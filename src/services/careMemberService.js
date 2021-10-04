@@ -12,30 +12,51 @@ const searchCareMembers = (queryParams) => {
 
   let result= careMembersData.filter((careMember) => {
    
-    /*
-      if (queryParams && queryParams.get('lastName') && 
-        careMember.lastName!==queryParams.get('lastName')){
+    if (queryParams && queryParams.get('lastName') && 
+      careMember.lastName!==queryParams.get('lastName')){
+      return false;
+    }
+
+
+    if (queryParams && queryParams.get('countryId')){ 
+      const countryCode = queryParams.get('countryId')
+      const countryObj =categoriesData.countryListAllIsoData.find(country => country.code3===countryCode)
+
+      if(careMember.country!==countryObj.name){
         return false;
-      }
+      }            
+    }
 
-      if (queryParams && queryParams.get('countryId')){ 
-        const countryCode = queryParams.get('countryId')
-        const countryObj =categoriesData.countryListAllIsoData.find(country => country.code3===countryCode)
+    if (queryParams && queryParams.get('businessUnitId')) {
+      const bunitId =parseInt(queryParams.get('businessUnitId'));
+      const businessUnitObj =categoriesData.businessUnits.find(bunit => bunit.id===bunitId);     
 
-        if(careMember.country!==countryObj.name){
-          return false;
-        }            
-      }
+      if(careMember.businessUnit!==businessUnitObj.name){
+        return false;
+      }        
+    }
 
-      if (queryParams && queryParams.get('businessUnitId')) {
-        const bunitId =parseInt(queryParams.get('businessUnitId'));
-        const businessUnitObj =categoriesData.businessUnits.find(bunit => bunit.id===bunitId);     
 
-        if(careMember.businessUnit!==businessUnitObj.name){
-          return false;
-        }        
-      }
-      */
+    if (queryParams && queryParams.get('businessUnitId')) {
+      const bunitId =parseInt(queryParams.get('businessUnitId'));
+      const businessUnitObj =categoriesData.businessUnits.find(bunit => bunit.id===bunitId);     
+
+      if(careMember.businessUnit!==businessUnitObj.name){
+        return false;
+      }        
+    }
+
+    /*
+    const careRoles = useSelector( (state) => {
+      return state.categories.careRoles.map(role => {return {"value": role.id, "label":role.name}})
+    });
+  
+    const groups =  useSelector( (state) => {
+      return state.groups.map(group => {return {"value": group.id, "label":group.name}})
+    });*/
+
+
+
       return true
   })
 

@@ -7,9 +7,9 @@ import {
     CARE_MEMBER_UPDATE_ROLE
  } from "actions/types";
 
- import { careMembersData } from '../mock-data/careMembers.js'
+// import { careMembersData } from '../mock-data/careMembers.js'
 
-const careMemberReducer = (careMembers = careMembersData, action) => {
+const careMemberReducer = (careMembers = [], action) => {
     const { type, payload } = action;
 
     switch (type) {

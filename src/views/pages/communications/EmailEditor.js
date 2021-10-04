@@ -48,24 +48,24 @@ import {
   Col,
 } from "reactstrap";
 // core components
+import { useDispatch, useSelector } from 'react-redux'
 
 function EmailEditor(props) {
 
   let history = useHistory();
   const [emailState, setEmailState] = useState(props.initialEmailState);
 
-  //mock options until real API requests can be made
-  //fetching groups and individual recipients is unavailable
-  //as of August 10th
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "mango", label: "Mango" },
-    { value: "orange", label: "Orange" },
-    { value: "passionfruit", label: "Passionfruit" }
-  ];
+  const careRoles = useSelector( (state) => {
+    return state.categories.careRoles.map(role => {return {"value": role.id, "label":role.name}})
+  });
+  const groups =  useSelector( (state) => {
+    return state.groups.map(group => {return {"value": group.id, "label":group.name}})
+  });
 
+  const careMembers = useSelector( (state) => {
+    return state.careMembers.map(careMember => {return {"value": careMember.id, "label":careMember.internationalName}})
+  });
+ 
   const handleSend = () => {
     emailService.sendMail(emailState);
     history.push("/admin/search-email");
@@ -137,7 +137,7 @@ function EmailEditor(props) {
                           id="input-email"
                           components = {makeAnimated()} 
                           isMulti 
-                          options = {options}
+                          options = {careMembers}
                           onChange={e => {
                             let recipientsArray = [];
                             e.forEach(element => recipientsArray.push(element.value));
@@ -160,11 +160,34 @@ function EmailEditor(props) {
                           id="input-recipient-group"
                           components = {makeAnimated()}
                           isMulti
-                          options = {options}
+                          options = {groups}
                           onChange = {e => {
                             let recipientGroupsArray = [];
                             e.forEach(element => recipientGroupsArray.push(element.value));
                             setEmailState({...emailState, recipientGroups:recipientGroupsArray});
+                          }}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-recipient-group"
+                          >
+                          To Roles
+                          </label>
+                          <Select
+                          id="input-recipient-group"
+                          components = {makeAnimated()}
+                          isMulti
+                          options = {careRoles}
+                          onChange = {e => {
+                            let recipientRoleArray = [];
+                            e.forEach(element => recipientRoleArray.push(element.value));
+                            setEmailState({...emailState, recipientRoles:recipientRoleArray});
                           }}
                           />
                         </FormGroup>

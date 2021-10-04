@@ -2,13 +2,17 @@ import React, { useState} from "react";
 import BootstrapTable from 'react-bootstrap-table-next'
 import paginationFactory from 'react-bootstrap-table2-paginator'
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit'
-import { Button, Card, CardHeader, Container, Row } from 'reactstrap'
+import { Button, Card, CardHeader, Container, Row , Col, Form ,CardBody,Input, FormGroup } from 'reactstrap'
 import GradientEmptyHeader from 'components/Headers/GradientEmptyHeader.js'
 import { useDispatch, useSelector } from 'react-redux'
+import ReactDatetime from "react-datetime";
 import {
   searchEmailDrafts,
   retrieveEmailDrafts
 } from "../../../actions/emailDrafts";
+import Select from "react-select";
+import makeAnimated from 'react-select/animated';
+
 
 const pagination = paginationFactory({
   page: 1,
@@ -41,13 +45,27 @@ const pagination = paginationFactory({
 const { SearchBar } = Search
 
 function SearchEmailDraftsPage(props) {
+
+  const careRoles = useSelector( (state) => {
+    return state.categories.careRoles.map(role => {return {"value": role.id, "label":role.name}})
+  });
+  const groups =  useSelector( (state) => {
+    return state.groups.map(group => {return {"value": group.id, "label":group.name}})
+  });
+
+  const careMembers = useSelector( (state) => {
+    return state.careMembers.map(careMember => {return {"value": careMember.id, "label":careMember.internationalName}})
+  });
+  const emailDrafts = useSelector(state => state.emailDrafts);
+
+
   const [searchSubject, setSearchSubject] = useState("");
   const [searchRecipient, setSearchRecipient] = useState("");
   const [searchGroup, setSearchGroup] = useState("");
   const [searchStartDate, setSearchStartDate] = useState("");
   const [searchEndDate, setSearchEndDate] = useState("");
 
-  const emailDrafts = useSelector(state => state.emailDrafts);
+
   const dispatch = useDispatch();
 
   const onChangeSearchSubject = e => {
@@ -111,6 +129,124 @@ function SearchEmailDraftsPage(props) {
       {alert}
       <GradientEmptyHeader name="Search Email Drafts" />
       <Container className="mt--6" fluid>
+      <Row>    
+        <div className="col">
+            <Card >
+              <CardHeader>
+                <h3 className="mb-0">Search Emails</h3>
+                <p className="text-sm mb-0">Filters</p>
+              </CardHeader>
+              <CardBody>
+                   <Row>
+               <Col md="2">
+                <FormGroup>
+                  <label
+                    className="form-control-label"
+                    htmlFor="lastName"
+                  >
+                    Subject
+                  </label>
+                  <Input
+                    id="lastName"
+                    style={{height:'36px'}}
+                    className="form-control"                    
+                    type="text"
+                    placeholder="Last Name"
+                    value={searchSubject}
+                    onChange={onChangeSearchSubject}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md="2">
+                <FormGroup>
+                  <label
+                    className="form-control-label"
+                    htmlFor="businessUnits"
+                  >
+                    Recipients
+                  </label>
+                  <Select
+                      id="businessUnits"
+                      components = {makeAnimated()}
+                      options = {careMembers}
+                      onChange = {item => setSearchRecipient(item.value)}
+                    />
+                </FormGroup>
+              </Col>
+              <Col md="2">
+                <FormGroup>
+                  <label
+                    className="form-control-label"
+                    htmlFor="country"
+                  >
+                    Groups
+                  </label>
+                  <Select
+                      id="country"
+                      components = {makeAnimated()}
+                      options = {groups}
+                      onChange = {item => setSearchGroup(item.value)}
+                    />
+                </FormGroup>
+              </Col>
+              <Col md="2">
+                <FormGroup>
+                  <label
+                    className="form-control-label"
+                    htmlFor="example3cols2Input"
+                  >
+                   Sent Date From
+                  </label>
+                  <ReactDatetime                   
+                    inputProps={{
+                      placeholder: "Hire date",
+                    }}
+                    onChange={(e) =>
+                      console.log(e)
+                      //onChangeSearchHiringDate(e)
+                    }
+                    timeFormat={false}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md="2">
+                <FormGroup>
+                  <label
+                    className="form-control-label"
+                    htmlFor="example3cols2Input"
+                  >
+                   Sent Date To
+                  </label>
+                  <ReactDatetime                   
+                    inputProps={{
+                      placeholder: "Hire date",
+                    }}
+                    onChange={(e) =>
+                      console.log(e)
+                      //onChangeSearchHiringDate(e)
+                    }
+                    timeFormat={false}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md="2"> 
+                <FormGroup>            
+                      <button
+                        style={{marginTop:'32px', marginLeft:'32px', height:'40px'}}                       
+                        className="btn btn-info"
+                        type="button"
+                        onClick={findByAllParameters}
+                      >
+                        Search
+                      </button>   
+                  </FormGroup>                 
+                </Col>
+            </Row>
+              </CardBody>
+              </Card>                   
+                </div>    
+      </Row>  
+
         <Row>
           <div className="col">
             <Card>
@@ -165,7 +301,7 @@ function SearchEmailDraftsPage(props) {
               >
                 {(props) => (
                   <div className="py-4 table-responsive">
-                    <div
+                    {/* <div
                       id="datatable-basic_filter"
                       className="dataTables_filter px-4 pb-1"
                     >
@@ -239,6 +375,9 @@ function SearchEmailDraftsPage(props) {
                         Search
                       </button>
                     </div>  
+            
+             */}
+            
                     <BootstrapTable
                       {...props.baseProps}
                       bootstrap4={true}

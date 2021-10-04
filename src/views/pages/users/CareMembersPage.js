@@ -84,29 +84,23 @@ function CareMembersPage(props) {
   
 
   const [searchRole, setSearchRole] = useState("");
-  const [searchLastName, setSearchLastName] = useState("");
   const [searchBusinessUnit, setSearchBusinessUnit] = useState("");
   const [searchCountry, setSearchCountry] = useState("");
   const [searchGroup, setSearchGroup] = useState("");  
-  const [searchOnBoardDateFrom, setSearchOnBoardDateFrom] = useState(null);
-  
+  const [searchLastName, setSearchLastName] = useState("");
+  const [searchOnBoardDateFrom, setSearchOnBoardDateFrom] = useState(null);  
   const [searchOnBoardDateTo, setSearchOnBoardDateTo] = useState(null);
   const [searchOffboardingDateFrom, setSearchOffboardingDateFrom] = useState(null);
   const [searchOffboardingDateTo, setSearchOffboardingDateTo] = useState(null);
-
-
-  const onChangeSearchOnboardingDateFrom = (dateAsMoment) => {    
-    setSearchRole(dateAsMoment.format('D-MM-YYYY'));
-  };
 
   const onChangeSearchLastName = e => {  
     const searchLastName = e.target.value;
     setSearchLastName(searchLastName);
   };
-
-  // const onChangeSearchOnboardingDateFrom = (dateAsMoment) => {    
-  //   setSearchOnBoardDateFrom(dateAsMoment.format('D-MM-YYYY'));
-  // };
+ 
+  const onChangeSearchOnboardingDateFrom = (dateAsMoment) => {    
+    setSearchOnBoardDateFrom(dateAsMoment.format('D-MM-YYYY'));
+  }
 
   const onChangeSearchOnboardingDateTo = (dateAsMoment) => {    
     setSearchOnBoardDateTo(dateAsMoment.format('D-MM-YYYY'));
@@ -122,9 +116,11 @@ function CareMembersPage(props) {
   
     const findByAllParameters = () => {
     let filters ={    
-      lastName: searchLastName,
       businessUnitId: searchBusinessUnit,
-      countryId:searchCountry,    
+      countryId:searchCountry,   
+      role: searchRole,
+      group:searchGroup,
+      lastName: searchLastName,  
       onboardDateFrom:searchOnBoardDateFrom,
       onboardDateTo:searchOnBoardDateTo,
       offboardingDateFrom:searchOffboardingDateFrom,
@@ -198,7 +194,7 @@ function CareMembersPage(props) {
                   Role
                   </label>
                   <Select
-                      id="group"
+                      id="role"
                       components = {makeAnimated()}
                       options = {careRoles}
                       onChange = {item => setSearchRole(item.value)}
@@ -411,7 +407,7 @@ function CareMembersPage(props) {
                     style: { width: '50px' },
                   },
                   {
-                    dataField: 'businessUnit.name',
+                    dataField: 'businessUnit',
                     text: 'bUnit',
                     sort: true,
                     style: { width: '50px' },
