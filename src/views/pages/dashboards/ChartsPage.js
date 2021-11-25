@@ -20,8 +20,15 @@ import Chart from "chart.js";
 // react plugin used to create charts
 import { Line, Bar, Doughnut, Pie } from "react-chartjs-2";
 // reactstrap components
-import { Card, CardHeader, CardBody, Container, Row, Col,
-   CardTitle, } from "reactstrap";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Container,
+  Row,
+  Col,
+  CardTitle,
+} from "reactstrap";
 // core components
 import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
 // import {
@@ -34,7 +41,6 @@ import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
 //   chartExample6,
 //   chartExample7,
 // } from "variables/charts.js";
-
 
 var colors = {
   gray: {
@@ -50,22 +56,22 @@ var colors = {
   },
   theme: {
     default: "#172b4d",
-    primary: "#5e72e4",
+    primary: "#003369",
     secondary: "#f4f5f7",
     info: "#11cdef",
-    success: "#2dce89",
-    danger: "#f5365c",
+    success: "#08C792",
+    danger: "#ED2939",
     warning: "#fb6340",
-    blue: "#5e72e4",
+    blue: "#003369",
     indigo: "#5603ad",
     purple: "#8965e0",
     pink: "#f3a4b5",
-    red: "#f5365c",
+    red: "#ED2939",
     orange: "#fb6340",
     yellow: "#ffd600",
-    green: "#2dce89",
+    green: "#08C792",
     teal: "#11cdef",
-    cyan:"#2bffc6"
+    cyan: "#2bffc6",
   },
   black: "#12263F",
   white: "#FFFFFF",
@@ -103,7 +109,14 @@ let activeMembersData = {
 
 const pieByRole = {
   data: {
-    labels: ["Advocates", "Trainer", "Sponsor", "Country Leader","Region Leader","Global Leader"],
+    labels: [
+      "Advocates",
+      "Trainer",
+      "Sponsor",
+      "Country Leader",
+      "Region Leader",
+      "Global Leader",
+    ],
     datasets: [
       {
         data: [
@@ -113,7 +126,7 @@ const pieByRole = {
           randomScalingFactor(),
           40,
           14,
-          6
+          6,
         ],
         backgroundColor: [
           colors.theme["danger"],
@@ -122,7 +135,7 @@ const pieByRole = {
           colors.theme["primary"],
           colors.theme["info"],
           colors.theme["blue"],
-          colors.theme["indigo"]          
+          colors.theme["indigo"],
         ],
         label: "Dataset 1",
       },
@@ -142,7 +155,16 @@ const pieByRole = {
 
 const pieByBunits = {
   data: {
-    labels: ["Road Logistics", "Sales", "Human Resources", "QSHE", "IT","Sea Logistics","Marketing","Air Logistics"],
+    labels: [
+      "Road Logistics",
+      "Sales",
+      "Human Resources",
+      "QSHE",
+      "IT",
+      "Sea Logistics",
+      "Marketing",
+      "Air Logistics",
+    ],
     datasets: [
       {
         data: [
@@ -163,7 +185,7 @@ const pieByBunits = {
           colors.theme["info"],
           colors.theme["blue"],
           colors.theme["indigo"],
-          colors.theme["purple"]
+          colors.theme["purple"],
         ],
         label: "Dataset 1",
       },
@@ -182,9 +204,17 @@ const pieByBunits = {
 };
 
 // Example 7 of Chart inside src/views/pages/Charts.js
-const  turnoverData = {
+const turnoverData = {
   data: {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+    ],
     datasets: [
       {
         label: "Offboarded",
@@ -213,7 +243,7 @@ const  turnoverData = {
           randomScalingFactor(),
         ],
         maxBarThickness: 10,
-      }
+      },
     ],
   },
   options: {
@@ -237,143 +267,138 @@ const  turnoverData = {
   },
 };
 
-
 function Charts() {
   // if (window.Chart) {
   //   parseOptions(Chart, chartOptions());
   // }
   return (
     <>
-      <GradientEmptyHeader name="Groups"  />
+      <GradientEmptyHeader name="Groups" />
       <Container className="mt--6" fluid>
-
-      <div>
+        <div>
           <Row>
-              <Col md="6" xl="3">
-                <Card className="card-stats">
-                  <CardBody>
-                    <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Onboarded last month
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">
-                          25
-                        </span>
+            <Col md="6" xl="3">
+              <Card className="card-stats">
+                <CardBody>
+                  <Row>
+                    <div className="col">
+                      <CardTitle
+                        tag="h5"
+                        className="text-uppercase text-muted mb-0"
+                      >
+                        Onboarded last month
+                      </CardTitle>
+                      <span className="h2 font-weight-bold mb-0">25</span>
+                    </div>
+                    <Col className="col-auto">
+                      <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="fas fa-user-graduate"></i>
                       </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="fas fa-user-graduate"></i>                         
-                        </div>
-                      </Col>
-                    </Row>
-                    <p className="mt-3 mb-0 text-sm">
-                      &nbsp;
-                    </p>
-                    {/* <p className="mt-3 mb-0 text-sm">
+                    </Col>
+                  </Row>
+                  <p className="mt-3 mb-0 text-sm">&nbsp;</p>
+                  {/* <p className="mt-3 mb-0 text-sm">
                       <span className="text-success mr-2">
                         <i className="fa fa-arrow-up" /> 3.48%
                       </span>{" "}
                       <span className="text-nowrap">Since last month</span>
                     </p> */}
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col md="6" xl="3">
-                <Card className="card-stats">
-                  <CardBody>
-                    <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                           Offboarded last month
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">7</span>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="6" xl="3">
+              <Card className="card-stats">
+                <CardBody>
+                  <Row>
+                    <div className="col">
+                      <CardTitle
+                        tag="h5"
+                        className="text-uppercase text-muted mb-0"
+                      >
+                        Offboarded last month
+                      </CardTitle>
+                      <span className="h2 font-weight-bold mb-0">7</span>
+                    </div>
+                    <Col className="col-auto">
+                      <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="fas fa-sign-out-alt"></i>
                       </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                          <i class="fas fa-sign-out-alt"></i>
-                        </div>
-                      </Col>
-                    </Row>
-                    <p className="mt-3 mb-0 text-sm">
-                      &nbsp;
-                    </p>
-                    {/* <p className="mt-3 mb-0 text-sm">
+                    </Col>
+                  </Row>
+                  <p className="mt-3 mb-0 text-sm">&nbsp;</p>
+                  {/* <p className="mt-3 mb-0 text-sm">
                       <span className="text-success mr-2">
                         <i className="fa fa-arrow-up" /> 3.48%
                       </span>{" "}
                       <span className="text-nowrap">Since last month</span>
                     </p> */}
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col md="6" xl="3">
-                <Card className="card-stats">
-                  <CardBody>
-                    <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Business Unit
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">Sea Logistics</span>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="6" xl="3">
+              <Card className="card-stats">
+                <CardBody>
+                  <Row>
+                    <div className="col">
+                      <CardTitle
+                        tag="h5"
+                        className="text-uppercase text-muted mb-0"
+                      >
+                        Business Unit
+                      </CardTitle>
+                      <span className="h2 font-weight-bold mb-0">
+                        Sea Logistics
+                      </span>
+                    </div>
+                    <Col className="col-auto">
+                      <div className="icon icon-shape bg-gradient-primary text-white rounded-circle shadow">
+                        <i class="fas fa-crown"></i>
                       </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-gradient-primary text-white rounded-circle shadow">
-                          <i class="fas fa-crown"></i>
-                        </div>
-                      </Col>
-                    </Row>
-                    <p className="mt-3 mb-0 text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-arrow-up" /> 8
-                      </span>{" "}
-                      <span className="text-nowrap">Since last month</span>
-                    </p>
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col md="6" xl="3">
-                <Card className="card-stats">
-                  <CardBody>
-                    <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Country
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">Germany</span>
+                    </Col>
+                  </Row>
+                  <p className="mt-3 mb-0 text-sm">
+                    <span className="text-success mr-2">
+                      <i className="fa fa-arrow-up" /> 8
+                    </span>{" "}
+                    <span className="text-nowrap">Since last month</span>
+                  </p>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="6" xl="3">
+              <Card className="card-stats">
+                <CardBody>
+                  <Row>
+                    <div className="col">
+                      <CardTitle
+                        tag="h5"
+                        className="text-uppercase text-muted mb-0"
+                      >
+                        Country
+                      </CardTitle>
+                      <span className="h2 font-weight-bold mb-0">
+                        Germany
+                      </span>
+                    </div>
+                    <Col className="col-auto">
+                      <div className="icon icon-shape bg-gradient-primary text-white rounded-circle shadow">
+                        <i class="fas fa-crown"></i>
                       </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-gradient-primary text-white rounded-circle shadow">
-                          <i class="fas fa-crown"></i>
-                        </div>
-                      </Col>
-                    </Row>
-                    <p className="mt-3 mb-0 text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-arrow-up" /> 11
-                      </span>{" "}
-                      <span className="text-nowrap">Since last month</span>
-                    </p>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-          </div>
+                    </Col>
+                  </Row>
+                  <p className="mt-3 mb-0 text-sm">
+                    <span className="text-success mr-2">
+                      <i className="fa fa-arrow-up" /> 11
+                    </span>{" "}
+                    <span className="text-nowrap">Since last month</span>
+                  </p>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </div>
         <Row>
-
-        <Col xl="6">
+          <Col xl="6">
             <Card>
               <CardHeader>
                 <h6 className="surtitle">Care Members</h6>
@@ -382,8 +407,8 @@ function Charts() {
               <CardBody>
                 <div className="chart">
                   <Bar
-                    data={ turnoverData.data}
-                    options={ turnoverData.options}
+                    data={turnoverData.data}
+                    options={turnoverData.options}
                     className="chart-canvas"
                     id="chart-bar-stacked"
                   />
@@ -391,26 +416,26 @@ function Charts() {
               </CardBody>
             </Card>
           </Col>
-            <Col xl="6">
-              <Card>
-                <CardHeader>
-                  <h6 className="surtitle">Care Members</h6>
-                  <h5 className="h3 mb-0">Total</h5>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart">
-                    <Line
-                      data={activeMembersData.data}
-                      options={activeMembersData.options}
-                      id="chart-sales"
-                      className="chart-canvas"
-                    />
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
+          <Col xl="6">
+            <Card>
+              <CardHeader>
+                <h6 className="surtitle">Care Members</h6>
+                <h5 className="h3 mb-0">Total</h5>
+              </CardHeader>
+              <CardBody>
+                <div className="chart">
+                  <Line
+                    data={activeMembersData.data}
+                    options={activeMembersData.options}
+                    id="chart-sales"
+                    className="chart-canvas"
+                  />
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
 
-            {/* <Col xl="6">
+          {/* <Col xl="6">
               <Card>
                 <CardHeader>
                   <h6 className="surtitle">Overview</h6>
@@ -431,23 +456,23 @@ function Charts() {
         </Row>
         <Row>
           <Col xl="6">
-              <Card>
-                <CardHeader>
-                  <h6 className="surtitle">Composition</h6>
-                  <h5 className="h3 mb-0">By Role</h5>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart">
+            <Card>
+              <CardHeader>
+                <h6 className="surtitle">Composition</h6>
+                <h5 className="h3 mb-0">By Role</h5>
+              </CardHeader>
+              <CardBody>
+                <div className="chart">
                   <Pie
                     data={pieByRole.data}
                     options={pieByRole.options}
                     className="chart-canvas"
                     id="chart-pie"
                   />
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
           {/* <Col xl="6">
             <Card>
               <CardHeader>
