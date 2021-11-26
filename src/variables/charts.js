@@ -180,7 +180,7 @@ var colors = {
     default: "#172b4d",
     primary: "#003369",
     secondary: "#f4f5f7",
-    info: "#11cdef",
+    info: "#0099DA",
     success: "#08C792",
     danger: "#ED2939",
     warning: "#fb6340",

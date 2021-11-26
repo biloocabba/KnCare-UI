@@ -83,7 +83,7 @@ function Vector() {
                       "stroke-width": 0,
                     },
                     hover: {
-                      fill: "#11cdef",
+                      fill: "#0099DA",
                       "stroke-width": 0,
                     },
                   }}
