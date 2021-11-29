@@ -16,7 +16,11 @@
 */
 import React from "react";
 // react library for routing
-import { useLocation, NavLink as NavLinkRRD, Link } from "react-router-dom";
+import {
+  useLocation,
+  NavLink as NavLinkRRD,
+  Link,
+} from "react-router-dom";
 // nodejs library that concatenates classes
 import classnames from "classnames";
 // nodejs library to set properties for components
@@ -41,7 +45,7 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
     // eslint-disable-next-line
   }, []);
   // verifies if routeName is the one active (in browser input)
-  const activeRoute = (routeName) => {
+  const activeRoute = routeName => {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
   // makes the sidenav normal on hover (actually when mouse enters on it)
@@ -58,7 +62,7 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
   };
   // this creates the intial state of this component based on the collapse routes
   // that it gets through routes
-  const getCollapseStates = (routes) => {
+  const getCollapseStates = routes => {
     let initialState = {};
     routes.map((prop, key) => {
       if (prop.collapse) {
@@ -75,7 +79,7 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
   // this verifies if any of the collapses should be default opened on a rerender of this component
   // for example, on the refresh of the page,
   // while on the src/views/forms/RegularForms.js - route /admin/regular-forms
-  const getCollapseInitialState = (routes) => {
+  const getCollapseInitialState = routes => {
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse && getCollapseInitialState(routes[i].views)) {
         return true;
@@ -93,7 +97,7 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
     }
   };
   // this function creates the links and collapses that appear in the sidebar (left menu)
-  const createLinks = (routes) => {
+  const createLinks = routes => {
     return routes.map((prop, key) => {
       if (prop.redirect || prop.global) {
         return null;
@@ -110,7 +114,7 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
               className={classnames({
                 active: getCollapseInitialState(prop.views),
               })}
-              onClick={(e) => {
+              onClick={e => {
                 e.preventDefault();
                 setState(st);
               }}
@@ -122,7 +126,10 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
                 </>
               ) : prop.miniName ? (
                 <>
-                  <span className="sidenav-mini-icon"> {prop.miniName} </span>
+                  <span className="sidenav-mini-icon">
+                    {" "}
+                    {prop.miniName}{" "}
+                  </span>
                   <span className="sidenav-normal"> {prop.name} </span>
                 </>
               ) : null}
@@ -135,8 +142,11 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
           </NavItem>
         );
       }
-      return (        
-        <NavItem className={activeRoute(prop.layout + prop.path)} key={key}>
+      return (
+        <NavItem
+          className={activeRoute(prop.layout + prop.path)}
+          key={key}
+        >
           <NavLink
             to={prop.layout + prop.path}
             activeClassName=""
@@ -150,7 +160,10 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
               </>
             ) : prop.miniName !== undefined ? (
               <>
-                <span className="sidenav-mini-icon"> {prop.miniName} </span>
+                <span className="sidenav-mini-icon">
+                  {" "}
+                  {prop.miniName}{" "}
+                </span>
                 <span className="sidenav-normal"> {prop.name} </span>
               </>
             ) : (
@@ -201,10 +214,86 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
           </div>
         </div>
       </div>
-     <div className="navbar-inner">
+      <div className="navbar-inner">
         <Collapse navbar isOpen={true}>
           <Nav navbar>{createLinks(routes)}</Nav>
 
+          <hr className="my-3" />
+          <h6 className="navbar-heading p-0 text-muted">
+            <span className="docs-normal">Care Tools</span>
+            <span className="docs-mini">CT</span>
+          </h6>
+          <Nav className="mb-md-3" navbar>
+            <NavItem>
+              <NavLink
+                href="http://carecards.us.int.kn/carecards/frmMenuMain?source=S"
+                target="_blank"
+              >
+                <i className="ni ni-palette" />
+                <span className="nav-link-text">Digital Credit Card</span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="https://connections.mykn.community/communities/service/html/communitystart?communityUuid=ba7a3c5a-23dd-45ad-9527-b12bd39ea32a"
+                target="_blank"
+              >
+                <i className="ni ni-palette" />
+                <span className="nav-link-text">
+                  Care Global myKN Community
+                </span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="https://connections.mykn.community/communities/service/html/communitystart?communityUuid=e6415180-c77b-4c50-baf6-f0346e49f86b"
+                target="_blank"
+              >
+                <i className="ni ni-palette" />
+                <span className="nav-link-text">
+                  Service Actions Trainings
+                </span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="https://connections.mykn.community/communities/service/html/communityoverview?communityUuid=65e6800f-a221-473c-92a9-ba3ab95fa099"
+                target="_blank"
+              >
+                <i className="ni ni-palette" />
+                <span className="nav-link-text">
+                  Balance+Belonging myKN Community
+                </span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="https://connections.mykn.community/communities/service/html/communityoverview?communityUuid=7eda766f-0c33-4f62-8fdb-ecb53191ea79"
+                target="_blank"
+              >
+                <i className="ni ni-palette" />
+                <span className="nav-link-text">
+                  Blue for Green myKN Community
+                </span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#under development" target="_blank">
+                <i className="ni ni-palette" />
+                <span className="nav-link-text">
+                  Customer Feedback Tool
+                </span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#to be confirmed" target="_blank">
+                <i className="ni ni-palette" />
+                <span className="nav-link-text">
+                  HR Dashboards integration{" "}
+                </span>
+              </NavLink>
+            </NavItem>
+          </Nav>
 
           <hr className="my-3" />
           <h6 className="navbar-heading p-0 text-muted">
@@ -213,10 +302,7 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
           </h6>
           <Nav className="mb-md-3" navbar>
             <NavItem>
-              <NavLink
-                href="#supportPage"
-                target="_blank"
-              >
+              <NavLink href="#supportPage" target="_blank">
                 <i className="ni ni-spaceship" />
                 <span className="nav-link-text">Contact Support Team</span>
               </NavLink>
@@ -229,13 +315,11 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
                 <i className="ni ni-palette" />
                 <span className="nav-link-text">Documentation</span>
               </NavLink>
-            </NavItem>           
+            </NavItem>
           </Nav>
         </Collapse>
       </div>
-   
- 
-      </div>
+    </div>
   );
   return (
     <Navbar
