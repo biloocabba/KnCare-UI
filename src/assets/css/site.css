@@ -1,16 +1,20 @@
-.files-dropzone{
+.files-dropzone {
   max-height: 25px;
   max-width: 25px;
 }
 
-.bi-paperclip:hover{
+.bi-paperclip:hover {
   background: rgb(228, 228, 228);
   transform: scale(1.02, 1.02);
   opacity: 0.6;
   border-radius: 5px;
-  }
+}
 
-  .uploaded-file{
-    width: 30%;
-    height: 50%;
-  }
+.uploaded-file {
+  width: 30%;
+  height: 50%;
+}
+
+.uploadInput:hover {
+  opacity: 0.6;
+}

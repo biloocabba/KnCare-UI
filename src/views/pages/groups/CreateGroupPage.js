@@ -14,40 +14,26 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useState, useEffect} from "react";
-import { useDispatch, useSelector } from  "react-redux";
-import {createGroup} from "actions/groups"
-//import {user_initialState} from "../../../mock-data/employees"
-import AsyncSelect from 'react-select/async';
-import SelectMemberPaginate from "./SelectMemberPaginate";
-import AddMemberPanel from "./AddMemberPanel.js";
+import React, { useState } from "react";
 // reactstrap components
 import {
   Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardImg,
-  CardTitle,
-  FormGroup,
-  Form,
-  Input,
-  ListGroupItem,
-  ListGroup,
-  Progress,
-  Container,
-  Row,
-  Col,
   ButtonGroup,
-  Collapse
+  Card,
+  CardBody,
+  CardHeader,
+  CardImg,
+  Col,
+  Collapse,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Row,
 } from "reactstrap";
-// core components
-import GroupHeader from "components/Headers/GroupHeader.js";
-import Select from 'react-select';
+import AddMemberPanel from "./AddMemberPanel.js";
 
 function CreateGroupPage() {
-
-
   // const initialGroupState = {
   //   id: null,
   //   name: "",
@@ -57,11 +43,11 @@ function CreateGroupPage() {
 
   // const [group, setGroup] = useState(initialGroupState)
 
-  const [groupName, setGroupName] = useState('')
-  const [groupDescription, setGroupDescription] = useState('')
-  const saveGroup = (e) => {
+  const [groupName, setGroupName] = useState("");
+  const [groupDescription, setGroupDescription] = useState("");
+  const saveGroup = e => {
     e.preventDefault();
-  }
+  };
 
   const [addMembersCollapse, setAddMembersCollapse] = useState(false);
 
@@ -144,39 +130,34 @@ function CreateGroupPage() {
   // useEffect(() => {
   //   getMembers()
   // }, []);
-  
-
-  
+  const [src, setSrc] = useState();
 
   return (
     <>
-      
       <div
         className="header pb-6 d-flex align-items-center"
         style={{
-          minHeight: "100px",        
+          minHeight: "100px",
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}
       >
         <span className="mask bg-gradient-info opacity-8" />
-
       </div>
 
       <Container className="mt--6" fluid>
         <Row>
-     
           <Col className="order-xl-1" xl="12">
             <Card>
               <CardHeader>
                 <Row className="align-items-center">
                   <Col xs="8">
                     <h3 className="mb-0">Create Group</h3>
-                  </Col>                
+                  </Col>
                 </Row>
               </CardHeader>
               <CardBody>
-              {/* {submitted ? (
+                {/* {submitted ? (
                  <div>
                  <h4>You submitted successfully!</h4>
                  <button className="btn btn-success" onClick={newGroup}>
@@ -189,9 +170,8 @@ function CreateGroupPage() {
                     Group information
                   </h6>
                   <div className="pl-lg-4">
-
                     <Row>
-                       <Col lg="10">
+                      <Col lg="10">
                         <FormGroup>
                           <label
                             className="form-control-label"
@@ -206,14 +186,65 @@ function CreateGroupPage() {
                             id="input-group-name"
                             placeholder="Group name"
                             type="text"
-                            onChange={e => setGroupName(e.target.value)}  
+                            onChange={e => setGroupName(e.target.value)}
                           />
                         </FormGroup>
-                      </Col>                    
+                      </Col>
                     </Row>
-                  
+
                     <Row>
-                       <Col lg="10">
+                      <Col lg="10">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-group-name"
+                          >
+                            Group Image
+                          </label>
+                          <div>
+                            <label
+                              className="uploadInput"
+                              htmlFor="uploadInput"
+                              // _hover={{ opacity: 0.6 }}
+                              style={{
+                                margin: "0",
+                                borderRadius: "100",
+                                cursor: "pointer",
+                              }}
+                            >
+                              {src ? (
+                                <CardImg src={src} width="10rem" />
+                              ) : (
+                                <p style={{ fontSize: 24 }}>Upload</p>
+                              )}
+                            </label>
+                            <input
+                              style={{
+                                visibility: "hidden",
+                                position: "absolute",
+                                width: "0px",
+                              }}
+                              type="file"
+                              id="uploadInput"
+                              accept="image/*"
+                              onChange={e => {
+                                const file = e.target.files[0];
+
+                                const reader = new FileReader();
+                                reader.onload = e => {
+                                  setSrc(e.target.result);
+                                };
+
+                                reader.readAsDataURL(file);
+                              }}
+                            />
+                          </div>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col lg="10">
                         <FormGroup>
                           <label
                             className="form-control-label"
@@ -222,44 +253,52 @@ function CreateGroupPage() {
                             Group Description (optional)
                           </label>
                           <Input
-                          name="description"
+                            name="description"
                             id="description"
                             placeholder="A few words about the group"
                             rows="4"
-                            type="textarea" 
-                            onChange={e =>  setGroupDescription(e.target.value)}  
-                            alue={groupDescription}                         
+                            type="textarea"
+                            onChange={e =>
+                              setGroupDescription(e.target.value)
+                            }
+                            alue={groupDescription}
                           />
                         </FormGroup>
-                      </Col>                    
+                      </Col>
                     </Row>
 
-                    <Row className="d-flex justify-content-between mx-2">               
-                        <h6 className="heading-small text-muted mb-4">
-                          MEMBERS
-                        </h6> 
-                        <ButtonGroup className="d-flex">
-                          <Button onClick={e => setAddMembersCollapse(!addMembersCollapse)} color='success' type="button">
-                              Add new Members
-                          </Button>                       
-                        </ButtonGroup>    
-                      </Row>
+                    <Row className="d-flex justify-content-between mx-2">
+                      <h6 className="heading-small text-muted mb-4">
+                        MEMBERS
+                      </h6>
+                      <ButtonGroup className="d-flex">
+                        <Button
+                          onClick={e =>
+                            setAddMembersCollapse(!addMembersCollapse)
+                          }
+                          color="success"
+                          type="button"
+                        >
+                          Add new Members
+                        </Button>
+                      </ButtonGroup>
+                    </Row>
 
-                      <Row>
-                        <Col lg="12">
+                    <Row>
+                      <Col lg="12">
                         {/* <MembersTableComps data={group.members} /> */}
-                          <Collapse isOpen={addMembersCollapse} >
-                            <AddMemberPanel 
-                              onchangeRole={ (e) => console.log(e)}
-                              onchangeCountry={(e) => console.log(e)}
-                              onchangeBunit={(e) => console.log(e)}
-                              onSelectCareMember={(e) => console.log(e)}                        
-                            />
-                          </Collapse>
-                          </Col> 
-                     </Row> 
-                     </div> 
-                    {/* <Row>
+                        <Collapse isOpen={addMembersCollapse}>
+                          <AddMemberPanel
+                            onchangeRole={e => console.log(e)}
+                            onchangeCountry={e => console.log(e)}
+                            onchangeBunit={e => console.log(e)}
+                            onSelectCareMember={e => console.log(e)}
+                          />
+                        </Collapse>
+                      </Col>
+                    </Row>
+                  </div>
+                  {/* <Row>
                        <Col lg="10">
                        
                        <AddMemberPanel 
@@ -270,7 +309,7 @@ function CreateGroupPage() {
                         />
                       </Col> 
                     </Row>  */}
-                       {/* <Row>
+                  {/* <Row>
 
                        <Col lg="2">
                        <FormGroup>
@@ -346,25 +385,23 @@ function CreateGroupPage() {
                           </FormGroup>
                        </Col> 
                        </Row>*/}
-                     
-                            {/* </Col> 
+
+                  {/* </Col> 
                         </Row>            */}
-                      {/* </div> */}
-                
-              
-              
+                  {/* </div> */}
 
-
-               
-                      
-     
-                 
-                  <div className="pl-lg-4">                   
-                   <button onClick={saveGroup} className="btn btn-success"> Submit </button>
-                 </div>
+                  <div className="pl-lg-4">
+                    <button
+                      onClick={saveGroup}
+                      className="btn btn-success"
+                    >
+                      {" "}
+                      Submit{" "}
+                    </button>
+                  </div>
                 </Form>
 
-             {/* )} */}
+                {/* )} */}
               </CardBody>
             </Card>
           </Col>
