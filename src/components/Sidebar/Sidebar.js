@@ -239,9 +239,7 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
                 target="_blank"
               >
                 <i className="ni ni-palette" />
-                <span className="nav-link-text">
-                  Care Global myKN Community
-                </span>
+                <span className="nav-link-text">Care Global</span>
               </NavLink>
             </NavItem>
             <NavItem>
@@ -261,9 +259,7 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
                 target="_blank"
               >
                 <i className="ni ni-palette" />
-                <span className="nav-link-text">
-                  Balance+Belonging myKN Community
-                </span>
+                <span className="nav-link-text">Balance+Belonging</span>
               </NavLink>
             </NavItem>
             <NavItem>
@@ -272,9 +268,7 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
                 target="_blank"
               >
                 <i className="ni ni-palette" />
-                <span className="nav-link-text">
-                  Blue for Green myKN Community
-                </span>
+                <span className="nav-link-text">Blue for Green</span>
               </NavLink>
             </NavItem>
             <NavItem>
@@ -289,7 +283,7 @@ function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
               <NavLink href="#to be confirmed" target="_blank">
                 <i className="ni ni-palette" />
                 <span className="nav-link-text">
-                  HR Dashboards integration{" "}
+                  HR Dashboards integration
                 </span>
               </NavLink>
             </NavItem>
