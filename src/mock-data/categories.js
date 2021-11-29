@@ -21,10 +21,11 @@ const businessUnits = [
 ];
 
 const careRoles = [
-  { id: 1, name: "advocate" },
-  { id: 2, name: "trainer" },
-  { id: 3, name: "leader" },
-  { id: 4, name: "sponsor" },
+  { id: 1, name: "Regional Transformation Manager" },
+  { id: 2, name: "Country Transformation Manager" },
+  { id: 3, name: "Advocate" },
+  { id: 4, name: "Trainer" },
+  { id: 5, name: "Sponsor" },
 ];
 
 // Lists of countries with ISO 3166 codes, presented in various formats.
