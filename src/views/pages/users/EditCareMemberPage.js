@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import {useState} from "react";
+import { useEffect, useState } from "react";
 
 // reactstrap components
 import {
@@ -31,78 +31,94 @@ import {
 } from "reactstrap";
 
 import Select from "react-select";
-import makeAnimated from 'react-select/animated';
+import makeAnimated from "react-select/animated";
 
-import {useParams} from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
-
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // core components
 import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
 
 function EditCareMemberPage(props) {
-
   let { id } = useParams(); //see in routes path: "/users/careMember-details/:id",
 
-  const dispatch =useDispatch();
-
-  const careRoles = useSelector( (state) => {
-    return state.categories.careRoles.map(role => {return {"value": role.id, "label":role.name}})
+  const careRoles = useSelector(state => {
+    return state.categories.careRoles.map(role => {
+      return { value: role.id, label: role.name };
+    });
   });
-  const careMembers = useSelector((state) =>  state.careMembers)
-  const groups =  useSelector( (state) => {
-    return state.groups.map(group => {return {"value": group.id, "label":group.name}})
+  const careMembers = useSelector(state => state.careMembers);
+  const groups = useSelector(state => {
+    return state.groups.map(group => {
+      return { value: group.id, label: group.name };
+    });
   });
+  const [careMember, setCareMember] = useState();
 
-  let careMember = careMembers.find((careMember) => careMember.id === parseInt(id))
+  useEffect(() => {
+    findCareMember();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  const findCareMember = () => {
+    setCareMember(
+      careMembers.find(careMember => careMember.id === parseInt(id)),
+    );
+  };
 
-  const [ role, setRole ] = useState(careMember.role);
-  const [ group, setGroup ] = useState(careMember.groups[0]);
+  const [role, setRole] = useState(
+    careMember ? (careMember.role ? careMember.role : "") : "",
+  );
+  // const [role, setRole] = useState(careMember.role || "");
+  const [group, setGroup] = useState([]);
+  // const [group, setGroup] = useState(careMember.groups[0]);
 
-
-  console.log(role);
+  if (!careMember) {
+    return <div>No care member found</div>;
+  }
 
   return (
     <>
-      <GradientEmptyHeader name="careMembers"  />
-      <Container className="mt--6" fluid>    
-        <Row>     
+      <GradientEmptyHeader name="careMembers" />
+      <Container className="mt--6" fluid>
+        <Row>
           <Col className="order-xl-1" xl="12">
             <Card>
               <CardHeader>
                 <Row className="align-items-center">
                   <Col xs="8">
                     <h3 className="mb-0">Care Member Details</h3>
-                  </Col>                
+                  </Col>
                 </Row>
-                <Row className="align-items-center py-4">              
+                <Row className="align-items-center py-4">
                   <Col lg="12" xs="7" className="text-right">
-                      <Button
-                          type="button"
-                          color="danger"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}                  
-                        >
-                          Offboard from Care
-                        </Button> 
-                        <Button
-                          type="button"
-                          color="info"
-                          href="#pablo"
-                          onClick={(e) => props.history.push('/admin/care-members')}                  
-                        >
-                          Back to Search
-                        </Button>                     
+                    <Button
+                      type="button"
+                      color="danger"
+                      href="#pablo"
+                      onClick={e => e.preventDefault()}
+                    >
+                      Offboard from Care
+                    </Button>
+                    <Button
+                      type="button"
+                      color="info"
+                      href="#pablo"
+                      onClick={e =>
+                        props.history.push("/admin/care-members")
+                      }
+                    >
+                      Back to Search
+                    </Button>
                   </Col>
                 </Row>
               </CardHeader>
               <CardBody>
-              <Form>
+                <Form>
                   <h6 className="heading-small text-muted mb-4">
                     Care Member information
                   </h6>
-                  <div className="pl-lg-4">                    
+                  <div className="pl-lg-4">
                     <Row>
                       <Col lg="6">
                         <FormGroup>
@@ -112,11 +128,11 @@ function EditCareMemberPage(props) {
                           >
                             Onboard Date
                           </label>
-                          <Input                            
+                          <Input
                             id="input-onboard-date"
                             value={careMember.onboardingDate}
-                            disabled = {true}       
-                            type="text"                            
+                            disabled={true}
+                            type="text"
                           />
                         </FormGroup>
                       </Col>
@@ -128,17 +144,16 @@ function EditCareMemberPage(props) {
                           >
                             Auto Offboard Date
                           </label>
-                          <Input                           
+                          <Input
                             id="input-offboard-date"
                             value={careMember.offboardingDate}
-                            onChange={e => e.preventDefault}                           
+                            onChange={e => e.preventDefault}
                             type="text"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
 
-                    
                     <Row>
                       <Col lg="6">
                         <FormGroup>
@@ -150,16 +165,18 @@ function EditCareMemberPage(props) {
                           </label>
                           <Select
                             id="careRole"
-                            components = {makeAnimated()}
-                            // value={role.name}    
-                            defaultInputValue ={role.name}   
-                            defaultValue ={role.name}     
-                            options = {careRoles}
-                            onChange = {item => setRole({"id":item.value, "name":item.label})}
+                            components={makeAnimated()}
+                            // value={role.name}
+                            defaultInputValue={role.name}
+                            defaultValue={role.name}
+                            options={careRoles}
+                            onChange={item =>
+                              setRole({ id: item.value, name: item.label })
+                            }
                           />
                         </FormGroup>
                       </Col>
-                       <Col lg="6">
+                      <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
@@ -169,25 +186,27 @@ function EditCareMemberPage(props) {
                           </label>
                           <Select
                             id="defaultGroup"
-                            components = {makeAnimated()}                            
-                            defaultInputValue ={group.name}   
-                            defaultValue ={group.name}   
-                            options = {groups}
-                            onChange = {item => setGroup({"id":item.value, "name":item.label})}
+                            components={makeAnimated()}
+                            defaultInputValue={group.name}
+                            defaultValue={group.name}
+                            options={groups}
+                            onChange={item =>
+                              setGroup({
+                                id: item.value,
+                                name: item.label,
+                              })
+                            }
                           />
                         </FormGroup>
                       </Col>
                     </Row>
-                   
-
                   </div>
                   <hr className="my-4" />
-
 
                   <h6 className="heading-small text-muted mb-4">
                     User information
                   </h6>
-                  <div className="pl-lg-4">                    
+                  <div className="pl-lg-4">
                     <Row>
                       <Col lg="6">
                         <FormGroup>
@@ -197,11 +216,11 @@ function EditCareMemberPage(props) {
                           >
                             First name
                           </label>
-                          <Input                            
+                          <Input
                             id="input-first-name"
                             value={careMember.firstName}
                             type="text"
-                            disabled = {true}
+                            disabled={true}
                           />
                         </FormGroup>
                       </Col>
@@ -213,17 +232,16 @@ function EditCareMemberPage(props) {
                           >
                             Last name
                           </label>
-                          <Input                           
+                          <Input
                             id="input-last-name"
                             value={careMember.lastName}
-                            disabled = {true}
+                            disabled={true}
                             type="text"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
 
-                    
                     <Row>
                       <Col lg="6">
                         <FormGroup>
@@ -233,11 +251,11 @@ function EditCareMemberPage(props) {
                           >
                             International Name
                           </label>
-                          <Input                           
+                          <Input
                             id="input-username"
                             value={careMember.internationalName}
-                            disabled = {true}
-                            type="text"                         
+                            disabled={true}
+                            type="text"
                           />
                         </FormGroup>
                       </Col>
@@ -252,14 +270,12 @@ function EditCareMemberPage(props) {
                           <Input
                             id="input-email"
                             value={careMember.email}
-                            disabled = {true}
+                            disabled={true}
                             type="email"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
-                   
-
                   </div>
                   <hr className="my-4" />
 
@@ -277,7 +293,7 @@ function EditCareMemberPage(props) {
                             Address
                           </label>
                           <Input
-                            disabled = {true}
+                            disabled={true}
                             value={careMember.officeAddressStreet}
                             id="input-address"
                             placeholder="Office Address"
@@ -296,7 +312,7 @@ function EditCareMemberPage(props) {
                             City
                           </label>
                           <Input
-                            disabled = {true}
+                            disabled={true}
                             value={careMember.officeAddressCity}
                             id="input-city"
                             placeholder="City"
@@ -313,7 +329,7 @@ function EditCareMemberPage(props) {
                             Country
                           </label>
                           <Input
-                            disabled = {true}
+                            disabled={true}
                             value={careMember.officeAddressCountry}
                             id="input-country"
                             placeholder="Country"
@@ -330,7 +346,7 @@ function EditCareMemberPage(props) {
                             Postal code
                           </label>
                           <Input
-                            disabled = {true}
+                            disabled={true}
                             value={careMember.officeAddressPostalCode}
                             id="input-postal-code"
                             placeholder="Postal code"
@@ -341,81 +357,95 @@ function EditCareMemberPage(props) {
                   </div>
                   <hr className="my-4" />
 
-                  <h6 className="heading-small text-muted mb-4">Company Data</h6>
+                  <h6 className="heading-small text-muted mb-4">
+                    Company Data
+                  </h6>
                   <div className="pl-lg-4">
-                  <Row>
+                    <Row>
                       <Col lg="4">
-                          <FormGroup>
-                          <label className="form-control-label">Title</label>
-                          <Input
-                                id="title"
-                                value={careMember.title}
-                                disabled = {true}
-                                type="text"
-                              />
-                          </FormGroup>
-                        </Col>
-
-                        <Col lg="4">
                         <FormGroup>
-                          <label className="form-control-label">Company Phone</label>
+                          <label className="form-control-label">
+                            Title
+                          </label>
                           <Input
-                                id="companyPhone"
-                                value="+372 77645322"
-                                disabled = {true}
-                                type="text"
-                              />
-                          </FormGroup>
-                        </Col>
-                        <Col lg="4">
-                        <FormGroup>
-                          <label className="form-control-label">Company Code</label>
-                          <Input
-                                id="input-postal-code"
-                                value={careMember.companyCode}
-                                disabled = {true}
-                                type="text"
-                              />
-                          </FormGroup>
-                        </Col>
-                        </Row>
-                   
-                        <Row>
-                        <Col lg="4">
-                            <FormGroup>
-                            <label className="form-control-label">Business Unit</label>
-                            <Input
-                                  id="input-postal-code"
-                                  value={careMember.businessUnit}
-                                  disabled = {true}
-                                  type="text"
-                                />
-                            </FormGroup>
-                          </Col>
+                            id="title"
+                            value={careMember.title}
+                            disabled={true}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
 
-                          <Col lg="4">
-                          <FormGroup>
-                            <label className="form-control-label">Cost Center</label>
-                            <Input
-                                  id="input-postal-code"
-                                  value={careMember.costCenter}
-                                  disabled = {true}
-                                  type="text"
-                                />
-                            </FormGroup>
-                          </Col>
-                          <Col lg="4">
-                          <FormGroup>
-                            <label className="form-control-label">Management Group</label>
-                            <Input
-                                  id="input-postal-code"
-                                  value={careMember.managementGroup}
-                                  disabled = {true}
-                                  type="text"
-                                />
-                            </FormGroup>
-                          </Col>
-                        </Row>
+                      <Col lg="4">
+                        <FormGroup>
+                          <label className="form-control-label">
+                            Company Phone
+                          </label>
+                          <Input
+                            id="companyPhone"
+                            value="+372 77645322"
+                            disabled={true}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="4">
+                        <FormGroup>
+                          <label className="form-control-label">
+                            Company Code
+                          </label>
+                          <Input
+                            id="input-postal-code"
+                            value={careMember.companyCode}
+                            disabled={true}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col lg="4">
+                        <FormGroup>
+                          <label className="form-control-label">
+                            Business Unit
+                          </label>
+                          <Input
+                            id="input-postal-code"
+                            value={careMember.businessUnit}
+                            disabled={true}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+
+                      <Col lg="4">
+                        <FormGroup>
+                          <label className="form-control-label">
+                            Cost Center
+                          </label>
+                          <Input
+                            id="input-postal-code"
+                            value={careMember.costCenter}
+                            disabled={true}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="4">
+                        <FormGroup>
+                          <label className="form-control-label">
+                            Management Group
+                          </label>
+                          <Input
+                            id="input-postal-code"
+                            value={careMember.managementGroup}
+                            disabled={true}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
                   </div>
                 </Form>
               </CardBody>
