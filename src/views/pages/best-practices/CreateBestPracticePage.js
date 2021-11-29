@@ -1,26 +1,25 @@
-import React, { useState, useRef } from "react";
-import { Redirect } from "react-router-dom";
-import SimpleReactValidator from "simple-react-validator";
-import bestPracticeService from "../../../services/BestPracticeService";
+// core components
+import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import React, { useRef, useState } from "react";
 import Files from "react-files";
-
+import { Redirect } from "react-router-dom";
 // reactstrap components
 import {
   Button,
+  Card,
+  CardBody,
+  CardHeader,
+  CardText,
+  Col,
+  Container,
   FormGroup,
   Input,
-  Tooltip,
-  Container,
   Row,
-  Col,
-  Card,
-  CardHeader,
-  CardBody,
-  CardText,
-  CardTitle,
+  Tooltip,
 } from "reactstrap";
-// core components
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import SimpleReactValidator from "simple-react-validator";
+import bestPracticeService from "../../../services/BestPracticeService";
+import CreatableSelect from "react-select/creatable";
 
 const initialState = {
   id: null,
@@ -90,6 +89,15 @@ function CreateBestPracticePage() {
     }
   };
 
+  const defaultTags = [
+    { value: "tag1", label: "Tag1" },
+    { value: "tag2", label: "Tag2" },
+    { value: "tag3", label: "Tag3" },
+    { value: "tag4", label: "Tag4" },
+    { value: "tag5", label: "Tag5" },
+    { value: "tag6", label: "Tag6" },
+  ];
+
   return (
     <>
       {created === true ? (
@@ -115,7 +123,7 @@ function CreateBestPracticePage() {
                   </CardHeader>
                   <CardBody>
                     <Row>
-                      <Col md="12">
+                      <Col md="10">
                         <FormGroup>
                           <label className="form-control-label">
                             Title
@@ -128,7 +136,7 @@ function CreateBestPracticePage() {
                           />
                         </FormGroup>
                       </Col>
-                      <Col md="12">
+                      <Col md="10">
                         <FormGroup>
                           <label className="form-control-label">
                             Description
@@ -143,7 +151,24 @@ function CreateBestPracticePage() {
                           />
                         </FormGroup>
                       </Col>
-                      <Col md="12">
+                      <Col md="10">
+                        <FormGroup>
+                          <label className="form-control-label">
+                            Tags
+                          </label>
+                          <CreatableSelect
+                            // styles={{
+                            //   container: base => ({
+                            //     ...base,
+                            //   }),
+                            // }}
+                            isMulti
+                            // onChange={handleChange}
+                            options={defaultTags}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col md="10">
                         <FormGroup>
                           <label className="form-control-label">
                             Image Url
