@@ -35,7 +35,7 @@ function Admin() {
     mainContentRef.current.scrollTop = 0;
   }, [location]);
 
-  const getRoutes = (routes) => {
+  const getRoutes = routes => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
@@ -54,17 +54,19 @@ function Admin() {
     });
   };
 
-  const getBrandText = (path) => {
+  const getBrandText = path => {
     for (let i = 0; i < routes.length; i++) {
-      if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
+      if (
+        location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1
+      ) {
         return routes[i].name;
       }
     }
     return "Brand";
   };
-  
+
   // toggles collapse between mini sidenav and normal
-  const toggleSidenav = (e) => {
+  const toggleSidenav = e => {
     if (document.body.classList.contains("g-sidenav-pinned")) {
       document.body.classList.remove("g-sidenav-pinned");
       document.body.classList.add("g-sidenav-hidden");
@@ -101,7 +103,7 @@ function Admin() {
         />
         <Switch>
           {getRoutes(routes)}
-          <Redirect from="*" to="/admin/dashboard" />
+          <Redirect from="*" to="/admin/home" />
         </Switch>
         <AdminFooter />
       </div>

@@ -15,35 +15,42 @@
 
 */
 
-
 import CreateCareMemberPage from "views/pages/users/CreateCareMemberPage";
 import CareMembersPage from "views/pages/users/CareMembersPage.js";
 import EditCareMemberPage from "views/pages/users/EditCareMemberPage.js";
 
-import EmployeesPage from "views/pages/users/EmployeesPage.js"
+import EmployeesPage from "views/pages/users/EmployeesPage.js";
 import EmployeeDetailsPage from "views/pages/users/EmployeeDetailsPage.js";
 
-import CreateGroupPage from "views/pages/groups/CreateGroupPage.js"
+import CreateGroupPage from "views/pages/groups/CreateGroupPage.js";
 import EditGroupPage from "views/pages/groups/EditGroupPage";
-import GroupsPage from "views/pages/groups/GroupsPage.js"
+import GroupsPage from "views/pages/groups/GroupsPage.js";
 
-import CreateBestPracticePage from "views/pages/best-practices/CreateBestPracticePage.js"
-import SearchBestPracticesPage from "views/pages/best-practices/SearchBestPracticesPage.js"
+import CreateBestPracticePage from "views/pages/best-practices/CreateBestPracticePage.js";
+import SearchBestPracticesPage from "views/pages/best-practices/SearchBestPracticesPage.js";
 import BestPracticeDetailPage from "views/pages/best-practices/BestPracticeDetailPage";
 
 import CreateNewEmailPage from "views/pages/communications/CreateNewEmailPage";
 import EmailDetailsPage from "views/pages/communications/EmailDetailsPage";
 import SearchEmailDraftsPage from "views/pages/communications/SearchEmailDraftPage";
 
+import ChartsPage from "views/pages/dashboards/ChartsPage.js";
+import WorldOverviewPage from "views/pages/dashboards/WorldOverviewPage.js";
 
-import ChartsPage from "views/pages/dashboards/ChartsPage.js"
-import WorldOverviewPage from "views/pages/dashboards/WorldOverviewPage.js"
-
-
-import LoginPage from "views/pages/users/LoginPage"
-
+import LoginPage from "views/pages/users/LoginPage";
+import { HomePage } from "views/pages/home";
 
 const routes = [
+  // Home
+  {
+    collapse: false,
+    path: "/home",
+    name: "Home",
+    miniName: "HO",
+    component: HomePage,
+    layout: "/admin",
+    icon: "ni ni-chart-pie-35 text-info",
+  },
   {
     collapse: true,
     name: "Users",
@@ -179,7 +186,7 @@ const routes = [
     name: "Dashboard",
     icon: "ni ni-chart-pie-35 text-info",
     state: "dashboardCollapse",
-    views: [     
+    views: [
       {
         path: "/statistics",
         name: "Charts",
@@ -197,50 +204,50 @@ const routes = [
     ],
   },
   {
-    collapse: false,  
-    global:true, 
+    collapse: false,
+    global: true,
     path: "/group-member-details/:id",
     component: EditGroupPage,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
-    collapse: false,  
-    global:true, 
+    collapse: false,
+    global: true,
     path: "/login",
     component: LoginPage,
-    layout: "/auth"
+    layout: "/auth",
   },
   {
     collapse: false,
     global: true,
     path: "/email-details/:id",
     component: EmailDetailsPage,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
-    collapse: false,  
-    global: true, 
+    collapse: false,
+    global: true,
     path: "/users/employee-details/:id",
     component: EmployeeDetailsPage,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
-    collapse: false,  
-    global: true, 
+    collapse: false,
+    global: true,
     path: "/users/care-member-details/:id",
     component: EditCareMemberPage,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
-    collapse: false,  
-    global:true, 
+    collapse: false,
+    global: true,
     path: "/users/new-care-member/:id",
     component: CreateCareMemberPage,
     layout: "/admin",
   },
   {
-    collapse: false,  
-    global:true, 
+    collapse: false,
+    global: true,
     path: "/best-practice/:id",
     component: BestPracticeDetailPage,
     layout: "/admin",
@@ -346,7 +353,6 @@ const routes = [
   //     },
   //   ],
   // }
-
 ];
 
 export default routes;
