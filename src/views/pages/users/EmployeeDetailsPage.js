@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from 'react'
+import React from "react";
 
 // reactstrap components
 import {
@@ -28,20 +28,20 @@ import {
   Container,
   Row,
   Col,
-} from 'reactstrap'
+} from "reactstrap";
 
-import { useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 
 // core components
-import GradientEmptyHeader from 'components/Headers/GradientEmptyHeader.js'
-import { useSelector } from 'react-redux'
+import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import { useSelector } from "react-redux";
 
 function EmployeeDetailsPage(props) {
-  let { id } = useParams() //see in routes path: "/users/employee-details/:id",
+  let { id } = useParams(); //see in routes path: "/users/employee-details/:id",
 
-  const employees = useSelector((state) => state.employees)
-  let employee = employees.find((employee) => employee.id === parseInt(id))
-  let buttonColor =  employee.careMember?   "secondary" : "success";
+  const employees = useSelector(state => state.employees);
+  let employee = employees.find(employee => employee.id === parseInt(id));
+  let buttonColor = employee.careMember ? "secondary" : "success";
 
   return (
     <>
@@ -62,16 +62,22 @@ function EmployeeDetailsPage(props) {
                       type="button"
                       color={buttonColor}
                       href="#pablo"
-                      onClick={(e) => props.history.push('/admin/users/new-care-member/' + id)}
-                      disabled ={employee.careMember}
+                      onClick={e =>
+                        props.history.push(
+                          "/admin/users/new-care-member/" + id,
+                        )
+                      }
+                      disabled={employee.careMember}
                     >
                       Invite to Care
                     </Button>
                     <Button
-                      type="button"
-                      color="info"
+                      className="btn btn-primary"
+                      color="primary"
                       href="#pablo"
-                      onClick={(e) => props.history.push('/admin/employees')}
+                      onClick={() =>
+                        props.history.push("/admin/employees")
+                      }
                     >
                       Back to Search
                     </Button>
@@ -225,7 +231,11 @@ function EmployeeDetailsPage(props) {
                           <Input
                             id="input-postal-code"
                             disabled={true}
-                            value={employee.officeAddressPostalCode? employee.officeAddressPostalCode: 10872}
+                            value={
+                              employee.officeAddressPostalCode
+                                ? employee.officeAddressPostalCode
+                                : 10872
+                            }
                             placeholder="Postal code"
                             type="number"
                           />
@@ -242,7 +252,9 @@ function EmployeeDetailsPage(props) {
                     <Row>
                       <Col lg="4">
                         <FormGroup>
-                          <label className="form-control-label">Title</label>
+                          <label className="form-control-label">
+                            Title
+                          </label>
                           <Input
                             id="title"
                             value={employee.title}
@@ -330,7 +342,7 @@ function EmployeeDetailsPage(props) {
         </Row>
       </Container>
     </>
-  )
+  );
 }
 
-export default EmployeeDetailsPage
+export default EmployeeDetailsPage;

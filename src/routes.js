@@ -49,12 +49,12 @@ const routes = [
     miniName: "HO",
     component: HomePage,
     layout: "/admin",
-    icon: "ni ni-chart-pie-35 text-info",
+    icon: "ni ni-chart-pie-35 text-primary",
   },
   {
     collapse: true,
     name: "Users",
-    icon: "ni ni-single-02 text-info",
+    icon: "ni ni-single-02 text-primary",
     state: "usersCollapse",
     views: [
       {
@@ -76,7 +76,7 @@ const routes = [
   {
     collapse: true,
     name: "Groups",
-    icon: "ni ni-circle-08 text-info",
+    icon: "ni ni-circle-08  text-primary",
     state: "groupsCollapse",
     views: [
       {
@@ -98,7 +98,7 @@ const routes = [
   {
     collapse: true,
     name: "Best Practices",
-    icon: "ni ni-compass-04 text-info",
+    icon: "ni ni-compass-04  text-primary",
     state: "bestPracticesCollapse",
     views: [
       {
@@ -120,7 +120,7 @@ const routes = [
   {
     collapse: true,
     name: "Communications",
-    icon: "ni ni-email-83 text-info",
+    icon: "ni ni-email-83  text-primary",
     state: "communicationsCollapse",
     views: [
       {
@@ -184,7 +184,7 @@ const routes = [
   {
     collapse: true,
     name: "Dashboard",
-    icon: "ni ni-chart-pie-35 text-info",
+    icon: "ni ni-chart-pie-35  text-primary",
     state: "dashboardCollapse",
     views: [
       {
@@ -255,7 +255,7 @@ const routes = [
   // {
   //   collapse: true,
   //   name: "Examples",
-  //   icon: "ni ni-briefcase-24 text-info",
+  //   icon: "ni ni-briefcase-24  text-primary",
   //   state: "exampleCollapse",
   //   layout: "/admin",
   //   views: [
@@ -341,7 +341,7 @@ const routes = [
   // {
   //   collapse: true,
   //   name: "Roles",
-  //   icon: "ni ni-circle-08 text-info",
+  //   icon: "ni ni-circle-08  text-primary",
   //   state: "rolesCollapse",
   //   views: [
   //     {

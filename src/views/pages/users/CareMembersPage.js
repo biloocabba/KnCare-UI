@@ -160,8 +160,7 @@ function CareMembersPage(props) {
         <Button
           id={row.id}
           className="btn-icon btn-2"
-          type="button"
-          color="info"
+          color="primary"
           onClick={goToCareMemberDetailsPage}
         >
           {/* <span id={row.id} className="btn-inner--icon"> */}
@@ -360,14 +359,14 @@ function CareMembersPage(props) {
 
                   <Col md="1">
                     <FormGroup className="text-right">
-                      <button
+                      <Button
                         style={{ marginTop: "32px", height: "40px" }}
-                        className="btn btn-info"
-                        type="button"
+                        className="btn btn-primary"
+                        color="primary"
                         onClick={findByAllParameters}
                       >
                         Search
-                      </button>
+                      </Button>
                     </FormGroup>
                   </Col>
                 </Row>

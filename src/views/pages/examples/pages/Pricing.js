@@ -41,7 +41,7 @@ function Pricing() {
             <div className="pricing card-group flex-column flex-md-row mb-3">
               <Card className="card-pricing border-0 text-center mb-4">
                 <CardHeader className="bg-transparent">
-                  <h4 className="text-uppercase ls-1 text-info py-3 mb-0">
+                  <h4 className="text-uppercase ls-1  text-primary py-3 mb-0">
                     Bravo pack
                   </h4>
                 </CardHeader>
@@ -57,7 +57,9 @@ function Pricing() {
                           </div>
                         </div>
                         <div>
-                          <span className="pl-2">Complete documentation</span>
+                          <span className="pl-2">
+                            Complete documentation
+                          </span>
                         </div>
                       </div>
                     </li>
@@ -96,7 +98,7 @@ function Pricing() {
                   <a
                     className="text-light"
                     href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={e => e.preventDefault()}
                   >
                     Request a demo
                   </a>
@@ -163,7 +165,7 @@ function Pricing() {
                   <a
                     className="text-white"
                     href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={e => e.preventDefault()}
                   >
                     Contact sales
                   </a>
@@ -180,9 +182,9 @@ function Pricing() {
           </div>
           <Col lg="6">
             <p className="text-white">
-              <strong>The Arctic Ocean</strong> freezes every winter and much of
-              the sea-ice then thaws every summer, and that process will
-              continue whatever.
+              <strong>The Arctic Ocean</strong> freezes every winter and
+              much of the sea-ice then thaws every summer, and that process
+              will continue whatever.
             </p>
           </Col>
         </div>
@@ -192,7 +194,9 @@ function Pricing() {
               <thead>
                 <tr>
                   <th className="px-0 bg-transparent" scope="col">
-                    <span className="text-light font-weight-700">Features</span>
+                    <span className="text-light font-weight-700">
+                      Features
+                    </span>
                   </th>
                   <th className="text-center bg-transparent" scope="col">
                     Bravo Pack
@@ -258,7 +262,9 @@ function Pricing() {
                   <td className="text-center">-</td>
                 </tr>
                 <tr>
-                  <td className="px-0">Password protected / Expiry links</td>
+                  <td className="px-0">
+                    Password protected / Expiry links
+                  </td>
                   <td className="text-center">
                     <i className="fas fa-check text-success" />
                   </td>

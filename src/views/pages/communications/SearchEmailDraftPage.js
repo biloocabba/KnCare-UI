@@ -1,70 +1,87 @@
-import React, { useState} from "react";
-import BootstrapTable from 'react-bootstrap-table-next'
-import paginationFactory from 'react-bootstrap-table2-paginator'
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit'
-import { Button, Card, CardHeader, Container, Row , Col, Form ,CardBody,Input, FormGroup } from 'reactstrap'
-import GradientEmptyHeader from 'components/Headers/GradientEmptyHeader.js'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from "react";
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import {
+  Button,
+  Card,
+  CardHeader,
+  Container,
+  Row,
+  Col,
+  Form,
+  CardBody,
+  Input,
+  FormGroup,
+} from "reactstrap";
+import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import { useDispatch, useSelector } from "react-redux";
 import ReactDatetime from "react-datetime";
 import {
   searchEmailDrafts,
-  retrieveEmailDrafts
+  retrieveEmailDrafts,
 } from "../../../actions/emailDrafts";
 import Select from "react-select";
-import makeAnimated from 'react-select/animated';
-
+import makeAnimated from "react-select/animated";
 
 const pagination = paginationFactory({
   page: 1,
   alwaysShowAllBtns: true,
   showTotal: true,
   withFirstAndLast: false,
-  sizePerPageRenderer: ({ options, currSizePerPage, onSizePerPageChange }) => (
+  sizePerPageRenderer: ({
+    options,
+    currSizePerPage,
+    onSizePerPageChange,
+  }) => (
     <div className="dataTables_length" id="datatable-basic_length">
       <label>
-        Show{' '}
+        Show{" "}
         {
           <select
             name="datatable-basic_length"
             aria-controls="datatable-basic"
             className="form-control form-control-sm"
-            onChange={(e) => onSizePerPageChange(e.target.value)}
+            onChange={e => onSizePerPageChange(e.target.value)}
           >
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
           </select>
-        }{' '}
+        }{" "}
         entries.
       </label>
     </div>
   ),
-})
+});
 
-const { SearchBar } = Search
+const { SearchBar } = Search;
 
 function SearchEmailDraftsPage(props) {
-
-  const careRoles = useSelector( (state) => {
-    return state.categories.careRoles.map(role => {return {"value": role.id, "label":role.name}})
+  const careRoles = useSelector(state => {
+    return state.categories.careRoles.map(role => {
+      return { value: role.id, label: role.name };
+    });
   });
-  const groups =  useSelector( (state) => {
-    return state.groups.map(group => {return {"value": group.id, "label":group.name}})
+  const groups = useSelector(state => {
+    return state.groups.map(group => {
+      return { value: group.id, label: group.name };
+    });
   });
 
-  const careMembers = useSelector( (state) => {
-    return state.careMembers.map(careMember => {return {"value": careMember.id, "label":careMember.internationalName}})
+  const careMembers = useSelector(state => {
+    return state.careMembers.map(careMember => {
+      return { value: careMember.id, label: careMember.internationalName };
+    });
   });
   const emailDrafts = useSelector(state => state.emailDrafts);
-
 
   const [searchSubject, setSearchSubject] = useState("");
   const [searchRecipient, setSearchRecipient] = useState("");
   const [searchGroup, setSearchGroup] = useState("");
   const [searchStartDate, setSearchStartDate] = useState("");
   const [searchEndDate, setSearchEndDate] = useState("");
-
 
   const dispatch = useDispatch();
 
@@ -92,160 +109,164 @@ function SearchEmailDraftsPage(props) {
     const searchEndDate = e.target.value;
     setSearchEndDate(searchEndDate);
   };
-  
+
   const findByAllParameters = () => {
-    let filters ={
+    let filters = {
       subject: searchSubject,
       recipient: searchRecipient,
       group: searchGroup,
       startDate: searchStartDate,
-      endDate: searchEndDate
-    }
+      endDate: searchEndDate,
+    };
     dispatch(searchEmailDrafts(filters));
-  }
+  };
 
-  const emailDraftDetails = (e) => {
-    var { id } = e.target
-    props.history.push('/admin/emailDrafts/email-draft-details/1')
-  }
+  const emailDraftDetails = e => {
+    var { id } = e.target;
+    props.history.push("/admin/emailDrafts/email-draft-details/1");
+  };
 
   const detailsActionButtonCell = () => {
     return (
-        <Button
-          className="btn-icon btn-2"
-          type="button"
-          color="info"
-          onClick={emailDraftDetails}
-        >
-          <span className="btn-inner--icon">
-            <i className="ni ni-badge" />
-          </span>
-        </Button>
-    )
-  }
+      <Button
+        className="btn-icon btn-2"
+        type="button"
+        color="info"
+        onClick={emailDraftDetails}
+      >
+        <span className="btn-inner--icon">
+          <i className="ni ni-badge" />
+        </span>
+      </Button>
+    );
+  };
 
   return (
     <>
       {alert}
       <GradientEmptyHeader name="Search Email Drafts" />
       <Container className="mt--6" fluid>
-      <Row>    
-        <div className="col">
-            <Card >
+        <Row>
+          <div className="col">
+            <Card>
               <CardHeader>
                 <h3 className="mb-0">Search Emails</h3>
                 <p className="text-sm mb-0">Filters</p>
               </CardHeader>
               <CardBody>
-                   <Row>
-               <Col md="2">
-                <FormGroup>
-                  <label
-                    className="form-control-label"
-                    htmlFor="lastName"
-                  >
-                    Subject
-                  </label>
-                  <Input
-                    id="lastName"
-                    style={{height:'36px'}}
-                    className="form-control"                    
-                    type="text"
-                    placeholder="Last Name"
-                    value={searchSubject}
-                    onChange={onChangeSearchSubject}
-                  />
-                </FormGroup>
-              </Col>
-              <Col md="2">
-                <FormGroup>
-                  <label
-                    className="form-control-label"
-                    htmlFor="businessUnits"
-                  >
-                    Recipients
-                  </label>
-                  <Select
-                      id="businessUnits"
-                      components = {makeAnimated()}
-                      options = {careMembers}
-                      onChange = {item => setSearchRecipient(item.value)}
-                    />
-                </FormGroup>
-              </Col>
-              <Col md="2">
-                <FormGroup>
-                  <label
-                    className="form-control-label"
-                    htmlFor="country"
-                  >
-                    Groups
-                  </label>
-                  <Select
-                      id="country"
-                      components = {makeAnimated()}
-                      options = {groups}
-                      onChange = {item => setSearchGroup(item.value)}
-                    />
-                </FormGroup>
-              </Col>
-              <Col md="2">
-                <FormGroup>
-                  <label
-                    className="form-control-label"
-                    htmlFor="example3cols2Input"
-                  >
-                   Sent Date From
-                  </label>
-                  <ReactDatetime                   
-                    inputProps={{
-                      placeholder: "Hire date",
-                    }}
-                    onChange={(e) =>
-                      console.log(e)
-                      //onChangeSearchHiringDate(e)
-                    }
-                    timeFormat={false}
-                  />
-                </FormGroup>
-              </Col>
-              <Col md="2">
-                <FormGroup>
-                  <label
-                    className="form-control-label"
-                    htmlFor="example3cols2Input"
-                  >
-                   Sent Date To
-                  </label>
-                  <ReactDatetime                   
-                    inputProps={{
-                      placeholder: "Hire date",
-                    }}
-                    onChange={(e) =>
-                      console.log(e)
-                      //onChangeSearchHiringDate(e)
-                    }
-                    timeFormat={false}
-                  />
-                </FormGroup>
-              </Col>
-              <Col md="2"> 
-                <FormGroup>            
-                      <button
-                        style={{marginTop:'32px', marginLeft:'32px', height:'40px'}}                       
-                        className="btn btn-info"
-                        type="button"
+                <Row>
+                  <Col md="2">
+                    <FormGroup>
+                      <label
+                        className="form-control-label"
+                        htmlFor="lastName"
+                      >
+                        Subject
+                      </label>
+                      <Input
+                        id="lastName"
+                        style={{ height: "36px" }}
+                        className="form-control"
+                        type="text"
+                        placeholder="Last Name"
+                        value={searchSubject}
+                        onChange={onChangeSearchSubject}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="2">
+                    <FormGroup>
+                      <label
+                        className="form-control-label"
+                        htmlFor="businessUnits"
+                      >
+                        Recipients
+                      </label>
+                      <Select
+                        id="businessUnits"
+                        components={makeAnimated()}
+                        options={careMembers}
+                        onChange={item => setSearchRecipient(item.value)}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="2">
+                    <FormGroup>
+                      <label
+                        className="form-control-label"
+                        htmlFor="country"
+                      >
+                        Groups
+                      </label>
+                      <Select
+                        id="country"
+                        components={makeAnimated()}
+                        options={groups}
+                        onChange={item => setSearchGroup(item.value)}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="2">
+                    <FormGroup>
+                      <label
+                        className="form-control-label"
+                        htmlFor="example3cols2Input"
+                      >
+                        Sent Date From
+                      </label>
+                      <ReactDatetime
+                        inputProps={{
+                          placeholder: "Hire date",
+                        }}
+                        onChange={
+                          e => console.log(e)
+                          //onChangeSearchHiringDate(e)
+                        }
+                        timeFormat={false}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="2">
+                    <FormGroup>
+                      <label
+                        className="form-control-label"
+                        htmlFor="example3cols2Input"
+                      >
+                        Sent Date To
+                      </label>
+                      <ReactDatetime
+                        inputProps={{
+                          placeholder: "Hire date",
+                        }}
+                        onChange={
+                          e => console.log(e)
+                          //onChangeSearchHiringDate(e)
+                        }
+                        timeFormat={false}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="2">
+                    <FormGroup>
+                      <Button
+                        style={{
+                          marginTop: "32px",
+                          marginLeft: "32px",
+                          height: "40px",
+                        }}
+                        className="btn btn-primary"
+                        color="primary"
                         onClick={findByAllParameters}
                       >
                         Search
-                      </button>   
-                  </FormGroup>                 
-                </Col>
-            </Row>
+                      </Button>
+                    </FormGroup>
+                  </Col>
+                </Row>
               </CardBody>
-              </Card>                   
-                </div>    
-      </Row>  
+            </Card>
+          </div>
+        </Row>
 
         <Row>
           <div className="col">
@@ -258,48 +279,48 @@ function SearchEmailDraftsPage(props) {
                 keyField="id"
                 columns={[
                   {
-                    dataField: 'id',
-                    text: 'id',
+                    dataField: "id",
+                    text: "id",
                     hidden: true,
                   },
                   {
-                    dataField: 'subject',
-                    text: 'subject',
+                    dataField: "subject",
+                    text: "subject",
                     sort: true,
                   },
                   {
-                    dataField: 'recipient',
-                    text: 'recipient',
+                    dataField: "recipient",
+                    text: "recipient",
                     sort: true,
-                    style: { width: '50px' },
+                    style: { width: "50px" },
                   },
                   {
-                    dataField: 'group',
-                    text: 'group',
+                    dataField: "group",
+                    text: "group",
                     sort: true,
-                    style: { width: '50px' },
+                    style: { width: "50px" },
                   },
                   {
-                    dataField: 'startDate',
-                    text: 'startDate',
+                    dataField: "startDate",
+                    text: "startDate",
                     sort: true,
-                    style: { width: '50px' },
+                    style: { width: "50px" },
                   },
                   {
-                    dataField: 'startDate',
-                    text: 'startDate',
+                    dataField: "startDate",
+                    text: "startDate",
                     sort: true,
-                    style: { width: '50px' },
+                    style: { width: "50px" },
                   },
                   {
-                    dataField: 'action',
-                    text: '',
+                    dataField: "action",
+                    text: "",
                     formatter: detailsActionButtonCell,
                   },
                 ]}
                 search
               >
-                {(props) => (
+                {props => (
                   <div className="py-4 table-responsive">
                     {/* <div
                       id="datatable-basic_filter"
@@ -377,7 +398,7 @@ function SearchEmailDraftsPage(props) {
                     </div>  
             
              */}
-            
+
                     <BootstrapTable
                       {...props.baseProps}
                       bootstrap4={true}
@@ -392,7 +413,7 @@ function SearchEmailDraftsPage(props) {
         </Row>
       </Container>
     </>
-  )
+  );
 }
 
-export default SearchEmailDraftsPage
+export default SearchEmailDraftsPage;

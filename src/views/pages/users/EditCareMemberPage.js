@@ -101,10 +101,10 @@ function EditCareMemberPage(props) {
                       Offboard from Care
                     </Button>
                     <Button
-                      type="button"
-                      color="info"
+                      className="btn btn-primary"
+                      color="primary"
                       href="#pablo"
-                      onClick={e =>
+                      onClick={() =>
                         props.history.push("/admin/care-members")
                       }
                     >

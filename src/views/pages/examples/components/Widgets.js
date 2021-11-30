@@ -380,7 +380,7 @@ function Widgets() {
                       <small>1 day ago</small>
                     </div>
                     <h4 className="mt-3 mb-1">
-                      <span className="text-info mr-1">●</span>
+                      <span className=" text-primary mr-1">●</span>
                       Your theme has been updated
                     </h4>
                     <p className="text-sm mb-0">

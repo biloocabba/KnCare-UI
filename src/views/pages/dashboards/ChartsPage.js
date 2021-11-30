@@ -14,23 +14,21 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+// core components
+import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
 import React from "react";
-// javascipt plugin for creating charts
-import Chart from "chart.js";
 // react plugin used to create charts
-import { Line, Bar, Doughnut, Pie } from "react-chartjs-2";
+import { Bar, Line, Pie } from "react-chartjs-2";
 // reactstrap components
 import {
   Card,
-  CardHeader,
   CardBody,
+  CardHeader,
+  CardTitle,
+  Col,
   Container,
   Row,
-  Col,
-  CardTitle,
 } from "reactstrap";
-// core components
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
 // import {
 //   chartOptions,
 //   parseOptions,

@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from 'react'
+import React from "react";
 
 // reactstrap components
 import {
@@ -28,82 +28,81 @@ import {
   Container,
   Row,
   Col,
-  Pagination, 
-  PaginationItem, 
-  PaginationLink
-} from 'reactstrap'
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+} from "reactstrap";
 
-import { useParams } from 'react-router-dom'
-import {  useState } from "react";
-import Rating  from "react-rating";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import Rating from "react-rating";
 // core components
-import GradientEmptyHeader from 'components/Headers/GradientEmptyHeader.js'
-import { useSelector } from 'react-redux'
+import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import { useSelector } from "react-redux";
 
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'; //this will optimize load with webworker
-import {huddle64pdf} from 'mock-data/mock-data-pdf-huddle-base64.js'
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
+import { huddle64pdf } from "mock-data/mock-data-pdf-huddle-base64.js";
 // import pdfToShare from 'assets/pdf/HostingCareHuddle.pdf'
 
-
-
 function BestPracticeDetailPage(props) {
-  let { id } = useParams() //see in routes path: "/users/employee-details/:id",
+  let { id } = useParams(); //see in routes path: "/users/employee-details/:id",
 
   //const bestPractices = useSelector((state) => state.bestPractices)
   //let bestPractice = bestPractices.find((bp) => bp.id === parseInt(id))
- 
+
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1); 
+  const [pageNumber, setPageNumber] = useState(1);
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
     setPageNumber(1);
-  }
+  };
 
-  const changePage = (offset) =>{
+  const changePage = offset => {
     setPageNumber(prevPageNumber => prevPageNumber + offset);
-  }
+  };
 
-  const previousPage =() => {
-    if( pageNumber>1){
+  const previousPage = () => {
+    if (pageNumber > 1) {
       changePage(-1);
-    }    
-  }
+    }
+  };
 
-  const nextPage = () => {   
-    if( pageNumber<numPages){
+  const nextPage = () => {
+    if (pageNumber < numPages) {
       changePage(1);
-    }      
-  }
+    }
+  };
 
-
-  let bestPractice={
-    title:'a demo title',
-    description:'a demo description',
-    author:'a demo author',
-    publishDate:'12/12/2020',
-    rating:4,
-    tags:['tag1','tag2', 'tag3'],
+  let bestPractice = {
+    title: "a demo title",
+    description: "a demo description",
+    author: "a demo author",
+    publishDate: "12/12/2020",
+    rating: 4,
+    tags: ["tag1", "tag2", "tag3"],
     // pdf:'assets/pdf/HostingCareHuddle.pdf' // this doesnt work. Local file works only with import
     // pdf:'https://github.com/stefanofiorenza/KNITS-Events/raw/master/KN-Brochure2020.pdf', //this doesnt work. Need cors enabled
-    pdf:'https://s3-ap-southeast-1.amazonaws.com/happay-local/HVP/BILL20198261213473719445688HP.pdf' //this works
-  }
+    pdf: "https://s3-ap-southeast-1.amazonaws.com/happay-local/HVP/BILL20198261213473719445688HP.pdf", //this works
+  };
   return (
     <>
       <GradientEmptyHeader name="Employees" />
       <Container className="mt--6" fluid>
-      <Row className="align-items-center py-4">
-                  <Col lg="12" xs="7" className="text-right">                   
-                    <Button
-                      type="button"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => props.history.push('/admin/search-best-practices')}
-                    >
-                      Back to Search
-                    </Button>
-                  </Col>
-                </Row>
+        <Row className="align-items-center py-4">
+          <Col lg="12" xs="7" className="text-right">
+            <Button
+              className="btn btn-primary"
+              color="primary"
+              href="#pablo"
+              onClick={e =>
+                props.history.push("/admin/search-best-practices")
+              }
+            >
+              Back to Search
+            </Button>
+          </Col>
+        </Row>
         <Row>
           <Col className="order-xl-1" xl="12">
             <Card>
@@ -113,8 +112,8 @@ function BestPracticeDetailPage(props) {
                     <h3 className="mb-0">Best Practice Details</h3>
                   </Col>
                 </Row>
-               </CardHeader>
-                <CardBody>
+              </CardHeader>
+              <CardBody>
                 <Form>
                   <h6 className="heading-small text-muted mb-4">
                     Best Practice details
@@ -153,7 +152,7 @@ function BestPracticeDetailPage(props) {
                           />
                         </FormGroup>
                       </Col>
-                    
+
                       <Col lg="3">
                         <FormGroup>
                           <label
@@ -189,66 +188,69 @@ function BestPracticeDetailPage(props) {
                     </Row>
                   </div>
                   <hr className="my-4" />
-                    <Row>
-                      <Col lg="1">
-                        &nbsp;
-                      </Col>
-                      <Col  lg="8">
+                  <Row>
+                    <Col lg="1">&nbsp;</Col>
+                    <Col lg="8">
                       <div className="pl-lg-4">
-                      <Document
-                           file={huddle64pdf}    
+                        <Document
+                          file={huddle64pdf}
                           //  file={bestPractice.pdf}
-                           onLoadSuccess={onDocumentLoadSuccess}
+                          onLoadSuccess={onDocumentLoadSuccess}
                         >
-                            <Page pageNumber={pageNumber} />
+                          <Page pageNumber={pageNumber} />
 
-                           {/* TO see all pages in same page */}
-                              {/* {Array.from(new Array(numPages), (el, index) => (
+                          {/* TO see all pages in same page */}
+                          {/* {Array.from(new Array(numPages), (el, index) => (
                                 <Page key={`page_${index + 1}`} pageNumber={index + 1} />
                               ))} */}
                         </Document>
-                        <div >
-                            <p className="mb-0">
-                              Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
-                            </p>
+                        <div>
+                          <p className="mb-0">
+                            Page {pageNumber || (numPages ? 1 : "--")} of{" "}
+                            {numPages || "--"}
+                          </p>
 
-                            <Pagination>
-                             
+                          <Pagination>
                             <PaginationItem>
-                                <PaginationLink
-                                  disabled={pageNumber <= 1}
-                                  aria-label="Previous"
-                                  href="#pablo"
-                                  onClick={previousPage}
-                                >
-                                  <i className="fa fa-angle-left" />
-                                  <span className="sr-only">Previous</span>
-                                </PaginationLink>
-                              </PaginationItem>
+                              <PaginationLink
+                                disabled={pageNumber <= 1}
+                                aria-label="Previous"
+                                href="#pablo"
+                                onClick={previousPage}
+                              >
+                                <i className="fa fa-angle-left" />
+                                <span className="sr-only">Previous</span>
+                              </PaginationLink>
+                            </PaginationItem>
 
-                               {Array.from(new Array(numPages), (el, index) => (
-                                 <PaginationItem>
-                                 <PaginationLink href="#pablo" onClick={e => setPageNumber(index+1)}>
-                                    {index+1}
-                                 </PaginationLink>
-                               </PaginationItem>
-                               ))}
-                            
+                            {Array.from(
+                              new Array(numPages),
+                              (el, index) => (
+                                <PaginationItem>
+                                  <PaginationLink
+                                    href="#pablo"
+                                    onClick={e => setPageNumber(index + 1)}
+                                  >
+                                    {index + 1}
+                                  </PaginationLink>
+                                </PaginationItem>
+                              ),
+                            )}
 
-                              <PaginationItem>
-                                <PaginationLink
-                                  disabled={pageNumber >= numPages}
-                                  aria-label="Next"
-                                  href="#pablo"
-                                  onClick={nextPage}
-                                >
-                                  <i className="fa fa-angle-right" />
-                                  <span className="sr-only">Next</span>
-                                </PaginationLink>
-                              </PaginationItem>
-                              </Pagination>
+                            <PaginationItem>
+                              <PaginationLink
+                                disabled={pageNumber >= numPages}
+                                aria-label="Next"
+                                href="#pablo"
+                                onClick={nextPage}
+                              >
+                                <i className="fa fa-angle-right" />
+                                <span className="sr-only">Next</span>
+                              </PaginationLink>
+                            </PaginationItem>
+                          </Pagination>
 
-                            {/* <Button
+                          {/* <Button
                               type="button"
                               color="info"
                               href="#pablo"
@@ -266,7 +268,7 @@ function BestPracticeDetailPage(props) {
                               Next
                             </Button> */}
 
-                            {/* <button type="button" disabled={pageNumber <= 1} onClick={previousPage}>
+                          {/* <button type="button" disabled={pageNumber <= 1} onClick={previousPage}>
                               Previous
                             </button>
                             <button
@@ -276,19 +278,19 @@ function BestPracticeDetailPage(props) {
                             >
                               Next
                             </button> */}
-                          </div>
                         </div>
-                      </Col>
+                      </div>
+                    </Col>
 
-                      <Col lg="2">
-                        <h3>Rate it:</h3>                       
-                          <Rating
-                            // style={{color:'yellow', borderColor:'black'}}
-                            emptySymbol="fa fa-star-o fa-2x"
-                            fullSymbol="fa fa-star fa-2x"
-                          />
-                      </Col>
-                    </Row>
+                    <Col lg="2">
+                      <h3>Rate it:</h3>
+                      <Rating
+                        // style={{color:'yellow', borderColor:'black'}}
+                        emptySymbol="fa fa-star-o fa-2x"
+                        fullSymbol="fa fa-star fa-2x"
+                      />
+                    </Col>
+                  </Row>
                 </Form>
               </CardBody>
             </Card>
@@ -296,7 +298,7 @@ function BestPracticeDetailPage(props) {
         </Row>
       </Container>
     </>
-  )
+  );
 }
 
-export default BestPracticeDetailPage
+export default BestPracticeDetailPage;

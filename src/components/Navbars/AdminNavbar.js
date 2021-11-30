@@ -14,37 +14,24 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 // nodejs library that concatenates classes
 import classnames from "classnames";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
+import React from "react";
+import { useDispatch } from "react-redux";
 // reactstrap components
 import {
   Collapse,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  ListGroupItem,
-  ListGroup,
-  Media,
-  Navbar,
-  NavItem,
-  NavLink,
-  Nav,
   Container,
-  Row,
-  Col,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Media,
+  Nav,
+  Navbar,
+  UncontrolledDropdown,
 } from "reactstrap";
-
 import { logout } from "../../actions/auth";
 
 function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
@@ -81,16 +68,13 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
     dispatch(logout());
   };
 
-  
-
-
   return (
     <>
       <Navbar
         className={classnames(
           "navbar-top navbar-expand border-bottom",
-          { "navbar-dark bg-info": theme === "dark" },
-          { "navbar-light bg-secondary": theme === "light" }
+          { "navbar-dark bg-primary": theme === "dark" },
+          { "navbar-light bg-secondary": theme === "light" },
         )}
       >
         <Container fluid>
@@ -154,7 +138,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                 >
                   <div className="px-3 py-3">
                     <h6 className="text-sm text-muted m-0">
-                      You have <strong className="text-info">13</strong>{" "}
+                      You have <strong className=" text-primary">13</strong>{" "}
                       notifications.
                     </h6>
                   </div>
@@ -308,7 +292,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                   </ListGroup>
 
                   <DropdownItem
-                    className="text-center text-info font-weight-bold py-3"
+                    className="text-center  text-primary font-weight-bold py-3"
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
                   >
@@ -316,7 +300,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown> */}
-{/* 
+              {/* 
               <UncontrolledDropdown nav>
                 <DropdownToggle className="nav-link" color="" tag="a">
                   <i className="ni ni-ungroup" />
@@ -403,7 +387,6 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
               </UncontrolledDropdown>
             
              */}
-            
             </Nav>
             <Nav className="align-items-center ml-auto ml-md-0" navbar>
               <UncontrolledDropdown nav>
@@ -412,7 +395,10 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                     <span className="avatar avatar-sm rounded-circle">
                       <img
                         alt="..."
-                        src={require("assets/img/care/stefano-fiorenza.jpg").default}
+                        src={
+                          require("assets/img/care/stefano-fiorenza.jpg")
+                            .default
+                        }
                       />
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
@@ -428,37 +414,34 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                   </DropdownItem>
                   <DropdownItem
                     href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={e => e.preventDefault()}
                   >
                     <i className="ni ni-single-02" />
                     <span>My profile</span>
                   </DropdownItem>
                   <DropdownItem
                     href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={e => e.preventDefault()}
                   >
                     <i className="ni ni-settings-gear-65" />
                     <span>Settings</span>
                   </DropdownItem>
                   <DropdownItem
                     href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={e => e.preventDefault()}
                   >
                     <i className="ni ni-calendar-grid-58" />
                     <span>Activity</span>
                   </DropdownItem>
                   <DropdownItem
                     href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={e => e.preventDefault()}
                   >
                     <i className="ni ni-support-16" />
                     <span>Support</span>
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem
-                    href="/auth/login"
-                    onClick={logOut}
-                  >
+                  <DropdownItem href="/auth/login" onClick={logOut}>
                     <i className="ni ni-user-run" />
                     <span>Logout</span>
                   </DropdownItem>

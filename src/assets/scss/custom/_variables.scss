@@ -83,7 +83,7 @@ $colors: map-merge(
 );
 
 $default: #172b4d !default;
-$primary: #003369 !default;
+$primary: $blue !default;
 $secondary: #f6f5f0 !default;
 $success: $green !default;
 $info: $teal !default;
