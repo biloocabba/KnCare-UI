@@ -11,4 +11,7 @@ export {
   lineActiveMembersData,
   pieByBusinessUnits,
   pieByRole,
+  doughnutByGender,
+  barByAge,
+  barByWorkingTime,
 } from "./charts";

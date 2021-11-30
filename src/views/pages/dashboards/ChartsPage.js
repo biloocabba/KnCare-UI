@@ -18,7 +18,7 @@
 import GradientEmptyHeader from "components/Headers/GradientEmptyHeader";
 import React from "react";
 // react plugin used to create charts
-import { Bar, Line, Pie } from "react-chartjs-2";
+import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 // reactstrap components
 import {
   Card,
@@ -29,11 +29,14 @@ import {
   Container,
   Row,
 } from "reactstrap";
+import { barByWorkingTime } from "variables";
 import {
+  barTurnoverData,
   lineActiveMembersData,
   pieByBusinessUnits,
   pieByRole,
-  barTurnoverData,
+  doughnutByGender,
+  barByAge,
 } from "variables";
 
 const ChartsPage = () => {
@@ -63,12 +66,6 @@ const ChartsPage = () => {
                     </Col>
                   </Row>
                   <p className="mt-3 mb-0 text-sm">&nbsp;</p>
-                  {/* <p className="mt-3 mb-0 text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-arrow-up" /> 3.48%
-                      </span>
-                      <span className="text-nowrap">Since last month</span>
-                    </p> */}
                 </CardBody>
               </Card>
             </Col>
@@ -92,12 +89,6 @@ const ChartsPage = () => {
                     </Col>
                   </Row>
                   <p className="mt-3 mb-0 text-sm">&nbsp;</p>
-                  {/* <p className="mt-3 mb-0 text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-arrow-up" /> 3.48%
-                      </span>
-                      <span className="text-nowrap">Since last month</span>
-                    </p> */}
                 </CardBody>
               </Card>
             </Col>
@@ -200,25 +191,6 @@ const ChartsPage = () => {
               </CardBody>
             </Card>
           </Col>
-
-          {/* <Col xl="6">
-              <Card>
-                <CardHeader>
-                  <h6 className="surtitle">Overview</h6>
-                  <h5 className="h3 mb-0">Offboarding</h5>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart">
-                    <Bar
-                      data={chartExample2.data}
-                      options={chartExample2.options}
-                      className="chart-canvas"
-                      id="chart-bars"
-                    />
-                  </div>
-                </CardBody>
-              </Card>
-            </Col> */}
         </Row>
         <Row>
           <Col xl="6">
@@ -239,24 +211,6 @@ const ChartsPage = () => {
               </CardBody>
             </Card>
           </Col>
-          {/* <Col xl="6">
-            <Card>
-              <CardHeader>
-                <h6 className="surtitle">Growth</h6>
-                <h5 className="h3 mb-0">Sales value</h5>
-              </CardHeader>
-              <CardBody>
-                <div className="chart">
-                  <Line
-                    data={chartExample4.data}
-                    options={chartExample4.options}
-                    id="chart-points"
-                    className="chart-canvas"
-                  />
-                </div>
-              </CardBody>
-            </Card>
-          </Col> */}
           <Col xl="6">
             <Card>
               <CardHeader>
@@ -275,21 +229,19 @@ const ChartsPage = () => {
               </CardBody>
             </Card>
           </Col>
-        </Row>
-        {/* <Row>
           <Col xl="6">
             <Card>
               <CardHeader>
-                <h6 className="surtitle">Partners</h6>
-                <h5 className="h3 mb-0">Affiliate traffic</h5>
+                <h6 className="surtitle">Care Members</h6>
+                <h5 className="h3 mb-0">By Gender</h5>
               </CardHeader>
               <CardBody>
                 <div className="chart">
-                  <Pie
-                    data={chartExample6.data}
-                    options={chartExample6.options}
+                  <Doughnut
+                    data={doughnutByGender.data}
+                    options={doughnutByGender.options}
                     className="chart-canvas"
-                    id="chart-pie"
+                    id="chart-doughnut"
                   />
                 </div>
               </CardBody>
@@ -298,14 +250,14 @@ const ChartsPage = () => {
           <Col xl="6">
             <Card>
               <CardHeader>
-                <h6 className="surtitle">Overview</h6>
-                <h5 className="h3 mb-0">Product comparison</h5>
+                <h6 className="surtitle">Care Members</h6>
+                <h5 className="h3 mb-0">By Age</h5>
               </CardHeader>
               <CardBody>
                 <div className="chart">
                   <Bar
-                    data={chartExample7.data}
-                    options={chartExample7.options}
+                    data={barByAge.data}
+                    options={barByAge.options}
                     className="chart-canvas"
                     id="chart-bar-stacked"
                   />
@@ -313,7 +265,25 @@ const ChartsPage = () => {
               </CardBody>
             </Card>
           </Col>
-        </Row> */}
+          <Col xl="6">
+            <Card>
+              <CardHeader>
+                <h6 className="surtitle">Care Members</h6>
+                <h5 className="h3 mb-0">By Working Time (Years)</h5>
+              </CardHeader>
+              <CardBody>
+                <div className="chart">
+                  <Bar
+                    data={barByWorkingTime.data}
+                    options={barByWorkingTime.options}
+                    className="chart-canvas"
+                    id="chart-bar-stacked"
+                  />
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
       </Container>
     </>
   );

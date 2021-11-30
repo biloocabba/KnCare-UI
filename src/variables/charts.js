@@ -20,6 +20,66 @@ import { colors } from "variables";
 // Only for demo purposes - return a random number to generate datasets
 const randomScalingFactor = () => Math.round(Math.random() * 100);
 
+export const barTurnoverData = {
+  data: {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+    ],
+    datasets: [
+      {
+        label: "Offboarded",
+        backgroundColor: colors.theme["danger"],
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+        ],
+        maxBarThickness: 10,
+      },
+      {
+        label: "Onboarded",
+        backgroundColor: colors.theme["success"],
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+        ],
+        maxBarThickness: 10,
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      tooltip: {
+        mode: "index",
+        intersect: false,
+      },
+    },
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true,
+      },
+    },
+  },
+};
+
 export const lineActiveMembersData = {
   data: {
     labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -145,22 +205,42 @@ export const pieByBusinessUnits = {
   },
 };
 
-export const barTurnoverData = {
+export const doughnutByGender = {
   data: {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-    ],
+    labels: ["Men", "Women"],
     datasets: [
       {
-        label: "Offboarded",
-        backgroundColor: colors.theme["danger"],
+        label: "Dataset 1",
+        data: [randomScalingFactor(), randomScalingFactor()],
+        backgroundColor: [colors.theme["primary"], colors.theme["danger"]],
+        hoverOffset: 6,
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
+    // hover: {
+    //   mode: "index",
+    // },
+    animation: {
+      animateScale: true,
+    },
+  },
+};
+
+export const barByAge = {
+  data: {
+    labels: ["20", "25", "30", "35", "40", "45", "50", "50+"],
+    datasets: [
+      {
+        label: "Care Members",
+        backgroundColor: colors.theme["orange"],
         data: [
+          randomScalingFactor(),
           randomScalingFactor(),
           randomScalingFactor(),
           randomScalingFactor(),
@@ -171,8 +251,17 @@ export const barTurnoverData = {
         ],
         maxBarThickness: 10,
       },
+    ],
+  },
+  options: {},
+};
+
+export const barByWorkingTime = {
+  data: {
+    labels: ["1", "2", "3", "4", "5", "5+"],
+    datasets: [
       {
-        label: "Onboarded",
+        label: "Care Members",
         backgroundColor: colors.theme["success"],
         data: [
           randomScalingFactor(),
@@ -181,31 +270,12 @@ export const barTurnoverData = {
           randomScalingFactor(),
           randomScalingFactor(),
           randomScalingFactor(),
-          randomScalingFactor(),
         ],
         maxBarThickness: 10,
       },
     ],
   },
-  options: {
-    tooltips: {
-      mode: "index",
-      intersect: false,
-    },
-    responsive: true,
-    scales: {
-      xAxes: [
-        {
-          stacked: true,
-        },
-      ],
-      yAxes: [
-        {
-          stacked: true,
-        },
-      ],
-    },
-  },
+  options: {},
 };
 
 // Example 1 of Chart inside src/views/dashboards/Dashboard.js
