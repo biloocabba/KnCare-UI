@@ -103,6 +103,7 @@ export const lineActiveMembersData = {
   },
 };
 
+// @todo improve hover
 export const pieByRole = {
   data: {
     labels: [
@@ -151,6 +152,7 @@ export const pieByRole = {
   },
 };
 
+// @todo improve hover
 export const pieByBusinessUnits = {
   data: {
     labels: [
