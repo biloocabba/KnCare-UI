@@ -213,7 +213,10 @@ function CreateGroupPage() {
                               }}
                             >
                               {src ? (
-                                <CardImg src={src} width="10rem" />
+                                <CardImg
+                                  src={src}
+                                  style={{ maxWidth: "10rem" }}
+                                />
                               ) : (
                                 <p style={{ fontSize: 24 }}>Upload</p>
                               )}
@@ -391,13 +394,12 @@ function CreateGroupPage() {
                   {/* </div> */}
 
                   <div className="pl-lg-4">
-                    <button
+                    <Button
                       onClick={saveGroup}
                       className="btn btn-success"
                     >
-                      {" "}
-                      Submit{" "}
-                    </button>
+                      Submit
+                    </Button>
                   </div>
                 </Form>
 
