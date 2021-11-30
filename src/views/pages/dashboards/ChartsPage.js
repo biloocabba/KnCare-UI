@@ -29,206 +29,12 @@ import {
   Container,
   Row,
 } from "reactstrap";
-import { colors } from "variables";
-// import {
-//   chartOptions,
-//   parseOptions,
-//   chartExample2,
-//   chartExample3,
-//   chartExample4,
-//   chartExample5,
-//   chartExample6,
-//   chartExample7,
-// } from "variables/charts.js";
-
-var randomScalingFactor = function () {
-  return Math.round(Math.random() * 100);
-};
-
-let activeMembersData = {
-  options: {
-    scales: {
-      yAxes: [
-        {
-          gridLines: {
-            color: colors.gray[200],
-            zeroLineColor: colors.gray[200],
-          },
-          ticks: {},
-        },
-      ],
-    },
-  },
-  data: {
-    labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Members",
-        data: [102, 122, 108, 128, 148, 144, 174, 202, 198],
-      },
-    ],
-  },
-};
-
-const pieByRole = {
-  data: {
-    labels: [
-      "Advocates",
-      "Trainer",
-      "Sponsor",
-      "Country Leader",
-      "Region Leader",
-      "Global Leader",
-    ],
-    datasets: [
-      {
-        data: [
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          40,
-          14,
-          6,
-        ],
-        backgroundColor: [
-          colors.theme["danger"],
-          colors.theme["warning"],
-          colors.theme["success"],
-          colors.theme["primary"],
-          colors.theme["info"],
-          colors.theme["blue"],
-          colors.theme["indigo"],
-        ],
-        label: "Dataset 1",
-      },
-    ],
-  },
-  options: {
-    responsive: true,
-    legend: {
-      position: "top",
-    },
-    animation: {
-      animateScale: true,
-      animateRotate: true,
-    },
-  },
-};
-
-const pieByBunits = {
-  data: {
-    labels: [
-      "Road Logistics",
-      "Sales",
-      "Human Resources",
-      "QSHE",
-      "IT",
-      "Sea Logistics",
-      "Marketing",
-      "Air Logistics",
-    ],
-    datasets: [
-      {
-        data: [
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-        ],
-        backgroundColor: [
-          colors.theme["danger"],
-          colors.theme["warning"],
-          colors.theme["success"],
-          colors.theme["primary"],
-          colors.theme["info"],
-          colors.theme["blue"],
-          colors.theme["indigo"],
-          colors.theme["purple"],
-        ],
-        label: "Dataset 1",
-      },
-    ],
-  },
-  options: {
-    responsive: true,
-    legend: {
-      position: "top",
-    },
-    animation: {
-      animateScale: true,
-      animateRotate: true,
-    },
-  },
-};
-
-// Example 7 of Chart inside src/views/pages/Charts.js
-const turnoverData = {
-  data: {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-    ],
-    datasets: [
-      {
-        label: "Offboarded",
-        backgroundColor: colors.theme["danger"],
-        data: [
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-        ],
-        maxBarThickness: 10,
-      },
-      {
-        label: "Onboarded",
-        backgroundColor: colors.theme["success"],
-        data: [
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-          randomScalingFactor(),
-        ],
-        maxBarThickness: 10,
-      },
-    ],
-  },
-  options: {
-    tooltips: {
-      mode: "index",
-      intersect: false,
-    },
-    responsive: true,
-    scales: {
-      xAxes: [
-        {
-          stacked: true,
-        },
-      ],
-      yAxes: [
-        {
-          stacked: true,
-        },
-      ],
-    },
-  },
-};
+import {
+  lineActiveMembersData,
+  pieByBusinessUnits,
+  pieByRole,
+  barTurnoverData,
+} from "variables";
 
 const ChartsPage = () => {
   return (
@@ -260,7 +66,7 @@ const ChartsPage = () => {
                   {/* <p className="mt-3 mb-0 text-sm">
                       <span className="text-success mr-2">
                         <i className="fa fa-arrow-up" /> 3.48%
-                      </span>{" "}
+                      </span>
                       <span className="text-nowrap">Since last month</span>
                     </p> */}
                 </CardBody>
@@ -289,7 +95,7 @@ const ChartsPage = () => {
                   {/* <p className="mt-3 mb-0 text-sm">
                       <span className="text-success mr-2">
                         <i className="fa fa-arrow-up" /> 3.48%
-                      </span>{" "}
+                      </span>
                       <span className="text-nowrap">Since last month</span>
                     </p> */}
                 </CardBody>
@@ -319,7 +125,7 @@ const ChartsPage = () => {
                   <p className="mt-3 mb-0 text-sm">
                     <span className="text-success mr-2">
                       <i className="fa fa-arrow-up" /> 8
-                    </span>{" "}
+                    </span>
                     <span className="text-nowrap">Since last month</span>
                   </p>
                 </CardBody>
@@ -349,7 +155,7 @@ const ChartsPage = () => {
                   <p className="mt-3 mb-0 text-sm">
                     <span className="text-success mr-2">
                       <i className="fa fa-arrow-up" /> 11
-                    </span>{" "}
+                    </span>
                     <span className="text-nowrap">Since last month</span>
                   </p>
                 </CardBody>
@@ -367,8 +173,8 @@ const ChartsPage = () => {
               <CardBody>
                 <div className="chart">
                   <Bar
-                    data={turnoverData.data}
-                    options={turnoverData.options}
+                    data={barTurnoverData.data}
+                    options={barTurnoverData.options}
                     className="chart-canvas"
                     id="chart-bar-stacked"
                   />
@@ -385,8 +191,8 @@ const ChartsPage = () => {
               <CardBody>
                 <div className="chart">
                   <Line
-                    data={activeMembersData.data}
-                    options={activeMembersData.options}
+                    data={lineActiveMembersData.data}
+                    options={lineActiveMembersData.options}
                     id="chart-sales"
                     className="chart-canvas"
                   />
@@ -460,8 +266,8 @@ const ChartsPage = () => {
               <CardBody>
                 <div className="chart">
                   <Pie
-                    data={pieByBunits.data}
-                    options={pieByBunits.options}
+                    data={pieByBusinessUnits.data}
+                    options={pieByBusinessUnits.options}
                     className="chart-canvas"
                     id="chart-pie"
                   />

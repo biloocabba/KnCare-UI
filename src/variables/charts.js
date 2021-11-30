@@ -18,21 +18,195 @@
 import { colors } from "variables";
 
 // Only for demo purposes - return a random number to generate datasets
-var randomScalingFactor = function () {
-  return Math.round(Math.random() * 100);
+const randomScalingFactor = () => Math.round(Math.random() * 100);
+
+export const lineActiveMembersData = {
+  data: {
+    labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    datasets: [
+      {
+        label: "Members",
+        data: [102, 122, 108, 128, 148, 144, 174, 202, 198],
+        // pointRadius: 4,
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      tooltip: {
+        intersect: false,
+      },
+      decimation: {
+        enabled: true,
+      },
+    },
+  },
 };
 
-// data.labels.forEach(function (label, index) {
-//   var bgColor = data.datasets[0].backgroundColor[index];
+export const pieByRole = {
+  data: {
+    labels: [
+      "Advocates",
+      "Trainer",
+      "Sponsor",
+      "Country Leader",
+      "Region Leader",
+      "Global Leader",
+    ],
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          40,
+          14,
+          6,
+        ],
+        backgroundColor: [
+          colors.theme["danger"],
+          colors.theme["warning"],
+          colors.theme["success"],
+          colors.theme["primary"],
+          colors.theme["info"],
+          colors.theme["indigo"],
+          colors.theme["pink"],
+        ],
+        hoverOffset: 6,
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
 
-//   content += '<span class="chart-legend-item">';
-//   content +=
-//     '<i class="chart-legend-indicator" style="background-color: ' +
-//     bgColor +
-//     '"></i>';
-//   content += label;
-//   content += "</span>";
-// });
+    animation: {
+      animateScale: true,
+    },
+  },
+};
+
+export const pieByBusinessUnits = {
+  data: {
+    labels: [
+      "Road Logistics",
+      "Sales",
+      "Human Resources",
+      "QSHE",
+      "IT",
+      "Sea Logistics",
+      "Marketing",
+      "Air Logistics",
+    ],
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+        ],
+        backgroundColor: [
+          colors.theme["danger"],
+          colors.theme["pink"],
+          colors.theme["warning"],
+          colors.theme["success"],
+          colors.theme["primary"],
+          colors.theme["info"],
+          colors.theme["indigo"],
+          colors.theme["purple"],
+        ],
+        hoverOffset: 6,
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
+    // hover: {
+    //   mode: "index",
+    // },
+    animation: {
+      animateScale: true,
+    },
+  },
+};
+
+export const barTurnoverData = {
+  data: {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+    ],
+    datasets: [
+      {
+        label: "Offboarded",
+        backgroundColor: colors.theme["danger"],
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+        ],
+        maxBarThickness: 10,
+      },
+      {
+        label: "Onboarded",
+        backgroundColor: colors.theme["success"],
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+        ],
+        maxBarThickness: 10,
+      },
+    ],
+  },
+  options: {
+    tooltips: {
+      mode: "index",
+      intersect: false,
+    },
+    responsive: true,
+    scales: {
+      xAxes: [
+        {
+          stacked: true,
+        },
+      ],
+      yAxes: [
+        {
+          stacked: true,
+        },
+      ],
+    },
+  },
+};
 
 // Example 1 of Chart inside src/views/dashboards/Dashboard.js
 export const chartExample1 = {
