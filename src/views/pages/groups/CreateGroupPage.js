@@ -14,6 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
 import React, { useState } from "react";
 // reactstrap components
 import {
@@ -134,16 +135,7 @@ function CreateGroupPage() {
 
   return (
     <>
-      <div
-        className="header pb-6 d-flex align-items-center"
-        style={{
-          minHeight: "100px",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-        }}
-      >
-        <span className="mask bg-gradient-info opacity-8" />
-      </div>
+      <GradientEmptyHeader />
 
       <Container className="mt--6" fluid>
         <Row>

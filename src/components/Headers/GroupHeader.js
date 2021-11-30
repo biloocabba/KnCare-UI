@@ -27,15 +27,12 @@ function GroupHeader() {
         style={{
           minHeight: "400px",
           backgroundImage:
-            'url("' +
-            require("assets/img/care/team.jpg").default +
-            '")',
+            'url("' + require("assets/img/care/team.jpg").default + '")',
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}
       >
-        <span className="mask bg-gradient-info opacity-8" />
-
+        <span className="mask bg-gradient-primary opacity-8" />
       </div>
     </>
   );

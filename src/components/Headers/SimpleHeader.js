@@ -30,7 +30,7 @@ import {
 function TimelineHeader({ name, parentName }) {
   return (
     <>
-      <div className="header header-dark bg-info pb-6 content__title content__title--calendar">
+      <div className="header header-dark bg-primary pb-6 content__title content__title--calendar">
         <Container fluid>
           <div className="header-body">
             <Row className="align-items-center py-4">
@@ -43,12 +43,12 @@ function TimelineHeader({ name, parentName }) {
                   listClassName="breadcrumb-links breadcrumb-dark"
                 >
                   <BreadcrumbItem>
-                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                    <a href="#pablo" onClick={e => e.preventDefault()}>
                       <i className="fas fa-home" />
                     </a>
                   </BreadcrumbItem>
                   <BreadcrumbItem>
-                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                    <a href="#pablo" onClick={e => e.preventDefault()}>
                       {parentName}
                     </a>
                   </BreadcrumbItem>
