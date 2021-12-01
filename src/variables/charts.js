@@ -87,7 +87,7 @@ export const lineActiveMembersData = {
       {
         label: "Members",
         data: [102, 122, 108, 128, 148, 144, 174, 202, 198],
-        // pointRadius: 4,
+        pointRadius: 4,
       },
     ],
   },
