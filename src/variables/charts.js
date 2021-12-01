@@ -132,10 +132,9 @@ export const pieByRole = {
           colors.theme["success"],
           colors.theme["primary"],
           colors.theme["info"],
-          colors.theme["indigo"],
-          colors.theme["pink"],
+          colors.gray[600],
+          colors.gray[400],
         ],
-        hoverOffset: 6,
       },
     ],
   },
@@ -180,15 +179,14 @@ export const pieByBusinessUnits = {
         ],
         backgroundColor: [
           colors.theme["danger"],
-          colors.theme["pink"],
+          colors.gray[400],
           colors.theme["warning"],
           colors.theme["success"],
           colors.theme["primary"],
           colors.theme["info"],
-          colors.theme["indigo"],
+          colors.gray[600],
           colors.theme["purple"],
         ],
-        hoverOffset: 6,
       },
     ],
   },
@@ -215,7 +213,6 @@ export const doughnutByGender = {
         label: "Dataset 1",
         data: [randomScalingFactor(), randomScalingFactor()],
         backgroundColor: [colors.theme["primary"], colors.theme["danger"]],
-        hoverOffset: 6,
       },
     ],
   },
@@ -234,13 +231,13 @@ export const doughnutByGender = {
   },
 };
 
-export const barByAge = {
+// @todo improve hover
+export const pieByAge = {
   data: {
     labels: ["20", "25", "30", "35", "40", "45", "50", "50+"],
     datasets: [
       {
         label: "Care Members",
-        backgroundColor: colors.theme["orange"],
         data: [
           randomScalingFactor(),
           randomScalingFactor(),
@@ -251,20 +248,41 @@ export const barByAge = {
           randomScalingFactor(),
           randomScalingFactor(),
         ],
-        maxBarThickness: 10,
+        backgroundColor: [
+          colors.theme["danger"],
+          colors.gray[400],
+          colors.theme["warning"],
+          colors.theme["success"],
+          colors.theme["primary"],
+          colors.theme["info"],
+          colors.gray[600],
+          colors.theme["purple"],
+        ],
       },
     ],
   },
-  options: {},
+  options: {
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
+    // hover: {
+    //   mode: "index",
+    // },
+    animation: {
+      animateScale: true,
+    },
+  },
 };
 
-export const barByWorkingTime = {
+// @todo improve hover
+export const pieByWorkingTime = {
   data: {
     labels: ["1", "2", "3", "4", "5", "5+"],
     datasets: [
       {
         label: "Care Members",
-        backgroundColor: colors.theme["success"],
         data: [
           randomScalingFactor(),
           randomScalingFactor(),
@@ -273,11 +291,30 @@ export const barByWorkingTime = {
           randomScalingFactor(),
           randomScalingFactor(),
         ],
-        maxBarThickness: 10,
+        backgroundColor: [
+          colors.theme["danger"],
+          colors.theme["warning"],
+          colors.theme["success"],
+          colors.theme["primary"],
+          colors.theme["info"],
+          colors.theme["purple"],
+        ],
       },
     ],
   },
-  options: {},
+  options: {
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
+    // hover: {
+    //   mode: "index",
+    // },
+    animation: {
+      animateScale: true,
+    },
+  },
 };
 
 // Example 1 of Chart inside src/views/dashboards/Dashboard.js

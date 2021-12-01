@@ -29,14 +29,14 @@ import {
   Container,
   Row,
 } from "reactstrap";
-import { barByWorkingTime } from "variables";
 import {
   barTurnoverData,
   lineActiveMembersData,
   pieByBusinessUnits,
   pieByRole,
   doughnutByGender,
-  barByAge,
+  pieByAge,
+  pieByWorkingTime,
 } from "variables";
 
 const ChartsPage = () => {
@@ -255,11 +255,11 @@ const ChartsPage = () => {
               </CardHeader>
               <CardBody>
                 <div className="chart">
-                  <Bar
-                    data={barByAge.data}
-                    options={barByAge.options}
+                  <Pie
+                    data={pieByAge.data}
+                    options={pieByAge.options}
                     className="chart-canvas"
-                    id="chart-bar-stacked"
+                    id="chart-pie"
                   />
                 </div>
               </CardBody>
@@ -273,11 +273,11 @@ const ChartsPage = () => {
               </CardHeader>
               <CardBody>
                 <div className="chart">
-                  <Bar
-                    data={barByWorkingTime.data}
-                    options={barByWorkingTime.options}
+                  <Pie
+                    data={pieByWorkingTime.data}
+                    options={pieByWorkingTime.options}
                     className="chart-canvas"
-                    id="chart-bar-stacked"
+                    id="chart-pie"
                   />
                 </div>
               </CardBody>

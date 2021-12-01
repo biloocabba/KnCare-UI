@@ -12,6 +12,6 @@ export {
   pieByBusinessUnits,
   pieByRole,
   doughnutByGender,
-  barByAge,
-  barByWorkingTime,
+  pieByAge,
+  pieByWorkingTime,
 } from "./charts";
