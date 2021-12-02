@@ -1,120 +1,121 @@
-import React, { useState, useMemo } from 'react'
-
+// core components
+import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import React, { useState } from "react";
+import ReactDatetime from "react-datetime";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+// react plugin used to create DropdownMenu for selecting items
+// import Select2 from 'react-select2-wrapper'
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+import { useHistory } from "react-router";
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
-  FormGroup,
-  Form,
-  Input,
-  Container,
-  Row,
+  CardHeader,
   Col,
-} from 'reactstrap'
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Row,
+} from "reactstrap";
+import { createCareMember } from "../../../actions/careMembers.js";
 
-import { useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+const CreateCareMemberPage = () => {
+  let { id } = useParams();
 
-// core components
-import GradientEmptyHeader from 'components/Headers/GradientEmptyHeader.js'
+  const history = useHistory();
 
-// react plugin used to create DropdownMenu for selecting items
-// import Select2 from 'react-select2-wrapper'
-import Select from "react-select";
-import makeAnimated from 'react-select/animated';
-import ReactDatetime from "react-datetime";
-
-import { createCareMember } from '../../../actions/careMembers.js'
-// react plugin used to fetch list of countries
-import countryList from 'country-list'
-
-
-const CreateCareMemberPage = (props) => {
-
-  let { id } = useParams()
-  
-  const dispatch = useDispatch()
-  const careRoles = useSelector( (state) => {
-    return state.categories.careRoles.map(role => {return {"value": role.id, "label":role.name}})
+  const dispatch = useDispatch();
+  const careRoles = useSelector(state => {
+    return state.categories.careRoles.map(role => {
+      return { value: role.id, label: role.name };
+    });
   });
-  const groups =  useSelector( (state) => {
-    return state.groups.map(group => {return {"value": group.id, "label":group.name}})
+  const groups = useSelector(state => {
+    return state.groups.map(group => {
+      return { value: group.id, label: group.name, data: group.value };
+    });
   });
 
-  const employees = useSelector((state) => state.employees)
-  let employee = employees.find((employee) => employee.id === parseInt(id))
-
+  const employees = useSelector(state => state.employees);
+  let employee = employees.find(employee => employee.id === parseInt(id));
 
   // const [selectedCountry, setSelectedCountry] = useState('')
   const initialState = {
-    onBoardDate: '',
-    offBoardDate: '',
+    onBoardDate: "",
+    offBoardDate: "",
     employee: null,
-    role: '',
-    group: '',
-  }
-  
-  const date = new Date()
-  const defaultOffBoardDate =date.setDate(date.getDate() + 365)
+    role: "",
+    group: "",
+  };
 
+  const date = new Date();
+  const defaultOffBoardDate = date.setDate(date.getDate() + 365);
 
-  const [ role, setRole ] = useState(careRoles[0]);
-  const [ group, setGroup ] = useState(groups[0]);
-  const [ onboardingDate, setOnboardingDate ] = useState(date);
-  const [ offboardingDate, setOffboardingDate ] = useState(defaultOffBoardDate);
-  
+  const [role, setRole] = useState(careRoles[0]);
+  const [group, setGroup] = useState(groups[0]);
+  const [offboardingDate, setOffboardingDate] = useState(
+    defaultOffBoardDate,
+  );
 
-  const [careMember, setCareMember] = useState(initialState)
+  const [careMember, setCareMember] = useState(initialState);
 
-  
-
-
-
-  const onBoardDate = `${date.getDate()}/${
-    date.getMonth() + 1
-  }/${date.getFullYear()-1}`
+  const onBoardDate = `${date.getDate()}/${date.getMonth() + 1}/${
+    date.getFullYear() - 1
+  }`;
 
   // const offBoardDate = `${date.getDate()}/${date.getMonth() + 1}/${
   //   date.getFullYear() + 1
   // }` //OffBoard Date is 1 year from on Board date
 
-
- 
-
-
-  const onChangeOffboardingDate = (dateAsMoment) => {    
-    setOffboardingDate(dateAsMoment.format('D-MM-YYYY'));
-  };
-
-
+  // const onChangeOffboardingDate = dateAsMoment => {
+  //   setOffboardingDate(dateAsMoment.format("D-MM-YYYY"));
+  // };
 
   const saveCareMember = () => {
-    
     const careMemberInfo = {
       onBoardDate: onBoardDate,
       offBoardDate: offboardingDate,
       employee: employee.id,
-      role: 'care Advocate',
+      role: "care Advocate",
       group: group,
       careMember: true,
-    }
+    };
+
+    console.log("careMemberInfo", careMemberInfo);
 
     dispatch(createCareMember(careMemberInfo))
-      .then((data) =>
+      .then(data =>
         setCareMember({
           onBoardDate: onBoardDate,
           offBoardDate: offboardingDate,
           employee: employee.id,
-          role: 'care Advocate',
+          role: "care Advocate",
           group: group,
-        })
+        }),
       )
-      .catch((error) => {
-        console.log(error)
-      })
-  }
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  console.log(groups, "groups");
+
+  const groupOptions = [
+    { value: 0, label: "All", data: groups },
+    ...groups,
+  ];
+
+  const filterOptions = (group, input) => {
+    if (input) {
+      return group.value === groupOptions[0].value;
+    }
+    return true;
+  };
 
   return (
     <>
@@ -135,7 +136,7 @@ const CreateCareMemberPage = (props) => {
                       type="button"
                       color="info"
                       href="#dsfkjlsi39ds9d97876s7d"
-                      onClick={(e) => props.history.push('/admin/employees')}
+                      onClick={() => history.push("/admin/employees")}
                     >
                       Back to Employees
                     </Button>
@@ -173,14 +174,12 @@ const CreateCareMemberPage = (props) => {
                           >
                             Auto Offboard Date
                           </label>
-                          <ReactDatetime                   
+                          <ReactDatetime
                             // inputProps={{
                             //   placeholder: "Hire date",
                             // }}
                             value={offboardingDate}
-                            onChange={(e) =>
-                              setOffboardingDate(e)
-                            }
+                            onChange={e => setOffboardingDate(e)}
                             timeFormat={false}
                           />
 
@@ -209,11 +208,13 @@ const CreateCareMemberPage = (props) => {
                             data={careRoles}                           
                           /> */}
 
-                        <Select
+                          <Select
                             id="careRole"
-                            components = {makeAnimated()}
-                            options = {careRoles}
-                            onChange = {item => setRole({"id":item.value, "name":item.label})}
+                            components={makeAnimated()}
+                            options={careRoles}
+                            onChange={item =>
+                              setRole({ id: item.value, name: item.label })
+                            }
                           />
                         </FormGroup>
                       </Col>
@@ -227,9 +228,17 @@ const CreateCareMemberPage = (props) => {
                           </label>
                           <Select
                             id="defaultGroup"
-                            components = {makeAnimated()}
-                            options = {groups}
-                            onChange = {item => setGroup({"id":item.value, "name":item.label})}
+                            components={makeAnimated()}
+                            options={groupOptions}
+                            onChange={item =>
+                              setGroup({
+                                id: item.value,
+                                name: item.label,
+                                value: item.data,
+                              })
+                            }
+                            filterOption={filterOptions}
+                            defaultValue={groupOptions[0]}
                           />
 
                           {/* <Select2
@@ -411,7 +420,9 @@ const CreateCareMemberPage = (props) => {
                     <Row>
                       <Col lg="4">
                         <FormGroup>
-                          <label className="form-control-label">Title</label>
+                          <label className="form-control-label">
+                            Title
+                          </label>
                           <Input
                             id="title"
                             value={employee.title}
@@ -508,7 +519,7 @@ const CreateCareMemberPage = (props) => {
         </Row>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default CreateCareMemberPage
+export default CreateCareMemberPage;

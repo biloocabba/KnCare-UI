@@ -1,7 +1,17 @@
 const groups = [
-  { id: 1, name: "Blue For Green", active: true },
-  { id: 2, name: "Balance and Belonging", active: true },
-  { id: 3, name: "Care for Community", active: true },
+  { id: 1, name: "Blue For Green", active: true, value: "Blue For Green" },
+  {
+    id: 2,
+    name: "Balance and Belonging",
+    active: true,
+    value: "Balance and Belonging",
+  },
+  {
+    id: 3,
+    name: "Care for Community",
+    active: true,
+    value: "Care for Community",
+  },
 ];
 
 const businessUnits = [

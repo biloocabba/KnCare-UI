@@ -59,9 +59,7 @@ function EmployeeDetailsPage(props) {
                 <Row className="align-items-center py-4">
                   <Col lg="12" xs="7" className="text-right">
                     <Button
-                      type="button"
                       color={buttonColor}
-                      href="#pablo"
                       onClick={e =>
                         props.history.push(
                           "/admin/users/new-care-member/" + id,
@@ -74,7 +72,6 @@ function EmployeeDetailsPage(props) {
                     <Button
                       className="btn btn-primary"
                       color="primary"
-                      href="#pablo"
                       onClick={() =>
                         props.history.push("/admin/employees")
                       }
