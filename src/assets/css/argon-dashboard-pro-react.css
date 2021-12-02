@@ -1896,6 +1896,11 @@ html.rtl {
   --default: #172b4d;
   --neutral: #fff;
   --darker: #000;
+  --neutral1: #F6F5F0;
+  --neutral2: #C5C6BF;
+  --neutral3: #929288;
+  --neutral4: #62635B;
+  --neutral5: #373832;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;

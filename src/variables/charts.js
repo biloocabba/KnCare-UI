@@ -103,16 +103,14 @@ export const lineActiveMembersData = {
   },
 };
 
-// @todo improve hover
 export const pieByRole = {
   data: {
     labels: [
-      "Advocates",
+      "Regional Transformation Manager",
+      "Country Transformation Manager",
+      "Advocate",
       "Trainer",
       "Sponsor",
-      "Country Leader",
-      "Region Leader",
-      "Global Leader",
     ],
     datasets: [
       {
@@ -122,18 +120,14 @@ export const pieByRole = {
           randomScalingFactor(),
           randomScalingFactor(),
           randomScalingFactor(),
-          40,
-          14,
-          6,
+          randomScalingFactor(),
         ],
         backgroundColor: [
-          colors.theme["danger"],
-          colors.theme["warning"],
-          colors.theme["success"],
           colors.theme["primary"],
           colors.theme["info"],
-          colors.gray[600],
-          colors.gray[400],
+          colors.theme["success"],
+          colors.theme["danger"],
+          colors.theme["neutral4"],
         ],
       },
     ],
@@ -151,18 +145,22 @@ export const pieByRole = {
   },
 };
 
-// @todo improve hover
 export const pieByBusinessUnits = {
   data: {
     labels: [
       "Road Logistics",
+      "Air Logistics",
+      "Sea Logistics",
       "Sales",
+      "Contract Logistics",
       "Human Resources",
       "QSHE",
-      "IT",
-      "Sea Logistics",
       "Marketing",
-      "Air Logistics",
+      "Finance",
+      "Legal",
+      "IT",
+      "Administrative",
+      "National Management",
     ],
     datasets: [
       {
@@ -176,16 +174,26 @@ export const pieByBusinessUnits = {
           randomScalingFactor(),
           randomScalingFactor(),
           randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
         ],
         backgroundColor: [
-          colors.theme["danger"],
-          colors.gray[400],
-          colors.theme["warning"],
-          colors.theme["success"],
           colors.theme["primary"],
           colors.theme["info"],
-          colors.gray[600],
+          colors.theme["success"],
+          colors.theme["danger"],
+          colors.theme["neutral4"],
+          colors.theme["neutral3"],
+          colors.theme["neutral2"],
+          colors.theme["neutral5"],
           colors.theme["purple"],
+          colors.theme["orange"],
+          colors.theme["yellow"],
+          colors.theme["cyan"],
+          colors.theme["pink"],
         ],
       },
     ],
@@ -196,9 +204,6 @@ export const pieByBusinessUnits = {
         position: "top",
       },
     },
-    // hover: {
-    //   mode: "index",
-    // },
     animation: {
       animateScale: true,
     },
@@ -231,7 +236,6 @@ export const doughnutByGender = {
   },
 };
 
-// @todo improve hover
 export const pieByAge = {
   data: {
     labels: ["20", "25", "30", "35", "40", "45", "50", "50+"],
@@ -249,14 +253,14 @@ export const pieByAge = {
           randomScalingFactor(),
         ],
         backgroundColor: [
-          colors.theme["danger"],
-          colors.gray[400],
-          colors.theme["warning"],
-          colors.theme["success"],
           colors.theme["primary"],
           colors.theme["info"],
-          colors.gray[600],
-          colors.theme["purple"],
+          colors.theme["success"],
+          colors.theme["danger"],
+          colors.theme["neutral4"],
+          colors.theme["neutral3"],
+          colors.theme["neutral2"],
+          colors.theme["neutral1"],
         ],
       },
     ],
@@ -267,16 +271,12 @@ export const pieByAge = {
         position: "top",
       },
     },
-    // hover: {
-    //   mode: "index",
-    // },
     animation: {
       animateScale: true,
     },
   },
 };
 
-// @todo improve hover
 export const pieByWorkingTime = {
   data: {
     labels: ["1", "2", "3", "4", "5", "5+"],
@@ -292,12 +292,12 @@ export const pieByWorkingTime = {
           randomScalingFactor(),
         ],
         backgroundColor: [
-          colors.theme["danger"],
-          colors.theme["warning"],
-          colors.theme["success"],
           colors.theme["primary"],
           colors.theme["info"],
-          colors.theme["purple"],
+          colors.theme["success"],
+          colors.theme["danger"],
+          colors.theme["neutral4"],
+          colors.theme["neutral3"],
         ],
       },
     ],
@@ -308,9 +308,6 @@ export const pieByWorkingTime = {
         position: "top",
       },
     },
-    // hover: {
-    //   mode: "index",
-    // },
     animation: {
       animateScale: true,
     },
