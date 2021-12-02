@@ -30,9 +30,9 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 // core components
-import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import IndexHeader from "components/Headers/IndexHeader.js";
-import AuthFooter from "components/Footers/AuthFooter.js";
+import IndexNavbar from "components/Navbars/IndexNavbar";
+import IndexHeader from "components/Headers/IndexHeader";
+import AuthFooter from "components/Footers/AuthFooter";
 
 function Index() {
   return (

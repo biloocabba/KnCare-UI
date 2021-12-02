@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import { BoxHeader } from "components/Headers";
 import React, { useState } from "react";
 // reactstrap components
 import {
@@ -32,7 +32,7 @@ import {
   Input,
   Row,
 } from "reactstrap";
-import AddMemberPanel from "./AddMemberPanel.js";
+import AddMemberPanel from "./AddMemberPanel";
 
 function CreateGroupPage() {
   // const initialGroupState = {
@@ -135,7 +135,7 @@ function CreateGroupPage() {
 
   return (
     <>
-      <GradientEmptyHeader />
+      <BoxHeader />
 
       <Container className="mt--6" fluid>
         <Row>

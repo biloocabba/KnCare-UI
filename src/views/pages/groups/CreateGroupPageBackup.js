@@ -15,7 +15,7 @@
 
 */
 import { createGroup } from "actions/groups";
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader";
+import { BoxHeader } from "components/Headers";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Select from "react-select";
@@ -114,7 +114,7 @@ function CreateGroupPage() {
 
   return (
     <>
-      <GradientEmptyHeader />
+      <BoxHeader />
 
       <Container className="mt--6" fluid>
         <Row>

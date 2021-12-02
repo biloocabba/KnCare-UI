@@ -18,7 +18,7 @@ import React from "react";
 // reactstrap components
 import { Card, Container, Row } from "reactstrap";
 // core components
-import SimpleHeader from "components/Headers/SimpleHeader.js";
+import { TimelineHeader } from "components/Headers";
 
 const MapCustom = () => {
   const mapRef = React.useRef(null);
@@ -157,7 +157,7 @@ const MapDefault = () => {
 function Google() {
   return (
     <>
-      <SimpleHeader name="Google maps" parentName="Maps" />
+      <TimelineHeader name="Google maps" parentName="Maps" />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">

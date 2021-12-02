@@ -16,26 +16,26 @@
 */
 
 import CreateCareMemberPage from "views/pages/users/CreateCareMemberPage";
-import CareMembersPage from "views/pages/users/CareMembersPage.js";
-import EditCareMemberPage from "views/pages/users/EditCareMemberPage.js";
+import CareMembersPage from "views/pages/users/CareMembersPage";
+import EditCareMemberPage from "views/pages/users/EditCareMemberPage";
 
-import EmployeesPage from "views/pages/users/EmployeesPage.js";
-import EmployeeDetailsPage from "views/pages/users/EmployeeDetailsPage.js";
+import EmployeesPage from "views/pages/users/EmployeesPage";
+import EmployeeDetailsPage from "views/pages/users/EmployeeDetailsPage";
 
-import CreateGroupPage from "views/pages/groups/CreateGroupPage.js";
+import CreateGroupPage from "views/pages/groups/CreateGroupPage";
 import EditGroupPage from "views/pages/groups/EditGroupPage";
-import GroupsPage from "views/pages/groups/GroupsPage.js";
+import GroupsPage from "views/pages/groups/GroupsPage";
 
-import CreateBestPracticePage from "views/pages/best-practices/CreateBestPracticePage.js";
-import SearchBestPracticesPage from "views/pages/best-practices/SearchBestPracticesPage.js";
+import CreateBestPracticePage from "views/pages/best-practices/CreateBestPracticePage";
+import SearchBestPracticesPage from "views/pages/best-practices/SearchBestPracticesPage";
 import BestPracticeDetailPage from "views/pages/best-practices/BestPracticeDetailPage";
 
 import CreateNewEmailPage from "views/pages/communications/CreateNewEmailPage";
 import EmailDetailsPage from "views/pages/communications/EmailDetailsPage";
 import SearchEmailDraftsPage from "views/pages/communications/SearchEmailDraftPage";
 
-import ChartsPage from "views/pages/dashboards/ChartsPage.js";
-import WorldOverviewPage from "views/pages/dashboards/WorldOverviewPage.js";
+import ChartsPage from "views/pages/dashboards/ChartsPage";
+import WorldOverviewPage from "views/pages/dashboards/WorldOverviewPage";
 
 import LoginPage from "views/pages/users/LoginPage";
 import { HomePage } from "views/pages/home";

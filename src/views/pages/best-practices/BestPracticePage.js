@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from "react";
-import initialState from "../../../mock-data/BestPracticeInitialState";
+import { BoxHeader } from "components/Headers";
+import React, { useState } from "react";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import { useDispatch } from "react-redux";
-import { Container, Row } from "reactstrap";
-import SimpleHeader from "components/Headers/SimpleHeader.js";
 import {
   Button,
-  Col,
-  Input,
-  FormGroup,
   Card,
   CardBody,
   CardHeader,
+  Col,
+  Container,
+  FormGroup,
+  Input,
+  Row,
 } from "reactstrap";
-
-import {
-  updateBestPractice,
-  deleteBestPractice,
-} from "../../../actions/bestPractice";
-import BestPracticeService from "../../../services/BestPracticeService";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 
 const BestPracticePage = props => {
   const dispatch = useDispatch();
@@ -88,7 +81,7 @@ const BestPracticePage = props => {
 
   return (
     <>
-      <SimpleHeader name="Best Practice" />
+      <BoxHeader />
       <Container className="mt-6 ml-6 container-sm" fluid>
         <Row>
           <div className="col">

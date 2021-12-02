@@ -1,4 +1,4 @@
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader";
+import { BoxHeader } from "components/Headers";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncSelect2 from "react-select2-wrapper";
@@ -101,7 +101,7 @@ function CreateRolePage() {
 
   return (
     <>
-      <GradientEmptyHeader />
+      <BoxHeader />
 
       <Container className="mt--6" fluid>
         <Row>

@@ -15,7 +15,7 @@
 
 */
 import { DEACTIVATE_GROUP, UPDATE_GROUP } from "actions/types";
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import { BoxHeader } from "components/Headers";
 import React, { useState } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
@@ -38,7 +38,7 @@ import {
   Row,
 } from "reactstrap";
 // core components
-import AddMemberPanel from "./AddMemberPanel.js";
+import AddMemberPanel from "./AddMemberPanel";
 
 const { SearchBar } = Search;
 
@@ -162,11 +162,9 @@ function EditGroupPage(props) {
     props.history.push("/admin/search-groups");
   };
 
-  let numOfMembers = 2; //(group.members) ? group.members.length : 0;
-
   return (
     <>
-      <GradientEmptyHeader name="Groups" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <Col className="order-xl-1" xl="12">

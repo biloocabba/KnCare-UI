@@ -18,11 +18,11 @@ import React from "react";
 // react library for routing
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import AdminFooter from "components/Footers/AdminFooter.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
+import AdminNavbar from "components/Navbars/AdminNavbar";
+import AdminFooter from "components/Footers/AdminFooter";
+import Sidebar from "components/Sidebar/Sidebar";
 
-import routes from "routes.js";
+import routes from "routes";
 
 function Admin() {
   const [sidenavOpen, setSidenavOpen] = React.useState(true);

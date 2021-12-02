@@ -1,8 +1,9 @@
 // core components
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import { BoxHeader } from "components/Headers";
 import React, { useRef, useState } from "react";
 import Files from "react-files";
 import { Redirect } from "react-router-dom";
+import CreatableSelect from "react-select/creatable";
 // reactstrap components
 import {
   Button,
@@ -19,7 +20,6 @@ import {
 } from "reactstrap";
 import SimpleReactValidator from "simple-react-validator";
 import bestPracticeService from "../../../services/BestPracticeService";
-import CreatableSelect from "react-select/creatable";
 
 const initialState = {
   id: null,
@@ -110,7 +110,7 @@ function CreateBestPracticePage() {
       >
         <span>{errorMessage}</span>
       </div>
-      <GradientEmptyHeader name="Best Practices" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <Col className="order-xl-1">

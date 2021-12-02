@@ -16,22 +16,19 @@
 */
 import React from "react";
 
-function GradientEmptyHeader() {
+const BoxHeader = () => {
   return (
     <>
       <div
-        className="header pb-6 d-flex align-items-center"
+        className="header"
         style={{
           minHeight: "150px",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
         }}
       >
-        <span className="mask bg-gradient-primary opacity-8" />
-        {/* <span className="mask bg-gradient-primary" /> */}
+        <span className="mask bg-primary" />
       </div>
     </>
   );
-}
+};
 
-export default GradientEmptyHeader;
+export default BoxHeader;

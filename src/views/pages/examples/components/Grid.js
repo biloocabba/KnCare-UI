@@ -17,14 +17,21 @@
 import React from "react";
 
 // reactstrap components
-import { Card, CardHeader, CardBody, Container, Row, Col } from "reactstrap";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Container,
+  Row,
+  Col,
+} from "reactstrap";
 // core components
-import SimpleHeader from "components/Headers/SimpleHeader.js";
+import { TimelineHeader } from "components/Headers";
 
 function Grid() {
   return (
     <>
-      <SimpleHeader name="Grid" parentName="Components" />
+      <TimelineHeader name="Grid" parentName="Components" />
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="8">

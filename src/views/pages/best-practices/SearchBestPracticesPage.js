@@ -16,7 +16,7 @@
 */
 import { searchBestPractices } from "actions/bestPractice";
 // core components
-import SimpleHeader from "components/Headers/SimpleHeader";
+import { TimelineHeader } from "components/Headers";
 import React, { useState } from "react";
 // react plugin that prints a given react component
 // react component for creating dynamic tables
@@ -147,7 +147,7 @@ function SearchBestPracticePage(props) {
   return (
     <>
       {alert}
-      <SimpleHeader name="Best Practices" parentName="Tables" />
+      <TimelineHeader name="Best Practices" parentName="Tables" />
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="12">

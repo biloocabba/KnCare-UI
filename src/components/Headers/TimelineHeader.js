@@ -27,7 +27,7 @@ import {
   Col,
 } from "reactstrap";
 
-function TimelineHeader({ name, parentName }) {
+const TimelineHeader = ({ name, parentName }) => {
   return (
     <>
       <div className="header header-dark bg-primary pb-6 content__title content__title--calendar">
@@ -71,7 +71,7 @@ function TimelineHeader({ name, parentName }) {
       </div>
     </>
   );
-}
+};
 
 TimelineHeader.propTypes = {
   name: PropTypes.string,

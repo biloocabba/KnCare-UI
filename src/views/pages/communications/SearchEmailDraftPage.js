@@ -1,28 +1,24 @@
+import { BoxHeader } from "components/Headers";
 import React, { useState } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import ReactDatetime from "react-datetime";
+import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 import {
   Button,
   Card,
-  CardHeader,
-  Container,
-  Row,
-  Col,
-  Form,
   CardBody,
-  Input,
+  CardHeader,
+  Col,
+  Container,
   FormGroup,
+  Input,
+  Row,
 } from "reactstrap";
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
-import { useDispatch, useSelector } from "react-redux";
-import ReactDatetime from "react-datetime";
-import {
-  searchEmailDrafts,
-  retrieveEmailDrafts,
-} from "../../../actions/emailDrafts";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
+import { searchEmailDrafts } from "../../../actions/emailDrafts";
 
 const pagination = paginationFactory({
   page: 1,
@@ -144,7 +140,7 @@ function SearchEmailDraftsPage(props) {
   return (
     <>
       {alert}
-      <GradientEmptyHeader name="Search Email Drafts" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">

@@ -1,14 +1,14 @@
 // core components
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import { BoxHeader } from "components/Headers";
 import React, { useState } from "react";
 import ReactDatetime from "react-datetime";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 // react plugin used to create DropdownMenu for selecting items
 // import Select2 from 'react-select2-wrapper'
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { useHistory } from "react-router";
 // reactstrap components
 import {
   Button,
@@ -22,7 +22,7 @@ import {
   Input,
   Row,
 } from "reactstrap";
-import { createCareMember } from "../../../actions/careMembers.js";
+import { createCareMember } from "../../../actions/careMembers";
 
 const CreateCareMemberPage = () => {
   let { id } = useParams();
@@ -119,7 +119,7 @@ const CreateCareMemberPage = () => {
 
   return (
     <>
-      <GradientEmptyHeader name="users" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <Col className="order-xl-1" xl="12">

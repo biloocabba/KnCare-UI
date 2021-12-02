@@ -29,12 +29,12 @@ import {
   Col,
 } from "reactstrap";
 // core components
-import SimpleHeader from "components/Headers/SimpleHeader.js";
+import { TimelineHeader } from "components/Headers";
 
 function Elements() {
   return (
     <>
-      <SimpleHeader name="Form elements" parentName="Forms" />
+      <TimelineHeader name="Form elements" parentName="Forms" />
       <Container className="mt--6" fluid>
         <Card className="mb-4">
           <CardHeader>

@@ -14,9 +14,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useState, useRef} from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 // nodejs library that concatenates classes
 import classnames from "classnames";
 // reactstrap components
@@ -36,17 +36,16 @@ import {
 
 import { login } from "../../../actions/auth";
 // core components
-import AuthHeader from "components/Headers/AuthHeader.js";
+import AuthHeader from "components/Headers/AuthHeader";
 
-import CareLogoMin  from "assets/img/brand/CareLogoMin.png";
+import CareLogoMin from "assets/img/brand/CareLogoMin.png";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 
-
-const required = (value) => {
+const required = value => {
   if (!value) {
     return (
       <div className="alert alert-danger" role="alert">
@@ -79,23 +78,20 @@ function LoginPage(props) {
 
   const { isLoggedIn } = useSelector(state => state.auth);
   const { message } = useSelector(state => state.message);
-  
- 
-  
 
   const dispatch = useDispatch();
 
-  const onChangeEmail = (e) => {
+  const onChangeEmail = e => {
     const email = e.target.value;
     setEmail(email);
   };
 
-  const onChangePassword = (e) => {
+  const onChangePassword = e => {
     const password = e.target.value;
     setPassword(password);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = e => {
     e.preventDefault();
 
     setLoading(true);
@@ -121,9 +117,6 @@ function LoginPage(props) {
     return <Redirect to="/dashboard" />;
   }
 
-
-
-
   return (
     <>
       <AuthHeader
@@ -138,7 +131,6 @@ function LoginPage(props) {
                 <div className="text-muted text-center mt-2 mb-3">
                   <img src={CareLogoMin} alt="KN Care Logo"></img>
                 </div>
-            
               </CardHeader>
               <CardBody className="px-lg-5 py-lg-5">
                 <div className="text-center text-muted mb-4">
@@ -205,23 +197,31 @@ function LoginPage(props) {
                     </label>
                   </div>
                   <div className="text-center">
-                    <Button className="my-4" color="info" type="button" onClick={handleLogin}>
-                    {loading && (
-                <span className="spinner-border spinner-border-sm"></span>
-              )}
+                    <Button
+                      className="my-4"
+                      color="info"
+                      type="button"
+                      onClick={handleLogin}
+                    >
+                      {loading && (
+                        <span className="spinner-border spinner-border-sm"></span>
+                      )}
                       <span>Sign in</span>
                     </Button>
                   </div>
 
                   {message && (
-            <div className="form-group">
-              <div className="alert alert-danger" role="alert">
-                {message}
-              </div>
-            </div>
-          )}
+                    <div className="form-group">
+                      <div className="alert alert-danger" role="alert">
+                        {message}
+                      </div>
+                    </div>
+                  )}
 
-<CheckButton style={{ display: "none" }} ref={checkBtn} />
+                  <CheckButton
+                    style={{ display: "none" }}
+                    ref={checkBtn}
+                  />
                 </Form>
               </CardBody>
             </Card>
@@ -230,7 +230,7 @@ function LoginPage(props) {
                 <a
                   className="text-light"
                   href="#pablo"
-                  onClick={(e) => e.preventDefault()}
+                  onClick={e => e.preventDefault()}
                 >
                   <small>Forgot password?</small>
                 </a>
@@ -239,7 +239,7 @@ function LoginPage(props) {
                 <a
                   className="text-light"
                   href="#pablo"
-                  onClick={(e) => e.preventDefault()}
+                  onClick={e => e.preventDefault()}
                 >
                   <small>Create new account</small>
                 </a>

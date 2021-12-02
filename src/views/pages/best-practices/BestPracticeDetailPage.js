@@ -14,34 +14,29 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-
+import { BoxHeader } from "components/Headers";
+import { huddle64pdf } from "mock-data/mock-data-pdf-huddle-base64";
+import React, { useState } from "react";
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
+import Rating from "react-rating";
+import { useParams } from "react-router-dom";
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
-  FormGroup,
-  Form,
-  Input,
-  Container,
-  Row,
+  CardHeader,
   Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
   Pagination,
   PaginationItem,
   PaginationLink,
+  Row,
 } from "reactstrap";
 
-import { useParams } from "react-router-dom";
-import { useState } from "react";
-import Rating from "react-rating";
-// core components
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
-import { useSelector } from "react-redux";
-
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
-import { huddle64pdf } from "mock-data/mock-data-pdf-huddle-base64.js";
 // import pdfToShare from 'assets/pdf/HostingCareHuddle.pdf'
 
 function BestPracticeDetailPage(props) {
@@ -87,7 +82,7 @@ function BestPracticeDetailPage(props) {
   };
   return (
     <>
-      <GradientEmptyHeader name="Employees" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row className="align-items-center py-4">
           <Col lg="12" xs="7" className="text-right">

@@ -14,29 +14,27 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { BoxHeader } from "components/Headers";
 import React, { useState } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import { searchCareMembers } from "../../../actions/careMembers";
+import ReactDatetime from "react-datetime";
+import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 import {
   Button,
   Card,
-  Col,
   CardBody,
   CardHeader,
+  Col,
   Container,
+  FormGroup,
   Input,
   Row,
-  FormGroup,
 } from "reactstrap";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
-import ReactDatetime from "react-datetime";
-
-import ReactBSAlert from "react-bootstrap-sweetalert";
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
-import { useDispatch, useSelector } from "react-redux";
+import { searchCareMembers } from "../../../actions/careMembers";
 
 const pagination = paginationFactory({
   page: 1,
@@ -188,7 +186,7 @@ function CareMembersPage(props) {
   return (
     <>
       {alert}
-      <GradientEmptyHeader name="Employees" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">

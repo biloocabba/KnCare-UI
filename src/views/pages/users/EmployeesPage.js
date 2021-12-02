@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
+import { BoxHeader } from "components/Headers";
 import React, { useState } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
@@ -33,7 +33,7 @@ import {
   Input,
   Row,
 } from "reactstrap";
-import { pagination } from "utils/tableUtils.js";
+import { pagination } from "utils/tableUtils";
 import { deleteUser, searchEmployees } from "../../../actions/employee";
 
 // const pagination = paginationFactory({
@@ -147,7 +147,7 @@ function EmployeesPage(props) {
   return (
     <>
       {/* alert*/}
-      <GradientEmptyHeader name="Employees" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">

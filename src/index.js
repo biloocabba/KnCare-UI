@@ -36,8 +36,8 @@ import "./assets/css/site.css";
 import "./assets/scss/argon-dashboard-pro-react.scss?v1.2.0";
 // plugins styles downloaded
 import "./assets/vendor/nucleo/css/nucleo.css";
-import AdminLayout from "./layouts/Admin.js";
-import AuthLayout from "./layouts/Auth.js";
+import AdminLayout from "./layouts/Admin";
+import AuthLayout from "./layouts/Auth";
 import store from "./store";
 import "./variables/chartDefaults";
 

@@ -14,27 +14,23 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { BoxHeader } from "components/Headers";
 import React from "react";
-
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
-  FormGroup,
-  Form,
-  Input,
-  Container,
-  Row,
+  CardHeader,
   Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Row,
 } from "reactstrap";
-
-import { useParams } from "react-router-dom";
-
-// core components
-import GradientEmptyHeader from "components/Headers/GradientEmptyHeader.js";
-import { useSelector } from "react-redux";
 
 function EmployeeDetailsPage(props) {
   let { id } = useParams(); //see in routes path: "/users/employee-details/:id",
@@ -45,7 +41,7 @@ function EmployeeDetailsPage(props) {
 
   return (
     <>
-      <GradientEmptyHeader name="Employees" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <Col className="order-xl-1" xl="12">

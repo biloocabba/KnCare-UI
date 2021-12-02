@@ -26,12 +26,12 @@ import {
   Col,
 } from "reactstrap";
 // core components
-import SimpleHeader from "components/Headers/SimpleHeader.js";
+import { TimelineHeader } from "components/Headers";
 
 function Typography() {
   return (
     <>
-      <SimpleHeader name="Typography" parentName="Components" />
+      <TimelineHeader name="Typography" parentName="Components" />
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="8">

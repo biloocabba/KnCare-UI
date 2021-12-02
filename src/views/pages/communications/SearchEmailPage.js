@@ -36,18 +36,21 @@ import {
   Form,
   Input,
   FormGroup,
-  Label
+  Label,
 } from "reactstrap";
 // core components
-import SimpleHeader from "components/Headers/SimpleHeader.js";
-
+import { TimelineHeader } from "components/Headers";
 
 const pagination = paginationFactory({
   page: 1,
   alwaysShowAllBtns: true,
   showTotal: true,
   withFirstAndLast: false,
-  sizePerPageRenderer: ({ options, currSizePerPage, onSizePerPageChange }) => (
+  sizePerPageRenderer: ({
+    options,
+    currSizePerPage,
+    onSizePerPageChange,
+  }) => (
     <div className="dataTables_length" id="datatable-basic_length">
       <label>
         Show{" "}
@@ -56,7 +59,7 @@ const pagination = paginationFactory({
             name="datatable-basic_length"
             aria-controls="datatable-basic"
             className="form-control form-control-sm"
-            onChange={(e) => onSizePerPageChange(e.target.value)}
+            onChange={e => onSizePerPageChange(e.target.value)}
           >
             <option value="10">10</option>
             <option value="25">25</option>
@@ -72,13 +75,12 @@ const pagination = paginationFactory({
 
 const { SearchBar } = Search;
 
-
 function ReactBSTables(props) {
   const [alert, setAlert] = React.useState(null);
   const componentRef = React.useRef(null);
   // this function will copy to clipboard an entire table,
   // so you can paste it inside an excel or csv file
-  const copyToClipboardAsTable = (el) => {
+  const copyToClipboardAsTable = el => {
     var body = document.body,
       range,
       sel;
@@ -111,47 +113,53 @@ function ReactBSTables(props) {
         btnSize=""
       >
         Copied to clipboard!
-      </ReactBSAlert>
+      </ReactBSAlert>,
     );
   };
 
-  const initialEmailState = [{
-    id:"1",
-    subject:"Sample subject",
-    content:"Hello world!",
-    attachments:null,
-    createdBy:{},
-    recipients:null,
-    recipientGroups:null
-  }]
+  const initialEmailState = [
+    {
+      id: "1",
+      subject: "Sample subject",
+      content: "Hello world!",
+      attachments: null,
+      createdBy: {},
+      recipients: null,
+      recipientGroups: null,
+    },
+  ];
   const [emails, setEmails] = useState(initialEmailState);
 
   useEffect(() => {
-    emailService.getAll()
-    .then(response => {
-        setEmails(response.data);
+    emailService.getAll().then(response => {
+      setEmails(response.data);
     });
   }, []);
 
   const EditDraft = e => {
-    var {id} = e.target;
-    props.history.push("/admin/email-details/"+id);
-  }
+    var { id } = e.target;
+    props.history.push("/admin/email-details/" + id);
+  };
 
-  const formatActionButtonCell =(cell, row)=>{  
+  const formatActionButtonCell = (cell, row) => {
     return (
-        <>
-            <Button id={row.id} className="btn-icon btn-2" type="button" onClick={e => EditDraft(e)}>
-                Edit
-            </Button>
-        </>
+      <>
+        <Button
+          id={row.id}
+          className="btn-icon btn-2"
+          type="button"
+          onClick={e => EditDraft(e)}
+        >
+          Edit
+        </Button>
+      </>
     );
-  }
+  };
 
   return (
     <>
       {alert}
-      <SimpleHeader name="Email search" parentName="Communications" />
+      <TimelineHeader name="Email search" parentName="Communications" />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
@@ -171,14 +179,14 @@ function ReactBSTables(props) {
                     sort: true,
                   },
                   {
-                      dataField: "action",
-                      text:"",
-                      formatter: formatActionButtonCell
-                  }
+                    dataField: "action",
+                    text: "",
+                    formatter: formatActionButtonCell,
+                  },
                 ]}
                 search
               >
-                {(props) => (
+                {props => (
                   <div className="py-4 table-responsive">
                     <Container fluid>
                       <Row>
@@ -191,7 +199,9 @@ function ReactBSTables(props) {
                               id="copy-tooltip"
                               onClick={() =>
                                 copyToClipboardAsTable(
-                                  document.getElementById("react-bs-table")
+                                  document.getElementById(
+                                    "react-bs-table",
+                                  ),
                                 )
                               }
                             >
@@ -215,15 +225,15 @@ function ReactBSTables(props) {
                             placement="top"
                             target="print-tooltip"
                           >
-                            This will open a print page with the visible rows of
-                            the table.
+                            This will open a print page with the visible
+                            rows of the table.
                           </UncontrolledTooltip>
                           <UncontrolledTooltip
                             placement="top"
                             target="copy-tooltip"
                           >
-                            This will copy to your clipboard the visible rows of
-                            the table.
+                            This will copy to your clipboard the visible
+                            rows of the table.
                           </UncontrolledTooltip>
                         </Col>
                         <Col xs={12} sm={6}>

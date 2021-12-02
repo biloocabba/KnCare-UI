@@ -14,11 +14,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useState, useEffect,PropTypes} from "react";
-import { useDispatch, useSelector } from  "react-redux";
-import {createGroup} from "actions/groups"
+import React, { useState, useEffect, PropTypes } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createGroup } from "actions/groups";
 //import {user_initialState} from "../../../mock-data/employees"
-import AsyncSelect from 'react-select/async';
+import AsyncSelect from "react-select/async";
 import SelectMemberPaginate from "./SelectMemberPaginate";
 
 // reactstrap components
@@ -40,116 +40,101 @@ import {
   Col,
 } from "reactstrap";
 // core components
-import GroupHeader from "components/Headers/GroupHeader.js";
-import Select from 'react-select';
-
-
+import GroupHeader from "components/Headers/GroupHeader";
+import Select from "react-select";
 
 function AddMemberPanel(props) {
-  
-
-const careMembers = useSelector( (state) => {
-    return state.careMembers.map(careMember => {return {"value": careMember.id, "label":careMember.internationalName}})
+  const careMembers = useSelector(state => {
+    return state.careMembers.map(careMember => {
+      return { value: careMember.id, label: careMember.internationalName };
+    });
   });
 
-
-  const roles = useSelector( (state) => {
-    return state.categories.careRoles.map(role => {return {"value": role.id, "label":role.name}})
+  const roles = useSelector(state => {
+    return state.categories.careRoles.map(role => {
+      return { value: role.id, label: role.name };
+    });
   });
 
-  const businessUnits = useSelector( (state) => {
-    return state.categories.businessUnits.map(bunit => {return {"value": bunit.id, "label":bunit.name}})
+  const businessUnits = useSelector(state => {
+    return state.categories.businessUnits.map(bunit => {
+      return { value: bunit.id, label: bunit.name };
+    });
   });
 
-  const countries = useSelector( (state) => {
-    return state.categories.countryListAllIsoData.map(country => {return {"value": country.code3, "label":country.name}})
+  const countries = useSelector(state => {
+    return state.categories.countryListAllIsoData.map(country => {
+      return { value: country.code3, label: country.name };
+    });
   });
-
 
   return (
-           <Card>
-              <CardHeader>
-                <Row className="align-items-center">
-                  <Col xs="8">
-                    <h3 className="mb-0">Add Members</h3>
-                  </Col>                
-                </Row>
-              </CardHeader>
-              <CardBody>
-                    <Row>
-                       <Col xl="12">
-                       <Row>
-
-                       <Col xl="2">
-                       <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="members"
-                          >
-                            Care Role
-                          </label>
-                          <Select                                  
-                              onChange={props.onchangeRole}
-                              options={roles}
-                              // getOptionValue={(option) => option.value}
-                              // getOptionLabel={(option) => option.value}
-                          />
-
-                          </FormGroup>
-                       </Col> 
-                       <Col xl="2">
-                       <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="members"
-                          >
-                            Country
-                          </label>
-                          <Select                                  
-                                  onChange={props.onchangeCountry}
-                                  options={countries}
-                                  // getOptionValue={(option) => option.value}
-                                  // getOptionLabel={(option) => option.name}
-                              />
-
-                          </FormGroup>
-                       </Col>   
-                       <Col xl="2">
-                       <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="members"
-                          >
-                            Business Unit
-                          </label>
-                          <Select                                 
-                                  onChange={props.onchangeBunit}
-                                  options={businessUnits}                                
-                              />
-
-                          </FormGroup>
-                       </Col>  
-                       <Col sm="6">
-                       <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="members"
-                          >
-                            Add members
-                          </label>
-                          <Select
-                                  isMulti                                 
-                                  onChange={props.onSelectCareMember}
-                                  options={careMembers}                                
-                              />
-
-                          </FormGroup>
-                       </Col> 
-                       </Row>
-                       </Col>                                                         
-                    </Row>
-                    </CardBody>
-            </Card>
+    <Card>
+      <CardHeader>
+        <Row className="align-items-center">
+          <Col xs="8">
+            <h3 className="mb-0">Add Members</h3>
+          </Col>
+        </Row>
+      </CardHeader>
+      <CardBody>
+        <Row>
+          <Col xl="12">
+            <Row>
+              <Col xl="2">
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="members">
+                    Care Role
+                  </label>
+                  <Select
+                    onChange={props.onchangeRole}
+                    options={roles}
+                    // getOptionValue={(option) => option.value}
+                    // getOptionLabel={(option) => option.value}
+                  />
+                </FormGroup>
+              </Col>
+              <Col xl="2">
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="members">
+                    Country
+                  </label>
+                  <Select
+                    onChange={props.onchangeCountry}
+                    options={countries}
+                    // getOptionValue={(option) => option.value}
+                    // getOptionLabel={(option) => option.name}
+                  />
+                </FormGroup>
+              </Col>
+              <Col xl="2">
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="members">
+                    Business Unit
+                  </label>
+                  <Select
+                    onChange={props.onchangeBunit}
+                    options={businessUnits}
+                  />
+                </FormGroup>
+              </Col>
+              <Col sm="6">
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="members">
+                    Add members
+                  </label>
+                  <Select
+                    isMulti
+                    onChange={props.onSelectCareMember}
+                    options={careMembers}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </CardBody>
+    </Card>
   );
 }
 
