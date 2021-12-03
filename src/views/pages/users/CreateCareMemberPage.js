@@ -35,9 +35,10 @@ const CreateCareMemberPage = () => {
       return { value: role.id, label: role.name };
     });
   });
+
   const groups = useSelector(state => {
     return state.groups.map(group => {
-      return { value: group.id, label: group.name, data: group.value };
+      return { value: group.id, label: group.name };
     });
   });
 
@@ -56,8 +57,13 @@ const CreateCareMemberPage = () => {
   const date = new Date();
   const defaultOffBoardDate = date.setDate(date.getDate() + 365);
 
+  const groupOptions = [
+    { value: 0, label: "All", groupIds: groups.map(group => group.value) },
+    ...groups,
+  ];
+
   const [role, setRole] = useState(careRoles[0]);
-  const [group, setGroup] = useState(groups[0]);
+  const [group, setGroup] = useState(groupOptions[0]);
   const [offboardingDate, setOffboardingDate] = useState(
     defaultOffBoardDate,
   );
@@ -102,13 +108,6 @@ const CreateCareMemberPage = () => {
         console.log(error);
       });
   };
-
-  console.log(groups, "groups");
-
-  const groupOptions = [
-    { value: 0, label: "All", data: groups },
-    ...groups,
-  ];
 
   const filterOptions = (group, input) => {
     if (input) {
@@ -234,7 +233,7 @@ const CreateCareMemberPage = () => {
                               setGroup({
                                 id: item.value,
                                 name: item.label,
-                                value: item.data,
+                                groupIds: item.data || [item.value],
                               })
                             }
                             filterOption={filterOptions}
