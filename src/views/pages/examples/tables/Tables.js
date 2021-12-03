@@ -14,37 +14,35 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { BoxHeader } from "components/Headers";
 import React from "react";
-
 // reactstrap components
 import {
   Badge,
   Button,
   Card,
-  CardHeader,
   CardFooter,
-  DropdownMenu,
+  CardHeader,
+  Col,
+  Container,
   DropdownItem,
+  DropdownMenu,
   DropdownToggle,
-  UncontrolledDropdown,
   Media,
   Pagination,
   PaginationItem,
   PaginationLink,
   Progress,
-  Table,
-  Container,
   Row,
-  Col,
+  Table,
+  UncontrolledDropdown,
   UncontrolledTooltip,
 } from "reactstrap";
-// core components
-import { TimelineHeader } from "components/Headers";
 
 function Tables() {
   return (
     <>
-      <TimelineHeader name="Tables" parentName="Tables" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">

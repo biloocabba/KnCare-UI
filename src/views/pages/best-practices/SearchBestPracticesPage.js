@@ -15,8 +15,7 @@
 
 */
 import { searchBestPractices } from "actions/bestPractice";
-// core components
-import { TimelineHeader } from "components/Headers";
+import { BoxHeader } from "components/Headers";
 import React, { useState } from "react";
 // react plugin that prints a given react component
 // react component for creating dynamic tables
@@ -74,7 +73,6 @@ const { SearchBar } = Search;
 
 function SearchBestPracticePage(props) {
   const [alert, setAlert] = React.useState(null);
-  const componentRef = React.useRef(null);
   // this function will copy to clipboard an entire table,
   // so you can paste it inside an excel or csv file
 
@@ -147,7 +145,7 @@ function SearchBestPracticePage(props) {
   return (
     <>
       {alert}
-      <TimelineHeader name="Best Practices" parentName="Tables" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="12">

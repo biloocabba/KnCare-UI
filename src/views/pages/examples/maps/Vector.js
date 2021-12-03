@@ -14,14 +14,12 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { BoxHeader } from "components/Headers";
 import React from "react";
 // react plugin for creating vector maps
 import { VectorMap } from "react-jvectormap";
-
 // reactstrap components
 import { Card, CardBody, Container, Row } from "reactstrap";
-// core components
-import { TimelineHeader } from "components/Headers";
 
 let mapData = {
   AU: 760,
@@ -40,7 +38,7 @@ let mapData = {
 function Vector() {
   return (
     <>
-      <TimelineHeader name="Vector maps" parentName="Maps" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">

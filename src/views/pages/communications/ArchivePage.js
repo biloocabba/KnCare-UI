@@ -34,10 +34,8 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
-// core components
-import { TimelineHeader } from "components/Headers";
-
 import { dataTable } from "variables/general";
+import { BoxHeader } from "components/Headers";
 
 const pagination = paginationFactory({
   page: 1,
@@ -118,7 +116,7 @@ function ArchivePage() {
   return (
     <>
       {alert}
-      <TimelineHeader name="React Tables" parentName="Tables" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">

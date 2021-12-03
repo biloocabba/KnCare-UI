@@ -14,27 +14,26 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { BoxHeader } from "components/Headers";
 import React from "react";
 // react component that copies the given text inside your clipboard
 import { CopyToClipboard } from "react-copy-to-clipboard";
 // reactstrap components
 import {
   Card,
-  CardHeader,
   CardBody,
+  CardHeader,
+  Col,
   Container,
   Row,
-  Col,
   UncontrolledTooltip,
 } from "reactstrap";
-// core components
-import { TimelineHeader } from "components/Headers";
 
 function Icons() {
   const [copiedText, setCopiedText] = React.useState(null);
   return (
     <>
-      <TimelineHeader name="Icons" parentName="Components" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
           <Col lg="8">

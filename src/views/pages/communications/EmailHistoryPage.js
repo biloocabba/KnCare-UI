@@ -14,25 +14,23 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { BoxHeader } from "components/Headers";
 import React from "react";
-
 // reactstrap components
 import {
   Badge,
   Card,
-  CardHeader,
   CardBody,
+  CardHeader,
+  Col,
   Container,
   Row,
-  Col,
 } from "reactstrap";
-// core components
-import { TimelineHeader } from "components/Headers";
 
 function EmailHistoryPage() {
   return (
     <>
-      <TimelineHeader name="Timeline" parentName="Pages" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <Col lg="6">

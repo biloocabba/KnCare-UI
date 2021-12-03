@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { TimelineHeader } from "components/Headers";
+import { BoxHeader } from "components/Headers";
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -76,7 +76,7 @@ function EmailEditor(props) {
 
   return (
     <>
-      <TimelineHeader name="Create Email" parentName="Communications" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <Col>

@@ -14,29 +14,27 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { BoxHeader } from "components/Headers";
 import React from "react";
-// react plugin that prints a given react component
-import ReactToPrint from "react-to-print";
+// react component used to create sweet alerts
+import ReactBSAlert from "react-bootstrap-sweetalert";
 // react component for creating dynamic tables
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-// react component used to create sweet alerts
-import ReactBSAlert from "react-bootstrap-sweetalert";
+// react plugin that prints a given react component
+import ReactToPrint from "react-to-print";
 // reactstrap components
 import {
   Button,
   ButtonGroup,
   Card,
   CardHeader,
+  Col,
   Container,
   Row,
-  Col,
   UncontrolledTooltip,
 } from "reactstrap";
-// core components
-import { TimelineHeader } from "components/Headers";
-
 import { dataTable } from "variables/general";
 
 const pagination = paginationFactory({
@@ -118,7 +116,7 @@ function ReactBSTables() {
   return (
     <>
       {alert}
-      <TimelineHeader name="React Tables" parentName="Tables" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">

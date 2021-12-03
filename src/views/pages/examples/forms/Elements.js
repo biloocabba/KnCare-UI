@@ -14,27 +14,26 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { BoxHeader } from "components/Headers";
 import React from "react";
 // reactstrap components
 import {
   Card,
-  CardHeader,
   CardBody,
-  Label,
-  FormGroup,
-  Form,
-  Input,
-  Container,
-  Row,
+  CardHeader,
   Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
 } from "reactstrap";
-// core components
-import { TimelineHeader } from "components/Headers";
 
 function Elements() {
   return (
     <>
-      <TimelineHeader name="Form elements" parentName="Forms" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Card className="mb-4">
           <CardHeader>

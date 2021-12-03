@@ -14,31 +14,30 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import { BoxHeader } from "components/Headers";
 // javascript plugin that creates a sortable object from a dom object
 import List from "list";
+import React from "react";
 // reactstrap components
 import {
   Badge,
   Card,
-  CardHeader,
   CardFooter,
-  DropdownMenu,
+  CardHeader,
+  Container,
   DropdownItem,
+  DropdownMenu,
   DropdownToggle,
-  UncontrolledDropdown,
   Media,
   Pagination,
   PaginationItem,
   PaginationLink,
   Progress,
-  Table,
-  Container,
   Row,
+  Table,
+  UncontrolledDropdown,
   UncontrolledTooltip,
 } from "reactstrap";
-// core components
-import { TimelineHeader } from "components/Headers";
 
 function Sortable() {
   const firstListRef = React.useRef(null);
@@ -60,7 +59,7 @@ function Sortable() {
   }, []);
   return (
     <>
-      <TimelineHeader name="Sortable Tables" parentName="Tables" />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
