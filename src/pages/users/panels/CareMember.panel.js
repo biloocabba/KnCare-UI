@@ -82,7 +82,7 @@ export const CareMemberPanel = ({
 
       
     const onBackToSearchClick= () => {
-        history.push("/admin/employees")
+        history.push("/admin/employees-search")
     }
     return (
         <Row>

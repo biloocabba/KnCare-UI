@@ -13,8 +13,6 @@ import {
   Row,
 } from "reactstrap";
 
-import BootstrapTable from "react-bootstrap-table-next";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import ReactDatetime from "react-datetime";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -22,6 +20,7 @@ import makeAnimated from "react-select/animated";
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets/react-table"; 
 
+import { employeesData } from 'mock-data/employees.js'
 import { employeesTableColumns } from './SearchEmployees.table'
 
 import { deleteUser, searchEmployees } from "../../../actions/employee";
@@ -36,11 +35,13 @@ export const SearchEmployeesPage = (props) => {
     isError: false,
     isSuccess: false,
     errorMessage: null,
-    entities: [],
+    entities: employeesData,
     entity: null,
   };
 
-
+  const businessUnits =[];
+  const countries =[];
+/*
   const businessUnits = useSelector(state => {
     return state.categories.businessUnits.map(bunit => {
       return { value: bunit.id, label: bunit.name };
@@ -54,6 +55,7 @@ export const SearchEmployeesPage = (props) => {
   });
 
   const employees = useSelector(state => state.employees);
+  */
   const dispatch = useDispatch();
 
   const [searchLastName, setSearchLastName] = useState("");

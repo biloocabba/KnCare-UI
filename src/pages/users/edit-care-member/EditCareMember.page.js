@@ -8,7 +8,7 @@ import {
 
 import { BoxHeader } from "components/headers";
 import { CareMemberPanel } from "../panels";
-
+import { careMembersData } from 'mock-data/careMembers.js'
 
 
 export const EditCareMemberPage = (props) => {
@@ -19,7 +19,7 @@ export const EditCareMemberPage = (props) => {
   const groups = [];
   const history =useHistory();
 
-  const careMembers = [];
+  //const careMembers = careMembersData;
   //this should be in selectors
   /*
   const careRoles = useSelector(state => {
@@ -45,9 +45,8 @@ export const EditCareMemberPage = (props) => {
     findCareMember();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-
   */
+
   const [careMember, setCareMember] = useState();
   const [role, setRole] = useState(
     careMember ? (careMember.role ? careMember.role : "") : "",
@@ -56,19 +55,28 @@ export const EditCareMemberPage = (props) => {
 
   
   const findCareMember = () => {
-    setCareMember(
-      careMembers.find(careMember => careMember.id === parseInt(id)),
-    );
+    console.log(careMembersData)
+    console.log(id)
+    const careMemberFound =careMembersData.find(careMember => careMember.id === parseInt(id))
+    console.log(careMemberFound)
+    setCareMember(careMemberFound);
   };
   
-  useEffect(() => {
-    findCareMember();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   console.log(careMembersData)
+  //   console.log(id)
+  //   findCareMember();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   
-  if (!careMember) {
-    return <div>No care member found</div>;
+  // if (!careMember) {
+  //   return <div>No care member found</div>;
+  // }
+
+  if(!careMember){
+    findCareMember();
   }
+ 
 
   return (
     <>

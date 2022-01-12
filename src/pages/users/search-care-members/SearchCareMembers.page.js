@@ -22,6 +22,8 @@ import { BoxHeader } from "components/headers";
 
 import { careMemberTableColumns } from './SearchCareMembers.table'
 import { searchCareMembers } from "../../../actions/careMembers";
+import { careMembersData } from 'mock-data/careMembers.js'
+
 
 export const SearchCareMembersPage = (props) => {
 
@@ -33,7 +35,7 @@ export const SearchCareMembersPage = (props) => {
     isError: false,
     isSuccess: false,
     errorMessage: null,
-    entities: [],
+    entities:careMembersData,
     entity: null,
   };
 
@@ -130,6 +132,7 @@ export const SearchCareMembersPage = (props) => {
   };
 
 
+  console.log(careMemberState.entities);
 
   return (
     <>

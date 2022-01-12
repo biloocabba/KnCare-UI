@@ -19,8 +19,8 @@ import React from "react";
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 
 // core components
-import AuthNavbar from "components/Navbars/AuthNavbar";
-import AuthFooter from "components/Footers/AuthFooter";
+import AuthNavbar from "components/navbars/AuthNavbar";
+import AuthFooter from "components/footers/AuthFooter";
 
 import { routes } from "routes";
 

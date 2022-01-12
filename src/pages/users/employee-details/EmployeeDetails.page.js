@@ -75,7 +75,7 @@ export const EmployeeDetailsPage = (props) => {
                       className="btn btn-primary"
                       color="primary"
                       onClick={() =>
-                        props.history.push("/admin/employees")
+                        props.history.push("/admin/employee-search")
                       }
                     >
                       Back to Search
