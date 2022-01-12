@@ -85,29 +85,7 @@ export const CareMemberPanel = ({
         history.push("/admin/employees-search")
     }
     return (
-        <Row>
-        <Col className="order-xl-1" xl="12">
-          <Card>
-            <CardHeader>
-              <Row className="align-items-center">
-                <Col xs="8">
-                  <h3 className="mb-0">New Care Member</h3>
-                </Col>
-              </Row>
-              <Row className="align-items-center py-4">
-                <Col lg="12" xs="7" className="text-right">
-                  <Button
-                    type="button"
-                    color="info"
-                    href="#dsfkjlsi39ds9d97876s7d"
-                    onClick={onBackToSearchClick}
-                  >
-                    Back to Employees
-                  </Button>
-                </Col>
-              </Row>
-            </CardHeader>
-            <CardBody>
+      
               <Form>
                 <h6 className="heading-small text-muted mb-4">
                   Care Member information
@@ -562,20 +540,7 @@ export const CareMemberPanel = ({
                   </Row>
                 </div>
               </Form>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-
-
-
-
-
-
-
-
-
-    )
+   )
 
 
 

@@ -16,7 +16,7 @@
 */
 import React, { useState }  from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams ,useHistory} from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -34,10 +34,12 @@ import {
 import { BoxHeader } from "components/headers";
 import { employeesData } from 'mock-data/employees.js'
 
+import { EMPLOYEE_SEARCH,CARE_MEMBER_CREATE } from "pages/users";
+
 export const EmployeeDetailsPage = (props) => {
 
   let { id } = useParams();
-
+  const history = useHistory();
 
   // To MOVE in Selectors
   /*
@@ -45,6 +47,7 @@ export const EmployeeDetailsPage = (props) => {
   let employee = employees.find(employee => employee.id === parseInt(id));
   */
 
+  const currentRole = "admin";
   let [employee, setEmployee] = useState();
   
   if(!employee){
@@ -72,10 +75,8 @@ export const EmployeeDetailsPage = (props) => {
                     <Button
                       color={buttonColor}
                       onClick={e =>
-                        props.history.push(
-                          "/admin/users/care-member-create/" + id,
-                        )
-                      }
+                        history.push(`/${currentRole}${CARE_MEMBER_CREATE}/${id}`)}
+                        
                       disabled={employee.careMember}
                     >
                       Invite to Care
@@ -83,8 +84,8 @@ export const EmployeeDetailsPage = (props) => {
                     <Button
                       className="btn btn-primary"
                       color="primary"
-                      onClick={() =>
-                        props.history.push("/admin/employee-search")
+                      onClick={() =>                         
+                        history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)
                       }
                     >
                       Back to Search

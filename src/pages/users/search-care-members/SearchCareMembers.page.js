@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import {
   Button,
@@ -24,10 +25,12 @@ import { careMemberTableColumns } from './SearchCareMembers.table'
 import { searchCareMembers } from "../../../actions/careMembers";
 import { careMembersData } from 'mock-data/careMembers.js'
 
+import { CARE_MEMBER_EDIT } from "pages/users";
+
 
 export const SearchCareMembersPage = (props) => {
 
-  
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const careMemberState = {
@@ -44,7 +47,8 @@ export const SearchCareMembersPage = (props) => {
   const countries  = [];
   const careRoles = [];
   const groups = [];
-
+  const currentRole = "admin";
+  
   // for selectors
   /*
   const businessUnits = useSelector(state => {
@@ -124,7 +128,8 @@ export const SearchCareMembersPage = (props) => {
 
   const onGoToCareMemberDetailsPage = e => {
     var { id } = e.target;
-    props.history.push("/admin/users/care-member-details/" + id);
+    // history.push("/admin/users/care-member-details/" + id);
+    history.push(`/${currentRole}${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const onRemoveCareMember = e => {

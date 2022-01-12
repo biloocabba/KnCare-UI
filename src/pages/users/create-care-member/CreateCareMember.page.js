@@ -24,17 +24,19 @@ import makeAnimated from "react-select/animated";
 import { BoxHeader } from "components/headers";
 import { employeesData } from 'mock-data/employees.js'
 
+
+import { EMPLOYEE_SEARCH } from "pages/users";
+import { CareMemberPanel } from "../panels";
+
 export const CreateCareMemberPage = () => {
 
   let { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const currentRole = "admin";
   //Use selector from slices
   const careRoles =[]; 
   const groups = [];
-
-
   
   const groupOptions =[];
 
@@ -61,17 +63,18 @@ export const CreateCareMemberPage = () => {
 
 */
 
-  const initialState = {
-    onBoardDate: "",
-    offBoardDate: "",
-    employee: null,
-    role: "",
-    group: "",
-  };
+ 
 
   const date = new Date();
   const defaultOffBoardDate = date.setDate(date.getDate() + 365);
 
+  const initialState = {
+    onBoardDate: "",
+    offBoardDate: "",
+    employee:null,
+    role: "",
+    group: "",
+  };
 
   const [role, setRole] = useState(careRoles[0]);
   const [group, setGroup] = useState(groupOptions[0]);
@@ -83,8 +86,10 @@ export const CreateCareMemberPage = () => {
   if(!employee){
     employee=employeesData.find(employee => employee.id === parseInt(id));
     setEmployee(employee);
+    setCareMember({...careMember,...employee})
   }
 
+ 
 
   const saveCareMember = () => {
     const careMemberInfo = {
@@ -141,7 +146,7 @@ export const CreateCareMemberPage = () => {
                       type="button"
                       color="info"
                       href="#dsfkjlsi39ds9d97876s7d"
-                      onClick={() => history.push("/admin/employee-search")}
+                       onClick={() => history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Employees
                     </Button>
@@ -149,7 +154,13 @@ export const CreateCareMemberPage = () => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <Form>
+
+              <CareMemberPanel 
+                careMember={careMember}
+                setCareMember={setCareMember}      
+              />  
+
+                {/* <Form>
                   <h6 className="heading-small text-muted mb-4">
                     Care Member information
                   </h6>
@@ -193,7 +204,7 @@ export const CreateCareMemberPage = () => {
                             value={offBoardDate}
                             onChange={(e) => e.preventDefault}
                             type="text"
-                          /> */}
+                          /> 
                         </FormGroup>
                       </Col>
                     </Row>
@@ -499,7 +510,7 @@ export const CreateCareMemberPage = () => {
                       </Button>
                     </Row>
                   </div>
-                </Form>
+                </Form> */}
               </CardBody>
             </Card>
           </Col>

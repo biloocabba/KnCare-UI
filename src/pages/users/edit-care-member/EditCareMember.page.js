@@ -3,13 +3,20 @@ import { useSelector } from "react-redux";
 import { useParams,useHistory } from "react-router-dom";
 
 import {
-  Container
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Container,
+  Row
 } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 import { CareMemberPanel } from "../panels";
 import { careMembersData } from 'mock-data/careMembers.js'
 
+import { EMPLOYEE_SEARCH } from "pages/users";
 
 export const EditCareMemberPage = (props) => {
 
@@ -47,6 +54,7 @@ export const EditCareMemberPage = (props) => {
   }, []);
   */
 
+  const currentRole = "admin";
   const [careMember, setCareMember] = useState();
   const [role, setRole] = useState(
     careMember ? (careMember.role ? careMember.role : "") : "",
@@ -79,10 +87,40 @@ export const EditCareMemberPage = (props) => {
     <>
       <BoxHeader />
       <Container className="mt--6" fluid>
-        <CareMemberPanel 
-           careMember={careMember}
-           setCareMember={setCareMember}      
-        />        
+      <Row>
+        <Col className="order-xl-1" xl="12">
+          <Card>
+            <CardHeader>
+              <Row className="align-items-center">
+                <Col xs="8">
+                  <h3 className="mb-0">New Care Member</h3>
+                </Col>
+              </Row>
+              <Row className="align-items-center py-4">
+                <Col lg="12" xs="7" className="text-right">
+                  <Button
+                    type="button"
+                    color="info"
+                    href="#dsfkjlsi39ds9d97876s7d"
+                    onClick={e => {
+                      e.preventDefault();
+                      history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)
+                    }}
+                  >
+                    Back to Employees
+                  </Button>
+                </Col>
+              </Row>
+            </CardHeader>
+            <CardBody>
+              <CareMemberPanel 
+                careMember={careMember}
+                setCareMember={setCareMember}      
+              />        
+              </CardBody>
+          </Card>
+        </Col>
+      </Row>
       </Container>
     </>
   );

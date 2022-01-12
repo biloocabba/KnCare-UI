@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 
 import {
   Button,
@@ -25,10 +27,12 @@ import { employeesTableColumns } from './SearchEmployees.table'
 
 import { deleteUser, searchEmployees } from "../../../actions/employee";
 
+import { EMPLOYEE_DETAILS } from "pages/users";
 
 
 export const SearchEmployeesPage = (props) => {
 
+  const history = useHistory();
 
   const employeeState = {
     isLoading: false,
@@ -41,6 +45,8 @@ export const SearchEmployeesPage = (props) => {
 
   const businessUnits =[];
   const countries =[];
+  const currentRole = "admin";
+
 /*
   const businessUnits = useSelector(state => {
     return state.categories.businessUnits.map(bunit => {
@@ -81,7 +87,9 @@ export const SearchEmployeesPage = (props) => {
 
   const onGoToEmployeeDetails = e => {
     var { id } = e.target;
-    props.history.push("/admin/users/employee-details/" + id);
+    // props.history.push("/admin/users/employee-details/" + id);
+    console.log(`/${currentRole}${EMPLOYEE_DETAILS}/${id}`);
+    history.push(`/${currentRole}${EMPLOYEE_DETAILS}/${id}`);    
   };
 
   const onRemoveEmployee = e => {

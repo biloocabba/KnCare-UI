@@ -3,7 +3,12 @@ import {
   EditCareMemberPage,
   EmployeeDetailsPage,
   SearchEmployeesPage,
-  SearchCareMembersPage  
+  SearchCareMembersPage,  
+  EMPLOYEE_SEARCH,
+  EMPLOYEE_DETAILS,
+  CARE_MEMBER_CREATE,
+  CARE_MEMBER_SEARCH,
+  CARE_MEMBER_EDIT
 } from ".";
 
 
@@ -16,14 +21,14 @@ export const userMenu = [
     state: "usersCollapse",
     views: [
       {
-        path: "/employee-search",
+        path: EMPLOYEE_SEARCH,
         name: "Employees",
         miniName: "E",
         component: SearchEmployeesPage,
         layout: "/admin",
       },
       {
-        path: "/care-member-search",
+        path: CARE_MEMBER_SEARCH,
         name: "Care Members",
         miniName: "CM",
         component: SearchCareMembersPage,
@@ -34,21 +39,23 @@ export const userMenu = [
   {
     collapse: false,
     global: true,
-    path: "/users/employee-details/:id",
+    path: `${EMPLOYEE_DETAILS}/:id`,
     component: EmployeeDetailsPage,
     layout: "/admin",
   },
   {
     collapse: false,
     global: true,
-    path: "/users/care-member-details/:id",
+    // path: "/users/care-member-details/:id",
+    path: `${CARE_MEMBER_EDIT}/:id`,
     component: EditCareMemberPage,
     layout: "/admin",
   },
   {
     collapse: false,
     global: true,
-    path: "/users/care-member-create/:id",
+    // path: "/users/care-member-create/:id",
+    path: `${CARE_MEMBER_CREATE}/:id`,
     component: CreateCareMemberPage,
     layout: "/admin",
   },
