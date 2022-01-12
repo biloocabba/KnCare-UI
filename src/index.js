@@ -29,6 +29,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { store } from "redux/app";
 import "select2/dist/css/select2.min.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "./assets/css/site.css";
@@ -38,7 +39,7 @@ import "./assets/scss/argon-dashboard-pro-react.scss?v1.2.0";
 import "./assets/vendor/nucleo/css/nucleo.css";
 import AdminLayout from "./layouts/Admin";
 import AuthLayout from "./layouts/Auth";
-import store from "./store";
+
 // import "./variables/chartDefaults";
 
 ReactDOM.render(
