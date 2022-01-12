@@ -18,11 +18,11 @@ const initialState: GroupStateType = {
   group: null,
   isLoading: false,
   isSuccess: false,
-  error: null,
+  error: {},
 };
 
 export const fetchGroup = createAsyncThunk(
-  "groups/fetchGroup",
+  "group/fetchGroup",
   async (id: number) => {
     let { data } = await groupService.getGroupById(id);
     return data;
@@ -30,7 +30,7 @@ export const fetchGroup = createAsyncThunk(
 );
 
 export const searchGroups = createAsyncThunk(
-  "groups/searchGroups",
+  "group/searchGroups",
   async () => {
     const { data } = await groupService.getAllGroups();
 
@@ -39,7 +39,7 @@ export const searchGroups = createAsyncThunk(
 );
 
 export const createGroup = createAsyncThunk(
-  "groups/createGroup",
+  "group/createGroup",
   async (body: Group) => {
     const { data } = await groupService.createGroup(body);
 
@@ -48,7 +48,7 @@ export const createGroup = createAsyncThunk(
 );
 
 export const updateGroup = createAsyncThunk(
-  "groups/updateGroup",
+  "group/updateGroup",
   async (updatedGroup: IUpdatedGroup) => {
     const { data } = await groupService.updateGroup(updatedGroup);
 
@@ -57,7 +57,7 @@ export const updateGroup = createAsyncThunk(
 );
 
 export const partialUpdateGroup = createAsyncThunk(
-  "groups/partialUpdateGroup",
+  "group/partialUpdateGroup",
   async (partiallyUpdatedGroup: IPartiallyUpdatedGroup) => {
     const { data } = await groupService.partialUpdateGroup(
       partiallyUpdatedGroup,
@@ -68,7 +68,7 @@ export const partialUpdateGroup = createAsyncThunk(
 );
 
 export const deleteGroup = createAsyncThunk(
-  "groups/deleteGroup",
+  "group/deleteGroup",
   async (id: number) => {
     let { data } = await groupService.deleteGroup(id);
     return data;
@@ -76,7 +76,7 @@ export const deleteGroup = createAsyncThunk(
 );
 
 export const groupSlice = createSlice({
-  name: "groups",
+  name: "group",
   initialState,
   reducers: {},
   extraReducers: builder => {
@@ -94,7 +94,7 @@ export const groupSlice = createSlice({
         state.isSuccess = false;
       });
       builder.addCase(thunk.rejected, (state, action) => {
-        state.error = action.payload || action.error;
+        state.error = action.error;
         state.isLoading = false;
         state.isSuccess = false;
       });

@@ -16,7 +16,7 @@ const initialState: EmployeeStateType = {
   employee: null,
   isLoading: false,
   isSuccess: false,
-  error: null,
+  error: {},
 };
 
 export const fetchEmployee = createAsyncThunk(
@@ -107,7 +107,7 @@ export const employeeSlice = createSlice({
         state.isSuccess = false;
       });
       builder.addCase(thunk.rejected, (state, action) => {
-        state.error = action.payload || action.error;
+        state.error = action.error;
         state.isLoading = false;
         state.isSuccess = false;
       });

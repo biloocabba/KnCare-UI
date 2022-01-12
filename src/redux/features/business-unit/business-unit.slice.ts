@@ -2,6 +2,7 @@ import {
   AsyncThunk,
   createAsyncThunk,
   createSlice,
+  SerializedError,
 } from "@reduxjs/toolkit";
 import { BusinessUnit } from "types/types";
 import { businessUnitService } from ".";
@@ -11,7 +12,7 @@ type BusinessUnitStateType = {
   businessUnit: BusinessUnit | null;
   isLoading: boolean;
   isSuccess: boolean;
-  error: any;
+  error: SerializedError;
 };
 
 const initialState: BusinessUnitStateType = {
@@ -19,7 +20,7 @@ const initialState: BusinessUnitStateType = {
   businessUnit: null,
   isLoading: false,
   isSuccess: false,
-  error: null,
+  error: {},
 };
 
 export const fetchBusinessUnits = createAsyncThunk(
@@ -42,7 +43,7 @@ export const businessUnitSlice = createSlice({
         state.isSuccess = false;
       });
       builder.addCase(thunk.rejected, (state, action) => {
-        state.error = action.payload || action.error;
+        state.error = action.error;
         state.isLoading = false;
         state.isSuccess = false;
       });

@@ -1,3 +1,4 @@
+import { SerializedError } from "@reduxjs/toolkit";
 import { Employee } from "types/types";
 
 export type EmployeeStateType = {
@@ -5,7 +6,7 @@ export type EmployeeStateType = {
   employee: Employee | null;
   isLoading: boolean;
   isSuccess: boolean;
-  error: any;
+  error: SerializedError;
 };
 
 export interface IUpdatedEmployee {

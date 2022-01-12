@@ -2,6 +2,7 @@ import {
   AsyncThunk,
   createAsyncThunk,
   createSlice,
+  SerializedError,
 } from "@reduxjs/toolkit";
 import { Country } from "types/types";
 import { countryService } from ".";
@@ -11,7 +12,7 @@ type CountryStateType = {
   country: Country | null;
   isLoading: boolean;
   isSuccess: boolean;
-  error: any;
+  error: SerializedError;
 };
 
 const initialState: CountryStateType = {
@@ -19,7 +20,7 @@ const initialState: CountryStateType = {
   country: null,
   isLoading: false,
   isSuccess: false,
-  error: null,
+  error: {},
 };
 
 export const fetchCountries = createAsyncThunk(
@@ -42,7 +43,7 @@ export const countrySlice = createSlice({
         state.isSuccess = false;
       });
       builder.addCase(thunk.rejected, (state, action) => {
-        state.error = action.payload || action.error;
+        state.error = action.error;
         state.isLoading = false;
         state.isSuccess = false;
       });

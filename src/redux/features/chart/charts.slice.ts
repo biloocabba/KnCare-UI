@@ -2,6 +2,7 @@ import {
   AsyncThunk,
   createAsyncThunk,
   createSlice,
+  SerializedError,
 } from "@reduxjs/toolkit";
 import { Chart } from "types/types";
 import { chartService } from ".";
@@ -11,7 +12,7 @@ type ChartStateType = {
   chart: Chart | null;
   isLoading: boolean;
   isSuccess: boolean;
-  error: any;
+  error: SerializedError;
 };
 
 const initialState: ChartStateType = {
@@ -19,7 +20,7 @@ const initialState: ChartStateType = {
   chart: null,
   isLoading: false,
   isSuccess: false,
-  error: null,
+  error: {},
 };
 
 export const fetchCharts = createAsyncThunk(
@@ -42,7 +43,7 @@ export const chartSlice = createSlice({
         state.isSuccess = false;
       });
       builder.addCase(thunk.rejected, (state, action) => {
-        state.error = action.payload || action.error;
+        state.error = action.error;
         state.isLoading = false;
         state.isSuccess = false;
       });

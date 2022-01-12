@@ -2,6 +2,7 @@ import {
   AsyncThunk,
   createAsyncThunk,
   createSlice,
+  SerializedError,
 } from "@reduxjs/toolkit";
 import { worldOverviewService } from ".";
 
@@ -11,7 +12,7 @@ type WorldOverviewStateType = {
   worldOverview: any | null;
   isLoading: boolean;
   isSuccess: boolean;
-  error: any;
+  error: SerializedError;
 };
 
 const initialState: WorldOverviewStateType = {
@@ -19,7 +20,7 @@ const initialState: WorldOverviewStateType = {
   worldOverview: null,
   isLoading: false,
   isSuccess: false,
-  error: null,
+  error: {},
 };
 
 export const fetchWorldOverviews = createAsyncThunk(
@@ -42,7 +43,7 @@ export const worldOverviewSlice = createSlice({
         state.isSuccess = false;
       });
       builder.addCase(thunk.rejected, (state, action) => {
-        state.error = action.payload || action.error;
+        state.error = action.error;
         state.isLoading = false;
         state.isSuccess = false;
       });
