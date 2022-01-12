@@ -39,7 +39,7 @@ import "./assets/vendor/nucleo/css/nucleo.css";
 import AdminLayout from "./layouts/Admin";
 import AuthLayout from "./layouts/Auth";
 import store from "./store";
-import "./variables/chartDefaults";
+// import "./variables/chartDefaults";
 
 ReactDOM.render(
   <Provider store={store}>
