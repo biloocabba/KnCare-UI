@@ -22,7 +22,7 @@ import makeAnimated from "react-select/animated";
 
 // import { createCareMember } from "../../../actions/careMembers";
 import { BoxHeader } from "components/headers";
-
+import { employeesData } from 'mock-data/employees.js'
 
 export const CreateCareMemberPage = () => {
 
@@ -33,8 +33,9 @@ export const CreateCareMemberPage = () => {
   //Use selector from slices
   const careRoles =[]; 
   const groups = [];
-  const employees = useSelector(state => state.employees);
-  const employee ={};
+
+
+  
   const groupOptions =[];
 
   /*
@@ -77,7 +78,12 @@ export const CreateCareMemberPage = () => {
   const [offboardingDate, setOffboardingDate] = useState(defaultOffBoardDate);
   const [careMember, setCareMember] = useState(initialState);
   const onBoardDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear() - 1}`;
-
+  let [employee, setEmployee] = useState();
+  
+  if(!employee){
+    employee=employeesData.find(employee => employee.id === parseInt(id));
+    setEmployee(employee);
+  }
 
 
   const saveCareMember = () => {
@@ -135,7 +141,7 @@ export const CreateCareMemberPage = () => {
                       type="button"
                       color="info"
                       href="#dsfkjlsi39ds9d97876s7d"
-                      onClick={() => history.push("/admin/employees")}
+                      onClick={() => history.push("/admin/employee-search")}
                     >
                       Back to Employees
                     </Button>

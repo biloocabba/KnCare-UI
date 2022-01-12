@@ -55,10 +55,7 @@ export const EditCareMemberPage = (props) => {
 
   
   const findCareMember = () => {
-    console.log(careMembersData)
-    console.log(id)
     const careMemberFound =careMembersData.find(careMember => careMember.id === parseInt(id))
-    console.log(careMemberFound)
     setCareMember(careMemberFound);
   };
   

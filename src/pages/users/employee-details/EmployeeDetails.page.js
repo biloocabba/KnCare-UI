@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useState }  from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 // reactstrap components
@@ -32,17 +32,26 @@ import {
 } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
+import { employeesData } from 'mock-data/employees.js'
 
 export const EmployeeDetailsPage = (props) => {
 
   let { id } = useParams();
-  let employee ={};
+
 
   // To MOVE in Selectors
   /*
   const employees = useSelector(state => state.employees);
   let employee = employees.find(employee => employee.id === parseInt(id));
   */
+
+  let [employee, setEmployee] = useState();
+  
+  if(!employee){
+    employee=employeesData.find(employee => employee.id === parseInt(id));
+    setEmployee(employee);
+  }
+
   let buttonColor = employee.careMember ? "secondary" : "success";
 
   return (
@@ -64,7 +73,7 @@ export const EmployeeDetailsPage = (props) => {
                       color={buttonColor}
                       onClick={e =>
                         props.history.push(
-                          "/admin/users/new-care-member/" + id,
+                          "/admin/users/care-member-create/" + id,
                         )
                       }
                       disabled={employee.careMember}
