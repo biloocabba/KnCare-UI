@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { Button } from "reactstrap";
@@ -50,12 +50,12 @@ export const ReactTable = ({
     );
   };
 
-  useEffect(() => {
-    const formatterColumn = columns.find(
-      element => element.formatter !== undefined,
-    );
-    formatterColumn.formatter = formatActionButtonCell;
-  });
+  const [formatterFunction, setFormatterFunction] = useState(false)
+
+  if(!formatterFunction){
+    columns[columns.length-1].formatter =formatActionButtonCell; //we can/should force formatter always to be on last column
+    setFormatterFunction(true);   
+  }
 
   return (
     <ToolkitProvider
