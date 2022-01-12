@@ -21,6 +21,7 @@ export interface Employee {
   nationality: string;
   officeAddressCity: string;
   officeAddressStreet: string;
+  officeAddressCountry: string;
   onboardingDate: string;
   offboardingDate: string;
   groups: Group[];
