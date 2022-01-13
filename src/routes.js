@@ -383,9 +383,11 @@ export default routes;
 import { groupMenu } from "pages/groups";
 import { userMenu } from "pages/users";
 import { dashboardMenu } from "pages/dashboards";
+import { bestPracticesMenu } from "./pages/best-practices";
 
 export const routes = [
   ...userMenu, 
   ...groupMenu,
-  ...dashboardMenu
+  ...dashboardMenu,
+  ...bestPracticesMenu
 ];

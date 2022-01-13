@@ -28,7 +28,7 @@ const initialState = {
   content: null,
 };
 
-function CreateBestPracticePage() {
+ export const CreateBestPracticePage = () => {
   const simpleValidator = useRef(new SimpleReactValidator());
 
   const [title, setTitle] = useState("");
@@ -284,5 +284,3 @@ function CreateBestPracticePage() {
     </>
   );
 }
-
-export default CreateBestPracticePage;

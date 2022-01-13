@@ -14,7 +14,7 @@ import {
   Row,
 } from "reactstrap";
 
-const BestPracticePage = props => {
+export const BestPracticePage = props => {
   const dispatch = useDispatch();
 
   const [disableEdit, setDisableEdit] = useState(true);
@@ -169,5 +169,3 @@ const BestPracticePage = props => {
     </>
   );
 };
-
-export default BestPracticePage;

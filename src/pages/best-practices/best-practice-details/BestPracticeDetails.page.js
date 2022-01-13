@@ -39,7 +39,7 @@ import {
 
 // import pdfToShare from 'assets/pdf/HostingCareHuddle.pdf'
 
-function BestPracticeDetailPage(props) {
+export const BestPracticeDetailPage = (props)  => {
   let { id } = useParams(); //see in routes path: "/users/employee-details/:id",
 
   //const bestPractices = useSelector((state) => state.bestPractices)
@@ -295,5 +295,3 @@ function BestPracticeDetailPage(props) {
     </>
   );
 }
-
-export default BestPracticeDetailPage;
