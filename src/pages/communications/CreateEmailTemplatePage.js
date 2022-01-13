@@ -35,7 +35,7 @@ import {
   Col,
 } from "reactstrap";
 // core components
-import ProfileHeader from "components/Headers/ProfileHeader";
+import ProfileHeader from "components/headers/ProfileHeader";
 
 function CreateEmailTemplatePage() {
   return (

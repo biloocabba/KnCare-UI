@@ -1,5 +1,5 @@
 // core components
-import { BoxHeader } from "components/Headers";
+import { BoxHeader } from "components/headers";
 import React, { useState } from "react";
 import ReactDatetime from "react-datetime";
 import { useDispatch, useSelector } from "react-redux";

@@ -35,7 +35,7 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 import { dataTable } from "variables/general";
-import { BoxHeader } from "components/Headers";
+import { BoxHeader } from "components/headers";
 
 const pagination = paginationFactory({
   page: 1,

@@ -382,9 +382,10 @@ export default routes;
 
 // import { dashboardMenu } from "pages/dashboards";
 // import { groupMenu } from "pages/groups";
+import { groupMenu } from "pages/groups";
 import { userMenu } from "pages/users";
 
 export const routes = [
   ...userMenu, 
-  //...groupMenu, ...dashboardMenu
+  ...groupMenu
 ];

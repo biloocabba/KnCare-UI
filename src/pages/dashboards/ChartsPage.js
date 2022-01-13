@@ -15,7 +15,7 @@
 
 */
 // core components
-import { BoxHeader } from "components/Headers";
+import { BoxHeader } from "components/headers";
 import React from "react";
 // react plugin used to create charts
 import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";

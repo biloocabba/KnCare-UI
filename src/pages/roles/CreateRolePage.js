@@ -1,4 +1,4 @@
-import { BoxHeader } from "components/Headers";
+import { BoxHeader } from "components/headers";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncSelect2 from "react-select2-wrapper";
