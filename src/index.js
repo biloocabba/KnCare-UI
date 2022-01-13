@@ -21,6 +21,7 @@ import "font-awesome/css/font-awesome.min.css";
 import "quill/dist/quill.core.css";
 import React from "react";
 import ReactDOM from "react-dom";
+import "./variables/charts/chartDefaults";
 // plugins styles from node_modules
 import "react-notification-alert/dist/animate.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
@@ -40,7 +41,6 @@ import "./assets/vendor/nucleo/css/nucleo.css";
 import AdminLayout from "./layouts/Admin";
 import AuthLayout from "./layouts/Auth";
 
-// import "./variables/chartDefaults";
 
 ReactDOM.render(
   <Provider store={store}>

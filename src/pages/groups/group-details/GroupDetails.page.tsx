@@ -15,11 +15,10 @@ import {
   Spinner
 } from "reactstrap";
 import { AddMemberPanel } from "..";
-import { BoxHeader } from "../../../components/headers";
-import { InputField } from "../../../components/widgets/input-field";
-import { ReactTable } from "../../../components/widgets/react-table";
-import { useAppDispatch, useAppSelector } from "../../../redux/app";
-import { deleteGroup, fetchGroup, partialUpdateGroup, selectGroupById,  updateGroup } from "../../../redux/features";
+import { BoxHeader } from "components/headers";
+import { ReactTable,InputField } from "components/widgets";
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { deleteGroup, fetchGroup, partialUpdateGroup, selectGroupById,  updateGroup } from "redux/features";
 
 interface RouteParams {
   id: string;

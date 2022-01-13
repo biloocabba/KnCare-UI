@@ -12,8 +12,8 @@ import {
 } from "reactstrap";
 
 import { AddMemberPanel } from ".";
-import { InputField } from "../../../components/widgets/input-field";
-import { Group } from "../../../types/types";
+import { InputField } from "components/widgets/input-field";
+import { Group } from "types/types";
 
 interface Props {
   group: Group;

@@ -1,5 +1,5 @@
-import { defaults } from "chart.js";
-import { colors, fonts, mode } from ".";
+import { defaults } from "react-chartjs-2";
+import { colors, fonts, mode } from "../theme";
 
 defaults.maintainAspectRatio = false;
 

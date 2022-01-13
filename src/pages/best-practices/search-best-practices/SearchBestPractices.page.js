@@ -71,7 +71,7 @@ const pagination = paginationFactory({
 
 const { SearchBar } = Search;
 
-function SearchBestPracticePage(props) {
+export const SearchBestPracticesPage = (props) => {
   const [alert, setAlert] = React.useState(null);
   // this function will copy to clipboard an entire table,
   // so you can paste it inside an excel or csv file
@@ -530,5 +530,3 @@ function SearchBestPracticePage(props) {
     </>
   );
 }
-
-export default SearchBestPracticePage;

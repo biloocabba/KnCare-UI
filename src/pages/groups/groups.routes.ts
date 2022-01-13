@@ -1,6 +1,4 @@
 import { CreateGroupPage, GroupDetailsPage, GROUP_CREATE, GROUP_DETAILS, GROUP_SEARCH, SearchGroupsPage } from ".";
-console.log("GROUP_CREATE",GROUP_CREATE);
-
 
 export const groupMenu = [
   {
