@@ -75,3 +75,5 @@ export interface IRoute {
   component?: ReactNode;
   layout?: LayoutType;
 }
+
+export type Theme = "light" | "dark";

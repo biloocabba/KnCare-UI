@@ -1,3 +1,5 @@
+import { Theme } from "types/types";
+
 export const colors = {
   gray: {
     50: "#F7FAFC",
@@ -40,7 +42,7 @@ export const colors = {
   transparent: "transparent",
 };
 
-export const mode = "light";
+export const mode:Theme = "light";
 export const fonts = {
   base: "Open Sans",
 };

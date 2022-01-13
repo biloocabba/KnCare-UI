@@ -1,5 +1,5 @@
 import { defaults } from "chart.js";
-import { colors, fonts, mode } from ".";
+import { colors, fonts, mode } from "..";
 
 defaults.maintainAspectRatio = false;
 

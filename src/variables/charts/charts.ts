@@ -16,11 +16,12 @@
 */
 
 import { colors } from "variables";
+import { IBarChart, IDoughnutChart, ILineChart, IPieChart } from "./types";
 
 // Only for demo purposes - return a random number to generate datasets
 const randomScalingFactor = () => Math.round(Math.random() * 100);
 
-export const barTurnoverData = {
+export const barTurnoverData:IBarChart = {
   data: {
     labels: [
       "January",
@@ -80,7 +81,7 @@ export const barTurnoverData = {
   },
 };
 
-export const lineActiveMembersData = {
+export const lineActiveMembersData:ILineChart = {
   data: {
     labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
@@ -103,7 +104,7 @@ export const lineActiveMembersData = {
   },
 };
 
-export const pieByRole = {
+export const pieByRole:IPieChart = {
   data: {
     labels: [
       "Regional Transformation Manager",
@@ -145,7 +146,7 @@ export const pieByRole = {
   },
 };
 
-export const pieByBusinessUnits = {
+export const pieByBusinessUnits:IPieChart = {
   data: {
     labels: [
       "Road Logistics",
@@ -210,7 +211,7 @@ export const pieByBusinessUnits = {
   },
 };
 
-export const doughnutByGender = {
+export const doughnutByGender:IDoughnutChart = {
   data: {
     labels: ["Men", "Women"],
     datasets: [
@@ -236,7 +237,7 @@ export const doughnutByGender = {
   },
 };
 
-export const pieByAge = {
+export const pieByAge:IPieChart = {
   data: {
     labels: ["20", "25", "30", "35", "40", "45", "50", "50+"],
     datasets: [
@@ -277,7 +278,7 @@ export const pieByAge = {
   },
 };
 
-export const pieByWorkingTime = {
+export const pieByWorkingTime:IPieChart = {
   data: {
     labels: ["1", "2", "3", "4", "5", "5+"],
     datasets: [
@@ -314,156 +315,52 @@ export const pieByWorkingTime = {
   },
 };
 
-// Example 1 of Chart inside src/views/dashboards/Dashboard.js
-export const chartExample1 = {
-  options: {
-    scales: {
-      yAxes: [
-        {
-          gridLines: {
-            color: colors.gray[700],
-            zeroLineColor: colors.gray[700],
-          },
-          ticks: {
-            callback: function (value) {
-              if (!(value % 10)) {
-                return "$" + value + "k";
-              }
-            },
-          },
-        },
-      ],
-    },
-    tooltips: {
-      callbacks: {
-        label: function (item, data) {
-          var label = data.datasets[item.datasetIndex].label || "";
-          var yLabel = item.yLabel;
-          var content = "";
-
-          if (data.datasets.length > 1) {
-            content += label;
-          }
-
-          content += "$" + yLabel + "k";
-          return content;
-        },
-      },
-    },
-  },
-  data1: canvas => {
-    return {
-      labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      datasets: [
-        {
-          label: "Performance",
-          data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
-        },
-      ],
-    };
-  },
-  data2: canvas => {
-    return {
-      labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      datasets: [
-        {
-          label: "Performance",
-          data: [0, 20, 5, 25, 10, 30, 15, 40, 40],
-        },
-      ],
-    };
-  },
-};
-
-// Example 2 of Chart inside src/views/dashboards/Dashboard.js and src/views/dashboards/Alternative.js and src/views/pages/Charts.js
-export const chartExample2 = {
-  options: {
-    scales: {
-      yAxes: [
-        {
-          gridLines: {
-            color: colors.gray[200],
-            zeroLineColor: colors.gray[200],
-          },
-          ticks: {
-            callback: function (value) {
-              if (!(value % 10)) {
-                //return '$' + value + 'k'
-                return value;
-              }
-            },
-          },
-        },
-      ],
-    },
-    tooltips: {
-      callbacks: {
-        label: function (item, data) {
-          var label = data.datasets[item.datasetIndex].label || "";
-          var yLabel = item.yLabel;
-          var content = "";
-          if (data.datasets.length > 1) {
-            content += label;
-          }
-          content += yLabel;
-          return content;
-        },
-      },
-    },
-  },
+export const lineChartExample: ILineChart = {
   data: {
     labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
       {
         label: "Sales",
         data: [25, 20, 30, 22, 17, 29],
-        maxBarThickness: 10,
+        pointRadius: 4,
       },
     ],
   },
-};
-
-// Example 3 of Chart inside src/views/dashboards/Alternative.js and src/views/pages/Charts.js
-export const chartExample3 = {
   options: {
-    scales: {
-      yAxes: [
-        {
-          gridLines: {
-            color: colors.gray[200],
-            zeroLineColor: colors.gray[200],
-          },
-          ticks: {},
-        },
-      ],
+    plugins: {
+      tooltip: {
+        intersect: false,
+      },
+      decimation: {
+        enabled: true,
+      },
     },
   },
+};
+
+export const barChartExample: IBarChart = {
   data: {
     labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
       {
         label: "Performance",
+        backgroundColor: colors.theme["danger"],
         data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
+        maxBarThickness: 10,
       },
     ],
   },
-};
-
-// Example 4 of Chart inside src/views/pages/Charts.js
-export const chartExample4 = {
   options: {
-    scales: {
-      yAxes: [
-        {
-          gridLines: {
-            color: colors.gray[200],
-            zeroLineColor: colors.gray[200],
-          },
-          ticks: {},
-        },
-      ],
+    plugins: {
+      tooltip: {
+        mode: "index",
+        intersect: false,
+      },
     },
   },
+};
+
+export const dotChartExample: ILineChart = {
   data: {
     labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
@@ -476,10 +373,10 @@ export const chartExample4 = {
       },
     ],
   },
+  options: {},
 };
 
-// Example 5 of Chart inside src/views/pages/Charts.js
-export const chartExample5 = {
+export const doughnutChartExample: IDoughnutChart = {
   data: {
     labels: ["Danger", "Warning", "Success", "Primary", "Info"],
     datasets: [
@@ -503,23 +400,24 @@ export const chartExample5 = {
     ],
   },
   options: {
-    responsive: true,
-    legend: {
-      position: "top",
+    plugins: {
+      legend: {
+        position: "top",
+      },
     },
     animation: {
       animateScale: true,
-      animateRotate: true,
     },
+    cutout: 120,
   },
 };
 
-// Example 6 of Chart inside src/views/pages/Charts.js
-export const chartExample6 = {
+export const pieChartExample: IPieChart = {
   data: {
     labels: ["Danger", "Warning", "Success", "Primary", "Info"],
     datasets: [
       {
+        label: "Dataset 1",
         data: [
           randomScalingFactor(),
           randomScalingFactor(),
@@ -534,24 +432,22 @@ export const chartExample6 = {
           colors.theme["primary"],
           colors.theme["info"],
         ],
-        label: "Dataset 1",
       },
     ],
   },
   options: {
-    responsive: true,
-    legend: {
-      position: "top",
+    plugins: {
+      legend: {
+        position: "top",
+      },
     },
     animation: {
       animateScale: true,
-      animateRotate: true,
     },
   },
 };
 
-// Example 7 of Chart inside src/views/pages/Charts.js
-export const chartExample7 = {
+export const multiBarChartExample: IBarChart = {
   data: {
     labels: [
       "January",
@@ -608,22 +504,19 @@ export const chartExample7 = {
     ],
   },
   options: {
-    tooltips: {
-      mode: "index",
-      intersect: false,
+    plugins: {
+      tooltip: {
+        mode: "index",
+        intersect: false,
+      },
     },
-    responsive: true,
     scales: {
-      xAxes: [
-        {
-          stacked: true,
-        },
-      ],
-      yAxes: [
-        {
-          stacked: true,
-        },
-      ],
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true,
+      },
     },
   },
 };
