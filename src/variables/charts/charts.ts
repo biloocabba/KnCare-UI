@@ -15,7 +15,7 @@
 
 */
 
-import { colors } from "variables";
+import { colors } from "variables/theme";
 import { IBarChart, IDoughnutChart, ILineChart, IPieChart } from "./types";
 
 // Only for demo purposes - return a random number to generate datasets

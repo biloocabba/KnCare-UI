@@ -16,7 +16,6 @@
 */
 // core components
 import { BoxHeader } from "components/headers";
-import React from "react";
 // react plugin used to create charts
 import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 // reactstrap components
@@ -37,9 +36,9 @@ import {
   pieByBusinessUnits,
   pieByRole,
   pieByWorkingTime,
-} from "variables";
+} from "variables/charts";
 
-const ChartsPage = () => {
+export const ChartsPage = () => {
   return (
     <>
       <BoxHeader />
@@ -61,7 +60,7 @@ const ChartsPage = () => {
                     </div>
                     <Col className="col-auto">
                       <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="fas fa-user-graduate"></i>
+                        <i className="fas fa-user-graduate"></i>
                       </div>
                     </Col>
                   </Row>
@@ -84,7 +83,7 @@ const ChartsPage = () => {
                     </div>
                     <Col className="col-auto">
                       <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="fas fa-sign-out-alt"></i>
+                        <i className="fas fa-sign-out-alt"></i>
                       </div>
                     </Col>
                   </Row>
@@ -109,7 +108,7 @@ const ChartsPage = () => {
                     </div>
                     <Col className="col-auto">
                       <div className="icon icon-shape bg-gradient-primary text-white rounded-circle shadow">
-                        <i class="fas fa-crown"></i>
+                        <i className="fas fa-crown"></i>
                       </div>
                     </Col>
                   </Row>
@@ -139,7 +138,7 @@ const ChartsPage = () => {
                     </div>
                     <Col className="col-auto">
                       <div className="icon icon-shape bg-gradient-primary text-white rounded-circle shadow">
-                        <i class="fas fa-crown"></i>
+                        <i className="fas fa-crown"></i>
                       </div>
                     </Col>
                   </Row>
@@ -288,5 +287,3 @@ const ChartsPage = () => {
     </>
   );
 };
-
-export default ChartsPage;

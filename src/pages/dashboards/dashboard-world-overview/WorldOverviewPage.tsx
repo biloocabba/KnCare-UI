@@ -16,15 +16,17 @@
 */
 import  {  useState,useEffect } from "react";
 // react plugin for creating vector maps
-import { VectorMap } from "react-jvectormap";
+
+import { VectorMap } from "@react-jvectormap/core";
+import worldMill from "@react-jvectormap/world/dist/worldMill.json";
+
 import { getActiveMembersMapData, getNewMembersMapData, getSelfResignedMembersMapData,getAutoOffboardedMembersMapData} from 'actions/mapKpi';
 // reactstrap components
 import { Card, CardBody, Container, Row , Col, CardTitle} from "reactstrap";
 // core components
-import MapsHeader from "components/headers/MapsHeader";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-function Vector() {
+export const WorldOverviewPage = () => {
 
   const dispatch = useDispatch();
 
@@ -33,65 +35,83 @@ function Vector() {
     dispatch(getNewMembersMapData());
     dispatch(getSelfResignedMembersMapData());
     dispatch(getAutoOffboardedMembersMapData());
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-   const activeMembersMap = useSelector(state =>{     
-      return state.mapKpis.activeMembersMap;
-  });
+  //  const activeMembersMap = useSelector(state =>{     
+  //     return state.mapKpis.activeMembersMap;
+  // });
 
-  const newMembersMap = useSelector(state =>{     
-    return state.mapKpis.newMembersMap;
-  });
+  // const newMembersMap = useSelector(state =>{     
+  //   return state.mapKpis.newMembersMap;
+  // });
 
-  const selfResignedMembersMap = useSelector(state =>{     
-    return state.mapKpis.selfResignedMembersMap;
-  });
+  // const selfResignedMembersMap = useSelector(state =>{     
+  //   return state.mapKpis.selfResignedMembersMap;
+  // });
 
-  const autoOffboardedMembersMap = useSelector(state =>{     
-    return state.mapKpis.autoOffboardedMembersMap;
-  });
+  // const autoOffboardedMembersMap = useSelector(state =>{     
+  //   return state.mapKpis.autoOffboardedMembersMap;
+  // });
 
-  const activeMap = useSelector(state =>{     
-    return state.mapKpis.activeMap;
-  });
+  // const activeMap = useSelector(state =>{     
+  //   return state.mapKpis.activeMap;
+  // });
   
-    const [newMembers, setNewMembers] = useState(null);
-    const [activeMembers, setActiveMembers] = useState(null);
-    const [autoOffboardedMembers, setAutoOffboardedMembers] = useState(null);
+  // @ts-ignore
+  const [newMembers, setNewMembers] = useState(null);
+  // @ts-ignore
+  const [activeMembers, setActiveMembers] = useState(null);
+  // @ts-ignore
+  const [autoOffboardedMembers, setAutoOffboardedMembers] = useState(null);
+  // @ts-ignore
     const [selfresignedMembers, setSelfresignedMembers] = useState(null);
 
    
-    const mapFilterClick = (e,fnApiCall) =>{
-      e.preventDefault();     
-      dispatch(fnApiCall());
-    }
+    // const mapFilterClick = (e,fnApiCall) =>{
+    //   e.preventDefault();     
+    //   dispatch(fnApiCall());
+    // }
 
-    const onActiveMembersClick = (e) =>{
-      mapFilterClick(e,getActiveMembersMapData);    
-    } 
+    // const onActiveMembersClick = (e) =>{
+    //   mapFilterClick(e,getActiveMembersMapData);    
+    // } 
     
-    const onNewMembersClick = (e) => {
-      mapFilterClick(e,getNewMembersMapData);   
-    } 
+    // const onNewMembersClick = (e) => {
+    //   mapFilterClick(e,getNewMembersMapData);   
+    // } 
 
-    const onSelfResignedClick = (e) => {
-      mapFilterClick(e,getSelfResignedMembersMapData);   
-    } 
+    // const onSelfResignedClick = (e) => {
+    //   mapFilterClick(e,getSelfResignedMembersMapData);   
+    // } 
 
-    const onAutoOffboardedClick = (e) => {
-      mapFilterClick(e,getAutoOffboardedMembersMapData);   
-    } 
+    // const onAutoOffboardedClick = (e) => {
+    //   mapFilterClick(e,getAutoOffboardedMembersMapData);   
+    // } 
+
+    const mapData = {
+      AU: 760,
+      BR: 550,
+      CA: 120,
+      DE: 1300,
+      FR: 540,
+      GB: 690,
+      GE: 200,
+      IN: 200,
+      RO: 600,
+      RU: 300,
+      US: 2920,
+    };
     
 
   return (
     <>
-      <MapsHeader name="World view" 
+      {/* <MapsHeader name="World view" 
         onActiveMembersClick={onActiveMembersClick} 
         onNewMembersClick={onNewMembersClick} 
         onSelfResignedClick={onSelfResignedClick} 
         onAutoOffboardedClick={onAutoOffboardedClick}         
-        />
+        /> */}
 
 
       <Container className="mt--6" fluid>
@@ -105,7 +125,7 @@ function Vector() {
                     width: "100%",
                     height: "600px",
                   }}
-                  map={"world_mill"}
+                  map={worldMill}
                   zoomOnScroll={true}
                   scaleColors={["#f00", "#0071A4"]}
                   normalizeFunction="polynomial"
@@ -115,6 +135,7 @@ function Vector() {
                   regionStyle={{
                     initial: {
                       fill: "#e9ecef",
+                      // @ts-ignore
                       "fill-opacity": 0.8,
                       stroke: "none",
                       "stroke-width": 0,
@@ -122,6 +143,7 @@ function Vector() {
                     },
                     hover: {
                       fill: "#dee2e6",
+                      // @ts-ignore
                       "fill-opacity": 0.8,
                       cursor: "pointer"
                     }
@@ -129,20 +151,23 @@ function Vector() {
                   series={{
                     regions: [
                       {
-                        values: activeMap,
+                        // @ts-ignore
+                        values: mapData,
+                        // values: activeMap,
+                        // @ts-ignore
                         scale: ["#ced4da", "#043c7c"],
                         normalizeFunction: "polynomial",
                       },
                     ],                   
                   }}
-                  onRegionTipShow={
-                    function name(e, label, code) {
-                       (activeMembersMap[code]!=undefined) ? setActiveMembers(activeMembersMap[code]) :setActiveMembers(0);
-                       ( newMembersMap[code]!=undefined) ? setNewMembers(newMembersMap[code]) :setNewMembers(0);
-                       (selfResignedMembersMap[code]!=undefined) ? setSelfresignedMembers(selfResignedMembersMap[code]) : setSelfresignedMembers(0);
-                       ( autoOffboardedMembersMap[code]!=undefined) ? setAutoOffboardedMembers(autoOffboardedMembersMap[code]) :setAutoOffboardedMembers(0);  
-                    }
-                  }                
+                  // onRegionTipShow={
+                  //   function name(e, label, code) {
+                  //      (activeMembersMap[code]!=undefined) ? setActiveMembers(activeMembersMap[code]) :setActiveMembers(0);
+                  //      ( newMembersMap[code]!=undefined) ? setNewMembers(newMembersMap[code]) :setNewMembers(0);
+                  //      (selfResignedMembersMap[code]!=undefined) ? setSelfresignedMembers(selfResignedMembersMap[code]) : setSelfresignedMembers(0);
+                  //      ( autoOffboardedMembersMap[code]!=undefined) ? setAutoOffboardedMembers(autoOffboardedMembersMap[code]) :setAutoOffboardedMembers(0);  
+                  //   }
+                  // }                
                 />
                   <Row>
                       <Col md="6" xl="3">
@@ -162,13 +187,13 @@ function Vector() {
                               </div>
                               <Col className="col-auto">
                                 <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                                  <i class="fas fa-user-graduate"></i>   
+                                  <i className="fas fa-user-graduate"></i>   
                                 </div>
                               </Col>
                             </Row>   
                             <p className="mt-3 mb-0 text-sm">
                               <span className="text-success mr-2">
-                                <i className="fa fa-arrow-up" /> {activeMembers/20}
+                                {/* <i className="fa fa-arrow-up" /> {activeMembers/20} */}
                               </span>{" "}
                               <span className="text-nowrap">Since last year</span>
                             </p>                         
@@ -190,13 +215,13 @@ function Vector() {
                               </div>
                               <Col className="col-auto">
                                 <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                                  <i class="fa fa-solid fa-user-plus"></i>  
+                                  <i className="fa fa-solid fa-user-plus"></i>  
                                 </div>
                               </Col>
                             </Row>    
                             <p className="mt-3 mb-0 text-sm">
                               <span className="text-success mr-2">
-                                <i className="fa fa-arrow-up" /> {newMembers/10}
+                                {/* <i className="fa fa-arrow-up" /> {newMembers/10} */}
                               </span>{" "}
                               <span className="text-nowrap">Since last year</span>
                             </p>                       
@@ -218,13 +243,13 @@ function Vector() {
                               </div>
                               <Col className="col-auto">
                                 <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                    <i class="fas fa-solid fa-user-minus"></i>
+                                    <i className="fas fa-solid fa-user-minus"></i>
                                 </div>
                               </Col>
                             </Row>   
                             <p className="mt-3 mb-0 text-sm">
                               <span className="text-danger mr-2">
-                                <i className="fa fa-arrow-up" /> {selfresignedMembers/20}
+                                {/* <i className="fa fa-arrow-up" /> {selfresignedMembers/20} */}
                               </span>{" "}
                               <span className="text-nowrap">Since last year</span>
                             </p>                         
@@ -246,13 +271,13 @@ function Vector() {
                               </div>
                               <Col className="col-auto">
                                 <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                  <i class="fas fa-sign-out-alt"></i>
+                                  <i className="fas fa-sign-out-alt"></i>
                                 </div>
                               </Col>
                             </Row>   
                             <p className="mt-3 mb-0 text-sm">
                               <span className="text-danger mr-2">
-                                <i className="fa fa-arrow-up" /> {autoOffboardedMembers/20}
+                                {/* <i className="fa fa-arrow-up" /> {autoOffboardedMembers/20} */}
                               </span>{" "}
                               <span className="text-nowrap">Since last year</span>
                             </p>                      
@@ -268,5 +293,3 @@ function Vector() {
     </>
   );
 }
-
-export default Vector;
