@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Employee {
   id: number;
   pdmId: number;
@@ -57,4 +59,19 @@ export interface Chart {
   label: string;
   value?: number;
   values?: number[];
+}
+
+export type LayoutType = "/admin" | "/auth";
+
+export interface IRoute {
+  collapse?: boolean;
+  name?: string;
+  icon?: string;
+  state?: string;
+  views?: IRoute[];
+  miniName?: string;
+  global?: boolean;
+  path?: string;
+  component?: ReactNode;
+  layout?: LayoutType;
 }

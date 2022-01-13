@@ -1,5 +1,5 @@
 // core components
-import { BoxHeader } from "components/Headers";
+import { BoxHeader } from "components/headers";
 import React, { useRef, useState } from "react";
 import Files from "react-files";
 import { Redirect } from "react-router-dom";

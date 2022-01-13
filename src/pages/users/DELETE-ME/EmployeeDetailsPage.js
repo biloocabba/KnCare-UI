@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { BoxHeader } from "components/Headers";
+import { BoxHeader } from "components/headers";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";

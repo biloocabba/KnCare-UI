@@ -1,4 +1,4 @@
-import { BoxHeader } from "components/Headers";
+import { BoxHeader } from "components/headers";
 import { Card, CardBody, CardHeader, Container, Row } from "reactstrap";
 
 const HomePage = () => {

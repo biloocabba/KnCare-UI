@@ -40,7 +40,7 @@ export const searchGroups = createAsyncThunk(
 
 export const createGroup = createAsyncThunk(
   "group/createGroup",
-  async (body: Group) => {
+  async (body: Partial<Group>) => {
     const { data } = await groupService.createGroup(body);
 
     return data;
@@ -74,6 +74,7 @@ export const deleteGroup = createAsyncThunk(
     return data;
   },
 );
+
 
 export const groupSlice = createSlice({
   name: "group",

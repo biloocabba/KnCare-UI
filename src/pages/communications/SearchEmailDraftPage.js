@@ -1,4 +1,4 @@
-import { BoxHeader } from "components/Headers";
+import { BoxHeader } from "components/headers";
 import React, { useState } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";

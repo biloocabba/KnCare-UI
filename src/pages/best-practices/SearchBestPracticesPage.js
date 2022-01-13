@@ -15,7 +15,7 @@
 
 */
 import { searchBestPractices } from "actions/bestPractice";
-import { BoxHeader } from "components/Headers";
+import { BoxHeader } from "components/headers";
 import React, { useState } from "react";
 // react plugin that prints a given react component
 // react component for creating dynamic tables

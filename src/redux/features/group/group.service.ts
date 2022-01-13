@@ -10,7 +10,7 @@ const getGroupById = (id: number) => {
   return httpCommon.get(`/groups/${id}`);
 };
 
-const createGroup = (body: Group) => {
+const createGroup = (body: Partial<Group>) => {
   return httpCommon.post(`/groups`, body);
 };
 

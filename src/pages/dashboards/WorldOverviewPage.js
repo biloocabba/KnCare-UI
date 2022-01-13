@@ -21,7 +21,7 @@ import { getActiveMembersMapData, getNewMembersMapData, getSelfResignedMembersMa
 // reactstrap components
 import { Card, CardBody, Container, Row , Col, CardTitle} from "reactstrap";
 // core components
-import MapsHeader from "components/Headers/MapsHeader";
+import MapsHeader from "components/headers/MapsHeader";
 import { useDispatch, useSelector } from "react-redux";
 
 function Vector() {

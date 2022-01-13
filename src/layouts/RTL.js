@@ -18,9 +18,9 @@ import React from "react";
 // react library for routing
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar";
-import AdminFooter from "components/Footers/AdminFooter";
-import Sidebar from "components/Sidebar/Sidebar";
+import AdminNavbar from "components/navbars/AdminNavbar";
+import AdminFooter from "components/footers/AdminFooter";
+import Sidebar from "components/sidebar/Sidebar";
 
 import routes from "routes";
 

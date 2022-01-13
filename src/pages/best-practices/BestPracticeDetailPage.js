@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { BoxHeader } from "components/Headers";
+import { BoxHeader } from "components/headers";
 import { huddle64pdf } from "mock-data/mock-data-pdf-huddle-base64";
 import React, { useState } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
