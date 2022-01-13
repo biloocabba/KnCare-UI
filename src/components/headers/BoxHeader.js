@@ -16,7 +16,7 @@
 */
 import React from "react";
 
-const BoxHeader = () => {
+export const BoxHeader = () => {
   return (
     <>
       <div
@@ -30,5 +30,3 @@ const BoxHeader = () => {
     </>
   );
 };
-
-export default BoxHeader;
