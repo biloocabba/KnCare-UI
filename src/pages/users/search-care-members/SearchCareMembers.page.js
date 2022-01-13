@@ -128,7 +128,6 @@ export const SearchCareMembersPage = (props) => {
 
   const onGoToCareMemberDetailsPage = e => {
     var { id } = e.target;
-    // history.push("/admin/users/care-member-details/" + id);
     history.push(`/${currentRole}${CARE_MEMBER_EDIT}/${id}`);
   };
 

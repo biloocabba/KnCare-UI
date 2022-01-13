@@ -1,4 +1,7 @@
-export interface Employee {
+
+export interface Domain {}
+
+export interface Employee extends Domain{
   id: number;
   pdmId: number;
   firstName: string;
@@ -28,17 +31,17 @@ export interface Employee {
   role: CareRole;
 }
 
-export interface CareRole {
+export interface CareRole extends Domain{
   id: number;
   name: string;
 }
 
-export interface BusinessUnit {
+export interface BusinessUnit extends Domain{
   id: number;
   name: string;
 }
 
-export interface Group {
+export interface Group extends Domain{
   id: number;
   name: string;
   active: boolean;
@@ -46,14 +49,14 @@ export interface Group {
   description: string;
 }
 
-export interface Country {
+export interface Country extends Domain{
   code: string;
   code3: string;
   name: string;
   number: string;
 }
 
-export interface Chart {
+export interface Chart extends Domain{
   label: string;
   value?: number;
   values?: number[];

@@ -87,8 +87,6 @@ export const SearchEmployeesPage = (props) => {
 
   const onGoToEmployeeDetails = e => {
     var { id } = e.target;
-    // props.history.push("/admin/users/employee-details/" + id);
-    console.log(`/${currentRole}${EMPLOYEE_DETAILS}/${id}`);
     history.push(`/${currentRole}${EMPLOYEE_DETAILS}/${id}`);    
   };
 
