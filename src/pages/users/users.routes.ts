@@ -1,3 +1,4 @@
+import { IRoute } from "types/types";
 import {
   CreateCareMemberPage,
   EditCareMemberPage,
@@ -13,7 +14,7 @@ import {
 
 
 
-export const userMenu = [
+export const userMenu:IRoute[] = [
   {
     collapse: true,
     name: "Users",

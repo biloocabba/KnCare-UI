@@ -1,6 +1,7 @@
-import { BestPracticeDetailPage, BEST_PRACTICE_DETAILS, CreateBestPracticePage,NEW_BEST_PRACTICE,SearchBestPracticesPage, SEARCH_BEST_PRACTICE } from ".";
+import { IRoute } from "types/types";
+import { BestPracticeDetailPage, BEST_PRACTICE_DETAILS, CreateBestPracticePage, NEW_BEST_PRACTICE, SearchBestPracticesPage, SEARCH_BEST_PRACTICE } from ".";
 
-export const bestPracticesMenu = [
+export const bestPracticesMenu:IRoute[] = [
     {
         collapse: true,
         name: "Best Practices",

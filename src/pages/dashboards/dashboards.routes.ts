@@ -1,6 +1,7 @@
+import { IRoute } from "types/types";
 import {ChartsPage, WorldOverviewPage} from ".";
 
-export const dashboardMenu = [
+export const dashboardMenu:IRoute[] = [
   {
     collapse: true,
     name: "Dashboard",

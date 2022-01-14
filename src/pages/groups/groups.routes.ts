@@ -1,6 +1,7 @@
+import { IRoute } from "types/types";
 import { CreateGroupPage, GroupDetailsPage, GROUP_CREATE, GROUP_DETAILS, GROUP_SEARCH, SearchGroupsPage } from ".";
 
-export const groupMenu = [
+export const groupMenu:IRoute[] = [
   {
     collapse: true,
     name: "Groups",
