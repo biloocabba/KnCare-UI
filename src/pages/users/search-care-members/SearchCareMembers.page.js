@@ -21,11 +21,11 @@ import { ReactTable } from "components/widgets/react-table";
 
 import { BoxHeader } from "components/headers";
 
-import { careMemberTableColumns } from './SearchCareMembers.table'
 import { searchCareMembers } from "../../../actions/careMembers";
 import { careMembersData } from 'mock-data/careMembers.js'
 
 import { CARE_MEMBER_EDIT } from "pages/users";
+import { careMemberTableColumns } from ".";
 
 
 export const SearchCareMembersPage = (props) => {
