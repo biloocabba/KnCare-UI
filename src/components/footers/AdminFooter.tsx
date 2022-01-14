@@ -14,13 +14,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-/*eslint-disable*/
-import React from "react";
 import knitsLogo from 'assets/img/brand/KNITS.png';
 // reactstrap components
 import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
 
-function AdminFooter() {
+export const AdminFooter = () => {
   return (
     <>
       <Container fluid>
@@ -38,7 +36,7 @@ function AdminFooter() {
                 <Nav className="nav-footer "> 
                 <NavItem>
                   <NavLink href="#dgfhjrds" target="_blank" >
-                  <img style={{width:'26px', height:'26px' }} src={knitsLogo} />
+                  <img style={{width:'26px', height:'26px' }} src={knitsLogo} alt='logo'/>
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -88,5 +86,3 @@ function AdminFooter() {
     </>
   );
 }
-
-export default AdminFooter;

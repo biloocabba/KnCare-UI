@@ -14,7 +14,6 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
 // react library for routing
 import { Link } from "react-router-dom";
 // reactstrap components
@@ -32,7 +31,7 @@ import {
   Button,
 } from "reactstrap";
 
-function AdminNavbar() {
+export const AuthNavbar = () => {
   return (
     <>
       <Navbar
@@ -202,5 +201,3 @@ function AdminNavbar() {
     </>
   );
 }
-
-export default AdminNavbar;

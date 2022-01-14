@@ -14,7 +14,6 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
 // react library for routing
 import { Link } from "react-router-dom";
 // reactstrap components
@@ -35,7 +34,7 @@ import {
 import CareLogoMin  from "assets/img/brand/CareLogoMin.png";
 
 
-function AdminNavbar() {
+export const IndexNavbar = () => {
   return (
     <>
       <Navbar
@@ -205,5 +204,3 @@ function AdminNavbar() {
     </>
   );
 }
-
-export default AdminNavbar;

@@ -4,7 +4,7 @@
 * Argon Dashboard PRO React - v1.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
@@ -14,12 +14,10 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-
 // reactstrap components
 import { Button, Container, Row, Col } from "reactstrap";
 
-function ProfileHeader() {
+export const RTLProfileHeader = () => {
   return (
     <>
       <div
@@ -34,7 +32,7 @@ function ProfileHeader() {
           backgroundPosition: "center top",
         }}
       >
-        <span className="mask bg-gradient-primary opacity-8" />
+        <span className="mask bg-gradient-info opacity-8" />
 
         <Container className="d-flex align-items-center" fluid>
           <Row>
@@ -46,7 +44,7 @@ function ProfileHeader() {
               </p>
               <Button
                 className="btn-neutral"
-                color="default"
+                color="primary"
                 href="#pablo"
                 onClick={e => e.preventDefault()}
               >
@@ -58,6 +56,4 @@ function ProfileHeader() {
       </div>
     </>
   );
-}
-
-export default ProfileHeader;
+};

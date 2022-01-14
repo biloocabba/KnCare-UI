@@ -34,7 +34,7 @@ import {
 } from "reactstrap";
 import { logout } from "../../actions/auth";
 
-function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
+export const AdminNavbar = ({ theme, sidenavOpen, toggleSidenav }) => {
   // function that on mobile devices makes the search open
   const openSearch = () => {
     document.body.classList.add("g-navbar-search-showing");
@@ -465,5 +465,3 @@ AdminNavbar.propTypes = {
   sidenavOpen: PropTypes.bool,
   theme: PropTypes.oneOf(["dark", "light"]),
 };
-
-export default AdminNavbar;

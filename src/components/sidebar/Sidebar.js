@@ -37,7 +37,7 @@ import {
   Nav,
 } from "reactstrap";
 
-function Sidebar({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) {
+export const Sidebar = ({ toggleSidenav, sidenavOpen, routes, logo, rtlActive }) => {
   const [state, setState] = React.useState({});
   const location = useLocation();
   React.useEffect(() => {
@@ -363,5 +363,3 @@ Sidebar.propTypes = {
   // rtl active, this will make the sidebar to stay on the right side
   rtlActive: PropTypes.bool,
 };
-
-export default Sidebar;
