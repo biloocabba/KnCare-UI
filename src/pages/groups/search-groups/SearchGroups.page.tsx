@@ -6,13 +6,13 @@ import { useHistory } from "react-router";
 import { Card, CardBody, CardHeader, Col, Container, FormGroup, Row} from "reactstrap";
 import { groupsTableColumns } from ".";
 import { useAppDispatch,useAppSelector } from "redux/app";
-import { deleteGroup, searchGroups, selectGroups } from "redux/features";
+import { deleteGroup, searchGroups, selectAllGroupsData } from "redux/features";
 import { BoxHeader } from "../../../components/headers";
 
 export const SearchGroupsPage = () => {
   const history = useHistory();
   const dispatch = useAppDispatch()
-  const groups = useAppSelector(selectGroups)
+  const groups = useAppSelector(selectAllGroupsData)
 
   const [selectedGroups, setSelectedGroups] = useState([]);
 

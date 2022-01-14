@@ -3,13 +3,13 @@ import { store } from "redux/app";
 describe("Empolyee redux state tests", () => {
   describe("initial state values", () => {
     test("Should initially set employee to null", () => {
-      const { employee } = store.getState().employee;
-      expect(employee).toEqual(null);
+      const { entity } = store.getState().employee;
+      expect(entity).toEqual(null);
     });
 
     test("Should initially set employees to an empty array", () => {
-      const { employees } = store.getState().employee;
-      expect(employees).toEqual([]);
+      const { entities } = store.getState().employee;
+      expect(entities).toEqual([]);
     });
 
     test("Should initially set error to empty object", () => {

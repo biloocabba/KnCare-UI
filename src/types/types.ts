@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 
-export interface Employee {
+
+export interface Domain {}
+export interface Employee extends Domain{
   id: number;
   pdmId: number;
   firstName: string;
@@ -18,29 +20,32 @@ export interface Employee {
   companyMobilePhone: string;
   gender: string;
   startDate: string;
-  endDate: string;
-  dateOfLeave: string;
-  nationality: string;
-  officeAddressCity: string;
-  officeAddressStreet: string;
-  officeAddressCountry: string;
+  endDate?: string | null;
+  dateOfLeave: string | null;
+  nationality: string| null;
+  officeAddressCity: string| null;
+  officeAddressStreet: string| null;
+  officeAddressCountry: string| null;
+}
+
+export interface CareMember extends Employee{
   onboardingDate: string;
-  offboardingDate: string;
-  groups: Group[];
+  offboardingDate: string | null;
+  groups?: number[];
   role: CareRole;
 }
 
-export interface CareRole {
+export interface CareRole extends Domain{
   id: number;
   name: string;
 }
 
-export interface BusinessUnit {
+export interface BusinessUnit extends Domain{
   id: number;
   name: string;
 }
 
-export interface Group {
+export interface Group extends Domain{
   id: number;
   name: string;
   active: boolean;
@@ -48,14 +53,14 @@ export interface Group {
   description: string;
 }
 
-export interface Country {
+export interface Country extends Domain{
   code: string;
   code3: string;
   name: string;
   number: string;
 }
 
-export interface Chart {
+export interface Chart extends Domain{
   label: string;
   value?: number;
   values?: number[];

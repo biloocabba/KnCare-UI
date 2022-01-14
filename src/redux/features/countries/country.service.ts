@@ -1,6 +1,6 @@
 import { httpCommon } from "..";
 
-const listCountries = () => {
+const listCountries = ()=> {
   return httpCommon.get(`/countries`);
 };
 

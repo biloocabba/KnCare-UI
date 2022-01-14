@@ -1,23 +1,23 @@
 import {
   AsyncThunk,
   createAsyncThunk,
-  createSlice,
-  SerializedError,
+  createSlice  
 } from "@reduxjs/toolkit";
 import { BusinessUnit } from "types/types";
 import { businessUnitService } from ".";
+import { StateType } from "redux/features/common";
 
-type BusinessUnitStateType = {
-  businessUnits: BusinessUnit[];
-  businessUnit: BusinessUnit | null;
-  isLoading: boolean;
-  isSuccess: boolean;
-  error: SerializedError;
-};
+// type BusinessUnitStateType = {
+//   businessUnits: BusinessUnit[];
+//   businessUnit: BusinessUnit | null;
+//   isLoading: boolean;
+//   isSuccess: boolean;
+//   error: SerializedError;
+// };
 
-const initialState: BusinessUnitStateType = {
-  businessUnits: [],
-  businessUnit: null,
+const initialState: StateType<BusinessUnit> = {
+  entities: [],
+  entity: null,
   isLoading: false,
   isSuccess: false,
   error: {},
@@ -49,7 +49,7 @@ export const businessUnitSlice = createSlice({
       });
     });
     builder.addCase(fetchBusinessUnits.fulfilled, (state, action) => {
-      state.businessUnits = action.payload;
+      state.entities = action.payload;
       state.isLoading = false;
       state.isSuccess = true;
     });

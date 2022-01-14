@@ -5,23 +5,23 @@ import {
 } from "@reduxjs/toolkit";
 
 import { Group } from "types/types";
+import { StateType } from "redux/features/common";
 
 import {
   groupService,
-  GroupStateType,
   IPartiallyUpdatedGroup,
   IUpdatedGroup,
 } from ".";
 
-const initialState: GroupStateType = {
-  groups: [],
-  group: null,
+const initialState: StateType<Group> = {
+  entities: [],
+  entity: null,
   isLoading: false,
   isSuccess: false,
   error: {},
 };
 
-export const fetchGroup = createAsyncThunk(
+export const fetchGroupById = createAsyncThunk(
   "group/fetchGroup",
   async (id: number) => {
     let { data } = await groupService.getGroupById(id);
@@ -83,7 +83,7 @@ export const groupSlice = createSlice({
   extraReducers: builder => {
     // https://stackoverflow.com/questions/68184008/how-to-refactor-duplicate-code-in-redux-toolkit-createasyncthunk-and-extrareduc
     [
-      fetchGroup,
+      fetchGroupById,
       searchGroups,
       createGroup,
       updateGroup,
@@ -101,27 +101,27 @@ export const groupSlice = createSlice({
       });
     });
 
-    builder.addCase(fetchGroup.fulfilled, (state, action) => {
-      state.group = action.payload[0];
+    builder.addCase(fetchGroupById.fulfilled, (state, action) => {
+      state.entity = action.payload;
       state.isLoading = false;
       state.isSuccess = true;
     });
     builder.addCase(searchGroups.fulfilled, (state, action) => {
-      state.groups = action.payload;
+      state.entities = action.payload;
       state.isLoading = false;
       state.isSuccess = true;
     });
 
     builder.addCase(createGroup.fulfilled, (state, action) => {
-      state.group = action.payload;
-      state.groups = [...state.groups, action.payload];
+      state.entity = action.payload;
+      state.entities = [...state.entities, action.payload];
       state.isLoading = false;
       state.isSuccess = true;
     });
 
     builder.addCase(updateGroup.fulfilled, (state, action) => {
-      state.group = action.payload;
-      let updatedGroups = state.groups.map(group => {
+      state.entity = action.payload;
+      let updatedGroups = state.entities.map(group => {
         if (group.id === action.payload.id) {
           return {
             ...group,
@@ -131,14 +131,14 @@ export const groupSlice = createSlice({
           return group;
         }
       });
-      state.groups = updatedGroups;
+      state.entities = updatedGroups;
       state.isLoading = false;
       state.isSuccess = true;
     });
 
     builder.addCase(partialUpdateGroup.fulfilled, (state, action) => {
-      state.group = action.payload;
-      let updatedGroups = state.groups.map(group => {
+      state.entity = action.payload;
+      let updatedGroups = state.entities.map(group => {
         if (group.id === action.payload.id) {
           return {
             ...group,
@@ -148,13 +148,13 @@ export const groupSlice = createSlice({
           return group;
         }
       });
-      state.groups = updatedGroups;
+      state.entities = updatedGroups;
       state.isLoading = false;
       state.isSuccess = true;
     });
 
     builder.addCase(deleteGroup.fulfilled, (state, action) => {
-      state.group = action.payload[0];
+      state.entity = action.payload[0];
       state.isLoading = false;
       state.isSuccess = true;
     });

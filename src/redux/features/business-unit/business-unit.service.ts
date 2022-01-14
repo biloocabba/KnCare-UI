@@ -1,7 +1,7 @@
 import { httpCommon } from "..";
 
 const listBusinessUnits = () => {
-  return httpCommon.get(`/businessUnits`);
+  return httpCommon.get(`/business-units`);
 };
 
 export const businessUnitService = {

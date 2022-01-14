@@ -23,7 +23,6 @@ import makeAnimated from "react-select/animated";
 import { InputField } from 'components/widgets/input-field';
 
 
-
 export const CareMemberPanel = ({
     careMember,
     setCareMember 
