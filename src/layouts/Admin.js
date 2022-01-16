@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useEffect } from "react";
 // react library for routing
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 // core components
@@ -23,8 +23,11 @@ import {AdminFooter} from "components/footers";
 import {Sidebar} from "components/sidebar";
 
 import { routes } from "routes";
+import { useAppDispatch } from "redux/app";
 
 function Admin() {
+
+  const dispatch = useAppDispatch();
   const [sidenavOpen, setSidenavOpen] = React.useState(true);
   const location = useLocation();
   const mainContentRef = React.useRef(null);
@@ -81,6 +84,9 @@ function Admin() {
       ? "dark"
       : "light";
   };
+
+ 
+
 
   return (
     <>

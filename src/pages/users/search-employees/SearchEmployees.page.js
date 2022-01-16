@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -13,19 +13,25 @@ import {
   FormGroup,
   Input,
   Row,
+  Spinner,
 } from "reactstrap";
 
-import ReactDatetime from "react-datetime";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
 
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets/react-table"; 
 
-import { employeesData } from 'mock-data/employees.js'
-import { employeesTableColumns } from './SearchEmployees.table'
+import { selectEmployeesState } from 'redux/features/employee/employee.selectors'
+import { selectAllCountryDataAsSelectOptions } from 'redux/features/countries/country.selectors'
+import { fetchCountries } from 'redux/features/countries/country.slice'
+import { fetchBusinessUnits } from 'redux/features/business-unit/business-unit.slice'
+import { selectAllBusinessUnitsDataAsSelectOptions } from 'redux/features/business-unit/business-unit.selectors'
 
-import { deleteUser, searchEmployees } from "../../../actions/employee";
+
+import { searchEmployees } from 'redux/features/employee/employee.slice'
+import { employeesTableColumns } from './SearchEmployees.table'
+import { SearchEmployeesFilterPanel } from './SearchEmployees.filter'
+
+// import { deleteUser, searchEmployees } from "../../../actions/employee";
 
 import { EMPLOYEE_DETAILS } from "pages/users";
 
@@ -33,18 +39,11 @@ import { EMPLOYEE_DETAILS } from "pages/users";
 export const SearchEmployeesPage = (props) => {
 
   const history = useHistory();
-
-  const employeeState = {
-    isLoading: false,
-    isError: false,
-    isSuccess: false,
-    errorMessage: null,
-    entities: employeesData,
-    entity: null,
-  };
-
-  const businessUnits =[];
-  const countries =[];
+  const dispatch = useDispatch();
+  
+  const employeeState =useSelector(selectEmployeesState);
+  const businessUnits = useSelector(selectAllBusinessUnitsDataAsSelectOptions);
+  const countries = useSelector(selectAllCountryDataAsSelectOptions);
   const currentRole = "admin";
 
 /*
@@ -62,28 +61,15 @@ export const SearchEmployeesPage = (props) => {
 
   const employees = useSelector(state => state.employees);
   */
-  const dispatch = useDispatch();
 
-  const [searchLastName, setSearchLastName] = useState("");
-  const [searchBusinessUnit, setSearchBusinessUnit] = useState("");
-  const [searchCountry, setSearchCountry] = useState("");
-  const [searchHiringDate, setSearchHiringDate] = useState(null);
   const [selectedEmployees, setSelectedEmployees] = useState([]);
 
-  const onChangeSearchLastName = e => {
-    const searchLastName = e.target.value;
-    setSearchLastName(searchLastName);
-  };
 
-  const findByAllParameters = () => {
-    let filters = {
-      lastName: searchLastName,
-      businessUnitId: searchBusinessUnit,
-      countryId: searchCountry,
-      hiringDate: searchHiringDate,
-    };
+  const onClickSearchEmployees = (filters) =>{
+    console.log(filters);
     dispatch(searchEmployees(filters));
-  };
+  }
+
 
   const onGoToEmployeeDetails = e => {
     var { id } = e.target;
@@ -93,12 +79,13 @@ export const SearchEmployeesPage = (props) => {
   const onRemoveEmployee = e => {
     var { id } = e.target;
     console.log(id);
-    dispatch(deleteUser(id));
+    // dispatch(deleteUser(id));
   };
 
-  const onChangeSearchHiringDate = dateAsMoment => {
-    setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"));
-  };
+  useEffect(() => {
+    dispatch(fetchCountries());
+    dispatch(fetchBusinessUnits());    
+  }, [dispatch]);
 
   return (
     <>
@@ -107,7 +94,13 @@ export const SearchEmployeesPage = (props) => {
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
-            <Card>
+
+          <SearchEmployeesFilterPanel
+              onSearchEmployees={onClickSearchEmployees}
+              countries={countries}
+              businessUnits={businessUnits}
+          />
+            {/* <Card>
               <CardHeader>
                 <h3 className="mb-0">Search Employees</h3>
                 <p className="text-sm mb-0">Filters</p>
@@ -202,7 +195,7 @@ export const SearchEmployeesPage = (props) => {
                   </Col>
                 </Row>
               </CardBody>
-            </Card>
+            </Card> */}
           </div>
         </Row>
 
@@ -213,7 +206,7 @@ export const SearchEmployeesPage = (props) => {
                 <h3 className="mb-0">Employees</h3>
                 <p className="text-sm mb-0">Kn Employees from PDM</p>
               </CardHeader>
-              {/* {employeesState.isLoading ? (
+              { employeeState.isLoading ? (
                 <div
                   style={{
                     textAlign: "center",
@@ -221,7 +214,7 @@ export const SearchEmployeesPage = (props) => {
                 >
                   <Spinner />
                 </div>
-              ) : ( */}
+              ) : (
                 <ReactTable
                   data={employeeState.entities}
                   keyField="id"
@@ -231,7 +224,8 @@ export const SearchEmployeesPage = (props) => {
                   selectedRows={selectedEmployees}
                   setSelectedRows={setSelectedEmployees}
                   searchBarPlaceholder="Filter results"
-                />            
+                />   
+                )}         
             </Card>
           </div>
         </Row>

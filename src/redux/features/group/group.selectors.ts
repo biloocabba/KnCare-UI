@@ -1,7 +1,19 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "redux/app";
+import { Group } from "types/types";
+import { StateType } from "redux/features/common";
 
-export const selectGroups = createSelector([(state:RootState) => state.group.groups], data => data);
+export const selectGroupState = (rootState: RootState): StateType<Group> => rootState.group;
 
-export const selectGroupById = (id:number) =>
-  createSelector([selectGroups], groupsdata => groupsdata.find(group => group.id === id));
+
+export const selectAllGroupsData = createSelector(
+  [selectGroupState],
+  groupState => groupState.entities 
+)
+
+export const selectGroupById = (id:number) => createSelector(
+  [selectAllGroupsData], //array of input selectors
+  groups => groups.find(group=> group.id===id)//arg
+)
+
+

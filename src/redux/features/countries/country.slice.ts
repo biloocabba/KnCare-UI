@@ -1,23 +1,26 @@
 import {
   AsyncThunk,
   createAsyncThunk,
-  createSlice,
-  SerializedError,
+  createSlice
 } from "@reduxjs/toolkit";
 import { Country } from "types/types";
 import { countryService } from ".";
+import { StateType } from "redux/features/common";
 
-type CountryStateType = {
-  countries: Country[];
-  country: Country | null;
-  isLoading: boolean;
-  isSuccess: boolean;
-  error: SerializedError;
-};
 
-const initialState: CountryStateType = {
-  countries: [],
-  country: null,
+
+
+// type CountryStateType = {
+//   countries: Country[];
+//   country: Country | null;
+//   isLoading: boolean;
+//   isSuccess: boolean;
+//   error: SerializedError;
+// };
+
+const initialState: StateType<Country> = {
+  entities: [],
+  entity: null,
   isLoading: false,
   isSuccess: false,
   error: {},
@@ -27,7 +30,6 @@ export const fetchCountries = createAsyncThunk(
   "country/fetchCountries",
   async () => {
     const { data } = await countryService.listCountries();
-
     return data;
   },
 );
@@ -49,7 +51,7 @@ export const countrySlice = createSlice({
       });
     });
     builder.addCase(fetchCountries.fulfilled, (state, action) => {
-      state.countries = action.payload;
+      state.entities = action.payload;
       state.isLoading = false;
       state.isSuccess = true;
     });

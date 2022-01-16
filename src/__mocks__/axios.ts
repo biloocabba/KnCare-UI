@@ -24,9 +24,7 @@ const employeeMockResponse = [
     nationality: "",
     officeAddressCountry: "",
     officeAddressCity: "Calaya",
-    officeAddressStreet: "1 Bultman Trail",
-    onboardingDate: "5/25/2019",
-    offboardingDate: "3/19/2019",
+    officeAddressStreet: "1 Bultman Trail"
   },
   {
     id: 2,
@@ -51,9 +49,7 @@ const employeeMockResponse = [
     nationality: "",
     officeAddressCountry: "",
     officeAddressCity: "Rychnov nad Kněžnou",
-    officeAddressStreet: "65 Cascade Road",
-    onboardingDate: "11/29/2020",
-    offboardingDate: "10/12/2020",
+    officeAddressStreet: "65 Cascade Road"
   },
   {
     id: 3,
@@ -78,9 +74,7 @@ const employeeMockResponse = [
     nationality: "",
     officeAddressCountry: "",
     officeAddressCity: "Kenarilang",
-    officeAddressStreet: "11403 Ludington Place",
-    onboardingDate: "7/28/2020",
-    offboardingDate: "4/17/2021",
+    officeAddressStreet: "11403 Ludington Place"
   },
   {
     id: 4,
@@ -105,9 +99,7 @@ const employeeMockResponse = [
     nationality: "",
     officeAddressCountry: "",
     officeAddressCity: "Floreşti",
-    officeAddressStreet: "09 Lindbergh Terrace",
-    onboardingDate: "4/10/2019",
-    offboardingDate: "4/20/2019",
+    officeAddressStreet: "09 Lindbergh Terrace"
   },
   {
     id: 5,
@@ -132,9 +124,7 @@ const employeeMockResponse = [
     nationality: "",
     officeAddressCountry: "",
     officeAddressCity: "Kirkop",
-    officeAddressStreet: "1 Gulseth Lane",
-    onboardingDate: "3/28/2019",
-    offboardingDate: "2/17/2019",
+    officeAddressStreet: "1 Gulseth Lane" 
   },
 ] as Employee[];
 

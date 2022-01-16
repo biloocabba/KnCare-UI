@@ -24,6 +24,11 @@ import { BoxHeader } from "components/headers";
 import { searchCareMembers } from "../../../actions/careMembers";
 import { careMembersData } from 'mock-data/careMembers.js'
 
+import { selectAllCountryDataAsSelectOptions } from 'redux/features/countries/country.selectors'
+import { fetchCountries } from 'redux/features/countries/country.slice'
+import { fetchBusinessUnits } from 'redux/features/business-unit/business-unit.slice'
+import { selectAllBusinessUnitsDataAsSelectOptions } from 'redux/features/business-unit/business-unit.selectors'
+
 import { CARE_MEMBER_EDIT } from "pages/users";
 import { careMemberTableColumns } from ".";
 
@@ -43,8 +48,8 @@ export const SearchCareMembersPage = (props) => {
   };
 
   const careMembers = []; //useSelector(state => state.careMembers);
-  const businessUnits = [];
-  const countries  = [];
+  const businessUnits = useSelector(selectAllBusinessUnitsDataAsSelectOptions);
+  const countries = useSelector(selectAllCountryDataAsSelectOptions);
   const careRoles = [];
   const groups = [];
   const currentRole = "admin";
