@@ -1,6 +1,3 @@
-import { ReactNode } from "react";
-
-
 export interface Domain {}
 export interface Employee extends Domain{
   id: number;
@@ -26,13 +23,17 @@ export interface Employee extends Domain{
   officeAddressCity: string| null;
   officeAddressStreet: string| null;
   officeAddressCountry: string| null;
+  officeAddressPostalCode: string| null;
 }
 
 export interface CareMember extends Employee{
+  employeeId: number;
   onboardingDate: string;
-  offboardingDate: string | null;
+  offboardingDate: string;
   groups?: number[];
-  role: CareRole;
+  groupIds?: number[];
+  roleId?: number;
+  role?: CareRole;
 }
 
 export interface CareRole extends Domain{
@@ -65,20 +66,3 @@ export interface Chart extends Domain{
   value?: number;
   values?: number[];
 }
-
-export type LayoutType = "/admin" | "/auth";
-
-export interface IRoute {
-  collapse?: boolean;
-  name?: string;
-  icon?: string;
-  state?: string;
-  views?: IRoute[];
-  miniName?: string;
-  global?: boolean;
-  path?: string;
-  component?: ReactNode;
-  layout?: LayoutType;
-}
-
-export type Theme = "light" | "dark";

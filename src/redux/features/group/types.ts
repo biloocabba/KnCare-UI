@@ -1,5 +1,5 @@
 import { SerializedError } from "@reduxjs/toolkit";
-import { Group } from "types/types";
+import { Group } from "types/domain";
 
 export type GroupStateType = {
   groups: Group[];

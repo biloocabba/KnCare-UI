@@ -1,4 +1,4 @@
-import { IRoute } from "types/types";
+import { IRoute } from "types";
 import {ChartsPage, WorldOverviewPage} from ".";
 
 export const dashboardMenu:IRoute[] = [

@@ -4,7 +4,7 @@ import { EditGroupPanel } from "..";
 import { BoxHeader } from "components/headers";
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { createGroup } from "redux/features";
-import { Group } from "types/types";
+import { Group } from "types";
 
 export const CreateGroupPage = () => {
   const initialState:Partial<Group> = {

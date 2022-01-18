@@ -1,4 +1,4 @@
-import { IRoute } from "types/types";
+import { IRoute } from "types";
 import { LOGIN, LoginPage } from ".";
 
 export const authMenu:IRoute[] = [

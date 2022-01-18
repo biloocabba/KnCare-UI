@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /*!
 
 =========================================================
@@ -32,7 +33,9 @@ import {
 } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
-import { employeesData } from 'mock-data/employees.js'
+// import { employeesData } from 'mock-data/employees.js'
+import { EmployeePanel } from 'pages/users/panels'
+import { selectEmployeeById } from 'redux/features/employee';
 
 import { EMPLOYEE_SEARCH,CARE_MEMBER_CREATE } from "pages/users";
 
@@ -41,21 +44,8 @@ export const EmployeeDetailsPage = (props) => {
   let { id } = useParams();
   const history = useHistory();
 
-  // To MOVE in Selectors
-  /*
-  const employees = useSelector(state => state.employees);
-  let employee = employees.find(employee => employee.id === parseInt(id));
-  */
-
+  const employee =useSelector(selectEmployeeById(parseInt(id)));
   const currentRole = "admin";
-  let [employee, setEmployee] = useState();
-  
-  if(!employee){
-    employee=employeesData.find(employee => employee.id === parseInt(id));
-    setEmployee(employee);
-  }
-
-  let buttonColor = employee.careMember ? "secondary" : "success";
 
   return (
     <>
@@ -73,11 +63,10 @@ export const EmployeeDetailsPage = (props) => {
                 <Row className="align-items-center py-4">
                   <Col lg="12" xs="7" className="text-right">
                     <Button
-                      color={buttonColor}
+                      // color={buttonColor}
                       onClick={e =>
-                        history.push(`/${currentRole}${CARE_MEMBER_CREATE}/${id}`)}
-                        
-                      disabled={employee.careMember}
+                        history.push(`/${currentRole}${CARE_MEMBER_CREATE}/${id}`)}                        
+                      // disabled={employee.careMember}
                     >
                       Invite to Care
                     </Button>
@@ -94,7 +83,12 @@ export const EmployeeDetailsPage = (props) => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <Form>
+
+              <EmployeePanel 
+                  employee={employee}
+                  panelHeader="User information"
+              />
+                {/* <Form>
                   <h6 className="heading-small text-muted mb-4">
                     User information
                   </h6>
@@ -344,7 +338,7 @@ export const EmployeeDetailsPage = (props) => {
                       </Col>
                     </Row>
                   </div>
-                </Form>
+                </Form> */}
               </CardBody>
             </Card>
           </Col>

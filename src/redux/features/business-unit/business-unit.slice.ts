@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   createSlice  
 } from "@reduxjs/toolkit";
-import { BusinessUnit } from "types/types";
+import { BusinessUnit } from "types/domain";
 import { businessUnitService } from ".";
 import { StateType } from "redux/features/common";
 

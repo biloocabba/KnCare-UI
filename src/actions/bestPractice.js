@@ -14,7 +14,6 @@ import {
 } from "./types/index";
 
 import BestPracticeService from "../services/BestPracticeService";
-import { PageStatus } from "../types/pageStatus";
 
 export const createBestPractice =
   (title, description, content) => async dispatch => {
@@ -40,7 +39,7 @@ export const retrieveBestPractices = () => async dispatch => {
   try {
     dispatch({
       type: API_SEND_START,
-      payload: PageStatus.Loading,
+      payload: ''
     });
 
     const res = await BestPracticeService.getAll();
@@ -52,7 +51,7 @@ export const retrieveBestPractices = () => async dispatch => {
 
     dispatch({
       type: API_SEND_END,
-      payload: PageStatus.Ok,
+      payload: ''
     });
   } catch (err) {
     console.log(err);

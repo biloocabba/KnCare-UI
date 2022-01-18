@@ -1,5 +1,5 @@
 import http from './http-common'
-import { categories } from '../mock-data/categories.js'
+import { categories } from '../redux/features/utils/in-memory-api-mock/mock-data/categories.js.js'
 
 const loadCategories = () => {
   return categories;

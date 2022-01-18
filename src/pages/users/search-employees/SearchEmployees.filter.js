@@ -39,24 +39,7 @@ export const SearchEmployeesFilterPanel = ({onSearchEmployees, countries, busine
               </CardHeader>
               <CardBody>
                 <Row>
-                  <Col md="3">
-                    {/* <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="lastName"
-                      >
-                        Last name
-                      </label>
-                      <Input
-                        id="lastName"
-                        style={{ height: "36px" }}
-                        className="form-control"
-                        type="text"
-                        placeholder="Last Name"
-                        value={searchLastName}
-                        onChange={onChangeSearchLastName}
-                      />
-                    </FormGroup> */}
+                  <Col md="3">                   
                       <InputField
                             id="input-last-name"
                             label="Last name"
@@ -68,70 +51,23 @@ export const SearchEmployeesFilterPanel = ({onSearchEmployees, countries, busine
                             onChange={onChangeSearchLastName}
                         />
                   </Col>
-                  <Col md="3">
-                    {/* <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="businessUnits"
-                      >
-                        Business Units
-                      </label>
-                      <Select
-                        id="businessUnits"
-                        components={makeAnimated()}
-                        options={businessUnits}
-                        onChange={item =>
-                          setSearchBusinessUnit(item.value)
-                        }
-                      />
-                    </FormGroup> */}
+                  <Col md="3">                 
                         <SelectField 
                             id="select-businessUnits"
-                            label="Business Units"
+                            label="Business Unit"
                             options={businessUnits}
                             onChange={item => setSearchBusinessUnit(item.value)}
                         />  
                   </Col>
-                  <Col md="2">
-                    {/* <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="country"
-                      >
-                        Countries
-                      </label>
-                      <Select
-                        id="country"
-                        components={makeAnimated()}
-                        options={countries}
-                        onChange={item => setSearchCountry(item.value)}
-                      />
-                    </FormGroup> */}
-
+                  <Col md="2">    
                     <SelectField 
                          id="select-country"
-                         label="Countries"
+                         label="Country"
                          options={countries}
                         onChange={item => setSearchCountry(item.value)}
-                    />  
-                  
+                    />                    
                   </Col>
-                  <Col md="2">
-                    {/* <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="example3cols2Input"
-                      >
-                        Hire Date From
-                      </label>
-                      <ReactDatetime
-                        inputProps={{
-                          placeholder: "Hire date",
-                        }}
-                        onChange={e => onChangeSearchHiringDate(e)}
-                        timeFormat={false}
-                      />
-                    </FormGroup> */}
+                  <Col md="2">                    
                     <DateField
                         id="date-hire-from"
                         label="Hire Date From"

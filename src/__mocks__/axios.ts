@@ -1,4 +1,4 @@
-import { Employee, Group } from "types/types";
+import { Employee, Group } from "types/domain";
 
 const employeeMockResponse = [
   {

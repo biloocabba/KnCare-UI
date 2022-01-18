@@ -1,41 +1,39 @@
-import { Employee } from "types/types";
- //import { httpCommon } from "..";
-import { httpCommon } from "../utils/http-common";
-import { IPartiallyUpdatedEmployee, IUpdatedEmployee } from ".";
-import { AxiosResponse } from "axios";
+import { Employee } from "types/domain";
+import { httpCommon, HttpResponseType } from "../utils/http-common";
+import { IPartiallyUpdated, IUpdated } from "redux/features/common";
 
-const searchEmployees = (queryParams: URLSearchParams): Promise<AxiosResponse<Employee[]>> => {
+const searchEmployees = (queryParams: URLSearchParams): HttpResponseType => {
   console.log(queryParams)
-  return httpCommon.get(`/employees?${queryParams}`);
+  return httpCommon.get(`/employee?${queryParams}`);
 };
 
-const getEmployeeById = (id: number): Promise<AxiosResponse<Employee>> => {
-  return httpCommon.get(`/employees/${id}`);
+const getEmployeeById = (id: number): HttpResponseType => {
+  return httpCommon.get(`/employee/${id}`);
 };
 
-const searchEmployeesByIds = (employeeIds: number[]): Promise<AxiosResponse<Employee[]>> => {
+const searchEmployeesByIds = (employeeIds: number[]): HttpResponseType => {
   const searchString = employeeIds.map(id => `id=${id}`).join("&");
-  return httpCommon.get(`/employees?${searchString}`);
+  return httpCommon.get(`/employee?${searchString}`);
 };
 
-const createEmployee = (body: Employee): Promise<AxiosResponse<Employee>> => {
-  return httpCommon.post(`/employees`, body);
+const createEmployee = (body: Employee): HttpResponseType => {
+  return httpCommon.post(`/employee`, body);
 };
 
-const updateEmployee = (updatedEmployee: IUpdatedEmployee): Promise<AxiosResponse<Employee>> => {
+const updateEmployee = (updatedEmployee: IUpdated<Employee>):HttpResponseType => {
   const { id, body } = updatedEmployee;
-  return httpCommon.put(`/employees/${id}`, body);
+  return httpCommon.put(`/employee/${id}`, body);
 };
 
 const partialUpdateEmployee = (
-  partiallyUpdatedEmployee: IPartiallyUpdatedEmployee,
-): Promise<AxiosResponse<Employee>> => {
+  partiallyUpdatedEmployee: IPartiallyUpdated<Employee>,
+): HttpResponseType => {
   const { id, body } = partiallyUpdatedEmployee;
-  return httpCommon.patch(`/employees/${id}`, body);
+  return httpCommon.patch(`/employee/${id}`, body);
 };
 
-const deleteEmployee = (id: number): Promise<AxiosResponse<any>> => {
-  return httpCommon.delete(`/employees/${id}`);
+const deleteEmployee = (id: number): HttpResponseType => {
+  return httpCommon.delete(`/employee/${id}`);
 };
 
 export const employeeService ={

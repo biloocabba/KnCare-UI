@@ -4,7 +4,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 
-import { Group } from "types/types";
+import { Group } from "types/domain";
 import { StateType } from "redux/features/common";
 
 import {
@@ -21,8 +21,8 @@ const initialState: StateType<Group> = {
   error: {},
 };
 
-export const fetchGroupById = createAsyncThunk(
-  "group/fetchGroup",
+export const findGroupById = createAsyncThunk(
+  "group/findById",
   async (id: number) => {
     let { data } = await groupService.getGroupById(id);
     return data;
@@ -83,7 +83,7 @@ export const groupSlice = createSlice({
   extraReducers: builder => {
     // https://stackoverflow.com/questions/68184008/how-to-refactor-duplicate-code-in-redux-toolkit-createasyncthunk-and-extrareduc
     [
-      fetchGroupById,
+      findGroupById,
       searchGroups,
       createGroup,
       updateGroup,
@@ -101,7 +101,7 @@ export const groupSlice = createSlice({
       });
     });
 
-    builder.addCase(fetchGroupById.fulfilled, (state, action) => {
+    builder.addCase(findGroupById.fulfilled, (state, action) => {
       state.entity = action.payload;
       state.isLoading = false;
       state.isSuccess = true;

@@ -1,4 +1,4 @@
-import { Theme } from "types/types";
+import { Theme } from "types";
 
 export const colors = {
   gray: {

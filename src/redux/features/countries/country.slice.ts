@@ -3,20 +3,11 @@ import {
   createAsyncThunk,
   createSlice
 } from "@reduxjs/toolkit";
-import { Country } from "types/types";
+import { Country } from "types/domain";
 import { countryService } from ".";
 import { StateType } from "redux/features/common";
 
 
-
-
-// type CountryStateType = {
-//   countries: Country[];
-//   country: Country | null;
-//   isLoading: boolean;
-//   isSuccess: boolean;
-//   error: SerializedError;
-// };
 
 const initialState: StateType<Country> = {
   entities: [],

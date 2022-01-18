@@ -3,14 +3,10 @@ import {
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
-import { Employee } from "types/types";
-import { StateType } from "redux/features/common";
+import { Employee } from "types";
+import { StateType ,IPartiallyUpdated, IUpdated,} from "redux/features/common";
+import { employeeService } from ".";
 
-import {
-  employeeService,  
-  IPartiallyUpdatedEmployee,
-  IUpdatedEmployee,
-} from ".";
 
 const initialState: StateType<Employee> = {
   entities: [],
@@ -20,8 +16,8 @@ const initialState: StateType<Employee> = {
   error: {},
 };
 
-export const fetchEmployee = createAsyncThunk(
-  "employee/fetchEmployee",
+export const findEmployeeById = createAsyncThunk(
+  "employee/findById",
   async (id: number): Promise<Employee> => {
     let { data } = await employeeService.getEmployeeById(id);
     return data;
@@ -29,7 +25,7 @@ export const fetchEmployee = createAsyncThunk(
 );
 
 export const searchEmployees = createAsyncThunk(
-  "employee/searchEmployees",
+  "employee/search",
   async (filters: any): Promise<Employee[]> => {
     console.log(filters);
     const queryParams = new URLSearchParams(filters);
@@ -39,7 +35,7 @@ export const searchEmployees = createAsyncThunk(
 );
 
 export const searchEmployeesByIds = createAsyncThunk(
-  "employee/searchEmployeesByIds",
+  "employee/searchByIds",
   async (employeeIds: number[]): Promise<Employee[]> => {
     const { data } = await employeeService.searchEmployeesByIds(
       employeeIds,
@@ -50,7 +46,7 @@ export const searchEmployeesByIds = createAsyncThunk(
 );
 
 export const createEmployee = createAsyncThunk(
-  "employee/createEmployee",
+  "employee/create",
   async (body: Employee): Promise<Employee> => {
     const { data } = await employeeService.createEmployee(body);
     return data;
@@ -58,17 +54,16 @@ export const createEmployee = createAsyncThunk(
 );
 
 export const updateEmployee = createAsyncThunk(
-  "employee/updateEmployee",
-  async (updatedEmployee: IUpdatedEmployee): Promise<Employee> => {
+  "employee/update",
+  async (updatedEmployee: IUpdated<Employee>): Promise<Employee> => {
     const { data } = await employeeService.updateEmployee(updatedEmployee);
-
     return data;
   },
 );
 
 export const partialUpdateEmployee = createAsyncThunk(
-  "employee/partialUpdateEmployee",
-  async (partiallyUpdatedEmployee: IPartiallyUpdatedEmployee): Promise<Employee> => {
+  "employee/partialUpdate",
+  async (partiallyUpdatedEmployee: IPartiallyUpdated<Employee>): Promise<Employee> => {
     const { data } = await employeeService.partialUpdateEmployee(
       partiallyUpdatedEmployee,
     );
@@ -78,7 +73,7 @@ export const partialUpdateEmployee = createAsyncThunk(
 );
 
 export const deleteEmployee = createAsyncThunk(
-  "employee/deleteEmployee",
+  "employee/delete",
   async (id: number) => {
     let { data } = await employeeService.deleteEmployee(id);
     return data;
@@ -92,7 +87,7 @@ export const employeeSlice = createSlice({
   extraReducers: builder => {
     // https://stackoverflow.com/questions/68184008/how-to-refactor-duplicate-code-in-redux-toolkit-createasyncthunk-and-extrareduc
     [
-      fetchEmployee,
+      findEmployeeById,
       searchEmployees,
       searchEmployeesByIds,
       createEmployee,
@@ -111,7 +106,7 @@ export const employeeSlice = createSlice({
       });
     });
 
-    builder.addCase(fetchEmployee.fulfilled, (state, action) => {
+    builder.addCase(findEmployeeById.fulfilled, (state, action) => {
       state.entity = action.payload;
       state.isLoading = false;
       state.isSuccess = true;

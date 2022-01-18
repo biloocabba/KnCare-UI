@@ -10,7 +10,7 @@ export const SelectField = props => {
       <label className="form-control-label" htmlFor={id}>
         {label}
       </label>
-        <Select  {...props}  components={makeAnimated()} /> 
+        <Select {...props}  components={makeAnimated()} /> 
     </FormGroup>
   );
 };

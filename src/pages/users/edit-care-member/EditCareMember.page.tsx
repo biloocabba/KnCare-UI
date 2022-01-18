@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useParams,useHistory } from "react-router-dom";
 
 import {
@@ -14,17 +12,26 @@ import {
 
 import { BoxHeader } from "components/headers";
 import { CareMemberPanel } from "../panels";
-import { careMembersData } from 'mock-data/careMembers.js'
 
-import { EMPLOYEE_SEARCH } from "pages/users";
+import { CARE_MEMBER_SEARCH} from "pages/users";
+import { selectCareMemberById,updateCareMember } from "redux/features/care-member";
+import { CareMember, CareMemberSaveRequest,RouteParams, SelectOption} from "types";
+import { IUpdated } from "redux/features/common";
+import { useAppDispatch, useAppSelector } from "redux/app";
 
-export const EditCareMemberPage = (props) => {
 
-  let { id } = useParams(); 
 
-  const careRoles =[];
-  const groups = [];
+export const EditCareMemberPage = () => {
+
+  const { id } = useParams<RouteParams>();
   const history =useHistory();
+  const dispatch = useAppDispatch();
+
+  const currentRole = "admin";
+  const careMember =useAppSelector(selectCareMemberById(parseInt(id))) as CareMember;
+  const rolesAsOptions:SelectOption[] =[]; 
+  const groupsAsOptions:SelectOption[] =[];
+ 
 
   //const careMembers = careMembersData;
   //this should be in selectors
@@ -54,18 +61,18 @@ export const EditCareMemberPage = (props) => {
   }, []);
   */
 
-  const currentRole = "admin";
-  const [careMember, setCareMember] = useState();
-  const [role, setRole] = useState(
-    careMember ? (careMember.role ? careMember.role : "") : "",
-  );
-  const [group, setGroup] = useState([]);
+
+  // const [careMember, setCareMember] = useState();
+  // const [role, setRole] = useState(
+  //   careMember ? (careMember.role ? careMember.role : "") : "",
+  // );
+  // const [group, setGroup] = useState([]);
 
   
-  const findCareMember = () => {
-    const careMemberFound =careMembersData.find(careMember => careMember.id === parseInt(id))
-    setCareMember(careMemberFound);
-  };
+  // const findCareMember = () => {
+  //   const careMemberFound =careMembersData.find(careMember => careMember.id === parseInt(id))
+  //   setCareMember(careMemberFound);
+  // };
   
   // useEffect(() => {
   //   console.log(careMembersData)
@@ -78,10 +85,19 @@ export const EditCareMemberPage = (props) => {
   //   return <div>No care member found</div>;
   // }
 
-  if(!careMember){
-    findCareMember();
-  }
+  // if(!careMember){
+  //   findCareMember();
+  // }
  
+   const saveCareMember = (careMemberRequest: CareMemberSaveRequest) => {
+    let httpUpdateRequest:IUpdated<CareMemberSaveRequest>= {id:careMemberRequest.id, body: careMemberRequest};
+    dispatch(updateCareMember(httpUpdateRequest));
+   }
+
+  // const saveCareMember = (careMember) => {
+  //   let careMemberUpdateRequest= {id:careMember.id, body:careMember};
+  //   dispatch(updateCareMember(careMemberUpdateRequest));
+  // }
 
   return (
     <>
@@ -93,7 +109,7 @@ export const EditCareMemberPage = (props) => {
             <CardHeader>
               <Row className="align-items-center">
                 <Col xs="8">
-                  <h3 className="mb-0">New Care Member</h3>
+                  <h3 className="mb-0">Care Member Details</h3>
                 </Col>
               </Row>
               <Row className="align-items-center py-4">
@@ -104,19 +120,23 @@ export const EditCareMemberPage = (props) => {
                     href="#dsfkjlsi39ds9d97876s7d"
                     onClick={e => {
                       e.preventDefault();
-                      history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)
+                      history.push(`/${currentRole}${CARE_MEMBER_SEARCH}`)
                     }}
                   >
-                    Back to Employees
+                    Back to Care Members
                   </Button>
                 </Col>
               </Row>
             </CardHeader>
             <CardBody>
-              <CareMemberPanel 
-                careMember={careMember}
-                setCareMember={setCareMember}      
-              />        
+            <CareMemberPanel 
+                  careMember={careMember}
+                  employeeId={ careMember.employeeId }
+                  groupOptions={groupsAsOptions}
+                  roleOptions={rolesAsOptions}
+                  onSave ={saveCareMember}   
+                  // isCreate={false}
+                />        
               </CardBody>
           </Card>
         </Col>

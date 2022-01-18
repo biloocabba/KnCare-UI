@@ -25,6 +25,9 @@ import {Sidebar} from "components/sidebar";
 import { routes } from "routes";
 import { useAppDispatch } from "redux/app";
 
+import { fetchCountries } from 'redux/features/countries/country.slice'
+import { fetchBusinessUnits } from 'redux/features/business-unit/business-unit.slice'
+
 function Admin() {
 
   const dispatch = useAppDispatch();
@@ -85,7 +88,10 @@ function Admin() {
       : "light";
   };
 
- 
+  useEffect(() => {
+    dispatch(fetchCountries());
+    dispatch(fetchBusinessUnits());    
+  }, [dispatch]);
 
 
   return (

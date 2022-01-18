@@ -1,4 +1,4 @@
-import { IRoute } from "types/types";
+import { IRoute } from "types";
 import { BestPracticeDetailPage, BEST_PRACTICE_DETAILS, CreateBestPracticePage, NEW_BEST_PRACTICE, SearchBestPracticesPage, SEARCH_BEST_PRACTICE } from ".";
 
 export const bestPracticesMenu:IRoute[] = [

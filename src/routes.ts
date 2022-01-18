@@ -380,7 +380,7 @@ export default routes;
 
 */
 
-import { IRoute } from "types/types";
+import { IRoute } from "types";
 import { groupMenu } from "pages/groups";
 import { userMenu } from "pages/users";
 import { dashboardMenu } from "pages/dashboards";

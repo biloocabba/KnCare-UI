@@ -1,4 +1,4 @@
-import { Group } from "types/types";
+import { Group } from "types/domain";
 import { httpCommon } from "..";
 import { IPartiallyUpdatedGroup, IUpdatedGroup } from ".";
 import { AxiosResponse } from "axios";

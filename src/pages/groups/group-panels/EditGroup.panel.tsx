@@ -13,7 +13,7 @@ import {
 
 import { AddMemberPanel } from ".";
 import { InputField } from "components/widgets/input-field";
-import { Group } from "types/types";
+import { Group } from "types/domain";
 
 interface Props {
   group: Group;

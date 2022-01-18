@@ -4,7 +4,7 @@ import {
   createSlice,
   SerializedError,
 } from "@reduxjs/toolkit";
-import { Chart } from "types/types";
+import { Chart } from "types/domain";
 import { chartService } from ".";
 
 type ChartStateType = {

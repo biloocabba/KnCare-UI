@@ -18,7 +18,7 @@ import { AddMemberPanel } from "..";
 import { BoxHeader } from "components/headers";
 import { ReactTable,InputField } from "components/widgets";
 import { useAppDispatch, useAppSelector } from "redux/app";
-import { deleteGroup, fetchGroupById, partialUpdateGroup, selectGroupById,  updateGroup } from "redux/features";
+import { deleteGroup, findGroupById, partialUpdateGroup, selectGroupById,  updateGroup } from "redux/features";
 
 interface RouteParams {
   id: string;
@@ -40,7 +40,7 @@ export const GroupDetailsPage = () => {
   const [addMemberCollapse, setAddMemberCollapse] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchGroupById(groupId));
+    dispatch(findGroupById(groupId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

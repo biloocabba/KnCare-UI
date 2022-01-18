@@ -5,7 +5,7 @@ import {
     AUTO_OFFBOARDED_MEMBERS
 } from "../actions/types";
 
-import mapState from 'mock-data/mapKpi'
+import mapState from 'redux/features/utils/in-memory-api-mock/mock-data/mapKpi'
 
 function mapKpisReducer(mapKpis = mapState, action) {
     const { type, payload } = action;
