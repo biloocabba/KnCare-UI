@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import { IRoute, LayoutType } from "types/ui";
+import { IRoute, LayoutType } from "types";
 
 const getLayout = (route: IRoute, layout: LayoutType, key: number) => {
   if (route.layout === layout) {

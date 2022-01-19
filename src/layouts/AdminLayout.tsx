@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import  { useEffect, useRef, useState } from "react";
+import  { useEffect, useRef } from "react";
 // react library for routing
 import { useLocation,  Switch, Redirect } from "react-router-dom";
 // core components
@@ -23,33 +23,25 @@ import {AdminFooter} from "components/footers";
 import {Sidebar} from "components/sidebar";
 
 import { routes } from "routes";
-import { useAppDispatch } from "redux/app";
+import { useAppDispatch ,useAppSelector} from "redux/app";
 
-import { fetchCountries } from 'redux/features/countries/country.slice'
-import { fetchBusinessUnits } from 'redux/features/business-unit/business-unit.slice'
 import { useGetRoutes, useScrollToTop } from "./hooks";
+import { toggleSidenav,fetchBusinessUnits,fetchCountries } from "redux/features";
 
 export const AdminLayout = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
 
-  const [sidenavOpen, setSidenavOpen] = useState(true);
+  const { isSidenavOpen } = useAppSelector(state => state.sidenav);
   const mainContentRef = useRef(document.createElement("div"));
 
 useScrollToTop(mainContentRef);
 
 
-  // toggles collapse between mini sidenav and normal
-  const toggleSidenav = () => {
-    if (document.body.classList.contains("g-sidenav-pinned")) {
-      document.body.classList.remove("g-sidenav-pinned");
-      document.body.classList.add("g-sidenav-hidden");
-    } else {
-      document.body.classList.add("g-sidenav-pinned");
-      document.body.classList.remove("g-sidenav-hidden");
-    }
-    setSidenavOpen(!sidenavOpen);
-  };
+useEffect(() => {
+  dispatch(fetchCountries());
+  dispatch(fetchBusinessUnits());    
+}, [dispatch]);
 
   const getNavbarTheme = () => {
     return location.pathname.indexOf("admin/alternative-dashboard") === -1
@@ -57,29 +49,20 @@ useScrollToTop(mainContentRef);
       : "light";
   };
 
-  useEffect(() => {
-    dispatch(fetchCountries());
-    dispatch(fetchBusinessUnits());    
-  }, [dispatch]);
-
-
   return (
     <>
       <Sidebar
         routes={routes}
-        toggleSidenav={toggleSidenav}
-        sidenavOpen={sidenavOpen}
         logo={{
           innerLink: "/",
           imgSrc: require("assets/img/brand/CareLogoMin.png").default,
           imgAlt: "...",
         }}
+        rtlActive={false}
       />
       <div className="main-content" ref={mainContentRef}>
         <AdminNavbar
           theme={getNavbarTheme()}
-          toggleSidenav={toggleSidenav}
-          sidenavOpen={sidenavOpen}
         />
         <Switch>
           {useGetRoutes(routes,"/admin")}
@@ -87,8 +70,8 @@ useScrollToTop(mainContentRef);
         </Switch>
         <AdminFooter />
       </div>
-      {sidenavOpen ? (
-        <div className="backdrop d-xl-none" onClick={toggleSidenav} />
+      {isSidenavOpen ? (
+        <div className="backdrop d-xl-none" onClick={() => dispatch(toggleSidenav())} />
       ) : null}
     </>
   );

@@ -16,10 +16,6 @@
 */
 // nodejs library that concatenates classes
 import classnames from "classnames";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
-import React from "react";
-import { useDispatch } from "react-redux";
 // reactstrap components
 import {
   Collapse,
@@ -33,36 +29,44 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 import { logout } from "../../actions/auth";
+import { useAppSelector,useAppDispatch } from "redux/app";
+import { Theme } from "types";
 
-export const AdminNavbar = ({ theme, sidenavOpen, toggleSidenav }) => {
-  // function that on mobile devices makes the search open
-  const openSearch = () => {
-    document.body.classList.add("g-navbar-search-showing");
-    setTimeout(function () {
-      document.body.classList.remove("g-navbar-search-showing");
-      document.body.classList.add("g-navbar-search-show");
-    }, 150);
-    setTimeout(function () {
-      document.body.classList.add("g-navbar-search-shown");
-    }, 300);
-  };
-  // function that on mobile devices makes the search close
-  const closeSearch = () => {
-    document.body.classList.remove("g-navbar-search-shown");
-    setTimeout(function () {
-      document.body.classList.remove("g-navbar-search-show");
-      document.body.classList.add("g-navbar-search-hiding");
-    }, 150);
-    setTimeout(function () {
-      document.body.classList.remove("g-navbar-search-hiding");
-      document.body.classList.add("g-navbar-search-hidden");
-    }, 300);
-    setTimeout(function () {
-      document.body.classList.remove("g-navbar-search-hidden");
-    }, 500);
-  };
+interface Props {
+  theme: Theme;
+}
 
-  const dispatch = useDispatch();
+export const AdminNavbar = ({ theme} :Props) => {
+  const dispatch = useAppDispatch();
+  // @ts-ignore
+  const { isSidenavOpen } = useAppSelector(state => state.sidenav);
+
+  // // function that on mobile devices makes the search open
+  // const openSearch = () => {
+  //   document.body.classList.add("g-navbar-search-showing");
+  //   setTimeout(function () {
+  //     document.body.classList.remove("g-navbar-search-showing");
+  //     document.body.classList.add("g-navbar-search-show");
+  //   }, 150);
+  //   setTimeout(function () {
+  //     document.body.classList.add("g-navbar-search-shown");
+  //   }, 300);
+  // };
+  // // function that on mobile devices makes the search close
+  // const closeSearch = () => {
+  //   document.body.classList.remove("g-navbar-search-shown");
+  //   setTimeout(function () {
+  //     document.body.classList.remove("g-navbar-search-show");
+  //     document.body.classList.add("g-navbar-search-hiding");
+  //   }, 150);
+  //   setTimeout(function () {
+  //     document.body.classList.remove("g-navbar-search-hiding");
+  //     document.body.classList.add("g-navbar-search-hidden");
+  //   }, 300);
+  //   setTimeout(function () {
+  //     document.body.classList.remove("g-navbar-search-hidden");
+  //   }, 500);
+  // };
 
   const logOut = () => {
     dispatch(logout());
@@ -111,7 +115,7 @@ export const AdminNavbar = ({ theme, sidenavOpen, toggleSidenav }) => {
                 <div
                   className={classnames(
                     "pr-3 sidenav-toggler",
-                    { active: sidenavOpen },
+                    { active: isSidenavOpen },
                     { "sidenav-toggler-dark": theme === "dark" }
                   )}
                   onClick={toggleSidenav}
@@ -455,13 +459,3 @@ export const AdminNavbar = ({ theme, sidenavOpen, toggleSidenav }) => {
   );
 }
 
-AdminNavbar.defaultProps = {
-  toggleSidenav: () => {},
-  sidenavOpen: false,
-  theme: "dark",
-};
-AdminNavbar.propTypes = {
-  toggleSidenav: PropTypes.func,
-  sidenavOpen: PropTypes.bool,
-  theme: PropTypes.oneOf(["dark", "light"]),
-};

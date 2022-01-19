@@ -9,5 +9,6 @@ export * from "./email";
 export * from "./employee";
 export * from "./group";
 export * from "./role";
+export * from "./sidenav";
 export * from "./utils";
 export * from "./world-overview";

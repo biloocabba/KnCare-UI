@@ -11,6 +11,7 @@ import {
   employeeSlice,
   groupSlice,
   roleSlice,
+  sidenavSlice,
   worldOverviewSlice,
 } from "../features";
 
@@ -26,6 +27,7 @@ export const store = configureStore({
     [employeeSlice.name]: employeeSlice.reducer,
     [groupSlice.name]: groupSlice.reducer,
     [roleSlice.name]: roleSlice.reducer,
+    [sidenavSlice.name]: sidenavSlice.reducer,
     [worldOverviewSlice.name]: worldOverviewSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => process.env.NODE_ENV !== 'production'? getDefaultMiddleware().concat(logger): getDefaultMiddleware(),

@@ -18,16 +18,21 @@ import {AdminFooter} from "components/footers";
 // core components
 import {AdminNavbar} from "components/navbars";
 import {Sidebar} from "components/sidebar";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef} from "react";
 // react library for routing
 import { Redirect, Switch } from "react-router-dom";
 import { routes } from "routes";
+import { useAppDispatch, useAppSelector } from "redux/app";
 import { useGetRoutes, useScrollToTop } from "./hooks";
+import { toggleSidenav } from "redux/features";
 
 
 export function RTLLayout() {
-  const [sidenavOpen, setSidenavOpen] = useState(true);
+  const dispatch = useAppDispatch();
+  const { isSidenavOpen } = useAppSelector(state => state.sidenav);
+
   const mainContentRef = useRef(document.createElement("div"));
+
   useEffect(() => {
     document.body.classList.add("rtl");
     document.documentElement.classList.add("rtl");
@@ -40,25 +45,10 @@ export function RTLLayout() {
 
 useScrollToTop(mainContentRef)
 
-
-  // toggles collapse between mini sidenav and normal
-  const toggleSidenav = () => {
-    if (document.body.classList.contains("g-sidenav-pinned")) {
-      document.body.classList.remove("g-sidenav-pinned");
-      document.body.classList.add("g-sidenav-hidden");
-    } else {
-      document.body.classList.add("g-sidenav-pinned");
-      document.body.classList.remove("g-sidenav-hidden");
-    }
-    setSidenavOpen(!sidenavOpen);
-  };
-
   return (
     <>
       <Sidebar
         routes={routes}
-        toggleSidenav={toggleSidenav}
-        sidenavOpen={sidenavOpen}
         logo={{
           innerLink: "/",
           imgSrc: require("assets/img/brand/CareLogoMin.png").default,
@@ -69,8 +59,6 @@ useScrollToTop(mainContentRef)
       <div className="main-content" ref={mainContentRef}>
         <AdminNavbar
           theme="dark"
-          toggleSidenav={toggleSidenav}
-          sidenavOpen={sidenavOpen}
         />
         <Switch>
           {useGetRoutes(routes, "/rtl")}
@@ -78,8 +66,8 @@ useScrollToTop(mainContentRef)
         </Switch>
         <AdminFooter />
       </div>
-      {sidenavOpen ? (
-        <div className="backdrop d-xl-none" onClick={toggleSidenav} />
+      {isSidenavOpen ? (
+        <div className="backdrop d-xl-none" onClick={() => dispatch(toggleSidenav())} />
       ) : null}
     </>
   );
