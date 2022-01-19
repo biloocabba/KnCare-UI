@@ -1,30 +1,26 @@
-import React from "react";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
+
+
 // reactstrap components
 import {
   Breadcrumb,
-  BreadcrumbItem,
   Button,
   Container,
   Row,
   Col,
 } from "reactstrap";
 
-import { useDispatch } from "react-redux";
 
 
-import {
-  ALL_ACTIVE_MEMBERS,
-  NEW_MEMBERS,
-  SELF_RESIGNED_MEMBERS,
-  AUTO_OFFBOARDED_MEMBERS
-} from "../../actions/types";
-import { getAutoOffboardedMembersMapData } from "actions/mapKpi";
+interface Props {
+  name: string;
+  onActiveMembersClick: () => void;
+  onNewMembersClick: () => void;
+  onSelfResignedClick: () => void;
+  onAutoOffboardedClick: () => void;
+}
 
 
-function MapsHeader({ name, onActiveMembersClick, onNewMembersClick, onSelfResignedClick, onAutoOffboardedClick }) {
-  const dispatch = useDispatch();
+export const MapsHeader = ({ name, onActiveMembersClick, onNewMembersClick, onSelfResignedClick, onAutoOffboardedClick }:Props) => {
   // const mapData = useSelector(state => state.mapKpis);
 
   // const getMap = (e, actionType) => {
@@ -93,9 +89,3 @@ function MapsHeader({ name, onActiveMembersClick, onNewMembersClick, onSelfResig
   );
 }
 
-MapsHeader.propTypes = {
-  name: PropTypes.string,
-  setMapData: PropTypes.func,
-};
-
-export default MapsHeader;
