@@ -31,7 +31,7 @@ export const chartSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    [fetchCharts].forEach((thunk: AsyncThunk<any, any, {}>) => {
+    [fetchCharts].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
       builder.addCase(thunk.pending, state => {
         state.isLoading = true;
         state.isSuccess = false;

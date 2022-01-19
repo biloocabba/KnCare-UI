@@ -85,7 +85,7 @@ export const employeeSlice = createSlice({
       updateEmployee,
       partialUpdateEmployee,
       deleteEmployee,
-    ].forEach((thunk: AsyncThunk<any, any, {}>) => {
+    ].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
       builder.addCase(thunk.pending, state => {
         state.isLoading = true;
         state.isSuccess = false;

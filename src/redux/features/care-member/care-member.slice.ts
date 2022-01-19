@@ -62,7 +62,7 @@ export const careMemberSlice = createSlice({
   extraReducers: builder => {
     // https://stackoverflow.com/questions/68184008/how-to-refactor-duplicate-code-in-redux-toolkit-createasyncthunk-and-extrareduc
     [searchCareMembers, createCareMember, updateCareMember, deleteCareMember].forEach(
-      (thunk: AsyncThunk<any, any, {}>) => {
+      (thunk: AsyncThunk<any, any, Record<string, never>>) => {
         builder.addCase(thunk.pending, state => {
           state.isLoading = true;
           state.isSuccess = false;

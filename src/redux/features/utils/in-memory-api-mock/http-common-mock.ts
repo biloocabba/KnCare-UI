@@ -53,6 +53,7 @@ export async function patch<T>(path: string, body: any): Promise<AxiosResponse<T
   return Promise.resolve(wrapIntoResponse(body));
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function httpDelete(path: string): Promise<AxiosResponse<any>> {
   return Promise.resolve(deleteMockResponse);
 }

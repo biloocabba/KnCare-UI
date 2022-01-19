@@ -15,6 +15,8 @@
 
 */
 
+import teamImg from "assets/img/theme/team-1.jpg";
+
 export const GroupHeader = () => {
   return (
     <>
@@ -22,7 +24,7 @@ export const GroupHeader = () => {
         className="header pb-6 d-flex align-items-center"
         style={{
           minHeight: "400px",
-          backgroundImage: 'url("' + require("assets/img/care/team.jpg").default + '")',
+          backgroundImage: 'url("' + teamImg + '")',
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}

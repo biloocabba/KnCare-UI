@@ -6,12 +6,8 @@ interface Props {
   onChangeBusinessUnit: any;
   onSelectCareMember: any;
 }
-export const AddMemberPanel = ({
-  onChangeRole,
-  onChangeCountry,
-  onChangeBusinessUnit,
-  onSelectCareMember,
-}: Props) => {
+// eslint-disable-next-line no-empty-pattern
+export const AddMemberPanel = ({}: Props) => {
   // const countriesList = useAppSelector(selectCountriesAsList);
   // const businessUnitsList = useAppSelector(selectBusinessUnitsAsList);
 

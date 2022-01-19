@@ -23,6 +23,9 @@ import classnames from "classnames";
 // core components
 import { AuthHeader } from "components/headers";
 
+import githubIcon from "assets/img/icons/common/github.svg";
+import googleIcon from "assets/img/icons/common/google.svg";
+
 export const LoginPage = () => {
   const [focusedEmail, setfocusedEmail] = React.useState(false);
   const [focusedPassword, setfocusedPassword] = React.useState(false);
@@ -48,7 +51,7 @@ export const LoginPage = () => {
                     onClick={e => e.preventDefault()}
                   >
                     <span className="btn-inner--icon mr-1">
-                      <img alt="..." src={require("assets/img/icons/common/github.svg").default} />
+                      <img alt="..." src={githubIcon} />
                     </span>
                     <span className="btn-inner--text">Github</span>
                   </Button>
@@ -59,7 +62,7 @@ export const LoginPage = () => {
                     onClick={e => e.preventDefault()}
                   >
                     <span className="btn-inner--icon mr-1">
-                      <img alt="..." src={require("assets/img/icons/common/google.svg").default} />
+                      <img alt="..." src={googleIcon} />
                     </span>
                     <span className="btn-inner--text">Google</span>
                   </Button>

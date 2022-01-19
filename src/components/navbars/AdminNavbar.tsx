@@ -30,11 +30,11 @@ import {
 import classnames from "classnames";
 
 // reactstrap components
+import { logout } from "actions/auth";
+import stefanoImg from "assets/img/care/stefano-fiorenza.jpg";
 import { Theme } from "types";
 
 import { useAppSelector, useAppDispatch } from "redux/app";
-
-import { logout } from "../../actions/auth";
 
 interface Props {
   theme: Theme;
@@ -42,7 +42,7 @@ interface Props {
 
 export const AdminNavbar = ({ theme }: Props) => {
   const dispatch = useAppDispatch();
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isSidenavOpen } = useAppSelector(state => state.sidenav);
 
   // // function that on mobile devices makes the search open
@@ -401,10 +401,7 @@ export const AdminNavbar = ({ theme }: Props) => {
                 <DropdownToggle className="nav-link pr-0" color="" tag="a">
                   <Media className="align-items-center">
                     <span className="avatar avatar-sm rounded-circle">
-                      <img
-                        alt="..."
-                        src={require("assets/img/care/stefano-fiorenza.jpg").default}
-                      />
+                      <img alt="..." src={stefanoImg} />
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
                       <span className="mb-0 text-sm font-weight-bold">Stefano Fiorenza</span>

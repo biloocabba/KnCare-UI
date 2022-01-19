@@ -1,9 +1,4 @@
-import { BoxHeader } from "components/headers";
-
 import React, { useState } from "react";
-
-import "react-confirm-alert/src/react-confirm-alert.css";
-import { useDispatch } from "react-redux";
 
 import {
   Button,
@@ -17,12 +12,14 @@ import {
   Row,
 } from "reactstrap";
 
-export const BestPracticePage = props => {
-  const dispatch = useDispatch();
+import { BoxHeader } from "components/headers";
 
+import "react-confirm-alert/src/react-confirm-alert.css";
+
+export const BestPracticePage = () => {
   const [disableEdit, setDisableEdit] = useState(true);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title] = useState("");
+  const [description] = useState("");
 
   /*
     const getBestPractice = id => {
@@ -97,14 +94,18 @@ export const BestPracticePage = props => {
                 <Row>
                   <Col md="12">
                     <FormGroup>
-                      <label className="form-control-label">Title</label>
-                      <Input name="title" value={title} />
+                      <label htmlFor="title" className="form-control-label">
+                        Title
+                      </label>
+                      <Input id="title" name="title" value={title} />
                     </FormGroup>
                   </Col>
                   <Col md="12">
                     <FormGroup>
-                      <label className="form-control-label">Description</label>
-                      <Input name="description" value={description} />
+                      <label htmlFor="description" className="form-control-label">
+                        Description
+                      </label>
+                      <Input id="description" name="description" value={description} />
                     </FormGroup>
                   </Col>
                 </Row>

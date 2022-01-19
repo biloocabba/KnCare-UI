@@ -19,7 +19,7 @@ import AsyncSelect2 from "react-select2-wrapper";
 
 import { BoxHeader } from "components/headers";
 
-import { createRole, retrieveRoles } from "../../../actions/roles";
+import { createRole, retrieveRoles } from "actions/roles";
 
 var CreateRolePage = () => {
   const initialState = {

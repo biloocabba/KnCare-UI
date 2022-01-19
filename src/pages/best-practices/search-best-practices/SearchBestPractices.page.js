@@ -77,23 +77,24 @@ const pagination = paginationFactory({
 const { SearchBar } = Search;
 
 export const SearchBestPracticesPage = props => {
-  const [alert, setAlert] = React.useState(null);
+  const [alert] = React.useState(null);
   // this function will copy to clipboard an entire table,
   // so you can paste it inside an excel or csv file
 
   const bestPractices = useSelector(state => state.bestPractices);
   const dispatch = useDispatch();
 
-  const [searchTime, setSearchTime] = useState("");
+  const [searchTime] = useState("");
   const [searchAuthor, setSearchAuthor] = useState("");
   const [searchTag, setSearchTag] = useState("");
-  const [searchRate, setSearchRate] = useState("");
+  const [searchRate] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
 
   // useEffect(() => {
   //   dispatch(reterieveBestPractices())
   // }, [dispatch])
 
+  // eslint-disable-next-line no-unused-vars
   const makeSearch = () => {
     const searchFilters = {
       searchTime: searchTime,
@@ -128,6 +129,7 @@ export const SearchBestPracticesPage = props => {
     props.history.push("/admin/best-practice/" + id);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const formatActionButtonCell = (cell, row) => {
     return (
       <>
@@ -377,6 +379,7 @@ export const SearchBestPracticesPage = props => {
                 {props => (
                   <div className="py-4 table-responsive">
                     <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
+                      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control*/}
                       <label>
                         Search:
                         <SearchBar

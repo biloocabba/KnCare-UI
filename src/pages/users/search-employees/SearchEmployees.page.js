@@ -3,9 +3,9 @@ import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
-
 import { useHistory } from "react-router-dom";
+
+import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";

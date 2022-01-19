@@ -7,7 +7,7 @@ module.exports = {
     jest: true,
     node: true,
   },
-  // files: ["*.js", "*.jsx"],
+  // files: ["**/*.js", "**/*.jsx"],
   parser: "@babel/eslint-parser",
   parserOptions: {
     ecmaFeatures: {
@@ -21,13 +21,21 @@ module.exports = {
     react: { version: "detect" },
     "import/resolver": {
       node: {
-        paths: ["src"],
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        moduleDirectory: ["node_modules", "src/"],
       },
+      // "babel-plugin-root-import": {
+      //   rootPathPrefix: "",
+      //   rootPathSuffix: "src",
+      // },
     },
+    // "import/resolver": {
+    //   "babel-module": { allowExistingDirectories: true },
+    // },
   },
   extends: [
-    "plugin:react/recommended",
     "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:testing-library/react",
@@ -35,6 +43,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:prettier/recommended",
+    "plugin:css-import-order/recommended",
   ],
   rules: {
     "react/react-in-jsx-scope": "off",
@@ -70,12 +79,22 @@ module.exports = {
             position: "before",
           },
           {
+            pattern: ".css",
+            group: "external",
+            position: "before",
+          },
+          {
             pattern: "react-redux",
             group: "external",
             position: "before",
           },
           {
             pattern: "react-router",
+            group: "external",
+            position: "before",
+          },
+          {
+            pattern: "react-router-dom",
             group: "external",
             position: "before",
           },
@@ -111,7 +130,7 @@ module.exports = {
         es6: true,
         jest: true,
       },
-      files: ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      files: ["**/*.ts", "**/*.tsx"],
       parser: "@typescript-eslint/parser",
       parserOptions: {
         ecmaFeatures: {
@@ -124,6 +143,10 @@ module.exports = {
         react: { version: "detect" },
         "import/resolver": {
           typescript: {},
+          node: {
+            extensions: [".js", ".jsx", ".ts", ".tsx"],
+            moduleDirectory: ["node_modules", "src/"],
+          },
         },
       },
       extends: [
@@ -138,12 +161,14 @@ module.exports = {
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
         "plugin:testing-library/react",
+        "plugin:css-import-order/recommended",
       ],
       rules: {
         "react/function-component-definition": [
           "error",
           { namedComponents: "arrow-function", unnamedComponents: "arrow-function" },
         ],
+        "@typescript-eslint/ban-ts-comment": "off",
         "linebreak-style": ["error", process.platform === "win32" ? "windows" : "unix"],
         "react/prop-types": "off",
         "import/order": [
@@ -164,6 +189,16 @@ module.exports = {
               },
               {
                 pattern: "react-router",
+                group: "external",
+                position: "before",
+              },
+              {
+                pattern: "react-router-dom",
+                group: "external",
+                position: "before",
+              },
+              {
+                pattern: "react-quill",
                 group: "external",
                 position: "before",
               },

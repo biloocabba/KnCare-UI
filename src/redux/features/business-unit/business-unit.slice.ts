@@ -33,7 +33,7 @@ export const businessUnitSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    [fetchBusinessUnits].forEach((thunk: AsyncThunk<any, any, {}>) => {
+    [fetchBusinessUnits].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
       builder.addCase(thunk.pending, state => {
         state.isLoading = true;
         state.isSuccess = false;

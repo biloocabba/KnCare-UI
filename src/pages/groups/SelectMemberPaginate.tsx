@@ -18,7 +18,7 @@ export const SelectMemberPaginate = ({ regionNameProp, valueProp, onChangeProp }
 
   const loadOptions = async (searchQuery: string, _: any, { page }: { page: number }) => {
     // @ts-ignore
-    const response = await getByRegion(regionName);
+    const response = getByRegion(regionName);
     // `https://www.anapioficeandfire.com/api/houses?region=${regionName}&page=${page}&pageSize=10`
 
     const responseJSON = await response.json();

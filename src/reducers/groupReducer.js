@@ -1,14 +1,5 @@
-import { categoriesData } from "mock-data/categories";
-
-import {
-  CREATE_GROUP,
-  RETRIEVE_GROUPS,
-  DEACTIVATE_GROUP,
-  ADD_CAREMEMBER_TO_GROUP,
-  REMOVE_CAREMEMBER_FROM_GROUP,
-  SEARCH_GROUP,
-  UPDATE_GROUP,
-} from "../actions/types";
+import { categoriesData } from "../../json-server-mock-data/groups";
+import { CREATE_GROUP, RETRIEVE_GROUPS, DEACTIVATE_GROUP, UPDATE_GROUP } from "../actions/types";
 
 function groupReducer(groups = categoriesData.groups, action) {
   const { type, payload } = action;

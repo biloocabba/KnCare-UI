@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { useHistory } from "react-router";
+
 import {
   Button,
   Card,
@@ -15,52 +17,25 @@ import {
 } from "reactstrap";
 
 import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import ReactDatetime from "react-datetime";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 import { BoxHeader } from "components/headers";
+import { pagination } from "components/widgets";
 
-import { searchEmailDrafts } from "../../../actions/emailDrafts";
+import { searchEmailDrafts } from "actions/emailDrafts";
 
-const pagination = paginationFactory({
-  page: 1,
-  alwaysShowAllBtns: true,
-  showTotal: true,
-  withFirstAndLast: false,
-  sizePerPageRenderer: ({ options, currSizePerPage, onSizePerPageChange }) => (
-    <div className="dataTables_length" id="datatable-basic_length">
-      <label>
-        Show{" "}
-        {
-          <select
-            name="datatable-basic_length"
-            aria-controls="datatable-basic"
-            className="form-control form-control-sm"
-            onChange={e => onSizePerPageChange(e.target.value)}
-          >
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
-        }{" "}
-        entries.
-      </label>
-    </div>
-  ),
-});
+// const { SearchBar } = Search;
 
-const { SearchBar } = Search;
-
-var SearchEmailDraftsPage = props => {
-  const careRoles = useSelector(state => {
-    return state.categories.careRoles.map(role => {
-      return { value: role.id, label: role.name };
-    });
-  });
+var SearchEmailDraftsPage = () => {
+  const history = useHistory();
+  // const careRoles = useSelector(state => {
+  //   return state.categories.careRoles.map(role => {
+  //     return { value: role.id, label: role.name };
+  //   });
+  // });
   const groups = useSelector(state => {
     return state.groups.map(group => {
       return { value: group.id, label: group.name };
@@ -77,8 +52,8 @@ var SearchEmailDraftsPage = props => {
   const [searchSubject, setSearchSubject] = useState("");
   const [searchRecipient, setSearchRecipient] = useState("");
   const [searchGroup, setSearchGroup] = useState("");
-  const [searchStartDate, setSearchStartDate] = useState("");
-  const [searchEndDate, setSearchEndDate] = useState("");
+  const [searchStartDate] = useState("");
+  const [searchEndDate] = useState("");
 
   const dispatch = useDispatch();
 
@@ -87,25 +62,25 @@ var SearchEmailDraftsPage = props => {
     setSearchSubject(searchSubject);
   };
 
-  const onChangeSearchRecipient = e => {
-    const searchRecipient = e.target.value;
-    setSearchRecipient(searchRecipient);
-  };
+  // const onChangeSearchRecipient = e => {
+  //   const searchRecipient = e.target.value;
+  //   setSearchRecipient(searchRecipient);
+  // };
 
-  const onChangeSearchGroup = e => {
-    const searchGroup = e.target.value;
-    setSearchGroup(searchGroup);
-  };
+  // const onChangeSearchGroup = e => {
+  //   const searchGroup = e.target.value;
+  //   setSearchGroup(searchGroup);
+  // };
 
-  const onChangeSearchStartDate = e => {
-    const searchStartDate = e.target.value;
-    setSearchStartDate(searchStartDate);
-  };
+  // const onChangeSearchStartDate = e => {
+  //   const searchStartDate = e.target.value;
+  //   setSearchStartDate(searchStartDate);
+  // };
 
-  const onChangeSearchEndDate = e => {
-    const searchEndDate = e.target.value;
-    setSearchEndDate(searchEndDate);
-  };
+  // const onChangeSearchEndDate = e => {
+  //   const searchEndDate = e.target.value;
+  //   setSearchEndDate(searchEndDate);
+  // };
 
   const findByAllParameters = () => {
     let filters = {
@@ -118,9 +93,8 @@ var SearchEmailDraftsPage = props => {
     dispatch(searchEmailDrafts(filters));
   };
 
-  const emailDraftDetails = e => {
-    var { id } = e.target;
-    props.history.push("/admin/emailDrafts/email-draft-details/1");
+  const emailDraftDetails = () => {
+    history.push("/admin/emailDrafts/email-draft-details/1");
   };
 
   const detailsActionButtonCell = () => {

@@ -1,13 +1,7 @@
 import { toast } from "react-toastify";
 
-import careMemberService from "../services/careMemberService";
-
-import {
-  CREATE_CARE_MEMBER,
-  RETRIEVE_CARE_MEMBERS,
-  API_CALL_START,
-  CARE_MEMBER_UPDATE_ROLE,
-} from "./types";
+import careMemberService from "services/careMemberService";
+import { CREATE_CARE_MEMBER, RETRIEVE_CARE_MEMBERS, API_CALL_START } from "types";
 
 export const searchCareMembers = filters => dispatch => {
   try {

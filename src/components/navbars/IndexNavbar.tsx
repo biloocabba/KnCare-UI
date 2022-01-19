@@ -15,6 +15,8 @@
 
 */
 // react library for routing
+import { Link } from "react-router-dom";
+
 import {
   UncontrolledCollapse,
   NavbarBrand,
@@ -29,9 +31,9 @@ import {
   Button,
 } from "reactstrap";
 
-import { Link } from "react-router-dom";
 // reactstrap components
 
+import brandBlue from "assets/img/brand/blue.png";
 import CareLogoMin from "assets/img/brand/CareLogoMin.png";
 
 export const IndexNavbar = () => {
@@ -67,7 +69,7 @@ export const IndexNavbar = () => {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link to="/admin/dashboard">
-                    <img alt="..." src={require("assets/img/brand/blue.png").default} />
+                    <img alt="..." src={brandBlue} />
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">

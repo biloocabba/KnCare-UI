@@ -14,7 +14,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-// react library for routing
+
+import { Link } from "react-router-dom";
+
 import {
   UncontrolledCollapse,
   NavbarBrand,
@@ -29,8 +31,8 @@ import {
   Button,
 } from "reactstrap";
 
-import { Link } from "react-router-dom";
-// reactstrap components
+import argonWhiteLogo from "assets/img/brand/argon-react-white.png";
+import brandBlue from "assets/img/brand/blue.png";
 
 export const AuthNavbar = () => {
   return (
@@ -42,7 +44,7 @@ export const AuthNavbar = () => {
       >
         <Container>
           <NavbarBrand to="/" tag={Link}>
-            <img alt="..." src={require("assets/img/brand/argon-react-white.png").default} />
+            <img alt="..." src={argonWhiteLogo} />
           </NavbarBrand>
           <button
             aria-controls="navbar-collapse"
@@ -65,7 +67,7 @@ export const AuthNavbar = () => {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link to="/admin/dashboard">
-                    <img alt="..." src={require("assets/img/brand/blue.png").default} />
+                    <img alt="..." src={brandBlue} />
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">

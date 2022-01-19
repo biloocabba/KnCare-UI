@@ -19,6 +19,8 @@ import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
 
+import { useParams, useHistory } from "react-router-dom";
+
 import {
   Button,
   Card,
@@ -31,8 +33,6 @@ import {
   Input,
   Row,
 } from "reactstrap";
-
-import { useParams, useHistory } from "react-router-dom";
 
 import { BoxHeader } from "components/headers";
 

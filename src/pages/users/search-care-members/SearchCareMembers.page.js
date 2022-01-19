@@ -3,6 +3,8 @@ import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { useHistory } from "react-router-dom";
+
 import {
   Button,
   Card,
@@ -16,7 +18,6 @@ import {
 } from "reactstrap";
 
 import ReactDatetime from "react-datetime";
-import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
@@ -92,7 +93,7 @@ export const SearchCareMembersPage = props => {
               <CardHeader>
                 <h3 className="mb-0">Search Results</h3>
                 <p className="text-sm mb-0">
-                  Care Members visible according to current user's role
+                  Care Members visible according to current user&#39;s role
                 </p>
               </CardHeader>
 

@@ -4,7 +4,6 @@ import {
   UPDATE_CARE_MEMBER,
   OFFBOARD_CARE_MEMBER,
   SEARCH_CARE_MEMBERS,
-  CARE_MEMBER_UPDATE_ROLE,
 } from "actions/types";
 
 // import { careMembersData } from '../mock-data/careMembers.js'

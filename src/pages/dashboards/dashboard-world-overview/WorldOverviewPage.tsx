@@ -64,13 +64,13 @@ export const WorldOverviewPage = () => {
   //   return state.mapKpis.activeMap;
   // });
 
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [newMembers, setNewMembers] = useState(null);
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeMembers, setActiveMembers] = useState(null);
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [autoOffboardedMembers, setAutoOffboardedMembers] = useState(null);
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selfresignedMembers, setSelfresignedMembers] = useState(null);
 
   // const mapFilterClick = (e,fnApiCall) =>{

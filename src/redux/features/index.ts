@@ -6,7 +6,6 @@ export * from "./care-member";
 export * from "./chart";
 export * from "./countries";
 export * from "./email";
-export * from "./employee";
 export * from "./group";
 export * from "./role";
 export * from "./sidenav";

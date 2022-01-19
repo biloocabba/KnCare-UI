@@ -24,7 +24,7 @@ export const countrySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    [fetchCountries].forEach((thunk: AsyncThunk<any, any, {}>) => {
+    [fetchCountries].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
       builder.addCase(thunk.pending, state => {
         state.isLoading = true;
         state.isSuccess = false;

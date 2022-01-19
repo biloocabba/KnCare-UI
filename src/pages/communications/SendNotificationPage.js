@@ -428,8 +428,11 @@ var SendNotificationPage = () => {
                   <h6 className="heading-small text-muted mb-4">About me</h6>
                   <div className="pl-lg-4">
                     <FormGroup>
-                      <label className="form-control-label">About Me</label>
+                      <label htmlFor="aboutYou" className="form-control-label">
+                        About Me
+                      </label>
                       <Input
+                        id="aboutYou"
                         placeholder="A few words about you ..."
                         rows="4"
                         type="textarea"

@@ -1,4 +1,4 @@
-import { FormGroup, Input } from "reactstrap";
+import { FormGroup } from "reactstrap";
 
 import ReactDatetime from "react-datetime";
 

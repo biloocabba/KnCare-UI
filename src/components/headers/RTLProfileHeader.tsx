@@ -17,6 +17,8 @@
 // reactstrap components
 import { Button, Container, Row, Col } from "reactstrap";
 
+import profileCoverImg from "assets/img/theme/profile-cover.jpg";
+
 export const RTLProfileHeader = () => {
   return (
     <>
@@ -24,7 +26,7 @@ export const RTLProfileHeader = () => {
         className="header pb-6 d-flex align-items-center"
         style={{
           minHeight: "500px",
-          backgroundImage: 'url("' + require("assets/img/theme/profile-cover.jpg").default + '")',
+          backgroundImage: 'url("' + profileCoverImg + '")',
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}

@@ -1,5 +1,4 @@
-import { categoriesData } from "mock-data/categories";
-
+import { categoriesData } from "../../json-server-mock-data/categories";
 import { LOAD_CATEGORIES } from "../actions/types/index";
 
 const categoryReducer = (categories = categoriesData, action) => {

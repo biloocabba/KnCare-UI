@@ -1,6 +1,8 @@
 // core components
 import React, { useRef, useState } from "react";
 
+import { Redirect } from "react-router-dom";
+
 import {
   Button,
   Card,
@@ -16,12 +18,12 @@ import {
 } from "reactstrap";
 
 import Files from "react-files";
-import { Redirect } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 // reactstrap components
 import SimpleReactValidator from "simple-react-validator";
 
 import { BoxHeader } from "components/headers";
+import { InputField } from "components/widgets";
 
 import bestPracticeService from "../../../services/BestPracticeService";
 
@@ -49,13 +51,13 @@ export const CreateBestPracticePage = () => {
 
   const toggle = () => setTooltipOpen(!tooltipOpen);
 
-  const [content, setContent] = useState(initialState);
+  const [content] = useState(initialState);
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setContent({ ...content, [name]: value });
-    simpleValidator.current.showMessageFor(name);
-  };
+  // const handleInputChange = e => {
+  //   const { name, value } = e.target;
+  //   setContent({ ...content, [name]: value });
+  //   simpleValidator.current.showMessageFor(name);
+  // };
 
   const onFilesError = error => {
     setErrorMessage(error.message);
@@ -75,6 +77,7 @@ export const CreateBestPracticePage = () => {
     forceUpdate(1);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const saveBestPractice = () => {
     formData.append("content", content.title);
     formData.append("content", content.description);
@@ -123,8 +126,8 @@ export const CreateBestPracticePage = () => {
                     <Row>
                       <Col md="10">
                         <FormGroup>
-                          <label className="form-control-label">Title</label>
-                          <Input
+                          <InputField
+                            label="Title"
                             className="text-sm"
                             name="title"
                             value={title}
@@ -134,8 +137,8 @@ export const CreateBestPracticePage = () => {
                       </Col>
                       <Col md="10">
                         <FormGroup>
-                          <label className="form-control-label">Description</label>
-                          <Input
+                          <InputField
+                            label="Description"
                             name="description"
                             type="textarea"
                             rows="5"
@@ -147,6 +150,7 @@ export const CreateBestPracticePage = () => {
                       </Col>
                       <Col md="10">
                         <FormGroup>
+                          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control*/}
                           <label className="form-control-label">Tags</label>
                           <CreatableSelect
                             // styles={{
@@ -162,6 +166,7 @@ export const CreateBestPracticePage = () => {
                       </Col>
                       <Col md="10">
                         <FormGroup>
+                          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control*/}
                           <label className="form-control-label">Image Url</label>
                           <Input
                             className="text-sm"

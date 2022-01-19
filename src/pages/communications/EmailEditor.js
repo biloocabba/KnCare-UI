@@ -14,17 +14,13 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { BoxHeader } from "components/headers";
 
 import React, { useState } from "react";
 
-import ReactQuill from "react-quill";
-
-import "react-quill/dist/quill.snow.css";
-// core components
 import { useSelector } from "react-redux";
 
-// reactstrap components
+import { useHistory } from "react-router-dom";
+
 import {
   Button,
   ButtonGroup,
@@ -39,11 +35,15 @@ import {
   Row,
 } from "reactstrap";
 
-import { useHistory } from "react-router-dom";
+import ReactQuill from "react-quill";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
+import { BoxHeader } from "components/headers";
+
 import emailService from "services/EmailService";
+
+import "react-quill/dist/quill.snow.css";
 
 var EmailEditor = props => {
   let history = useHistory();

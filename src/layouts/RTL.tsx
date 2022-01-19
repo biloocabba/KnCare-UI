@@ -24,6 +24,7 @@ import { AdminNavbar } from "components/navbars";
 import { Sidebar } from "components/sidebar";
 // react library for routing
 
+import careLogo from "assets/img/brand/CareLogoMin.png";
 import { routes } from "routes";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
@@ -31,7 +32,7 @@ import { toggleSidenav } from "redux/features";
 
 import { useGetRoutes, useScrollToTop } from "./hooks";
 
-export var RTLLayout = () => {
+export const RTLLayout = () => {
   const dispatch = useAppDispatch();
   const { isSidenavOpen } = useAppSelector(state => state.sidenav);
 
@@ -55,7 +56,7 @@ export var RTLLayout = () => {
         routes={routes}
         logo={{
           innerLink: "/",
-          imgSrc: require("assets/img/brand/CareLogoMin.png").default,
+          imgSrc: careLogo,
           imgAlt: "...",
         }}
         rtlActive
@@ -69,7 +70,14 @@ export var RTLLayout = () => {
         <AdminFooter />
       </div>
       {isSidenavOpen ? (
-        <div className="backdrop d-xl-none" onClick={() => dispatch(toggleSidenav())} />
+        <div
+          className="backdrop d-xl-none"
+          role="button"
+          tabIndex={0}
+          // @docs https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/click-events-have-key-events.md
+          onKeyDown={() => dispatch(toggleSidenav())}
+          onClick={() => dispatch(toggleSidenav())}
+        />
       ) : null}
     </>
   );

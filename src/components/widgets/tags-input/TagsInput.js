@@ -74,7 +74,7 @@ const defaultInputProps = {
   placeholder: "Add a tag",
 };
 
-const TagsInput = React.forwardRef((props, ref) => {
+export const TagsInput = React.forwardRef((props, ref) => {
   const divElementRef = React.useRef(null);
   const inputElementRef = React.useRef(null);
   const [tagState, setTagState] = React.useState("");
@@ -553,5 +553,3 @@ TagsInput.propTypes = {
   tagDisplayProp: PropTypes.string,
   preventSubmit: PropTypes.bool,
 };
-
-export default TagsInput;

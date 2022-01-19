@@ -14,10 +14,25 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
+import { StrictMode } from "react";
+
+import { Provider } from "react-redux";
+
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+
+import ReactDOM from "react-dom";
+import { ToastContainer } from "react-toastify";
+
+import { AdminLayout, AuthLayout } from "layouts";
+
+import { store } from "redux/app";
+
+import "variables/charts/chartDefaults";
+
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fullcalendar/common/main.min.css";
 import "@fullcalendar/daygrid/main.min.css";
-
 import "react-notification-alert/dist/animate.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "select2/dist/css/select2.min.css";
@@ -25,23 +40,9 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import "quill/dist/quill.core.css";
 import "react-toastify/dist/ReactToastify.css";
-
-import "./assets/css/site.css";
 import "./assets/scss/argon-dashboard-pro-react.scss?v1.2.0";
+import "./assets/css/site.css";
 import "./assets/vendor/nucleo/css/nucleo.css";
-import "./variables/charts/chartDefaults";
-
-import { StrictMode } from "react";
-
-import { Provider } from "react-redux";
-
-import ReactDOM from "react-dom";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-
-import { AdminLayout, AuthLayout } from "layouts";
-
-import { store } from "redux/app";
 
 ReactDOM.render(
   <Provider store={store}>

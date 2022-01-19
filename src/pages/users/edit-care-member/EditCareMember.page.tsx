@@ -1,6 +1,6 @@
-import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
-
 import { useParams, useHistory } from "react-router-dom";
+
+import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 

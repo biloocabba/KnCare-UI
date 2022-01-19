@@ -37,6 +37,7 @@ import {
 
 // core components
 import ProfileHeader from "components/headers/ProfileHeader";
+import { InputField } from "components/widgets";
 
 var CreateEmailTemplatePage = () => {
   return (
@@ -428,8 +429,8 @@ var CreateEmailTemplatePage = () => {
                   <h6 className="heading-small text-muted mb-4">About me</h6>
                   <div className="pl-lg-4">
                     <FormGroup>
-                      <label className="form-control-label">About Me</label>
-                      <Input
+                      <InputField
+                        label="About Me"
                         placeholder="A few words about you ..."
                         rows="4"
                         type="textarea"

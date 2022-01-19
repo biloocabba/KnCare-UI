@@ -16,6 +16,8 @@
 */
 import React, { useState } from "react";
 
+import { useHistory } from "react-router";
+
 import {
   Button,
   Card,
@@ -34,18 +36,14 @@ import {
 
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
 import Rating from "react-rating";
-import { useParams } from "react-router-dom";
 
 import { BoxHeader } from "components/headers";
 
-import { huddle64pdf } from "redux/features/utils/in-memory-api-mock/mock-data/mock-data-pdf-huddle-base64";
+import { huddle64pdf } from "redux/features";
 
-// reactstrap components
-
-// import pdfToShare from 'assets/pdf/HostingCareHuddle.pdf'
-
-export const BestPracticeDetailPage = props => {
-  let { id } = useParams(); //see in routes path: "/users/employee-details/:id",
+export const BestPracticeDetailPage = () => {
+  const history = useHistory();
+  // let { id } = useParams(); //see in routes path: "/users/employee-details/:id",
 
   //const bestPractices = useSelector((state) => state.bestPractices)
   //let bestPractice = bestPractices.find((bp) => bp.id === parseInt(id))
@@ -95,7 +93,7 @@ export const BestPracticeDetailPage = props => {
               className="btn btn-primary"
               color="primary"
               href="#pablo"
-              onClick={e => props.history.push("/admin/search-best-practices")}
+              onClick={() => history.push("/admin/search-best-practices")}
             >
               Back to Search
             </Button>
@@ -210,7 +208,7 @@ export const BestPracticeDetailPage = props => {
                               <PaginationItem>
                                 <PaginationLink
                                   href="#pablo"
-                                  onClick={e => setPageNumber(index + 1)}
+                                  onClick={() => setPageNumber(index + 1)}
                                 >
                                   {index + 1}
                                 </PaginationLink>
