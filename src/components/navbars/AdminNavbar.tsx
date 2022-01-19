@@ -34,7 +34,7 @@ import { logout } from "actions/auth";
 import stefanoImg from "assets/img/care/stefano-fiorenza.jpg";
 import { Theme } from "types";
 
-import { useAppSelector, useAppDispatch } from "redux/app";
+import { useAppDispatch } from "redux/app";
 
 interface Props {
   theme: Theme;
@@ -42,8 +42,6 @@ interface Props {
 
 export const AdminNavbar = ({ theme }: Props) => {
   const dispatch = useAppDispatch();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isSidenavOpen } = useAppSelector(state => state.sidenav);
 
   // // function that on mobile devices makes the search open
   // const openSearch = () => {

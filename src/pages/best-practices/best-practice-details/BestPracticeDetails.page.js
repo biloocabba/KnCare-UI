@@ -39,7 +39,7 @@ import Rating from "react-rating";
 
 import { BoxHeader } from "components/headers";
 
-import { huddle64pdf } from "redux/features";
+import { huddle64pdf } from "redux/features/utils/in-memory-api-mock/mock-data/mock-data-pdf-huddle-base64";
 
 export const BestPracticeDetailPage = () => {
   const history = useHistory();

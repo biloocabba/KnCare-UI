@@ -13,10 +13,10 @@ import { ReactTable } from "components/widgets";
 import { EMPLOYEE_DETAILS } from "pages/users";
 
 import {
-  selectAllBusinessUnitsDataAsSelectOptions,
   selectAllCountryDataAsSelectOptions,
   selectEmployeesState,
   searchEmployees,
+  selectAllBusinessUnitsDataAsSelectOptions,
   deleteEmployee,
 } from "redux/features";
 

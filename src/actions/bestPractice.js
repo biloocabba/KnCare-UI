@@ -1,4 +1,5 @@
 import BestPracticeService from "services/BestPracticeService";
+
 import {
   API_SEND_END,
   API_SEND_START,
@@ -6,7 +7,7 @@ import {
   DELETE_BEST_PRACTICE,
   RETRIEVE_BEST_PRACTICES,
   UPDATE_BEST_PRACTICE,
-} from "types/index";
+} from "./types/index";
 
 export const createBestPractice = (title, description, content) => async dispatch => {
   try {
