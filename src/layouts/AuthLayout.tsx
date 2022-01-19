@@ -14,15 +14,17 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import  { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+
 // react library for routing
 import { Switch, Redirect } from "react-router-dom";
 
 // core components
-import {AuthNavbar} from "components/navbars";
-import {AuthFooter} from "components/footers";
+import { AuthFooter } from "components/footers";
+import { AuthNavbar } from "components/navbars";
 
 import { routes } from "routes";
+
 import { useGetRoutes, useScrollToTop } from "./hooks";
 
 export const AuthLayout = () => {
@@ -36,21 +38,18 @@ export const AuthLayout = () => {
     };
   });
 
-
   useScrollToTop(mainContentRef);
-
-
 
   return (
     <>
       <div className="main-content" ref={mainContentRef}>
         <AuthNavbar />
         <Switch>
-          {useGetRoutes(routes,"/auth")}
+          {useGetRoutes(routes, "/auth")}
           <Redirect from="*" to="/auth/login" />
         </Switch>
       </div>
       <AuthFooter />
     </>
   );
-}
+};

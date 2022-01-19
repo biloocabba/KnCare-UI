@@ -9,18 +9,17 @@ interface Props {
   onChangeProp: (option: any) => void;
 }
 
-export const SelectMemberPaginate = ({regionNameProp,valueProp,onChangeProp}:Props) => {
+export const SelectMemberPaginate = ({ regionNameProp, valueProp, onChangeProp }: Props) => {
   const [regionName, setRegionName] = useState("");
 
   useEffect(() => {
     setRegionName(regionNameProp);
   }, [regionNameProp]);
 
-  const loadOptions = async (searchQuery:string, _:any, { page }: {page:number}) => {
-
+  const loadOptions = async (searchQuery: string, _: any, { page }: { page: number }) => {
     // @ts-ignore
-    const response = await getByRegion(regionName)
-      // `https://www.anapioficeandfire.com/api/houses?region=${regionName}&page=${page}&pageSize=10`
+    const response = await getByRegion(regionName);
+    // `https://www.anapioficeandfire.com/api/houses?region=${regionName}&page=${page}&pageSize=10`
 
     const responseJSON = await response.json();
 
@@ -33,7 +32,7 @@ export const SelectMemberPaginate = ({regionNameProp,valueProp,onChangeProp}:Pro
     };
   };
 
-  const onChange = (option:any) => {
+  const onChange = (option: any) => {
     if (typeof onChangeProp === "function") {
       onChangeProp(option);
     }
@@ -44,8 +43,8 @@ export const SelectMemberPaginate = ({regionNameProp,valueProp,onChangeProp}:Pro
       key={JSON.stringify(regionName)}
       value={valueProp || ""}
       loadOptions={loadOptions}
-      getOptionValue={(option:any) => option.id}
-      getOptionLabel={(option:any) => `${option.firstName} ${option.lastName}`}
+      getOptionValue={(option: any) => option.id}
+      getOptionLabel={(option: any) => `${option.firstName} ${option.lastName}`}
       onChange={onChange}
       isSearchable={true}
       isMulti
@@ -56,4 +55,3 @@ export const SelectMemberPaginate = ({regionNameProp,valueProp,onChangeProp}:Pro
     />
   );
 };
-

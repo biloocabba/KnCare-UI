@@ -24,7 +24,7 @@ const employeeMockResponse = [
     nationality: "",
     officeAddressCountry: "",
     officeAddressCity: "Calaya",
-    officeAddressStreet: "1 Bultman Trail"
+    officeAddressStreet: "1 Bultman Trail",
   },
   {
     id: 2,
@@ -49,7 +49,7 @@ const employeeMockResponse = [
     nationality: "",
     officeAddressCountry: "",
     officeAddressCity: "Rychnov nad Kněžnou",
-    officeAddressStreet: "65 Cascade Road"
+    officeAddressStreet: "65 Cascade Road",
   },
   {
     id: 3,
@@ -74,7 +74,7 @@ const employeeMockResponse = [
     nationality: "",
     officeAddressCountry: "",
     officeAddressCity: "Kenarilang",
-    officeAddressStreet: "11403 Ludington Place"
+    officeAddressStreet: "11403 Ludington Place",
   },
   {
     id: 4,
@@ -99,7 +99,7 @@ const employeeMockResponse = [
     nationality: "",
     officeAddressCountry: "",
     officeAddressCity: "Floreşti",
-    officeAddressStreet: "09 Lindbergh Terrace"
+    officeAddressStreet: "09 Lindbergh Terrace",
   },
   {
     id: 5,
@@ -124,7 +124,7 @@ const employeeMockResponse = [
     nationality: "",
     officeAddressCountry: "",
     officeAddressCity: "Kirkop",
-    officeAddressStreet: "1 Gulseth Lane" 
+    officeAddressStreet: "1 Gulseth Lane",
   },
 ] as Employee[];
 

@@ -28,21 +28,11 @@ function getClipboardData(e) {
 }
 
 function defaultRenderTag(props) {
-  let {
-    tag,
-    key,
-    disabled,
-    onRemove,
-    classNameRemove,
-    getTagDisplayValue,
-    ...other
-  } = props;
+  let { tag, key, disabled, onRemove, classNameRemove, getTagDisplayValue, ...other } = props;
   return (
     <span key={key} {...other}>
       {getTagDisplayValue(tag)}
-      {!disabled && (
-        <a className={classNameRemove} onClick={(e) => onRemove(key)} />
-      )}
+      {!disabled && <a className={classNameRemove} onClick={e => onRemove(key)} />}
     </span>
   );
 }
@@ -76,7 +66,7 @@ function defaultRenderLayout(tagComponents, inputComponent) {
 }
 
 function defaultPasteSplit(data) {
-  return data.split(" ").map((d) => d.trim());
+  return data.split(" ").map(d => d.trim());
 }
 
 const defaultInputProps = {
@@ -120,7 +110,7 @@ const TagsInput = React.forwardRef((props, ref) => {
     onChangeInput,
     ...other
   } = props;
-  const _getTagDisplayValueHook = (tagInner) => {
+  const _getTagDisplayValueHook = tagInner => {
     if (tagDisplayProp) {
       return tagInner[tagDisplayProp];
     }
@@ -128,7 +118,7 @@ const TagsInput = React.forwardRef((props, ref) => {
     return tagInner;
   };
 
-  const _makeTagHook = (tagInner) => {
+  const _makeTagHook = tagInner => {
     if (tagDisplayProp) {
       return {
         [tagDisplayProp]: tagInner,
@@ -138,7 +128,7 @@ const TagsInput = React.forwardRef((props, ref) => {
     return tagInner;
   };
 
-  const _removeTagHook = (indexInner) => {
+  const _removeTagHook = indexInner => {
     let valueInner = value.concat([]);
     if (indexInner > -1 && indexInner < valueInner.length) {
       let changed = valueInner.splice(indexInner, 1);
@@ -162,26 +152,21 @@ const TagsInput = React.forwardRef((props, ref) => {
     return tagState;
   };
 
-  const _addTagsHook = (tagsInner) => {
+  const _addTagsHook = tagsInner => {
     let { onValidationReject } = props;
 
     if (onlyUnique) {
       tagsInner = uniq(tagsInner);
-      tagsInner = tagsInner.filter((tag) =>
+      tagsInner = tagsInner.filter(tag =>
         value.every(
-          (currentTag) =>
-            _getTagDisplayValueHook(currentTag) !== _getTagDisplayValueHook(tag)
+          currentTag => _getTagDisplayValueHook(currentTag) !== _getTagDisplayValueHook(tag)
         )
       );
     }
 
-    const rejectedTags = tagsInner.filter(
-      (tag) => !_validateHook(_getTagDisplayValueHook(tag))
-    );
-    tagsInner = tagsInner.filter((tag) =>
-      _validateHook(_getTagDisplayValueHook(tag))
-    );
-    tagsInner = tagsInner.filter((tag) => {
+    const rejectedTags = tagsInner.filter(tag => !_validateHook(_getTagDisplayValueHook(tag)));
+    tagsInner = tagsInner.filter(tag => _validateHook(_getTagDisplayValueHook(tag)));
+    tagsInner = tagsInner.filter(tag => {
       let tagDisplayValueInner = _getTagDisplayValueHook(tag);
       if (typeof tagDisplayValueInner.trim === "function") {
         return tagDisplayValueInner.trim().length > 0;
@@ -218,15 +203,11 @@ const TagsInput = React.forwardRef((props, ref) => {
     return false;
   };
 
-  const _validateHook = (tagInner) => {
+  const _validateHook = tagInner => {
     return validate(tagInner) && validationRegex.test(tagInner);
   };
 
-  const _shouldPreventDefaultEventOnAddHook = (
-    addedInner,
-    emptyInner,
-    keyCodeInner
-  ) => {
+  const _shouldPreventDefaultEventOnAddHook = (addedInner, emptyInner, keyCodeInner) => {
     if (addedInner) {
       return true;
     }
@@ -239,10 +220,7 @@ const TagsInput = React.forwardRef((props, ref) => {
   };
 
   const focusHook = () => {
-    if (
-      inputElementRef.current &&
-      typeof inputElementRef.current.focus === "function"
-    ) {
+    if (inputElementRef.current && typeof inputElementRef.current.focus === "function") {
       inputElementRef.current.focus();
     }
 
@@ -250,10 +228,7 @@ const TagsInput = React.forwardRef((props, ref) => {
   };
 
   const blurHook = () => {
-    if (
-      inputElementRef.current &&
-      typeof inputElementRef.current.blur === "function"
-    ) {
+    if (inputElementRef.current && typeof inputElementRef.current.blur === "function") {
       inputElementRef.current.blur();
     }
 
@@ -271,7 +246,7 @@ const TagsInput = React.forwardRef((props, ref) => {
     return false;
   };
 
-  const addTagHook = (tagInner) => {
+  const addTagHook = tagInner => {
     return _addTagsHook([tagInner]);
   };
 
@@ -279,7 +254,7 @@ const TagsInput = React.forwardRef((props, ref) => {
     _clearInputHook();
   };
 
-  const handlePasteHook = (e) => {
+  const handlePasteHook = e => {
     if (!addOnPaste) {
       return;
     }
@@ -287,14 +262,12 @@ const TagsInput = React.forwardRef((props, ref) => {
     e.preventDefault();
 
     let dataInner = getClipboardData(e);
-    let tagsInner = pasteSplit(dataInner).map((tagInner) =>
-      _makeTagHook(tagInner)
-    );
+    let tagsInner = pasteSplit(dataInner).map(tagInner => _makeTagHook(tagInner));
 
     _addTagsHook(tagsInner);
   };
 
-  const handleKeyDownHook = (e) => {
+  const handleKeyDownHook = e => {
     if (e.defaultPrevented) {
       return;
     }
@@ -303,21 +276,13 @@ const TagsInput = React.forwardRef((props, ref) => {
     let emptyInner = tagInner === "";
     let keyCodeInner = e.keyCode;
     let keyInner = e.key;
-    let addInner =
-      addKeys.indexOf(keyCodeInner) !== -1 || addKeys.indexOf(keyInner) !== -1;
+    let addInner = addKeys.indexOf(keyCodeInner) !== -1 || addKeys.indexOf(keyInner) !== -1;
     let removeInner =
-      removeKeys.indexOf(keyCodeInner) !== -1 ||
-      removeKeys.indexOf(keyInner) !== -1;
+      removeKeys.indexOf(keyCodeInner) !== -1 || removeKeys.indexOf(keyInner) !== -1;
 
     if (addInner) {
       let addedInner = acceptHook();
-      if (
-        _shouldPreventDefaultEventOnAddHook(
-          addedInner,
-          emptyInner,
-          keyCodeInner
-        )
-      ) {
+      if (_shouldPreventDefaultEventOnAddHook(addedInner, emptyInner, keyCodeInner)) {
         e.preventDefault();
       }
     }
@@ -328,13 +293,13 @@ const TagsInput = React.forwardRef((props, ref) => {
     }
   };
 
-  const handleClickHook = (e) => {
+  const handleClickHook = e => {
     if (e.target === divElementRef.current) {
       focusHook();
     }
   };
 
-  const handleChangeHook = (e) => {
+  const handleChangeHook = e => {
     let { onChange } = props.inputProps;
     let tagInner = e.target.value;
 
@@ -349,7 +314,7 @@ const TagsInput = React.forwardRef((props, ref) => {
     }
   };
 
-  const handleOnFocusHook = (e) => {
+  const handleOnFocusHook = e => {
     let { onFocus } = props.inputProps;
 
     if (onFocus) {
@@ -359,7 +324,7 @@ const TagsInput = React.forwardRef((props, ref) => {
     setIsFocusedState(true);
   };
 
-  const handleOnBlurHook = (e) => {
+  const handleOnBlurHook = e => {
     let { onBlur } = props.inputProps;
 
     setIsFocusedState(false);
@@ -378,7 +343,7 @@ const TagsInput = React.forwardRef((props, ref) => {
     }
   };
 
-  const handleRemoveHook = (tagInner) => {
+  const handleRemoveHook = tagInner => {
     _removeTagHook(tagInner);
   };
 
@@ -398,14 +363,12 @@ const TagsInput = React.forwardRef((props, ref) => {
     return propsInner;
   };
 
-  const inputValueHook = (propsInner) => {
+  const inputValueHook = propsInner => {
     return propsInner.currentValue || propsInner.inputValue || "";
   };
 
   const hasControlledInputHook = () => {
-    return (
-      typeof onChangeInput === "function" && typeof inputValue === "string"
-    );
+    return typeof onChangeInput === "function" && typeof inputValue === "string";
   };
 
   let divClassName = className;
@@ -441,15 +404,15 @@ const TagsInput = React.forwardRef((props, ref) => {
     props: props,
     _getTagState: tagState,
 
-    _getTagDisplayValue: (tagInner) => {
+    _getTagDisplayValue: tagInner => {
       return _getTagDisplayValueHook(tagInner);
     },
 
-    _makeTag: (tagInner) => {
+    _makeTag: tagInner => {
       return _makeTagHook(tagInner);
     },
 
-    _removeTag: (indexInner) => {
+    _removeTag: indexInner => {
       _removeTagHook(indexInner);
     },
 
@@ -461,20 +424,16 @@ const TagsInput = React.forwardRef((props, ref) => {
       return _tagHook();
     },
 
-    _addTags: (tagsInner) => {
+    _addTags: tagsInner => {
       return _addTagsHook(tagsInner);
     },
 
-    _validate: (tagInner) => {
+    _validate: tagInner => {
       return _validateHook(tagInner);
     },
 
     _shouldPreventDefaultEventOnAdd: (addedInner, emptyInner, keyCodeInner) => {
-      return _shouldPreventDefaultEventOnAddHook(
-        addedInner,
-        emptyInner,
-        keyCodeInner
-      );
+      return _shouldPreventDefaultEventOnAddHook(addedInner, emptyInner, keyCodeInner);
     },
 
     focus: () => {
@@ -489,7 +448,7 @@ const TagsInput = React.forwardRef((props, ref) => {
       return acceptHook();
     },
 
-    addTag: (tagInner) => {
+    addTag: tagInner => {
       return addTagHook(tagInner);
     },
 
@@ -497,31 +456,31 @@ const TagsInput = React.forwardRef((props, ref) => {
       clearInputHook();
     },
 
-    handlePaste: (e) => {
+    handlePaste: e => {
       handlePasteHook(e);
     },
 
-    handleKeyDown: (e) => {
+    handleKeyDown: e => {
       handleKeyDownHook(e);
     },
 
-    handleClick: (e) => {
+    handleClick: e => {
       handleClickHook(e);
     },
 
-    handleChange: (e) => {
+    handleChange: e => {
       handleChangeHook(e);
     },
 
-    handleOnFocus: (e) => {
+    handleOnFocus: e => {
       handleOnFocusHook(e);
     },
 
-    handleOnBlur: (e) => {
+    handleOnBlur: e => {
       handleOnBlurHook(e);
     },
 
-    handleRemove: (tagInner) => {
+    handleRemove: tagInner => {
       handleRemoveHook(tagInner);
     },
 
@@ -529,7 +488,7 @@ const TagsInput = React.forwardRef((props, ref) => {
       return inputPropsHook();
     },
 
-    inputValue: (propsInner) => {
+    inputValue: propsInner => {
       return inputValueHook(propsInner);
     },
 
@@ -571,9 +530,7 @@ TagsInput.defaultProps = {
 
 TagsInput.propTypes = {
   focusedClassName: PropTypes.string,
-  addKeys: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  ),
+  addKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
   addOnBlur: PropTypes.bool,
   addOnPaste: PropTypes.bool,
   currentValue: PropTypes.string,
@@ -581,9 +538,7 @@ TagsInput.propTypes = {
   inputProps: PropTypes.object,
   onChange: PropTypes.func.isRequired,
   onChangeInput: PropTypes.func,
-  removeKeys: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  ),
+  removeKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
   renderInput: PropTypes.func,
   renderTag: PropTypes.func,
   renderLayout: PropTypes.func,

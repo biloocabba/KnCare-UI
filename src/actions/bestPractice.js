@@ -1,3 +1,5 @@
+import BestPracticeService from "../services/BestPracticeService";
+
 import {
   CREATE_BEST_PRACTICE,
   UPDATE_BEST_PRACTICE,
@@ -13,33 +15,30 @@ import {
   API_SEND_END,
 } from "./types/index";
 
-import BestPracticeService from "../services/BestPracticeService";
+export const createBestPractice = (title, description, content) => async dispatch => {
+  try {
+    const res = await BestPracticeService.create({
+      title,
+      description,
+      content,
+    });
 
-export const createBestPractice =
-  (title, description, content) => async dispatch => {
-    try {
-      const res = await BestPracticeService.create({
-        title,
-        description,
-        content,
-      });
+    dispatch({
+      type: CREATE_BEST_PRACTICE,
+      payload: res.data,
+    });
 
-      dispatch({
-        type: CREATE_BEST_PRACTICE,
-        payload: res.data,
-      });
-
-      return Promise.resolve(res.data);
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  };
+    return Promise.resolve(res.data);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
 
 export const retrieveBestPractices = () => async dispatch => {
   try {
     dispatch({
       type: API_SEND_START,
-      payload: ''
+      payload: "",
     });
 
     const res = await BestPracticeService.getAll();
@@ -51,7 +50,7 @@ export const retrieveBestPractices = () => async dispatch => {
 
     dispatch({
       type: API_SEND_END,
-      payload: ''
+      payload: "",
     });
   } catch (err) {
     console.log(err);

@@ -15,15 +15,8 @@
 
 */
 import React from "react";
+
 // react plugin that prints a given react component
-import ReactToPrint from "react-to-print";
-// react component for creating dynamic tables
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-// react component used to create sweet alerts
-import ReactBSAlert from "react-bootstrap-sweetalert";
-// reactstrap components
 import {
   Button,
   ButtonGroup,
@@ -34,19 +27,27 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
-import { dataTable } from "variables/general";
+
+import ReactBSAlert from "react-bootstrap-sweetalert";
+import BootstrapTable from "react-bootstrap-table-next";
+// react component for creating dynamic tables
+import paginationFactory from "react-bootstrap-table2-paginator";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import ReactToPrint from "react-to-print";
+// react component used to create sweet alerts
+
+// reactstrap components
+
 import { BoxHeader } from "components/headers";
+
+import { dataTable } from "variables/general";
 
 const pagination = paginationFactory({
   page: 1,
   alwaysShowAllBtns: true,
   showTotal: true,
   withFirstAndLast: false,
-  sizePerPageRenderer: ({
-    options,
-    currSizePerPage,
-    onSizePerPageChange,
-  }) => (
+  sizePerPageRenderer: ({ options, currSizePerPage, onSizePerPageChange }) => (
     <div className="dataTables_length" id="datatable-basic_length">
       <label>
         Show{" "}
@@ -71,7 +72,7 @@ const pagination = paginationFactory({
 
 const { SearchBar } = Search;
 
-function ArchivePage() {
+var ArchivePage = () => {
   const [alert, setAlert] = React.useState(null);
   const componentRef = React.useRef(null);
   // this function will copy to clipboard an entire table,
@@ -109,7 +110,7 @@ function ArchivePage() {
         btnSize=""
       >
         Copied to clipboard!
-      </ReactBSAlert>,
+      </ReactBSAlert>
     );
   };
 
@@ -124,9 +125,8 @@ function ArchivePage() {
               <CardHeader>
                 <h3 className="mb-0">React Bootstrap Table 2</h3>
                 <p className="text-sm mb-0">
-                  This is an exmaple of data table using the well known
-                  react-bootstrap-table2 plugin. This is a minimal setup in
-                  order to get started fast.
+                  This is an exmaple of data table using the well known react-bootstrap-table2
+                  plugin. This is a minimal setup in order to get started fast.
                 </p>
               </CardHeader>
               <ToolkitProvider
@@ -168,10 +168,7 @@ function ArchivePage() {
               >
                 {props => (
                   <div className="py-4 table-responsive">
-                    <div
-                      id="datatable-basic_filter"
-                      className="dataTables_filter px-4 pb-1"
-                    >
+                    <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
                       <label>
                         Search:
                         <SearchBar
@@ -195,9 +192,8 @@ function ArchivePage() {
               <CardHeader>
                 <h3 className="mb-0">Action buttons</h3>
                 <p className="text-sm mb-0">
-                  This is an exmaple of data table using the well known
-                  react-bootstrap-table2 plugin. This is a minimal setup in
-                  order to get started fast.
+                  This is an exmaple of data table using the well known react-bootstrap-table2
+                  plugin. This is a minimal setup in order to get started fast.
                 </p>
               </CardHeader>
               <ToolkitProvider
@@ -249,11 +245,7 @@ function ArchivePage() {
                               size="sm"
                               id="copy-tooltip"
                               onClick={() =>
-                                copyToClipboardAsTable(
-                                  document.getElementById(
-                                    "react-bs-table",
-                                  ),
-                                )
+                                copyToClipboardAsTable(document.getElementById("react-bs-table"))
                               }
                             >
                               <span>Copy</span>
@@ -272,19 +264,11 @@ function ArchivePage() {
                               content={() => componentRef.current}
                             />
                           </ButtonGroup>
-                          <UncontrolledTooltip
-                            placement="top"
-                            target="print-tooltip"
-                          >
-                            This will open a print page with the visible
-                            rows of the table.
+                          <UncontrolledTooltip placement="top" target="print-tooltip">
+                            This will open a print page with the visible rows of the table.
                           </UncontrolledTooltip>
-                          <UncontrolledTooltip
-                            placement="top"
-                            target="copy-tooltip"
-                          >
-                            This will copy to your clipboard the visible
-                            rows of the table.
+                          <UncontrolledTooltip placement="top" target="copy-tooltip">
+                            This will copy to your clipboard the visible rows of the table.
                           </UncontrolledTooltip>
                         </Col>
                         <Col xs={12} sm={6}>
@@ -321,6 +305,6 @@ function ArchivePage() {
       </Container>
     </>
   );
-}
+};
 
 export default ArchivePage;

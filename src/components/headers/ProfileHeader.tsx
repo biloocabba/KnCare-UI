@@ -24,10 +24,7 @@ export const ProfileHeader = () => {
         className="header pb-6 d-flex align-items-center"
         style={{
           minHeight: "500px",
-          backgroundImage:
-            'url("' +
-            require("assets/img/theme/profile-cover.jpg").default +
-            '")',
+          backgroundImage: 'url("' + require("assets/img/theme/profile-cover.jpg").default + '")',
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}
@@ -39,9 +36,8 @@ export const ProfileHeader = () => {
             <Col lg="7" md="10">
               <h1 className="display-2 text-white">Hello Jesse</h1>
               <p className="text-white mt-0 mb-5">
-                This is your profile page. You can see the progress you've
-                made with your work and manage your projects or assigned
-                tasks
+                This is your profile page. You can see the progress you've made with your work and
+                manage your projects or assigned tasks
               </p>
               <Button
                 className="btn-neutral"

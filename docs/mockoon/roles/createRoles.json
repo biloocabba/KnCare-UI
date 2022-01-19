@@ -1,104 +1,104 @@
 {
-    "source": "mockoon:1.15.0",
-    "data": [
-        {
-            "type": "environment",
-            "item": {
+  "source": "mockoon:1.15.0",
+  "data": [
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 17,
+        "name": "New environment",
+        "endpointPrefix": "",
+        "latency": 0,
+        "port": 8000,
+        "hostname": "0.0.0.0",
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "roles",
+            "responses": [
+              {
                 "uuid": "",
-                "lastMigration": 17,
-                "name": "New environment",
-                "endpointPrefix": "",
+                "body": "\n  [\n    {\n      \"id\": 1,\n      \"name\": \"None\",\n      \"rankedBefore\": \"\",\n      \"rankedAfter\": \"\",\n      \"active\": true,\n      \"createdAt\": \"28.07.2021\",\n      \"updatedAt\": \"28.07.2021\",\n      \"rank\": 0\n\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Admin\",\n      \"rankedBefore\": \"\",\n      \"rankedAfter\": \"\",\n      \"active\": true,\n      \"createdAt\": \"28.07.2021\",\n      \"updatedAt\": \"28.07.2021\",\n      \"rank\": 20\n      \n    },\n    {\n      \"id\": 3,\n      \"name\": \"User\",\n      \"rankedBefore\": \"\",\n      \"rankedAfter\": \"\",\n      \"active\": true,\n      \"createdAt\": \"28.07.2021\",\n      \"updatedAt\": \"28.07.2021\",\n      \"rank\": 10\n\n    }\n]\n",
                 "latency": 0,
-                "port": 8000,
-                "hostname": "0.0.0.0",
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "roles",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "\n  [\n    {\n      \"id\": 1,\n      \"name\": \"None\",\n      \"rankedBefore\": \"\",\n      \"rankedAfter\": \"\",\n      \"active\": true,\n      \"createdAt\": \"28.07.2021\",\n      \"updatedAt\": \"28.07.2021\",\n      \"rank\": 0\n\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Admin\",\n      \"rankedBefore\": \"\",\n      \"rankedAfter\": \"\",\n      \"active\": true,\n      \"createdAt\": \"28.07.2021\",\n      \"updatedAt\": \"28.07.2021\",\n      \"rank\": 20\n      \n    },\n    {\n      \"id\": 3,\n      \"name\": \"User\",\n      \"rankedBefore\": \"\",\n      \"rankedAfter\": \"\",\n      \"active\": true,\n      \"createdAt\": \"28.07.2021\",\n      \"updatedAt\": \"28.07.2021\",\n      \"rank\": 10\n\n    }\n]\n",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false,
-                                "fallbackTo404": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "post",
-                        "endpoint": "roles",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false,
-                                "fallbackTo404": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "proxyRemovePrefix": false,
-                "https": false,
-                "cors": true,
-                "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Methods",
-                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Headers",
-                        "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-                    }
-                ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ]
-            }
-        }
-    ]
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false,
+                "fallbackTo404": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "post",
+            "endpoint": "roles",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{}",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false,
+                "fallbackTo404": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "proxyRemovePrefix": false,
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ]
+      }
+    }
+  ]
 }

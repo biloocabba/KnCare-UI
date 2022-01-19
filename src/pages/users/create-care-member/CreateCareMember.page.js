@@ -1,43 +1,47 @@
 /* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from "react-redux";
+
 import { useHistory } from "react-router";
-import { useParams } from "react-router-dom";
 
 import {
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Col,
-    Container,
-    Form,
-    FormGroup,
-    Input,
-    Row,
-  } from "reactstrap";
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Row,
+} from "reactstrap";
+
+import { useParams } from "react-router-dom";
+
+import { BoxHeader } from "components/headers";
+
+import { CREATE_CARE_MEMBER_ID } from "app.consts";
+import { EMPLOYEE_SEARCH } from "pages/users";
 
 // import { createCareMember } from "../../../actions/careMembers";
-import { BoxHeader } from "components/headers";
+
 // import { employeesData } from 'mock-data/employees.js'
-import { selectEmployeeById } from 'redux/features/employee';
-import { createCareMember } from 'redux/features/care-member';
+import { createCareMember } from "redux/features/care-member";
+import { selectEmployeeById } from "redux/features/employee";
 
-import { EMPLOYEE_SEARCH } from "pages/users";
 import { CareMemberPanel } from "../panels";
-import { CREATE_CARE_MEMBER_ID } from "app.consts";
 
-export const CreateCareMemberPage = (props) => {
-
+export const CreateCareMemberPage = props => {
   let { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
 
   //Use selector from slices
   const currentRole = "admin";
-  const employee =useSelector(selectEmployeeById(parseInt(id)));
-  const rolesAsOptions =[]; 
-  const groupsAsOptions =[];
-  
+  const employee = useSelector(selectEmployeeById(parseInt(id)));
+  const rolesAsOptions = [];
+  const groupsAsOptions = [];
+
   /*
   const careRoles = useSelector(state => {
     return state.categories.careRoles.map(role => {
@@ -70,9 +74,9 @@ export const CreateCareMemberPage = (props) => {
     onBoardDate,
     offBoardDate: defaultOffBoardDate,
     role: "",
-    group: "",    
-    id:CREATE_CARE_MEMBER_ID,
-    employeeId:employee.id
+    group: "",
+    id: CREATE_CARE_MEMBER_ID,
+    employeeId: employee.id,
   };
 
   console.log(careMember);
@@ -83,16 +87,14 @@ export const CreateCareMemberPage = (props) => {
   // const [group, setGroup] = useState(groupOptions[0]);
   // const [offboardingDate, setOffboardingDate] = useState(defaultOffBoardDate);
   // const [careMember, setCareMember] = useState(defaultOffBoardDate);
- // const onBoardDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear() - 1}`;
+  // const onBoardDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear() - 1}`;
   // let [employee, setEmployee] = useState();
-  
+
   // if(!employee){
   //   employee=employeesData.find(employee => employee.id === parseInt(id));
   //   setEmployee(employee);
   //   setCareMember({...careMember,...employee})
   // }
-
- 
 
   // const saveCareMember = () => {
   //   const careMemberInfo = {
@@ -130,10 +132,9 @@ export const CreateCareMemberPage = (props) => {
   //   return true;
   // };
 
-  const saveCareMember = (careMember) => {
+  const saveCareMember = careMember => {
     dispatch(createCareMember(careMember));
-  }
-
+  };
 
   return (
     <>
@@ -154,7 +155,7 @@ export const CreateCareMemberPage = (props) => {
                       type="button"
                       color="info"
                       href="#dsfkjlsi39ds9d97876s7d"
-                       onClick={() => history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)}
+                      onClick={() => history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Employees
                     </Button>
@@ -162,13 +163,13 @@ export const CreateCareMemberPage = (props) => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <CareMemberPanel 
+                <CareMemberPanel
                   careMember={careMember}
                   groupOptions={groupsAsOptions}
                   roleOptions={rolesAsOptions}
-                  onSave ={saveCareMember}   
+                  onSave={saveCareMember}
                   // isCreate={true}
-                />              
+                />
               </CardBody>
             </Card>
           </Col>

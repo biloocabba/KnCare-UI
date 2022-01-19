@@ -1,16 +1,16 @@
-import http from './http-common'
+import http from "./http-common";
 
 const getAllEmailDrafts = () => {
-  return http.get('/emailDrafts')
-}
+  return http.get("/emailDrafts");
+};
 
-const searchEmailDrafts = (queryParams) => {
+const searchEmailDrafts = queryParams => {
   return http.get(`/emailDrafts?${queryParams}`);
 };
 
 const emailDraftService = {
   getAllEmailDrafts,
-  searchEmailDrafts
+  searchEmailDrafts,
 };
 
-export default emailDraftService
+export default emailDraftService;

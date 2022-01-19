@@ -1,1 +1,1 @@
-export * from "./WorldOverviewPage"
+export * from "./WorldOverviewPage";

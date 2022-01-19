@@ -1,13 +1,18 @@
 import { useState } from "react";
+
 import { Container } from "reactstrap";
-import { EditGroupPanel } from "..";
+
 import { BoxHeader } from "components/headers";
-import { useAppDispatch, useAppSelector } from "redux/app";
-import { createGroup } from "redux/features";
+
 import { Group } from "types";
 
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { createGroup } from "redux/features";
+
+import { EditGroupPanel } from "..";
+
 export const CreateGroupPage = () => {
-  const initialState:Partial<Group> = {
+  const initialState: Partial<Group> = {
     name: "",
     description: "",
     members: [],
@@ -20,15 +25,13 @@ export const CreateGroupPage = () => {
   const [addMembersCollapse, setAddMembersCollapse] = useState(false);
   // const [alert, setAlert] = useState(groupsState.isError);
 
-
   const onSave = () => {
     dispatch(createGroup(group));
   };
 
-
   return (
     <>
-      <BoxHeader/>
+      <BoxHeader />
       {alert}
 
       <Container className="mt--6" fluid>

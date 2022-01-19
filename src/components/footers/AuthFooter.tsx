@@ -37,10 +37,7 @@ export const AuthFooter = () => {
             <Col xl="6">
               <Nav className="nav-footer justify-content-center justify-content-xl-end">
                 <NavItem>
-                  <NavLink
-                    href="https://www.creative-tim.com?ref=adpr-auth-footer"
-                    target="_blank"
-                  >
+                  <NavLink href="https://www.creative-tim.com?ref=adpr-auth-footer" target="_blank">
                     Creative Tim
                   </NavLink>
                 </NavItem>
@@ -53,10 +50,7 @@ export const AuthFooter = () => {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink
-                    href="http://blog.creative-tim.com?ref=adpr-auth-footer"
-                    target="_blank"
-                  >
+                  <NavLink href="http://blog.creative-tim.com?ref=adpr-auth-footer" target="_blank">
                     Blog
                   </NavLink>
                 </NavItem>
@@ -75,4 +69,4 @@ export const AuthFooter = () => {
       </footer>
     </>
   );
-}
+};

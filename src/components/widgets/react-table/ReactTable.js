@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 
 import { Button } from "reactstrap";
 
+import PropTypes from "prop-types";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
@@ -19,7 +19,7 @@ export const ReactTable = ({
   selectedRows,
   setSelectedRows,
   searchBarPlaceholder,
-  selectButtonText
+  selectButtonText,
 }) => {
   const formatActionButtonCell = (cell, row) => {
     return (
@@ -50,21 +50,15 @@ export const ReactTable = ({
     );
   };
 
-  const [formatterFunction, setFormatterFunction] = useState(false)
+  const [formatterFunction, setFormatterFunction] = useState(false);
 
-  if(!formatterFunction){
-    columns[columns.length-1].formatter =formatActionButtonCell; //we can/should force formatter always to be on last column
-    setFormatterFunction(true);   
+  if (!formatterFunction) {
+    columns[columns.length - 1].formatter = formatActionButtonCell; //we can/should force formatter always to be on last column
+    setFormatterFunction(true);
   }
 
   return (
-    <ToolkitProvider
-      data={data}
-      keyField={keyField}
-      columns={columns}
-      bootstrap4
-      search
-    >
+    <ToolkitProvider data={data} keyField={keyField} columns={columns} bootstrap4 search>
       {props => (
         <div className="py-4 table-responsive">
           <div
@@ -74,25 +68,19 @@ export const ReactTable = ({
           >
             <label>
               {searchBarPlaceholder}
-              <SearchBar
-                className="form-control-sm mr-3"
-                placeholder=''
-                {...props.searchProps}
-              />
+              <SearchBar className="form-control-sm mr-3" placeholder="" {...props.searchProps} />
             </label>
 
-          {
-              (selectButtonText) &&
-            <>
-              <Button
-                className="btn btn-success"
-                onClick={() => console.log("selectedRows", selectedRows)}
-              >
-              {selectButtonText}
-              </Button>
-            </>        
-          }
-          
+            {selectButtonText && (
+              <>
+                <Button
+                  className="btn btn-success"
+                  onClick={() => console.log("selectedRows", selectedRows)}
+                >
+                  {selectButtonText}
+                </Button>
+              </>
+            )}
           </div>
           <BootstrapTable
             {...props.baseProps}
@@ -116,6 +104,6 @@ ReactTable.propTypes = {
   onDeleteItemClick: PropTypes.func.isRequired,
   selectedRows: PropTypes.array.isRequired,
   setSelectedRows: PropTypes.func.isRequired,
-  searchBarPlaceholder:PropTypes.string,
-  selectButtonText:PropTypes.string
+  searchBarPlaceholder: PropTypes.string,
+  selectButtonText: PropTypes.string,
 };

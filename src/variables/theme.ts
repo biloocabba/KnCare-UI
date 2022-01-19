@@ -42,7 +42,7 @@ export const colors = {
   transparent: "transparent",
 };
 
-export const mode:Theme = "light";
+export const mode: Theme = "light";
 export const fonts = {
   base: "Open Sans",
 };

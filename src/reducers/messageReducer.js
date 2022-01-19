@@ -1,7 +1,5 @@
 import { SET_MESSAGE, CLEAR_MESSAGE } from "../actions/types";
 
-
-
 export default function (state = {}, action) {
   const { type, payload } = action;
 

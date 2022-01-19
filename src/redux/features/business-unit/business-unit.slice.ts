@@ -1,11 +1,10 @@
-import {
-  AsyncThunk,
-  createAsyncThunk,
-  createSlice  
-} from "@reduxjs/toolkit";
+import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import { BusinessUnit } from "types/domain";
-import { businessUnitService } from ".";
+
 import { StateType } from "redux/features/common";
+
+import { businessUnitService } from ".";
 
 // type BusinessUnitStateType = {
 //   businessUnits: BusinessUnit[];
@@ -23,14 +22,11 @@ const initialState: StateType<BusinessUnit> = {
   error: {},
 };
 
-export const fetchBusinessUnits = createAsyncThunk(
-  "businessUnit/fetchBusinessUnits",
-  async () => {
-    const { data } = await businessUnitService.listBusinessUnits();
+export const fetchBusinessUnits = createAsyncThunk("businessUnit/fetchBusinessUnits", async () => {
+  const { data } = await businessUnitService.listBusinessUnits();
 
-    return data;
-  },
-);
+  return data;
+});
 
 export const businessUnitSlice = createSlice({
   name: "businessUnit",

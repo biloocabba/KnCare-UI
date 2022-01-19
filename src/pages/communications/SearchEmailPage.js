@@ -8,9 +8,11 @@
 =========================================================
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { BoxHeader } from "components/headers";
 import React, { useEffect, useState } from "react";
+
 // react component used to create sweet alerts
+import { Button, ButtonGroup, Card, Col, Container, Row, UncontrolledTooltip } from "reactstrap";
+
 import ReactBSAlert from "react-bootstrap-sweetalert";
 // react component for creating dynamic tables
 import BootstrapTable from "react-bootstrap-table-next";
@@ -18,16 +20,10 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 // react plugin that prints a given react component
 import ReactToPrint from "react-to-print";
+
 // reactstrap components
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Col,
-  Container,
-  Row,
-  UncontrolledTooltip,
-} from "reactstrap";
+import { BoxHeader } from "components/headers";
+
 import emailService from "services/emailService";
 
 const pagination = paginationFactory({
@@ -35,11 +31,7 @@ const pagination = paginationFactory({
   alwaysShowAllBtns: true,
   showTotal: true,
   withFirstAndLast: false,
-  sizePerPageRenderer: ({
-    options,
-    currSizePerPage,
-    onSizePerPageChange,
-  }) => (
+  sizePerPageRenderer: ({ options, currSizePerPage, onSizePerPageChange }) => (
     <div className="dataTables_length" id="datatable-basic_length">
       <label>
         Show{" "}
@@ -64,7 +56,7 @@ const pagination = paginationFactory({
 
 const { SearchBar } = Search;
 
-function ReactBSTables(props) {
+var ReactBSTables = props => {
   const [alert, setAlert] = React.useState(null);
   const componentRef = React.useRef(null);
   // this function will copy to clipboard an entire table,
@@ -102,7 +94,7 @@ function ReactBSTables(props) {
         btnSize=""
       >
         Copied to clipboard!
-      </ReactBSAlert>,
+      </ReactBSAlert>
     );
   };
 
@@ -133,12 +125,7 @@ function ReactBSTables(props) {
   const formatActionButtonCell = (cell, row) => {
     return (
       <>
-        <Button
-          id={row.id}
-          className="btn-icon btn-2"
-          type="button"
-          onClick={e => EditDraft(e)}
-        >
+        <Button id={row.id} className="btn-icon btn-2" type="button" onClick={e => EditDraft(e)}>
           Edit
         </Button>
       </>
@@ -187,11 +174,7 @@ function ReactBSTables(props) {
                               size="sm"
                               id="copy-tooltip"
                               onClick={() =>
-                                copyToClipboardAsTable(
-                                  document.getElementById(
-                                    "react-bs-table",
-                                  ),
-                                )
+                                copyToClipboardAsTable(document.getElementById("react-bs-table"))
                               }
                             >
                               <span>Copy</span>
@@ -210,19 +193,11 @@ function ReactBSTables(props) {
                               content={() => componentRef.current}
                             />
                           </ButtonGroup>
-                          <UncontrolledTooltip
-                            placement="top"
-                            target="print-tooltip"
-                          >
-                            This will open a print page with the visible
-                            rows of the table.
+                          <UncontrolledTooltip placement="top" target="print-tooltip">
+                            This will open a print page with the visible rows of the table.
                           </UncontrolledTooltip>
-                          <UncontrolledTooltip
-                            placement="top"
-                            target="copy-tooltip"
-                          >
-                            This will copy to your clipboard the visible
-                            rows of the table.
+                          <UncontrolledTooltip placement="top" target="copy-tooltip">
+                            This will copy to your clipboard the visible rows of the table.
                           </UncontrolledTooltip>
                         </Col>
                         <Col xs={12} sm={6}>
@@ -260,6 +235,6 @@ function ReactBSTables(props) {
       </Container>
     </>
   );
-}
+};
 
 export default ReactBSTables;

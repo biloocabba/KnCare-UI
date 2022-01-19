@@ -14,18 +14,12 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { searchBestPractices } from "actions/bestPractice";
-import { BoxHeader } from "components/headers";
 import React, { useState } from "react";
+
 // react plugin that prints a given react component
 // react component for creating dynamic tables
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import ReactDatetime from "react-datetime";
 import { useDispatch, useSelector } from "react-redux";
-// react component used to create sweet alerts
-// reactstrap components
+
 import {
   Button,
   Card,
@@ -40,6 +34,17 @@ import {
   Input,
   Row,
 } from "reactstrap";
+
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import ReactDatetime from "react-datetime";
+// react component used to create sweet alerts
+// reactstrap components
+
+import { BoxHeader } from "components/headers";
+
+import { searchBestPractices } from "actions/bestPractice";
 
 const pagination = paginationFactory({
   page: 1,
@@ -71,7 +76,7 @@ const pagination = paginationFactory({
 
 const { SearchBar } = Search;
 
-export const SearchBestPracticesPage = (props) => {
+export const SearchBestPracticesPage = props => {
   const [alert, setAlert] = React.useState(null);
   // this function will copy to clipboard an entire table,
   // so you can paste it inside an excel or csv file
@@ -113,12 +118,8 @@ export const SearchBestPracticesPage = (props) => {
 
   // limit description respresintation to 50 characters to fit it on the page
   bestPractices.forEach(bestPractice => {
-    if (
-      bestPractice.description !== null &&
-      bestPractice.description.length > 50
-    ) {
-      bestPractice.description =
-        bestPractice.description.substring(0, 50) + "...";
+    if (bestPractice.description !== null && bestPractice.description.length > 50) {
+      bestPractice.description = bestPractice.description.substring(0, 50) + "...";
     }
   });
 
@@ -160,10 +161,7 @@ export const SearchBestPracticesPage = (props) => {
                     <Card>
                       <CardImg
                         alt="..."
-                        src={
-                          require("assets/img/care/care-credit-cards.png")
-                            .default
-                        }
+                        src={require("assets/img/care/care-credit-cards.png").default}
                         top
                       />
                       <CardBody>
@@ -172,17 +170,10 @@ export const SearchBestPracticesPage = (props) => {
                         </CardTitle>
                         <CardText className="mb-4">
                           <Row className="justify-content-center">
-                            <Col lg="12">
-                              Recognize a colleague from everywhere in the
-                              world
-                            </Col>
+                            <Col lg="12">Recognize a colleague from everywhere in the world</Col>
                           </Row>
                         </CardText>
-                        <Button
-                          color="primary"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
+                        <Button color="primary" href="#pablo" onClick={e => e.preventDefault()}>
                           Read More
                         </Button>
                       </CardBody>
@@ -190,11 +181,7 @@ export const SearchBestPracticesPage = (props) => {
                   </Col>
                   <Col lg="4">
                     <Card>
-                      <CardImg
-                        alt="..."
-                        src={require("assets/img/care/huddle.png").default}
-                        top
-                      />
+                      <CardImg alt="..." src={require("assets/img/care/huddle.png").default} top />
                       <CardBody>
                         <CardTitle className="mb-3 text-center" tag="h3">
                           Huddles
@@ -202,8 +189,8 @@ export const SearchBestPracticesPage = (props) => {
                         <CardText className="mb-4">
                           <Row className="justify-content-center">
                             <Col lg="12">
-                              Guide the team in a discussion around the
-                              topics and what the idea means
+                              Guide the team in a discussion around the topics and what the idea
+                              means
                             </Col>
                           </Row>
                         </CardText>
@@ -222,10 +209,7 @@ export const SearchBestPracticesPage = (props) => {
                     <Card>
                       <CardImg
                         alt="..."
-                        src={
-                          require("assets/img/care/remote-work.png")
-                            .default
-                        }
+                        src={require("assets/img/care/remote-work.png").default}
                         top
                       />
                       <CardBody>
@@ -237,11 +221,7 @@ export const SearchBestPracticesPage = (props) => {
                             <Col lg="12">Playbook for remote work</Col>
                           </Row>
                         </CardText>
-                        <Button
-                          color="primary"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
+                        <Button color="primary" href="#pablo" onClick={e => e.preventDefault()}>
                           Read More
                         </Button>
                       </CardBody>
@@ -264,10 +244,7 @@ export const SearchBestPracticesPage = (props) => {
                 <Row>
                   <Col md="3">
                     <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="author"
-                      >
+                      <label className="form-control-label" htmlFor="author">
                         Author
                       </label>
                       <Input
@@ -281,10 +258,7 @@ export const SearchBestPracticesPage = (props) => {
                   </Col>
                   <Col md="3">
                     <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="title"
-                      >
+                      <label className="form-control-label" htmlFor="title">
                         Title
                       </label>
                       <Input
@@ -312,10 +286,7 @@ export const SearchBestPracticesPage = (props) => {
                   </Col>
                   <Col md="2">
                     <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="example3cols2Input"
-                      >
+                      <label className="form-control-label" htmlFor="example3cols2Input">
                         Creation Date
                       </label>
                       <ReactDatetime
@@ -405,10 +376,7 @@ export const SearchBestPracticesPage = (props) => {
               >
                 {props => (
                   <div className="py-4 table-responsive">
-                    <div
-                      id="datatable-basic_filter"
-                      className="dataTables_filter px-4 pb-1"
-                    >
+                    <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
                       <label>
                         Search:
                         <SearchBar
@@ -529,4 +497,4 @@ export const SearchBestPracticesPage = (props) => {
       </Container>
     </>
   );
-}
+};

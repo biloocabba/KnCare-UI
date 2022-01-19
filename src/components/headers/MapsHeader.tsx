@@ -1,15 +1,5 @@
-
-
 // reactstrap components
-import {
-  Breadcrumb,
-  Button,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
-
-
+import { Breadcrumb, Button, Container, Row, Col } from "reactstrap";
 
 interface Props {
   name: string;
@@ -19,13 +9,18 @@ interface Props {
   onAutoOffboardedClick: () => void;
 }
 
-
-export const MapsHeader = ({ name, onActiveMembersClick, onNewMembersClick, onSelfResignedClick, onAutoOffboardedClick }:Props) => {
+export const MapsHeader = ({
+  name,
+  onActiveMembersClick,
+  onNewMembersClick,
+  onSelfResignedClick,
+  onAutoOffboardedClick,
+}: Props) => {
   // const mapData = useSelector(state => state.mapKpis);
 
   // const getMap = (e, actionType) => {
   //   e.preventDefault();
-    
+
   //   dispatch(getMapData(actionType));
   // }
 
@@ -36,9 +31,7 @@ export const MapsHeader = ({ name, onActiveMembersClick, onNewMembersClick, onSe
           <div className="header-body">
             <Row className="align-items-center py-4">
               <Col lg="6" xs="7">
-                <h6 className="fullcalendar-title h2 text-white d-inline-block mb-0">
-                  {name}
-                </h6>{" "}
+                <h6 className="fullcalendar-title h2 text-white d-inline-block mb-0">{name}</h6>{" "}
                 <Breadcrumb
                   className="d-none d-md-inline-block ml-lg-4"
                   listClassName="breadcrumb-links breadcrumb-dark"
@@ -56,28 +49,36 @@ export const MapsHeader = ({ name, onActiveMembersClick, onNewMembersClick, onSe
                 </Breadcrumb>
               </Col>
               <Col className="mt-6 mt-md-0 text-md-right" lg="6" xs="5">
-                <Button className="btn-neutral"
+                <Button
+                  className="btn-neutral"
                   onClick={onActiveMembersClick}
                   color="default"
-                  size="sm">
+                  size="sm"
+                >
                   Active Care Members
                 </Button>
-                <Button className="btn-neutral"
+                <Button
+                  className="btn-neutral"
                   onClick={onNewMembersClick}
                   color="default"
-                  size="sm">
+                  size="sm"
+                >
                   New Care Members
                 </Button>
-                <Button className="btn-neutral"
+                <Button
+                  className="btn-neutral"
                   onClick={onSelfResignedClick}
                   color="default"
-                  size="sm">
+                  size="sm"
+                >
                   Self resigned last year
                 </Button>
-                <Button className="btn-neutral"
+                <Button
+                  className="btn-neutral"
                   onClick={onAutoOffboardedClick}
                   color="default"
-                  size="sm">
+                  size="sm"
+                >
                   Automatic offboarded last year
                 </Button>
               </Col>
@@ -87,5 +88,4 @@ export const MapsHeader = ({ name, onActiveMembersClick, onNewMembersClick, onSe
       </div>
     </>
   );
-}
-
+};

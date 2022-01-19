@@ -1,7 +1,7 @@
-import { BoxHeader } from "components/headers";
 import React, { useEffect, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
-import AsyncSelect2 from "react-select2-wrapper";
+
 import {
   Button,
   Card,
@@ -14,9 +14,14 @@ import {
   Input,
   Row,
 } from "reactstrap";
+
+import AsyncSelect2 from "react-select2-wrapper";
+
+import { BoxHeader } from "components/headers";
+
 import { createRole, retrieveRoles } from "../../../actions/roles";
 
-function CreateRolePage() {
+var CreateRolePage = () => {
   const initialState = {
     id: null,
     name: "",
@@ -59,11 +64,7 @@ function CreateRolePage() {
   const saveRole = e => {
     e.preventDefault();
     // ranking system should be implemented better with some check on the same rank, ranked before do not lower rank than ranked after and etc.
-    if (
-      role.name.length > 0 &&
-      role.rankedAfter.length > 0 &&
-      role.rankedBefore.length > 0
-    ) {
+    if (role.name.length > 0 && role.rankedAfter.length > 0 && role.rankedBefore.length > 0) {
       let allRoles = getRoles();
       let num = 0;
       for (const i in allRoles) {
@@ -124,17 +125,12 @@ function CreateRolePage() {
                   </div>
                 ) : (
                   <Form>
-                    <h6 className="heading-small text-muted mb-4">
-                      Role Information
-                    </h6>
+                    <h6 className="heading-small text-muted mb-4">Role Information</h6>
                     <div className="pl-lg-4">
                       <Row>
                         <Col lg="10">
                           <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-role-name"
-                            >
+                            <label className="form-control-label" htmlFor="input-role-name">
                               Role Name
                             </label>
                             <Input
@@ -152,10 +148,7 @@ function CreateRolePage() {
                       <Row>
                         <Col lg="10">
                           <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-ranked-before"
-                            >
+                            <label className="form-control-label" htmlFor="input-ranked-before">
                               Ranked Before
                             </label>
                             <AsyncSelect2
@@ -176,10 +169,7 @@ function CreateRolePage() {
                       <Row>
                         <Col lg="10">
                           <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-ranked-after"
-                            >
+                            <label className="form-control-label" htmlFor="input-ranked-after">
                               Ranked After
                             </label>
                             <AsyncSelect2
@@ -199,15 +189,10 @@ function CreateRolePage() {
                     </div>
                     <hr className="my-4" />
 
-                    <h6 className="heading-small text-muted mb-4">
-                      Add Role
-                    </h6>
+                    <h6 className="heading-small text-muted mb-4">Add Role</h6>
 
                     <div className="pl-lg-4">
-                      <Button
-                        onClick={saveRole}
-                        className="btn btn-success"
-                      >
+                      <Button onClick={saveRole} className="btn btn-success">
                         {" "}
                         Submit{" "}
                       </Button>
@@ -221,6 +206,6 @@ function CreateRolePage() {
       </Container>
     </>
   );
-}
+};
 
 export default CreateRolePage;

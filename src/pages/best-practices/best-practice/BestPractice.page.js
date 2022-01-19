@@ -1,7 +1,10 @@
 import { BoxHeader } from "components/headers";
+
 import React, { useState } from "react";
+
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { useDispatch } from "react-redux";
+
 import {
   Button,
   Card,
@@ -100,9 +103,7 @@ export const BestPracticePage = props => {
                   </Col>
                   <Col md="12">
                     <FormGroup>
-                      <label className="form-control-label">
-                        Description
-                      </label>
+                      <label className="form-control-label">Description</label>
                       <Input name="description" value={description} />
                     </FormGroup>
                   </Col>

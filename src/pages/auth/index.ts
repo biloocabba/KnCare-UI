@@ -1,4 +1,4 @@
-export * from "./login"
+export * from "./login";
 
-export * from "./auth.routes.const"
-export * from "./auth.routes"
+export * from "./auth.routes.const";
+export * from "./auth.routes";

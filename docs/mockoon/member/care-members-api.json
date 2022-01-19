@@ -1,1139 +1,1139 @@
 {
-    "source": "mockoon:1.14.1",
-    "data": [
-        {
-            "type": "environment",
-            "item": {
+  "source": "mockoon:1.14.1",
+  "data": [
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 15,
+        "name": "Demo users API",
+        "endpointPrefix": "",
+        "latency": 0,
+        "port": 7000,
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "Get all users",
+            "method": "get",
+            "endpoint": "users",
+            "responses": [
+              {
                 "uuid": "",
-                "lastMigration": 15,
-                "name": "Demo users API",
-                "endpointPrefix": "",
-                "latency": 0,
-                "port": 7000,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "Get all users",
-                        "method": "get",
-                        "endpoint": "users",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  ...\n  testBusinessUnitId:{{queryParam 'BusinessUnitId'}}\n  \n}",
-                                "latency": 50,
-                                "statusCode": 200,
-                                "label": "Success",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "disableTemplating": false,
-                                "rulesOperator": "OR"
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Get a user",
-                        "method": "get",
-                        "endpoint": "users/:id",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"id\": 1,\n  \"firstname\": \"John\",\n  \"Lastname\": \"Snow\",\n  \"status\": \"Learning things\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "Get userId 1",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "params",
-                                        "modifier": "id",
-                                        "value": "1",
-                                        "isRegex": false
-                                    }
-                                ],
-                                "disableTemplating": false,
-                                "rulesOperator": "OR"
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"id\": 2,\n  \"firstname\": \"Daenerys\",\n  \"Lastname\": \"Targaryen\",\n  \"status\": \"Riding a dragon\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "Get userId 2",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "params",
-                                        "modifier": "id",
-                                        "value": "2",
-                                        "isRegex": false
-                                    }
-                                ],
-                                "disableTemplating": false,
-                                "rulesOperator": "OR"
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Create a user",
-                        "method": "post",
-                        "endpoint": "users",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"firstname\": \"{{body 'firstName'}}\",\n  \"lastname\": \"{{body 'lastName'}}\",\n  \"status\": \"{{body 'status'}}\"\n}",
-                                "latency": 0,
-                                "statusCode": 201,
-                                "label": "Success",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "body",
-                                        "modifier": "firstname",
-                                        "value": ".+",
-                                        "isRegex": true
-                                    }
-                                ],
-                                "disableTemplating": false,
-                                "rulesOperator": "OR"
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"Error\": \"firstname is required\"\n}",
-                                "latency": 0,
-                                "statusCode": 400,
-                                "label": "Missing data",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "body",
-                                        "modifier": "firstname",
-                                        "value": "^$",
-                                        "isRegex": true
-                                    }
-                                ],
-                                "disableTemplating": false,
-                                "rulesOperator": "OR"
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Delete a user",
-                        "method": "delete",
-                        "endpoint": "users/:id",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "",
-                                "latency": 0,
-                                "statusCode": 204,
-                                "label": "User deleted",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "body",
-                                        "modifier": "firstname",
-                                        "value": ".*",
-                                        "isRegex": true
-                                    }
-                                ],
-                                "disableTemplating": false,
-                                "rulesOperator": "OR"
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "https": false,
-                "cors": true,
+                "body": "{\n  ...\n  testBusinessUnitId:{{queryParam 'BusinessUnitId'}}\n  \n}",
+                "latency": 50,
+                "statusCode": 200,
+                "label": "Success",
                 "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Methods",
-                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Headers",
-                        "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-                    }
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyRemovePrefix": false
-            }
-        },
-        {
-            "type": "environment",
-            "item": {
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "disableTemplating": false,
+                "rulesOperator": "OR"
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "Get a user",
+            "method": "get",
+            "endpoint": "users/:id",
+            "responses": [
+              {
                 "uuid": "",
-                "lastMigration": 15,
-                "name": "TestEnv",
-                "endpointPrefix": "test",
+                "body": "{\n  \"id\": 1,\n  \"firstname\": \"John\",\n  \"Lastname\": \"Snow\",\n  \"status\": \"Learning things\"\n}",
                 "latency": 0,
-                "port": 7001,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "TestEnv",
-                        "method": "get",
-                        "endpoint": "",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "post",
-                        "endpoint": "echo",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  firstName: \"{{ body 'firstName' 'anonymous' }}\",\n  lastName: \"{{ body 'lastName' 'anonymous' }}\",\n  city:\"{{ body 'city' 'Tallinn' }}\",\n  email:\"{{body 'email' 'anonymous@email.it' }} \"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "demo",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\r\n  \"userId\": \"{{ urlParam 'id' }}\",\r\n  \"name\": \"{{ queryParam 'name' 'John' }}\",\r\n  \"lang\": \"{{{ header 'Accept-Language' 'en' }}}\",\r\n  \"elementTitle\": \"{{ body 'elements.0.title' 'default' }}\",\r\n  \"ip\": \"{{ ip }}\",\r\n  \"method\": \"{{ method }}\",\r\n  \"hostname\": \"{{ hostname }}\",\r\n  \"friends\": [\r\n    {{# repeat 2 }}\r\n      {\r\n        \"id\": {{ @index }},\r\n        \"name\": \"{{ faker 'name.firstName' }} {{ faker 'name.lastName' }}\"\r\n      }\r\n    {{/ repeat }}\r\n  ],\r\n  \"oneItem\": \"{{ oneOf (array 'item1' 'item2' 'item3') }}\",\r\n  \"someItemsAsString\": \"{{ someOf (array 'item1' 'item2' 'item3') 1 2 }}\",\r\n  \"someItemsAsArray\": {{{ someOf (array 'item1' 'item2' 'item3') 1 2 true }}},\r\n  \"userName\":\r\n    {{# switch (urlParam 'id') }}\r\n      {{# case \"1\" }}\"John\"{{/ case }}\r\n      {{# case \"2\" }}\"Jack\"{{/ case }}\r\n      {{# default }}\"Peter\"{{/ default }}\r\n    {{/ switch}}\r\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "https": false,
-                "cors": true,
+                "statusCode": 200,
+                "label": "Get userId 1",
                 "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [
+                  {
+                    "target": "params",
+                    "modifier": "id",
+                    "value": "1",
+                    "isRegex": false
+                  }
                 ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyRemovePrefix": false
-            }
-        },
-        {
-            "type": "environment",
-            "item": {
+                "disableTemplating": false,
+                "rulesOperator": "OR"
+              },
+              {
                 "uuid": "",
-                "lastMigration": 15,
-                "name": "CurrencyApi",
-                "endpointPrefix": "currencies",
+                "body": "{\n  \"id\": 2,\n  \"firstname\": \"Daenerys\",\n  \"Lastname\": \"Targaryen\",\n  \"status\": \"Riding a dragon\"\n}",
                 "latency": 0,
-                "port": 7002,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "exchanges",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"USD\":1,\n  \"EUR\":0.8231787,\n  \"GBP\":0.70858018,\n  \"JPY\":108.85982,\n  \"CNY\":6.4249112,\n  \"RUB\":74.117424\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "https": false,
-                "cors": true,
+                "statusCode": 200,
+                "label": "Get userId 2",
                 "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Methods",
-                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Headers",
-                        "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-                    }
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [
+                  {
+                    "target": "params",
+                    "modifier": "id",
+                    "value": "2",
+                    "isRegex": false
+                  }
                 ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyRemovePrefix": false
-            }
-        },
-        {
-            "type": "environment",
-            "item": {
+                "disableTemplating": false,
+                "rulesOperator": "OR"
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "Create a user",
+            "method": "post",
+            "endpoint": "users",
+            "responses": [
+              {
                 "uuid": "",
-                "lastMigration": 15,
-                "name": "mockCurrencyServer",
-                "endpointPrefix": "currencies",
+                "body": "{\n  \"firstname\": \"{{body 'firstName'}}\",\n  \"lastname\": \"{{body 'lastName'}}\",\n  \"status\": \"{{body 'status'}}\"\n}",
                 "latency": 0,
-                "port": 7003,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "exchange",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "\t{\n\t  \"USD\":1,\n\t  \"EUR\":0.8231787,\n\t  \"GBP\":0.70858018,\n\t  \"JPY\":108.85982,\n\t  \"CNY\":6.4249112,\n\t  \"RUB\":74.117424\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "https": false,
-                "cors": true,
+                "statusCode": 201,
+                "label": "Success",
                 "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Methods",
-                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Headers",
-                        "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-                    }
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [
+                  {
+                    "target": "body",
+                    "modifier": "firstname",
+                    "value": ".+",
+                    "isRegex": true
+                  }
                 ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyRemovePrefix": false
-            }
-        },
-        {
-            "type": "environment",
-            "item": {
+                "disableTemplating": false,
+                "rulesOperator": "OR"
+              },
+              {
                 "uuid": "",
-                "lastMigration": 15,
-                "name": "CurrencyApi2",
-                "endpointPrefix": "currencies",
+                "body": "{\n  \"Error\": \"firstname is required\"\n}",
                 "latency": 0,
-                "port": 7004,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "exchange",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\r\n\t  \"USD\":1,\r\n\t  \"EUR\":0.8231787,\r\n\t  \"GBP\":0.70858018,\r\n\t  \"JPY\":108.85982,\r\n\t  \"CNY\":6.4249112,\r\n\t  \"RUB\":74.117424\r\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "https": false,
-                "cors": true,
+                "statusCode": 400,
+                "label": "Missing data",
                 "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [
+                  {
+                    "target": "body",
+                    "modifier": "firstname",
+                    "value": "^$",
+                    "isRegex": true
+                  }
                 ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyRemovePrefix": false
-            }
-        },
-        {
-            "type": "environment",
-            "item": {
+                "disableTemplating": false,
+                "rulesOperator": "OR"
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "Delete a user",
+            "method": "delete",
+            "endpoint": "users/:id",
+            "responses": [
+              {
                 "uuid": "",
-                "lastMigration": 15,
-                "name": "employee-api",
-                "endpointPrefix": "",
+                "body": "",
                 "latency": 0,
-                "port": 8000,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "employees",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "[\n   {\n    \"id\": 1,\n    \"pdmId\": 1001,\n    \"firstName\": \"Billy\",\n    \"lastName\": \"Thornton\",\n    \"internationalName\": \"Billy Thornton\",\n    \"email\": \"employee01@gmail.com\",\n    \"title\": \"Developer\",\n    \"businessUnit\": {\n      \"id\": 1,\n      \"name\": \"IT\",\n      \"description\": \"description of business unit\"\n    }\n  },\n  {\n    \"id\": 2,\n    \"pdmId\": 1002,\n    \"firstName\": \"Kersti\",\n    \"lastName\": \"Soomre\",\n    \"internationalName\": \"Kersti Soomre\",\n    \"email\": \"employee02@gmail.com\",\n    \"title\": \"HR\",\n    \"businessUnit\": {\n      \"id\": 1,\n      \"name\": \"IT\",\n      \"description\": \"description of business unit\"\n    }\n  }\n]",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "post",
-                        "endpoint": "members",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"onBoardDate\": \"{{body 'onBoardDate'}}\",\n  \"offBoardDate\": \"{{body 'offBoardDate'}}\",\n  \"employee\": \"{{body 'id'}}\",\n  \"role\": \"{{body 'id'}}\",\n  \"country\": \"{{body 'country'}}\"\n}",
-                                "latency": 0,
-                                "statusCode": 201,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "bestPractices",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "[\n   {\n    \"id\": 1,\n    \"title\": \"Sample title\",\n    \"content\": \"Hello world!\",\n    \"description\": \"randome stuff here\"\n  },\n  {\n    \"id\": 2,\n    \"title\": \"Sample title\",\n    \"content\": \"Hello world!\",\n    \"description\": \"randome stuff here\"\n  }\n]",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "proxyRemovePrefix": false,
-                "https": false,
-                "cors": true,
+                "statusCode": 204,
+                "label": "User deleted",
                 "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Methods",
-                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Headers",
-                        "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-                    }
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [
+                  {
+                    "target": "body",
+                    "modifier": "firstname",
+                    "value": ".*",
+                    "isRegex": true
+                  }
                 ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ]
-            }
-        },
-        {
-            "type": "environment",
-            "item": {
+                "disableTemplating": false,
+                "rulesOperator": "OR"
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyRemovePrefix": false
+      }
+    },
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 15,
+        "name": "TestEnv",
+        "endpointPrefix": "test",
+        "latency": 0,
+        "port": 7001,
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "TestEnv",
+            "method": "get",
+            "endpoint": "",
+            "responses": [
+              {
                 "uuid": "",
-                "lastMigration": 15,
-                "name": "group-api",
-                "endpointPrefix": "",
+                "body": "{}",
                 "latency": 0,
-                "port": 8000,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "Generate random body (JSON, text, CSV, etc) with templating",
-                        "method": "get",
-                        "endpoint": "groups",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"groups\": [\n    {{# repeat (queryParam 'total' '10') }}\n      {\n        \"id\": \"{{ faker 'random.number' min=10000 max=1000 }}\",\n        \"name\": \"{{faker 'internet.userName'}}\",\n        \"description\": \"This is a group description\",\n        \"members\" : [\n          {{# repeat (queryParam 'total' '3') }} {\"id\":\"{{ faker 'random.number' min=10000 max=1000000 }}\"} {{/ repeat }} ]\n      },\n    {{/ repeat }}\n  ],\n  \"total\": \"{{queryParam 'total' '10'}}\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "Creates 10 random users, or the amount specified in the 'total' query param",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "post",
-                        "endpoint": "groups",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"id\":\"{{ faker 'random.number' min=10000 max=100000 }}\",\n  \"name\":\"{{body 'name'}}\",\n  \"description\":\"{{body 'description'}}\"\n}",
-                                "latency": 0,
-                                "statusCode": 201,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
-                                    },
-                                    {
-                                        "key": "Accept",
-                                        "value": "application/json"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{}",
-                                "latency": 0,
-                                "statusCode": 406,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Use multiple responses with rules",
-                        "method": "post",
-                        "endpoint": "content/:param1",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"Rules example\": \"Default response. Served if route param 'param1' is not present.\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "Default response",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"Rules example\": \"Content XYZ. Served if route param 'param1' equals 'xyz'. (See in 'Rules' tab)\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "Content XYZ",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "params",
-                                        "modifier": "param1",
-                                        "value": "xyz",
-                                        "isRegex": false
-                                    }
-                                ],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"Rules example\": \"Content not found. Served if route param 'param1' is not equal to 'xyz'. (See in 'Rules' tab)\"\n}\n",
-                                "latency": 0,
-                                "statusCode": 404,
-                                "label": "Content not found",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "params",
-                                        "modifier": "param1",
-                                        "value": "^(?!.*xyz).*$",
-                                        "isRegex": true
-                                    }
-                                ],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Serve a file dynamically depending on the path param 'pageName'.",
-                        "method": "get",
-                        "endpoint": "file/:pageName",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "Templating is also supported in file path",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "text/html"
-                                    }
-                                ],
-                                "filePath": "./page{{urlParam 'pageName'}}.html",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Path supports various patterns",
-                        "method": "put",
-                        "endpoint": "path/with/pattern(s)?/*",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "The current path will match the following routes: \nhttp://localhost:3000/path/with/pattern/\nhttp://localhost:3000/path/with/patterns/\nhttp://localhost:3000/path/with/patterns/anything-else\n\nLearn more about Mockoon's routing: https://mockoon.com/docs/latest/routing",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "text/plain"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Can Mockoon forward or record entering requests?",
-                        "method": "get",
-                        "endpoint": "forward-and-record",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "Mockoon can also act as a proxy and forward all entering requests that are not caught by declared routes. \nYou can activate this option in the environment settings ('cog' icon in the upper right corner). \nTo learn more: https://mockoon.com/docs/latest/proxy-mode\n\nAs always, all entering requests, and responses from the proxied server will be recorded ('clock' icon in the upper right corner).\nTo learn more: https://mockoon.com/docs/latest/requests-logging",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "text/plain"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "delete",
-                        "endpoint": "",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "https": false,
-                "cors": true,
-                "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Methods",
-                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Headers",
-                        "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-                    }
-                ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyRemovePrefix": false
-            }
-        },
-        {
-            "type": "environment",
-            "item": {
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "post",
+            "endpoint": "echo",
+            "responses": [
+              {
                 "uuid": "",
-                "lastMigration": 15,
-                "name": "BestPracticeAPI",
-                "endpointPrefix": "",
+                "body": "{\n  firstName: \"{{ body 'firstName' 'anonymous' }}\",\n  lastName: \"{{ body 'lastName' 'anonymous' }}\",\n  city:\"{{ body 'city' 'Tallinn' }}\",\n  email:\"{{body 'email' 'anonymous@email.it' }} \"\n}",
                 "latency": 0,
-                "port": 8000,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "best-practices",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "[\n   {\n    \"id\": 1,\n    \"title\": \"Sample title\",\n    \"content\": \"Hello world!\",\n    \"description\": \"randome stuff here\"\n  },\n  {\n    \"id\": 2,\n    \"title\": \"Sample title\",\n    \"content\": \"Hello world!\",\n    \"description\": \"randome stuff here\"\n  }\n]",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "proxyRemovePrefix": false,
-                "https": false,
-                "cors": true,
-                "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Methods",
-                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Headers",
-                        "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-                    }
-                ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ]
-            }
-        },
-        {
-            "type": "environment",
-            "item": {
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "demo",
+            "responses": [
+              {
                 "uuid": "",
-                "lastMigration": 15,
-                "name": "Care-Members",
-                "endpointPrefix": "",
+                "body": "{\r\n  \"userId\": \"{{ urlParam 'id' }}\",\r\n  \"name\": \"{{ queryParam 'name' 'John' }}\",\r\n  \"lang\": \"{{{ header 'Accept-Language' 'en' }}}\",\r\n  \"elementTitle\": \"{{ body 'elements.0.title' 'default' }}\",\r\n  \"ip\": \"{{ ip }}\",\r\n  \"method\": \"{{ method }}\",\r\n  \"hostname\": \"{{ hostname }}\",\r\n  \"friends\": [\r\n    {{# repeat 2 }}\r\n      {\r\n        \"id\": {{ @index }},\r\n        \"name\": \"{{ faker 'name.firstName' }} {{ faker 'name.lastName' }}\"\r\n      }\r\n    {{/ repeat }}\r\n  ],\r\n  \"oneItem\": \"{{ oneOf (array 'item1' 'item2' 'item3') }}\",\r\n  \"someItemsAsString\": \"{{ someOf (array 'item1' 'item2' 'item3') 1 2 }}\",\r\n  \"someItemsAsArray\": {{{ someOf (array 'item1' 'item2' 'item3') 1 2 true }}},\r\n  \"userName\":\r\n    {{# switch (urlParam 'id') }}\r\n      {{# case \"1\" }}\"John\"{{/ case }}\r\n      {{# case \"2\" }}\"Jack\"{{/ case }}\r\n      {{# default }}\"Peter\"{{/ default }}\r\n    {{/ switch}}\r\n}",
                 "latency": 0,
-                "port": 8000,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "care-members",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "[\r\n{\"id\":1,\r\n\"firstName\":\"Skyler\",\"lastName\":\"Eberlein\",\r\n\"title\":\"Cost Accountant\",\r\n\"managementGroup\":\"Engineering\",\r\n\"costCenter\":\"YEG72LR\",\r\n\"email\":\"seberlein0@g.co\",\r\n\"internationalName\":\"{{queryParam 'internationalName' 'Skyler Eberlein'}}\",\r\n\"businessUnit\":\"{{queryParam 'businessUnit' 'Product Management'}}\",\r\n\"country\":\"{{queryParam 'country''Netherlands'}}\",\r\n\"companyCode\":\"{{queryParam 'companyCode' 'ZBD RM-JF'}}\"\r\n},\r\n{\"id\":2,\"firstName\":\"Carline\",\"lastName\":\"Harroway\",\r\n\"internationalName\":\"{{queryParam 'internationalName' 'test'}}\",\r\n\"title\":\"Developer I\",\"businessUnit\":\"Accounting\",\"managementGroup\":\"Services\",\"companyCode\":\"XLU SM-GW\",\"costCenter\":\"ECP52VQ\",\"email\":\"charroway1@nps.gov\",\"country\":\"Honduras\"},\r\n{\"id\":3,\"firstName\":\"Courtnay\",\"lastName\":\"Morfett\",\"internationalName\":\"Courtnay Morfett\",\"title\":\"Health Coach I\",\"businessUnit\":\"Sales\",\"managementGroup\":\"Engineering\",\"companyCode\":\"XAN ZW-OW\",\"costCenter\":\"FUE32HB\",\"email\":\"cmorfett2@ameblo.jp\",\"country\":\"Brazil\"},\r\n{\"id\":4,\"firstName\":\"Giacopo\",\"lastName\":\"Chaim\",\"internationalName\":\"Giacopo Chaim\",\"title\":\"Senior Developer\",\"businessUnit\":\"Engineering\",\"managementGroup\":\"Sales\",\"companyCode\":\"EIT KN-YB\",\"costCenter\":\"KPD32UZ\",\"email\":\"gchaim3@myspace.com\",\"country\":\"Honduras\"},\r\n{\"id\":5,\"firstName\":\"Willyt\",\"lastName\":\"Rowswell\",\"internationalName\":\"Willyt Rowswell\",\"title\":\"Sales Associate\",\"businessUnit\":\"Sales\",\"managementGroup\":\"Research and Development\",\"companyCode\":\"JNX OG-VO\",\"costCenter\":\"BSU62PN\",\"email\":\"wrowswell4@uol.com.br\",\"country\":\"Poland\"},\r\n{\"id\":6,\"firstName\":\"Brenda\",\"lastName\":\"Tomaskov\",\"internationalName\":\"Brenda Tomaskov\",\"title\":\"Assistant Manager\",\"businessUnit\":\"Marketing\",\"managementGroup\":\"Training\",\"companyCode\":\"KLF OG-ZY\",\"costCenter\":\"ZEW32PE\",\"email\":\"btomaskov5@cdbaby.com\",\"country\":\"Russia\"},\r\n{\"id\":7,\"firstName\":\"Alyssa\",\"lastName\":\"Smorthit\",\"internationalName\":\"Alyssa Smorthit\",\"title\":\"Help Desk Technician\",\"businessUnit\":\"Legal\",\"managementGroup\":\"Legal\",\"companyCode\":\"SKH DG-GQ\",\"costCenter\":\"KVC42GZ\",\"email\":\"asmorthit6@macromedia.com\",\"country\":\"China\"},\r\n{\"id\":8,\"firstName\":\"Elke\",\"lastName\":\"Willatts\",\"internationalName\":\"Elke Willatts\",\"title\":\"Mechanical Systems Engineer\",\"businessUnit\":\"Support\",\"managementGroup\":\"Marketing\",\"companyCode\":\"ODN RT-LN\",\"costCenter\":\"CDJ22KF\",\"email\":\"ewillatts7@furl.net\",\"country\":\"China\"},\r\n{\"id\":9,\"firstName\":\"Fayette\",\"lastName\":\"Fyldes\",\"internationalName\":\"Fayette Fyldes\",\"title\":\"Staff Scientist\",\"businessUnit\":\"Support\",\"managementGroup\":\"Services\",\"companyCode\":\"PFL GX-QO\",\"costCenter\":\"HGC92XL\",\"email\":\"ffyldes8@google.ru\",\"country\":\"Japan\"}\r\n]",
-                                "latency": 0,
-                                "statusCode": 201,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "proxyRemovePrefix": false,
-                "https": false,
-                "cors": true,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyRemovePrefix": false
+      }
+    },
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 15,
+        "name": "CurrencyApi",
+        "endpointPrefix": "currencies",
+        "latency": 0,
+        "port": 7002,
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "exchanges",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{\n  \"USD\":1,\n  \"EUR\":0.8231787,\n  \"GBP\":0.70858018,\n  \"JPY\":108.85982,\n  \"CNY\":6.4249112,\n  \"RUB\":74.117424\n}",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyRemovePrefix": false
+      }
+    },
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 15,
+        "name": "mockCurrencyServer",
+        "endpointPrefix": "currencies",
+        "latency": 0,
+        "port": 7003,
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "exchange",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "\t{\n\t  \"USD\":1,\n\t  \"EUR\":0.8231787,\n\t  \"GBP\":0.70858018,\n\t  \"JPY\":108.85982,\n\t  \"CNY\":6.4249112,\n\t  \"RUB\":74.117424\n}",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyRemovePrefix": false
+      }
+    },
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 15,
+        "name": "CurrencyApi2",
+        "endpointPrefix": "currencies",
+        "latency": 0,
+        "port": 7004,
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "exchange",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{\r\n\t  \"USD\":1,\r\n\t  \"EUR\":0.8231787,\r\n\t  \"GBP\":0.70858018,\r\n\t  \"JPY\":108.85982,\r\n\t  \"CNY\":6.4249112,\r\n\t  \"RUB\":74.117424\r\n}",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyRemovePrefix": false
+      }
+    },
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 15,
+        "name": "employee-api",
+        "endpointPrefix": "",
+        "latency": 0,
+        "port": 8000,
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "employees",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "[\n   {\n    \"id\": 1,\n    \"pdmId\": 1001,\n    \"firstName\": \"Billy\",\n    \"lastName\": \"Thornton\",\n    \"internationalName\": \"Billy Thornton\",\n    \"email\": \"employee01@gmail.com\",\n    \"title\": \"Developer\",\n    \"businessUnit\": {\n      \"id\": 1,\n      \"name\": \"IT\",\n      \"description\": \"description of business unit\"\n    }\n  },\n  {\n    \"id\": 2,\n    \"pdmId\": 1002,\n    \"firstName\": \"Kersti\",\n    \"lastName\": \"Soomre\",\n    \"internationalName\": \"Kersti Soomre\",\n    \"email\": \"employee02@gmail.com\",\n    \"title\": \"HR\",\n    \"businessUnit\": {\n      \"id\": 1,\n      \"name\": \"IT\",\n      \"description\": \"description of business unit\"\n    }\n  }\n]",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "post",
+            "endpoint": "members",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{\n  \"onBoardDate\": \"{{body 'onBoardDate'}}\",\n  \"offBoardDate\": \"{{body 'offBoardDate'}}\",\n  \"employee\": \"{{body 'id'}}\",\n  \"role\": \"{{body 'id'}}\",\n  \"country\": \"{{body 'country'}}\"\n}",
+                "latency": 0,
+                "statusCode": 201,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "bestPractices",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "[\n   {\n    \"id\": 1,\n    \"title\": \"Sample title\",\n    \"content\": \"Hello world!\",\n    \"description\": \"randome stuff here\"\n  },\n  {\n    \"id\": 2,\n    \"title\": \"Sample title\",\n    \"content\": \"Hello world!\",\n    \"description\": \"randome stuff here\"\n  }\n]",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "proxyRemovePrefix": false,
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ]
+      }
+    },
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 15,
+        "name": "group-api",
+        "endpointPrefix": "",
+        "latency": 0,
+        "port": 8000,
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "Generate random body (JSON, text, CSV, etc) with templating",
+            "method": "get",
+            "endpoint": "groups",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{\n  \"groups\": [\n    {{# repeat (queryParam 'total' '10') }}\n      {\n        \"id\": \"{{ faker 'random.number' min=10000 max=1000 }}\",\n        \"name\": \"{{faker 'internet.userName'}}\",\n        \"description\": \"This is a group description\",\n        \"members\" : [\n          {{# repeat (queryParam 'total' '3') }} {\"id\":\"{{ faker 'random.number' min=10000 max=1000000 }}\"} {{/ repeat }} ]\n      },\n    {{/ repeat }}\n  ],\n  \"total\": \"{{queryParam 'total' '10'}}\"\n}",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "Creates 10 random users, or the amount specified in the 'total' query param",
                 "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Methods",
-                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Headers",
-                        "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-                    }
+                  {
+                    "key": "",
+                    "value": ""
+                  }
                 ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "post",
+            "endpoint": "groups",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{\n  \"id\":\"{{ faker 'random.number' min=10000 max=100000 }}\",\n  \"name\":\"{{body 'name'}}\",\n  \"description\":\"{{body 'description'}}\"\n}",
+                "latency": 0,
+                "statusCode": 201,
+                "label": "",
+                "headers": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
                 ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ]
-            }
-        }
-    ]
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              },
+              {
+                "uuid": "",
+                "body": "{}",
+                "latency": 0,
+                "statusCode": 406,
+                "label": "",
+                "headers": [
+                  {
+                    "key": "",
+                    "value": ""
+                  }
+                ],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "Use multiple responses with rules",
+            "method": "post",
+            "endpoint": "content/:param1",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{\n  \"Rules example\": \"Default response. Served if route param 'param1' is not present.\"\n}",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "Default response",
+                "headers": [
+                  {
+                    "key": "",
+                    "value": ""
+                  }
+                ],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              },
+              {
+                "uuid": "",
+                "body": "{\n  \"Rules example\": \"Content XYZ. Served if route param 'param1' equals 'xyz'. (See in 'Rules' tab)\"\n}",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "Content XYZ",
+                "headers": [
+                  {
+                    "key": "",
+                    "value": ""
+                  }
+                ],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [
+                  {
+                    "target": "params",
+                    "modifier": "param1",
+                    "value": "xyz",
+                    "isRegex": false
+                  }
+                ],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              },
+              {
+                "uuid": "",
+                "body": "{\n  \"Rules example\": \"Content not found. Served if route param 'param1' is not equal to 'xyz'. (See in 'Rules' tab)\"\n}\n",
+                "latency": 0,
+                "statusCode": 404,
+                "label": "Content not found",
+                "headers": [
+                  {
+                    "key": "",
+                    "value": ""
+                  }
+                ],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [
+                  {
+                    "target": "params",
+                    "modifier": "param1",
+                    "value": "^(?!.*xyz).*$",
+                    "isRegex": true
+                  }
+                ],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "Serve a file dynamically depending on the path param 'pageName'.",
+            "method": "get",
+            "endpoint": "file/:pageName",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "Templating is also supported in file path",
+                "headers": [
+                  {
+                    "key": "Content-Type",
+                    "value": "text/html"
+                  }
+                ],
+                "filePath": "./page{{urlParam 'pageName'}}.html",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "Path supports various patterns",
+            "method": "put",
+            "endpoint": "path/with/pattern(s)?/*",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "The current path will match the following routes: \nhttp://localhost:3000/path/with/pattern/\nhttp://localhost:3000/path/with/patterns/\nhttp://localhost:3000/path/with/patterns/anything-else\n\nLearn more about Mockoon's routing: https://mockoon.com/docs/latest/routing",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [
+                  {
+                    "key": "Content-Type",
+                    "value": "text/plain"
+                  }
+                ],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "Can Mockoon forward or record entering requests?",
+            "method": "get",
+            "endpoint": "forward-and-record",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "Mockoon can also act as a proxy and forward all entering requests that are not caught by declared routes. \nYou can activate this option in the environment settings ('cog' icon in the upper right corner). \nTo learn more: https://mockoon.com/docs/latest/proxy-mode\n\nAs always, all entering requests, and responses from the proxied server will be recorded ('clock' icon in the upper right corner).\nTo learn more: https://mockoon.com/docs/latest/requests-logging",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [
+                  {
+                    "key": "Content-Type",
+                    "value": "text/plain"
+                  }
+                ],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "delete",
+            "endpoint": "",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{}",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [
+                  {
+                    "key": "",
+                    "value": ""
+                  }
+                ],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyRemovePrefix": false
+      }
+    },
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 15,
+        "name": "BestPracticeAPI",
+        "endpointPrefix": "",
+        "latency": 0,
+        "port": 8000,
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "best-practices",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "[\n   {\n    \"id\": 1,\n    \"title\": \"Sample title\",\n    \"content\": \"Hello world!\",\n    \"description\": \"randome stuff here\"\n  },\n  {\n    \"id\": 2,\n    \"title\": \"Sample title\",\n    \"content\": \"Hello world!\",\n    \"description\": \"randome stuff here\"\n  }\n]",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "proxyRemovePrefix": false,
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ]
+      }
+    },
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 15,
+        "name": "Care-Members",
+        "endpointPrefix": "",
+        "latency": 0,
+        "port": 8000,
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "care-members",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "[\r\n{\"id\":1,\r\n\"firstName\":\"Skyler\",\"lastName\":\"Eberlein\",\r\n\"title\":\"Cost Accountant\",\r\n\"managementGroup\":\"Engineering\",\r\n\"costCenter\":\"YEG72LR\",\r\n\"email\":\"seberlein0@g.co\",\r\n\"internationalName\":\"{{queryParam 'internationalName' 'Skyler Eberlein'}}\",\r\n\"businessUnit\":\"{{queryParam 'businessUnit' 'Product Management'}}\",\r\n\"country\":\"{{queryParam 'country''Netherlands'}}\",\r\n\"companyCode\":\"{{queryParam 'companyCode' 'ZBD RM-JF'}}\"\r\n},\r\n{\"id\":2,\"firstName\":\"Carline\",\"lastName\":\"Harroway\",\r\n\"internationalName\":\"{{queryParam 'internationalName' 'test'}}\",\r\n\"title\":\"Developer I\",\"businessUnit\":\"Accounting\",\"managementGroup\":\"Services\",\"companyCode\":\"XLU SM-GW\",\"costCenter\":\"ECP52VQ\",\"email\":\"charroway1@nps.gov\",\"country\":\"Honduras\"},\r\n{\"id\":3,\"firstName\":\"Courtnay\",\"lastName\":\"Morfett\",\"internationalName\":\"Courtnay Morfett\",\"title\":\"Health Coach I\",\"businessUnit\":\"Sales\",\"managementGroup\":\"Engineering\",\"companyCode\":\"XAN ZW-OW\",\"costCenter\":\"FUE32HB\",\"email\":\"cmorfett2@ameblo.jp\",\"country\":\"Brazil\"},\r\n{\"id\":4,\"firstName\":\"Giacopo\",\"lastName\":\"Chaim\",\"internationalName\":\"Giacopo Chaim\",\"title\":\"Senior Developer\",\"businessUnit\":\"Engineering\",\"managementGroup\":\"Sales\",\"companyCode\":\"EIT KN-YB\",\"costCenter\":\"KPD32UZ\",\"email\":\"gchaim3@myspace.com\",\"country\":\"Honduras\"},\r\n{\"id\":5,\"firstName\":\"Willyt\",\"lastName\":\"Rowswell\",\"internationalName\":\"Willyt Rowswell\",\"title\":\"Sales Associate\",\"businessUnit\":\"Sales\",\"managementGroup\":\"Research and Development\",\"companyCode\":\"JNX OG-VO\",\"costCenter\":\"BSU62PN\",\"email\":\"wrowswell4@uol.com.br\",\"country\":\"Poland\"},\r\n{\"id\":6,\"firstName\":\"Brenda\",\"lastName\":\"Tomaskov\",\"internationalName\":\"Brenda Tomaskov\",\"title\":\"Assistant Manager\",\"businessUnit\":\"Marketing\",\"managementGroup\":\"Training\",\"companyCode\":\"KLF OG-ZY\",\"costCenter\":\"ZEW32PE\",\"email\":\"btomaskov5@cdbaby.com\",\"country\":\"Russia\"},\r\n{\"id\":7,\"firstName\":\"Alyssa\",\"lastName\":\"Smorthit\",\"internationalName\":\"Alyssa Smorthit\",\"title\":\"Help Desk Technician\",\"businessUnit\":\"Legal\",\"managementGroup\":\"Legal\",\"companyCode\":\"SKH DG-GQ\",\"costCenter\":\"KVC42GZ\",\"email\":\"asmorthit6@macromedia.com\",\"country\":\"China\"},\r\n{\"id\":8,\"firstName\":\"Elke\",\"lastName\":\"Willatts\",\"internationalName\":\"Elke Willatts\",\"title\":\"Mechanical Systems Engineer\",\"businessUnit\":\"Support\",\"managementGroup\":\"Marketing\",\"companyCode\":\"ODN RT-LN\",\"costCenter\":\"CDJ22KF\",\"email\":\"ewillatts7@furl.net\",\"country\":\"China\"},\r\n{\"id\":9,\"firstName\":\"Fayette\",\"lastName\":\"Fyldes\",\"internationalName\":\"Fayette Fyldes\",\"title\":\"Staff Scientist\",\"businessUnit\":\"Support\",\"managementGroup\":\"Services\",\"companyCode\":\"PFL GX-QO\",\"costCenter\":\"HGC92XL\",\"email\":\"ffyldes8@google.ru\",\"country\":\"Japan\"}\r\n]",
+                "latency": 0,
+                "statusCode": 201,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "proxyRemovePrefix": false,
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ]
+      }
+    }
+  ]
 }

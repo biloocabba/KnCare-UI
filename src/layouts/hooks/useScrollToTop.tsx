@@ -1,9 +1,8 @@
 import { useEffect } from "react";
+
 import { useLocation } from "react-router";
 
-export const useScrollToTop = (
-  mainContentRef: React.MutableRefObject<HTMLDivElement>,
-) => {
+export const useScrollToTop = (mainContentRef: React.MutableRefObject<HTMLDivElement>) => {
   const location = useLocation();
 
   useEffect(() => {

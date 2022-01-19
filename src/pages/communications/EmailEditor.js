@@ -15,14 +15,15 @@
 
 */
 import { BoxHeader } from "components/headers";
+
 import React, { useState } from "react";
+
 import ReactQuill from "react-quill";
+
 import "react-quill/dist/quill.snow.css";
 // core components
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
+
 // reactstrap components
 import {
   Button,
@@ -37,9 +38,14 @@ import {
   Input,
   Row,
 } from "reactstrap";
+
+import { useHistory } from "react-router-dom";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+
 import emailService from "services/EmailService";
 
-function EmailEditor(props) {
+var EmailEditor = props => {
   let history = useHistory();
   const [emailState, setEmailState] = useState(props.initialEmailState);
 
@@ -88,27 +94,13 @@ function EmailEditor(props) {
                   </Col>
                   <Col className="text-right" xs="4">
                     <ButtonGroup>
-                      <Button
-                        color="danger"
-                        href="#pablo"
-                        onClick={handleDiscard}
-                        size="sm"
-                      >
+                      <Button color="danger" href="#pablo" onClick={handleDiscard} size="sm">
                         Discard
                       </Button>
-                      <Button
-                        href="#pablo"
-                        onClick={handleSaveAsDraft}
-                        size="sm"
-                      >
+                      <Button href="#pablo" onClick={handleSaveAsDraft} size="sm">
                         Save as Draft
                       </Button>
-                      <Button
-                        color="primary"
-                        href="#pablo"
-                        onClick={handleSend}
-                        size="sm"
-                      >
+                      <Button color="primary" href="#pablo" onClick={handleSend} size="sm">
                         Send
                       </Button>
                     </ButtonGroup>
@@ -121,10 +113,7 @@ function EmailEditor(props) {
                     <Row>
                       <Col>
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-email"
-                          >
+                          <label className="form-control-label" htmlFor="input-email">
                             Recipient
                           </label>
                           <Select
@@ -134,9 +123,7 @@ function EmailEditor(props) {
                             options={careMembers}
                             onChange={e => {
                               let recipientsArray = [];
-                              e.forEach(element =>
-                                recipientsArray.push(element.value),
-                              );
+                              e.forEach(element => recipientsArray.push(element.value));
                               setEmailState({
                                 ...emailState,
                                 recipients: recipientsArray,
@@ -149,10 +136,7 @@ function EmailEditor(props) {
                     <Row>
                       <Col>
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-recipient-group"
-                          >
+                          <label className="form-control-label" htmlFor="input-recipient-group">
                             Recipient Group
                           </label>
                           <Select
@@ -162,9 +146,7 @@ function EmailEditor(props) {
                             options={groups}
                             onChange={e => {
                               let recipientGroupsArray = [];
-                              e.forEach(element =>
-                                recipientGroupsArray.push(element.value),
-                              );
+                              e.forEach(element => recipientGroupsArray.push(element.value));
                               setEmailState({
                                 ...emailState,
                                 recipientGroups: recipientGroupsArray,
@@ -177,10 +159,7 @@ function EmailEditor(props) {
                     <Row>
                       <Col>
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-recipient-group"
-                          >
+                          <label className="form-control-label" htmlFor="input-recipient-group">
                             To Roles
                           </label>
                           <Select
@@ -190,9 +169,7 @@ function EmailEditor(props) {
                             options={careRoles}
                             onChange={e => {
                               let recipientRoleArray = [];
-                              e.forEach(element =>
-                                recipientRoleArray.push(element.value),
-                              );
+                              e.forEach(element => recipientRoleArray.push(element.value));
                               setEmailState({
                                 ...emailState,
                                 recipientRoles: recipientRoleArray,
@@ -206,10 +183,7 @@ function EmailEditor(props) {
                   <hr className="my-4" />
                   <div className="pl-lg-4">
                     <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="email-subject"
-                      >
+                      <label className="form-control-label" htmlFor="email-subject">
                         Subject
                       </label>
                       <Input
@@ -226,9 +200,7 @@ function EmailEditor(props) {
                     </FormGroup>
                     <ReactQuill
                       value={emailState.content}
-                      onChange={e =>
-                        setEmailState({ ...emailState, content: e })
-                      }
+                      onChange={e => setEmailState({ ...emailState, content: e })}
                     />
                   </div>
                 </Form>
@@ -239,6 +211,6 @@ function EmailEditor(props) {
       </Container>
     </>
   );
-}
+};
 
 export default EmailEditor;

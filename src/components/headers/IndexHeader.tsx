@@ -15,9 +15,10 @@
 
 */
 // react library for routing
+import { Button, Card, CardBody, Container, Row, Col } from "reactstrap";
+
 import { Link } from "react-router-dom";
 // reactstrap components
-import { Button, Card, CardBody, Container, Row, Col } from "reactstrap";
 
 export const IndexHeader = () => {
   return (
@@ -32,13 +33,11 @@ export const IndexHeader = () => {
                     Argon Dashboard PRO React
                   </h1>
                   <h2 className="display-4 text-white font-weight-light">
-                    A beautiful premium dashboard for Bootstrap 4, React
-                    and Reactstrap.
+                    A beautiful premium dashboard for Bootstrap 4, React and Reactstrap.
                   </h2>
                   <p className="text-white mt-4">
-                    Argon perfectly combines reusable HTML and modular CSS
-                    with a modern styling and beautiful markup throughout
-                    each HTML template in the pack.
+                    Argon perfectly combines reusable HTML and modular CSS with a modern styling and
+                    beautiful markup throughout each HTML template in the pack.
                   </p>
                   <div className="mt-5">
                     <Button
@@ -68,9 +67,7 @@ export const IndexHeader = () => {
                           <i className="ni ni-active-40" />
                         </div>
                         <h5 className="h3">Components</h5>
-                        <p>
-                          Argon comes with over 70 handcrafted components.
-                        </p>
+                        <p>Argon comes with over 70 handcrafted components.</p>
                       </CardBody>
                     </Card>
                     <Card>
@@ -80,8 +77,7 @@ export const IndexHeader = () => {
                         </div>
                         <h5 className="h3">Plugins</h5>
                         <p>
-                          Fully integrated and extendable third-party
-                          plugins that you will love.
+                          Fully integrated and extendable third-party plugins that you will love.
                         </p>
                       </CardBody>
                     </Card>
@@ -93,10 +89,7 @@ export const IndexHeader = () => {
                           <i className="ni ni-active-40" />
                         </div>
                         <h5 className="h3">Pages</h5>
-                        <p>
-                          From simple to complex, you get a beautiful set
-                          of 15+ page examples.
-                        </p>
+                        <p>From simple to complex, you get a beautiful set of 15+ page examples.</p>
                       </CardBody>
                     </Card>
                     <Card className="mb-4">
@@ -105,9 +98,7 @@ export const IndexHeader = () => {
                           <i className="ni ni-active-40" />
                         </div>
                         <h5 className="h3">Documentation</h5>
-                        <p>
-                          You will love how easy is to to work with Argon.
-                        </p>
+                        <p>You will love how easy is to to work with Argon.</p>
                       </CardBody>
                     </Card>
                   </Col>
@@ -125,10 +116,7 @@ export const IndexHeader = () => {
             x="0"
             y="0"
           >
-            <polygon
-              className="fill-default"
-              points="2560 0 2560 100 0 100"
-            />
+            <polygon className="fill-default" points="2560 0 2560 100 0 100" />
           </svg>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { defaults } from "react-chartjs-2";
+
 import { colors, fonts, mode } from "../theme";
 
 defaults.maintainAspectRatio = false;
@@ -41,8 +42,7 @@ defaults.elements.bar.borderRadius = 10;
 
 // arc (pie and doughnut)
 defaults.elements.arc.backgroundColor = colors.theme["primary"];
-defaults.elements.arc.borderColor =
-  mode === "dark" ? colors.gray[800] : colors.white;
+defaults.elements.arc.borderColor = mode === "dark" ? colors.gray[800] : colors.white;
 // defaults.elements.arc.borderWidth = 4;
 defaults.elements.arc.hoverOffset = 6;
 
@@ -59,7 +59,7 @@ defaults.scales["linear"].ticks.padding = 10;
 defaults.scales["linear"].beginAtZero = true;
 // this removes all tick labels that are not at a 10th of a unit
 defaults.scales["linear"].ticks.callback = value => {
-  let numberValue = parseInt(value.toString());
+  const numberValue = parseInt(value.toString());
   if (!(numberValue % 10)) {
     return numberValue;
   } else {

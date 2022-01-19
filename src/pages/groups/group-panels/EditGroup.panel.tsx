@@ -11,14 +11,16 @@ import {
   Spinner,
 } from "reactstrap";
 
-import { AddMemberPanel } from ".";
 import { InputField } from "components/widgets/input-field";
+
 import { Group } from "types/domain";
+
+import { AddMemberPanel } from ".";
 
 interface Props {
   group: Group;
   setGroup: (group: Group) => void;
-  onSave: (group:Group) => void;
+  onSave: (group: Group) => void;
   groupsState: any;
   addMembersCollapse: boolean;
   setAddMembersCollapse: (collapse: boolean) => void;
@@ -33,7 +35,7 @@ export const EditGroupPanel = ({
   onBackToSearchClick,
   addMembersCollapse,
   setAddMembersCollapse,
-}:Props) => {
+}: Props) => {
   const { name, description } = group;
 
   return (
@@ -104,13 +106,13 @@ export const EditGroupPanel = ({
                     <Collapse isOpen={addMembersCollapse}>
                       <AddMemberPanel
                         // eslint-disable-next-line no-console
-                        onChangeRole={(e:any) => console.log(e)}
+                        onChangeRole={(e: any) => console.log(e)}
                         // eslint-disable-next-line no-console
-                        onChangeCountry={(e:any) => console.log(e)}
+                        onChangeCountry={(e: any) => console.log(e)}
                         // eslint-disable-next-line no-console
-                        onChangeBusinessUnit={(e:any) => console.log(e)}
+                        onChangeBusinessUnit={(e: any) => console.log(e)}
                         // eslint-disable-next-line no-console
-                        onSelectCareMember={(e:any) => console.log(e)}
+                        onSelectCareMember={(e: any) => console.log(e)}
                       />
                     </Collapse>
                   </Col>
@@ -138,4 +140,3 @@ export const EditGroupPanel = ({
     </Row>
   );
 };
-

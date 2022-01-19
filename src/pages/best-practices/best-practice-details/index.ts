@@ -1,1 +1,1 @@
-export * from "./BestPracticeDetails.page"
+export * from "./BestPracticeDetails.page";

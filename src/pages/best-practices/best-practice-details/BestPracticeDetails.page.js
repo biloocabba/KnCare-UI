@@ -14,13 +14,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { BoxHeader } from "components/headers";
-import { huddle64pdf } from "redux/features/utils/in-memory-api-mock/mock-data/mock-data-pdf-huddle-base64";
 import React, { useState } from "react";
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
-import Rating from "react-rating";
-import { useParams } from "react-router-dom";
-// reactstrap components
+
 import {
   Button,
   Card,
@@ -37,9 +32,19 @@ import {
   Row,
 } from "reactstrap";
 
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
+import Rating from "react-rating";
+import { useParams } from "react-router-dom";
+
+import { BoxHeader } from "components/headers";
+
+import { huddle64pdf } from "redux/features/utils/in-memory-api-mock/mock-data/mock-data-pdf-huddle-base64";
+
+// reactstrap components
+
 // import pdfToShare from 'assets/pdf/HostingCareHuddle.pdf'
 
-export const BestPracticeDetailPage = (props)  => {
+export const BestPracticeDetailPage = props => {
   let { id } = useParams(); //see in routes path: "/users/employee-details/:id",
 
   //const bestPractices = useSelector((state) => state.bestPractices)
@@ -90,9 +95,7 @@ export const BestPracticeDetailPage = (props)  => {
               className="btn btn-primary"
               color="primary"
               href="#pablo"
-              onClick={e =>
-                props.history.push("/admin/search-best-practices")
-              }
+              onClick={e => props.history.push("/admin/search-best-practices")}
             >
               Back to Search
             </Button>
@@ -110,17 +113,12 @@ export const BestPracticeDetailPage = (props)  => {
               </CardHeader>
               <CardBody>
                 <Form>
-                  <h6 className="heading-small text-muted mb-4">
-                    Best Practice details
-                  </h6>
+                  <h6 className="heading-small text-muted mb-4">Best Practice details</h6>
                   <div className="pl-lg-4">
                     <Row>
                       <Col lg="3">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-first-name"
-                          >
+                          <label className="form-control-label" htmlFor="input-first-name">
                             Title
                           </label>
                           <Input
@@ -133,10 +131,7 @@ export const BestPracticeDetailPage = (props)  => {
                       </Col>
                       <Col lg="3">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="rating"
-                          >
+                          <label className="form-control-label" htmlFor="rating">
                             Current Rating
                           </label>
                           <Input
@@ -150,10 +145,7 @@ export const BestPracticeDetailPage = (props)  => {
 
                       <Col lg="3">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="author"
-                          >
+                          <label className="form-control-label" htmlFor="author">
                             Author
                           </label>
                           <Input
@@ -166,10 +158,7 @@ export const BestPracticeDetailPage = (props)  => {
                       </Col>
                       <Col lg="3">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="publishDate"
-                          >
+                          <label className="form-control-label" htmlFor="publishDate">
                             Published On
                           </label>
                           <Input
@@ -201,8 +190,7 @@ export const BestPracticeDetailPage = (props)  => {
                         </Document>
                         <div>
                           <p className="mb-0">
-                            Page {pageNumber || (numPages ? 1 : "--")} of{" "}
-                            {numPages || "--"}
+                            Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
                           </p>
 
                           <Pagination>
@@ -218,19 +206,16 @@ export const BestPracticeDetailPage = (props)  => {
                               </PaginationLink>
                             </PaginationItem>
 
-                            {Array.from(
-                              new Array(numPages),
-                              (el, index) => (
-                                <PaginationItem>
-                                  <PaginationLink
-                                    href="#pablo"
-                                    onClick={e => setPageNumber(index + 1)}
-                                  >
-                                    {index + 1}
-                                  </PaginationLink>
-                                </PaginationItem>
-                              ),
-                            )}
+                            {Array.from(new Array(numPages), (el, index) => (
+                              <PaginationItem>
+                                <PaginationLink
+                                  href="#pablo"
+                                  onClick={e => setPageNumber(index + 1)}
+                                >
+                                  {index + 1}
+                                </PaginationLink>
+                              </PaginationItem>
+                            ))}
 
                             <PaginationItem>
                               <PaginationLink
@@ -294,4 +279,4 @@ export const BestPracticeDetailPage = (props)  => {
       </Container>
     </>
   );
-}
+};

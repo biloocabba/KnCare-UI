@@ -1,17 +1,10 @@
-import {
-  AsyncThunk,
-  createAsyncThunk,
-  createSlice,
-} from "@reduxjs/toolkit";
+import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { Group } from "types/domain";
+
 import { StateType } from "redux/features/common";
 
-import {
-  groupService,
-  IPartiallyUpdatedGroup,
-  IUpdatedGroup,
-} from ".";
+import { groupService, IPartiallyUpdatedGroup, IUpdatedGroup } from ".";
 
 const initialState: StateType<Group> = {
   entities: [],
@@ -21,31 +14,22 @@ const initialState: StateType<Group> = {
   error: {},
 };
 
-export const findGroupById = createAsyncThunk(
-  "group/findById",
-  async (id: number) => {
-    let { data } = await groupService.getGroupById(id);
-    return data;
-  },
-);
+export const findGroupById = createAsyncThunk("group/findById", async (id: number) => {
+  const { data } = await groupService.getGroupById(id);
+  return data;
+});
 
-export const searchGroups = createAsyncThunk(
-  "group/searchGroups",
-  async () => {
-    const { data } = await groupService.getAllGroups();
+export const searchGroups = createAsyncThunk("group/searchGroups", async () => {
+  const { data } = await groupService.getAllGroups();
 
-    return data;
-  },
-);
+  return data;
+});
 
-export const createGroup = createAsyncThunk(
-  "group/createGroup",
-  async (body: Partial<Group>) => {
-    const { data } = await groupService.createGroup(body);
+export const createGroup = createAsyncThunk("group/createGroup", async (body: Partial<Group>) => {
+  const { data } = await groupService.createGroup(body);
 
-    return data;
-  },
-);
+  return data;
+});
 
 export const updateGroup = createAsyncThunk(
   "group/updateGroup",
@@ -53,28 +37,22 @@ export const updateGroup = createAsyncThunk(
     const { data } = await groupService.updateGroup(updatedGroup);
 
     return data;
-  },
+  }
 );
 
 export const partialUpdateGroup = createAsyncThunk(
   "group/partialUpdateGroup",
   async (partiallyUpdatedGroup: IPartiallyUpdatedGroup) => {
-    const { data } = await groupService.partialUpdateGroup(
-      partiallyUpdatedGroup,
-    );
+    const { data } = await groupService.partialUpdateGroup(partiallyUpdatedGroup);
 
     return data;
-  },
+  }
 );
 
-export const deleteGroup = createAsyncThunk(
-  "group/deleteGroup",
-  async (id: number) => {
-    let { data } = await groupService.deleteGroup(id);
-    return data;
-  },
-);
-
+export const deleteGroup = createAsyncThunk("group/deleteGroup", async (id: number) => {
+  const { data } = await groupService.deleteGroup(id);
+  return data;
+});
 
 export const groupSlice = createSlice({
   name: "group",
@@ -121,7 +99,7 @@ export const groupSlice = createSlice({
 
     builder.addCase(updateGroup.fulfilled, (state, action) => {
       state.entity = action.payload;
-      let updatedGroups = state.entities.map(group => {
+      const updatedGroups = state.entities.map(group => {
         if (group.id === action.payload.id) {
           return {
             ...group,
@@ -138,7 +116,7 @@ export const groupSlice = createSlice({
 
     builder.addCase(partialUpdateGroup.fulfilled, (state, action) => {
       state.entity = action.payload;
-      let updatedGroups = state.entities.map(group => {
+      const updatedGroups = state.entities.map(group => {
         if (group.id === action.payload.id) {
           return {
             ...group,

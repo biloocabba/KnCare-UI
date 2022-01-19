@@ -11,9 +11,7 @@ export const selectRow = setSelectedRows => {
         // if user unseleceted a row
       } else {
         // removes this selected row from the selectedRows array
-        setSelectedRows(oldRows =>
-          oldRows.filter(oldRow => oldRow.id !== row.id),
-        );
+        setSelectedRows(oldRows => oldRows.filter(oldRow => oldRow.id !== row.id));
         // unselect
         return true;
       }
@@ -30,7 +28,7 @@ export const selectRow = setSelectedRows => {
         // removes this selected row from the selectedRows array
         setSelectedRows(oldRows =>
           // if rows array includes oldRow remove it from state
-          oldRows.filter(oldRow => !rows.includes(oldRow)),
+          oldRows.filter(oldRow => !rows.includes(oldRow))
         );
         // unselect
         return;

@@ -14,20 +14,14 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { BoxHeader } from "components/headers";
 import React from "react";
-// reactstrap components
-import {
-  Badge,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Container,
-  Row,
-} from "reactstrap";
 
-function EmailHistoryPage() {
+// reactstrap components
+import { Badge, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
+
+import { BoxHeader } from "components/headers";
+
+var EmailHistoryPage = () => {
   return (
     <>
       <BoxHeader />
@@ -49,14 +43,11 @@ function EmailHistoryPage() {
                       <i className="ni ni-bell-55" />
                     </span>
                     <div className="timeline-content">
-                      <small className="text-muted font-weight-bold">
-                        10:30 AM
-                      </small>
+                      <small className="text-muted font-weight-bold">10:30 AM</small>
                       <h5 className="mt-3 mb-0">New message</h5>
                       <p className="text-sm mt-1 mb-0">
-                        Nullam id dolor id nibh ultricies vehicula ut id
-                        elit. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
+                        Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </p>
                       <div className="mt-3">
                         <Badge color="success" pill>
@@ -76,14 +67,11 @@ function EmailHistoryPage() {
                       <i className="ni ni-html5" />
                     </span>
                     <div className="timeline-content">
-                      <small className="text-muted font-weight-bold">
-                        10:30 AM
-                      </small>
+                      <small className="text-muted font-weight-bold">10:30 AM</small>
                       <h5 className="mt-3 mb-0">Product issue</h5>
                       <p className="text-sm mt-1 mb-0">
-                        Nullam id dolor id nibh ultricies vehicula ut id
-                        elit. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
+                        Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </p>
                       <div className="mt-3">
                         <Badge color="danger" pill>
@@ -103,14 +91,11 @@ function EmailHistoryPage() {
                       <i className="ni ni-like-2" />
                     </span>
                     <div className="timeline-content">
-                      <small className="text-muted font-weight-bold">
-                        10:30 AM
-                      </small>
+                      <small className="text-muted font-weight-bold">10:30 AM</small>
                       <h5 className="mt-3 mb-0">New likes</h5>
                       <p className="text-sm mt-1 mb-0">
-                        Nullam id dolor id nibh ultricies vehicula ut id
-                        elit. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
+                        Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </p>
                       <div className="mt-3">
                         <Badge color="info" pill>
@@ -130,14 +115,11 @@ function EmailHistoryPage() {
                       <i className="ni ni-bell-55" />
                     </span>
                     <div className="timeline-content">
-                      <small className="text-muted font-weight-bold">
-                        10:30 AM
-                      </small>
+                      <small className="text-muted font-weight-bold">10:30 AM</small>
                       <h5 className="mt-3 mb-0">New message</h5>
                       <p className="text-sm mt-1 mb-0">
-                        Nullam id dolor id nibh ultricies vehicula ut id
-                        elit. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
+                        Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </p>
                       <div className="mt-3">
                         <Badge color="success" pill>
@@ -157,14 +139,11 @@ function EmailHistoryPage() {
                       <i className="ni ni-html5" />
                     </span>
                     <div className="timeline-content">
-                      <small className="text-muted font-weight-bold">
-                        10:30 AM
-                      </small>
+                      <small className="text-muted font-weight-bold">10:30 AM</small>
                       <h5 className="mt-3 mb-0">Product issue</h5>
                       <p className="text-sm mt-1 mb-0">
-                        Nullam id dolor id nibh ultricies vehicula ut id
-                        elit. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
+                        Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </p>
                       <div className="mt-3">
                         <Badge color="danger" pill>
@@ -199,14 +178,11 @@ function EmailHistoryPage() {
                       <i className="ni ni-bell-55" />
                     </span>
                     <div className="timeline-content">
-                      <small className="text-light font-weight-bold">
-                        10:30 AM
-                      </small>
+                      <small className="text-light font-weight-bold">10:30 AM</small>
                       <h5 className="text-white mt-3 mb-0">New message</h5>
                       <p className="text-light text-sm mt-1 mb-0">
-                        Nullam id dolor id nibh ultricies vehicula ut id
-                        elit. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
+                        Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </p>
                       <div className="mt-3">
                         <Badge color="success" pill>
@@ -226,16 +202,11 @@ function EmailHistoryPage() {
                       <i className="ni ni-html5" />
                     </span>
                     <div className="timeline-content">
-                      <small className="text-light font-weight-bold">
-                        10:30 AM
-                      </small>
-                      <h5 className="text-white mt-3 mb-0">
-                        Product issue
-                      </h5>
+                      <small className="text-light font-weight-bold">10:30 AM</small>
+                      <h5 className="text-white mt-3 mb-0">Product issue</h5>
                       <p className="text-light text-sm mt-1 mb-0">
-                        Nullam id dolor id nibh ultricies vehicula ut id
-                        elit. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
+                        Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </p>
                       <div className="mt-3">
                         <Badge color="danger" pill>
@@ -255,14 +226,11 @@ function EmailHistoryPage() {
                       <i className="ni ni-like-2" />
                     </span>
                     <div className="timeline-content">
-                      <small className="text-light font-weight-bold">
-                        10:30 AM
-                      </small>
+                      <small className="text-light font-weight-bold">10:30 AM</small>
                       <h5 className="text-white mt-3 mb-0">New likes</h5>
                       <p className="text-light text-sm mt-1 mb-0">
-                        Nullam id dolor id nibh ultricies vehicula ut id
-                        elit. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
+                        Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </p>
                       <div className="mt-3">
                         <Badge color="info" pill>
@@ -282,14 +250,11 @@ function EmailHistoryPage() {
                       <i className="ni ni-bell-55" />
                     </span>
                     <div className="timeline-content">
-                      <small className="text-light font-weight-bold">
-                        10:30 AM
-                      </small>
+                      <small className="text-light font-weight-bold">10:30 AM</small>
                       <h5 className="text-white mt-3 mb-0">New message</h5>
                       <p className="text-light text-sm mt-1 mb-0">
-                        Nullam id dolor id nibh ultricies vehicula ut id
-                        elit. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
+                        Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </p>
                       <div className="mt-3">
                         <Badge color="success" pill>
@@ -309,16 +274,11 @@ function EmailHistoryPage() {
                       <i className="ni ni-html5" />
                     </span>
                     <div className="timeline-content">
-                      <small className="text-light font-weight-bold">
-                        10:30 AM
-                      </small>
-                      <h5 className="text-white mt-3 mb-0">
-                        Product issue
-                      </h5>
+                      <small className="text-light font-weight-bold">10:30 AM</small>
+                      <h5 className="text-white mt-3 mb-0">Product issue</h5>
                       <p className="text-light text-sm mt-1 mb-0">
-                        Nullam id dolor id nibh ultricies vehicula ut id
-                        elit. Cum sociis natoque penatibus et magnis dis
-                        parturient montes, nascetur ridiculus mus.
+                        Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </p>
                       <div className="mt-3">
                         <Badge color="danger" pill>
@@ -341,6 +301,6 @@ function EmailHistoryPage() {
       </Container>
     </>
   );
-}
+};
 
 export default EmailHistoryPage;

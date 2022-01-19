@@ -1,20 +1,19 @@
 import { IRoute } from "types";
+
 import {
   CreateCareMemberPage,
   EditCareMemberPage,
   EmployeeDetailsPage,
   SearchEmployeesPage,
-  SearchCareMembersPage,  
+  SearchCareMembersPage,
   EMPLOYEE_SEARCH,
   EMPLOYEE_DETAILS,
   CARE_MEMBER_CREATE,
   CARE_MEMBER_SEARCH,
-  CARE_MEMBER_EDIT
+  CARE_MEMBER_EDIT,
 } from ".";
 
-
-
-export const userMenu:IRoute[] = [
+export const userMenu: IRoute[] = [
   {
     collapse: true,
     name: "Users",
@@ -36,7 +35,7 @@ export const userMenu:IRoute[] = [
         layout: "/admin",
       },
     ],
-  }, 
+  },
   {
     collapse: false,
     global: true,

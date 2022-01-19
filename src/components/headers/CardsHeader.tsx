@@ -41,9 +41,7 @@ export const CardsHeader = ({ name, parentName }: Props) => {
           <div className="header-body">
             <Row className="align-items-center py-4">
               <Col lg="6" xs="7">
-                <h6 className="h2 text-white d-inline-block mb-0">
-                  {name}
-                </h6>{" "}
+                <h6 className="h2 text-white d-inline-block mb-0">{name}</h6>{" "}
                 <Breadcrumb
                   className="d-none d-md-inline-block ml-md-4"
                   listClassName="breadcrumb-links breadcrumb-dark"
@@ -91,15 +89,10 @@ export const CardsHeader = ({ name, parentName }: Props) => {
                   <CardBody>
                     <Row>
                       <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
+                        <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
                           Total traffic
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">
-                          350,897
-                        </span>
+                        <span className="h2 font-weight-bold mb-0">350,897</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -121,15 +114,10 @@ export const CardsHeader = ({ name, parentName }: Props) => {
                   <CardBody>
                     <Row>
                       <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
+                        <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
                           New users
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">
-                          2,356
-                        </span>
+                        <span className="h2 font-weight-bold mb-0">2,356</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -151,15 +139,10 @@ export const CardsHeader = ({ name, parentName }: Props) => {
                   <CardBody>
                     <Row>
                       <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
+                        <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
                           Sales
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">
-                          924
-                        </span>
+                        <span className="h2 font-weight-bold mb-0">924</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -181,15 +164,10 @@ export const CardsHeader = ({ name, parentName }: Props) => {
                   <CardBody>
                     <Row>
                       <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
+                        <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
                           Performance
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">
-                          49,65%
-                        </span>
+                        <span className="h2 font-weight-bold mb-0">49,65%</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-gradient-primary text-white rounded-circle shadow">

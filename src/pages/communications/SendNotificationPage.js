@@ -34,10 +34,11 @@ import {
   Row,
   Col,
 } from "reactstrap";
+
 // core components
 import ProfileHeader from "components/headers/ProfileHeader";
 
-function SendNotificationPage() {
+var SendNotificationPage = () => {
   return (
     <>
       <ProfileHeader />
@@ -45,13 +46,7 @@ function SendNotificationPage() {
         <Row>
           <Col className="order-xl-2" xl="4">
             <Card className="card-profile">
-              <CardImg
-                alt="..."
-                src={
-                  require("assets/img/theme/img-1-1000x600.jpg").default
-                }
-                top
-              />
+              <CardImg alt="..." src={require("assets/img/theme/img-1-1000x600.jpg").default} top />
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
                   <div className="card-profile-image">
@@ -59,9 +54,7 @@ function SendNotificationPage() {
                       <img
                         alt="..."
                         className="rounded-circle"
-                        src={
-                          require("assets/img/theme/team-4.jpg").default
-                        }
+                        src={require("assets/img/theme/team-4.jpg").default}
                       />
                     </a>
                   </div>
@@ -144,13 +137,7 @@ function SendNotificationPage() {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          <img
-                            alt="..."
-                            src={
-                              require("assets/img/theme/bootstrap.jpg")
-                                .default
-                            }
-                          />
+                          <img alt="..." src={require("assets/img/theme/bootstrap.jpg").default} />
                         </a>
                       </Col>
                       <div className="col">
@@ -172,13 +159,7 @@ function SendNotificationPage() {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          <img
-                            alt="..."
-                            src={
-                              require("assets/img/theme/angular.jpg")
-                                .default
-                            }
-                          />
+                          <img alt="..." src={require("assets/img/theme/angular.jpg").default} />
                         </a>
                       </Col>
                       <div className="col">
@@ -200,13 +181,7 @@ function SendNotificationPage() {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          <img
-                            alt="..."
-                            src={
-                              require("assets/img/theme/sketch.jpg")
-                                .default
-                            }
-                          />
+                          <img alt="..." src={require("assets/img/theme/sketch.jpg").default} />
                         </a>
                       </Col>
                       <div className="col">
@@ -228,22 +203,12 @@ function SendNotificationPage() {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          <img
-                            alt="..."
-                            src={
-                              require("assets/img/theme/react.jpg").default
-                            }
-                          />
+                          <img alt="..." src={require("assets/img/theme/react.jpg").default} />
                         </a>
                       </Col>
                       <div className="col">
                         <h5>React Material Dashboard</h5>
-                        <Progress
-                          className="progress-xs mb-0"
-                          max="100"
-                          value="90"
-                          color="info"
-                        />
+                        <Progress className="progress-xs mb-0" max="100" value="90" color="info" />
                       </div>
                     </Row>
                   </ListGroupItem>
@@ -255,12 +220,7 @@ function SendNotificationPage() {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          <img
-                            alt="..."
-                            src={
-                              require("assets/img/theme/vue.jpg").default
-                            }
-                          />
+                          <img alt="..." src={require("assets/img/theme/vue.jpg").default} />
                         </a>
                       </Col>
                       <div className="col">
@@ -285,15 +245,10 @@ function SendNotificationPage() {
                   <CardBody>
                     <Row>
                       <div className="col">
-                        <CardTitle
-                          className="text-uppercase text-muted mb-0 text-white"
-                          tag="h5"
-                        >
+                        <CardTitle className="text-uppercase text-muted mb-0 text-white" tag="h5">
                           Total traffic
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0 text-white">
-                          350,897
-                        </span>
+                        <span className="h2 font-weight-bold mb-0 text-white">350,897</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-white text-dark rounded-circle shadow">
@@ -306,9 +261,7 @@ function SendNotificationPage() {
                         <i className="fa fa-arrow-up" />
                         3.48%
                       </span>
-                      <span className="text-nowrap text-light">
-                        Since last month
-                      </span>
+                      <span className="text-nowrap text-light">Since last month</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -321,9 +274,7 @@ function SendNotificationPage() {
                         <CardTitle className="text-uppercase text-muted mb-0 text-white">
                           Performance
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0 text-white">
-                          49,65%
-                        </span>
+                        <span className="h2 font-weight-bold mb-0 text-white">49,65%</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-white text-dark rounded-circle shadow">
@@ -336,9 +287,7 @@ function SendNotificationPage() {
                         <i className="fa fa-arrow-up" />
                         3.48%
                       </span>
-                      <span className="text-nowrap text-light">
-                        Since last month
-                      </span>
+                      <span className="text-nowrap text-light">Since last month</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -364,17 +313,12 @@ function SendNotificationPage() {
               </CardHeader>
               <CardBody>
                 <Form>
-                  <h6 className="heading-small text-muted mb-4">
-                    User information
-                  </h6>
+                  <h6 className="heading-small text-muted mb-4">User information</h6>
                   <div className="pl-lg-4">
                     <Row>
                       <Col lg="6">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-username"
-                          >
+                          <label className="form-control-label" htmlFor="input-username">
                             Username
                           </label>
                           <Input
@@ -387,27 +331,17 @@ function SendNotificationPage() {
                       </Col>
                       <Col lg="6">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-email"
-                          >
+                          <label className="form-control-label" htmlFor="input-email">
                             Email address
                           </label>
-                          <Input
-                            id="input-email"
-                            placeholder="jesse@example.com"
-                            type="email"
-                          />
+                          <Input id="input-email" placeholder="jesse@example.com" type="email" />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
                       <Col lg="6">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-first-name"
-                          >
+                          <label className="form-control-label" htmlFor="input-first-name">
                             First name
                           </label>
                           <Input
@@ -420,10 +354,7 @@ function SendNotificationPage() {
                       </Col>
                       <Col lg="6">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-last-name"
-                          >
+                          <label className="form-control-label" htmlFor="input-last-name">
                             Last name
                           </label>
                           <Input
@@ -438,17 +369,12 @@ function SendNotificationPage() {
                   </div>
                   <hr className="my-4" />
 
-                  <h6 className="heading-small text-muted mb-4">
-                    Contact information
-                  </h6>
+                  <h6 className="heading-small text-muted mb-4">Contact information</h6>
                   <div className="pl-lg-4">
                     <Row>
                       <Col md="12">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
+                          <label className="form-control-label" htmlFor="input-address">
                             Address
                           </label>
                           <Input
@@ -463,10 +389,7 @@ function SendNotificationPage() {
                     <Row>
                       <Col lg="4">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-city"
-                          >
+                          <label className="form-control-label" htmlFor="input-city">
                             City
                           </label>
                           <Input
@@ -479,10 +402,7 @@ function SendNotificationPage() {
                       </Col>
                       <Col lg="4">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
+                          <label className="form-control-label" htmlFor="input-country">
                             Country
                           </label>
                           <Input
@@ -495,31 +415,20 @@ function SendNotificationPage() {
                       </Col>
                       <Col lg="4">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
+                          <label className="form-control-label" htmlFor="input-country">
                             Postal code
                           </label>
-                          <Input
-                            id="input-postal-code"
-                            placeholder="Postal code"
-                            type="number"
-                          />
+                          <Input id="input-postal-code" placeholder="Postal code" type="number" />
                         </FormGroup>
                       </Col>
                     </Row>
                   </div>
                   <hr className="my-4" />
 
-                  <h6 className="heading-small text-muted mb-4">
-                    About me
-                  </h6>
+                  <h6 className="heading-small text-muted mb-4">About me</h6>
                   <div className="pl-lg-4">
                     <FormGroup>
-                      <label className="form-control-label">
-                        About Me
-                      </label>
+                      <label className="form-control-label">About Me</label>
                       <Input
                         placeholder="A few words about you ..."
                         rows="4"
@@ -536,6 +445,6 @@ function SendNotificationPage() {
       </Container>
     </>
   );
-}
+};
 
 export default SendNotificationPage;

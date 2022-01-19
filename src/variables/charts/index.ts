@@ -1,2 +1,2 @@
-export * from "./chartDefaults"
-export * from "./charts"
+export * from "./chartDefaults";
+export * from "./charts";

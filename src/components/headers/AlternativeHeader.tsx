@@ -15,14 +15,7 @@
 
 */
 // reactstrap components
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  Button,
-  Col,
-  Container,
-  Row,
-} from "reactstrap";
+import { Breadcrumb, BreadcrumbItem, Button, Col, Container, Row } from "reactstrap";
 
 export const AlternativeHeader = () => {
   return (

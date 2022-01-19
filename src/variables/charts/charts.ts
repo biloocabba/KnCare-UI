@@ -16,22 +16,15 @@
 */
 
 import { colors } from "variables/theme";
+
 import { IBarChart, IDoughnutChart, ILineChart, IPieChart } from "./types";
 
 // Only for demo purposes - return a random number to generate datasets
 const randomScalingFactor = () => Math.round(Math.random() * 100);
 
-export const barTurnoverData:IBarChart = {
+export const barTurnoverData: IBarChart = {
   data: {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-    ],
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
         label: "Offboarded",
@@ -81,7 +74,7 @@ export const barTurnoverData:IBarChart = {
   },
 };
 
-export const lineActiveMembersData:ILineChart = {
+export const lineActiveMembersData: ILineChart = {
   data: {
     labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
@@ -104,7 +97,7 @@ export const lineActiveMembersData:ILineChart = {
   },
 };
 
-export const pieByRole:IPieChart = {
+export const pieByRole: IPieChart = {
   data: {
     labels: [
       "Regional Transformation Manager",
@@ -146,7 +139,7 @@ export const pieByRole:IPieChart = {
   },
 };
 
-export const pieByBusinessUnits:IPieChart = {
+export const pieByBusinessUnits: IPieChart = {
   data: {
     labels: [
       "Road Logistics",
@@ -211,7 +204,7 @@ export const pieByBusinessUnits:IPieChart = {
   },
 };
 
-export const doughnutByGender:IDoughnutChart = {
+export const doughnutByGender: IDoughnutChart = {
   data: {
     labels: ["Men", "Women"],
     datasets: [
@@ -237,7 +230,7 @@ export const doughnutByGender:IDoughnutChart = {
   },
 };
 
-export const pieByAge:IPieChart = {
+export const pieByAge: IPieChart = {
   data: {
     labels: ["20", "25", "30", "35", "40", "45", "50", "50+"],
     datasets: [
@@ -278,7 +271,7 @@ export const pieByAge:IPieChart = {
   },
 };
 
-export const pieByWorkingTime:IPieChart = {
+export const pieByWorkingTime: IPieChart = {
   data: {
     labels: ["1", "2", "3", "4", "5", "5+"],
     datasets: [
@@ -449,15 +442,7 @@ export const pieChartExample: IPieChart = {
 
 export const multiBarChartExample: IBarChart = {
   data: {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-    ],
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
         label: "Dataset 1",

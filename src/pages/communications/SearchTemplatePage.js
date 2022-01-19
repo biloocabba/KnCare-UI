@@ -14,17 +14,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { BoxHeader } from "components/headers";
 import React from "react";
+
 // react component used to create sweet alerts
-import ReactBSAlert from "react-bootstrap-sweetalert";
-// react component for creating dynamic tables
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-// react plugin that prints a given react component
-import ReactToPrint from "react-to-print";
-// reactstrap components
 import {
   Button,
   ButtonGroup,
@@ -35,6 +27,18 @@ import {
   Row,
   UncontrolledTooltip,
 } from "reactstrap";
+
+import ReactBSAlert from "react-bootstrap-sweetalert";
+// react component for creating dynamic tables
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+// react plugin that prints a given react component
+import ReactToPrint from "react-to-print";
+
+// reactstrap components
+import { BoxHeader } from "components/headers";
+
 import { dataTable } from "variables/general";
 
 const pagination = paginationFactory({
@@ -42,11 +46,7 @@ const pagination = paginationFactory({
   alwaysShowAllBtns: true,
   showTotal: true,
   withFirstAndLast: false,
-  sizePerPageRenderer: ({
-    options,
-    currSizePerPage,
-    onSizePerPageChange,
-  }) => (
+  sizePerPageRenderer: ({ options, currSizePerPage, onSizePerPageChange }) => (
     <div className="dataTables_length" id="datatable-basic_length">
       <label>
         Show{" "}
@@ -71,7 +71,7 @@ const pagination = paginationFactory({
 
 const { SearchBar } = Search;
 
-function SearchTemplatePage() {
+var SearchTemplatePage = () => {
   const [alert, setAlert] = React.useState(null);
   const componentRef = React.useRef(null);
   // this function will copy to clipboard an entire table,
@@ -109,7 +109,7 @@ function SearchTemplatePage() {
         btnSize=""
       >
         Copied to clipboard!
-      </ReactBSAlert>,
+      </ReactBSAlert>
     );
   };
 
@@ -124,9 +124,8 @@ function SearchTemplatePage() {
               <CardHeader>
                 <h3 className="mb-0">React Bootstrap Table 2</h3>
                 <p className="text-sm mb-0">
-                  This is an exmaple of data table using the well known
-                  react-bootstrap-table2 plugin. This is a minimal setup in
-                  order to get started fast.
+                  This is an exmaple of data table using the well known react-bootstrap-table2
+                  plugin. This is a minimal setup in order to get started fast.
                 </p>
               </CardHeader>
               <ToolkitProvider
@@ -168,10 +167,7 @@ function SearchTemplatePage() {
               >
                 {props => (
                   <div className="py-4 table-responsive">
-                    <div
-                      id="datatable-basic_filter"
-                      className="dataTables_filter px-4 pb-1"
-                    >
+                    <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
                       <label>
                         Search:
                         <SearchBar
@@ -195,9 +191,8 @@ function SearchTemplatePage() {
               <CardHeader>
                 <h3 className="mb-0">Action buttons</h3>
                 <p className="text-sm mb-0">
-                  This is an exmaple of data table using the well known
-                  react-bootstrap-table2 plugin. This is a minimal setup in
-                  order to get started fast.
+                  This is an exmaple of data table using the well known react-bootstrap-table2
+                  plugin. This is a minimal setup in order to get started fast.
                 </p>
               </CardHeader>
               <ToolkitProvider
@@ -249,11 +244,7 @@ function SearchTemplatePage() {
                               size="sm"
                               id="copy-tooltip"
                               onClick={() =>
-                                copyToClipboardAsTable(
-                                  document.getElementById(
-                                    "react-bs-table",
-                                  ),
-                                )
+                                copyToClipboardAsTable(document.getElementById("react-bs-table"))
                               }
                             >
                               <span>Copy</span>
@@ -272,19 +263,11 @@ function SearchTemplatePage() {
                               content={() => componentRef.current}
                             />
                           </ButtonGroup>
-                          <UncontrolledTooltip
-                            placement="top"
-                            target="print-tooltip"
-                          >
-                            This will open a print page with the visible
-                            rows of the table.
+                          <UncontrolledTooltip placement="top" target="print-tooltip">
+                            This will open a print page with the visible rows of the table.
                           </UncontrolledTooltip>
-                          <UncontrolledTooltip
-                            placement="top"
-                            target="copy-tooltip"
-                          >
-                            This will copy to your clipboard the visible
-                            rows of the table.
+                          <UncontrolledTooltip placement="top" target="copy-tooltip">
+                            This will copy to your clipboard the visible rows of the table.
                           </UncontrolledTooltip>
                         </Col>
                         <Col xs={12} sm={6}>
@@ -321,6 +304,6 @@ function SearchTemplatePage() {
       </Container>
     </>
   );
-}
+};
 
 export default SearchTemplatePage;

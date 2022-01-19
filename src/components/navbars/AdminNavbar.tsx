@@ -15,8 +15,6 @@
 
 */
 // nodejs library that concatenates classes
-import classnames from "classnames";
-// reactstrap components
 import {
   Collapse,
   Container,
@@ -28,15 +26,21 @@ import {
   Navbar,
   UncontrolledDropdown,
 } from "reactstrap";
-import { logout } from "../../actions/auth";
-import { useAppSelector,useAppDispatch } from "redux/app";
+
+import classnames from "classnames";
+
+// reactstrap components
 import { Theme } from "types";
+
+import { useAppSelector, useAppDispatch } from "redux/app";
+
+import { logout } from "../../actions/auth";
 
 interface Props {
   theme: Theme;
 }
 
-export const AdminNavbar = ({ theme} :Props) => {
+export const AdminNavbar = ({ theme }: Props) => {
   const dispatch = useAppDispatch();
   // @ts-ignore
   const { isSidenavOpen } = useAppSelector(state => state.sidenav);
@@ -78,7 +82,7 @@ export const AdminNavbar = ({ theme} :Props) => {
         className={classnames(
           "navbar-top navbar-expand border-bottom",
           { "navbar-dark bg-primary": theme === "dark" },
-          { "navbar-light bg-secondary": theme === "light" },
+          { "navbar-light bg-secondary": theme === "light" }
         )}
       >
         <Container fluid>
@@ -399,16 +403,11 @@ export const AdminNavbar = ({ theme} :Props) => {
                     <span className="avatar avatar-sm rounded-circle">
                       <img
                         alt="..."
-                        src={
-                          require("assets/img/care/stefano-fiorenza.jpg")
-                            .default
-                        }
+                        src={require("assets/img/care/stefano-fiorenza.jpg").default}
                       />
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
-                      <span className="mb-0 text-sm font-weight-bold">
-                        Stefano Fiorenza
-                      </span>
+                      <span className="mb-0 text-sm font-weight-bold">Stefano Fiorenza</span>
                     </Media>
                   </Media>
                 </DropdownToggle>
@@ -416,31 +415,19 @@ export const AdminNavbar = ({ theme} :Props) => {
                   <DropdownItem className="noti-title" header tag="div">
                     <h6 className="text-overflow m-0">Welcome!</h6>
                   </DropdownItem>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
+                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
                     <i className="ni ni-single-02" />
                     <span>My profile</span>
                   </DropdownItem>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
+                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
                     <i className="ni ni-settings-gear-65" />
                     <span>Settings</span>
                   </DropdownItem>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
+                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
                     <i className="ni ni-calendar-grid-58" />
                     <span>Activity</span>
                   </DropdownItem>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
+                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
                     <i className="ni ni-support-16" />
                     <span>Support</span>
                   </DropdownItem>
@@ -457,5 +444,4 @@ export const AdminNavbar = ({ theme} :Props) => {
       </Navbar>
     </>
   );
-}
-
+};

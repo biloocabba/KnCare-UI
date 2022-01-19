@@ -1,5 +1,5 @@
 export interface Domain {}
-export interface Employee extends Domain{
+export interface Employee extends Domain {
   id: number;
   pdmId: number;
   firstName: string;
@@ -19,14 +19,14 @@ export interface Employee extends Domain{
   startDate: string;
   endDate?: string | null;
   dateOfLeave: string | null;
-  nationality: string| null;
-  officeAddressCity: string| null;
-  officeAddressStreet: string| null;
-  officeAddressCountry: string| null;
-  officeAddressPostalCode: string| null;
+  nationality: string | null;
+  officeAddressCity: string | null;
+  officeAddressStreet: string | null;
+  officeAddressCountry: string | null;
+  officeAddressPostalCode: string | null;
 }
 
-export interface CareMember extends Employee{
+export interface CareMember extends Employee {
   employeeId: number;
   onboardingDate: string;
   offboardingDate: string;
@@ -36,17 +36,17 @@ export interface CareMember extends Employee{
   role?: CareRole;
 }
 
-export interface CareRole extends Domain{
+export interface CareRole extends Domain {
   id: number;
   name: string;
 }
 
-export interface BusinessUnit extends Domain{
+export interface BusinessUnit extends Domain {
   id: number;
   name: string;
 }
 
-export interface Group extends Domain{
+export interface Group extends Domain {
   id: number;
   name: string;
   active: boolean;
@@ -54,14 +54,14 @@ export interface Group extends Domain{
   description: string;
 }
 
-export interface Country extends Domain{
+export interface Country extends Domain {
   code: string;
   code3: string;
   name: string;
   number: string;
 }
 
-export interface Chart extends Domain{
+export interface Chart extends Domain {
   label: string;
   value?: number;
   values?: number[];

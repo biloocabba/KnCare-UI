@@ -15,28 +15,21 @@
 
 */
 import { useEffect, useState } from "react";
-// react library for routing
-import {
-  useLocation,
-  NavLink as NavLinkRRD,
-  Link,
-} from "react-router-dom";
-// nodejs library that concatenates classes
-import classnames from "classnames";
 
+// react library for routing
+import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav } from "reactstrap";
+
+import classnames from "classnames";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import { useLocation, NavLink as NavLinkRRD, Link } from "react-router-dom";
+// nodejs library that concatenates classes
 
 // react library that creates nice scrollbar on windows devices
-import PerfectScrollbar from "react-perfect-scrollbar";
+
 // reactstrap components
-import {
-  Collapse,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  NavLink,
-  Nav,
-} from "reactstrap";
+
 import { IRoute } from "types";
+
 import { useAppDispatch, useAppSelector } from "../../redux/app";
 import { toggleSidenav } from "../../redux/features";
 
@@ -73,7 +66,7 @@ interface Props {
   rtlActive: boolean;
 }
 
-export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
+export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
   const [state, setState] = useState<any>({});
   const location = useLocation();
 
@@ -88,7 +81,7 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
   /**
    * verifies if routeName is the one active (in browser input)
    */
-   const activeRoute = (routeName: string) => {
+  const activeRoute = (routeName: string) => {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
 
@@ -109,28 +102,27 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
     }
   };
 
-    /**
+  /**
    * this creates the intial state of this component
    * based on the collapse routes that it gets through routes
    */
-     const getViewCollapseInitialState = (routes: IRoute[]) => {
-      for (let i = 0; i < routes.length; i++) {
-        let routePath = routes[i].path;
-        if (routePath) {
-          if (location.pathname.indexOf(routePath) !== -1) {
-            return true;
-          }
+  const getViewCollapseInitialState = (routes: IRoute[]) => {
+    for (let i = 0; i < routes.length; i++) {
+      const routePath = routes[i].path;
+      if (routePath) {
+        if (location.pathname.indexOf(routePath) !== -1) {
+          return true;
         }
       }
-      return false;
-    };
-
+    }
+    return false;
+  };
 
   /**
    * this is used on mobile devices, when a user navigates
    * the sidebar will autoclose
    */
-   const closeSidenav = () => {
+  const closeSidenav = () => {
     if (window.innerWidth < 1200) {
       dispatch(toggleSidenav());
     }
@@ -139,12 +131,12 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
   /**
    * this function creates the links and collapses that appear in the sidebar (left menu)
    */
-   const createLinks = (routes: IRoute[]) => {
+  const createLinks = (routes: IRoute[]) => {
     return routes.map(route => {
       if (route.global) return null;
 
       if (route.collapse && route.state && route.views) {
-        let st: any = {};
+        const st: any = {};
         st[route["state"]] = !state[route.state];
         return (
           <NavItem key={route.path}>
@@ -166,17 +158,13 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
                 </>
               ) : route.miniName ? (
                 <>
-                  <span className="sidenav-mini-icon">
-                    {route.miniName}
-                  </span>
+                  <span className="sidenav-mini-icon">{route.miniName}</span>
                   <span className="sidenav-normal"> {route.name} </span>
                 </>
               ) : null}
             </NavLink>
             <Collapse isOpen={state[route.state]}>
-              <Nav className="nav-sm flex-column">
-                {createLinks(route.views)}
-              </Nav>
+              <Nav className="nav-sm flex-column">{createLinks(route.views)}</Nav>
             </Collapse>
           </NavItem>
         );
@@ -184,10 +172,7 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
       return (
         <>
           {route.layout ? (
-            <NavItem
-              className={activeRoute(route.layout + route.path)}
-              key={route.path}
-            >
+            <NavItem className={activeRoute(route.layout + route.path)} key={route.path}>
               <NavLink
                 to={route.layout + route.path}
                 activeClassName=""
@@ -201,9 +186,7 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
                   </>
                 ) : route.miniName !== undefined ? (
                   <>
-                    <span className="sidenav-mini-icon">
-                      {route.miniName}
-                    </span>
+                    <span className="sidenav-mini-icon">{route.miniName}</span>
                     <span className="sidenav-normal">{route.name}</span>
                   </>
                 ) : (
@@ -235,11 +218,7 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
       <div className="sidenav-header d-flex align-items-center">
         {logo ? (
           <NavbarBrand {...navbarBrandProps}>
-            <img
-              alt={logo.imgAlt}
-              className="navbar-brand-img"
-              src={logo.imgSrc}
-            />
+            <img alt={logo.imgAlt} className="navbar-brand-img" src={logo.imgSrc} />
           </NavbarBrand>
         ) : null}
         <div className="ml-auto">
@@ -247,6 +226,10 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
             className={classnames("sidenav-toggler d-none d-xl-block", {
               active: isSidenavOpen,
             })}
+            role="button"
+            tabIndex={0}
+            // @docs https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/click-events-have-key-events.md
+            onKeyDown={() => dispatch(toggleSidenav())}
             onClick={() => dispatch(toggleSidenav())}
           >
             <div className="sidenav-toggler-inner">
@@ -291,9 +274,7 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
                 target="_blank"
               >
                 <i className="ni ni-palette" />
-                <span className="nav-link-text">
-                  Service Actions Trainings
-                </span>
+                <span className="nav-link-text">Service Actions Trainings</span>
               </NavLink>
             </NavItem>
             <NavItem>
@@ -317,17 +298,13 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
             <NavItem>
               <NavLink href="#under development" target="_blank">
                 <i className="ni ni-palette" />
-                <span className="nav-link-text">
-                  Customer Feedback Tool
-                </span>
+                <span className="nav-link-text">Customer Feedback Tool</span>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#to be confirmed" target="_blank">
                 <i className="ni ni-palette" />
-                <span className="nav-link-text">
-                  HR Dashboards integration
-                </span>
+                <span className="nav-link-text">HR Dashboards integration</span>
               </NavLink>
             </NavItem>
           </Nav>
@@ -374,4 +351,4 @@ export const Sidebar = ({ routes, logo, rtlActive  = false}:Props) => {
       )}
     </Navbar>
   );
-}
+};

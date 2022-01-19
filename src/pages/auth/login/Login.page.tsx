@@ -1,7 +1,6 @@
 import React from "react";
+
 // nodejs library that concatenates classes
-import classnames from "classnames";
-// reactstrap components
 import {
   Button,
   Card,
@@ -17,8 +16,12 @@ import {
   Row,
   Col,
 } from "reactstrap";
+
+import classnames from "classnames";
+
+// reactstrap components
 // core components
-import {AuthHeader} from "components/headers";
+import { AuthHeader } from "components/headers";
 
 export const LoginPage = () => {
   const [focusedEmail, setfocusedEmail] = React.useState(false);
@@ -42,15 +45,10 @@ export const LoginPage = () => {
                     className="btn-neutral btn-icon"
                     color="default"
                     href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={e => e.preventDefault()}
                   >
                     <span className="btn-inner--icon mr-1">
-                      <img
-                        alt="..."
-                        src={
-                          require("assets/img/icons/common/github.svg").default
-                        }
-                      />
+                      <img alt="..." src={require("assets/img/icons/common/github.svg").default} />
                     </span>
                     <span className="btn-inner--text">Github</span>
                   </Button>
@@ -58,15 +56,10 @@ export const LoginPage = () => {
                     className="btn-neutral btn-icon"
                     color="default"
                     href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={e => e.preventDefault()}
                   >
                     <span className="btn-inner--icon mr-1">
-                      <img
-                        alt="..."
-                        src={
-                          require("assets/img/icons/common/google.svg").default
-                        }
-                      />
+                      <img alt="..." src={require("assets/img/icons/common/google.svg").default} />
                     </span>
                     <span className="btn-inner--text">Google</span>
                   </Button>
@@ -121,10 +114,7 @@ export const LoginPage = () => {
                       id=" customCheckLogin"
                       type="checkbox"
                     />
-                    <label
-                      className="custom-control-label"
-                      htmlFor=" customCheckLogin"
-                    >
+                    <label className="custom-control-label" htmlFor=" customCheckLogin">
                       <span className="text-muted">Remember me</span>
                     </label>
                   </div>
@@ -138,20 +128,12 @@ export const LoginPage = () => {
             </Card>
             <Row className="mt-3">
               <Col xs="6">
-                <a
-                  className="text-light"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                >
+                <a className="text-light" href="#pablo" onClick={e => e.preventDefault()}>
                   <small>Forgot password?</small>
                 </a>
               </Col>
               <Col className="text-right" xs="6">
-                <a
-                  className="text-light"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                >
+                <a className="text-light" href="#pablo" onClick={e => e.preventDefault()}>
                   <small>Create new account</small>
                 </a>
               </Col>
@@ -161,5 +143,4 @@ export const LoginPage = () => {
       </Container>
     </>
   );
-}
-
+};

@@ -1,149 +1,149 @@
 {
-    "source": "mockoon:1.14.1",
-    "data": [
-        {
-            "type": "environment",
-            "item": {
+  "source": "mockoon:1.14.1",
+  "data": [
+    {
+      "type": "environment",
+      "item": {
+        "uuid": "",
+        "lastMigration": 15,
+        "name": "Practices",
+        "endpointPrefix": "",
+        "latency": 1000,
+        "port": 8080,
+        "routes": [
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "",
+            "responses": [
+              {
                 "uuid": "",
-                "lastMigration": 15,
-                "name": "Practices",
-                "endpointPrefix": "",
-                "latency": 1000,
-                "port": 8080,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "api/v1/practices",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n    \"content\": [\n        {{# repeat 5}}\n        {\n            \"id\": {{ @index }},\n            \"title\": \"test title number {{ @index }}\",\n            \"description\": \"test description number {{ @index }}\",\n            \"content\": \"test content number {{@index }}\"\n        }\n        {{/ repeat}}\n    ]\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "post",
-                        "endpoint": "api/v1/practices",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n            \"id\": 10,\n            \"title\": \"test title\",\n            \"description\": \"test description\",\n            \"content\": \"test content\"\n        }",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "api/v1/practices/:id",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n            \"id\": 10,\n            \"title\": \"test title\",\n            \"description\": \"test description\",\n            \"content\": \"test content\"\n        }",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "proxyRemovePrefix": false,
-                "https": false,
-                "cors": true,
-                "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Methods",
-                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Headers",
-                        "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-                    }
-                ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ]
-            }
-        }
-    ]
+                "body": "{}",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "api/v1/practices",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{\n    \"content\": [\n        {{# repeat 5}}\n        {\n            \"id\": {{ @index }},\n            \"title\": \"test title number {{ @index }}\",\n            \"description\": \"test description number {{ @index }}\",\n            \"content\": \"test content number {{@index }}\"\n        }\n        {{/ repeat}}\n    ]\n}",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "post",
+            "endpoint": "api/v1/practices",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{\n            \"id\": 10,\n            \"title\": \"test title\",\n            \"description\": \"test description\",\n            \"content\": \"test content\"\n        }",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          },
+          {
+            "uuid": "",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "api/v1/practices/:id",
+            "responses": [
+              {
+                "uuid": "",
+                "body": "{\n            \"id\": 10,\n            \"title\": \"test title\",\n            \"description\": \"test description\",\n            \"content\": \"test content\"\n        }",
+                "latency": 0,
+                "statusCode": 200,
+                "label": "",
+                "headers": [],
+                "filePath": "",
+                "sendFileAsBody": false,
+                "rules": [],
+                "rulesOperator": "OR",
+                "disableTemplating": false
+              }
+            ],
+            "enabled": true,
+            "randomResponse": false,
+            "sequentialResponse": false
+          }
+        ],
+        "proxyMode": false,
+        "proxyHost": "",
+        "proxyRemovePrefix": false,
+        "https": false,
+        "cors": true,
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+          }
+        ],
+        "proxyReqHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "proxyResHeaders": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ]
+      }
+    }
+  ]
 }

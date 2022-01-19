@@ -14,19 +14,22 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import  { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+
 // react library for routing
-import { useLocation,  Switch, Redirect } from "react-router-dom";
+import { useLocation, Switch, Redirect } from "react-router-dom";
+
 // core components
-import {AdminNavbar} from "components/navbars";
-import {AdminFooter} from "components/footers";
-import {Sidebar} from "components/sidebar";
+import { AdminFooter } from "components/footers";
+import { AdminNavbar } from "components/navbars";
+import { Sidebar } from "components/sidebar";
 
 import { routes } from "routes";
-import { useAppDispatch ,useAppSelector} from "redux/app";
+
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { toggleSidenav, fetchBusinessUnits, fetchCountries } from "redux/features";
 
 import { useGetRoutes, useScrollToTop } from "./hooks";
-import { toggleSidenav,fetchBusinessUnits,fetchCountries } from "redux/features";
 
 export const AdminLayout = () => {
   const dispatch = useAppDispatch();
@@ -35,18 +38,15 @@ export const AdminLayout = () => {
   const { isSidenavOpen } = useAppSelector(state => state.sidenav);
   const mainContentRef = useRef(document.createElement("div"));
 
-useScrollToTop(mainContentRef);
+  useScrollToTop(mainContentRef);
 
-
-useEffect(() => {
-  dispatch(fetchCountries());
-  dispatch(fetchBusinessUnits());    
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchCountries());
+    dispatch(fetchBusinessUnits());
+  }, [dispatch]);
 
   const getNavbarTheme = () => {
-    return location.pathname.indexOf("admin/alternative-dashboard") === -1
-      ? "dark"
-      : "light";
+    return location.pathname.indexOf("admin/alternative-dashboard") === -1 ? "dark" : "light";
   };
 
   return (
@@ -61,11 +61,9 @@ useEffect(() => {
         rtlActive={false}
       />
       <div className="main-content" ref={mainContentRef}>
-        <AdminNavbar
-          theme={getNavbarTheme()}
-        />
+        <AdminNavbar theme={getNavbarTheme()} />
         <Switch>
-          {useGetRoutes(routes,"/admin")}
+          {useGetRoutes(routes, "/admin")}
           <Redirect from="*" to="/admin/home" />
         </Switch>
         <AdminFooter />
@@ -75,4 +73,4 @@ useEffect(() => {
       ) : null}
     </>
   );
-}
+};

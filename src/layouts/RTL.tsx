@@ -14,20 +14,24 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import {AdminFooter} from "components/footers";
-// core components
-import {AdminNavbar} from "components/navbars";
-import {Sidebar} from "components/sidebar";
-import { useEffect, useRef} from "react";
-// react library for routing
+import { useEffect, useRef } from "react";
+
 import { Redirect, Switch } from "react-router-dom";
+
+import { AdminFooter } from "components/footers";
+// core components
+import { AdminNavbar } from "components/navbars";
+import { Sidebar } from "components/sidebar";
+// react library for routing
+
 import { routes } from "routes";
+
 import { useAppDispatch, useAppSelector } from "redux/app";
-import { useGetRoutes, useScrollToTop } from "./hooks";
 import { toggleSidenav } from "redux/features";
 
+import { useGetRoutes, useScrollToTop } from "./hooks";
 
-export function RTLLayout() {
+export var RTLLayout = () => {
   const dispatch = useAppDispatch();
   const { isSidenavOpen } = useAppSelector(state => state.sidenav);
 
@@ -43,7 +47,7 @@ export function RTLLayout() {
     };
   });
 
-useScrollToTop(mainContentRef)
+  useScrollToTop(mainContentRef);
 
   return (
     <>
@@ -57,9 +61,7 @@ useScrollToTop(mainContentRef)
         rtlActive
       />
       <div className="main-content" ref={mainContentRef}>
-        <AdminNavbar
-          theme="dark"
-        />
+        <AdminNavbar theme="dark" />
         <Switch>
           {useGetRoutes(routes, "/rtl")}
           <Redirect from="*" to="/rtl/rtl-support" />
@@ -71,4 +73,4 @@ useScrollToTop(mainContentRef)
       ) : null}
     </>
   );
-}
+};

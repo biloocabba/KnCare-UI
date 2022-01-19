@@ -1,12 +1,10 @@
-import {
-  AsyncThunk,
-  createAsyncThunk,
-  createSlice,
-} from "@reduxjs/toolkit";
-import { Employee } from "types";
-import { StateType ,IPartiallyUpdated, IUpdated,} from "redux/features/common";
-import { employeeService } from ".";
+import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+import { Employee } from "types";
+
+import { StateType, IPartiallyUpdated, IUpdated } from "redux/features/common";
+
+import { employeeService } from ".";
 
 const initialState: StateType<Employee> = {
   entities: [],
@@ -19,9 +17,9 @@ const initialState: StateType<Employee> = {
 export const findEmployeeById = createAsyncThunk(
   "employee/findById",
   async (id: number): Promise<Employee> => {
-    let { data } = await employeeService.getEmployeeById(id);
+    const { data } = await employeeService.getEmployeeById(id);
     return data;
-  },
+  }
 );
 
 export const searchEmployees = createAsyncThunk(
@@ -31,18 +29,16 @@ export const searchEmployees = createAsyncThunk(
     const queryParams = new URLSearchParams(filters);
     const { data } = await employeeService.searchEmployees(queryParams);
     return data;
-  },
+  }
 );
 
 export const searchEmployeesByIds = createAsyncThunk(
   "employee/searchByIds",
   async (employeeIds: number[]): Promise<Employee[]> => {
-    const { data } = await employeeService.searchEmployeesByIds(
-      employeeIds,
-    );
+    const { data } = await employeeService.searchEmployeesByIds(employeeIds);
 
     return data;
-  },
+  }
 );
 
 export const createEmployee = createAsyncThunk(
@@ -50,7 +46,7 @@ export const createEmployee = createAsyncThunk(
   async (body: Employee): Promise<Employee> => {
     const { data } = await employeeService.createEmployee(body);
     return data;
-  },
+  }
 );
 
 export const updateEmployee = createAsyncThunk(
@@ -58,27 +54,22 @@ export const updateEmployee = createAsyncThunk(
   async (updatedEmployee: IUpdated<Employee>): Promise<Employee> => {
     const { data } = await employeeService.updateEmployee(updatedEmployee);
     return data;
-  },
+  }
 );
 
 export const partialUpdateEmployee = createAsyncThunk(
   "employee/partialUpdate",
   async (partiallyUpdatedEmployee: IPartiallyUpdated<Employee>): Promise<Employee> => {
-    const { data } = await employeeService.partialUpdateEmployee(
-      partiallyUpdatedEmployee,
-    );
+    const { data } = await employeeService.partialUpdateEmployee(partiallyUpdatedEmployee);
 
     return data;
-  },
+  }
 );
 
-export const deleteEmployee = createAsyncThunk(
-  "employee/delete",
-  async (id: number) => {
-    let { data } = await employeeService.deleteEmployee(id);
-    return data;
-  },
-);
+export const deleteEmployee = createAsyncThunk("employee/delete", async (id: number) => {
+  const { data } = await employeeService.deleteEmployee(id);
+  return data;
+});
 
 export const employeeSlice = createSlice({
   name: "employee",
@@ -130,7 +121,7 @@ export const employeeSlice = createSlice({
 
     builder.addCase(updateEmployee.fulfilled, (state, action) => {
       state.entity = action.payload;
-      let updatedEmployees = state.entities.map(employee => {
+      const updatedEmployees = state.entities.map(employee => {
         if (employee.id === action.payload.id) {
           return {
             ...employee,
@@ -147,7 +138,7 @@ export const employeeSlice = createSlice({
 
     builder.addCase(partialUpdateEmployee.fulfilled, (state, action) => {
       state.entity = action.payload;
-      let updatedEmployees = state.entities.map(employee => {
+      const updatedEmployees = state.entities.map(employee => {
         if (employee.id === action.payload.id) {
           return {
             ...employee,

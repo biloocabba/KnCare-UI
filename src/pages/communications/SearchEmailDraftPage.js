@@ -1,12 +1,7 @@
-import { BoxHeader } from "components/headers";
 import React, { useState } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import ReactDatetime from "react-datetime";
+
 import { useDispatch, useSelector } from "react-redux";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
+
 import {
   Button,
   Card,
@@ -18,6 +13,16 @@ import {
   Input,
   Row,
 } from "reactstrap";
+
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import ReactDatetime from "react-datetime";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+
+import { BoxHeader } from "components/headers";
+
 import { searchEmailDrafts } from "../../../actions/emailDrafts";
 
 const pagination = paginationFactory({
@@ -25,11 +30,7 @@ const pagination = paginationFactory({
   alwaysShowAllBtns: true,
   showTotal: true,
   withFirstAndLast: false,
-  sizePerPageRenderer: ({
-    options,
-    currSizePerPage,
-    onSizePerPageChange,
-  }) => (
+  sizePerPageRenderer: ({ options, currSizePerPage, onSizePerPageChange }) => (
     <div className="dataTables_length" id="datatable-basic_length">
       <label>
         Show{" "}
@@ -54,7 +55,7 @@ const pagination = paginationFactory({
 
 const { SearchBar } = Search;
 
-function SearchEmailDraftsPage(props) {
+var SearchEmailDraftsPage = props => {
   const careRoles = useSelector(state => {
     return state.categories.careRoles.map(role => {
       return { value: role.id, label: role.name };
@@ -124,12 +125,7 @@ function SearchEmailDraftsPage(props) {
 
   const detailsActionButtonCell = () => {
     return (
-      <Button
-        className="btn-icon btn-2"
-        type="button"
-        color="info"
-        onClick={emailDraftDetails}
-      >
+      <Button className="btn-icon btn-2" type="button" color="info" onClick={emailDraftDetails}>
         <span className="btn-inner--icon">
           <i className="ni ni-badge" />
         </span>
@@ -153,10 +149,7 @@ function SearchEmailDraftsPage(props) {
                 <Row>
                   <Col md="2">
                     <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="lastName"
-                      >
+                      <label className="form-control-label" htmlFor="lastName">
                         Subject
                       </label>
                       <Input
@@ -172,10 +165,7 @@ function SearchEmailDraftsPage(props) {
                   </Col>
                   <Col md="2">
                     <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="businessUnits"
-                      >
+                      <label className="form-control-label" htmlFor="businessUnits">
                         Recipients
                       </label>
                       <Select
@@ -188,10 +178,7 @@ function SearchEmailDraftsPage(props) {
                   </Col>
                   <Col md="2">
                     <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="country"
-                      >
+                      <label className="form-control-label" htmlFor="country">
                         Groups
                       </label>
                       <Select
@@ -204,10 +191,7 @@ function SearchEmailDraftsPage(props) {
                   </Col>
                   <Col md="2">
                     <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="example3cols2Input"
-                      >
+                      <label className="form-control-label" htmlFor="example3cols2Input">
                         Sent Date From
                       </label>
                       <ReactDatetime
@@ -224,10 +208,7 @@ function SearchEmailDraftsPage(props) {
                   </Col>
                   <Col md="2">
                     <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="example3cols2Input"
-                      >
+                      <label className="form-control-label" htmlFor="example3cols2Input">
                         Sent Date To
                       </label>
                       <ReactDatetime
@@ -410,6 +391,6 @@ function SearchEmailDraftsPage(props) {
       </Container>
     </>
   );
-}
+};
 
 export default SearchEmailDraftsPage;

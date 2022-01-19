@@ -24,10 +24,7 @@ export const RTLProfileHeader = () => {
         className="header pb-6 d-flex align-items-center"
         style={{
           minHeight: "500px",
-          backgroundImage:
-            'url("' +
-            require("assets/img/theme/profile-cover.jpg").default +
-            '")',
+          backgroundImage: 'url("' + require("assets/img/theme/profile-cover.jpg").default + '")',
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}
@@ -39,8 +36,8 @@ export const RTLProfileHeader = () => {
             <Col lg="7" md="10">
               <h1 className="display-2 text-white">مرحبا جيسي</h1>
               <p className="text-white mt-0 mb-5">
-                هذه هي صفحة ملفك الشخصي. يمكنك رؤية التقدم الذي أحرزته في
-                عملك وإدارة مشاريعك أو المهام المعينة
+                هذه هي صفحة ملفك الشخصي. يمكنك رؤية التقدم الذي أحرزته في عملك وإدارة مشاريعك أو
+                المهام المعينة
               </p>
               <Button
                 className="btn-neutral"

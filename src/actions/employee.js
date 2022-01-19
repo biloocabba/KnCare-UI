@@ -1,3 +1,5 @@
+import employeeService from "../services/employeeService";
+
 import {
   CREATE_EMPLOYEE,
   UPDATE_EMPLOYEE,
@@ -5,32 +7,30 @@ import {
   RETRIEVE_EMPLOYEES,
   SEARCH_EMPLOYEES,
   API_CALL_ERROR,
-  API_CALL_START
-} from './types'
+  API_CALL_START,
+} from "./types";
 
-import employeeService from '../services/employeeService'
+export const createUser = data => {
+  console.log(data);
+  return { type: CREATE_EMPLOYEE, payload: data };
+};
 
-export const createUser = (data) => {
-  console.log(data)
-  return { type: CREATE_EMPLOYEE, payload: data }
-}
-
-export const retrieveEmployees = () => async (dispatch) => {
+export const retrieveEmployees = () => async dispatch => {
   try {
-    const res = await employeeService.getAll()
-    dispatch({ type: RETRIEVE_EMPLOYEES, payload: res.data })
+    const res = await employeeService.getAll();
+    dispatch({ type: RETRIEVE_EMPLOYEES, payload: res.data });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-export const searchEmployees = (filters) => (dispatch) => {
+export const searchEmployees = filters => dispatch => {
   try {
     const queryParams = new URLSearchParams(filters);
 
     dispatch({
       type: API_CALL_START,
-      payload: 'SEARCH_EMPLOYEES',
+      payload: "SEARCH_EMPLOYEES",
     });
 
     const res = employeeService.searchEmployees(queryParams);
@@ -39,7 +39,6 @@ export const searchEmployees = (filters) => (dispatch) => {
       type: SEARCH_EMPLOYEES,
       payload: res.data,
     });
-
   } catch (err) {
     dispatch({
       type: API_CALL_ERROR,
@@ -67,9 +66,9 @@ export const searchEmployees = (filters) => async (dispatch) => {
 };*/
 
 export const updateUser = (id, data) => {
-  return { type: UPDATE_EMPLOYEE, payload: id, data }
-}
+  return { type: UPDATE_EMPLOYEE, payload: id, data };
+};
 
-export const deleteUser = (id) => {
-  return { type: DELETE_EMPLOYEE, payload: { id } }
-}
+export const deleteUser = id => {
+  return { type: DELETE_EMPLOYEE, payload: { id } };
+};

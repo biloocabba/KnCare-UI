@@ -12,17 +12,17 @@ const get = id => {
 //   return http.post("/practices", data);
 // };
 
-const create = (formData) => {
+const create = formData => {
   return http.post("/practices", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
-    }
+    },
   });
-}
+};
 
-const search = (queryParams) => {
+const search = queryParams => {
   return http.get(`/best-practices?${queryParams}`);
-}
+};
 
 const update = (id, data) => {
   return http.put(`/practices/${id}`, data);
@@ -36,7 +36,6 @@ const removeAll = () => {
   return http.delete("/practices");
 };
 
-
 const bestPracticeService = {
   getAll,
   get,
@@ -44,7 +43,7 @@ const bestPracticeService = {
   update,
   remove,
   removeAll,
-  search
+  search,
 };
 
 export default bestPracticeService;

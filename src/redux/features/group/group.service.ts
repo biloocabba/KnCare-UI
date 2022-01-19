@@ -1,7 +1,10 @@
-import { Group } from "types/domain";
-import { httpCommon } from "..";
-import { IPartiallyUpdatedGroup, IUpdatedGroup } from ".";
 import { AxiosResponse } from "axios";
+
+import { Group } from "types/domain";
+
+import { httpCommon } from "..";
+
+import { IPartiallyUpdatedGroup, IUpdatedGroup } from ".";
 
 const getAllGroups = (): Promise<AxiosResponse<Group[]>> => {
   return httpCommon.get(`/groups`);
@@ -21,7 +24,7 @@ const updateGroup = (updatedGroup: IUpdatedGroup): Promise<AxiosResponse<Group>>
 };
 
 const partialUpdateGroup = (
-  partiallyUpdatedGroup: IPartiallyUpdatedGroup,
+  partiallyUpdatedGroup: IPartiallyUpdatedGroup
 ): Promise<AxiosResponse<Group>> => {
   const { id, body } = partiallyUpdatedGroup;
   return httpCommon.patch(`/groups/${id}`, body);

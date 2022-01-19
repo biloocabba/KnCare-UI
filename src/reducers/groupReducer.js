@@ -1,3 +1,5 @@
+import { categoriesData } from "mock-data/categories";
+
 import {
   CREATE_GROUP,
   RETRIEVE_GROUPS,
@@ -7,8 +9,6 @@ import {
   SEARCH_GROUP,
   UPDATE_GROUP,
 } from "../actions/types";
-
-import { categoriesData } from "mock-data/categories";
 
 function groupReducer(groups = categoriesData.groups, action) {
   const { type, payload } = action;

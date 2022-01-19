@@ -1,14 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "es6",
-      "dom",
-      "dom.iterable",
-      "ESNext",
-      "esnext.asynciterable",
-      "es2017"
-    ],
+    "lib": ["es6", "dom", "dom.iterable", "ESNext", "esnext.asynciterable", "es2017"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -29,8 +22,8 @@
     "noUnusedLocals": true,
     "removeComments": true,
     "strictNullChecks": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
   },
-  "include": ["src"],
+  "include": ["src", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

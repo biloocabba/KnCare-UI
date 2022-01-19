@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 type SidenavState = {
   isSidenavOpen: boolean;
-}
+};
 
 const initialState: SidenavState = {
-  isSidenavOpen: true
+  isSidenavOpen: true,
 };
 
 export const sidenavSlice = createSlice({

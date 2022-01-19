@@ -32,33 +32,30 @@ import "./assets/vendor/nucleo/css/nucleo.css";
 import "./variables/charts/chartDefaults";
 
 import { StrictMode } from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
+import { Provider } from "react-redux";
+
+import ReactDOM from "react-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import {AdminLayout,AuthLayout} from "layouts";
+import { AdminLayout, AuthLayout } from "layouts";
 
 import { store } from "redux/app";
-
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-    <StrictMode>
-      <Switch>
-        <Route
-          path="/admin"
-          render={() => <AdminLayout />}
-        />
-        <Route path="/auth"  render={() => <AuthLayout />} />
-        <Route path="/"  render={() => <AdminLayout />} />
-        <Redirect from="*" to="/" />
-      </Switch>
-    </StrictMode>
+      <StrictMode>
+        <Switch>
+          <Route path="/admin" render={() => <AdminLayout />} />
+          <Route path="/auth" render={() => <AuthLayout />} />
+          <Route path="/" render={() => <AdminLayout />} />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </StrictMode>
     </BrowserRouter>
     <ToastContainer />
   </Provider>,
-  document.getElementById("root"),
+  document.getElementById("root")
 );

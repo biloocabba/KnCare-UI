@@ -1,5 +1,6 @@
-import { BoxHeader } from "components/headers";
 import { Card, CardBody, CardHeader, Container, Row } from "reactstrap";
+
+import { BoxHeader } from "components/headers";
 
 const HomePage = () => {
   return (

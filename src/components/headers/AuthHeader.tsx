@@ -31,9 +31,7 @@ export const AuthHeader = ({ title, lead }: Props) => {
             <Row className="justify-content-center">
               <Col className="px-5" lg="6" md="8" xl="5">
                 {title ? <h1 className="text-white">{title}</h1> : null}
-                {lead ? (
-                  <p className="text-lead text-white">{lead}</p>
-                ) : null}
+                {lead ? <p className="text-lead text-white">{lead}</p> : null}
               </Col>
             </Row>
           </div>
@@ -47,10 +45,7 @@ export const AuthHeader = ({ title, lead }: Props) => {
             x="0"
             y="0"
           >
-            <polygon
-              className="fill-default"
-              points="2560 0 2560 100 0 100"
-            />
+            <polygon className="fill-default" points="2560 0 2560 100 0 100" />
           </svg>
         </div>
       </div>

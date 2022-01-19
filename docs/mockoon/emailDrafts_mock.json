@@ -1,11 +1,11 @@
 [
-    {
-       "id":1,
-       "subject":"{{queryParam 'searchSubject' 'Standup Meeting'}}",
-       "content":"It will start at 10:00",
-       "recipient":"{{queryParam 'searchRecipient' 'skylereberlain@gmail.com'}}",
-       "group":"{{queryParam 'searchGroup' 'WorkGroup01'}}",
-       "startDate":"{{queryParam 'searchStartDate' '01.01.2001'}}",
-       "endDate":"{{queryParam 'searchEndDate' '01.01.2001'}}"
-    }
- ]
+  {
+    "id": 1,
+    "subject": "{{queryParam 'searchSubject' 'Standup Meeting'}}",
+    "content": "It will start at 10:00",
+    "recipient": "{{queryParam 'searchRecipient' 'skylereberlain@gmail.com'}}",
+    "group": "{{queryParam 'searchGroup' 'WorkGroup01'}}",
+    "startDate": "{{queryParam 'searchStartDate' '01.01.2001'}}",
+    "endDate": "{{queryParam 'searchEndDate' '01.01.2001'}}"
+  }
+]

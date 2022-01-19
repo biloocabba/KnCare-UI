@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import logger from 'redux-logger';
+import logger from "redux-logger";
+
 import {
   authorizationSlice,
   bestPracticeSlice,
@@ -30,8 +31,11 @@ export const store = configureStore({
     [sidenavSlice.name]: sidenavSlice.reducer,
     [worldOverviewSlice.name]: worldOverviewSlice.reducer,
   },
-  middleware: (getDefaultMiddleware) => process.env.NODE_ENV !== 'production'? getDefaultMiddleware().concat(logger): getDefaultMiddleware(),
-  devTools: process.env.NODE_ENV !== 'production',
+  middleware: getDefaultMiddleware =>
+    process.env.NODE_ENV !== "production"
+      ? getDefaultMiddleware().concat(logger)
+      : getDefaultMiddleware(),
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export type RootState = ReturnType<typeof store.getState>;

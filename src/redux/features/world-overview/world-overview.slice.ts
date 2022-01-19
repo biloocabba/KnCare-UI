@@ -1,9 +1,5 @@
-import {
-  AsyncThunk,
-  createAsyncThunk,
-  createSlice,
-  SerializedError,
-} from "@reduxjs/toolkit";
+import { AsyncThunk, createAsyncThunk, createSlice, SerializedError } from "@reduxjs/toolkit";
+
 import { worldOverviewService } from ".";
 
 type WorldOverviewStateType = {
@@ -29,7 +25,7 @@ export const fetchWorldOverviews = createAsyncThunk(
     const { data } = await worldOverviewService.listWorldOverview();
 
     return data;
-  },
+  }
 );
 
 export const worldOverviewSlice = createSlice({
@@ -37,7 +33,7 @@ export const worldOverviewSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    [fetchWorldOverviews].forEach((thunk: AsyncThunk<any, any, {}>) => {
+    [fetchWorldOverviews].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
       builder.addCase(thunk.pending, state => {
         state.isLoading = true;
         state.isSuccess = false;

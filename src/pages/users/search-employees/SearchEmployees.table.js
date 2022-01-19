@@ -1,16 +1,16 @@
 export const employeesTableColumns = [
   {
     dataField: "id",
-    text: "id", 
-    hidden: true,   
+    text: "id",
+    hidden: true,
   },
   {
     dataField: "firstName",
-    text: "First Name",    
+    text: "First Name",
   },
   {
     dataField: "lastName",
-    text: "Last Name",  
+    text: "Last Name",
   },
   {
     dataField: "internationalName",
@@ -48,6 +48,6 @@ export const employeesTableColumns = [
   {
     dataField: "action",
     text: "",
-    formatter: ()=> {},
+    formatter: () => {},
   },
-]
+];

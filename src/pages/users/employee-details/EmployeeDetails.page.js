@@ -15,10 +15,10 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState }  from "react";
+import React, { useState } from "react";
+
 import { useSelector } from "react-redux";
-import { useParams ,useHistory} from "react-router-dom";
-// reactstrap components
+
 import {
   Button,
   Card,
@@ -32,19 +32,23 @@ import {
   Row,
 } from "reactstrap";
 
+import { useParams, useHistory } from "react-router-dom";
+
 import { BoxHeader } from "components/headers";
+
+import { EMPLOYEE_SEARCH, CARE_MEMBER_CREATE } from "pages/users";
+import { EmployeePanel } from "pages/users/panels";
+// reactstrap components
+
 // import { employeesData } from 'mock-data/employees.js'
-import { EmployeePanel } from 'pages/users/panels'
-import { selectEmployeeById } from 'redux/features/employee';
 
-import { EMPLOYEE_SEARCH,CARE_MEMBER_CREATE } from "pages/users";
+import { selectEmployeeById } from "redux/features/employee";
 
-export const EmployeeDetailsPage = (props) => {
-
+export const EmployeeDetailsPage = props => {
   let { id } = useParams();
   const history = useHistory();
 
-  const employee =useSelector(selectEmployeeById(parseInt(id)));
+  const employee = useSelector(selectEmployeeById(parseInt(id)));
   const currentRole = "admin";
 
   return (
@@ -64,8 +68,7 @@ export const EmployeeDetailsPage = (props) => {
                   <Col lg="12" xs="7" className="text-right">
                     <Button
                       // color={buttonColor}
-                      onClick={e =>
-                        history.push(`/${currentRole}${CARE_MEMBER_CREATE}/${id}`)}                        
+                      onClick={e => history.push(`/${currentRole}${CARE_MEMBER_CREATE}/${id}`)}
                       // disabled={employee.careMember}
                     >
                       Invite to Care
@@ -73,9 +76,7 @@ export const EmployeeDetailsPage = (props) => {
                     <Button
                       className="btn btn-primary"
                       color="primary"
-                      onClick={() =>                         
-                        history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)
-                      }
+                      onClick={() => history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Search
                     </Button>
@@ -83,11 +84,7 @@ export const EmployeeDetailsPage = (props) => {
                 </Row>
               </CardHeader>
               <CardBody>
-
-              <EmployeePanel 
-                  employee={employee}
-                  panelHeader="User information"
-              />
+                <EmployeePanel employee={employee} panelHeader="User information" />
                 {/* <Form>
                   <h6 className="heading-small text-muted mb-4">
                     User information
@@ -346,4 +343,4 @@ export const EmployeeDetailsPage = (props) => {
       </Container>
     </>
   );
-}
+};

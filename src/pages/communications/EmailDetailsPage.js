@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+
 import { useParams } from "react-router-dom";
+
 import emailService from "services/EmailService";
+
 import EmailEditor from "./EmailEditor";
 
 function EmailDetailsPage() {

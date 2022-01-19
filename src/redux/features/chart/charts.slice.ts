@@ -1,10 +1,7 @@
-import {
-  AsyncThunk,
-  createAsyncThunk,
-  createSlice,
-  SerializedError,
-} from "@reduxjs/toolkit";
+import { AsyncThunk, createAsyncThunk, createSlice, SerializedError } from "@reduxjs/toolkit";
+
 import { Chart } from "types/domain";
+
 import { chartService } from ".";
 
 type ChartStateType = {
@@ -23,14 +20,11 @@ const initialState: ChartStateType = {
   error: {},
 };
 
-export const fetchCharts = createAsyncThunk(
-  "chart/fetchCharts",
-  async () => {
-    const { data } = await chartService.listCharts();
+export const fetchCharts = createAsyncThunk("chart/fetchCharts", async () => {
+  const { data } = await chartService.listCharts();
 
-    return data;
-  },
-);
+  return data;
+});
 
 export const chartSlice = createSlice({
   name: "chart",

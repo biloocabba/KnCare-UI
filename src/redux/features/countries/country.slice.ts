@@ -1,13 +1,10 @@
-import {
-  AsyncThunk,
-  createAsyncThunk,
-  createSlice
-} from "@reduxjs/toolkit";
+import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import { Country } from "types/domain";
-import { countryService } from ".";
+
 import { StateType } from "redux/features/common";
 
-
+import { countryService } from ".";
 
 const initialState: StateType<Country> = {
   entities: [],
@@ -17,13 +14,10 @@ const initialState: StateType<Country> = {
   error: {},
 };
 
-export const fetchCountries = createAsyncThunk(
-  "country/fetchCountries",
-  async () => {
-    const { data } = await countryService.listCountries();
-    return data;
-  },
-);
+export const fetchCountries = createAsyncThunk("country/fetchCountries", async () => {
+  const { data } = await countryService.listCountries();
+  return data;
+});
 
 export const countrySlice = createSlice({
   name: "country",

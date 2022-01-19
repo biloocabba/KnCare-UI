@@ -15,19 +15,14 @@
 
 */
 // core components
+import { Card, CardBody, CardHeader, CardTitle, Col, Container, Row } from "reactstrap";
+
+import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
+
 import { BoxHeader } from "components/headers";
 // react plugin used to create charts
-import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 // reactstrap components
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Col,
-  Container,
-  Row,
-} from "reactstrap";
+
 import {
   barTurnoverData,
   doughnutByGender,
@@ -50,10 +45,7 @@ export const ChartsPage = () => {
                 <CardBody>
                   <Row>
                     <div className="col">
-                      <CardTitle
-                        tag="h5"
-                        className="text-uppercase text-muted mb-0"
-                      >
+                      <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
                         Onboarded last month
                       </CardTitle>
                       <span className="h2 font-weight-bold mb-0">25</span>
@@ -73,10 +65,7 @@ export const ChartsPage = () => {
                 <CardBody>
                   <Row>
                     <div className="col">
-                      <CardTitle
-                        tag="h5"
-                        className="text-uppercase text-muted mb-0"
-                      >
+                      <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
                         Offboarded last month
                       </CardTitle>
                       <span className="h2 font-weight-bold mb-0">7</span>
@@ -96,15 +85,10 @@ export const ChartsPage = () => {
                 <CardBody>
                   <Row>
                     <div className="col">
-                      <CardTitle
-                        tag="h5"
-                        className="text-uppercase text-muted mb-0"
-                      >
+                      <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
                         Business Unit
                       </CardTitle>
-                      <span className="h2 font-weight-bold mb-0">
-                        Sea Logistics
-                      </span>
+                      <span className="h2 font-weight-bold mb-0">Sea Logistics</span>
                     </div>
                     <Col className="col-auto">
                       <div className="icon icon-shape bg-gradient-primary text-white rounded-circle shadow">
@@ -126,15 +110,10 @@ export const ChartsPage = () => {
                 <CardBody>
                   <Row>
                     <div className="col">
-                      <CardTitle
-                        tag="h5"
-                        className="text-uppercase text-muted mb-0"
-                      >
+                      <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
                         Country
                       </CardTitle>
-                      <span className="h2 font-weight-bold mb-0">
-                        Germany
-                      </span>
+                      <span className="h2 font-weight-bold mb-0">Germany</span>
                     </div>
                     <Col className="col-auto">
                       <div className="icon icon-shape bg-gradient-primary text-white rounded-circle shadow">

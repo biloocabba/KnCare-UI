@@ -1,17 +1,17 @@
 import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactstrap";
 
 interface Props {
-  onChangeRole:any;
-  onChangeCountry:any;
-  onChangeBusinessUnit:any;
-  onSelectCareMember:any;
+  onChangeRole: any;
+  onChangeCountry: any;
+  onChangeBusinessUnit: any;
+  onSelectCareMember: any;
 }
-export const AddMemberPanel = (
-  {onChangeRole,
+export const AddMemberPanel = ({
+  onChangeRole,
   onChangeCountry,
   onChangeBusinessUnit,
-  onSelectCareMember}:Props
-) => {
+  onSelectCareMember,
+}: Props) => {
   // const countriesList = useAppSelector(selectCountriesAsList);
   // const businessUnitsList = useAppSelector(selectBusinessUnitsAsList);
 

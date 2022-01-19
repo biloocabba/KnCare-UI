@@ -1,9 +1,11 @@
 import { Employee } from "types/domain";
-import { httpCommon, HttpResponseType } from "../utils/http-common";
+
 import { IPartiallyUpdated, IUpdated } from "redux/features/common";
 
+import { httpCommon, HttpResponseType } from "../utils/http-common";
+
 const searchEmployees = (queryParams: URLSearchParams): HttpResponseType => {
-  console.log(queryParams)
+  console.log(queryParams);
   return httpCommon.get(`/employee?${queryParams}`);
 };
 
@@ -20,13 +22,13 @@ const createEmployee = (body: Employee): HttpResponseType => {
   return httpCommon.post(`/employee`, body);
 };
 
-const updateEmployee = (updatedEmployee: IUpdated<Employee>):HttpResponseType => {
+const updateEmployee = (updatedEmployee: IUpdated<Employee>): HttpResponseType => {
   const { id, body } = updatedEmployee;
   return httpCommon.put(`/employee/${id}`, body);
 };
 
 const partialUpdateEmployee = (
-  partiallyUpdatedEmployee: IPartiallyUpdated<Employee>,
+  partiallyUpdatedEmployee: IPartiallyUpdated<Employee>
 ): HttpResponseType => {
   const { id, body } = partiallyUpdatedEmployee;
   return httpCommon.patch(`/employee/${id}`, body);
@@ -36,7 +38,7 @@ const deleteEmployee = (id: number): HttpResponseType => {
   return httpCommon.delete(`/employee/${id}`);
 };
 
-export const employeeService ={
+export const employeeService = {
   searchEmployees,
   getEmployeeById,
   searchEmployeesByIds,

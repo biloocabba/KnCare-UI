@@ -1,10 +1,6 @@
 // core components
-import { BoxHeader } from "components/headers";
 import React, { useRef, useState } from "react";
-import Files from "react-files";
-import { Redirect } from "react-router-dom";
-import CreatableSelect from "react-select/creatable";
-// reactstrap components
+
 import {
   Button,
   Card,
@@ -18,7 +14,15 @@ import {
   Row,
   Tooltip,
 } from "reactstrap";
+
+import Files from "react-files";
+import { Redirect } from "react-router-dom";
+import CreatableSelect from "react-select/creatable";
+// reactstrap components
 import SimpleReactValidator from "simple-react-validator";
+
+import { BoxHeader } from "components/headers";
+
 import bestPracticeService from "../../../services/BestPracticeService";
 
 const initialState = {
@@ -28,7 +32,7 @@ const initialState = {
   content: null,
 };
 
- export const CreateBestPracticePage = () => {
+export const CreateBestPracticePage = () => {
   const simpleValidator = useRef(new SimpleReactValidator());
 
   const [title, setTitle] = useState("");
@@ -100,14 +104,8 @@ const initialState = {
 
   return (
     <>
-      {created === true ? (
-        <Redirect to={"/admin/search-best-practices"} />
-      ) : null}
-      <div
-        class="alert alert-danger mt-3"
-        role="alert"
-        hidden={!errorAlert}
-      >
+      {created === true ? <Redirect to={"/admin/search-best-practices"} /> : null}
+      <div className="alert alert-danger mt-3" role="alert" hidden={!errorAlert}>
         <span>{errorMessage}</span>
       </div>
       <BoxHeader />
@@ -125,9 +123,7 @@ const initialState = {
                     <Row>
                       <Col md="10">
                         <FormGroup>
-                          <label className="form-control-label">
-                            Title
-                          </label>
+                          <label className="form-control-label">Title</label>
                           <Input
                             className="text-sm"
                             name="title"
@@ -138,9 +134,7 @@ const initialState = {
                       </Col>
                       <Col md="10">
                         <FormGroup>
-                          <label className="form-control-label">
-                            Description
-                          </label>
+                          <label className="form-control-label">Description</label>
                           <Input
                             name="description"
                             type="textarea"
@@ -153,9 +147,7 @@ const initialState = {
                       </Col>
                       <Col md="10">
                         <FormGroup>
-                          <label className="form-control-label">
-                            Tags
-                          </label>
+                          <label className="form-control-label">Tags</label>
                           <CreatableSelect
                             // styles={{
                             //   container: base => ({
@@ -170,9 +162,7 @@ const initialState = {
                       </Col>
                       <Col md="10">
                         <FormGroup>
-                          <label className="form-control-label">
-                            Image Url
-                          </label>
+                          <label className="form-control-label">Image Url</label>
                           <Input
                             className="text-sm"
                             name="title"
@@ -262,9 +252,7 @@ const initialState = {
                 <CardBody>
                   <Button close onClick={removeFile} />
                   <CardText tag="h5">
-                    {formData.entries().next().done
-                      ? ""
-                      : formData.get("file").name}
+                    {formData.entries().next().done ? "" : formData.get("file").name}
                   </CardText>
                 </CardBody>
               </Card>
@@ -272,15 +260,11 @@ const initialState = {
           </Row>
         </div>
         <Row>
-          <Button
-            color="primary"
-            type="submit"
-            onClick={e => console.log(e)}
-          >
+          <Button color="primary" type="submit" onClick={e => console.log(e)}>
             Create
           </Button>
         </Row>
       </Container>
     </>
   );
-}
+};

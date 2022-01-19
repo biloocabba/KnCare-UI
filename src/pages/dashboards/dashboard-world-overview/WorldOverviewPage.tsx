@@ -14,20 +14,26 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import  {  useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 // react plugin for creating vector maps
+
+import { useDispatch } from "react-redux";
+
+import { Card, CardBody, Container, Row, Col, CardTitle } from "reactstrap";
 
 import { VectorMap } from "@react-jvectormap/core";
 import worldMill from "@react-jvectormap/world/dist/worldMill.json";
 
-import { getActiveMembersMapData, getNewMembersMapData, getSelfResignedMembersMapData,getAutoOffboardedMembersMapData} from 'actions/mapKpi';
+import {
+  getActiveMembersMapData,
+  getNewMembersMapData,
+  getSelfResignedMembersMapData,
+  getAutoOffboardedMembersMapData,
+} from "actions/mapKpi";
 // reactstrap components
-import { Card, CardBody, Container, Row , Col, CardTitle} from "reactstrap";
 // core components
-import { useDispatch } from "react-redux";
 
 export const WorldOverviewPage = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,29 +41,29 @@ export const WorldOverviewPage = () => {
     dispatch(getNewMembersMapData());
     dispatch(getSelfResignedMembersMapData());
     dispatch(getAutoOffboardedMembersMapData());
-// eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //  const activeMembersMap = useSelector(state =>{     
+  //  const activeMembersMap = useSelector(state =>{
   //     return state.mapKpis.activeMembersMap;
   // });
 
-  // const newMembersMap = useSelector(state =>{     
+  // const newMembersMap = useSelector(state =>{
   //   return state.mapKpis.newMembersMap;
   // });
 
-  // const selfResignedMembersMap = useSelector(state =>{     
+  // const selfResignedMembersMap = useSelector(state =>{
   //   return state.mapKpis.selfResignedMembersMap;
   // });
 
-  // const autoOffboardedMembersMap = useSelector(state =>{     
+  // const autoOffboardedMembersMap = useSelector(state =>{
   //   return state.mapKpis.autoOffboardedMembersMap;
   // });
 
-  // const activeMap = useSelector(state =>{     
+  // const activeMap = useSelector(state =>{
   //   return state.mapKpis.activeMap;
   // });
-  
+
   // @ts-ignore
   const [newMembers, setNewMembers] = useState(null);
   // @ts-ignore
@@ -65,44 +71,42 @@ export const WorldOverviewPage = () => {
   // @ts-ignore
   const [autoOffboardedMembers, setAutoOffboardedMembers] = useState(null);
   // @ts-ignore
-    const [selfresignedMembers, setSelfresignedMembers] = useState(null);
+  const [selfresignedMembers, setSelfresignedMembers] = useState(null);
 
-   
-    // const mapFilterClick = (e,fnApiCall) =>{
-    //   e.preventDefault();     
-    //   dispatch(fnApiCall());
-    // }
+  // const mapFilterClick = (e,fnApiCall) =>{
+  //   e.preventDefault();
+  //   dispatch(fnApiCall());
+  // }
 
-    // const onActiveMembersClick = (e) =>{
-    //   mapFilterClick(e,getActiveMembersMapData);    
-    // } 
-    
-    // const onNewMembersClick = (e) => {
-    //   mapFilterClick(e,getNewMembersMapData);   
-    // } 
+  // const onActiveMembersClick = (e) =>{
+  //   mapFilterClick(e,getActiveMembersMapData);
+  // }
 
-    // const onSelfResignedClick = (e) => {
-    //   mapFilterClick(e,getSelfResignedMembersMapData);   
-    // } 
+  // const onNewMembersClick = (e) => {
+  //   mapFilterClick(e,getNewMembersMapData);
+  // }
 
-    // const onAutoOffboardedClick = (e) => {
-    //   mapFilterClick(e,getAutoOffboardedMembersMapData);   
-    // } 
+  // const onSelfResignedClick = (e) => {
+  //   mapFilterClick(e,getSelfResignedMembersMapData);
+  // }
 
-    const mapData = {
-      AU: 760,
-      BR: 550,
-      CA: 120,
-      DE: 1300,
-      FR: 540,
-      GB: 690,
-      GE: 200,
-      IN: 200,
-      RO: 600,
-      RU: 300,
-      US: 2920,
-    };
-    
+  // const onAutoOffboardedClick = (e) => {
+  //   mapFilterClick(e,getAutoOffboardedMembersMapData);
+  // }
+
+  const mapData = {
+    AU: 760,
+    BR: 550,
+    CA: 120,
+    DE: 1300,
+    FR: 540,
+    GB: 690,
+    GE: 200,
+    IN: 200,
+    RO: 600,
+    RU: 300,
+    US: 2920,
+  };
 
   return (
     <>
@@ -112,7 +116,6 @@ export const WorldOverviewPage = () => {
         onSelfResignedClick={onSelfResignedClick} 
         onAutoOffboardedClick={onAutoOffboardedClick}         
         /> */}
-
 
       <Container className="mt--6" fluid>
         <Row>
@@ -131,7 +134,7 @@ export const WorldOverviewPage = () => {
                   normalizeFunction="polynomial"
                   hoverOpacity={0.7}
                   hoverColor={false}
-                  backgroundColor="transparent"                  
+                  backgroundColor="transparent"
                   regionStyle={{
                     initial: {
                       fill: "#e9ecef",
@@ -145,8 +148,8 @@ export const WorldOverviewPage = () => {
                       fill: "#dee2e6",
                       // @ts-ignore
                       "fill-opacity": 0.8,
-                      cursor: "pointer"
-                    }
+                      cursor: "pointer",
+                    },
                   }}
                   series={{
                     regions: [
@@ -158,133 +161,121 @@ export const WorldOverviewPage = () => {
                         scale: ["#ced4da", "#043c7c"],
                         normalizeFunction: "polynomial",
                       },
-                    ],                   
+                    ],
                   }}
                   // onRegionTipShow={
                   //   function name(e, label, code) {
                   //      (activeMembersMap[code]!=undefined) ? setActiveMembers(activeMembersMap[code]) :setActiveMembers(0);
                   //      ( newMembersMap[code]!=undefined) ? setNewMembers(newMembersMap[code]) :setNewMembers(0);
                   //      (selfResignedMembersMap[code]!=undefined) ? setSelfresignedMembers(selfResignedMembersMap[code]) : setSelfresignedMembers(0);
-                  //      ( autoOffboardedMembersMap[code]!=undefined) ? setAutoOffboardedMembers(autoOffboardedMembersMap[code]) :setAutoOffboardedMembers(0);  
+                  //      ( autoOffboardedMembersMap[code]!=undefined) ? setAutoOffboardedMembers(autoOffboardedMembersMap[code]) :setAutoOffboardedMembers(0);
                   //   }
-                  // }                
+                  // }
                 />
-                  <Row>
-                      <Col md="6" xl="3">
-                        <Card className="card-stats">
-                          <CardBody>
-                            <Row>
-                              <div className="col">
-                                <CardTitle
-                                  tag="h5"
-                                  className="text-uppercase text-muted mb-0"
-                                >
-                                  Active members
-                                </CardTitle>
-                                <span className="h2 font-weight-bold mb-0">
-                                  {activeMembers}
-                                </span>
-                              </div>
-                              <Col className="col-auto">
-                                <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                                  <i className="fas fa-user-graduate"></i>   
-                                </div>
-                              </Col>
-                            </Row>   
-                            <p className="mt-3 mb-0 text-sm">
-                              <span className="text-success mr-2">
-                                {/* <i className="fa fa-arrow-up" /> {activeMembers/20} */}
-                              </span>{" "}
-                              <span className="text-nowrap">Since last year</span>
-                            </p>                         
-                          </CardBody>
-                        </Card>
-                      </Col>
-                      <Col md="6" xl="3">
-                        <Card className="card-stats">
-                          <CardBody>
-                            <Row>
-                              <div className="col">
-                                <CardTitle
-                                  tag="h5"
-                                  className="text-uppercase text-muted mb-0"
-                                >
-                                  New Members
-                                </CardTitle>
-                                <span className="h2 font-weight-bold mb-0"> {newMembers}</span>
-                              </div>
-                              <Col className="col-auto">
-                                <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                                  <i className="fa fa-solid fa-user-plus"></i>  
-                                </div>
-                              </Col>
-                            </Row>    
-                            <p className="mt-3 mb-0 text-sm">
-                              <span className="text-success mr-2">
-                                {/* <i className="fa fa-arrow-up" /> {newMembers/10} */}
-                              </span>{" "}
-                              <span className="text-nowrap">Since last year</span>
-                            </p>                       
-                          </CardBody>
-                        </Card>
-                      </Col>
-                      <Col md="6" xl="3">
-                        <Card className="card-stats">
-                          <CardBody>
-                            <Row>
-                              <div className="col">
-                                <CardTitle
-                                  tag="h5"
-                                  className="text-uppercase text-muted mb-0"
-                                >
-                                  Self Resigned
-                                </CardTitle>
-                                <span className="h2 font-weight-bold mb-0">{selfresignedMembers}</span>
-                              </div>
-                              <Col className="col-auto">
-                                <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                    <i className="fas fa-solid fa-user-minus"></i>
-                                </div>
-                              </Col>
-                            </Row>   
-                            <p className="mt-3 mb-0 text-sm">
-                              <span className="text-danger mr-2">
-                                {/* <i className="fa fa-arrow-up" /> {selfresignedMembers/20} */}
-                              </span>{" "}
-                              <span className="text-nowrap">Since last year</span>
-                            </p>                         
-                          </CardBody>
-                        </Card>
-                      </Col>
-                      <Col md="6" xl="3">
-                        <Card className="card-stats">
-                          <CardBody>
-                            <Row>
-                              <div className="col">
-                                <CardTitle
-                                  tag="h5"
-                                  className="text-uppercase text-muted mb-0"
-                                >
-                                  Auto Offboarded
-                                </CardTitle>
-                                <span className="h2 font-weight-bold mb-0">{autoOffboardedMembers}</span>
-                              </div>
-                              <Col className="col-auto">
-                                <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                  <i className="fas fa-sign-out-alt"></i>
-                                </div>
-                              </Col>
-                            </Row>   
-                            <p className="mt-3 mb-0 text-sm">
-                              <span className="text-danger mr-2">
-                                {/* <i className="fa fa-arrow-up" /> {autoOffboardedMembers/20} */}
-                              </span>{" "}
-                              <span className="text-nowrap">Since last year</span>
-                            </p>                      
-                          </CardBody>
-                        </Card>
-                      </Col>
-                    </Row>
+                <Row>
+                  <Col md="6" xl="3">
+                    <Card className="card-stats">
+                      <CardBody>
+                        <Row>
+                          <div className="col">
+                            <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
+                              Active members
+                            </CardTitle>
+                            <span className="h2 font-weight-bold mb-0">{activeMembers}</span>
+                          </div>
+                          <Col className="col-auto">
+                            <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                              <i className="fas fa-user-graduate"></i>
+                            </div>
+                          </Col>
+                        </Row>
+                        <p className="mt-3 mb-0 text-sm">
+                          <span className="text-success mr-2">
+                            {/* <i className="fa fa-arrow-up" /> {activeMembers/20} */}
+                          </span>{" "}
+                          <span className="text-nowrap">Since last year</span>
+                        </p>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                  <Col md="6" xl="3">
+                    <Card className="card-stats">
+                      <CardBody>
+                        <Row>
+                          <div className="col">
+                            <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
+                              New Members
+                            </CardTitle>
+                            <span className="h2 font-weight-bold mb-0"> {newMembers}</span>
+                          </div>
+                          <Col className="col-auto">
+                            <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                              <i className="fa fa-solid fa-user-plus"></i>
+                            </div>
+                          </Col>
+                        </Row>
+                        <p className="mt-3 mb-0 text-sm">
+                          <span className="text-success mr-2">
+                            {/* <i className="fa fa-arrow-up" /> {newMembers/10} */}
+                          </span>{" "}
+                          <span className="text-nowrap">Since last year</span>
+                        </p>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                  <Col md="6" xl="3">
+                    <Card className="card-stats">
+                      <CardBody>
+                        <Row>
+                          <div className="col">
+                            <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
+                              Self Resigned
+                            </CardTitle>
+                            <span className="h2 font-weight-bold mb-0">{selfresignedMembers}</span>
+                          </div>
+                          <Col className="col-auto">
+                            <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                              <i className="fas fa-solid fa-user-minus"></i>
+                            </div>
+                          </Col>
+                        </Row>
+                        <p className="mt-3 mb-0 text-sm">
+                          <span className="text-danger mr-2">
+                            {/* <i className="fa fa-arrow-up" /> {selfresignedMembers/20} */}
+                          </span>{" "}
+                          <span className="text-nowrap">Since last year</span>
+                        </p>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                  <Col md="6" xl="3">
+                    <Card className="card-stats">
+                      <CardBody>
+                        <Row>
+                          <div className="col">
+                            <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
+                              Auto Offboarded
+                            </CardTitle>
+                            <span className="h2 font-weight-bold mb-0">
+                              {autoOffboardedMembers}
+                            </span>
+                          </div>
+                          <Col className="col-auto">
+                            <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                              <i className="fas fa-sign-out-alt"></i>
+                            </div>
+                          </Col>
+                        </Row>
+                        <p className="mt-3 mb-0 text-sm">
+                          <span className="text-danger mr-2">
+                            {/* <i className="fa fa-arrow-up" /> {autoOffboardedMembers/20} */}
+                          </span>{" "}
+                          <span className="text-nowrap">Since last year</span>
+                        </p>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                </Row>
               </CardBody>
             </Card>
           </div>
@@ -292,4 +283,4 @@ export const WorldOverviewPage = () => {
       </Container>
     </>
   );
-}
+};
