@@ -14,8 +14,6 @@ import {
 
 import { BoxHeader } from "components/headers";
 
-import "react-confirm-alert/src/react-confirm-alert.css";
-
 export const BestPracticePage = () => {
   const [disableEdit, setDisableEdit] = useState(true);
   const [title] = useState("");

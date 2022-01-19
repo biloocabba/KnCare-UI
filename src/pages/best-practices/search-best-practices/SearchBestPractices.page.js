@@ -44,8 +44,6 @@ import ReactDatetime from "react-datetime";
 
 import { BoxHeader } from "components/headers";
 
-import { searchBestPractices } from "actions/bestPractice";
-
 const pagination = paginationFactory({
   page: 1,
   alwaysShowAllBtns: true,
@@ -104,7 +102,9 @@ export const SearchBestPracticesPage = props => {
       searchTitle: searchTitle,
     };
 
-    dispatch(searchBestPractices(searchFilters));
+    console.log(dispatch);
+    console.log(searchFilters);
+    // dispatch(searchBestPractices(searchFilters));
   };
 
   // const status = useSelector(state => state.pageStatus);

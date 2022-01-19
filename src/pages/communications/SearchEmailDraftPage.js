@@ -25,7 +25,7 @@ import makeAnimated from "react-select/animated";
 import { BoxHeader } from "components/headers";
 import { pagination } from "components/widgets";
 
-import { searchEmailDrafts } from "actions/emailDrafts";
+// import { searchEmailDrafts } from "actions/emailDrafts";
 
 // const { SearchBar } = Search;
 
@@ -90,7 +90,9 @@ var SearchEmailDraftsPage = () => {
       startDate: searchStartDate,
       endDate: searchEndDate,
     };
-    dispatch(searchEmailDrafts(filters));
+    console.log(filters);
+    dispatch();
+    // dispatch(searchEmailDrafts(filters));
   };
 
   const emailDraftDetails = () => {

@@ -25,8 +25,6 @@ import SimpleReactValidator from "simple-react-validator";
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
-import bestPracticeService from "../../../services/BestPracticeService";
-
 const initialState = {
   id: null,
   title: "",
@@ -41,7 +39,9 @@ export const CreateBestPracticePage = () => {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
+  // eslint-disable-next-line no-unused-vars
   const [created, setCreated] = useState(false);
+
   const [formData] = useState(new FormData());
   const [, forceUpdate] = useState();
   const [errorAlert, setErrorAlert] = useState(false);
@@ -83,13 +83,13 @@ export const CreateBestPracticePage = () => {
     formData.append("content", content.description);
     const formValid = simpleValidator.current.allValid();
     if (formValid) {
-      bestPracticeService
-        .create(formData)
-        .then(setCreated(true))
-        .catch(e => {
-          setErrorAlert(true);
-          setErrorMessage(e);
-        });
+      // bestPracticeService
+      //   .create(formData)
+      //   .then(setCreated(true))
+      //   .catch(e => {
+      //     setErrorAlert(true);
+      //     setErrorMessage(e);
+      // });
     } else {
       simpleValidator.current.showMessages();
       forceUpdate(1);

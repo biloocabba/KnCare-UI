@@ -35,13 +35,13 @@ import {
   Row,
 } from "reactstrap";
 
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 import { BoxHeader } from "components/headers";
 
-import emailService from "services/EmailService";
+//import emailService from "services/EmailService";
 
 import "react-quill/dist/quill.snow.css";
 
@@ -67,13 +67,13 @@ var EmailEditor = props => {
   });
 
   const handleSend = () => {
-    emailService.sendMail(emailState);
-    history.push("/admin/search-email");
+    // emailService.sendMail(emailState);
+    // history.push("/admin/search-email");
   };
 
   const handleSaveAsDraft = () => {
-    emailService.saveAsDraft(emailState);
-    history.push("/admin/search-email");
+    // emailService.saveAsDraft(emailState);
+    // history.push("/admin/search-email");
   };
 
   const handleDiscard = () => {
@@ -198,10 +198,10 @@ var EmailEditor = props => {
                         }
                       />
                     </FormGroup>
-                    <ReactQuill
+                    {/* <ReactQuill
                       value={emailState.content}
                       onChange={e => setEmailState({ ...emailState, content: e })}
-                    />
+                    /> */}
                   </div>
                 </Form>
               </CardBody>

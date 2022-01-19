@@ -30,18 +30,18 @@ import {
 import classnames from "classnames";
 
 // reactstrap components
-import { logout } from "actions/auth";
+// import { logout } from "actions/auth";
 import stefanoImg from "assets/img/care/stefano-fiorenza.jpg";
 import { Theme } from "types";
 
-import { useAppDispatch } from "redux/app";
+// import { useAppDispatch } from "redux/app";
 
 interface Props {
   theme: Theme;
 }
 
 export const AdminNavbar = ({ theme }: Props) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   // // function that on mobile devices makes the search open
   // const openSearch = () => {
@@ -71,7 +71,7 @@ export const AdminNavbar = ({ theme }: Props) => {
   // };
 
   const logOut = () => {
-    dispatch(logout());
+    // dispatch(logout());
   };
 
   return (

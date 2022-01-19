@@ -14,35 +14,35 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // react plugin for creating vector maps
 
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 import { Card, CardBody, Container, Row, Col, CardTitle } from "reactstrap";
 
 import { VectorMap } from "@react-jvectormap/core";
 import worldMill from "@react-jvectormap/world/dist/worldMill.json";
 
-import {
-  getActiveMembersMapData,
-  getNewMembersMapData,
-  getSelfResignedMembersMapData,
-  getAutoOffboardedMembersMapData,
-} from "actions/mapKpi";
+// import {
+//   getActiveMembersMapData,
+//   getNewMembersMapData,
+//   getSelfResignedMembersMapData,
+//   getAutoOffboardedMembersMapData,
+// } from "actions/mapKpi";
 // reactstrap components
 // core components
 
 export const WorldOverviewPage = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getActiveMembersMapData());
-    dispatch(getNewMembersMapData());
-    dispatch(getSelfResignedMembersMapData());
-    dispatch(getAutoOffboardedMembersMapData());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getActiveMembersMapData());
+  //   dispatch(getNewMembersMapData());
+  //   dispatch(getSelfResignedMembersMapData());
+  //   dispatch(getAutoOffboardedMembersMapData());
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   //  const activeMembersMap = useSelector(state =>{
   //     return state.mapKpis.activeMembersMap;
