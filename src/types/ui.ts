@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export type LayoutType = "/admin" | "/auth";
+export type LayoutType = "/admin" | "/auth" | "/rtl";
 export type Theme = "light" | "dark";
 export interface IRoute {
   collapse?: boolean;

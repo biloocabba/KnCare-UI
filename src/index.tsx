@@ -17,43 +17,46 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fullcalendar/common/main.min.css";
 import "@fullcalendar/daygrid/main.min.css";
-import "font-awesome/css/font-awesome.min.css";
-import "quill/dist/quill.core.css";
-import React from "react";
-import ReactDOM from "react-dom";
-import "./variables/charts/chartDefaults";
-// plugins styles from node_modules
+
 import "react-notification-alert/dist/animate.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
-import { Provider } from "react-redux";
-// react library for routing
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { store } from "redux/app";
 import "select2/dist/css/select2.min.css";
 import "sweetalert2/dist/sweetalert2.min.css";
+import "font-awesome/css/font-awesome.min.css";
+import "quill/dist/quill.core.css";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./assets/css/site.css";
-// core styles
 import "./assets/scss/argon-dashboard-pro-react.scss?v1.2.0";
-// plugins styles downloaded
 import "./assets/vendor/nucleo/css/nucleo.css";
-import AdminLayout from "./layouts/Admin";
-import AuthLayout from "./layouts/Auth";
+import "./variables/charts/chartDefaults";
+
+import { StrictMode } from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+
+import { ToastContainer } from "react-toastify";
+
+import {AdminLayout,AuthLayout} from "layouts";
+
+import { store } from "redux/app";
 
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
+    <StrictMode>
       <Switch>
         <Route
           path="/admin"
-          render={props => <AdminLayout {...props} />}
+          render={() => <AdminLayout />}
         />
-        <Route path="/auth" render={props => <AuthLayout {...props} />} />
-        <Route path="/" render={props => <AdminLayout {...props} />} />
+        <Route path="/auth"  render={() => <AuthLayout />} />
+        <Route path="/"  render={() => <AdminLayout />} />
         <Redirect from="*" to="/" />
       </Switch>
+    </StrictMode>
     </BrowserRouter>
     <ToastContainer />
   </Provider>,
