@@ -1,6 +1,8 @@
 // Lists of countries with ISO 3166 codes, presented in various formats.
 // Last Updated: July 30, 2020
 
+import { Country } from "types";
+
 // License: CC0 1.0 Universal
 // https://creativecommons.org/publicdomain/zero/1.0/
 
@@ -1027,7 +1029,7 @@ export const countryListNumeric = {
 // All simple ISO 3166 country data
 // including: 2-character, 3-character, full country name and numeric code.
 // Sorted alphabetical by country name (special characters on bottom)
-export const countryListAllIsoData = [
+export const countryListAllIsoData: Country[] = [
   { code: "AF", code3: "AFG", name: "Afghanistan", number: "004" },
   { code: "AL", code3: "ALB", name: "Albania", number: "008" },
   { code: "DZ", code3: "DZA", name: "Algeria", number: "012" },

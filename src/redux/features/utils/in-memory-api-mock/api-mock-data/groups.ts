@@ -1,4 +1,6 @@
-export const groups = [
+import { Group } from "types";
+
+export const groups: Group[] = [
   {
     id: 1,
     name: "Blue For Green",

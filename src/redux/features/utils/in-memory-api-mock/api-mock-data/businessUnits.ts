@@ -1,4 +1,6 @@
-export const businessUnits = [
+import { BusinessUnit } from "types";
+
+export const businessUnits: BusinessUnit[] = [
   { id: 1, name: "Road Logistics" },
   { id: 2, name: "Air Logistics" },
   { id: 3, name: "Sea Logistics" },

@@ -1,3 +1,4 @@
+// @todo add type
 export const role_initialState = [
   {
     id: 1,

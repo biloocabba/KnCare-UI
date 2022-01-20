@@ -1,5 +1,7 @@
 import { AxiosResponse } from "axios";
 
+import { PRACTICES } from "redux/features/common";
+
 import {
   businessUnitsMockResponse,
   careRolesMockResponse,
@@ -18,13 +20,19 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
   if (url.includes("/employee")) {
     return Promise.resolve(searchEmployees(url));
   }
+
   if (url.includes("/care-member")) {
     return Promise.resolve(searchCareMembers(url));
+  }
+
+  if (url.includes(PRACTICES)) {
+    return Promise.resolve(groupMockResponse);
   }
 
   if (url.includes("/group")) {
     return Promise.resolve(groupMockResponse);
   }
+
   if (url.includes("/care-role")) {
     return Promise.resolve(careRolesMockResponse);
   }
