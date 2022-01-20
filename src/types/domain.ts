@@ -47,6 +47,17 @@ export interface BusinessUnit extends Domain {
   name: string;
 }
 
+export interface BestPractice extends Domain {
+  id: number;
+  title: string;
+  description: string;
+  author: string;
+  publishDate: Date;
+  rating: number;
+  tags: string[];
+  pdf: string;
+}
+
 export interface Group extends Domain {
   id: number;
   name: string;
