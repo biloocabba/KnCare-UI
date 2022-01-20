@@ -17,6 +17,7 @@ import { selectAllCountryDataAsSelectOptions } from "redux/features/countries/co
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from ".";
 import { CareMemberQueryFilters, SelectOption } from "types";
 import { useAppDispatch, useAppSelector } from "redux/app";
+import { selectAllGroupsDataAsSelectOptions, selectGroupState } from "redux/features";
 
 export const SearchCareMembersPage = () => {
   const history = useHistory();
@@ -35,7 +36,7 @@ export const SearchCareMembersPage = () => {
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
   const roles: SelectOption[] = [];
-  const groups: SelectOption[] = [];
+  const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
   const currentRole = "admin";
 
   // const [alert, setAlert] = React.useState(null);

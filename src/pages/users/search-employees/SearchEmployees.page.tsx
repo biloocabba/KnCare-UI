@@ -1,7 +1,4 @@
 import { MouseEvent, useState } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-
 import { useHistory } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
@@ -22,16 +19,17 @@ import { EMPLOYEE_DETAILS } from "pages/users";
 import { SearchEmployeesFilterPanel } from "./SearchEmployees.filter";
 import { employeesTableColumns } from "./SearchEmployees.table";
 import { EmployeeQueryFilters } from "types";
+import { useAppDispatch, useAppSelector } from "redux/app";
 
 // import { deleteUser, searchEmployees } from "../../../actions/employee";
 
 export const SearchEmployeesPage = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const employeeState = useSelector(selectEmployeesState);
-  const businessUnits = useSelector(selectAllBusinessUnitsDataAsSelectOptions);
-  const countries = useSelector(selectAllCountryDataAsSelectOptions);
+  const employeeState = useAppSelector(selectEmployeesState);
+  const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
+  const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
   const currentRole = "admin"; //TO GET FROM SELECTORS
 
   const [selectedEmployees, setSelectedEmployees] = useState([]);

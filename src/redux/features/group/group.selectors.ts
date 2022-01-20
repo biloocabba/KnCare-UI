@@ -1,14 +1,15 @@
 import { createSelector } from "@reduxjs/toolkit";
 
+import { SelectOption } from "types";
 import { Group } from "types/domain";
 
 import { RootState } from "redux/app";
 import { StateType, ALL } from "redux/features/common";
 
-export const selectGroupsState = (rootState: RootState): StateType<Group> => rootState.group;
+export const selectGroupState = (rootState: RootState): StateType<Group> => rootState.group;
 
 export const selectAllGroupsData = createSelector(
-  [selectGroupsState],
+  [selectGroupState],
   groupState => groupState.entities
 );
 
@@ -18,9 +19,12 @@ export const selectGroupById = (id: number) =>
     groups => groups.find(group => group.id === id) //arg
   );
 
-export const selectAllGroupsDataAsSelectOptions = createSelector([selectAllGroupsData], groups => {
-  const groupOptions = groups.map(group => {
-    return { value: group.id, label: group.name };
-  });
-  return [ALL, ...groupOptions];
-});
+export const selectAllGroupsDataAsSelectOptions = createSelector(
+  [selectAllGroupsData],
+  (groups): SelectOption[] => {
+    const groupOptions: SelectOption[] = groups.map(group => {
+      return { value: `${group.id}`, label: group.name };
+    });
+    return [ALL, ...groupOptions];
+  }
+);

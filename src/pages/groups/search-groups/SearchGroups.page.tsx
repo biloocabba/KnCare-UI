@@ -8,14 +8,14 @@ import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets/react-table";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
-import { deleteGroup, searchGroups, selectGroupsState } from "redux/features";
+import { deleteGroup, searchGroups, selectGroupState } from "redux/features";
 
 import { groupsTableColumns } from ".";
 
 export const SearchGroupsPage = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const groups = useAppSelector(selectGroupsState);
+  const groups = useAppSelector(selectGroupState);
 
   const [selectedGroups, setSelectedGroups] = useState([]);
 

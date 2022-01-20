@@ -17,7 +17,7 @@ import { Group } from "types/domain";
 
 import { AddMemberPanel } from ".";
 
-interface Props {
+interface EditGroupPanelProps {
   group: Group;
   setGroup: (group: Group) => void;
   onSave: (group: Group) => void;
@@ -35,7 +35,7 @@ export const EditGroupPanel = ({
   onBackToSearchClick,
   addMembersCollapse,
   setAddMembersCollapse,
-}: Props) => {
+}: EditGroupPanelProps) => {
   const { name, description } = group;
 
   return (

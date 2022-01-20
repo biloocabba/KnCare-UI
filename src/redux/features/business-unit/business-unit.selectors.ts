@@ -18,7 +18,7 @@ export const selectAllBusinessUnitData = createSelector(
 
 export const selectAllBusinessUnitsDataAsSelectOptions = createSelector(
   [selectAllBusinessUnitData],
-  (businessUnits): SelectOption[] => {
+  businessUnits => {
     const businessUnitOptions: SelectOption[] = businessUnits.map(businessUnit => {
       return { value: `${businessUnit.id}`, label: businessUnit.name };
     });
