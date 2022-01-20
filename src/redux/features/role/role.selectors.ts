@@ -3,7 +3,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { CareRole } from "types/domain";
 
 import { RootState } from "redux/app";
-import { StateType } from "redux/features/common";
+import { StateType } from "redux/features";
 
 const ALL = { value: "", label: "ALL" };
 

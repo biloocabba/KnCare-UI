@@ -2,9 +2,7 @@ import { AxiosResponse } from "axios";
 
 import { CareRole } from "types/domain";
 
-import { IUpdated } from "redux/features/common";
-
-import { httpCommon } from "..";
+import { IUpdated, httpCommon } from "redux/features";
 
 const findAll = (): Promise<AxiosResponse<CareRole[]>> => {
   return httpCommon.get(`/roles`);

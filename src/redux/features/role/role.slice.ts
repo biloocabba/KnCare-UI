@@ -2,9 +2,7 @@ import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { CareRole } from "types/domain";
 
-import { StateType, IUpdated } from "redux/features/common";
-
-import { roleService } from "./role.service";
+import { roleService, StateType, IUpdated } from "redux/features";
 
 const initialState: StateType<CareRole> = {
   entities: [],
