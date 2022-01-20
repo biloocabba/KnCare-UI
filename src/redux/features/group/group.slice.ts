@@ -2,9 +2,9 @@ import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { Group } from "types/domain";
 
-import { StateType } from "redux/features/common";
+import { StateType, IUpdated, IPartiallyUpdated } from "redux/features/common";
 
-import { groupService, IPartiallyUpdatedGroup, IUpdatedGroup } from ".";
+import { groupService } from ".";
 
 const initialState: StateType<Group> = {
   entities: [],
@@ -33,15 +33,18 @@ export const createGroup = createAsyncThunk("group/create", async (body: Partial
   return data;
 });
 
-export const updateGroup = createAsyncThunk("group/update", async (updatedGroup: IUpdatedGroup) => {
-  const { data } = await groupService.update(updatedGroup);
+export const updateGroup = createAsyncThunk(
+  "group/update",
+  async (updatedGroup: IUpdated<Group>) => {
+    const { data } = await groupService.update(updatedGroup);
 
-  return data;
-});
+    return data;
+  }
+);
 
 export const partialUpdateGroup = createAsyncThunk(
   "group/partialUpdate",
-  async (partiallyUpdatedGroup: IPartiallyUpdatedGroup) => {
+  async (partiallyUpdatedGroup: IPartiallyUpdated<Group>) => {
     const { data } = await groupService.partialUpdate(partiallyUpdatedGroup);
 
     return data;
