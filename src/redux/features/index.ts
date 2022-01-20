@@ -3,6 +3,7 @@ export * from "./authorization";
 export * from "./best-practices";
 export * from "./business-unit";
 export * from "./care-member";
+export * from "./common";
 export * from "./chart";
 export * from "./countries";
 export * from "./email";

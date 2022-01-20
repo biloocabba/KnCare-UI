@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 
 import { BestPractice } from "types";
 
-import { IUpdated, httpCommon, PRACTICES } from "redux/features";
+import { httpCommon, IUpdated, PRACTICES } from "redux/features";
 
 const findAll = (): Promise<AxiosResponse<BestPractice[]>> => {
   return httpCommon.get(`${PRACTICES}`);
