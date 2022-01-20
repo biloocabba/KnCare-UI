@@ -16,40 +16,24 @@
 
 */
 
-import React, { useState } from "react";
-
 import { useSelector } from "react-redux";
-
 import { useParams, useHistory } from "react-router-dom";
 
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Container,
-  Form,
-  FormGroup,
-  Input,
-  Row,
-} from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 
 import { EMPLOYEE_SEARCH, CARE_MEMBER_CREATE } from "pages/users";
 import { EmployeePanel } from "pages/users/panels";
-// reactstrap components
-
-// import { employeesData } from 'mock-data/employees.js'
 
 import { selectEmployeeById } from "redux/features/employee";
+import { Employee, RouteParams } from "types";
 
-export const EmployeeDetailsPage = props => {
-  let { id } = useParams();
+export const EmployeeDetailsPage = () => {
+  const { id } = useParams<RouteParams>();
   const history = useHistory();
 
-  const employee = useSelector(selectEmployeeById(parseInt(id)));
+  const employee: Employee = useSelector(selectEmployeeById(parseInt(id))) as Employee;
   const currentRole = "admin";
 
   return (
@@ -85,258 +69,7 @@ export const EmployeeDetailsPage = props => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <EmployeePanel employee={employee} panelHeader="User information" />
-                {/* <Form>
-                  <h6 className="heading-small text-muted mb-4">
-                    User information
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-first-name"
-                          >
-                            First name
-                          </label>
-                          <Input
-                            id="input-first-name"
-                            value={employee.firstName}
-                            type="text"
-                            disabled={true}
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-last-name"
-                          >
-                            Last name
-                          </label>
-                          <Input
-                            id="input-last-name"
-                            value={employee.lastName}
-                            disabled={true}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-username"
-                          >
-                            International Name
-                          </label>
-                          <Input
-                            id="input-username"
-                            value={employee.internationalName}
-                            disabled={true}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-email"
-                          >
-                            Email address
-                          </label>
-                          <Input
-                            id="input-email"
-                            value={employee.email}
-                            disabled={true}
-                            type="email"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-                  <hr className="my-4" />
-
-                  <h6 className="heading-small text-muted mb-4">
-                    Contact information
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            Office address
-                          </label>
-                          <Input
-                            disabled={true}
-                            defaultValue={employee.officeAddressStreet}
-                            id="input-address"
-                            placeholder="Home Address"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-city"
-                          >
-                            City
-                          </label>
-                          <Input
-                            disabled={true}
-                            defaultValue={employee.officeAddressCity}
-                            id="input-city"
-                            placeholder="City"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Country
-                          </label>
-                          <Input
-                            disabled={true}
-                            defaultValue={employee.officeAddressCountry}
-                            id="input-country"
-                            placeholder="Country"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Postal code
-                          </label>
-                          <Input
-                            id="input-postal-code"
-                            disabled={true}
-                            value={
-                              employee.officeAddressPostalCode
-                                ? employee.officeAddressPostalCode
-                                : 10872
-                            }
-                            placeholder="Postal code"
-                            type="number"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-                  <hr className="my-4" />
-
-                  <h6 className="heading-small text-muted mb-4">
-                    Company Data
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label className="form-control-label">
-                            Title
-                          </label>
-                          <Input
-                            id="title"
-                            value={employee.title}
-                            disabled={true}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-
-                      <Col lg="4">
-                        <FormGroup>
-                          <label className="form-control-label">
-                            Company Phone
-                          </label>
-                          <Input
-                            id="companyPhone"
-                            value="+372 77645322"
-                            disabled={true}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label className="form-control-label">
-                            Company Code
-                          </label>
-                          <Input
-                            id="input-postal-code"
-                            value={employee.companyCode}
-                            disabled={true}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-
-                    <Row>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label className="form-control-label">
-                            Business Unit
-                          </label>
-                          <Input
-                            id="input-postal-code"
-                            value={employee.businessUnit}
-                            disabled={true}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-
-                      <Col lg="4">
-                        <FormGroup>
-                          <label className="form-control-label">
-                            Cost Center
-                          </label>
-                          <Input
-                            id="input-postal-code"
-                            value={employee.costCenter}
-                            disabled={true}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label className="form-control-label">
-                            Management Group
-                          </label>
-                          <Input
-                            id="input-postal-code"
-                            value={employee.managementGroup}
-                            disabled={true}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-                </Form> */}
+                <EmployeePanel employee={employee} />
               </CardBody>
             </Card>
           </Col>

@@ -1,5 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
+import { SelectOption } from "types";
 import { BusinessUnit } from "types/domain";
 
 import { RootState } from "redux/app";
@@ -17,9 +18,9 @@ export const selectAllBusinessUnitData = createSelector(
 
 export const selectAllBusinessUnitsDataAsSelectOptions = createSelector(
   [selectAllBusinessUnitData],
-  businessUnits => {
-    const businessUnitOptions = businessUnits.map(businessUnit => {
-      return { value: businessUnit.id, label: businessUnit.name };
+  (businessUnits): SelectOption[] => {
+    const businessUnitOptions: SelectOption[] = businessUnits.map(businessUnit => {
+      return { value: `${businessUnit.id}`, label: businessUnit.name };
     });
     return [ALL, ...businessUnitOptions];
   }

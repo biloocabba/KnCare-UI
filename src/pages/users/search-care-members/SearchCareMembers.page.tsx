@@ -1,25 +1,8 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-
+/* eslint-disable */
+import { MouseEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Container,
-  FormGroup,
-  Input,
-  Row,
-} from "reactstrap";
-
-import ReactDatetime from "react-datetime";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
+import { Card, CardHeader, Container, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets/react-table";
@@ -32,10 +15,12 @@ import { searchCareMembers, selectCareMemberState } from "redux/features/care-me
 import { selectAllCountryDataAsSelectOptions } from "redux/features/countries/country.selectors";
 
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from ".";
+import { CareMemberQueryFilters, SelectOption } from "types";
+import { useAppDispatch, useAppSelector } from "redux/app";
 
-export const SearchCareMembersPage = props => {
+export const SearchCareMembersPage = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // const careMemberState = {
   //   isLoading: false,
@@ -46,27 +31,28 @@ export const SearchCareMembersPage = props => {
   //   entity: null,
   // };
 
-  const careMemberState = useSelector(selectCareMemberState);
-  const businessUnits = useSelector(selectAllBusinessUnitsDataAsSelectOptions);
-  const countries = useSelector(selectAllCountryDataAsSelectOptions);
-  const roles = [];
-  const groups = [];
+  const careMemberState = useAppSelector(selectCareMemberState);
+  const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
+  const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
+  const roles: SelectOption[] = [];
+  const groups: SelectOption[] = [];
   const currentRole = "admin";
 
-  const [alert, setAlert] = React.useState(null);
+  // const [alert, setAlert] = React.useState(null);
   const [selectedCareMembers, setSelectedCareMembers] = useState([]);
 
-  const onGoToCareMemberDetailsPage = e => {
-    var { id } = e.target;
+  const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const { id } = e.currentTarget;
     console.log(id, `/${currentRole}${CARE_MEMBER_EDIT}/${id}`);
     history.push(`/${currentRole}${CARE_MEMBER_EDIT}/${id}`);
   };
 
-  const onRemoveCareMember = e => {
-    console.log(e.target);
+  const onRemoveCareMember = (e: MouseEvent<HTMLButtonElement>) => {
+    console.log(e.currentTarget);
   };
 
-  const onClickSearchCareMembers = filters => {
+  const onClickSearchCareMembers = (filters: CareMemberQueryFilters): void => {
     dispatch(searchCareMembers(filters));
   };
 

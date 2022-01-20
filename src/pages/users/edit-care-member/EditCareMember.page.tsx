@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useParams, useHistory } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
@@ -122,7 +123,6 @@ export const EditCareMemberPage = () => {
               <CardBody>
                 <CareMemberPanel
                   careMember={careMember}
-                  employeeId={careMember.employeeId}
                   groupOptions={groupsAsOptions}
                   roleOptions={rolesAsOptions}
                   onSave={saveCareMember}

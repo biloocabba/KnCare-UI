@@ -15,11 +15,10 @@ interface onSaveFunction {
   (careMemberRequest: CareMemberSaveRequest): void;
 }
 interface CareMemberPanelProps {
-  employeeId: number;
+  // employeeId: number;
   careMember: CareMember;
   groupOptions: SelectOption[];
   roleOptions: SelectOption[];
-  // isCreate:Boolean,
   onSave: onSaveFunction;
 }
 

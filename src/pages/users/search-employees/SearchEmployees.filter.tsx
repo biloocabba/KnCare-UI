@@ -1,34 +1,47 @@
-import React, { useState } from "react";
+/* eslint-disable */
+import { useState } from "react";
 
 import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactstrap";
 
 import { DateField } from "components/widgets/date-field";
 import { InputField } from "components/widgets/input-field";
 import { SelectField } from "components/widgets/select-field";
+import { EmployeeQueryFilters, SelectOption } from "types";
+import { Moment } from "moment";
 
-export const SearchEmployeesFilterPanel = ({ onSearchEmployees, countries, businessUnits }) => {
+interface onSearchEmployeesFunction {
+  (employeeSearchRequest: EmployeeQueryFilters): void;
+}
+
+interface SearchEmployeesFilterPanelProps {
+  countries: SelectOption[];
+  businessUnits: SelectOption[];
+  onSearchEmployees: onSearchEmployeesFunction;
+}
+
+export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProps) => {
   const [searchLastName, setSearchLastName] = useState("");
-  const [searchBusinessUnit, setSearchBusinessUnit] = useState("");
-  const [searchCountry, setSearchCountry] = useState("");
-  const [searchHiringDate, setSearchHiringDate] = useState(null);
+  const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
+  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>();
+  const [searchHiringDate, setSearchHiringDate] = useState<string>();
 
-  const onChangeSearchLastName = e => {
+  const onChangeSearchLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchLastName = e.target.value;
     setSearchLastName(searchLastName);
   };
-  const onChangeSearchHiringDate = dateAsMoment => {
-    setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"));
-  };
+
+  // const onChangeSearchHiringDate = dateAsMoment => {
+  //   setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"));
+  // };
 
   const findByAllParameters = () => {
-    let filters = {
+    let filters: EmployeeQueryFilters = {
       lastName: searchLastName,
-      businessUnitId: searchBusinessUnit,
-      countryId: searchCountry,
+      businessUnitId: searchBusinessUnitId,
+      countryIsoCode3: searchCountryIsoCode3,
       hiringDate: searchHiringDate,
     };
-    console.log(filters);
-    onSearchEmployees(filters);
+    props.onSearchEmployees(filters);
   };
 
   return (
@@ -55,23 +68,30 @@ export const SearchEmployeesFilterPanel = ({ onSearchEmployees, countries, busin
             <SelectField
               id="select-businessUnits"
               label="Business Unit"
-              options={businessUnits}
-              onChange={item => setSearchBusinessUnit(item.value)}
+              options={props.businessUnits}
+              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
+                const id: number = parseInt(item.target.value);
+                setSearchBusinessUnitId(id);
+              }}
             />
           </Col>
           <Col md="2">
             <SelectField
               id="select-country"
               label="Country"
-              options={countries}
-              onChange={item => setSearchCountry(item.value)}
+              options={props.countries}
+              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
+                setSearchCountryIsoCode3(item.target.value);
+              }}
             />
           </Col>
           <Col md="2">
             <DateField
               id="date-hire-from"
               label="Hire Date From"
-              onChange={e => onChangeSearchHiringDate(e)}
+              onChange={(dateAsMoment: Moment) =>
+                setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"))
+              }
               timeFormat={false}
             />
           </Col>

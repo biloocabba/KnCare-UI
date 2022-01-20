@@ -1,16 +1,10 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
 import { useHistory } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
-
-import { BoxHeader } from "components/headers";
-import { ReactTable } from "components/widgets";
-
-import { EMPLOYEE_DETAILS } from "pages/users";
 
 import {
   selectAllCountryDataAsSelectOptions,
@@ -20,8 +14,14 @@ import {
   deleteEmployee,
 } from "redux/features";
 
+import { BoxHeader } from "components/headers";
+import { ReactTable } from "components/widgets";
+
+import { EMPLOYEE_DETAILS } from "pages/users";
+
 import { SearchEmployeesFilterPanel } from "./SearchEmployees.filter";
 import { employeesTableColumns } from "./SearchEmployees.table";
+import { EmployeeQueryFilters } from "types";
 
 // import { deleteUser, searchEmployees } from "../../../actions/employee";
 
@@ -36,18 +36,20 @@ export const SearchEmployeesPage = () => {
 
   const [selectedEmployees, setSelectedEmployees] = useState([]);
 
-  const onClickSearchEmployees = filters => {
+  const onClickSearchEmployees = (filters: EmployeeQueryFilters): void => {
     dispatch(searchEmployees(filters));
   };
 
-  const onGoToEmployeeDetails = e => {
-    var { id } = e.target;
+  const onGoToEmployeeDetails = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const { id } = e.currentTarget;
     history.push(`/${currentRole}${EMPLOYEE_DETAILS}/${id}`);
   };
 
-  const onRemoveEmployee = e => {
-    var { id } = e.target;
-    dispatch(deleteEmployee(id));
+  const onRemoveEmployee = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const { id } = e.currentTarget;
+    dispatch(deleteEmployee(parseInt(id)));
   };
 
   return (

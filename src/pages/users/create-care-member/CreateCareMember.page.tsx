@@ -1,27 +1,24 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
-
 import { useHistory } from "react-router";
 
 import { useParams } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
+import { BoxHeader } from "components/headers";
+
+import { EMPLOYEE_SEARCH } from "pages/users";
+import { CareMemberPanel } from "pages/users/panels";
 import { RouteParams, SelectOption, CareMember, Employee, CareMemberSaveRequest } from "types";
 import { CREATE_CARE_MEMBER_ID } from "types/app.consts";
-import { formatDateAsDD_MM_YYYY as formatDateAs_DD_MM_YYYY } from "types/utils";
+import { formatDateAsDD_MM_YYYY, addDays } from "types/utils";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { createCareMember } from "redux/features/care-member";
 import { selectEmployeeById } from "redux/features/employee";
 
-import { BoxHeader } from "components/headers";
-
-import { EMPLOYEE_SEARCH } from "pages/users";
-import { CareMemberPanel } from "pages/users/panels";
-
 export const CreateCareMemberPage = () => {
-  let { id } = useParams<RouteParams>();
+  const { id } = useParams<RouteParams>();
   const history = useHistory();
   const dispatch = useAppDispatch();
 
@@ -36,11 +33,10 @@ export const CreateCareMemberPage = () => {
   const createDefaultCareMember = (): CareMember => {
     console.log("createDefaultCareMember Called");
     const nowAsDate: Date = new Date();
-    const oneYearFromNowAsDate: Date = new Date();
-    oneYearFromNowAsDate.setDate(nowAsDate.getDate() + 365);
+    const oneYearFromNowAsDate: Date = addDays(nowAsDate, 365);
 
-    const onboardingDate: string = formatDateAs_DD_MM_YYYY(nowAsDate);
-    const defaultOffBoarding: string = formatDateAs_DD_MM_YYYY(oneYearFromNowAsDate);
+    const onboardingDate: string = formatDateAsDD_MM_YYYY(nowAsDate);
+    const defaultOffBoarding: string = formatDateAsDD_MM_YYYY(oneYearFromNowAsDate);
 
     return {
       ...employee,
@@ -51,7 +47,7 @@ export const CreateCareMemberPage = () => {
     };
   };
 
-  const [careMember, setCareMember] = useState(createDefaultCareMember());
+  const careMember: CareMember = createDefaultCareMember();
 
   console.log(careMember);
 

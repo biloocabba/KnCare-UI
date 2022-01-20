@@ -1,5 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
+import { SelectOption } from "types";
 import { Country } from "types/domain";
 
 import { RootState } from "redux/app";
@@ -16,8 +17,8 @@ export const selectAllCountryData = createSelector(
 
 export const selectAllCountryDataAsSelectOptions = createSelector(
   [selectAllCountryData],
-  countries => {
-    const countriesOptions = countries.map(country => {
+  (countries): SelectOption[] => {
+    const countriesOptions: SelectOption[] = countries.map(country => {
       return { value: country.code, label: country.name };
     });
     return [ALL, ...countriesOptions];
