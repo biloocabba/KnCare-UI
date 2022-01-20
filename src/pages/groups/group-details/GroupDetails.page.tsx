@@ -28,6 +28,7 @@ import {
   partialUpdateGroup,
   selectGroupById,
   updateGroup,
+  selectEmployeesState,
 } from "redux/features";
 
 import { AddMemberPanel } from "..";
@@ -43,7 +44,7 @@ export const GroupDetailsPage = () => {
   const dispatch = useAppDispatch();
 
   const groupsState = useAppSelector(selectGroupById(groupId));
-  const employeesState = useAppSelector(state => state.employee);
+  const employeesState = useAppSelector(selectEmployeesState);
 
   const [group, setGroup] = useState(groupsState);
 

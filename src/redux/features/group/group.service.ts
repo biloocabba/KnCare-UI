@@ -6,39 +6,39 @@ import { httpCommon } from "..";
 
 import { IPartiallyUpdatedGroup, IUpdatedGroup } from ".";
 
-const getAllGroups = (): Promise<AxiosResponse<Group[]>> => {
+const findAll = (): Promise<AxiosResponse<Group[]>> => {
   return httpCommon.get(`/groups`);
 };
 
-const getGroupById = (id: number): Promise<AxiosResponse<Group>> => {
+const findById = (id: number): Promise<AxiosResponse<Group>> => {
   return httpCommon.get(`/groups/${id}`);
 };
 
-const createGroup = (body: Partial<Group>): Promise<AxiosResponse<Group>> => {
+const create = (body: Partial<Group>): Promise<AxiosResponse<Group>> => {
   return httpCommon.post(`/groups`, body);
 };
 
-const updateGroup = (updatedGroup: IUpdatedGroup): Promise<AxiosResponse<Group>> => {
+const update = (updatedGroup: IUpdatedGroup): Promise<AxiosResponse<Group>> => {
   const { id, body } = updatedGroup;
   return httpCommon.put(`/groups/${id}`, body);
 };
 
-const partialUpdateGroup = (
+const partialUpdate = (
   partiallyUpdatedGroup: IPartiallyUpdatedGroup
 ): Promise<AxiosResponse<Group>> => {
   const { id, body } = partiallyUpdatedGroup;
   return httpCommon.patch(`/groups/${id}`, body);
 };
 
-const deleteGroup = (id: number) => {
+const deleteItem = (id: number) => {
   return httpCommon.delete(`/groups/${id}`);
 };
 
 export const groupService = {
-  getAllGroups,
-  getGroupById,
-  createGroup,
-  updateGroup,
-  partialUpdateGroup,
-  deleteGroup,
+  findAll,
+  findById,
+  create,
+  update,
+  partialUpdate,
+  deleteItem,
 };

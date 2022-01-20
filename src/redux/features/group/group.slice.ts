@@ -15,42 +15,41 @@ const initialState: StateType<Group> = {
 };
 
 export const findGroupById = createAsyncThunk("group/findById", async (id: number) => {
-  const { data } = await groupService.getGroupById(id);
-  return data;
-});
-
-export const searchGroups = createAsyncThunk("group/searchGroups", async () => {
-  const { data } = await groupService.getAllGroups();
+  const { data } = await groupService.findById(id);
+  console.log("data", data);
 
   return data;
 });
 
-export const createGroup = createAsyncThunk("group/createGroup", async (body: Partial<Group>) => {
-  const { data } = await groupService.createGroup(body);
+export const searchGroups = createAsyncThunk("group/search", async () => {
+  const { data } = await groupService.findAll();
 
   return data;
 });
 
-export const updateGroup = createAsyncThunk(
-  "group/updateGroup",
-  async (updatedGroup: IUpdatedGroup) => {
-    const { data } = await groupService.updateGroup(updatedGroup);
+export const createGroup = createAsyncThunk("group/create", async (body: Partial<Group>) => {
+  const { data } = await groupService.create(body);
 
-    return data;
-  }
-);
+  return data;
+});
+
+export const updateGroup = createAsyncThunk("group/update", async (updatedGroup: IUpdatedGroup) => {
+  const { data } = await groupService.update(updatedGroup);
+
+  return data;
+});
 
 export const partialUpdateGroup = createAsyncThunk(
-  "group/partialUpdateGroup",
+  "group/partialUpdate",
   async (partiallyUpdatedGroup: IPartiallyUpdatedGroup) => {
-    const { data } = await groupService.partialUpdateGroup(partiallyUpdatedGroup);
+    const { data } = await groupService.partialUpdate(partiallyUpdatedGroup);
 
     return data;
   }
 );
 
-export const deleteGroup = createAsyncThunk("group/deleteGroup", async (id: number) => {
-  const { data } = await groupService.deleteGroup(id);
+export const deleteGroup = createAsyncThunk("group/delete", async (id: number) => {
+  const { data } = await groupService.deleteItem(id);
   return data;
 });
 
