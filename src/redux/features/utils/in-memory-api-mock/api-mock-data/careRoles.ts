@@ -1,4 +1,6 @@
-export const careRoles = [
+import { CareRole } from "types";
+
+export const careRoles: CareRole[] = [
   { id: 1, name: "Regional Transformation Manager" },
   { id: 2, name: "Country Transformation Manager" },
   { id: 3, name: "Advocate" },
