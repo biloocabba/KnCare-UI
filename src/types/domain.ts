@@ -79,6 +79,13 @@ export interface Chart extends Domain {
   values?: number[];
 }
 
+interface Marker {
+  latLng: [number, number];
+  name: string;
+}
+
 export interface WorldOverview extends Domain {
-  id: any;
+  id: number;
+  countryData: number[] | { [key: string]: number };
+  markerData: Marker[];
 }
