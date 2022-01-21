@@ -43,7 +43,7 @@ import { BoxHeader } from "components/headers";
 
 //import emailService from "services/EmailService";
 
-import "react-quill/dist/quill.snow.css";
+// import "react-quill/dist/quill.snow.css";
 
 var EmailEditor = props => {
   let history = useHistory();
