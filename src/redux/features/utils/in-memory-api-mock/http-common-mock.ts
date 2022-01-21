@@ -1,8 +1,9 @@
 import { AxiosResponse } from "axios";
 
-import { PRACTICES, WORLD_OVERVIEW_ROUTE } from "redux/features/common";
+import { BEST_PRACTICE_ROUTE, WORLD_OVERVIEW_ROUTE } from "redux/features";
 
 import {
+  bestPracticeMockResponse,
   businessUnitsMockResponse,
   careRolesMockResponse,
   countriesMockResponse,
@@ -26,9 +27,8 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
     return Promise.resolve(searchCareMembers(url));
   }
 
-  // @todo
-  if (url.includes(PRACTICES)) {
-    return Promise.resolve(groupMockResponse);
+  if (url.includes(BEST_PRACTICE_ROUTE)) {
+    return Promise.resolve(bestPracticeMockResponse);
   }
 
   if (url.includes(WORLD_OVERVIEW_ROUTE)) {
@@ -42,6 +42,7 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
   if (url.includes("/care-role")) {
     return Promise.resolve(careRolesMockResponse);
   }
+
   if (url.includes("/business-unit")) {
     return Promise.resolve(businessUnitsMockResponse);
   }
@@ -49,6 +50,7 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
   if (url.includes("/country")) {
     return Promise.resolve(countriesMockResponse);
   }
+
   return Promise.reject();
 }
 
