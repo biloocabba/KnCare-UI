@@ -1,5 +1,5 @@
-/* eslint-disable */
 import { MouseEvent, useState } from "react";
+
 import { useHistory } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row } from "reactstrap";
@@ -8,28 +8,18 @@ import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets/react-table";
 
 import { CARE_MEMBER_EDIT } from "pages/users";
+import { CareMemberQueryFilters, SelectOption } from "types";
 
-// import { careMembersData } from "mock-data/careMembers";
+import { useAppDispatch, useAppSelector } from "redux/app";
 import { selectAllBusinessUnitsDataAsSelectOptions } from "redux/features/business-unit/business-unit.selectors";
 import { searchCareMembers, selectCareMemberState } from "redux/features/care-member";
 import { selectAllCountryDataAsSelectOptions } from "redux/features/countries/country.selectors";
 
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from ".";
-import { CareMemberQueryFilters, SelectOption } from "types";
-import { useAppDispatch, useAppSelector } from "redux/app";
 
 export const SearchCareMembersPage = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
-
-  // const careMemberState = {
-  //   isLoading: false,
-  //   isError: false,
-  //   isSuccess: false,
-  //   errorMessage: null,
-  //   entities:careMembersData,
-  //   entity: null,
-  // };
 
   const careMemberState = useAppSelector(selectCareMemberState);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
@@ -38,7 +28,6 @@ export const SearchCareMembersPage = () => {
   const groups: SelectOption[] = [];
   const currentRole = "admin";
 
-  // const [alert, setAlert] = React.useState(null);
   const [selectedCareMembers, setSelectedCareMembers] = useState([]);
 
   const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
