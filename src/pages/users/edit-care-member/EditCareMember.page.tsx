@@ -24,60 +24,6 @@ export const EditCareMemberPage = () => {
   const rolesAsOptions: SelectOption[] = [];
   const groupsAsOptions: SelectOption[] = [];
 
-  //const careMembers = careMembersData;
-  //this should be in selectors
-  /*
-  const careRoles = useSelector(state => {
-    return state.categories.careRoles.map(role => {
-      return { value: role.id, label: role.name };
-    });
-  });
-  const careMembers = useSelector(state => state.careMembers);
-  const groups = useSelector(state => {
-    return state.groups.map(group => {
-      return { value: group.id, label: group.name };
-    });
-  });
-
-
-  const findCareMember = () => {
-    setCareMember(
-      careMembers.find(careMember => careMember.id === parseInt(id)),
-    );
-  };
-  
-  useEffect(() => {
-    findCareMember();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  */
-
-  // const [careMember, setCareMember] = useState();
-  // const [role, setRole] = useState(
-  //   careMember ? (careMember.role ? careMember.role : "") : "",
-  // );
-  // const [group, setGroup] = useState([]);
-
-  // const findCareMember = () => {
-  //   const careMemberFound =careMembersData.find(careMember => careMember.id === parseInt(id))
-  //   setCareMember(careMemberFound);
-  // };
-
-  // useEffect(() => {
-  //   console.log(careMembersData)
-  //   console.log(id)
-  //   findCareMember();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // if (!careMember) {
-  //   return <div>No care member found</div>;
-  // }
-
-  // if(!careMember){
-  //   findCareMember();
-  // }
-
   const saveCareMember = (careMemberRequest: CareMemberSaveRequest) => {
     const httpUpdateRequest: IUpdated<CareMemberSaveRequest> = {
       id: careMemberRequest.id,
@@ -85,11 +31,6 @@ export const EditCareMemberPage = () => {
     };
     dispatch(updateCareMember(httpUpdateRequest));
   };
-
-  // const saveCareMember = (careMember) => {
-  //   let careMemberUpdateRequest= {id:careMember.id, body:careMember};
-  //   dispatch(updateCareMember(careMemberUpdateRequest));
-  // }
 
   return (
     <>

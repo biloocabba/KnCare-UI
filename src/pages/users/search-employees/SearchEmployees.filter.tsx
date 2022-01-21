@@ -1,13 +1,14 @@
-/* eslint-disable */
 import { useState } from "react";
 
 import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactstrap";
 
+import { Moment } from "moment";
+
 import { DateField } from "components/widgets/date-field";
 import { InputField } from "components/widgets/input-field";
 import { SelectField } from "components/widgets/select-field";
+
 import { EmployeeQueryFilters, SelectOption } from "types";
-import { Moment } from "moment";
 
 interface onSearchEmployeesFunction {
   (employeeSearchRequest: EmployeeQueryFilters): void;
@@ -30,12 +31,8 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
     setSearchLastName(searchLastName);
   };
 
-  // const onChangeSearchHiringDate = dateAsMoment => {
-  //   setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"));
-  // };
-
   const findByAllParameters = () => {
-    let filters: EmployeeQueryFilters = {
+    const filters: EmployeeQueryFilters = {
       lastName: searchLastName,
       businessUnitId: searchBusinessUnitId,
       countryIsoCode3: searchCountryIsoCode3,

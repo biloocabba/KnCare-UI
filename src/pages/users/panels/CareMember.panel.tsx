@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
 
 import { Button, Col, Form, Row } from "reactstrap";
@@ -15,7 +14,6 @@ interface onSaveFunction {
   (careMemberRequest: CareMemberSaveRequest): void;
 }
 interface CareMemberPanelProps {
-  // employeeId: number;
   careMember: CareMember;
   groupOptions: SelectOption[];
   roleOptions: SelectOption[];
@@ -23,34 +21,13 @@ interface CareMemberPanelProps {
 }
 
 export const CareMemberPanel = (props: CareMemberPanelProps) => {
-  const {
-    careMember,
-    groupOptions,
-    roleOptions,
-    onSave,
-    // isCreate
-  } = props;
+  const { careMember, groupOptions, roleOptions, onSave } = props;
 
   const [onboardingDate, setOnboardingDate] = useState(careMember.onboardingDate);
   const [offboardingDate, setOffboardingDate] = useState(careMember.offboardingDate);
 
   const [roleId, setRoleId] = useState<number | undefined>();
   const [groupIds, setGroupIds] = useState<number[]>([]);
-
-  // const groupFilterOptions = (group, input) => {
-  //   if (input) {
-  //     return group.value === groupOptions[0].value;
-  //   }
-  //   return true;
-  // };
-
-  const onChangeOnboardingDate = (dateAsMoment: Moment) => {
-    setOnboardingDate(dateAsMoment.format("D-MM-YYYY"));
-  };
-
-  const onChangeOffboardingDate = (dateAsMoment: Moment) => {
-    setOffboardingDate(dateAsMoment.format("D-MM-YYYY"));
-  };
 
   const onSaveCareMember = () => {
     const careMemberSaveRequest: CareMemberSaveRequest = {
@@ -73,8 +50,10 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
             <DateField
               id="date-auto-onboarding-date"
               label="Onboard date"
-              value={careMember ? careMember.onboardingDate : ""}
-              onChange={onChangeOnboardingDate}
+              value={onboardingDate}
+              onChange={(dateAsMoment: Moment) =>
+                setOnboardingDate(dateAsMoment.format("D-MM-YYYY"))
+              }
               timeFormat={false}
             />
           </Col>
@@ -83,7 +62,9 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-offboarding-date"
               label="Auto Offboard Date"
               value={offboardingDate}
-              onChange={onChangeOffboardingDate}
+              onChange={(dateAsMoment: Moment) =>
+                setOffboardingDate(dateAsMoment.format("D-MM-YYYY"))
+              }
               timeFormat={false}
             />
           </Col>
@@ -110,7 +91,6 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
                 const groupIdSelected = Array.from(selections)
                   .filter(option => option.selected)
                   .map(item => parseInt(item.value));
-                // let currentGroups=[...groupIds,parseInt()];
                 setGroupIds(groupIdSelected);
               }}
             />

@@ -4,12 +4,10 @@ const selfResignedMembersMap = {};
 const autoOffboardedMembersMap = {};
 const activeMap = {};
 
-const mapState = {
+export const mapState = {
   activeMembersMap,
   newMembersMap,
   selfResignedMembersMap,
   autoOffboardedMembersMap,
   activeMap,
 };
-
-export default mapState;

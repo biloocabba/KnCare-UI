@@ -2,21 +2,20 @@ import { useState } from "react";
 
 import { useHistory } from "react-router";
 
-import { Card, CardBody, CardHeader, Col, Container, FormGroup, Row } from "reactstrap";
+import { Card, CardBody, CardHeader, Col, Container, FormGroup, Row, Spinner } from "reactstrap";
 
+import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets/react-table";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
-import { deleteGroup, searchGroups, selectAllGroupsData } from "redux/features";
-
-import { BoxHeader } from "../../../components/headers";
+import { deleteGroup, searchGroups, selectGroupState } from "redux/features";
 
 import { groupsTableColumns } from ".";
 
 export const SearchGroupsPage = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const groups = useAppSelector(selectAllGroupsData);
+  const groups = useAppSelector(selectGroupState);
 
   const [selectedGroups, setSelectedGroups] = useState([]);
 
@@ -76,7 +75,7 @@ export const SearchGroupsPage = () => {
                 <h3 className="mb-0">Groups</h3>
                 <p className="text-sm mb-0">Groups</p>
               </CardHeader>
-              {/* {groups.isLoading ? (
+              {groups.isLoading ? (
                 <div
                   style={{
                     textAlign: "center",
@@ -84,17 +83,17 @@ export const SearchGroupsPage = () => {
                 >
                   <Spinner />
                 </div>
-              ) : ( */}
-              <ReactTable
-                data={groups}
-                keyField="id"
-                columns={groupsTableColumns}
-                onViewDetailsClick={goToGroupDetails}
-                onDeleteItemClick={removeGroup}
-                selectedRows={selectedGroups}
-                setSelectedRows={setSelectedGroups}
-              />
-              {/* )} */}
+              ) : (
+                <ReactTable
+                  data={groups.entities}
+                  keyField="id"
+                  columns={groupsTableColumns}
+                  onViewDetailsClick={goToGroupDetails}
+                  onDeleteItemClick={removeGroup}
+                  selectedRows={selectedGroups}
+                  setSelectedRows={setSelectedGroups}
+                />
+              )}
             </Card>
           </div>
         </Row>

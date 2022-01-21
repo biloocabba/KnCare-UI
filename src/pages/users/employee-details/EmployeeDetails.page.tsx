@@ -1,4 +1,3 @@
-/* eslint-disable */
 /*!
 
 =========================================================
@@ -17,6 +16,7 @@
 */
 
 import { useSelector } from "react-redux";
+
 import { useParams, useHistory } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
@@ -25,9 +25,9 @@ import { BoxHeader } from "components/headers";
 
 import { EMPLOYEE_SEARCH, CARE_MEMBER_CREATE } from "pages/users";
 import { EmployeePanel } from "pages/users/panels";
+import { Employee, RouteParams } from "types";
 
 import { selectEmployeeById } from "redux/features/employee";
-import { Employee, RouteParams } from "types";
 
 export const EmployeeDetailsPage = () => {
   const { id } = useParams<RouteParams>();
@@ -53,7 +53,7 @@ export const EmployeeDetailsPage = () => {
                   <Col lg="12" xs="7" className="text-right">
                     <Button
                       // color={buttonColor}
-                      onClick={e => history.push(`/${currentRole}${CARE_MEMBER_CREATE}/${id}`)}
+                      onClick={() => history.push(`/${currentRole}${CARE_MEMBER_CREATE}/${id}`)}
                       // disabled={employee.careMember}
                     >
                       Invite to Care

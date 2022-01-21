@@ -5,6 +5,7 @@ export * from "./business-unit";
 export * from "./care-member";
 export * from "./chart";
 export * from "./countries";
+export * from "./common";
 export * from "./email";
 export * from "./group";
 export * from "./role";

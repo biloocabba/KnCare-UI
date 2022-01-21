@@ -1,4 +1,6 @@
-export const careMembersData = [
+import { CareMember } from "types";
+
+export const careMembersData: CareMember[] = [
   {
     id: 1000,
     employeeId: 1000,

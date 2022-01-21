@@ -6,7 +6,7 @@ import { BusinessUnit } from "types/domain";
 import { RootState } from "redux/app";
 import { StateType } from "redux/features/common";
 
-const ALL = { value: "", label: "ALL" };
+const ALL: SelectOption = { value: "", label: "ALL" };
 
 export const selectBusinessUnitState = (rootState: RootState): StateType<BusinessUnit> =>
   rootState.businessUnit;
@@ -18,7 +18,7 @@ export const selectAllBusinessUnitData = createSelector(
 
 export const selectAllBusinessUnitsDataAsSelectOptions = createSelector(
   [selectAllBusinessUnitData],
-  (businessUnits): SelectOption[] => {
+  businessUnits => {
     const businessUnitOptions: SelectOption[] = businessUnits.map(businessUnit => {
       return { value: `${businessUnit.id}`, label: businessUnit.name };
     });

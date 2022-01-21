@@ -1,3 +1,5 @@
+// @todo add type
+// error: Expression produces a union type that is too complex to represent.ts(2590)
 export const employeesData = [
   {
     id: 1,

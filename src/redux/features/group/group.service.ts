@@ -1,44 +1,39 @@
-import { AxiosResponse } from "axios";
-
 import { Group } from "types/domain";
 
-import { httpCommon } from "..";
+import { httpCommon, HttpResponseType } from "..";
+import { IPartiallyUpdated, IUpdated } from "../common";
 
-import { IPartiallyUpdatedGroup, IUpdatedGroup } from ".";
-
-const getAllGroups = (): Promise<AxiosResponse<Group[]>> => {
-  return httpCommon.get(`/groups`);
+const findAll = (): HttpResponseType => {
+  return httpCommon.get(`/group`);
 };
 
-const getGroupById = (id: number): Promise<AxiosResponse<Group>> => {
-  return httpCommon.get(`/groups/${id}`);
+const findById = (id: number): HttpResponseType => {
+  return httpCommon.get(`/group/${id}`);
 };
 
-const createGroup = (body: Partial<Group>): Promise<AxiosResponse<Group>> => {
-  return httpCommon.post(`/groups`, body);
+const create = (body: Partial<Group>): HttpResponseType => {
+  return httpCommon.post(`/group`, body);
 };
 
-const updateGroup = (updatedGroup: IUpdatedGroup): Promise<AxiosResponse<Group>> => {
+const update = (updatedGroup: IUpdated<Group>): HttpResponseType => {
   const { id, body } = updatedGroup;
-  return httpCommon.put(`/groups/${id}`, body);
+  return httpCommon.put(`/group/${id}`, body);
 };
 
-const partialUpdateGroup = (
-  partiallyUpdatedGroup: IPartiallyUpdatedGroup
-): Promise<AxiosResponse<Group>> => {
+const partialUpdate = (partiallyUpdatedGroup: IPartiallyUpdated<Group>): HttpResponseType => {
   const { id, body } = partiallyUpdatedGroup;
-  return httpCommon.patch(`/groups/${id}`, body);
+  return httpCommon.patch(`/group/${id}`, body);
 };
 
-const deleteGroup = (id: number) => {
-  return httpCommon.delete(`/groups/${id}`);
+const deleteItem = (id: number) => {
+  return httpCommon.delete(`/group/${id}`);
 };
 
 export const groupService = {
-  getAllGroups,
-  getGroupById,
-  createGroup,
-  updateGroup,
-  partialUpdateGroup,
-  deleteGroup,
+  findAll,
+  findById,
+  create,
+  update,
+  partialUpdate,
+  deleteItem,
 };

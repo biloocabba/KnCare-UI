@@ -6,7 +6,7 @@ import { Country } from "types/domain";
 import { RootState } from "redux/app";
 import { StateType } from "redux/features/common";
 
-const ALL = { value: "", label: "ALL" };
+const ALL: SelectOption = { value: "", label: "ALL" };
 
 export const selectCountryState = (rootState: RootState): StateType<Country> => rootState.country;
 

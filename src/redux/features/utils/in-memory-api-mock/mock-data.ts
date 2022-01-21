@@ -1,13 +1,16 @@
 import { AxiosResponse } from "axios";
 
-import { CareRole, Employee, Group, CareMember, Country, BusinessUnit } from "types";
+import { CareRole, Employee, Group, CareMember, Country, BusinessUnit, BestPractice } from "types";
 
-import { businessUnits } from "redux/features/utils/in-memory-api-mock/mock-data/businessUnits";
-import { careMembersData } from "redux/features/utils/in-memory-api-mock/mock-data/careMembers.js";
-import { careRoles } from "redux/features/utils/in-memory-api-mock/mock-data/careRoles";
-import { countryListAllIsoData } from "redux/features/utils/in-memory-api-mock/mock-data/countries.js";
-import { employeesData } from "redux/features/utils/in-memory-api-mock/mock-data/employees.js";
-import { groups } from "redux/features/utils/in-memory-api-mock/mock-data/groups.js";
+import {
+  employeesData,
+  groups,
+  bestPractices,
+  careMembersData,
+  countryListAllIsoData,
+  businessUnits,
+  careRoles,
+} from "./api-mock-data";
 
 export const mockAxiosReponse = {
   status: 200,
@@ -28,6 +31,11 @@ export const employeeMockResponse: AxiosResponse<Employee[]> = {
 
 export const groupMockResponse: AxiosResponse<Group[]> = {
   data: groups,
+  ...mockAxiosReponse,
+};
+
+export const bestPracticeMockResponse: AxiosResponse<BestPractice[]> = {
+  data: bestPractices,
   ...mockAxiosReponse,
 };
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Col, Form, Row } from "reactstrap";
 
 import { InputField } from "components/widgets/input-field";
