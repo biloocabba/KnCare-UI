@@ -14,7 +14,7 @@ const initialState: StateType<WorldOverview> = {
 };
 
 export const fetchWorldOverviews = createAsyncThunk("worldOverview/find", async () => {
-  const { data } = await worldOverviewService.getAll();
+  const { data } = await worldOverviewService.findAll();
 
   return data;
 });
