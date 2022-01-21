@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-import { PRACTICES } from "redux/features/common";
+import { PRACTICES, WORLD_OVERVIEW_ROUTE } from "redux/features/common";
 
 import {
   businessUnitsMockResponse,
@@ -8,6 +8,7 @@ import {
   countriesMockResponse,
   deleteMockResponse,
   groupMockResponse,
+  worldOverviewMockResponse,
 } from "./mock-data";
 import {
   saveCareMember,
@@ -25,8 +26,13 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
     return Promise.resolve(searchCareMembers(url));
   }
 
+  // @todo
   if (url.includes(PRACTICES)) {
     return Promise.resolve(groupMockResponse);
+  }
+
+  if (url.includes(WORLD_OVERVIEW_ROUTE)) {
+    return Promise.resolve(worldOverviewMockResponse);
   }
 
   if (url.includes("/group")) {
