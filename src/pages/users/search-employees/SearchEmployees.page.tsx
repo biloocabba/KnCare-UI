@@ -1,8 +1,16 @@
 import { MouseEvent, useState } from "react";
+
 import { useHistory } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
 
+import { BoxHeader } from "components/headers";
+import { ReactTable } from "components/widgets";
+
+import { EMPLOYEE_DETAILS } from "pages/users";
+import { EmployeeQueryFilters } from "types";
+
+import { useAppDispatch, useAppSelector } from "redux/app";
 import {
   selectAllCountryDataAsSelectOptions,
   selectEmployeesState,
@@ -11,17 +19,8 @@ import {
   deleteEmployee,
 } from "redux/features";
 
-import { BoxHeader } from "components/headers";
-import { ReactTable } from "components/widgets";
-
-import { EMPLOYEE_DETAILS } from "pages/users";
-
 import { SearchEmployeesFilterPanel } from "./SearchEmployees.filter";
 import { employeesTableColumns } from "./SearchEmployees.table";
-import { EmployeeQueryFilters } from "types";
-import { useAppDispatch, useAppSelector } from "redux/app";
-
-// import { deleteUser, searchEmployees } from "../../../actions/employee";
 
 export const SearchEmployeesPage = () => {
   const history = useHistory();
