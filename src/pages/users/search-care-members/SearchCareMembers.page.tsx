@@ -11,7 +11,10 @@ import { CARE_MEMBER_EDIT } from "pages/users";
 import { CareMemberQueryFilters, SelectOption } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
-import { selectAllGroupsDataAsSelectOptions } from "redux/features";
+import {
+  selectAllGroupsDataAsSelectOptions,
+  selectAllRoleDataAsSelectOptions,
+} from "redux/features";
 import { selectAllBusinessUnitsDataAsSelectOptions } from "redux/features/business-unit/business-unit.selectors";
 import { searchCareMembers, selectCareMemberState } from "redux/features/care-member";
 import { selectAllCountryDataAsSelectOptions } from "redux/features/countries/country.selectors";
@@ -25,7 +28,7 @@ export const SearchCareMembersPage = () => {
   const careMemberState = useAppSelector(selectCareMemberState);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
-  const roles: SelectOption[] = [];
+  const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
   const currentRole = "admin";
 

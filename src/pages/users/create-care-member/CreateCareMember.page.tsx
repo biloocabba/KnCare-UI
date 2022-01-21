@@ -14,21 +14,24 @@ import { CREATE_CARE_MEMBER_ID } from "types/app.consts";
 import { formatDateAsDD_MM_YYYY, addDays } from "types/utils";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
-import { createCareMember } from "redux/features/care-member";
-import { selectEmployeeById } from "redux/features/employee";
+import {
+  selectAllGroupsDataAsSelectOptions,
+  selectAllRoleDataAsSelectOptions,
+  selectEmployeeById,
+  createCareMember,
+} from "redux/features";
 
 export const CreateCareMemberPage = () => {
   const { id } = useParams<RouteParams>();
   const history = useHistory();
   const dispatch = useAppDispatch();
 
-  //Use selector from slices
   const employeeIdAsInt: number = parseInt(id);
 
   const currentRole = "admin";
   const employee: Employee = useAppSelector(selectEmployeeById(employeeIdAsInt)) as Employee;
-  const rolesAsOptions: SelectOption[] = [];
-  const groupsAsOptions: SelectOption[] = [];
+  const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
+  const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
   const createDefaultCareMember = (): CareMember => {
     console.log("createDefaultCareMember Called");
@@ -47,64 +50,11 @@ export const CreateCareMemberPage = () => {
     };
   };
 
-  const careMember: CareMember = createDefaultCareMember();
-
-  console.log(careMember);
-
-  // const [careMember, setCareMember] = useState(careMemberDefaultData);
-
-  // const [role, setRole] = useState(careRoles[0]);
-  // const [group, setGroup] = useState(groupOptions[0]);
-  // const [offboardingDate, setOffboardingDate] = useState(defaultOffBoardDate);
-  // const [careMember, setCareMember] = useState(defaultOffBoardDate);
-  // const onBoardDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear() - 1}`;
-  // let [employee, setEmployee] = useState();
-
-  // if(!employee){
-  //   employee=employeesData.find(employee => employee.id === parseInt(id));
-  //   setEmployee(employee);
-  //   setCareMember({...careMember,...employee})
-  // }
-
-  // const saveCareMember = () => {
-  //   const careMemberInfo = {
-  //     onBoardDate: onBoardDate,
-  //     offBoardDate: offboardingDate,
-  //     employee: employee.id,
-  //     role: "care Advocate",
-  //     group: group,
-  //     careMember: true,
-  //   };
-
-  //   console.log("careMemberInfo", careMemberInfo);
-
-  //   /*
-  //   dispatch(createCareMember(careMemberInfo))
-  //     .then(data =>
-  //       setCareMember({
-  //         onBoardDate: onBoardDate,
-  //         offBoardDate: offboardingDate,
-  //         employee: employee.id,
-  //         role: "care Advocate",
-  //         group: group,
-  //       }),
-  //     )
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  //     */
-  // };
-
-  // const filterOptions = (group, input) => {
-  //   if (input) {
-  //     return group.value === groupOptions[0].value;
-  //   }
-  //   return true;
-  // };
-
   const saveCareMember = (careMemberSaveRequest: CareMemberSaveRequest): void => {
     dispatch(createCareMember(careMemberSaveRequest));
   };
+
+  const careMember: CareMember = createDefaultCareMember();
 
   return (
     <>
@@ -135,8 +85,8 @@ export const CreateCareMemberPage = () => {
               <CardBody>
                 <CareMemberPanel
                   careMember={careMember}
-                  groupOptions={groupsAsOptions}
-                  roleOptions={rolesAsOptions}
+                  groupOptions={groups}
+                  roleOptions={roles}
                   onSave={saveCareMember}
                 />
               </CardBody>

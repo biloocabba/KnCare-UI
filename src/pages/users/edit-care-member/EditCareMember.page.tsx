@@ -9,7 +9,13 @@ import { CARE_MEMBER_SEARCH } from "pages/users";
 import { CareMember, CareMemberSaveRequest, RouteParams, SelectOption } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
-import { selectCareMemberById, updateCareMember } from "redux/features/care-member";
+import {
+  selectAllGroupsDataAsSelectOptions,
+  selectAllRoleDataAsSelectOptions,
+  selectCareMemberById,
+  updateCareMember,
+} from "redux/features";
+
 import { IUpdated } from "redux/features/common";
 
 import { CareMemberPanel } from "../panels";
@@ -21,8 +27,8 @@ export const EditCareMemberPage = () => {
 
   const currentRole = "admin";
   const careMember = useAppSelector(selectCareMemberById(parseInt(id))) as CareMember;
-  const rolesAsOptions: SelectOption[] = [];
-  const groupsAsOptions: SelectOption[] = [];
+  const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
+  const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
   const saveCareMember = (careMemberRequest: CareMemberSaveRequest) => {
     const httpUpdateRequest: IUpdated<CareMemberSaveRequest> = {
@@ -64,10 +70,9 @@ export const EditCareMemberPage = () => {
               <CardBody>
                 <CareMemberPanel
                   careMember={careMember}
-                  groupOptions={groupsAsOptions}
-                  roleOptions={rolesAsOptions}
+                  groupOptions={groups}
+                  roleOptions={roles}
                   onSave={saveCareMember}
-                  // isCreate={false}
                 />
               </CardBody>
             </Card>
