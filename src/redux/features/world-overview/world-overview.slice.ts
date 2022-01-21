@@ -1,32 +1,23 @@
-import { AsyncThunk, createAsyncThunk, createSlice, SerializedError } from "@reduxjs/toolkit";
+import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { WorldOverview } from "../../../types";
+import { StateType } from "../common";
 
 import { worldOverviewService } from ".";
 
-type WorldOverviewStateType = {
-  // add types
-  worldOverviews: any;
-  worldOverview: any | null;
-  isLoading: boolean;
-  isSuccess: boolean;
-  error: SerializedError;
-};
-
-const initialState: WorldOverviewStateType = {
-  worldOverviews: [],
-  worldOverview: null,
+const initialState: StateType<WorldOverview> = {
+  entities: [],
+  entity: null,
   isLoading: false,
   isSuccess: false,
   error: {},
 };
 
-export const fetchWorldOverviews = createAsyncThunk(
-  "worldOverview/fetchWorldOverviews",
-  async () => {
-    const { data } = await worldOverviewService.listWorldOverview();
+export const fetchWorldOverviews = createAsyncThunk("worldOverview/find", async () => {
+  const { data } = await worldOverviewService.getAll();
 
-    return data;
-  }
-);
+  return data;
+});
 
 export const worldOverviewSlice = createSlice({
   name: "worldOverview",
@@ -45,7 +36,7 @@ export const worldOverviewSlice = createSlice({
       });
     });
     builder.addCase(fetchWorldOverviews.fulfilled, (state, action) => {
-      state.worldOverviews = action.payload;
+      state.entities = action.payload;
       state.isLoading = false;
       state.isSuccess = true;
     });

@@ -78,3 +78,7 @@ export interface Chart extends Domain {
   value?: number;
   values?: number[];
 }
+
+export interface WorldOverview extends Domain {
+  id: any;
+}
