@@ -46,7 +46,6 @@ export const userMenu: IRoute[] = [
   {
     collapse: false,
     global: true,
-    // path: "/users/care-member-details/:id",
     path: `${CARE_MEMBER_EDIT}/:id`,
     component: EditCareMemberPage,
     layout: "/admin",
@@ -54,7 +53,6 @@ export const userMenu: IRoute[] = [
   {
     collapse: false,
     global: true,
-    // path: "/users/care-member-create/:id",
     path: `${CARE_MEMBER_CREATE}/:id`,
     component: CreateCareMemberPage,
     layout: "/admin",

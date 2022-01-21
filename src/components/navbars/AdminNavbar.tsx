@@ -29,12 +29,8 @@ import {
 
 import classnames from "classnames";
 
-// reactstrap components
-// import { logout } from "actions/auth";
 import stefanoImg from "assets/img/care/stefano-fiorenza.jpg";
 import { Theme } from "types";
-
-// import { useAppDispatch } from "redux/app";
 
 interface Props {
   theme: Theme;
