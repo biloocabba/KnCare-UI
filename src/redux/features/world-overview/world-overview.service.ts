@@ -1,9 +1,10 @@
 import { httpCommon } from "..";
+import { WORLD_OVERVIEW_ROUTE } from "../common";
 
-const listWorldOverview = () => {
-  return httpCommon.get(`/worldOverview`);
+const findAll = () => {
+  return httpCommon.get(`${WORLD_OVERVIEW_ROUTE}`);
 };
 
 export const worldOverviewService = {
-  listWorldOverview,
+  findAll,
 };

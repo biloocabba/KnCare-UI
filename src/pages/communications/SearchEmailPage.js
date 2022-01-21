@@ -20,11 +20,8 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 // react plugin that prints a given react component
 import ReactToPrint from "react-to-print";
 
-// reactstrap components
 import { BoxHeader } from "components/headers";
 import { pagination } from "components/widgets";
-
-import { emailService } from "services/EmailService";
 
 const { SearchBar } = Search;
 
@@ -81,12 +78,12 @@ var ReactBSTables = props => {
       recipientGroups: null,
     },
   ];
-  const [emails, setEmails] = useState(initialEmailState);
+  const [emails] = useState(initialEmailState);
 
   useEffect(() => {
-    emailService.getAll().then(response => {
-      setEmails(response.data);
-    });
+    // emailService.getAll().then(response => {
+    //   setEmails(response.data);
+    // });
   }, []);
 
   const EditDraft = e => {

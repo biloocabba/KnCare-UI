@@ -78,3 +78,14 @@ export interface Chart extends Domain {
   value?: number;
   values?: number[];
 }
+
+interface Marker {
+  latLng: [number, number];
+  name: string;
+}
+
+export interface WorldOverview extends Domain {
+  id: number;
+  countryData: number[] | { [key: string]: number };
+  markerData: Marker[];
+}

@@ -1,6 +1,15 @@
 import { AxiosResponse } from "axios";
 
-import { CareRole, Employee, Group, CareMember, Country, BusinessUnit, BestPractice } from "types";
+import {
+  CareRole,
+  Employee,
+  Group,
+  CareMember,
+  Country,
+  BusinessUnit,
+  BestPractice,
+  WorldOverview,
+} from "types";
 
 import {
   employeesData,
@@ -11,6 +20,7 @@ import {
   businessUnits,
   careRoles,
 } from "./api-mock-data";
+import { worldOverviewData } from "./api-mock-data/worldOverview";
 
 export const mockAxiosReponse = {
   status: 200,
@@ -36,6 +46,11 @@ export const groupMockResponse: AxiosResponse<Group[]> = {
 
 export const bestPracticeMockResponse: AxiosResponse<BestPractice[]> = {
   data: bestPractices,
+  ...mockAxiosReponse,
+};
+
+export const worldOverviewMockResponse: AxiosResponse<WorldOverview[]> = {
+  data: worldOverviewData,
   ...mockAxiosReponse,
 };
 
