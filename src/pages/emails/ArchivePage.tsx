@@ -14,10 +14,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import { useRef } from "react";
 
 import {
-  Button,
   ButtonGroup,
   Card,
   CardHeader,
@@ -27,59 +26,22 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-import ReactBSAlert from "react-bootstrap-sweetalert";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import ReactToPrint from "react-to-print";
 
 import { BoxHeader } from "components/headers";
 import { pagination } from "components/widgets";
 
+import { useAlert } from "context";
 import { dataTable } from "variables/general";
+
+import { CopyButton, PrintButton } from "./components";
 
 const { SearchBar } = Search;
 
-var ArchivePage = () => {
-  const [alert, setAlert] = React.useState(null);
-  const componentRef = React.useRef(null);
-  // this function will copy to clipboard an entire table,
-  // so you can paste it inside an excel or csv file
-  const copyToClipboardAsTable = el => {
-    var body = document.body,
-      range,
-      sel;
-    if (document.createRange && window.getSelection) {
-      range = document.createRange();
-      sel = window.getSelection();
-      sel.removeAllRanges();
-      try {
-        range.selectNodeContents(el);
-        sel.addRange(range);
-      } catch (e) {
-        range.selectNode(el);
-        sel.addRange(range);
-      }
-      document.execCommand("copy");
-    } else if (body.createTextRange) {
-      range = body.createTextRange();
-      range.moveToElementText(el);
-      range.select();
-      range.execCommand("Copy");
-    }
-    setAlert(
-      <ReactBSAlert
-        success
-        style={{ display: "block", marginTop: "-100px" }}
-        title="Good job!"
-        onConfirm={() => setAlert(null)}
-        onCancel={() => setAlert(null)}
-        confirmBtnBsStyle="info"
-        btnSize=""
-      >
-        Copied to clipboard!
-      </ReactBSAlert>
-    );
-  };
+const ArchivePage = () => {
+  const { alert } = useAlert();
+  const componentRef = useRef(null);
 
   return (
     <>
@@ -207,30 +169,8 @@ var ArchivePage = () => {
                       <Row>
                         <Col xs={12} sm={6}>
                           <ButtonGroup>
-                            <Button
-                              className="buttons-copy buttons-html5"
-                              color="default"
-                              size="sm"
-                              id="copy-tooltip"
-                              onClick={() =>
-                                copyToClipboardAsTable(document.getElementById("react-bs-table"))
-                              }
-                            >
-                              <span>Copy</span>
-                            </Button>
-                            <ReactToPrint
-                              trigger={() => (
-                                <Button
-                                  color="default"
-                                  size="sm"
-                                  className="buttons-copy buttons-html5"
-                                  id="print-tooltip"
-                                >
-                                  Print
-                                </Button>
-                              )}
-                              content={() => componentRef.current}
-                            />
+                            <CopyButton elementId="react-bs-table" />
+                            <PrintButton ref={componentRef} />
                           </ButtonGroup>
                           <UncontrolledTooltip placement="top" target="print-tooltip">
                             This will open a print page with the visible rows of the table.
