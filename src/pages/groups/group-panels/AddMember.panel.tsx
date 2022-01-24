@@ -15,7 +15,7 @@ interface Props {
   onChangeBusinessUnit: () => void;
   onSelectCareMember: () => void;
 }
-// eslint-disable-next-line no-empty-pattern
+
 export const AddMemberPanel = ({
   onChangeBusinessUnit,
   onChangeCountry,
@@ -25,9 +25,6 @@ export const AddMemberPanel = ({
   const countriesList = useAppSelector(selectAllCountryDataAsSelectOptions);
   const businessUnitsList = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const membersList = useAppSelector(selectAllEmployeeDataAsSelectOptions);
-
-  console.log("AddMemberPanel.tsx: countriesList: ", countriesList);
-  console.log("AddMemberPanel.tsx: businessUnitsList: ", businessUnitsList);
 
   const jobTitles = [
     { value: 1, label: "product manager" },
