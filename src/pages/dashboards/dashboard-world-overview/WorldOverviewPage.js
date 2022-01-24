@@ -15,106 +15,71 @@
 
 */
 import { useState } from "react";
-// react plugin for creating vector maps
-
-// import { useDispatch } from "react-redux";
 
 import { Card, CardBody, Container, Row, Col, CardTitle } from "reactstrap";
 
-import { VectorMap } from "@react-jvectormap/core";
-import worldMill from "@react-jvectormap/world/dist/worldMill.json";
+import { VectorMap } from "react-jvectormap";
 
-// import {
-//   getActiveMembersMapData,
-//   getNewMembersMapData,
-//   getSelfResignedMembersMapData,
-//   getAutoOffboardedMembersMapData,
-// } from "actions/mapKpi";
-// reactstrap components
-// core components
+import { MapsHeader } from "components/headers";
+
+import { useAppDispatch, useAppSelector } from "redux/app";
+import {
+  fetchActiveMembersReport,
+  fetchAutoOffboardedMembersReport,
+  fetchNewMembersReport,
+  fetchSelfResignedMembersReport,
+  selectActiveMembersReportsData,
+  selectAutoOffboardedMembersReportsData,
+  selectCurrentMapData,
+  selectNewMembersReportsData,
+  selectSelfResignedMembersReportsData,
+} from "redux/features";
 
 export const WorldOverviewPage = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getActiveMembersMapData());
-  //   dispatch(getNewMembersMapData());
-  //   dispatch(getSelfResignedMembersMapData());
-  //   dispatch(getAutoOffboardedMembersMapData());
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const activeMap = useAppSelector(selectCurrentMapData);
+  let activeMembersMap = useAppSelector(selectActiveMembersReportsData);
+  let newMembersMap = useAppSelector(selectNewMembersReportsData);
+  let selfResignedMembersMap = useAppSelector(selectSelfResignedMembersReportsData);
+  let autoOffboardedMembersMap = useAppSelector(selectAutoOffboardedMembersReportsData);
 
-  //  const activeMembersMap = useSelector(state =>{
-  //     return state.mapKpis.activeMembersMap;
-  // });
+  const [newMembers, setNewMembers] = useState(null);
+  const [activeMembers, setActiveMembers] = useState(null);
+  const [autoOffboardedMembers, setAutoOffboardedMembers] = useState(null);
+  const [selfresignedMembers, setSelfresignedMembers] = useState(null);
 
-  // const newMembersMap = useSelector(state =>{
-  //   return state.mapKpis.newMembersMap;
-  // });
+  const mapFilterClick = (e, fnApiCall) => {
+    e.preventDefault();
+    dispatch(fnApiCall());
+    fnApiCall();
+  };
 
-  // const selfResignedMembersMap = useSelector(state =>{
-  //   return state.mapKpis.selfResignedMembersMap;
-  // });
+  const onActiveMembersClick = e => {
+    mapFilterClick(e, fetchActiveMembersReport);
+  };
 
-  // const autoOffboardedMembersMap = useSelector(state =>{
-  //   return state.mapKpis.autoOffboardedMembersMap;
-  // });
+  const onNewMembersClick = e => {
+    mapFilterClick(e, fetchNewMembersReport);
+  };
 
-  // const activeMap = useSelector(state =>{
-  //   return state.mapKpis.activeMap;
-  // });
+  const onSelfResignedClick = e => {
+    mapFilterClick(e, fetchSelfResignedMembersReport);
+  };
 
-  const [newMembers] = useState(null);
-
-  const [activeMembers] = useState(null);
-
-  const [autoOffboardedMembers] = useState(null);
-
-  const [selfresignedMembers] = useState(null);
-
-  // const mapFilterClick = (e,fnApiCall) =>{
-  //   e.preventDefault();
-  //   dispatch(fnApiCall());
-  // }
-
-  // const onActiveMembersClick = (e) =>{
-  //   mapFilterClick(e,getActiveMembersMapData);
-  // }
-
-  // const onNewMembersClick = (e) => {
-  //   mapFilterClick(e,getNewMembersMapData);
-  // }
-
-  // const onSelfResignedClick = (e) => {
-  //   mapFilterClick(e,getSelfResignedMembersMapData);
-  // }
-
-  // const onAutoOffboardedClick = (e) => {
-  //   mapFilterClick(e,getAutoOffboardedMembersMapData);
-  // }
-
-  const mapData = {
-    AU: 760,
-    BR: 550,
-    CA: 120,
-    DE: 1300,
-    FR: 540,
-    GB: 690,
-    GE: 200,
-    IN: 200,
-    RO: 600,
-    RU: 300,
-    US: 2920,
+  const onAutoOffboardedClick = e => {
+    mapFilterClick(e, fetchAutoOffboardedMembersReport);
   };
 
   return (
     <>
-      {/* <MapsHeader name="World view" 
-        onActiveMembersClick={onActiveMembersClick} 
-        onNewMembersClick={onNewMembersClick} 
-        onSelfResignedClick={onSelfResignedClick} 
-        onAutoOffboardedClick={onAutoOffboardedClick}         
-        /> */}
+      <MapsHeader
+        name="World view"
+        onActiveMembersClick={onActiveMembersClick}
+        onNewMembersClick={onNewMembersClick}
+        onSelfResignedClick={onSelfResignedClick}
+        onAutoOffboardedClick={onAutoOffboardedClick}
+      />
 
       <Container className="mt--6" fluid>
         <Row>
@@ -127,7 +92,7 @@ export const WorldOverviewPage = () => {
                     width: "100%",
                     height: "600px",
                   }}
-                  map={worldMill}
+                  map={"world_mill"}
                   zoomOnScroll={true}
                   scaleColors={["#f00", "#0071A4"]}
                   normalizeFunction="polynomial"
@@ -137,7 +102,6 @@ export const WorldOverviewPage = () => {
                   regionStyle={{
                     initial: {
                       fill: "#e9ecef",
-                      // @ts-ignore
                       "fill-opacity": 0.8,
                       stroke: "none",
                       "stroke-width": 0,
@@ -145,7 +109,6 @@ export const WorldOverviewPage = () => {
                     },
                     hover: {
                       fill: "#dee2e6",
-                      // @ts-ignore
                       "fill-opacity": 0.8,
                       cursor: "pointer",
                     },
@@ -153,23 +116,26 @@ export const WorldOverviewPage = () => {
                   series={{
                     regions: [
                       {
-                        // @ts-ignore
-                        values: mapData,
-                        // values: activeMap,
-                        // @ts-ignore
+                        values: activeMap,
                         scale: ["#ced4da", "#043c7c"],
                         normalizeFunction: "polynomial",
                       },
                     ],
                   }}
-                  // onRegionTipShow={
-                  //   function name(e, label, code) {
-                  //      (activeMembersMap[code]!=undefined) ? setActiveMembers(activeMembersMap[code]) :setActiveMembers(0);
-                  //      ( newMembersMap[code]!=undefined) ? setNewMembers(newMembersMap[code]) :setNewMembers(0);
-                  //      (selfResignedMembersMap[code]!=undefined) ? setSelfresignedMembers(selfResignedMembersMap[code]) : setSelfresignedMembers(0);
-                  //      ( autoOffboardedMembersMap[code]!=undefined) ? setAutoOffboardedMembers(autoOffboardedMembersMap[code]) :setAutoOffboardedMembers(0);
-                  //   }
-                  // }
+                  onRegionTipShow={function name(e, label, code) {
+                    activeMembersMap[code] != undefined
+                      ? setActiveMembers(activeMembersMap[code])
+                      : setActiveMembers(0);
+                    newMembersMap[code] != undefined
+                      ? setNewMembers(newMembersMap[code])
+                      : setNewMembers(0);
+                    selfResignedMembersMap[code] != undefined
+                      ? setSelfresignedMembers(selfResignedMembersMap[code])
+                      : setSelfresignedMembers(0);
+                    autoOffboardedMembersMap[code] != undefined
+                      ? setAutoOffboardedMembers(autoOffboardedMembersMap[code])
+                      : setAutoOffboardedMembers(0);
+                  }}
                 />
                 <Row>
                   <Col md="6" xl="3">
@@ -190,7 +156,7 @@ export const WorldOverviewPage = () => {
                         </Row>
                         <p className="mt-3 mb-0 text-sm">
                           <span className="text-success mr-2">
-                            {/* <i className="fa fa-arrow-up" /> {activeMembers/20} */}
+                            <i className="fa fa-arrow-up" /> {activeMembers / 20}
                           </span>{" "}
                           <span className="text-nowrap">Since last year</span>
                         </p>
@@ -215,7 +181,7 @@ export const WorldOverviewPage = () => {
                         </Row>
                         <p className="mt-3 mb-0 text-sm">
                           <span className="text-success mr-2">
-                            {/* <i className="fa fa-arrow-up" /> {newMembers/10} */}
+                            <i className="fa fa-arrow-up" /> {newMembers / 10}
                           </span>{" "}
                           <span className="text-nowrap">Since last year</span>
                         </p>
@@ -240,7 +206,7 @@ export const WorldOverviewPage = () => {
                         </Row>
                         <p className="mt-3 mb-0 text-sm">
                           <span className="text-danger mr-2">
-                            {/* <i className="fa fa-arrow-up" /> {selfresignedMembers/20} */}
+                            <i className="fa fa-arrow-up" /> {selfresignedMembers / 20}
                           </span>{" "}
                           <span className="text-nowrap">Since last year</span>
                         </p>
@@ -267,7 +233,7 @@ export const WorldOverviewPage = () => {
                         </Row>
                         <p className="mt-3 mb-0 text-sm">
                           <span className="text-danger mr-2">
-                            {/* <i className="fa fa-arrow-up" /> {autoOffboardedMembers/20} */}
+                            <i className="fa fa-arrow-up" /> {autoOffboardedMembers / 20}
                           </span>{" "}
                           <span className="text-nowrap">Since last year</span>
                         </p>

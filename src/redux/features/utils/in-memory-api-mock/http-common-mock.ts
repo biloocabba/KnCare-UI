@@ -1,7 +1,14 @@
 import { AxiosResponse } from "axios";
 
-import { BEST_PRACTICE_ROUTE, WORLD_OVERVIEW_ROUTE } from "redux/features";
+import { BEST_PRACTICE_ROUTE } from "redux/features";
 
+import {
+  saveCareMember,
+  searchCareMembers,
+  searchEmployees,
+  wrapIntoResponse,
+  reportService,
+} from "./api-mock-service";
 import {
   bestPracticeMockResponse,
   businessUnitsMockResponse,
@@ -9,14 +16,8 @@ import {
   countriesMockResponse,
   deleteMockResponse,
   groupMockResponse,
-  worldOverviewMockResponse,
+  // worldOverviewMockResponse,
 } from "./mock-data";
-import {
-  saveCareMember,
-  searchCareMembers,
-  searchEmployees,
-  wrapIntoResponse,
-} from "./mock-data-api";
 
 export async function get(url: string): Promise<AxiosResponse<any>> {
   if (url.includes("/employee")) {
@@ -31,8 +32,8 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
     return Promise.resolve(bestPracticeMockResponse);
   }
 
-  if (url.includes(WORLD_OVERVIEW_ROUTE)) {
-    return Promise.resolve(worldOverviewMockResponse);
+  if (url.includes("/report/")) {
+    return Promise.resolve(reportService.get(url));
   }
 
   if (url.includes("/group")) {

@@ -25,3 +25,9 @@ export interface CareMemberQueryFilters {
   offboardingDateFrom?: string;
   offboardingDateTo?: string;
 }
+
+export interface Chart {
+  label: string;
+  value?: number;
+  values?: number[];
+}

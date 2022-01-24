@@ -73,19 +73,22 @@ export interface Country extends Domain {
   number: string;
 }
 
-export interface Chart extends Domain {
-  label: string;
-  value?: number;
-  values?: number[];
+// export type WorldOverviewCachedReports = Domain & {
+//   [reportName in ReportName]: WorldDataReport;
+// };
+
+export interface WorldOverviewCachedReports extends Domain {
+  reportName: string;
+  data: WorldDataReport;
 }
 
-interface Marker {
-  latLng: [number, number];
-  name: string;
-}
+export declare type WorldDataReport = {
+  [countryCode: string]: number;
+};
 
-export interface WorldOverview extends Domain {
-  id: number;
-  countryData: number[] | { [key: string]: number };
-  markerData: Marker[];
-}
+export const NO_REPORT_CACHED: WorldDataReport = { NONE: 0 };
+export const REPORT_KEY_ACTIVE_MEMBERS = "ActiveMembers";
+export const REPORT_KEY_NEW_MEMBERS = "NewMembers";
+export const REPORT_KEY_SELF_RESIGNED_MEMBERS = "SelfResignedMembers";
+export const REPORT_KEY_AUTO_OFFBOARDED_MEMBERS = "AutoOffboardedMembers";
+export const REPORT_KEY_CURRENT_MAP = "REPORT_KEY_CURRENT_MAP";
