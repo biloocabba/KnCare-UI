@@ -15,7 +15,6 @@
 
 */
 
-// reactstrap components
 import {
   Button,
   Card,
@@ -23,9 +22,7 @@ import {
   CardBody,
   CardImg,
   CardTitle,
-  FormGroup,
   Form,
-  Input,
   ListGroupItem,
   ListGroup,
   Progress,
@@ -35,6 +32,7 @@ import {
 } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
+import { InputField } from "components/widgets";
 
 import angularImg from "assets/img/theme/angular.jpg";
 import boostrapImg from "assets/img/theme/bootstrap.jpg";
@@ -319,53 +317,37 @@ export const SendNotificationPage = () => {
                   <div className="pl-lg-4">
                     <Row>
                       <Col lg="6">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="input-username">
-                            Username
-                          </label>
-                          <Input
-                            defaultValue="lucky.jesse"
-                            id="input-username"
-                            placeholder="Username"
-                            type="text"
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="input-username"
+                          label="Username"
+                          defaultValue="lucky.jesse"
+                          placeholder="Username"
+                        />
                       </Col>
                       <Col lg="6">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="input-email">
-                            Email address
-                          </label>
-                          <Input id="input-email" placeholder="jesse@example.com" type="email" />
-                        </FormGroup>
+                        <InputField
+                          id="input-email"
+                          label="Email address"
+                          placeholder="jesse@example.com"
+                        />
                       </Col>
                     </Row>
                     <Row>
                       <Col lg="6">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="input-first-name">
-                            First name
-                          </label>
-                          <Input
-                            defaultValue="Lucky"
-                            id="input-first-name"
-                            placeholder="First name"
-                            type="text"
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="input-first-name"
+                          label="First name"
+                          placeholder="First name"
+                          defaultValue="Lucky"
+                        />
                       </Col>
                       <Col lg="6">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="input-last-name">
-                            Last name
-                          </label>
-                          <Input
-                            defaultValue="Jesse"
-                            id="input-last-name"
-                            placeholder="Last name"
-                            type="text"
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="input-last-name"
+                          label="Last name"
+                          placeholder="Last name"
+                          defaultValue="Jesse"
+                        />
                       </Col>
                     </Row>
                   </div>
@@ -375,53 +357,37 @@ export const SendNotificationPage = () => {
                   <div className="pl-lg-4">
                     <Row>
                       <Col md="12">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="input-address">
-                            Address
-                          </label>
-                          <Input
-                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                            id="input-address"
-                            placeholder="Home Address"
-                            type="text"
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="input-address"
+                          label="Address"
+                          defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                          placeholder="Home Address"
+                        />
                       </Col>
                     </Row>
                     <Row>
                       <Col lg="4">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="input-city">
-                            City
-                          </label>
-                          <Input
-                            defaultValue="New York"
-                            id="input-city"
-                            placeholder="City"
-                            type="text"
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="input-city"
+                          label="City"
+                          defaultValue="New York"
+                          placeholder="City"
+                        />
                       </Col>
                       <Col lg="4">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="input-country">
-                            Country
-                          </label>
-                          <Input
-                            defaultValue="United States"
-                            id="input-country"
-                            placeholder="Country"
-                            type="text"
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="input-country"
+                          label="Country"
+                          defaultValue="United States"
+                          placeholder="Country"
+                        />
                       </Col>
                       <Col lg="4">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="input-country">
-                            Postal code
-                          </label>
-                          <Input id="input-postal-code" placeholder="Postal code" type="number" />
-                        </FormGroup>
+                        <InputField
+                          id="input-postal-code"
+                          label="Postal code"
+                          placeholder="Postal code"
+                        />
                       </Col>
                     </Row>
                   </div>
@@ -429,18 +395,13 @@ export const SendNotificationPage = () => {
 
                   <h6 className="heading-small text-muted mb-4">About me</h6>
                   <div className="pl-lg-4">
-                    <FormGroup>
-                      <label htmlFor="aboutYou" className="form-control-label">
-                        About Me
-                      </label>
-                      <Input
-                        id="aboutYou"
-                        placeholder="A few words about you ..."
-                        rows="4"
-                        type="textarea"
-                        defaultValue="A beautiful premium dashboard for Bootstrap 4."
-                      />
-                    </FormGroup>
+                    <InputField
+                      label="About Me"
+                      placeholder="A few words about you ..."
+                      rows="4"
+                      type="textarea"
+                      defaultValue="A beautiful premium dashboard for Bootstrap 4."
+                    />
                   </div>
                 </Form>
               </CardBody>

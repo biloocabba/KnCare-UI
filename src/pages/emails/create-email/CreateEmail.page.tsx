@@ -1,6 +1,6 @@
-import { EmailEditor } from "./EmailEditor";
+import { EditEmail } from "../email-panels";
 
-export const CreateNewEmailPage = () => {
+export const CreateEmailPage = () => {
   const initialEmailState = {
     id: "",
     subject: "",
@@ -11,5 +11,5 @@ export const CreateNewEmailPage = () => {
     recipientGroups: [],
   };
 
-  return <EmailEditor initialEmailState={initialEmailState} />;
+  return <EditEmail initialEmailState={initialEmailState} />;
 };

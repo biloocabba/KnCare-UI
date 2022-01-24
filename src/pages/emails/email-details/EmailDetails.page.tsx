@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { RouteParams } from "types";
 
-import { EmailEditor } from "./EmailEditor";
+import { EditEmail } from "../email-panels";
 
 export const EmailDetailsPage = () => {
   const { id } = useParams<RouteParams>();
@@ -45,5 +45,5 @@ export const EmailDetailsPage = () => {
 
   // return renderPage();
 
-  return <EmailEditor initialEmailState={initialEmailState} />;
+  return <EditEmail initialEmailState={initialEmailState} />;
 };

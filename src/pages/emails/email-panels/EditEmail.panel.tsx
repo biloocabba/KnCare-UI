@@ -28,15 +28,15 @@ import {
   Col,
   Container,
   Form,
-  FormGroup,
-  Input,
   Row,
 } from "reactstrap";
 
 import makeAnimated from "react-select/animated";
 
 import { BoxHeader } from "components/headers";
-import { SelectField } from "components/widgets";
+import { SelectField, InputField } from "components/widgets";
+
+import { EMAIL_SEARCH_ROUTE } from "../emails.routes.const";
 
 // import "react-quill/dist/quill.snow.css";
 
@@ -44,7 +44,7 @@ interface Props {
   initialEmailState: any;
 }
 
-export const EmailEditor = ({ initialEmailState }: Props) => {
+export const EditEmail = ({ initialEmailState }: Props) => {
   const history = useHistory();
   const [emailState, setEmailState] = useState(initialEmailState);
 
@@ -63,7 +63,7 @@ export const EmailEditor = ({ initialEmailState }: Props) => {
   };
 
   const handleDiscard = () => {
-    history.push("/admin/search-email");
+    history.push(`/admin${EMAIL_SEARCH_ROUTE}`);
   };
 
   return (
@@ -80,13 +80,13 @@ export const EmailEditor = ({ initialEmailState }: Props) => {
                   </Col>
                   <Col className="text-right" xs="4">
                     <ButtonGroup>
-                      <Button color="danger" href="#pablo" onClick={handleDiscard} size="sm">
+                      <Button color="danger" onClick={handleDiscard} size="sm">
                         Discard
                       </Button>
-                      <Button href="#pablo" onClick={handleSaveAsDraft} size="sm">
+                      <Button onClick={handleSaveAsDraft} size="sm">
                         Save as Draft
                       </Button>
-                      <Button color="primary" href="#pablo" onClick={handleSend} size="sm">
+                      <Button color="primary" onClick={handleSend} size="sm">
                         Send
                       </Button>
                     </ButtonGroup>
@@ -156,22 +156,19 @@ export const EmailEditor = ({ initialEmailState }: Props) => {
                   </div>
                   <hr className="my-4" />
                   <div className="pl-lg-4">
-                    <FormGroup>
-                      <label className="form-control-label" htmlFor="email-subject">
-                        Subject
-                      </label>
-                      <Input
-                        id="email-subject"
-                        type="text"
-                        value={emailState.subject}
-                        onChange={e =>
-                          setEmailState({
-                            ...emailState,
-                            subject: e.target.value,
-                          })
-                        }
-                      />
-                    </FormGroup>
+                    <InputField
+                      id="email-subject"
+                      type="text"
+                      label="Subject"
+                      value={emailState.subject}
+                      onChange={(e: any) =>
+                        setEmailState({
+                          ...emailState,
+                          subject: e.target.value,
+                        })
+                      }
+                    />
+
                     {/* <ReactQuill
                       value={emailState.content}
                       onChange={e => setEmailState({ ...emailState, content: e })}

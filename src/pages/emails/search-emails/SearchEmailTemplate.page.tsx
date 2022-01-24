@@ -14,15 +14,16 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
 import { useRef } from "react";
 
 import {
   ButtonGroup,
   Card,
   CardHeader,
+  Col,
   Container,
   Row,
-  Col,
   UncontrolledTooltip,
 } from "reactstrap";
 
@@ -35,11 +36,13 @@ import { pagination } from "components/widgets";
 import { useAlert } from "context";
 import { dataTable } from "variables/general";
 
-import { CopyButton, PrintButton } from "./components";
+import { CopyButton, PrintButton } from "../components";
+
+import { emailsTableColumns } from "./SearchEmails.table";
 
 const { SearchBar } = Search;
 
-export const ArchivePage = () => {
+export const SearchEmailTemplatePage = () => {
   const { alert } = useAlert();
   const componentRef = useRef(null);
 
@@ -58,55 +61,16 @@ export const ArchivePage = () => {
                   plugin. This is a minimal setup in order to get started fast.
                 </p>
               </CardHeader>
-              <ToolkitProvider
-                data={dataTable}
-                keyField="name"
-                columns={[
-                  {
-                    dataField: "name",
-                    text: "Name",
-                    sort: true,
-                  },
-                  {
-                    dataField: "position",
-                    text: "Position",
-                    sort: true,
-                  },
-                  {
-                    dataField: "office",
-                    text: "Office",
-                    sort: true,
-                  },
-                  {
-                    dataField: "age",
-                    text: "Age",
-                    sort: true,
-                  },
-                  {
-                    dataField: "start_date",
-                    text: "Start date",
-                    sort: true,
-                  },
-                  {
-                    dataField: "salary",
-                    text: "Salary",
-                    sort: true,
-                  },
-                ]}
-                search
-              >
+              <ToolkitProvider data={dataTable} keyField="name" columns={emailsTableColumns} search>
                 {props => (
                   <div className="py-4 table-responsive">
                     <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
-                      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                      <label>
-                        Search:
-                        <SearchBar
-                          className="form-control-sm"
-                          placeholder=""
-                          {...props.searchProps}
-                        />
-                      </label>
+                      Search:
+                      <SearchBar
+                        className="form-control-sm"
+                        placeholder=""
+                        {...props.searchProps}
+                      />
                     </div>
                     <BootstrapTable
                       {...props.baseProps}
@@ -184,15 +148,12 @@ export const ArchivePage = () => {
                             id="datatable-basic_filter"
                             className="dataTables_filter px-4 pb-1 float-right"
                           >
-                            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                            <label>
-                              Search:
-                              <SearchBar
-                                className="form-control-sm"
-                                placeholder=""
-                                {...props.searchProps}
-                              />
-                            </label>
+                            Search:
+                            <SearchBar
+                              className="form-control-sm"
+                              placeholder=""
+                              {...props.searchProps}
+                            />
                           </div>
                         </Col>
                       </Row>

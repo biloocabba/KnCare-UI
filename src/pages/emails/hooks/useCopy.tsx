@@ -1,7 +1,6 @@
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
 import { useAlert } from "context";
-// react component used to create sweet alerts
 
 /**
  * @description this hook will copy to clipboard an entire table,

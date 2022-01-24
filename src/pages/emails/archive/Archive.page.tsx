@@ -1,18 +1,30 @@
 /*!
+
 =========================================================
 * Argon Dashboard PRO React - v1.2.0
 =========================================================
+
 * Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
+
 * Coded by Creative Tim
+
 =========================================================
+
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
 */
-import React, { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 
-import { useHistory } from "react-router";
-
-import { Button, ButtonGroup, Card, Col, Container, Row, UncontrolledTooltip } from "reactstrap";
+import {
+  ButtonGroup,
+  Card,
+  CardHeader,
+  Container,
+  Row,
+  Col,
+  UncontrolledTooltip,
+} from "reactstrap";
 
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
@@ -21,54 +33,16 @@ import { BoxHeader } from "components/headers";
 import { pagination } from "components/widgets";
 
 import { useAlert } from "context";
+import { dataTable } from "variables/general";
 
-import { CopyButton, PrintButton } from "./components";
+import { CopyButton, PrintButton } from "../components";
+import { emailsTableColumns } from "../search-emails/SearchEmails.table";
 
 const { SearchBar } = Search;
 
-export const ReactBSTables = () => {
+export const ArchivePage = () => {
   const { alert } = useAlert();
-  const history = useHistory();
   const componentRef = useRef(null);
-
-  const initialEmailState = [
-    {
-      id: "1",
-      subject: "Sample subject",
-      content: "Hello world!",
-      attachments: null,
-      createdBy: {},
-      recipients: null,
-      recipientGroups: null,
-    },
-  ];
-  const [emails] = useState(initialEmailState);
-
-  useEffect(() => {
-    // emailService.getAll().then(response => {
-    //   setEmails(response.data);
-    // });
-  }, []);
-
-  const onEditDraftClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const { id } = e.target as HTMLButtonElement;
-    history.push("/admin/email-details/" + id);
-  };
-
-  const formatActionButtonCell = (cell: any, row: any) => {
-    return (
-      <>
-        <Button
-          id={row.id}
-          className="btn-icon btn-2"
-          type="button"
-          onClick={e => onEditDraftClick(e)}
-        >
-          Edit
-        </Button>
-      </>
-    );
-  };
 
   return (
     <>
@@ -78,28 +52,79 @@ export const ReactBSTables = () => {
         <Row>
           <div className="col">
             <Card>
+              <CardHeader>
+                <h3 className="mb-0">React Bootstrap Table 2</h3>
+                <p className="text-sm mb-0">
+                  This is an exmaple of data table using the well known react-bootstrap-table2
+                  plugin. This is a minimal setup in order to get started fast.
+                </p>
+              </CardHeader>
               <ToolkitProvider
-                data={emails}
-                keyField="id"
+                data={dataTable}
+                keyField="name"
                 columns={[
                   {
-                    dataField: "id",
-                    text: "Id",
+                    dataField: "name",
+                    text: "Name",
                     sort: true,
                   },
                   {
-                    dataField: "subject",
-                    text: "Subject",
+                    dataField: "position",
+                    text: "Position",
                     sort: true,
                   },
                   {
-                    dataField: "action",
-                    text: "",
-                    formatter: formatActionButtonCell,
+                    dataField: "office",
+                    text: "Office",
+                    sort: true,
+                  },
+                  {
+                    dataField: "age",
+                    text: "Age",
+                    sort: true,
+                  },
+                  {
+                    dataField: "start_date",
+                    text: "Start date",
+                    sort: true,
+                  },
+                  {
+                    dataField: "salary",
+                    text: "Salary",
+                    sort: true,
                   },
                 ]}
                 search
               >
+                {props => (
+                  <div className="py-4 table-responsive">
+                    <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
+                      Search:
+                      <SearchBar
+                        className="form-control-sm"
+                        placeholder=""
+                        {...props.searchProps}
+                      />
+                    </div>
+                    <BootstrapTable
+                      {...props.baseProps}
+                      bootstrap4={true}
+                      pagination={pagination}
+                      bordered={false}
+                    />
+                  </div>
+                )}
+              </ToolkitProvider>
+            </Card>
+            <Card>
+              <CardHeader>
+                <h3 className="mb-0">Action buttons</h3>
+                <p className="text-sm mb-0">
+                  This is an exmaple of data table using the well known react-bootstrap-table2
+                  plugin. This is a minimal setup in order to get started fast.
+                </p>
+              </CardHeader>
+              <ToolkitProvider data={dataTable} keyField="name" columns={emailsTableColumns} search>
                 {props => (
                   <div className="py-4 table-responsive">
                     <Container fluid>
@@ -132,7 +157,6 @@ export const ReactBSTables = () => {
                       </Row>
                     </Container>
                     <BootstrapTable
-                      hover
                       ref={componentRef}
                       {...props.baseProps}
                       bootstrap4={true}

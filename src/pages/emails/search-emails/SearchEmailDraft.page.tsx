@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { useHistory } from "react-router";
-
 import { Button, Card, CardBody, CardHeader, Col, Container, FormGroup, Row } from "reactstrap";
 
 import BootstrapTable from "react-bootstrap-table-next";
@@ -14,8 +12,6 @@ import { pagination, SelectField, InputField } from "components/widgets";
 const { SearchBar } = Search;
 
 export const SearchEmailDraftsPage = () => {
-  const history = useHistory();
-
   const groups: any = [];
   const careMembers: any = [];
   const emailDrafts: any = [];
@@ -64,7 +60,7 @@ export const SearchEmailDraftsPage = () => {
   };
 
   const emailDraftDetails = () => {
-    history.push("/admin/emailDrafts/email-draft-details/1");
+    // history.push("/admin/emailDrafts/email-draft-details/1");
   };
 
   const detailsActionButtonCell = () => {
@@ -198,25 +194,21 @@ export const SearchEmailDraftsPage = () => {
                     dataField: "recipient",
                     text: "recipient",
                     sort: true,
-                    style: { width: "50px" },
                   },
                   {
                     dataField: "group",
                     text: "group",
                     sort: true,
-                    style: { width: "50px" },
                   },
                   {
                     dataField: "startDate",
                     text: "startDate",
                     sort: true,
-                    style: { width: "50px" },
                   },
                   {
                     dataField: "startDate",
                     text: "startDate",
                     sort: true,
-                    style: { width: "50px" },
                   },
                   {
                     dataField: "action",
