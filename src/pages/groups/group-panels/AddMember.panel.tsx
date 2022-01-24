@@ -1,24 +1,42 @@
 import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactstrap";
 
+import { SelectField } from "components/widgets";
+
+import { useAppSelector } from "redux/app";
+import {
+  selectAllBusinessUnitsDataAsSelectOptions,
+  selectAllCountryDataAsSelectOptions,
+  selectAllEmployeeDataAsSelectOptions,
+} from "redux/features";
+
 interface Props {
-  onChangeRole: any;
-  onChangeCountry: any;
-  onChangeBusinessUnit: any;
-  onSelectCareMember: any;
+  onChangeRole: () => void;
+  onChangeCountry: () => void;
+  onChangeBusinessUnit: () => void;
+  onSelectCareMember: () => void;
 }
 // eslint-disable-next-line no-empty-pattern
-export const AddMemberPanel = ({}: Props) => {
-  // const countriesList = useAppSelector(selectCountriesAsList);
-  // const businessUnitsList = useAppSelector(selectBusinessUnitsAsList);
+export const AddMemberPanel = ({
+  onChangeBusinessUnit,
+  onChangeCountry,
+  onChangeRole,
+  onSelectCareMember,
+}: Props) => {
+  const countriesList = useAppSelector(selectAllCountryDataAsSelectOptions);
+  const businessUnitsList = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
+  const membersList = useAppSelector(selectAllEmployeeDataAsSelectOptions);
 
-  // const jobTitles = [
-  //   { value: 1, label: "product manager" },
-  //   { value: 2, label: "qa engineer" },
-  //   { value: 3, label: "hr consultant" },
-  //   { value: 4, label: "office manager" },
-  //   { value: 5, label: "sales representative" },
-  //   { value: 6, label: "logistics consultant" },
-  // ];
+  console.log("AddMemberPanel.tsx: countriesList: ", countriesList);
+  console.log("AddMemberPanel.tsx: businessUnitsList: ", businessUnitsList);
+
+  const jobTitles = [
+    { value: 1, label: "product manager" },
+    { value: 2, label: "qa engineer" },
+    { value: 3, label: "hr consultant" },
+    { value: 4, label: "office manager" },
+    { value: 5, label: "sales representative" },
+    { value: 6, label: "logistics consultant" },
+  ];
   // @todo make this find employees by filters
   return (
     <Card>
@@ -33,38 +51,39 @@ export const AddMemberPanel = ({}: Props) => {
         <Row>
           <Col md="12">
             <Row>
-              {/* <Col md="2">
-                <FormGroup>
-                  <label className="form-control-label" htmlFor="members">
-                    Job Title
-                  </label>
-                  <Select onChange={onChangeRole} options={jobTitles} />
-                </FormGroup>
-              </Col> */}
-              {/* <Col md="2">
-                <FormGroup>
-                  <label className="form-control-label" htmlFor="members">
-                    Country
-                  </label>
-                  <Select onChange={onChangeCountry} options={countriesList} />
-                </FormGroup>
+              <Col md="2">
+                <SelectField
+                  id="job-title"
+                  label="Job Title"
+                  onChange={onChangeRole}
+                  options={jobTitles}
+                />
               </Col>
               <Col md="2">
-                <FormGroup>
-                  <label className="form-control-label" htmlFor="members">
-                    Business Unit
-                  </label>
-                  <Select onChange={onChangeBusinessUnit} options={businessUnitsList} />
-                </FormGroup>
+                <SelectField
+                  id="country-select"
+                  label="Country"
+                  onChange={onChangeCountry}
+                  options={countriesList}
+                />
+              </Col>
+              <Col md="2">
+                <SelectField
+                  id="business-unit-select"
+                  label="Business Unit"
+                  onChange={onChangeBusinessUnit}
+                  options={businessUnitsList}
+                />
               </Col>
               <Col md="4">
-                <FormGroup>
-                  <label className="form-control-label" htmlFor="members">
-                    Add members
-                  </label>
-                  <Select isMulti onChange={onSelectCareMember} options={selectEmployeesAsList} />
-                </FormGroup>
-              </Col> */}
+                <SelectField
+                  id="add-members-select"
+                  label="Add members"
+                  isMulti
+                  onChange={onSelectCareMember}
+                  options={membersList}
+                />
+              </Col>
               <Col md="2">
                 <FormGroup>
                   <Button

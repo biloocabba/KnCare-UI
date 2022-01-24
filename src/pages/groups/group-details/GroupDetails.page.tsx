@@ -175,16 +175,10 @@ export const GroupDetailsPage = () => {
                           <Col lg="12">
                             <Collapse isOpen={addMemberCollapse}>
                               <AddMemberPanel
-                                // eslint-disable-next-line no-console
-                                onChangeRole={(e: any) => console.log(e)}
-                                // eslint-disable-next-line no-console
-                                onChangeCountry={(e: any) => console.log(e)}
-                                onChangeBusinessUnit={(e: any) =>
-                                  // eslint-disable-next-line no-console
-                                  console.log(e)
-                                }
-                                // eslint-disable-next-line no-console
-                                onSelectCareMember={(e: any) => console.log(e)}
+                                onChangeRole={() => console.log("onChangeRole")}
+                                onChangeCountry={() => console.log("onChangeCountry")}
+                                onChangeBusinessUnit={() => console.log("onChangeBusinessUnit")}
+                                onSelectCareMember={() => console.log("onSelectCareMember")}
                               />
                             </Collapse>
                           </Col>

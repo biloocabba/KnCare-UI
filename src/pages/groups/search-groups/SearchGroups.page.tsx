@@ -19,14 +19,14 @@ export const SearchGroupsPage = () => {
 
   const [selectedGroups, setSelectedGroups] = useState([]);
 
-  const goToGroupDetails = (e: any) => {
-    const { id } = e.target;
+  const goToGroupDetails = (e: React.MouseEvent<HTMLInputElement>) => {
+    const { id } = e.target as HTMLElement;
     history.push(`/admin/groups/group-details/${id}`);
   };
 
-  const removeGroup = (e: any) => {
-    const { id } = e.target;
-    dispatch(deleteGroup(id));
+  const removeGroup = (e: React.MouseEvent<HTMLInputElement>) => {
+    const { id } = e.target as HTMLElement;
+    dispatch(deleteGroup(parseInt(id)));
   };
 
   const findByAllParameters = () => {

@@ -15,13 +15,15 @@ import { InputField } from "components/widgets/input-field";
 
 import { Group } from "types/domain";
 
+import { StateType } from "redux/features";
+
 import { AddMemberPanel } from ".";
 
 interface EditGroupPanelProps {
   group: Group;
   setGroup: (group: Group) => void;
   onSave: (group: Group) => void;
-  groupsState: any;
+  groupsState: StateType<Group>;
   addMembersCollapse: boolean;
   setAddMembersCollapse: (collapse: boolean) => void;
   onBackToSearchClick?: () => void;
@@ -105,14 +107,10 @@ export const EditGroupPanel = ({
                     {/* <MembersTableComps data={group.members} /> */}
                     <Collapse isOpen={addMembersCollapse}>
                       <AddMemberPanel
-                        // eslint-disable-next-line no-console
-                        onChangeRole={(e: any) => console.log(e)}
-                        // eslint-disable-next-line no-console
-                        onChangeCountry={(e: any) => console.log(e)}
-                        // eslint-disable-next-line no-console
-                        onChangeBusinessUnit={(e: any) => console.log(e)}
-                        // eslint-disable-next-line no-console
-                        onSelectCareMember={(e: any) => console.log(e)}
+                        onChangeRole={() => console.log("onChangeRole")}
+                        onChangeCountry={() => console.log("onChangeCountry")}
+                        onChangeBusinessUnit={() => console.log("onChangeBusinessUnit")}
+                        onSelectCareMember={() => console.log("onSelectCareMember")}
                       />
                     </Collapse>
                   </Col>
