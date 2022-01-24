@@ -379,13 +379,13 @@ export default routes;
 
 */
 
+import { authMenu } from "pages/auth";
+import { bestPracticesMenu } from "pages/best-practices";
 import { dashboardMenu } from "pages/dashboards";
+import { emailMenu } from "pages/emails";
 import { groupMenu } from "pages/groups";
 import { userMenu } from "pages/users";
 import { IRoute } from "types";
-
-import { authMenu } from "./pages/auth";
-import { bestPracticesMenu } from "./pages/best-practices";
 
 export const routes: IRoute[] = [
   ...userMenu,
@@ -393,4 +393,5 @@ export const routes: IRoute[] = [
   ...dashboardMenu,
   ...bestPracticesMenu,
   ...authMenu,
+  ...emailMenu,
 ];
