@@ -38,6 +38,8 @@ import {
 // core components
 import ProfileHeader from "components/headers/ProfileHeader";
 
+import img1000x600 from "assets/img/theme/img-1-1000x600.jpg";
+
 var SendNotificationPage = () => {
   return (
     <>
@@ -46,7 +48,7 @@ var SendNotificationPage = () => {
         <Row>
           <Col className="order-xl-2" xl="4">
             <Card className="card-profile">
-              <CardImg alt="..." src={require("assets/img/theme/img-1-1000x600.jpg").default} top />
+              <CardImg alt="..." src={img1000x600} top />
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
                   <div className="card-profile-image">
