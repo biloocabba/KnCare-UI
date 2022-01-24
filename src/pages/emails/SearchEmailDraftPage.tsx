@@ -1,53 +1,24 @@
 import React, { useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-
 import { useHistory } from "react-router";
 
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Container,
-  FormGroup,
-  Input,
-  Row,
-} from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Container, FormGroup, Row } from "reactstrap";
 
 import BootstrapTable from "react-bootstrap-table-next";
-import ToolkitProvider from "react-bootstrap-table2-toolkit";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import ReactDatetime from "react-datetime";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
 
 import { BoxHeader } from "components/headers";
-import { pagination } from "components/widgets";
+import { pagination, SelectField, InputField } from "components/widgets";
 
-// import { searchEmailDrafts } from "actions/emailDrafts";
+const { SearchBar } = Search;
 
-// const { SearchBar } = Search;
-
-var SearchEmailDraftsPage = () => {
+export const SearchEmailDraftsPage = () => {
   const history = useHistory();
-  // const careRoles = useSelector(state => {
-  //   return state.categories.careRoles.map(role => {
-  //     return { value: role.id, label: role.name };
-  //   });
-  // });
-  const groups = useSelector(state => {
-    return state.groups.map(group => {
-      return { value: group.id, label: group.name };
-    });
-  });
 
-  const careMembers = useSelector(state => {
-    return state.careMembers.map(careMember => {
-      return { value: careMember.id, label: careMember.internationalName };
-    });
-  });
-  const emailDrafts = useSelector(state => state.emailDrafts);
+  const groups: any = [];
+  const careMembers: any = [];
+  const emailDrafts: any = [];
 
   const [searchSubject, setSearchSubject] = useState("");
   const [searchRecipient, setSearchRecipient] = useState("");
@@ -55,35 +26,33 @@ var SearchEmailDraftsPage = () => {
   const [searchStartDate] = useState("");
   const [searchEndDate] = useState("");
 
-  const dispatch = useDispatch();
-
-  const onChangeSearchSubject = e => {
-    const searchSubject = e.target.value;
-    setSearchSubject(searchSubject);
+  const onChangeSearchSubject = (e: React.FormEvent<HTMLFormElement>) => {
+    const { value } = e.target as HTMLFormElement;
+    setSearchSubject(value);
   };
 
-  // const onChangeSearchRecipient = e => {
-  //   const searchRecipient = e.target.value;
-  //   setSearchRecipient(searchRecipient);
+  // const onChangeSearchRecipient = (e: React.FormEvent<HTMLFormElement>) => {
+  //   const { value } = e.target as HTMLFormElement;
+  //   setSearchRecipient(value);
   // };
 
-  // const onChangeSearchGroup = e => {
-  //   const searchGroup = e.target.value;
-  //   setSearchGroup(searchGroup);
+  // const onChangeSearchGroup = (e: React.FormEvent<HTMLFormElement>) => {
+  //   const { value } = e.target as HTMLFormElement;
+  //   setSearchGroup(value);
   // };
 
-  // const onChangeSearchStartDate = e => {
-  //   const searchStartDate = e.target.value;
-  //   setSearchStartDate(searchStartDate);
+  // const onChangeSearchStartDate = (e: React.FormEvent<HTMLFormElement>) => {
+  //   const { value } = e.target as HTMLFormElement;
+  //   setSearchStartDate(value);
   // };
 
-  // const onChangeSearchEndDate = e => {
-  //   const searchEndDate = e.target.value;
-  //   setSearchEndDate(searchEndDate);
+  // const onChangeSearchEndDate = (e: React.FormEvent<HTMLFormElement>) => {
+  //   const { value } = e.target as HTMLFormElement;
+  //   setSearchEndDate(value);
   // };
 
   const findByAllParameters = () => {
-    let filters = {
+    const filters = {
       subject: searchSubject,
       recipient: searchRecipient,
       group: searchGroup,
@@ -91,7 +60,6 @@ var SearchEmailDraftsPage = () => {
       endDate: searchEndDate,
     };
     console.log(filters);
-    dispatch();
     // dispatch(searchEmailDrafts(filters));
   };
 
@@ -124,46 +92,31 @@ var SearchEmailDraftsPage = () => {
               <CardBody>
                 <Row>
                   <Col md="2">
-                    <FormGroup>
-                      <label className="form-control-label" htmlFor="lastName">
-                        Subject
-                      </label>
-                      <Input
-                        id="lastName"
-                        style={{ height: "36px" }}
-                        className="form-control"
-                        type="text"
-                        placeholder="Last Name"
-                        value={searchSubject}
-                        onChange={onChangeSearchSubject}
-                      />
-                    </FormGroup>
+                    <InputField
+                      id="lastName"
+                      label="Subject"
+                      style={{ height: "36px" }}
+                      type="text"
+                      placeholder="Last Name"
+                      value={searchSubject}
+                      onChange={onChangeSearchSubject}
+                    />
                   </Col>
                   <Col md="2">
-                    <FormGroup>
-                      <label className="form-control-label" htmlFor="businessUnits">
-                        Recipients
-                      </label>
-                      <Select
-                        id="businessUnits"
-                        components={makeAnimated()}
-                        options={careMembers}
-                        onChange={item => setSearchRecipient(item.value)}
-                      />
-                    </FormGroup>
+                    <SelectField
+                      id="businessUnits"
+                      label="Recipients"
+                      options={careMembers}
+                      onChange={(item: any) => setSearchRecipient(item.value)}
+                    />
                   </Col>
                   <Col md="2">
-                    <FormGroup>
-                      <label className="form-control-label" htmlFor="country">
-                        Groups
-                      </label>
-                      <Select
-                        id="country"
-                        components={makeAnimated()}
-                        options={groups}
-                        onChange={item => setSearchGroup(item.value)}
-                      />
-                    </FormGroup>
+                    <SelectField
+                      id="country"
+                      label="Groups"
+                      options={groups}
+                      onChange={(item: any) => setSearchGroup(item.value)}
+                    />
                   </Col>
                   <Col md="2">
                     <FormGroup>
@@ -275,82 +228,51 @@ var SearchEmailDraftsPage = () => {
               >
                 {props => (
                   <div className="py-4 table-responsive">
-                    {/* <div
-                      id="datatable-basic_filter"
-                      className="dataTables_filter px-4 pb-1"
-                    >
-                      <label>
-                        <SearchBar
-                          className="form-control-sm"
-                          placeholder="Subject"
-                          value={searchSubject}
-                          onChange={onChangeSearchSubject}
-                        />
-                      </label>
+                    <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
+                      <SearchBar
+                        className="form-control-sm"
+                        placeholder="Subject"
+                        // value={searchSubject}
+                        // onChange={onChangeSearchSubject}
+                      />
                     </div>
-                    <div
-                      id="datatable-basic_filter"
-                      className="dataTables_filter px-4 pb-1"
-                    >
-                      <label>
-                        <SearchBar
-                          className="form-control-sm"
-                          placeholder="recipient"
-                          value={searchRecipient}
-                          onChange={onChangeSearchRecipient}
-                        />
-                      </label>
+                    <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
+                      <SearchBar
+                        className="form-control-sm"
+                        placeholder="recipient"
+                        // value={searchRecipient}
+                        // onChange={onChangeSearchRecipient}
+                      />
                     </div>
-                    <div
-                      id="datatable-basic_filter"
-                      className="dataTables_filter px-4 pb-1"
-                    >
-                      <label>
-                        <SearchBar
-                          className="form-control-sm"
-                          placeholder="Group"
-                          value={searchGroup}
-                          onChange={onChangeSearchGroup}
-                        />
-                      </label>
+                    <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
+                      <SearchBar
+                        className="form-control-sm"
+                        placeholder="Group"
+                        // value={searchGroup}
+                        // onChange={onChangeSearchGroup}
+                      />
                     </div>
-                    <div
-                      id="datatable-basic_filter"
-                      className="dataTables_filter px-4 pb-1"
-                    >
-                      <label>
-                        <SearchBar
-                          className="form-control-sm"
-                          placeholder="Start Date"
-                          value={searchStartDate}
-                          onChange={onChangeSearchStartDate}
-                        />
-                      </label>
+                    <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
+                      <SearchBar
+                        className="form-control-sm"
+                        placeholder="Start Date"
+                        // value={searchStartDate}
+                        // onChange={onChangeSearchStartDate}
+                      />
                     </div>
-                    <div
-                      id="datatable-basic_filter"
-                      className="dataTables_filter px-4 pb-1"
-                    >
-                      <label>
-                        <SearchBar
-                          className="form-control-sm"
-                          placeholder="End Date"
-                          value={searchEndDate}
-                          onChange={onChangeSearchEndDate}
-                        />
-                      </label>
+                    <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
+                      <SearchBar
+                        className="form-control-sm"
+                        placeholder="End Date"
+                        // value={searchEndDate}
+                        // onChange={onChangeSearchEndDate}
+                      />
                     </div>
                     <div className="input-group-append">
-                      <button
-                        className="btn btn-info"
-                        type="button"
-                        onClick={findByAllParameters}
-                      >
+                      <button className="btn btn-info" onClick={findByAllParameters}>
                         Search
                       </button>
-                    </div>  
-            
-             */}
+                    </div>
 
                     <BootstrapTable
                       {...props.baseProps}
@@ -368,5 +290,3 @@ var SearchEmailDraftsPage = () => {
     </>
   );
 };
-
-export default SearchEmailDraftsPage;

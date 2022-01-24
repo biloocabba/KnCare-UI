@@ -41,7 +41,7 @@ import sketchImg from "assets/img/theme/sketch.jpg";
 import team4Img from "assets/img/theme/team-4.jpg";
 import vueImg from "assets/img/theme/vue.jpg";
 
-const CreateEmailTemplatePage = () => {
+export const CreateEmailTemplatePage = () => {
   return (
     <>
       <BoxHeader />
@@ -411,5 +411,3 @@ const CreateEmailTemplatePage = () => {
     </>
   );
 };
-
-export default CreateEmailTemplatePage;

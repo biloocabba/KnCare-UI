@@ -8,67 +8,28 @@
 =========================================================
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-// react component used to create sweet alerts
+import { useHistory } from "react-router";
+
 import { Button, ButtonGroup, Card, Col, Container, Row, UncontrolledTooltip } from "reactstrap";
 
-import ReactBSAlert from "react-bootstrap-sweetalert";
-// react component for creating dynamic tables
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-// react plugin that prints a given react component
-import ReactToPrint from "react-to-print";
 
-// reactstrap components
 import { BoxHeader } from "components/headers";
 import { pagination } from "components/widgets";
 
-import { emailService } from "services/EmailService";
+import { useAlert } from "context";
+
+import { CopyButton, PrintButton } from "./components";
 
 const { SearchBar } = Search;
 
-var ReactBSTables = props => {
-  const [alert, setAlert] = React.useState(null);
-  const componentRef = React.useRef(null);
-  // this function will copy to clipboard an entire table,
-  // so you can paste it inside an excel or csv file
-  const copyToClipboardAsTable = el => {
-    var body = document.body,
-      range,
-      sel;
-    if (document.createRange && window.getSelection) {
-      range = document.createRange();
-      sel = window.getSelection();
-      sel.removeAllRanges();
-      try {
-        range.selectNodeContents(el);
-        sel.addRange(range);
-      } catch (e) {
-        range.selectNode(el);
-        sel.addRange(range);
-      }
-      document.execCommand("copy");
-    } else if (body.createTextRange) {
-      range = body.createTextRange();
-      range.moveToElementText(el);
-      range.select();
-      range.execCommand("Copy");
-    }
-    setAlert(
-      <ReactBSAlert
-        success
-        style={{ display: "block", marginTop: "-100px" }}
-        title="Good job!"
-        onConfirm={() => setAlert(null)}
-        onCancel={() => setAlert(null)}
-        confirmBtnBsStyle="info"
-        btnSize=""
-      >
-        Copied to clipboard!
-      </ReactBSAlert>
-    );
-  };
+export const ReactBSTables = () => {
+  const { alert } = useAlert();
+  const history = useHistory();
+  const componentRef = useRef(null);
 
   const initialEmailState = [
     {
@@ -81,23 +42,28 @@ var ReactBSTables = props => {
       recipientGroups: null,
     },
   ];
-  const [emails, setEmails] = useState(initialEmailState);
+  const [emails] = useState(initialEmailState);
 
   useEffect(() => {
-    emailService.getAll().then(response => {
-      setEmails(response.data);
-    });
+    // emailService.getAll().then(response => {
+    //   setEmails(response.data);
+    // });
   }, []);
 
-  const EditDraft = e => {
-    var { id } = e.target;
-    props.history.push("/admin/email-details/" + id);
+  const onEditDraftClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const { id } = e.target as HTMLButtonElement;
+    history.push("/admin/email-details/" + id);
   };
 
-  const formatActionButtonCell = (cell, row) => {
+  const formatActionButtonCell = (cell: any, row: any) => {
     return (
       <>
-        <Button id={row.id} className="btn-icon btn-2" type="button" onClick={e => EditDraft(e)}>
+        <Button
+          id={row.id}
+          className="btn-icon btn-2"
+          type="button"
+          onClick={e => onEditDraftClick(e)}
+        >
           Edit
         </Button>
       </>
@@ -140,30 +106,8 @@ var ReactBSTables = props => {
                       <Row>
                         <Col xs={12} sm={6}>
                           <ButtonGroup>
-                            <Button
-                              className="buttons-copy buttons-html5"
-                              color="default"
-                              size="sm"
-                              id="copy-tooltip"
-                              onClick={() =>
-                                copyToClipboardAsTable(document.getElementById("react-bs-table"))
-                              }
-                            >
-                              <span>Copy</span>
-                            </Button>
-                            <ReactToPrint
-                              trigger={() => (
-                                <Button
-                                  color="default"
-                                  size="sm"
-                                  className="buttons-copy buttons-html5"
-                                  id="print-tooltip"
-                                >
-                                  Print
-                                </Button>
-                              )}
-                              content={() => componentRef.current}
-                            />
+                            <CopyButton elementId="react-bs-table" />
+                            <PrintButton ref={componentRef} />
                           </ButtonGroup>
                           <UncontrolledTooltip placement="top" target="print-tooltip">
                             This will open a print page with the visible rows of the table.
@@ -177,15 +121,12 @@ var ReactBSTables = props => {
                             id="datatable-basic_filter"
                             className="dataTables_filter px-4 pb-1 float-right"
                           >
-                            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                            <label>
-                              Search:
-                              <SearchBar
-                                className="form-control-sm"
-                                placeholder=""
-                                {...props.searchProps}
-                              />
-                            </label>
+                            Search:
+                            <SearchBar
+                              className="form-control-sm"
+                              placeholder=""
+                              {...props.searchProps}
+                            />
                           </div>
                         </Col>
                       </Row>
@@ -209,5 +150,3 @@ var ReactBSTables = props => {
     </>
   );
 };
-
-export default ReactBSTables;

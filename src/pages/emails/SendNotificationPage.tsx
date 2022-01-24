@@ -14,7 +14,6 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
 
 // reactstrap components
 import {
@@ -35,15 +34,20 @@ import {
   Col,
 } from "reactstrap";
 
-// core components
-import ProfileHeader from "components/headers/ProfileHeader";
+import { BoxHeader } from "components/headers";
 
+import angularImg from "assets/img/theme/angular.jpg";
+import boostrapImg from "assets/img/theme/bootstrap.jpg";
 import img1000x600 from "assets/img/theme/img-1-1000x600.jpg";
+import reactImg from "assets/img/theme/react.jpg";
+import sketchImg from "assets/img/theme/sketch.jpg";
+import team4Img from "assets/img/theme/team-4.jpg";
+import vueImg from "assets/img/theme/vue.jpg";
 
-var SendNotificationPage = () => {
+export const SendNotificationPage = () => {
   return (
     <>
-      <ProfileHeader />
+      <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
           <Col className="order-xl-2" xl="4">
@@ -53,11 +57,7 @@ var SendNotificationPage = () => {
                 <Col className="order-lg-2" lg="3">
                   <div className="card-profile-image">
                     <a href="#pablo" onClick={e => e.preventDefault()}>
-                      <img
-                        alt="..."
-                        className="rounded-circle"
-                        src={require("assets/img/theme/team-4.jpg").default}
-                      />
+                      <img alt="..." className="rounded-circle" src={team4Img} />
                     </a>
                   </div>
                 </Col>
@@ -139,7 +139,7 @@ var SendNotificationPage = () => {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          <img alt="..." src={require("assets/img/theme/bootstrap.jpg").default} />
+                          <img alt="..." src={boostrapImg} />
                         </a>
                       </Col>
                       <div className="col">
@@ -161,7 +161,7 @@ var SendNotificationPage = () => {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          <img alt="..." src={require("assets/img/theme/angular.jpg").default} />
+                          <img alt="..." src={angularImg} />
                         </a>
                       </Col>
                       <div className="col">
@@ -183,7 +183,7 @@ var SendNotificationPage = () => {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          <img alt="..." src={require("assets/img/theme/sketch.jpg").default} />
+                          <img alt="..." src={sketchImg} />
                         </a>
                       </Col>
                       <div className="col">
@@ -205,7 +205,7 @@ var SendNotificationPage = () => {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          <img alt="..." src={require("assets/img/theme/react.jpg").default} />
+                          <img alt="..." src={reactImg} />
                         </a>
                       </Col>
                       <div className="col">
@@ -222,7 +222,7 @@ var SendNotificationPage = () => {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          <img alt="..." src={require("assets/img/theme/vue.jpg").default} />
+                          <img alt="..." src={vueImg} />
                         </a>
                       </Col>
                       <div className="col">
@@ -451,5 +451,3 @@ var SendNotificationPage = () => {
     </>
   );
 };
-
-export default SendNotificationPage;

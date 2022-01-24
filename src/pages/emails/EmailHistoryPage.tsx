@@ -14,14 +14,13 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
 
 // reactstrap components
 import { Badge, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 
-var EmailHistoryPage = () => {
+export const EmailHistoryPage = () => {
   return (
     <>
       <BoxHeader />
@@ -302,5 +301,3 @@ var EmailHistoryPage = () => {
     </>
   );
 };
-
-export default EmailHistoryPage;

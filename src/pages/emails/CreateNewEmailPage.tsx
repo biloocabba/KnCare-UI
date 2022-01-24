@@ -1,8 +1,6 @@
-import React from "react";
+import { EmailEditor } from "./EmailEditor";
 
-import EmailEditor from "./EmailEditor";
-
-var CreateNewEmailPage = () => {
+export const CreateNewEmailPage = () => {
   const initialEmailState = {
     id: "",
     subject: "",
@@ -15,4 +13,3 @@ var CreateNewEmailPage = () => {
 
   return <EmailEditor initialEmailState={initialEmailState} />;
 };
-export default CreateNewEmailPage;

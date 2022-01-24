@@ -39,7 +39,7 @@ import { CopyButton, PrintButton } from "./components";
 
 const { SearchBar } = Search;
 
-const ArchivePage = () => {
+export const ArchivePage = () => {
   const { alert } = useAlert();
   const componentRef = useRef(null);
 
@@ -215,5 +215,3 @@ const ArchivePage = () => {
     </>
   );
 };
-
-export default ArchivePage;

@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 
-//import emailService from "services/EmailService";
+import { RouteParams } from "types";
 
-import EmailEditor from "./EmailEditor";
+import { EmailEditor } from "./EmailEditor";
 
-var EmailDetailsPage = () => {
-  let { id } = useParams();
+export const EmailDetailsPage = () => {
+  const { id } = useParams<RouteParams>();
 
   const initialEmailState = {};
   // const [initialEmailState, setInitialEmailState] = useState();
@@ -45,10 +45,5 @@ var EmailDetailsPage = () => {
 
   // return renderPage();
 
-  return (
-    <>
-      <EmailEditor initialEmailState={initialEmailState} />{" "}
-    </>
-  );
+  return <EmailEditor initialEmailState={initialEmailState} />;
 };
-export default EmailDetailsPage;
