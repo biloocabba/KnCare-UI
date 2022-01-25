@@ -3,13 +3,6 @@ import { AxiosResponse } from "axios";
 import { BEST_PRACTICE_ROUTE } from "redux/features";
 
 import {
-  saveCareMember,
-  searchCareMembers,
-  searchEmployees,
-  wrapIntoResponse,
-  reportService,
-} from "./api-mock-service";
-import {
   bestPracticeMockResponse,
   businessUnitsMockResponse,
   careRolesMockResponse,
@@ -17,7 +10,14 @@ import {
   deleteMockResponse,
   groupMockResponse,
   // worldOverviewMockResponse,
-} from "./mock-data";
+} from "./api-mock-data/mock-data";
+import {
+  saveCareMember,
+  searchCareMembers,
+  searchEmployees,
+  wrapIntoResponse,
+  reportService,
+} from "./api-mock-service";
 
 export async function get(url: string): Promise<AxiosResponse<any>> {
   if (url.includes("/employee")) {

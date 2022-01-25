@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 
 import { Employee } from "types";
 
-import { employeeMockResponse } from "../mock-data";
+import { employeeMockResponse } from "../api-mock-data/mock-data";
 
 import { entitySearch, matchBusinessUnit, matchCountryId, matchFirstName } from ".";
 

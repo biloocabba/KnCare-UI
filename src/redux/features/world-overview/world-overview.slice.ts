@@ -59,7 +59,6 @@ const initialState: StateType<WorldOverviewCachedReports> = {
 export const fetchActiveMembersReport = createAsyncThunk(
   REPORT_ACTIVE_MEMBERS_ROUTE,
   async (): Promise<WorldDataReport> => {
-    console.log("fetchActiveMembersReport Thunk");
     const { data } = await worldOverviewService.getActiveMembersMapData();
     return data;
   }

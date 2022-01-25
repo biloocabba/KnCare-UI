@@ -3,7 +3,11 @@ import { AxiosResponse } from "axios";
 import { CareMember, Employee } from "types";
 import { CREATE_CARE_MEMBER_ID } from "types/app.consts";
 
-import { mockAxiosReponse, businessUnitsMockResponse, countriesMockResponse } from "../mock-data";
+import {
+  mockAxiosReponse,
+  businessUnitsMockResponse,
+  countriesMockResponse,
+} from "../api-mock-data/mock-data";
 
 export const wrapIntoResponse = <T>(body: T): AxiosResponse<T> => {
   return {

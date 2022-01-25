@@ -28,6 +28,19 @@ export interface CareMemberQueryFilters {
 
 export interface Chart {
   label: string;
-  value?: number;
+  value: number;
   values?: number[];
+}
+
+export interface TurnoverChart {
+  month: string;
+  onboarded: number;
+  offboarded: number;
+}
+
+export interface ApiResponse<T> {
+  isError: boolean;
+  message: string;
+  code?: number;
+  data?: T;
 }

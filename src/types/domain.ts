@@ -73,10 +73,6 @@ export interface Country extends Domain {
   number: string;
 }
 
-// export type WorldOverviewCachedReports = Domain & {
-//   [reportName in ReportName]: WorldDataReport;
-// };
-
 export interface WorldOverviewCachedReports extends Domain {
   reportName: string;
   data: WorldDataReport;

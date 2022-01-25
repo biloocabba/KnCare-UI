@@ -5,11 +5,27 @@ import { Country } from "types";
 import {
   REPORT_ACTIVE_MEMBERS_ROUTE,
   REPORT_AUTO_OFFBOARDED_MEMBERS_ROUTE,
+  REPORT_MEMBERS_BY_AGE_ROUTE,
+  REPORT_MEMBERS_BY_BUSINESS_UNITS_ROUTE,
+  REPORT_MEMBERS_BY_GENDER_ROUTE,
+  REPORT_MEMBERS_BY_ROLE_ROUTE,
+  REPORT_MEMBERS_BY_SENIORITY_ROUTE,
+  REPORT_MEMBERS_TURNOVER_ROUTE,
+  REPORT_MEMBERS_WORKFORCE_ROUTE,
   REPORT_NEW_MEMBERS_ROUTE,
   REPORT_SELF_RESIGNED_MEMBERS_ROUTE,
 } from "redux/features";
 
-import { countriesMockResponse } from "../mock-data";
+import {
+  memberTurnoverReport,
+  workforceReport,
+  distributionByAgeReport,
+  distributionByBusinessUnitReport,
+  distributionByGenderReport,
+  distributionByRoleReport,
+  distributionBySeniorityReport,
+} from "../api-mock-data";
+import { countriesMockResponse } from "../api-mock-data/mock-data";
 
 import { wrapIntoResponse } from ".";
 
@@ -35,6 +51,34 @@ async function get(url: string): Promise<AxiosResponse<any>> {
 
   if (url.includes(REPORT_SELF_RESIGNED_MEMBERS_ROUTE)) {
     response = getSelfResignedMembersMapDataMock();
+  }
+
+  if (url.includes(REPORT_MEMBERS_TURNOVER_ROUTE)) {
+    response = memberTurnoverReport;
+  }
+
+  if (url.includes(REPORT_MEMBERS_WORKFORCE_ROUTE)) {
+    response = workforceReport;
+  }
+
+  if (url.includes(REPORT_MEMBERS_BY_AGE_ROUTE)) {
+    response = distributionByAgeReport;
+  }
+
+  if (url.includes(REPORT_MEMBERS_BY_BUSINESS_UNITS_ROUTE)) {
+    response = distributionByBusinessUnitReport;
+  }
+
+  if (url.includes(REPORT_MEMBERS_BY_GENDER_ROUTE)) {
+    response = distributionByGenderReport;
+  }
+
+  if (url.includes(REPORT_MEMBERS_BY_ROLE_ROUTE)) {
+    response = distributionByRoleReport;
+  }
+
+  if (url.includes(REPORT_MEMBERS_BY_SENIORITY_ROUTE)) {
+    response = distributionBySeniorityReport;
   }
 
   return wrapIntoResponse(response);

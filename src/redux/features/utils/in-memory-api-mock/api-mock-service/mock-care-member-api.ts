@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 
 import { CareMember, CareMemberSaveRequest, Employee } from "types";
 
-import { careMembersMockResponse } from "../mock-data";
+import { careMembersMockResponse } from "../api-mock-data/mock-data";
 
 import {
   entitySearch,
