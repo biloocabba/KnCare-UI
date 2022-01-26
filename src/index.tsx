@@ -40,6 +40,7 @@ import "font-awesome/css/font-awesome.min.css";
 import "./assets/scss/argon-dashboard-pro-react.scss?v1.2.0";
 import "./assets/css/site.css";
 import "./assets/vendor/nucleo/css/nucleo.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 ReactDOM.render(
   <Provider store={store}>

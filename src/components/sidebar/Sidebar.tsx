@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 // react library for routing
 import { useLocation, NavLink as NavLinkRRD, Link } from "react-router-dom";
@@ -132,48 +132,49 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
   /**
    * this function creates the links and collapses that appear in the sidebar (left menu)
    */
-  const createLinks = (routes: IRoute[]) => {
-    return routes.map(route => {
-      if (route.global) return null;
+  const createLinks = (routes: IRoute[]): ReactNode => {
+    const navItems = routes
+      .filter(route => !route.global || !route.layout)
+      .map(route => {
+        if (route.collapse && route.state && route.views) {
+          const st: any = {};
+          st[route["state"]] = !state[route.state];
 
-      if (route.collapse && route.state && route.views) {
-        const st: any = {};
-        st[route["state"]] = !state[route.state];
-        return (
-          <NavItem key={route.path}>
-            <NavLink
-              data-toggle="collapse"
-              aria-expanded={state[route.state]}
-              className={classnames({
-                active: getViewCollapseInitialState(route.views),
-              })}
-              onClick={e => {
-                e.preventDefault();
-                setState({ ...state, ...st });
-              }}
-            >
-              {route.icon ? (
-                <>
-                  <i className={route.icon} />
-                  <span className="nav-link-text">{route.name}</span>
-                </>
-              ) : route.miniName ? (
-                <>
-                  <span className="sidenav-mini-icon">{route.miniName}</span>
-                  <span className="sidenav-normal"> {route.name} </span>
-                </>
-              ) : null}
-            </NavLink>
-            <Collapse isOpen={state[route.state]}>
-              <Nav className="nav-sm flex-column">{createLinks(route.views)}</Nav>
-            </Collapse>
-          </NavItem>
-        );
-      }
-      return (
-        <>
-          {route.layout ? (
-            <NavItem className={activeRoute(route.layout + route.path)} key={route.path}>
+          // console.log("Route for Collapsed: ", route, "key: ", route.key);
+          return (
+            <NavItem key={route.key}>
+              <NavLink
+                data-toggle="collapse"
+                aria-expanded={state[route.state]}
+                className={classnames({
+                  active: getViewCollapseInitialState(route.views),
+                })}
+                onClick={e => {
+                  e.preventDefault();
+                  setState({ ...state, ...st });
+                }}
+              >
+                {route.icon ? (
+                  <>
+                    <i className={route.icon} />
+                    <span className="nav-link-text">{route.name}</span>
+                  </>
+                ) : route.miniName ? (
+                  <>
+                    <span className="sidenav-mini-icon">{route.miniName}</span>
+                    <span className="sidenav-normal"> {route.name} </span>
+                  </>
+                ) : null}
+              </NavLink>
+              <Collapse isOpen={state[route.state]}>
+                <Nav className="nav-sm flex-column">{createLinks(route.views)}</Nav>
+              </Collapse>
+            </NavItem>
+          );
+        } else {
+          // console.log("Not Collapsed: ", route, "Key: ", route.key);
+          return (
+            <NavItem className={activeRoute(route.layout + route.path)} key={route.key}>
               <NavLink
                 to={route.layout + route.path}
                 activeClassName=""
@@ -195,10 +196,12 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
                 )}
               </NavLink>
             </NavItem>
-          ) : null}
-        </>
-      );
-    });
+          );
+        }
+      });
+
+    // console.log(navItems);
+    return navItems;
   };
 
   let navbarBrandProps;
@@ -315,23 +318,6 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
             <span className="docs-normal">Support</span>
             <span className="docs-mini">D</span>
           </h6>
-          <Nav className="mb-md-3" navbar>
-            <NavItem>
-              <NavLink href="#supportPage" target="_blank">
-                <i className="ni ni-spaceship" />
-                <span className="nav-link-text">Contact Support Team</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                href="https://demos.creative-tim.com/argon-dashboard-pro-react/#/documentation/colors?ref=adpr-sidebar"
-                target="_blank"
-              >
-                <i className="ni ni-palette" />
-                <span className="nav-link-text">Documentation</span>
-              </NavLink>
-            </NavItem>
-          </Nav>
         </Collapse>
       </div>
     </div>

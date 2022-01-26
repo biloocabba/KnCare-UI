@@ -8,6 +8,8 @@ export const dashboardMenu: IRoute[] = [
     name: "Dashboard",
     icon: "ni ni-chart-pie-35 text-info",
     state: "dashboardCollapse",
+    key: "DashboardMenu",
+    path: "DashboardMenu",
     views: [
       {
         path: "/statistics",
@@ -15,6 +17,7 @@ export const dashboardMenu: IRoute[] = [
         miniName: "C",
         component: ChartsPage,
         layout: "/admin",
+        key: "Dashboard/Charts",
       },
       {
         path: "/world-map",
@@ -22,6 +25,7 @@ export const dashboardMenu: IRoute[] = [
         miniName: "WM",
         component: WorldOverviewPage,
         layout: "/admin",
+        key: "Dashboard/World Map",
       },
     ],
   },

@@ -9,5 +9,6 @@ export const authMenu: IRoute[] = [
     path: LOGIN,
     component: LoginPage,
     layout: "/auth",
+    key: "Auth/Login",
   },
 ];

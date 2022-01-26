@@ -15,6 +15,8 @@ export const groupMenu: IRoute[] = [
     name: "Groups",
     icon: "ni ni-circle-08 text-info",
     state: "groupCollapse",
+    path: "GroupsMenu",
+    key: "GroupsMenu",
     views: [
       {
         path: GROUP_CREATE,
@@ -22,6 +24,7 @@ export const groupMenu: IRoute[] = [
         miniName: "CG",
         component: CreateGroupPage,
         layout: "/admin",
+        key: "Groups/Create Group",
       },
       {
         path: GROUP_SEARCH,
@@ -29,6 +32,7 @@ export const groupMenu: IRoute[] = [
         miniName: "SG",
         component: SearchGroupsPage,
         layout: "/admin",
+        key: "Groups/Search Group",
       },
     ],
   },
@@ -38,5 +42,7 @@ export const groupMenu: IRoute[] = [
     path: `${GROUP_DETAILS}/:id`,
     component: GroupDetailsPage,
     layout: "/admin",
+    name: `${GROUP_DETAILS}/:id`,
+    key: `Groups/${GROUP_DETAILS}/:id`,
   },
 ];

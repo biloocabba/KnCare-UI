@@ -11,9 +11,11 @@ export interface IRoute {
   views?: IRoute[];
   miniName?: string;
   global?: boolean;
-  path?: string;
+  path: string;
   component?: ReactNode;
   layout?: LayoutType;
+  redirect?: string;
+  key: string;
 }
 
 export interface SelectOption {

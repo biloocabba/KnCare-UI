@@ -25,7 +25,9 @@ import { AuthNavbar } from "components/navbars";
 
 import { routes } from "routes";
 
-import { useGetRoutes, useScrollToTop } from "./hooks";
+// import { getuseScrollToTopRoutes } from "./hooks";
+import { useScrollToTop } from "./hooks";
+import { getRoutes } from "./hooks/useGetRoutes";
 
 export const AuthLayout = () => {
   const mainContentRef = useRef(document.createElement("div"));
@@ -45,7 +47,7 @@ export const AuthLayout = () => {
       <div className="main-content" ref={mainContentRef}>
         <AuthNavbar />
         <Switch>
-          {useGetRoutes(routes, "/auth")}
+          {getRoutes(routes, "/auth")}
           <Redirect from="*" to="/auth/login" />
         </Switch>
       </div>
