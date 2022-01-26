@@ -2,35 +2,21 @@
 //   (careMemberRequest: CareMemberSaveRequest): void;
 // }
 
-import { useEffect, useState } from "react";
-
 import { Spinner, Card, CardHeader, CardBody } from "reactstrap";
+
+import { TurnoverChart } from "types";
 
 import { dashboardService } from "redux/features/dashboards";
 
-import { renderAlert } from "../Chart.renderers";
+import { useChart } from "../useChart";
 
 import { renderChart } from "./Turnover.renderer";
 
 export const TurnoverChartPanel = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [chart, setChart] = useState<JSX.Element>();
-  const [alert, setAlert] = useState<JSX.Element>();
-
-  const fetchDataAsync = async () => {
-    const httpResponse = await dashboardService.getTurnoverReport();
-    if (httpResponse.isError) {
-      setAlert(renderAlert(httpResponse));
-    } else {
-      setChart(renderChart(httpResponse));
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    fetchDataAsync();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
+  const { isLoading, chart, alert } = useChart<TurnoverChart[]>(
+    dashboardService.getTurnoverReport,
+    renderChart
+  );
 
   return (
     <Card>
