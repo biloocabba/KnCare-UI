@@ -16,9 +16,7 @@
 */
 import React, { useState } from "react";
 
-// react plugin that prints a given react component
-// react component for creating dynamic tables
-import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 import {
   Button,
@@ -36,76 +34,52 @@ import {
 } from "reactstrap";
 
 import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import ReactDatetime from "react-datetime";
-// react component used to create sweet alerts
-// reactstrap components
 
 import { BoxHeader } from "components/headers";
+import { pagination } from "components/widgets";
 
-const pagination = paginationFactory({
-  page: 1,
-  alwaysShowAllBtns: true,
-  showTotal: true,
-  withFirstAndLast: false,
-  sizePerPageRenderer: ({ onSizePerPageChange }) => (
-    <div className="dataTables_length" id="datatable-basic_length">
-      <label>
-        Show{" "}
-        {
-          <select
-            name="datatable-basic_length"
-            aria-controls="datatable-basic"
-            className="form-control form-control-sm"
-            onChange={e => onSizePerPageChange(e.target.value)}
-          >
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
-        }{" "}
-        entries.
-      </label>
-    </div>
-  ),
-});
+import careCreditCardsImg from "assets/img/care/care-credit-cards.png";
+import huddleImg from "assets/img/care/huddle.png";
+import remoteWorkImg from "assets/img/care/remote-work.png";
+
+import { useAppSelector } from "redux/app";
+import { selectBestPracticeState } from "redux/features";
 
 const { SearchBar } = Search;
 
-export const SearchBestPracticesPage = props => {
-  const [alert] = React.useState(null);
+export const SearchBestPracticesPage = () => {
+  const [alert] = useState(null);
+  const history = useHistory();
   // this function will copy to clipboard an entire table,
   // so you can paste it inside an excel or csv file
 
-  const bestPractices = useSelector(state => state.bestPractices);
-  const dispatch = useDispatch();
+  const bestPractices = useAppSelector(selectBestPracticeState);
 
-  const [searchTime] = useState("");
+  // const [searchTime] = useState("");
   const [searchAuthor, setSearchAuthor] = useState("");
   const [searchTag, setSearchTag] = useState("");
-  const [searchRate] = useState("");
+  // const [searchRate] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
 
   // useEffect(() => {
   //   dispatch(reterieveBestPractices())
   // }, [dispatch])
 
-  // eslint-disable-next-line no-unused-vars
-  const makeSearch = () => {
-    const searchFilters = {
-      searchTime: searchTime,
-      searchAuthor: searchAuthor,
-      searchTag: searchTag,
-      searchRate: searchRate,
-      searchTitle: searchTitle,
-    };
+  // const makeSearch = () => {
+  //   const searchFilters = {
+  //     searchTime: searchTime,
+  //     searchAuthor: searchAuthor,
+  //     searchTag: searchTag,
+  //     searchRate: searchRate,
+  //     searchTitle: searchTitle,
+  //   };
 
-    console.log(dispatch);
-    console.log(searchFilters);
-    // dispatch(searchBestPractices(searchFilters));
-  };
+  //   console.log(dispatch);
+  //   console.log(searchFilters);
+  //   // dispatch(searchBestPractices(searchFilters));
+  // };
 
   // const status = useSelector(state => state.pageStatus);
   // const pageStatus = { pageStatus: status, statusCode: -1 };
@@ -118,32 +92,31 @@ export const SearchBestPracticesPage = props => {
   // }, [dispatch]);
 
   // limit description respresintation to 50 characters to fit it on the page
-  bestPractices.forEach(bestPractice => {
+  bestPractices.entities.forEach(bestPractice => {
     if (bestPractice.description !== null && bestPractice.description.length > 50) {
       bestPractice.description = bestPractice.description.substring(0, 50) + "...";
     }
   });
 
-  const toBestPracticeDetailsPage = e => {
-    var { id } = e.target;
-    props.history.push("/admin/best-practice/" + id);
+  const toBestPracticeDetailsPage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const { id } = e.target as HTMLButtonElement;
+    history.push("/admin/best-practice/" + id);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const formatActionButtonCell = (cell, row) => {
-    return (
-      <>
-        <Button
-          id={row.id}
-          className="btn-icon btn-2"
-          type="button"
-          onClick={e => toBestPracticeDetailsPage(e)}
-        >
-          View
-        </Button>
-      </>
-    );
-  };
+  // const formatActionButtonCell = (cell, row) => {
+  //   return (
+  //     <>
+  //       <Button
+  //         id={row.id}
+  //         className="btn-icon btn-2"
+  //         type="button"
+  //         onClick={e => toBestPracticeDetailsPage(e)}
+  //       >
+  //         View
+  //       </Button>
+  //     </>
+  //   );
+  // };
 
   return (
     <>
@@ -161,11 +134,7 @@ export const SearchBestPracticesPage = props => {
                 <Row className="card-wrapper">
                   <Col lg="4">
                     <Card>
-                      <CardImg
-                        alt="..."
-                        src={require("assets/img/care/care-credit-cards.png").default}
-                        top
-                      />
+                      <CardImg alt="..." src={careCreditCardsImg} top />
                       <CardBody>
                         <CardTitle className="mb-3 text-center" tag="h3">
                           Care Credit Cards
@@ -183,7 +152,7 @@ export const SearchBestPracticesPage = props => {
                   </Col>
                   <Col lg="4">
                     <Card>
-                      <CardImg alt="..." src={require("assets/img/care/huddle.png").default} top />
+                      <CardImg alt="..." src={huddleImg} top />
                       <CardBody>
                         <CardTitle className="mb-3 text-center" tag="h3">
                           Huddles
@@ -209,11 +178,7 @@ export const SearchBestPracticesPage = props => {
                   </Col>
                   <Col lg="4">
                     <Card>
-                      <CardImg
-                        alt="..."
-                        src={require("assets/img/care/remote-work.png").default}
-                        top
-                      />
+                      <CardImg alt="..." src={remoteWorkImg} top />
                       <CardBody>
                         <CardTitle className="mb-3 text-center" tag="h3">
                           Care & Remote Work
@@ -330,7 +295,7 @@ export const SearchBestPracticesPage = props => {
               </CardHeader>
 
               <ToolkitProvider
-                data={bestPractices}
+                data={bestPractices.entities}
                 keyField="id"
                 columns={[
                   {
