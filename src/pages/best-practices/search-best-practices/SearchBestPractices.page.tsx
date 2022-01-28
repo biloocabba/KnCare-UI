@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 import { useHistory } from "react-router";
 
@@ -31,32 +31,34 @@ import {
   FormGroup,
   Input,
   Row,
+  Spinner,
 } from "reactstrap";
 
-import BootstrapTable from "react-bootstrap-table-next";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import ReactDatetime from "react-datetime";
 
 import { BoxHeader } from "components/headers";
-import { pagination } from "components/widgets";
+import { ReactTable } from "components/widgets";
 
 import careCreditCardsImg from "assets/img/care/care-credit-cards.png";
 import huddleImg from "assets/img/care/huddle.png";
 import remoteWorkImg from "assets/img/care/remote-work.png";
 
-import { useAppSelector } from "redux/app";
-import { selectBestPracticeState } from "redux/features";
+import { useAppSelector, useAppDispatch } from "redux/app";
+import { selectBestPracticeState, searchBestPractices, deleteBestPractice } from "redux/features";
 
-const { SearchBar } = Search;
+import { BEST_PRACTICE_DETAILS } from "../best-practices.routes.const";
+
+import { bestPracticesTableColumns } from "./SearchBestPractices.table";
 
 export const SearchBestPracticesPage = () => {
   const [alert] = useState(null);
   const history = useHistory();
+  const dispatch = useAppDispatch();
   // this function will copy to clipboard an entire table,
   // so you can paste it inside an excel or csv file
 
   const bestPractices = useAppSelector(selectBestPracticeState);
-
+  const [selectedRows, setSelectedRows] = useState([]);
   // const [searchTime] = useState("");
   const [searchAuthor, setSearchAuthor] = useState("");
   const [searchTag, setSearchTag] = useState("");
@@ -67,19 +69,17 @@ export const SearchBestPracticesPage = () => {
   //   dispatch(reterieveBestPractices())
   // }, [dispatch])
 
-  // const makeSearch = () => {
-  //   const searchFilters = {
-  //     searchTime: searchTime,
-  //     searchAuthor: searchAuthor,
-  //     searchTag: searchTag,
-  //     searchRate: searchRate,
-  //     searchTitle: searchTitle,
-  //   };
+  const onSearch = () => {
+    const searchFilters = {
+      // searchTime,
+      searchAuthor,
+      searchTag,
+      // searchRate,
+      searchTitle,
+    };
 
-  //   console.log(dispatch);
-  //   console.log(searchFilters);
-  //   // dispatch(searchBestPractices(searchFilters));
-  // };
+    dispatch(searchBestPractices(searchFilters));
+  };
 
   // const status = useSelector(state => state.pageStatus);
   // const pageStatus = { pageStatus: status, statusCode: -1 };
@@ -92,31 +92,22 @@ export const SearchBestPracticesPage = () => {
   // }, [dispatch]);
 
   // limit description respresintation to 50 characters to fit it on the page
-  bestPractices.entities.forEach(bestPractice => {
-    if (bestPractice.description !== null && bestPractice.description.length > 50) {
-      bestPractice.description = bestPractice.description.substring(0, 50) + "...";
-    }
-  });
+  // bestPractices.entities.forEach(bestPractice => {
+  //   if (bestPractice.description !== null && bestPractice.description.length > 50) {
+  //     bestPractice.description = bestPractice.description.substring(0, 50) + "...";
+  //   }
+  // });
 
-  const toBestPracticeDetailsPage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const { id } = e.target as HTMLButtonElement;
-    history.push("/admin/best-practice/" + id);
+  const onGoToBestPracticeDetails = (e: MouseEvent<HTMLButtonElement>) => {
+    const { id } = e.currentTarget as HTMLButtonElement;
+    history.push(`/admin${BEST_PRACTICE_DETAILS}/${id}`);
   };
 
-  // const formatActionButtonCell = (cell, row) => {
-  //   return (
-  //     <>
-  //       <Button
-  //         id={row.id}
-  //         className="btn-icon btn-2"
-  //         type="button"
-  //         onClick={e => toBestPracticeDetailsPage(e)}
-  //       >
-  //         View
-  //       </Button>
-  //     </>
-  //   );
-  // };
+  const onRemoveBestPractice = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const { id } = e.currentTarget as HTMLButtonElement;
+    dispatch(deleteBestPractice(parseInt(id)));
+  };
 
   return (
     <>
@@ -169,7 +160,7 @@ export const SearchBestPracticesPage = () => {
                           id="1"
                           color="primary"
                           href="#pablo"
-                          onClick={e => toBestPracticeDetailsPage(e)}
+                          onClick={e => onGoToBestPracticeDetails(e)}
                         >
                           Read More
                         </Button>
@@ -275,7 +266,7 @@ export const SearchBestPracticesPage = () => {
                         }}
                         className="btn btn-primary"
                         color="primary"
-                        onClick={e => console.log(e)}
+                        onClick={onSearch}
                       >
                         Search
                       </button>
@@ -293,172 +284,26 @@ export const SearchBestPracticesPage = () => {
               <CardHeader>
                 <h3 className="mb-0">Search results</h3>
               </CardHeader>
-
-              <ToolkitProvider
-                data={bestPractices.entities}
-                keyField="id"
-                columns={[
-                  {
-                    dataField: "id",
-                    text: "id",
-                    hidden: true,
-                  },
-                  {
-                    dataField: "title",
-                    text: "Title",
-                    sort: true,
-                  },
-                  {
-                    dataField: "content",
-                    text: "Content",
-                    sort: true,
-                  },
-                  {
-                    dataField: "description",
-                    text: "Description",
-                    sort: true,
-                  },
-                  {
-                    dataField: "author",
-                    text: "Author",
-                    sort: true,
-                  },
-                  {
-                    dataField: "tag",
-                    text: "Tag",
-                    sort: true,
-                  },
-                  {
-                    dataField: "rate",
-                    text: "Rate",
-                    sort: true,
-                  },
-                  {
-                    dataField: "time",
-                    text: "Time",
-                    sort: true,
-                  },
-                ]}
-                search
-              >
-                {props => (
-                  <div className="py-4 table-responsive">
-                    <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
-                      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control*/}
-                      <label>
-                        Search:
-                        <SearchBar
-                          className="form-control-sm"
-                          placeholder="Filter results"
-                          {...props.searchProps}
-                        />
-                      </label>
-                    </div>
-                    {/* <div className="py-4 table-responsive">
-                    <div
-                      id="datatable-basic_filter"
-                      className="dataTables_filter px-4 pb-1"
-                    >
-                      <div
-                        id="datatable-basic_filter"
-                        className="dataTables_filter px-3 pb-1"
-                      >
-                        <label>
-                          <Input
-                            className="form-control-sm"
-                            placeholder="Time"
-                            onChange={(e) => setSearchTime(e.target.value)}
-                            value={searchTime}
-                            id="search-time"
-                            type="text"
-                          />
-                        </label>
-                      </div>
-                      <div
-                        id="datatable-basic_filter"
-                        className="dataTables_filter px-3 pb-1"
-                      >
-                        <label>
-                          <Input
-                            className="form-control-sm"
-                            placeholder="Author"
-                            onChange={(e) => setSearchAuthor(e.target.value)}
-                            value={searchAuthor}
-                            id="search-Author"
-                            type="text"
-                          />
-                        </label>
-                      </div>
-                      <div
-                        id="datatable-basic_filter"
-                        className="dataTables_filter px-3 pb-1"
-                      >
-                        <label>
-                          <Input
-                            className="form-control-sm"
-                            placeholder="Tag"
-                            onChange={(e) => setSearchTag(e.target.value)}
-                            value={searchTag}
-                            id="search-Tag"
-                            type="text"
-                          />
-                        </label>
-                      </div>
-                      <div
-                        id="datatable-basic_filter"
-                        className="dataTables_filter px-3 pb-1"
-                      >
-                        <label>
-                          <Input
-                            className="form-control-sm"
-                            placeholder="Rate"
-                            onChange={(e) => setSearchRate(e.target.value)}
-                            value={searchRate}
-                            id="search-Rate"
-                            type="text"
-                          />
-                        </label>
-                      </div>
-                      <div
-                        id="datatable-basic_filter"
-                        className="dataTables_filter px-3 pb-1"
-                      >
-                        <label>
-                          <Input
-                            className="form-control-sm"
-                            placeholder="Title"
-                            onChange={(e) => setSearchTitle(e.target.value)}
-                            value={searchTitle}
-                            id="search-Title"
-                            type="text"
-                          />
-                        </label>
-                      </div>
-                      <Button
-                        type="button"
-                        color="info"
-                        href="#pablo"
-                        onClick={makeSearch}
-                      >
-                        Search
-                      </Button>
-                    </div>
-                    <BootstrapTable
-                      {...props.baseProps}
-                      bootstrap4={true}
-                      pagination={pagination}
-                      bordered={false}
-                    />
-                  </div> */}
-                    <BootstrapTable
-                      {...props.baseProps}
-                      bootstrap4={true}
-                      pagination={pagination}
-                      bordered={false}
-                    />
-                  </div>
-                )}
-              </ToolkitProvider>
+              {bestPractices.isLoading ? (
+                <div
+                  style={{
+                    textAlign: "center",
+                  }}
+                >
+                  <Spinner />
+                </div>
+              ) : (
+                <ReactTable
+                  data={bestPractices.entities}
+                  keyField="id"
+                  columns={bestPracticesTableColumns}
+                  onViewDetailsClick={onGoToBestPracticeDetails}
+                  onDeleteItemClick={onRemoveBestPractice}
+                  selectedRows={selectedRows}
+                  setSelectedRows={setSelectedRows}
+                  searchBarPlaceholder="Filter results"
+                />
+              )}
             </Card>
           </div>
         </Row>
@@ -466,3 +311,41 @@ export const SearchBestPracticesPage = () => {
     </>
   );
 };
+
+// <ToolkitProvider
+//   data={bestPractices.entities}
+//   keyField="id"
+//   columns={bestPracticesTableColumns}
+//   search
+// >
+//   {props => (
+//     <div className="py-4 table-responsive">
+//       <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
+//         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control*/}
+//         <label>
+//           Search:
+//           <SearchBar
+//             className="form-control-sm"
+//             placeholder="Filter results"
+//             {...props.searchProps}
+//           />
+//         </label>
+//       </div>
+//       {/* <div className="py-4 table-responsive">
+
+//       <BootstrapTable
+//         {...props.baseProps}
+//         bootstrap4={true}
+//         pagination={pagination}
+//         bordered={false}
+//       />
+//     </div> */}
+//       <BootstrapTable
+//         {...props.baseProps}
+//         bootstrap4={true}
+//         pagination={pagination}
+//         bordered={false}
+//       />
+//     </div>
+//   )}
+// </ToolkitProvider>
