@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { useHistory } from "react-router";
 
@@ -51,12 +51,12 @@ export const BestPracticeDetailPage = () => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const onDocumentLoadSuccess = ({ numPages }) => {
+  const onDocumentLoadSuccess = ({ numPages }: any) => {
     setNumPages(numPages);
     setPageNumber(1);
   };
 
-  const changePage = offset => {
+  const changePage = (offset: number) => {
     setPageNumber(prevPageNumber => prevPageNumber + offset);
   };
 
@@ -67,12 +67,13 @@ export const BestPracticeDetailPage = () => {
   };
 
   const nextPage = () => {
+    // @ts-ignore
     if (pageNumber < numPages) {
       changePage(1);
     }
   };
 
-  let bestPractice = {
+  const bestPractice = {
     title: "a demo title",
     description: "a demo description",
     author: "a demo author",
@@ -217,6 +218,7 @@ export const BestPracticeDetailPage = () => {
 
                             <PaginationItem>
                               <PaginationLink
+                                // @ts-ignore
                                 disabled={pageNumber >= numPages}
                                 aria-label="Next"
                                 href="#pablo"
