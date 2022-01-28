@@ -16,7 +16,6 @@ export const TurnoverChartPanel = () => {
     dashboardService.getTurnoverReport,
     renderChart
   );
-
   return (
     <ChartCard
       alert={alert}

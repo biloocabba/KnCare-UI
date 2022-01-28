@@ -23,7 +23,7 @@ import { ThemeColors } from "types";
 
 import { StatisticsPanel } from "./Statistics.panel";
 
-import { TurnoverChartPanel, WorkforceChartPanel } from "./";
+import { TurnoverChartPanel, WorkforceChartPanel, GenderChartPanel } from "./";
 
 export const ChartsPage = () => {
   // const [chartsLoaded, setChartsLoaded] = useState<boolean>(false);
@@ -65,9 +65,7 @@ export const ChartsPage = () => {
 
         <Row>
           <Col xl="4">
-            <div className="chart" style={{ backgroundColor: ThemeColors.theme.neutral1 }}>
-              Pie by Gender here
-            </div>
+            <GenderChartPanel />
           </Col>
           <Col xl="4">
             <div className="chart" style={{ backgroundColor: ThemeColors.theme.neutral2 }}>
@@ -93,26 +91,7 @@ export const ChartsPage = () => {
           </Col>
         </Row>
         {/*
-          <Col xl="6">
-            <Card>
-              <CardBody>
-                <div className="chart">
-                  {pieMembersByGenderLoaded ? (
-                    <>
-                      <Spinner />
-                    </>
-                  ) : (
-                    <Pie
-                      data={pieMembersByGender.data}
-                      options={pieMembersByGender.options}
-                      className="chart-canvas"
-                      id="chart-pie"
-                    />
-                  )}
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
+        
           <Col xl="6">
             <Card>
               <CardHeader>
