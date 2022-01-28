@@ -22,8 +22,8 @@ import { BoxHeader } from "components/headers";
 import { ThemeColors } from "types";
 
 import { StatisticsPanel } from "./Statistics.panel";
-import { TurnoverChartPanel } from "./turnover-chart-panel";
-import { WorkforceChartPanel } from "./workforce-chart-panel/Workforce.chart";
+
+import { TurnoverChartPanel, WorkforceChartPanel } from "./";
 
 export const ChartsPage = () => {
   // const [chartsLoaded, setChartsLoaded] = useState<boolean>(false);
