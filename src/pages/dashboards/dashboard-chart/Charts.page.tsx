@@ -65,7 +65,6 @@ export const ChartsPage = () => {
 
         <Row>
           <Col xl="4">
-            {" "}
             <div className="chart" style={{ backgroundColor: ThemeColors.theme.neutral1 }}>
               Pie by Gender here
             </div>
@@ -96,10 +95,6 @@ export const ChartsPage = () => {
         {/*
           <Col xl="6">
             <Card>
-              <CardHeader>
-                <h6 className="surtitle">Composition</h6>
-                <h5 className="h3 mb-0">By Role</h5>
-              </CardHeader>
               <CardBody>
                 <div className="chart">
                   {pieMembersByGenderLoaded ? (

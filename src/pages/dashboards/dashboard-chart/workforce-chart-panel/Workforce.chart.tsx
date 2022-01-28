@@ -1,7 +1,6 @@
-import { Card, CardBody, CardHeader, Spinner } from "reactstrap";
-
 import { dashboardService } from "redux/features/dashboards";
 
+import { ChartCard } from "../components";
 import { useChart } from "../useChart";
 
 import { renderChart } from "./Workforce.renderer";
@@ -10,24 +9,12 @@ export const WorkforceChartPanel = () => {
   const { isLoading, chart, alert } = useChart(dashboardService.getWorkforceReport, renderChart);
 
   return (
-    <Card>
-      <CardHeader>
-        <h6 className="surtitle">Composition</h6>
-        <h5 className="h3 mb-0">By Role</h5>
-      </CardHeader>
-      <CardBody>
-        <div className="chart">
-          {isLoading ? (
-            <>
-              <Spinner />
-            </>
-          ) : chart ? (
-            chart
-          ) : (
-            alert
-          )}
-        </div>
-      </CardBody>
-    </Card>
+    <ChartCard
+      alert={alert}
+      chart={chart}
+      isLoading={isLoading}
+      title="Composition"
+      subTitle="By Role"
+    />
   );
 };
