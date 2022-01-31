@@ -17,6 +17,7 @@ interface onSearchEmployeesFunction {
 interface SearchEmployeesFilterPanelProps {
   countries: SelectOption[];
   businessUnits: SelectOption[];
+  jobTitle: SelectOption[];
   onSearchEmployees: onSearchEmployeesFunction;
 }
 
@@ -25,6 +26,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
   const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
   const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>();
   const [searchHiringDate, setSearchHiringDate] = useState<string>();
+  const [searchJobTitle, setSearchJobTitle] = useState<string>();
 
   const onChangeSearchLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchLastName = e.target.value;
@@ -37,6 +39,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
       businessUnitId: searchBusinessUnitId,
       countryIsoCode3: searchCountryIsoCode3,
       hiringDate: searchHiringDate,
+      jobTitle: searchJobTitle,
     };
     props.onSearchEmployees(filters);
   };
@@ -66,9 +69,19 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
               id="select-businessUnits"
               label="Business Unit"
               options={props.businessUnits}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                const id: number = parseInt(item.target.value);
+              onChange={(item: SelectOption) => {
+                const id: number = parseInt(item.value);
                 setSearchBusinessUnitId(id);
+              }}
+            />
+          </Col>
+          <Col md="3">
+            <SelectField
+              id="select-jobTitle"
+              label="Job Title"
+              options={props.jobTitle}
+              onChange={(item: SelectOption) => {
+                setSearchJobTitle(item.value);
               }}
             />
           </Col>
@@ -77,8 +90,8 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
               id="select-country"
               label="Country"
               options={props.countries}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                setSearchCountryIsoCode3(item.target.value);
+              onChange={(item: SelectOption) => {
+                setSearchCountryIsoCode3(item.value);
               }}
             />
           </Col>

@@ -11,6 +11,7 @@ export interface EmployeeQueryFilters {
   lastName?: string;
   businessUnitId?: number;
   countryIsoCode3?: string;
+  jobTitle?: string;
   hiringDate?: string;
 }
 

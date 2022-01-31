@@ -8,7 +8,7 @@ import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
 import { EMPLOYEE_DETAILS } from "pages/users";
-import { EmployeeQueryFilters } from "types";
+import { EmployeeQueryFilters, SelectOption } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
@@ -29,6 +29,16 @@ export const SearchEmployeesPage = () => {
   const employeeState = useAppSelector(selectEmployeesState);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
+
+  // @todo find a bettter place for this
+  const jobTitles: SelectOption[] = [
+    { value: "1", label: "product manager" },
+    { value: "2", label: "qa engineer" },
+    { value: "3", label: "hr consultant" },
+    { value: "4", label: "office manager" },
+    { value: "5", label: "sales representative" },
+    { value: "6", label: "logistics consultant" },
+  ];
   const currentRole = "admin"; //TO GET FROM SELECTORS
 
   const [selectedEmployees, setSelectedEmployees] = useState([]);
@@ -57,6 +67,7 @@ export const SearchEmployeesPage = () => {
           <div className="col">
             <SearchEmployeesFilterPanel
               onSearchEmployees={onClickSearchEmployees}
+              jobTitle={jobTitles}
               countries={countries}
               businessUnits={businessUnits}
             />

@@ -17,18 +17,19 @@ import {
 } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
-import { ReactTable, InputField } from "components/widgets";
+import { InputField, ReactTable } from "components/widgets";
 
 import { employeesTableColumns } from "pages/users";
+import { Group } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
   deleteGroup,
   findGroupById,
   partialUpdateGroup,
+  selectEmployeesState,
   selectGroupById,
   updateGroup,
-  selectEmployeesState,
 } from "redux/features";
 
 import { AddMemberPanel } from "..";
@@ -46,7 +47,7 @@ export const GroupDetailsPage = () => {
   const groupsState = useAppSelector(selectGroupById(groupId));
   const employeesState = useAppSelector(selectEmployeesState);
 
-  const [group, setGroup] = useState(groupsState);
+  const [group, setGroup] = useState(groupsState as Group);
 
   const [selectedEmployees, setSelectedEmployees] = useState([]);
   const [currentMembersCollapse, setCurrentMembersCollapse] = useState(false);
@@ -174,12 +175,7 @@ export const GroupDetailsPage = () => {
                         <Row>
                           <Col lg="12">
                             <Collapse isOpen={addMemberCollapse}>
-                              <AddMemberPanel
-                                onChangeRole={() => console.log("onChangeRole")}
-                                onChangeCountry={() => console.log("onChangeCountry")}
-                                onChangeBusinessUnit={() => console.log("onChangeBusinessUnit")}
-                                onSelectCareMember={() => console.log("onSelectCareMember")}
-                              />
+                              <AddMemberPanel group={group} setGroup={setGroup} />
                             </Collapse>
                           </Col>
                         </Row>

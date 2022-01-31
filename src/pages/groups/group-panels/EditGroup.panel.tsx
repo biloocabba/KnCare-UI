@@ -13,9 +13,10 @@ import {
 
 import { InputField } from "components/widgets/input-field";
 
-import { Group } from "types/domain";
+import { Group } from "types";
 
-import { StateType } from "redux/features";
+import { useAppSelector } from "redux/app";
+import { selectEmployeesState, StateType } from "redux/features";
 
 import { AddMemberPanel } from ".";
 
@@ -39,6 +40,7 @@ export const EditGroupPanel = ({
   setAddMembersCollapse,
 }: EditGroupPanelProps) => {
   const { name, description } = group;
+  const employees = useAppSelector(selectEmployeesState);
 
   return (
     <Row>
@@ -106,12 +108,18 @@ export const EditGroupPanel = ({
                   <Col lg="12">
                     {/* <MembersTableComps data={group.members} /> */}
                     <Collapse isOpen={addMembersCollapse}>
-                      <AddMemberPanel
-                        onChangeRole={() => console.log("onChangeRole")}
-                        onChangeCountry={() => console.log("onChangeCountry")}
-                        onChangeBusinessUnit={() => console.log("onChangeBusinessUnit")}
-                        onSelectCareMember={() => console.log("onSelectCareMember")}
-                      />
+                      <AddMemberPanel group={group} setGroup={setGroup} />
+                      {groupsState.isLoading ? (
+                        <div className="text-center">
+                          <Spinner />
+                        </div>
+                      ) : (
+                        employees.entities.map(employee => (
+                          <div key={employee.id}>
+                            {`${employee.firstName} ${employee.lastName}`}
+                          </div>
+                        ))
+                      )}
                     </Collapse>
                   </Col>
                 </Row>
