@@ -8,7 +8,7 @@ interface Props {
   subTitle: string;
 }
 
-export const ChartCard = ({ isLoading, chart, alert, title, subTitle }: Props) => {
+export const ChartPanel = ({ isLoading, chart, alert, title, subTitle }: Props) => {
   return (
     <Card>
       <CardHeader>

@@ -2,7 +2,7 @@ import { TurnoverChart } from "types";
 
 import { dashboardService } from "redux/features/dashboards";
 
-import { ChartCard } from "../components";
+import { ChartPanel } from "../components";
 import { useChart } from "../useChart";
 
 import { renderChart } from "./Turnover.renderer";
@@ -17,7 +17,7 @@ export const TurnoverChartPanel = () => {
     renderChart
   );
   return (
-    <ChartCard
+    <ChartPanel
       alert={alert}
       chart={chart}
       isLoading={isLoading}

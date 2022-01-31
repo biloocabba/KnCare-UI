@@ -1,6 +1,6 @@
 import { dashboardService } from "redux/features/dashboards";
 
-import { ChartCard } from "../components";
+import { ChartPanel } from "../components";
 import { useChart } from "../useChart";
 
 import { renderChart } from "./Gender.renderer";
@@ -12,7 +12,7 @@ export const GenderChartPanel = () => {
   );
 
   return (
-    <ChartCard
+    <ChartPanel
       alert={alert}
       chart={chart}
       isLoading={isLoading}
