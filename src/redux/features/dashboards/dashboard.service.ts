@@ -19,23 +19,23 @@ const getWorkforceReport = async (): Promise<ApiResponse<Chart[]>> => {
   return handleGetApiRequestInternal(`${REPORT_MEMBERS_WORKFORCE_ROUTE}`);
 };
 
-const getDistributionByGenderReport = () => {
+const getDistributionByGenderReport = async (): Promise<ApiResponse<Chart[]>> => {
   return handleGetApiRequestInternal(`${REPORT_MEMBERS_BY_GENDER_ROUTE}`);
 };
 
-const getDistributionByRoleReport = () => {
+const getDistributionByRoleReport = async (): Promise<ApiResponse<Chart[]>> => {
   return handleGetApiRequestInternal(`${REPORT_MEMBERS_BY_ROLE_ROUTE}`);
 };
 
-const getDistributionByBusinessUnitReport = () => {
+const getDistributionByBusinessUnitReport = async (): Promise<ApiResponse<Chart[]>> => {
   return handleGetApiRequestInternal(`${REPORT_MEMBERS_BY_BUSINESS_UNITS_ROUTE}`);
 };
 
-const getDistributionByAgeReport = () => {
+const getDistributionByAgeReport = async (): Promise<ApiResponse<Chart[]>> => {
   return handleGetApiRequestInternal(`${REPORT_MEMBERS_BY_AGE_ROUTE}`);
 };
 
-const getDistributionBySeniorityReport = () => {
+const getDistributionBySeniorityReport = async (): Promise<ApiResponse<Chart[]>> => {
   return handleGetApiRequestInternal(`${REPORT_MEMBERS_BY_SENIORITY_ROUTE}`);
 };
 

@@ -10,8 +10,8 @@ import { BoxHeader } from "components/headers";
 import { EMPLOYEE_SEARCH } from "pages/users";
 import { CareMemberPanel } from "pages/users/panels";
 import { RouteParams, SelectOption, CareMember, Employee, CareMemberSaveRequest } from "types";
-import { CREATE_CARE_MEMBER_ID } from "types/app.consts";
 import { formatDateAsDD_MM_YYYY, addDays } from "types/utils";
+import { CREATE_CARE_MEMBER_ID } from "variables/app.consts";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {

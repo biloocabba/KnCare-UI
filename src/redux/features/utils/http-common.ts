@@ -2,7 +2,7 @@
 import { AxiosResponse } from "axios";
 
 import { ApiResponse } from "types";
-import { GENERIC_ERROR_CODE } from "types/app.consts";
+import { GENERIC_ERROR_CODE } from "variables/app.consts";
 
 import { httpCommonMock } from "./in-memory-api-mock/http-common-mock";
 

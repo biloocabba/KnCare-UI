@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import { CareMember, Employee } from "types";
-import { CREATE_CARE_MEMBER_ID } from "types/app.consts";
+import { CREATE_CARE_MEMBER_ID } from "variables/app.consts";
 
 import {
   mockAxiosReponse,
