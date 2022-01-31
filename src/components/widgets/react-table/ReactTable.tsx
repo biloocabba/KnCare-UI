@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 import { Button } from "reactstrap";
 
-import PropTypes from "prop-types";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 import { pagination, selectRow } from ".";
 
 const { SearchBar } = Search;
+
+interface Props {
+  // @todo change data any type to generic type
+  data: any[];
+  // @todo change columns any type to generic type
+  columns: any;
+  keyField: string;
+  onViewDetailsClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  onDeleteItemClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  // @todo change columns any type to generic type
+  // this can be Employees or Groups, etc...
+  selectedRows: any;
+  setSelectedRows: any;
+  // setSelectedRows: React.Dispatch<React.SetStateAction<any[]>>;
+  searchBarPlaceholder?: string;
+  selectButtonText?: string;
+}
 
 export const ReactTable = ({
   columns,
@@ -20,8 +36,9 @@ export const ReactTable = ({
   setSelectedRows,
   searchBarPlaceholder,
   selectButtonText,
-}) => {
-  const formatActionButtonCell = (cell, row) => {
+}: Props) => {
+  // @todo change row type to generic type
+  const formatActionButtonCell = (_: any, row: any) => {
     return (
       <>
         <Button
@@ -87,7 +104,7 @@ export const ReactTable = ({
             bootstrap4
             pagination={pagination}
             bordered={false}
-            deleteRow
+            // deleteRow // does not exist
             selectRow={selectRow(setSelectedRows)}
           />
         </div>
@@ -96,14 +113,12 @@ export const ReactTable = ({
   );
 };
 
-ReactTable.propTypes = {
-  columns: PropTypes.array.isRequired,
-  keyField: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
-  onViewDetailsClick: PropTypes.func.isRequired,
-  onDeleteItemClick: PropTypes.func.isRequired,
-  selectedRows: PropTypes.array.isRequired,
-  setSelectedRows: PropTypes.func.isRequired,
-  searchBarPlaceholder: PropTypes.string,
-  selectButtonText: PropTypes.string,
-};
+// ReactTable.propTypes = {
+//   columns: PropTypes.array.isRequired,
+//   keyField: PropTypes.string.isRequired,
+//   data: PropTypes.array.isRequired,
+//   selectedRows: PropTypes.array.isRequired,
+//   setSelectedRows: PropTypes.func.isRequired,
+//   searchBarPlaceholder: PropTypes.string,
+//   selectButtonText: PropTypes.string,
+// };

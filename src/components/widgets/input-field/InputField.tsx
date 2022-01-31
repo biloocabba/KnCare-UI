@@ -17,11 +17,3 @@ export const InputField = ({ id, label, ...props }: Props) => {
     </FormGroup>
   );
 };
-// @todo remove these after converting to TS
-// InputField.propTypes = {
-//   id: PropTypes.string.isRequired,
-//   label: PropTypes.string.isRequired,
-//   type: PropTypes.string.isRequired,
-//   value: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// };

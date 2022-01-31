@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 
 import { useHistory, useParams } from "react-router";
 
@@ -80,8 +80,8 @@ export const GroupDetailsPage = () => {
     setCurrentMembersCollapse(false);
   };
 
-  const memberDetails = (e: any) => {
-    const { id } = e.target;
+  const memberDetails = (e: MouseEvent<HTMLButtonElement>) => {
+    const { id } = e.currentTarget;
     history.push(`/admin/users/employee-details/${id}`);
   };
 

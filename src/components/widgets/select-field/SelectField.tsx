@@ -12,7 +12,7 @@ import makeAnimated from "react-select/animated";
 //     label: string;
 //   };
 
-// find types
+// @todo find types
 type Props = any & {
   id: string;
   label: string;
