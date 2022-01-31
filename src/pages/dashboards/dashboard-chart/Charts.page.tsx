@@ -19,10 +19,10 @@ import { Col, Container, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 
-import { ThemeColors } from "types";
-
+import { AgeChartPanel } from "./age-chart-panel";
 import { BusinessUnitChartPanel } from "./business-unit-chart-panel";
 import { RoleChartPanel } from "./role-chart-panel";
+import { SeniorityChartPanel } from "./seniority-chart-panel";
 import { StatisticsPanel } from "./Statistics.panel";
 
 import { TurnoverChartPanel, WorkforceChartPanel, GenderChartPanel } from "./";
@@ -78,14 +78,10 @@ export const ChartsPage = () => {
         </Row>
         <Row>
           <Col xl="6">
-            <div className="chart" style={{ backgroundColor: ThemeColors.theme.neutral4 }}>
-              Pie by Age here
-            </div>
+            <AgeChartPanel />
           </Col>
           <Col xl="6">
-            <div className="chart" style={{ backgroundColor: ThemeColors.theme.neutral5 }}>
-              Pie by Seniority here
-            </div>
+            <SeniorityChartPanel />
           </Col>
         </Row>
         {/*
