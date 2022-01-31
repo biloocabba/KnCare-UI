@@ -3,7 +3,7 @@ import { ChartData, ChartOptions } from "chart.js";
 import { ThemeColors } from "types";
 
 export const genderTemplate: ChartData<"pie"> = {
-  labels: ["Women", "Men"],
+  labels: [],
   datasets: [
     {
       label: "Gender",

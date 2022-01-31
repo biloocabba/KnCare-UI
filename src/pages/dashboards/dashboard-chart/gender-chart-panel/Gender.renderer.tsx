@@ -6,8 +6,7 @@ import { optionsTemplate, genderTemplate } from "./Gender.template";
 
 const toPieChartUI = (apiResponse: Chart[]): IPieChart => {
   apiResponse.forEach(genderRecord => {
-    console.log("genderREcord", genderRecord);
-
+    genderTemplate.labels?.push(genderRecord.label);
     genderTemplate.datasets[0].data.push(genderRecord.value);
   });
 
