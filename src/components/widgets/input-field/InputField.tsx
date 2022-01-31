@@ -1,8 +1,12 @@
-// import PropTypes from "prop-types";
-import { FormGroup, Input } from "reactstrap";
+import { FormGroup, Input, InputProps } from "reactstrap";
 
-export const InputField = props => {
-  let { id, label } = props;
+type Props = InputProps & {
+  id: string;
+  label: string;
+};
+
+export const InputField = ({ id, label, ...props }: Props) => {
+  console.log("InputField propssss123: ", props);
 
   return (
     <FormGroup>

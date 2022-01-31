@@ -2,7 +2,7 @@ import { FormGroup } from "reactstrap";
 
 import ReactDatetime from "react-datetime";
 
-export type Props = ReactDatetime.DatetimepickerProps & {
+type Props = ReactDatetime.DatetimepickerProps & {
   id: string;
   label: string;
 };
