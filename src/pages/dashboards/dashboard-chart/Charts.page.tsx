@@ -21,6 +21,7 @@ import { BoxHeader } from "components/headers";
 
 import { ThemeColors } from "types";
 
+import { BusinessUnitChartPanel } from "./business-unit-chart-panel";
 import { RoleChartPanel } from "./role-chart-panel";
 import { StatisticsPanel } from "./Statistics.panel";
 
@@ -72,9 +73,7 @@ export const ChartsPage = () => {
             <RoleChartPanel />
           </Col>
           <Col xl="4">
-            <div className="chart" style={{ backgroundColor: ThemeColors.theme.neutral3 }}>
-              Pie by Bunits here
-            </div>
+            <BusinessUnitChartPanel />
           </Col>
         </Row>
         <Row>

@@ -6,13 +6,21 @@ import { pieDataTemplate, pieOptionsTemplate } from "../templates";
 
 const toPieChartUI = (apiResponse: Chart[]): IPieChart => {
   const template = pieDataTemplate({
-    label: "Role",
+    label: "BusinessUnit",
     backgroundColor: [
       ThemeColors.theme["primary"],
       ThemeColors.theme["info"],
       ThemeColors.theme["success"],
       ThemeColors.theme["danger"],
       ThemeColors.theme["neutral4"],
+      ThemeColors.theme["neutral3"],
+      ThemeColors.theme["neutral5"],
+      ThemeColors.theme["neutral2"],
+      ThemeColors.gray[800],
+      ThemeColors.gray[700],
+      ThemeColors.gray[600],
+      ThemeColors.gray[500],
+      ThemeColors.gray[400],
     ],
   });
 
