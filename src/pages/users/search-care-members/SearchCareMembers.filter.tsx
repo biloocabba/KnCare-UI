@@ -2,11 +2,7 @@ import React, { useState } from "react";
 
 import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactstrap";
 
-import { Moment } from "moment";
-
-import { DateField } from "components/widgets/date-field";
-import { InputField } from "components/widgets/input-field";
-import { SelectField } from "components/widgets/select-field";
+import { DateField, InputField, SelectField } from "components/widgets";
 
 import { CareMemberQueryFilters, SelectOption } from "types";
 
@@ -124,8 +120,12 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
                 placeholder: "From",
               }}
               label="Onbording from"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchOnBoardDateFrom(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchOnBoardDateFrom(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -137,8 +137,12 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
                 placeholder: "To",
               }}
               label="Onbording to"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchOnBoardDateTo(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchOnBoardDateTo(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -150,8 +154,12 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
                 placeholder: "from",
               }}
               label="Offboarded From"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchOffboardingDateFrom(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchOffboardingDateFrom(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -163,8 +171,12 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
                 placeholder: "to",
               }}
               label="Offboarded To"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchOffboardingDateTo(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchOffboardingDateTo(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />

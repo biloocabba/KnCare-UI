@@ -2,8 +2,6 @@ import { useState } from "react";
 
 import { Button, Col, Form, Row } from "reactstrap";
 
-import { Moment } from "moment";
-
 import { DateField } from "components/widgets/date-field";
 import { InputField } from "components/widgets/input-field";
 import { SelectField } from "components/widgets/select-field";
@@ -51,8 +49,12 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-onboarding-date"
               label="Onboard date"
               value={onboardingDate}
-              onChange={(dateAsMoment: Moment) =>
-                setOnboardingDate(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setOnboardingDate(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -62,8 +64,12 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-offboarding-date"
               label="Auto Offboard Date"
               value={offboardingDate}
-              onChange={(dateAsMoment: Moment) =>
-                setOffboardingDate(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setOffboardingDate(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />

@@ -2,11 +2,7 @@ import { useState } from "react";
 
 import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactstrap";
 
-import { Moment } from "moment";
-
-import { DateField } from "components/widgets/date-field";
-import { InputField } from "components/widgets/input-field";
-import { SelectField } from "components/widgets/select-field";
+import { DateField, InputField, SelectField } from "components/widgets";
 
 import { EmployeeQueryFilters, SelectOption } from "types";
 
@@ -86,8 +82,12 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
             <DateField
               id="date-hire-from"
               label="Hire Date From"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchHiringDate(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
