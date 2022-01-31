@@ -14,6 +14,14 @@ export interface EmployeeQueryFilters {
   hiringDate?: string;
 }
 
+export interface BestPracticesQueryFilters {
+  searchTime?: string;
+  searchAuthor?: string;
+  searchTag?: string;
+  searchRate?: number;
+  searchTitle?: string;
+}
+
 export interface CareMemberQueryFilters {
   businessUnitId?: number;
   countryIsoCode3?: string;

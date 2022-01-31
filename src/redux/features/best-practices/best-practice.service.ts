@@ -14,6 +14,10 @@ const create = (body: Partial<BestPractice>): HttpResponseType => {
   return httpCommon.post(`${BEST_PRACTICE_ROUTE}`, body);
 };
 
+const search = (queryParams: URLSearchParams): HttpResponseType => {
+  return httpCommon.get(`${BEST_PRACTICE_ROUTE}?${queryParams}`);
+};
+
 const update = (updatedBestPractice: IUpdated<BestPractice>): HttpResponseType => {
   const { id, body } = updatedBestPractice;
   return httpCommon.put(`${BEST_PRACTICE_ROUTE}/${id}`, body);
@@ -27,6 +31,7 @@ export const bestPracticeService = {
   findAll,
   findById,
   create,
+  search,
   update,
   remove,
 };

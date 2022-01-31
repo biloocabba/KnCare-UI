@@ -1,5 +1,4 @@
-// core components
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 
 import { Redirect } from "react-router-dom";
 
@@ -19,28 +18,18 @@ import {
 
 import Files from "react-files";
 import CreatableSelect from "react-select/creatable";
-// reactstrap components
-import SimpleReactValidator from "simple-react-validator";
 
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
-const initialState = {
-  id: null,
-  title: "",
-  description: "",
-  content: null,
-};
-
 export const CreateBestPracticePage = () => {
-  const simpleValidator = useRef(new SimpleReactValidator());
+  // const simpleValidator = useRef(new SimpleReactValidator());
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  // eslint-disable-next-line no-unused-vars
-  const [created, setCreated] = useState(false);
+  const [created] = useState(false);
 
   const [formData] = useState(new FormData());
   const [, forceUpdate] = useState();
@@ -51,7 +40,7 @@ export const CreateBestPracticePage = () => {
 
   const toggle = () => setTooltipOpen(!tooltipOpen);
 
-  const [content] = useState(initialState);
+  // const [content] = useState(initialState);
 
   // const handleInputChange = e => {
   //   const { name, value } = e.target;
@@ -59,42 +48,43 @@ export const CreateBestPracticePage = () => {
   //   simpleValidator.current.showMessageFor(name);
   // };
 
-  const onFilesError = error => {
+  const onFilesError = (error: any) => {
     setErrorMessage(error.message);
     setErrorAlert(true);
   };
 
-  const fileUpload = files => {
+  const fileUpload = (files: any) => {
     toggle();
     formData.delete("file");
     formData.append("file", files[0]);
     setErrorAlert(false);
+    // @ts-ignore
     forceUpdate(formData.get("file").name);
   };
 
   const removeFile = () => {
     formData.delete("file");
+    // @ts-ignore
     forceUpdate(1);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const saveBestPractice = () => {
-    formData.append("content", content.title);
-    formData.append("content", content.description);
-    const formValid = simpleValidator.current.allValid();
-    if (formValid) {
-      // bestPracticeService
-      //   .create(formData)
-      //   .then(setCreated(true))
-      //   .catch(e => {
-      //     setErrorAlert(true);
-      //     setErrorMessage(e);
-      // });
-    } else {
-      simpleValidator.current.showMessages();
-      forceUpdate(1);
-    }
-  };
+  // const saveBestPractice = () => {
+  //   formData.append("content", content.title);
+  //   formData.append("content", content.description);
+  //   const formValid = simpleValidator.current.allValid();
+  //   if (formValid) {
+  //     // bestPracticeService
+  //     //   .create(formData)
+  //     //   .then(setCreated(true))
+  //     //   .catch(e => {
+  //     //     setErrorAlert(true);
+  //     //     setErrorMessage(e);
+  //     // });
+  //   } else {
+  //     simpleValidator.current.showMessages();
+  //     forceUpdate(1);
+  //   }
+  // };
 
   const defaultTags = [
     { value: "tag1", label: "Tag1" },
@@ -125,28 +115,24 @@ export const CreateBestPracticePage = () => {
                   <CardBody>
                     <Row>
                       <Col md="10">
-                        <FormGroup>
-                          <InputField
-                            label="Title"
-                            className="text-sm"
-                            name="title"
-                            value={title}
-                            onChange={e => setTitle(e.target.value)}
-                          />
-                        </FormGroup>
+                        <InputField
+                          label="Title"
+                          className="text-sm"
+                          name="title"
+                          value={title}
+                          onChange={(e: any) => setTitle(e.target.value)}
+                        />
                       </Col>
                       <Col md="10">
-                        <FormGroup>
-                          <InputField
-                            label="Description"
-                            name="description"
-                            type="textarea"
-                            rows="5"
-                            // onChange={handleInputChange}
-                            onChange={e => setDescription(e.target.value)}
-                            value={description}
-                          />
-                        </FormGroup>
+                        <InputField
+                          label="Description"
+                          name="description"
+                          type="textarea"
+                          rows="5"
+                          // onChange={handleInputChange}
+                          onChange={(e: any) => setDescription(e.target.value)}
+                          value={description}
+                        />
                       </Col>
                       <Col md="10">
                         <FormGroup>
@@ -253,10 +239,12 @@ export const CreateBestPracticePage = () => {
         <div className="uploaded-file">
           <Row>
             <Col sm="10">
+              {/* @ts-ignore */}
               <Card hidden={formData.entries("file").next().done}>
                 <CardBody>
                   <Button close onClick={removeFile} />
                   <CardText tag="h5">
+                    {/* @ts-ignore */}
                     {formData.entries().next().done ? "" : formData.get("file").name}
                   </CardText>
                 </CardBody>

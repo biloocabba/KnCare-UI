@@ -14,9 +14,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react";
+import { useState } from "react";
 
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 import {
   Button,
@@ -26,8 +26,6 @@ import {
   Col,
   Container,
   Form,
-  FormGroup,
-  Input,
   Pagination,
   PaginationItem,
   PaginationLink,
@@ -38,25 +36,30 @@ import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will o
 import Rating from "react-rating";
 
 import { BoxHeader } from "components/headers";
+import { InputField } from "components/widgets";
 
+import { RouteParams } from "types";
+
+import { useAppSelector } from "redux/app";
+import { selectBestPracticeById } from "redux/features";
 import { huddle64pdf } from "redux/features/utils/in-memory-api-mock";
+
+import { SEARCH_BEST_PRACTICE } from "../best-practices.routes.const";
 
 export const BestPracticeDetailPage = () => {
   const history = useHistory();
-  // let { id } = useParams(); //see in routes path: "/users/employee-details/:id",
+  const { id } = useParams<RouteParams>();
 
-  //const bestPractices = useSelector((state) => state.bestPractices)
-  //let bestPractice = bestPractices.find((bp) => bp.id === parseInt(id))
-
+  const bestPractice = useAppSelector(selectBestPracticeById(parseInt(id)));
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const onDocumentLoadSuccess = ({ numPages }) => {
+  const onDocumentLoadSuccess = ({ numPages }: any) => {
     setNumPages(numPages);
     setPageNumber(1);
   };
 
-  const changePage = offset => {
+  const changePage = (offset: number) => {
     setPageNumber(prevPageNumber => prevPageNumber + offset);
   };
 
@@ -67,22 +70,12 @@ export const BestPracticeDetailPage = () => {
   };
 
   const nextPage = () => {
+    // @ts-ignore
     if (pageNumber < numPages) {
       changePage(1);
     }
   };
 
-  let bestPractice = {
-    title: "a demo title",
-    description: "a demo description",
-    author: "a demo author",
-    publishDate: "12/12/2020",
-    rating: 4,
-    tags: ["tag1", "tag2", "tag3"],
-    // pdf:'assets/pdf/HostingCareHuddle.pdf' // this doesnt work. Local file works only with import
-    // pdf:'https://github.com/stefanofiorenza/KNITS-Events/raw/master/KN-Brochure2020.pdf', //this doesnt work. Need cors enabled
-    pdf: "https://s3-ap-southeast-1.amazonaws.com/happay-local/HVP/BILL20198261213473719445688HP.pdf", //this works
-  };
   return (
     <>
       <BoxHeader />
@@ -93,7 +86,7 @@ export const BestPracticeDetailPage = () => {
               className="btn btn-primary"
               color="primary"
               href="#pablo"
-              onClick={() => history.push("/admin/search-best-practices")}
+              onClick={() => history.push(`/admin${SEARCH_BEST_PRACTICE}`)}
             >
               Back to Search
             </Button>
@@ -115,57 +108,41 @@ export const BestPracticeDetailPage = () => {
                   <div className="pl-lg-4">
                     <Row>
                       <Col lg="3">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="input-first-name">
-                            Title
-                          </label>
-                          <Input
-                            id="input-first-name"
-                            value={bestPractice.title}
-                            type="text"
-                            disabled={true}
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="input-first-name"
+                          label="Title"
+                          value={bestPractice?.title}
+                          type="text"
+                          disabled={true}
+                        />
                       </Col>
                       <Col lg="3">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="rating">
-                            Current Rating
-                          </label>
-                          <Input
-                            id="input-first-name"
-                            value={bestPractice.rating}
-                            type="text"
-                            disabled={true}
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="input-first-name"
+                          label="Current Rating"
+                          value={bestPractice?.rating}
+                          type="text"
+                          disabled={true}
+                        />
                       </Col>
 
                       <Col lg="3">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="author">
-                            Author
-                          </label>
-                          <Input
-                            id="author"
-                            value={bestPractice.author}
-                            type="text"
-                            disabled={true}
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="author"
+                          label="Author"
+                          value={bestPractice?.author}
+                          type="text"
+                          disabled={true}
+                        />
                       </Col>
                       <Col lg="3">
-                        <FormGroup>
-                          <label className="form-control-label" htmlFor="publishDate">
-                            Published On
-                          </label>
-                          <Input
-                            id="publishDate"
-                            value={bestPractice.publishDate}
-                            type="text"
-                            disabled={true}
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="publishDate"
+                          label="Published On"
+                          value={bestPractice?.publishDate.toString()}
+                          type="text"
+                          disabled={true}
+                        />
                       </Col>
                     </Row>
                   </div>
@@ -217,6 +194,7 @@ export const BestPracticeDetailPage = () => {
 
                             <PaginationItem>
                               <PaginationLink
+                                // @ts-ignore
                                 disabled={pageNumber >= numPages}
                                 aria-label="Next"
                                 href="#pablo"

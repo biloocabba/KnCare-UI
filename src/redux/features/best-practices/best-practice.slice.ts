@@ -28,6 +28,15 @@ export const findAllBestPractices = createAsyncThunk("bestPractice/findAll", asy
   return data;
 });
 
+export const searchBestPractices = createAsyncThunk(
+  "bestPractice/search",
+  async (filters: any): Promise<BestPractice[]> => {
+    const queryParams = new URLSearchParams(filters);
+    const { data } = await bestPracticeService.search(queryParams);
+    return data;
+  }
+);
+
 export const createBestPractice = createAsyncThunk(
   "bestPractice/create",
   async (body: Partial<BestPractice>) => {
@@ -61,6 +70,7 @@ export const bestPracticeSlice = createSlice({
       findBestPracticeById,
       findAllBestPractices,
       createBestPractice,
+      searchBestPractices,
       updateBestPractice,
       deleteBestPractice,
     ].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
@@ -81,6 +91,11 @@ export const bestPracticeSlice = createSlice({
       state.isSuccess = true;
     });
     builder.addCase(findAllBestPractices.fulfilled, (state, action) => {
+      state.entities = action.payload;
+      state.isLoading = false;
+      state.isSuccess = true;
+    });
+    builder.addCase(searchBestPractices.fulfilled, (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;
       state.isSuccess = true;
