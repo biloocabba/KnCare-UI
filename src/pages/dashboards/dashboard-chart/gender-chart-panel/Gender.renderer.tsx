@@ -1,10 +1,15 @@
 import { Pie } from "react-chartjs-2";
 
-import { ApiResponse, IPieChart, Chart } from "types";
+import { ApiResponse, IPieChart, Chart, ThemeColors } from "types";
 
-import { optionsTemplate, genderTemplate } from "./Gender.template";
+import { pieDataTemplate, pieOptionsTemplate } from "../templates/Pie.template";
 
 const toPieChartUI = (apiResponse: Chart[]): IPieChart => {
+  const genderTemplate = pieDataTemplate({
+    label: "Gender",
+    backgroundColor: [ThemeColors.theme["danger"], ThemeColors.theme["primary"]],
+  });
+
   apiResponse.forEach(genderRecord => {
     genderTemplate.labels?.push(genderRecord.label);
     genderTemplate.datasets[0].data.push(genderRecord.value);
@@ -12,7 +17,7 @@ const toPieChartUI = (apiResponse: Chart[]): IPieChart => {
 
   return {
     data: genderTemplate,
-    options: optionsTemplate,
+    options: pieOptionsTemplate,
   };
 };
 
