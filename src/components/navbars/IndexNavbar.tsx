@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-// react library for routing
+
 import { Link } from "react-router-dom";
 
 import {
@@ -30,8 +30,6 @@ import {
   UncontrolledTooltip,
   Button,
 } from "reactstrap";
-
-// reactstrap components
 
 import brandBlue from "assets/img/brand/blue.png";
 import CareLogoMin from "assets/img/brand/CareLogoMin.png";

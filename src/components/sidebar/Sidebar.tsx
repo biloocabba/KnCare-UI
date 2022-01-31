@@ -16,18 +16,12 @@
 */
 import { ReactNode, useEffect, useState } from "react";
 
-// react library for routing
 import { useLocation, NavLink as NavLinkRRD, Link } from "react-router-dom";
 
 import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav } from "reactstrap";
 
 import classnames from "classnames";
 import PerfectScrollbar from "react-perfect-scrollbar";
-// nodejs library that concatenates classes
-
-// react library that creates nice scrollbar on windows devices
-
-// reactstrap components
 
 import { IRoute } from "types";
 

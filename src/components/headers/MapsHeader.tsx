@@ -1,4 +1,3 @@
-// reactstrap components
 import { Breadcrumb, Button, Container, Row, Col } from "reactstrap";
 
 interface Props {
@@ -16,14 +15,6 @@ export const MapsHeader = ({
   onSelfResignedClick,
   onAutoOffboardedClick,
 }: Props) => {
-  // const mapData = useSelector(state => state.mapKpis);
-
-  // const getMap = (e, actionType) => {
-  //   e.preventDefault();
-
-  //   dispatch(getMapData(actionType));
-  // }
-
   return (
     <>
       <div className="header header-dark bg-info pb-6 content__title content__title--calendar">
