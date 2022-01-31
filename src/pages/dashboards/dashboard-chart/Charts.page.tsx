@@ -21,6 +21,7 @@ import { BoxHeader } from "components/headers";
 
 import { ThemeColors } from "types";
 
+import { RoleChartPanel } from "./role-chart-panel";
 import { StatisticsPanel } from "./Statistics.panel";
 
 import { TurnoverChartPanel, WorkforceChartPanel, GenderChartPanel } from "./";
@@ -68,9 +69,7 @@ export const ChartsPage = () => {
             <GenderChartPanel />
           </Col>
           <Col xl="4">
-            <div className="chart" style={{ backgroundColor: ThemeColors.theme.neutral2 }}>
-              Pie by Role here
-            </div>
+            <RoleChartPanel />
           </Col>
           <Col xl="4">
             <div className="chart" style={{ backgroundColor: ThemeColors.theme.neutral3 }}>
