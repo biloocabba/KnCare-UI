@@ -7,7 +7,7 @@ import { pieDataTemplate, pieOptionsTemplate } from "../templates/Pie.template";
 const toPieChartUI = (apiResponse: Chart[]): IPieChart => {
   const genderTemplate = pieDataTemplate({
     label: "Gender",
-    backgroundColor: [ThemeColors.theme["danger"], ThemeColors.theme["primary"]],
+    backgroundColor: [ThemeColors.theme["primary"], ThemeColors.theme["info"]],
   });
 
   apiResponse.forEach(genderRecord => {
