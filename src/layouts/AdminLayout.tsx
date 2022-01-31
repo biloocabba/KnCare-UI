@@ -23,7 +23,7 @@ import { useLocation, Switch, Redirect } from "react-router-dom";
 // import { Spinner } from "reactstrap";
 // import { Col, Row } from "reactstrap";
 
-import Audio from "react-loader-spinner";
+import { Audio } from "react-loader-spinner";
 
 import { AdminFooter } from "components/footers";
 import { AdminNavbar } from "components/navbars";
@@ -97,7 +97,7 @@ export const AdminLayout = () => {
           <div className="main-content" ref={mainContentRef}>
             <div style={{ height: "300pt" }}>&nbsp;</div>
             <div className="d-flex justify-content-center mb-3">
-              <Audio type="Audio" color={ThemeColors.theme.primary} height={160} width={160} />
+              <Audio color={ThemeColors.theme.primary} height={160} width={160} />
             </div>
           </div>
         </>
