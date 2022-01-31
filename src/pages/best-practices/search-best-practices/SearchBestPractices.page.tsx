@@ -54,8 +54,6 @@ export const SearchBestPracticesPage = () => {
   const [alert] = useState(null);
   const history = useHistory();
   const dispatch = useAppDispatch();
-  // this function will copy to clipboard an entire table,
-  // so you can paste it inside an excel or csv file
 
   const bestPractices = useAppSelector(selectBestPracticeState);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -64,10 +62,6 @@ export const SearchBestPracticesPage = () => {
   const [searchTag, setSearchTag] = useState("");
   // const [searchRate] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
-
-  // useEffect(() => {
-  //   dispatch(reterieveBestPractices())
-  // }, [dispatch])
 
   const onSearch = () => {
     const searchFilters = {
@@ -80,23 +74,6 @@ export const SearchBestPracticesPage = () => {
 
     dispatch(searchBestPractices(searchFilters));
   };
-
-  // const status = useSelector(state => state.pageStatus);
-  // const pageStatus = { pageStatus: status, statusCode: -1 };
-
-  // useEffect(() => {
-  //   const loadData = async () => {
-  //     await dispatch(retrieveBestPractices());
-  //   }
-  //   loadData();
-  // }, [dispatch]);
-
-  // limit description respresintation to 50 characters to fit it on the page
-  // bestPractices.entities.forEach(bestPractice => {
-  //   if (bestPractice.description !== null && bestPractice.description.length > 50) {
-  //     bestPractice.description = bestPractice.description.substring(0, 50) + "...";
-  //   }
-  // });
 
   const onGoToBestPracticeDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.currentTarget as HTMLButtonElement;
@@ -311,41 +288,3 @@ export const SearchBestPracticesPage = () => {
     </>
   );
 };
-
-// <ToolkitProvider
-//   data={bestPractices.entities}
-//   keyField="id"
-//   columns={bestPracticesTableColumns}
-//   search
-// >
-//   {props => (
-//     <div className="py-4 table-responsive">
-//       <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
-//         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control*/}
-//         <label>
-//           Search:
-//           <SearchBar
-//             className="form-control-sm"
-//             placeholder="Filter results"
-//             {...props.searchProps}
-//           />
-//         </label>
-//       </div>
-//       {/* <div className="py-4 table-responsive">
-
-//       <BootstrapTable
-//         {...props.baseProps}
-//         bootstrap4={true}
-//         pagination={pagination}
-//         bordered={false}
-//       />
-//     </div> */}
-//       <BootstrapTable
-//         {...props.baseProps}
-//         bootstrap4={true}
-//         pagination={pagination}
-//         bordered={false}
-//       />
-//     </div>
-//   )}
-// </ToolkitProvider>
