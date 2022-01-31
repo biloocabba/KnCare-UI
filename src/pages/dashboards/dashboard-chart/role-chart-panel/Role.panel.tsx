@@ -1,13 +1,13 @@
 import { dashboardService } from "redux/features/dashboards";
 
-import { ChartPanel } from "../components";
+import { ChartPanel } from "../chart-panels";
 import { useChart } from "../useChart";
 
-import { renderChart } from "./Gender.renderer";
+import { renderChart } from "./Role.renderer";
 
-export const GenderChartPanel = () => {
+export const RoleChartPanel = () => {
   const { isLoading, chart, alert } = useChart(
-    dashboardService.getDistributionByGenderReport,
+    dashboardService.getDistributionByRoleReport,
     renderChart
   );
 
@@ -17,7 +17,7 @@ export const GenderChartPanel = () => {
       chart={chart}
       isLoading={isLoading}
       title="Composition"
-      subTitle="By Gender"
+      subTitle="By Role"
     />
   );
 };

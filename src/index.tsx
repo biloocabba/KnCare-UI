@@ -28,7 +28,7 @@ import { AdminLayout, AuthLayout } from "layouts";
 
 import { store } from "redux/app";
 
-import "variables/charts/chartDefaults";
+import "variables/chartDefaults";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fullcalendar/common/main.min.css";

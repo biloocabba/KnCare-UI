@@ -1,1 +1,1 @@
-export * from "./Seniority.chart";
+export * from "./Seniority.panel";

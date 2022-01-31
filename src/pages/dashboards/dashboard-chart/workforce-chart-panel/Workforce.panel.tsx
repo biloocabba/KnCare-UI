@@ -1,6 +1,6 @@
 import { dashboardService } from "redux/features/dashboards";
 
-import { ChartPanel } from "../components";
+import { ChartPanel } from "../chart-panels";
 import { useChart } from "../useChart";
 
 import { renderChart } from "./Workforce.renderer";
@@ -13,8 +13,8 @@ export const WorkforceChartPanel = () => {
       alert={alert}
       chart={chart}
       isLoading={isLoading}
-      title="Composition"
-      subTitle="By Role"
+      title="Care Members"
+      subTitle="Last 7 months"
     />
   );
 };

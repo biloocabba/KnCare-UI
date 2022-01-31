@@ -1,1 +1,1 @@
-export * from "./Workforce.chart";
+export * from "./Workforce.panel";

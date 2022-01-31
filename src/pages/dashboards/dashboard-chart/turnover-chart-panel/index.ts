@@ -1,1 +1,1 @@
-export * from "./Turnover.chart";
+export * from "./Turnover.panel";

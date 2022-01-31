@@ -14,18 +14,22 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-// core components
+
 import { Col, Container, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 
-import { AgeChartPanel } from "./age-chart-panel";
-import { BusinessUnitChartPanel } from "./business-unit-chart-panel";
-import { RoleChartPanel } from "./role-chart-panel";
-import { SeniorityChartPanel } from "./seniority-chart-panel";
 import { StatisticsPanel } from "./Statistics.panel";
 
-import { TurnoverChartPanel, WorkforceChartPanel, GenderChartPanel } from "./";
+import {
+  TurnoverChartPanel,
+  WorkforceChartPanel,
+  GenderChartPanel,
+  AgeChartPanel,
+  BusinessUnitChartPanel,
+  RoleChartPanel,
+  SeniorityChartPanel,
+} from "./";
 
 export const ChartsPage = () => {
   return (

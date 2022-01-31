@@ -1,1 +1,1 @@
-export * from "./Role.chart";
+export * from "./Role.panel";

@@ -1,13 +1,13 @@
 import { dashboardService } from "redux/features/dashboards";
 
-import { ChartPanel } from "../components";
+import { ChartPanel } from "../chart-panels";
 import { useChart } from "../useChart";
 
-import { renderChart } from "./Seniority.renderer";
+import { renderChart } from "./Age.renderer";
 
-export const SeniorityChartPanel = () => {
+export const AgeChartPanel = () => {
   const { isLoading, chart, alert } = useChart(
-    dashboardService.getDistributionBySeniorityReport,
+    dashboardService.getDistributionByAgeReport,
     renderChart
   );
 
@@ -17,7 +17,7 @@ export const SeniorityChartPanel = () => {
       chart={chart}
       isLoading={isLoading}
       title="Composition"
-      subTitle="By Seniority"
+      subTitle="By Age"
     />
   );
 };

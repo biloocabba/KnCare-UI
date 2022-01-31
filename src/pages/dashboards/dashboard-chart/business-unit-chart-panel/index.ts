@@ -1,1 +1,1 @@
-export * from "./BusinessUnit.chart";
+export * from "./BusinessUnit.panel";

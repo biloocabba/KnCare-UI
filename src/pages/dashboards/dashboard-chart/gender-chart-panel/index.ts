@@ -1,1 +1,1 @@
-export * from "./Gender.chart";
+export * from "./Gender.panel";

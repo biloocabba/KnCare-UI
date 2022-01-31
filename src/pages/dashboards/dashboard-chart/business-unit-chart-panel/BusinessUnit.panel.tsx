@@ -1,6 +1,6 @@
 import { dashboardService } from "redux/features/dashboards";
 
-import { ChartPanel } from "../components";
+import { ChartPanel } from "../chart-panels";
 import { useChart } from "../useChart";
 
 import { renderChart } from "./BusinessUnit.renderer";
