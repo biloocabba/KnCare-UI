@@ -22,13 +22,6 @@ import CreatableSelect from "react-select/creatable";
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
-// const initialState = {
-//   id: null,
-//   title: "",
-//   description: "",
-//   content: null,
-// };
-
 export const CreateBestPracticePage = () => {
   // const simpleValidator = useRef(new SimpleReactValidator());
 
