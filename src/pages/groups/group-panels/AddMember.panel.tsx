@@ -22,6 +22,7 @@ export const AddMemberPanel = ({ group, setGroup }: Props) => {
 
   const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
+
   const employees = useAppSelector(selectEmployeesState);
 
   const jobTitles: SelectOption[] = [

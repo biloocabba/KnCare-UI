@@ -16,6 +16,7 @@ const initialState: StateType<Country> = {
 
 export const fetchCountries = createAsyncThunk("country/fetchCountries", async () => {
   const { data } = await countryService.listCountries();
+
   return data;
 });
 
