@@ -41,7 +41,7 @@ export const AddMemberPanel = ({ group, setGroup }: Props) => {
   const onClickSearchEmployees = (filters: EmployeeQueryFilters): void => {
     dispatch(searchEmployees(filters));
   };
-  // @todo make this find employees by filters
+
   return (
     <>
       <SearchEmployeesFilterPanel

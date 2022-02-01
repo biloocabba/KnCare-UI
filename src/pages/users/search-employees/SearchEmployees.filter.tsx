@@ -37,7 +37,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
     const filters: EmployeeQueryFilters = {
       lastName: searchLastName,
       businessUnitId: searchBusinessUnitId,
-      countryIsoCode3: searchCountryIsoCode3,
+      countryId: searchCountryIsoCode3,
       hiringDate: searchHiringDate,
       jobTitle: searchJobTitle,
     };

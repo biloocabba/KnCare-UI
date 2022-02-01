@@ -36,7 +36,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
   const findByAllParameters = () => {
     const filters: CareMemberQueryFilters = {
       businessUnitId: searchBusinessUnitId,
-      countryIsoCode3: searchCountryIsoCode3,
+      countryId: searchCountryIsoCode3,
       roleId: searchRoleId,
       groupId: searchGroupId,
       lastName: searchLastName,

@@ -10,7 +10,7 @@ export interface CareMemberSaveRequest {
 export interface EmployeeQueryFilters {
   lastName?: string;
   businessUnitId?: number;
-  countryIsoCode3?: string;
+  countryId?: string;
   jobTitle?: string;
   hiringDate?: string;
 }
@@ -25,7 +25,7 @@ export interface BestPracticesQueryFilters {
 
 export interface CareMemberQueryFilters {
   businessUnitId?: number;
-  countryIsoCode3?: string;
+  countryId?: string;
   roleId?: number;
   groupId?: number;
   lastName?: string;
