@@ -39,9 +39,8 @@ export const searchBestPractices = createAsyncThunk(
 
 export const createBestPractice = createAsyncThunk(
   "bestPractice/create",
-  async (body: Partial<BestPractice>) => {
+  async (body: BestPractice) => {
     const { data } = await bestPracticeService.create(body);
-
     return data;
   }
 );

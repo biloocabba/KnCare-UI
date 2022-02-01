@@ -51,6 +51,7 @@ export const BestPracticeDetailPage = () => {
   const { id } = useParams<RouteParams>();
 
   const bestPractice = useAppSelector(selectBestPracticeById(parseInt(id)));
+
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -152,8 +153,8 @@ export const BestPracticeDetailPage = () => {
                     <Col lg="8">
                       <div className="pl-lg-4">
                         <Document
+                          // file="https://cors-anywhere.herokuapp.com/https://github.com/KNITS-OS/SkillQuest/raw/master/Resources/corporatebrochurekuehnenagel2021en.pdf"
                           file={huddle64pdf}
-                          //  file={bestPractice.pdf}
                           onLoadSuccess={onDocumentLoadSuccess}
                         >
                           <Page pageNumber={pageNumber} />
@@ -182,7 +183,7 @@ export const BestPracticeDetailPage = () => {
                             </PaginationItem>
 
                             {Array.from(new Array(numPages), (el, index) => (
-                              <PaginationItem>
+                              <PaginationItem key={index + 1}>
                                 <PaginationLink
                                   href="#pablo"
                                   onClick={() => setPageNumber(index + 1)}
@@ -205,46 +206,13 @@ export const BestPracticeDetailPage = () => {
                               </PaginationLink>
                             </PaginationItem>
                           </Pagination>
-
-                          {/* <Button
-                              type="button"
-                              color="info"
-                              href="#pablo"
-                              onClick={previousPage}
-                            >
-                              Previous
-                            </Button>
-
-                            <Button
-                              type="button"
-                              color="info"
-                              href="#pablo"
-                              onClick={nextPage}
-                            >
-                              Next
-                            </Button> */}
-
-                          {/* <button type="button" disabled={pageNumber <= 1} onClick={previousPage}>
-                              Previous
-                            </button>
-                            <button
-                              type="button"
-                              disabled={pageNumber >= numPages}
-                              onClick={nextPage}
-                            >
-                              Next
-                            </button> */}
                         </div>
                       </div>
                     </Col>
 
                     <Col lg="2">
                       <h3>Rate it:</h3>
-                      <Rating
-                        // style={{color:'yellow', borderColor:'black'}}
-                        emptySymbol="fa fa-star-o fa-2x"
-                        fullSymbol="fa fa-star fa-2x"
-                      />
+                      <Rating emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" />
                     </Col>
                   </Row>
                 </Form>

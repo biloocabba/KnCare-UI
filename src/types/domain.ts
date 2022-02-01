@@ -55,7 +55,9 @@ export interface BestPractice extends Domain {
   publishDate: Date;
   rating: number;
   tags: string[];
-  pdf: string;
+  imageUrl?: string;
+  contentUrl?: string;
+  contentFiles?: File[];
 }
 
 export interface Group extends Domain {

@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import { CareMember, Employee } from "types";
-import { CREATE_CARE_MEMBER_ID } from "variables/app.consts";
+import { CREATE_ENTITY_ID } from "variables/app.consts";
 
 import {
   mockAxiosReponse,
@@ -46,7 +46,7 @@ export const entitySearch = <T>(
 export const matchBusinessUnit = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
   if (queryParams && queryParams.get("businessUnitId")) {
     const bunitIdAsString = queryParams.get("businessUnitId");
-    const bunitId: number = bunitIdAsString ? parseInt(bunitIdAsString) : CREATE_CARE_MEMBER_ID;
+    const bunitId: number = bunitIdAsString ? parseInt(bunitIdAsString) : CREATE_ENTITY_ID;
     const businessUnitObj = businessUnitsMockResponse.data.find(bunit => bunit.id === bunitId);
 
     if (businessUnitObj && entity.businessUnit !== businessUnitObj.name) {

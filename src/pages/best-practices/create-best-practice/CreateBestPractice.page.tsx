@@ -1,106 +1,45 @@
 import { useState } from "react";
 
-import { Redirect } from "react-router-dom";
+import { Button, Card, CardBody, CardHeader, Col, Container, FormGroup, Row } from "reactstrap";
 
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  CardText,
-  Col,
-  Container,
-  FormGroup,
-  Input,
-  Row,
-  Tooltip,
-} from "reactstrap";
-
-import Files from "react-files";
 import CreatableSelect from "react-select/creatable";
 
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
+import { BestPractice } from "types";
+import { toFileArray } from "types/utils";
+import { defaultBestPracticesTags } from "variables/app.consts";
+
+import { useAppDispatch } from "redux/app";
+import { createBestPractice } from "redux/features";
+
+import { bestPracticeDefaultState } from "..";
+
 export const CreateBestPracticePage = () => {
-  // const simpleValidator = useRef(new SimpleReactValidator());
+  const dispatch = useAppDispatch();
+  const [bestPractice, setBestPractice] = useState<BestPractice>(bestPracticeDefaultState);
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-
-  const [created] = useState(false);
-
-  const [formData] = useState(new FormData());
-  const [, forceUpdate] = useState();
-  const [errorAlert, setErrorAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("Something went wrong");
-
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-
-  const toggle = () => setTooltipOpen(!tooltipOpen);
-
-  // const [content] = useState(initialState);
-
-  // const handleInputChange = e => {
-  //   const { name, value } = e.target;
-  //   setContent({ ...content, [name]: value });
-  //   simpleValidator.current.showMessageFor(name);
-  // };
-
-  const onFilesError = (error: any) => {
-    setErrorMessage(error.message);
-    setErrorAlert(true);
+  const changeFileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.currentTarget.files) {
+      setBestPractice({
+        ...bestPractice,
+        contentFiles: toFileArray(event.currentTarget.files),
+      });
+    }
   };
 
-  const fileUpload = (files: any) => {
-    toggle();
-    formData.delete("file");
-    formData.append("file", files[0]);
-    setErrorAlert(false);
-    // @ts-ignore
-    forceUpdate(formData.get("file").name);
+  const saveBestPractice = () => {
+    dispatch(createBestPractice(bestPractice));
   };
 
-  const removeFile = () => {
-    formData.delete("file");
-    // @ts-ignore
-    forceUpdate(1);
+  const handleChange = (newValue: any) => {
+    const currentTags = [...bestPractice.tags, newValue];
+    setBestPractice({ ...bestPractice, tags: currentTags });
   };
-
-  // const saveBestPractice = () => {
-  //   formData.append("content", content.title);
-  //   formData.append("content", content.description);
-  //   const formValid = simpleValidator.current.allValid();
-  //   if (formValid) {
-  //     // bestPracticeService
-  //     //   .create(formData)
-  //     //   .then(setCreated(true))
-  //     //   .catch(e => {
-  //     //     setErrorAlert(true);
-  //     //     setErrorMessage(e);
-  //     // });
-  //   } else {
-  //     simpleValidator.current.showMessages();
-  //     forceUpdate(1);
-  //   }
-  // };
-
-  const defaultTags = [
-    { value: "tag1", label: "Tag1" },
-    { value: "tag2", label: "Tag2" },
-    { value: "tag3", label: "Tag3" },
-    { value: "tag4", label: "Tag4" },
-    { value: "tag5", label: "Tag5" },
-    { value: "tag6", label: "Tag6" },
-  ];
 
   return (
     <>
-      {created === true ? <Redirect to={"/admin/search-best-practices"} /> : null}
-      <div className="alert alert-danger mt-3" role="alert" hidden={!errorAlert}>
-        <span>{errorMessage}</span>
-      </div>
       <BoxHeader />
       <Container className="mt--6" fluid>
         <Row>
@@ -116,144 +55,83 @@ export const CreateBestPracticePage = () => {
                     <Row>
                       <Col md="10">
                         <InputField
+                          id="input-title"
                           label="Title"
-                          className="text-sm"
-                          name="title"
-                          value={title}
-                          onChange={(e: any) => setTitle(e.target.value)}
+                          value={bestPractice.title}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setBestPractice({
+                              ...bestPractice,
+                              title: e.target.value,
+                            })
+                          }
                         />
                       </Col>
+                    </Row>
+                    <Row>
                       <Col md="10">
                         <InputField
+                          id="input-description"
                           label="Description"
-                          name="description"
                           type="textarea"
                           rows="5"
-                          // onChange={handleInputChange}
-                          onChange={(e: any) => setDescription(e.target.value)}
-                          value={description}
+                          value={bestPractice.description}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setBestPractice({
+                              ...bestPractice,
+                              description: e.target.value,
+                            })
+                          }
                         />
                       </Col>
+                    </Row>
+                    <Row>
                       <Col md="10">
                         <FormGroup>
-                          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control*/}
-                          <label className="form-control-label">Tags</label>
+                          <label htmlFor="select-tags" className="form-control-label">
+                            Tags
+                          </label>
                           <CreatableSelect
-                            // styles={{
-                            //   container: base => ({
-                            //     ...base,
-                            //   }),
-                            // }}
+                            id="select-tags"
                             isMulti
-                            // onChange={handleChange}
-                            options={defaultTags}
+                            options={defaultBestPracticesTags}
+                            onChange={handleChange}
                           />
                         </FormGroup>
                       </Col>
+                    </Row>
+                    <Row>
                       <Col md="10">
-                        <FormGroup>
-                          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control*/}
-                          <label className="form-control-label">Image Url</label>
-                          <Input
-                            className="text-sm"
-                            name="title"
-                            value={imageUrl}
-                            onChange={e => setImageUrl(e.target.value)}
-                          />
-                        </FormGroup>
+                        <InputField
+                          id="input-image-url"
+                          label="Image Url"
+                          value={bestPractice.imageUrl}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setBestPractice({
+                              ...bestPractice,
+                              imageUrl: e.target.value,
+                            })
+                          }
+                        />
                       </Col>
+                    </Row>
+                    <Row>
+                      <InputField
+                        id="file-content-upload"
+                        type="file"
+                        name="file"
+                        onChange={changeFileHandler}
+                        className="form-control"
+                      />
                     </Row>
                   </CardBody>
                 </Card>
               </div>
             </Row>
-            {/*
-            <FormGroup>
-              <label className="form-control-label">Title</label>
-              {simpleValidator.current.message('title', content.title, 'required|min:3|max:50')}
-              <Input
-                type="text"
-                name="title"
-                onChange={handleInputChange}
-                onBlur={() => simpleValidator.current.showMessageFor('title')}
-              />
-            </FormGroup>
-             */}
           </Col>
         </Row>
-        {/* <Row>
-          <Col className="order-xl-1">
-            <FormGroup>
-              <label className="form-control-label">Description</label>
-              {simpleValidator.current.message('description', content.description, 'required|max:1000')}
-              <Input
-                name="description"
-                type="textarea"
-                rows="5"
-                onChange={handleInputChange}
-              />
-              <p className="float-right">{content.description.length} / 1000</p>
-            </FormGroup>
-          </Col>
-        </Row> */}
+
         <Row>
-          <Col>
-            <FormGroup>
-              <div className="files">
-                <Files
-                  className="files-dropzone"
-                  onChange={fileUpload}
-                  onError={onFilesError}
-                  accepts={[".jpg", ".pdf", "audio/*", ".html"]}
-                  multiple
-                  maxFileSize={10000000}
-                  minFileSize={0}
-                  clickable
-                >
-                  <Tooltip
-                    placement="right"
-                    isOpen={tooltipOpen}
-                    target="TooltipExample"
-                    toggle={toggle}
-                  >
-                    Attach files
-                  </Tooltip>
-                  <svg
-                    id="TooltipExample"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    fill="currentColor"
-                    className="bi bi-paperclip"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z" />
-                  </svg>
-                </Files>
-                {/* <div className="file-name d-flex" hidden={formData.entries("file").next().done}> */}
-                {/* <p className="mt-2">{formData.entries("file").next().done ? "" : formData.get("file").name}</p> */}
-              </div>
-            </FormGroup>
-          </Col>
-        </Row>
-        <div className="uploaded-file">
-          <Row>
-            <Col sm="10">
-              {/* @ts-ignore */}
-              <Card hidden={formData.entries("file").next().done}>
-                <CardBody>
-                  <Button close onClick={removeFile} />
-                  <CardText tag="h5">
-                    {/* @ts-ignore */}
-                    {formData.entries().next().done ? "" : formData.get("file").name}
-                  </CardText>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-        <Row>
-          <Button color="primary" type="submit" onClick={e => console.log(e)}>
+          <Button color="primary" type="submit" onClick={saveBestPractice}>
             Create
           </Button>
         </Row>
