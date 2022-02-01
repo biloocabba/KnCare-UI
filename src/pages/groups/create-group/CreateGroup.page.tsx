@@ -13,6 +13,8 @@ import { EditGroupPanel } from "..";
 
 export const CreateGroupPage = () => {
   const initialState: Partial<Group> = {
+    // @todo make this use real id
+    id: Math.floor(Math.random() * 1000) + 1,
     name: "",
     description: "",
     members: [],
@@ -22,10 +24,8 @@ export const CreateGroupPage = () => {
   const groupsState = useAppSelector(state => state.group);
 
   const [group, setGroup] = useState(initialState);
-  const [addMembersCollapse, setAddMembersCollapse] = useState(false);
-  // const [alert, setAlert] = useState(groupsState.isError);
 
-  const onSave = () => {
+  const onCreate = () => {
     dispatch(createGroup(group));
   };
 
@@ -39,10 +39,8 @@ export const CreateGroupPage = () => {
           <EditGroupPanel
             group={group as Group}
             setGroup={setGroup}
-            onSave={onSave}
+            onSave={onCreate}
             groupsState={groupsState}
-            addMembersCollapse={addMembersCollapse}
-            setAddMembersCollapse={setAddMembersCollapse}
           />
         )}
       </Container>

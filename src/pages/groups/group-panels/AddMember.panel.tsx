@@ -7,7 +7,6 @@ import {
   searchEmployees,
   selectAllBusinessUnitsDataAsSelectOptions,
   selectAllCountryDataAsSelectOptions,
-  selectEmployeesState,
 } from "redux/features";
 
 import { SearchEmployeesFilterPanel } from "../../users";
@@ -15,15 +14,22 @@ import { SearchEmployeesFilterPanel } from "../../users";
 interface Props {
   group: Group;
   setGroup: (group: Group) => void;
+  selectedRows: Employee[];
+  setSelectedRows: (selectedRows: Employee[]) => void;
+  tableRef: React.MutableRefObject<undefined>;
 }
 
-export const AddMemberPanel = ({ group, setGroup }: Props) => {
+export const AddMemberPanel = ({
+  group,
+  setGroup,
+  selectedRows,
+  setSelectedRows,
+  tableRef,
+}: Props) => {
   const dispatch = useAppDispatch();
 
   const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
-
-  const employees = useAppSelector(selectEmployeesState);
 
   const jobTitles: SelectOption[] = [
     { value: "1", label: "product manager" },
@@ -34,8 +40,12 @@ export const AddMemberPanel = ({ group, setGroup }: Props) => {
     { value: "6", label: "logistics consultant" },
   ];
 
-  const onEmployeeAdd = (employee: Employee) => {
-    setGroup({ ...group, members: [...group.members, employee.id] });
+  const onEmployeeAdd = (selectedEmployees: Employee[]) => {
+    const employeeIds = selectedEmployees.map(employee => employee.id);
+    setGroup({ ...group, members: [...group.members, ...employeeIds] });
+    setSelectedRows([]);
+    // @ts-ignore
+    tableRef.current.selectionContext.selected = [];
   };
 
   const onClickSearchEmployees = (filters: EmployeeQueryFilters): void => {
@@ -51,16 +61,8 @@ export const AddMemberPanel = ({ group, setGroup }: Props) => {
         businessUnits={businessUnits}
       />
       <FormGroup>
-        <Button
-          style={{
-            marginTop: "32px",
-            marginLeft: "32px",
-            height: "40px",
-          }}
-          color="success"
-          onClick={() => onEmployeeAdd(employees.entities[0])}
-        >
-          Add
+        <Button color="success" onClick={() => onEmployeeAdd(selectedRows)}>
+          Add Member To Group
         </Button>
       </FormGroup>
     </>

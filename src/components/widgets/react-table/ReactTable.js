@@ -20,6 +20,7 @@ export const ReactTable = ({
   setSelectedRows,
   searchBarPlaceholder,
   selectButtonText,
+  tableRef,
 }) => {
   const formatActionButtonCell = (cell, row) => {
     return (
@@ -84,6 +85,7 @@ export const ReactTable = ({
           </div>
           <BootstrapTable
             {...props.baseProps}
+            ref={tableRef}
             bootstrap4
             pagination={pagination}
             bordered={false}
@@ -100,10 +102,11 @@ ReactTable.propTypes = {
   columns: PropTypes.array.isRequired,
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
-  onViewDetailsClick: PropTypes.func.isRequired,
-  onDeleteItemClick: PropTypes.func.isRequired,
+  onViewDetailsClick: PropTypes.func,
+  onDeleteItemClick: PropTypes.func,
   selectedRows: PropTypes.array.isRequired,
   setSelectedRows: PropTypes.func.isRequired,
+  tableRef: PropTypes.object,
   searchBarPlaceholder: PropTypes.string,
   selectButtonText: PropTypes.string,
 };

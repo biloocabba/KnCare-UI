@@ -7,6 +7,14 @@ export interface CareMemberSaveRequest {
   groupIds?: number[];
 }
 
+export interface GroupSaveRequest {
+  id: number;
+  name: string;
+  active: boolean;
+  members: number[];
+  description: string;
+}
+
 export interface EmployeeQueryFilters {
   lastName?: string;
   businessUnitId?: number;
