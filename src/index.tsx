@@ -24,6 +24,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import ReactDOM from "react-dom";
 // import { ToastContainer } from "react-toastify";
 
+import { AlertProvider } from "context";
 import { AdminLayout, AuthLayout } from "layouts";
 
 import { store } from "redux/app";
@@ -46,12 +47,14 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <StrictMode>
-        <Switch>
-          <Route path="/admin" render={() => <AdminLayout />} />
-          <Route path="/auth" render={() => <AuthLayout />} />
-          <Route path="/" render={() => <AdminLayout />} />
-          <Redirect from="*" to="/" />
-        </Switch>
+        <AlertProvider>
+          <Switch>
+            <Route path="/admin" render={() => <AdminLayout />} />
+            <Route path="/auth" render={() => <AuthLayout />} />
+            <Route path="/" render={() => <AdminLayout />} />
+            <Redirect from="*" to="/" />
+          </Switch>
+        </AlertProvider>
       </StrictMode>
     </BrowserRouter>
   </Provider>,
