@@ -5,6 +5,7 @@ import { Container } from "reactstrap";
 import { BoxHeader } from "components/headers";
 
 import { Group } from "types";
+import { CREATE_ENTITY_ID } from "variables/app.consts";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { createGroup } from "redux/features";
@@ -13,8 +14,7 @@ import { EditGroupPanel } from "..";
 
 export const CreateGroupPage = () => {
   const initialState: Partial<Group> = {
-    // @todo make this use real id
-    id: Math.floor(Math.random() * 1000) + 1,
+    id: CREATE_ENTITY_ID,
     name: "",
     description: "",
     members: [],
@@ -32,17 +32,14 @@ export const CreateGroupPage = () => {
   return (
     <>
       <BoxHeader />
-      {alert}
 
       <Container className="mt--6" fluid>
-        {group && (
-          <EditGroupPanel
-            group={group as Group}
-            setGroup={setGroup}
-            onSave={onCreate}
-            groupsState={groupsState}
-          />
-        )}
+        <EditGroupPanel
+          group={group as Group}
+          setGroup={setGroup}
+          onSave={onCreate}
+          isLoading={groupsState.isLoading}
+        />
       </Container>
     </>
   );

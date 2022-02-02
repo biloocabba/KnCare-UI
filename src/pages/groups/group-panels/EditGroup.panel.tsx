@@ -4,15 +4,13 @@ import { InputField } from "components/widgets";
 
 import { Group } from "types";
 
-import { StateType } from "redux/features";
-
 import { MembersPanel } from ".";
 
 interface EditGroupPanelProps {
   group: Group;
   setGroup: (group: Group) => void;
   onSave: (group: Group) => void;
-  groupsState: StateType<Group>;
+  isLoading: boolean;
   onBackToSearchClick?: () => void;
 }
 
@@ -20,7 +18,7 @@ export const EditGroupPanel = ({
   group,
   setGroup,
   onSave,
-  groupsState,
+  isLoading,
   onBackToSearchClick,
 }: EditGroupPanelProps) => {
   const { name, description } = group;
@@ -80,7 +78,7 @@ export const EditGroupPanel = ({
               <Row className="align-items-center py-4">
                 <Col lg="12" xs="7" className="text-right">
                   <Button color="success" onClick={() => onSave(group)}>
-                    {groupsState.isLoading ? <Spinner /> : "Submit"}
+                    {isLoading ? <Spinner /> : "Submit"}
                   </Button>
 
                   {onBackToSearchClick ? (
