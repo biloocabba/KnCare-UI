@@ -1,3 +1,5 @@
+import { Role } from "./security";
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Domain {}
 export interface Employee extends Domain {
@@ -40,6 +42,7 @@ export interface CareMember extends Employee {
 export interface CareRole extends Domain {
   id: number;
   name: string;
+  role?: Role;
 }
 
 export interface BusinessUnit extends Domain {
@@ -75,6 +78,15 @@ export interface Country extends Domain {
   number: string;
 }
 
+export interface Principal extends Domain {
+  fullName: string;
+  username: string;
+  email: string;
+  jwtToken: string;
+  countryCode3: string;
+  authRole: Role;
+  role?: string;
+}
 export interface WorldOverviewCachedReports extends Domain {
   reportName: string;
   data: WorldDataReport;
@@ -83,10 +95,3 @@ export interface WorldOverviewCachedReports extends Domain {
 export declare type WorldDataReport = {
   [countryCode: string]: number;
 };
-
-export const NO_REPORT_CACHED: WorldDataReport = { NONE: 0 };
-export const REPORT_KEY_ACTIVE_MEMBERS = "ActiveMembers";
-export const REPORT_KEY_NEW_MEMBERS = "NewMembers";
-export const REPORT_KEY_SELF_RESIGNED_MEMBERS = "SelfResignedMembers";
-export const REPORT_KEY_AUTO_OFFBOARDED_MEMBERS = "AutoOffboardedMembers";
-export const REPORT_KEY_CURRENT_MAP = "REPORT_KEY_CURRENT_MAP";

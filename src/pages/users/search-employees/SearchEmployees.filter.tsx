@@ -4,11 +4,13 @@ import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactst
 
 import { Moment } from "moment";
 
+import { WithAuthorization } from "components/authorization/WithAuthorization";
 import { DateField } from "components/widgets/date-field";
 import { InputField } from "components/widgets/input-field";
 import { SelectField } from "components/widgets/select-field";
 
 import { EmployeeQueryFilters, SelectOption } from "types";
+import { Permission } from "types/security";
 
 interface onSearchEmployeesFunction {
   (employeeSearchRequest: EmployeeQueryFilters): void;
@@ -44,6 +46,18 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
     props.onSearchEmployees(filters);
   };
 
+  const renderDateFilter = () => {
+    return (
+      <Col md="2">
+        <DateField
+          id="date-hire-from"
+          label="Hire Date From"
+          onChange={(dateAsMoment: Moment) => setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"))}
+          timeFormat={false}
+        />
+      </Col>
+    );
+  };
   return (
     <Card>
       <CardHeader>
@@ -85,26 +99,22 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
               }}
             />
           </Col>
-          <Col md="2">
-            <SelectField
-              id="select-country"
-              label="Country"
-              options={props.countries}
-              onChange={(item: SelectOption) => {
-                setSearchCountryIsoCode3(item.value);
-              }}
-            />
-          </Col>
-          <Col md="2">
-            <DateField
-              id="date-hire-from"
-              label="Hire Date From"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"))
-              }
-              timeFormat={false}
-            />
-          </Col>
+          <WithAuthorization
+            requires={Permission.Email_country_all}
+            onUnauthorized={renderDateFilter()}
+          >
+            <Col md="2">
+              <SelectField
+                id="select-country"
+                label="Country"
+                options={props.countries}
+                onChange={(item: SelectOption) => {
+                  setSearchCountryIsoCode3(item.value);
+                }}
+              />
+            </Col>
+            {renderDateFilter()} {/* reused in WithAuthorization */}
+          </WithAuthorization>
           <Col md="2">
             <FormGroup>
               <Button

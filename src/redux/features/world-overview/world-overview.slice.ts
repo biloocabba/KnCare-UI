@@ -1,15 +1,14 @@
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+import { WorldOverviewCachedReports, WorldDataReport } from "types";
 import {
-  WorldOverviewCachedReports,
-  NO_REPORT_CACHED,
-  WorldDataReport,
   REPORT_KEY_ACTIVE_MEMBERS,
   REPORT_KEY_AUTO_OFFBOARDED_MEMBERS,
   REPORT_KEY_NEW_MEMBERS,
   REPORT_KEY_SELF_RESIGNED_MEMBERS,
   REPORT_KEY_CURRENT_MAP,
-} from "types";
+  NO_REPORT_CACHED,
+} from "variables/app.consts";
 
 import {
   StateType,
