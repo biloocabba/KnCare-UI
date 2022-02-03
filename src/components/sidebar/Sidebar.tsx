@@ -29,10 +29,10 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 
 // reactstrap components
 
-import { IRoute } from "types";
+import { IRoute, Role } from "types";
 
-import { useAppDispatch, useAppSelector } from "../../redux/app";
-import { toggleSidenav } from "../../redux/features";
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { selectLoggedUserRole, toggleSidenav } from "redux/features";
 
 interface Props {
   /**
@@ -69,6 +69,7 @@ interface Props {
 
 export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
   const [state, setState] = useState<any>({});
+  const userRole = useAppSelector(selectLoggedUserRole);
   const location = useLocation();
 
   const dispatch = useAppDispatch();
@@ -132,11 +133,11 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
   /**
    * this function creates the links and collapses that appear in the sidebar (left menu)
    */
-  const createLinks = (routes: IRoute[]): ReactNode => {
+  const createLinks = (routes: IRoute[], userRole: Role): ReactNode => {
     const navItems = routes
       .filter(route => !route.global || !route.layout)
       .map(route => {
-        if (route.collapse && route.state && route.views) {
+        if (route.collapse && route.state && route.views && route.allowedRoles.includes(userRole)) {
           const st: any = {};
           st[route["state"]] = !state[route.state];
 
@@ -167,40 +168,41 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
                 ) : null}
               </NavLink>
               <Collapse isOpen={state[route.state]}>
-                <Nav className="nav-sm flex-column">{createLinks(route.views)}</Nav>
+                <Nav className="nav-sm flex-column">{createLinks(route.views, userRole)}</Nav>
               </Collapse>
             </NavItem>
           );
         } else {
-          // console.log("Not Collapsed: ", route, "Key: ", route.key);
           return (
-            <NavItem className={activeRoute(route.layout + route.path)} key={route.key}>
-              <NavLink
-                to={route.layout + route.path}
-                activeClassName=""
-                onClick={closeSidenav}
-                tag={NavLinkRRD}
-              >
-                {route.icon !== undefined ? (
-                  <>
-                    <i className={route.icon} />
-                    <span className="nav-link-text">{route.name}</span>
-                  </>
-                ) : route.miniName !== undefined ? (
-                  <>
-                    <span className="sidenav-mini-icon">{route.miniName}</span>
-                    <span className="sidenav-normal">{route.name}</span>
-                  </>
-                ) : (
-                  route.name
-                )}
-              </NavLink>
-            </NavItem>
+            <>
+              {route.allowedRoles.includes(userRole) && (
+                <NavItem className={activeRoute(route.layout + route.path)} key={route.key}>
+                  <NavLink
+                    to={route.layout + route.path}
+                    activeClassName=""
+                    onClick={closeSidenav}
+                    tag={NavLinkRRD}
+                  >
+                    {route.icon !== undefined ? (
+                      <>
+                        <i className={route.icon} />
+                        <span className="nav-link-text">{route.name}</span>
+                      </>
+                    ) : route.miniName !== undefined ? (
+                      <>
+                        <span className="sidenav-mini-icon">{route.miniName}</span>
+                        <span className="sidenav-normal">{route.name}</span>
+                      </>
+                    ) : (
+                      route.name
+                    )}
+                  </NavLink>
+                </NavItem>
+              )}
+            </>
           );
         }
       });
-
-    // console.log(navItems);
     return navItems;
   };
 
@@ -246,7 +248,7 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
       </div>
       <div className="navbar-inner">
         <Collapse navbar isOpen={true}>
-          <Nav navbar>{createLinks(routes)}</Nav>
+          <Nav navbar>{createLinks(routes, userRole)}</Nav>
 
           <hr className="my-3" />
           <h6 className="navbar-heading p-0 text-muted">

@@ -39,6 +39,7 @@ import {
   fetchCountries,
   selectAllBusinessUnitData,
   selectAllCountryData,
+  selectLoggedUserRole,
 } from "redux/features";
 
 import { useScrollToTop } from "./hooks";
@@ -56,6 +57,7 @@ export const AdminLayout = () => {
   const [isBusinessUnitsDataLoaded, setIsBusinessUnitsDataLoaded] = useState(false);
   const countries = useAppSelector(selectAllCountryData);
   const businessUnits = useAppSelector(selectAllBusinessUnitData);
+  const userRole = useAppSelector(selectLoggedUserRole);
   useScrollToTop(mainContentRef);
 
   useEffect(() => {
@@ -115,7 +117,7 @@ export const AdminLayout = () => {
           <div className="main-content" ref={mainContentRef}>
             <AdminNavbar theme={getNavbarTheme()} />
             <Switch>
-              {getRoutes(routes, "/admin")}
+              {getRoutes(routes, "/admin", userRole)}
               <Redirect from="*" to="/admin/home" />
             </Switch>
             <AdminFooter />

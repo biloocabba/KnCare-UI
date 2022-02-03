@@ -9,7 +9,7 @@ import { authorizationService } from "./authorization.service";
 
 const initialState: StateType<Principal> = {
   entities: [],
-  entity: loggedInUsers.regionalManagerUser,
+  entity: loggedInUsers.sponsorUser,
   isLoading: false,
   isSuccess: false,
   error: {},

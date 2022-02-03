@@ -26,11 +26,15 @@ import { AuthNavbar } from "components/navbars";
 import { routes } from "routes";
 
 // import { getuseScrollToTopRoutes } from "./hooks";
+import { useAppSelector } from "redux/app";
+import { selectLoggedUserRole } from "redux/features";
+
 import { useScrollToTop } from "./hooks";
 import { getRoutes } from "./utils";
 
 export const AuthLayout = () => {
   const mainContentRef = useRef(document.createElement("div"));
+  const userRole = useAppSelector(selectLoggedUserRole);
 
   useEffect(() => {
     document.body.classList.add("bg-default");
@@ -47,7 +51,7 @@ export const AuthLayout = () => {
       <div className="main-content" ref={mainContentRef}>
         <AuthNavbar />
         <Switch>
-          {getRoutes(routes, "/auth")}
+          {getRoutes(routes, "/auth", userRole)}
           <Redirect from="*" to="/auth/login" />
         </Switch>
       </div>

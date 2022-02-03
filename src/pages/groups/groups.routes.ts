@@ -1,5 +1,7 @@
 import { IRoute } from "types";
 
+import { allAuthRoles } from "../utils";
+
 import {
   CreateGroupPage,
   GroupDetailsPage,
@@ -17,6 +19,7 @@ export const groupMenu: IRoute[] = [
     state: "groupCollapse",
     path: "GroupsMenu",
     key: "GroupsMenu",
+    allowedRoles: [...allAuthRoles],
     views: [
       {
         path: GROUP_CREATE,
@@ -25,6 +28,7 @@ export const groupMenu: IRoute[] = [
         component: CreateGroupPage,
         layout: "/admin",
         key: "Groups/Create Group",
+        allowedRoles: [...allAuthRoles],
       },
       {
         path: GROUP_SEARCH,
@@ -33,6 +37,7 @@ export const groupMenu: IRoute[] = [
         component: SearchGroupsPage,
         layout: "/admin",
         key: "Groups/Search Group",
+        allowedRoles: [...allAuthRoles],
       },
     ],
   },
@@ -44,5 +49,6 @@ export const groupMenu: IRoute[] = [
     layout: "/admin",
     name: `${GROUP_DETAILS}/:id`,
     key: `Groups/${GROUP_DETAILS}/:id`,
+    allowedRoles: [...allAuthRoles],
   },
 ];

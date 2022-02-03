@@ -1,10 +1,9 @@
 import { Route } from "react-router-dom";
 
-import { IRoute, LayoutType } from "types";
+import { IRoute, LayoutType, Role } from "types";
 
-const getLayout = (route: IRoute, layout: LayoutType) => {
-  //const key = route.name + route.path;
-  if (route.layout === layout) {
+const getLayout = (route: IRoute, layout: LayoutType, userRole: Role) => {
+  if (route.layout === layout && route.allowedRoles.includes(userRole)) {
     return (
       <Route
         path={route.layout + route.path}
@@ -18,16 +17,20 @@ const getLayout = (route: IRoute, layout: LayoutType) => {
   }
 };
 
-export const getRoutes = (routes: IRoute[], layout: LayoutType) => {
-  return routes.map(route => {
-    if (route.collapse && route.views && route.views.length > 0) {
-      return getRouteViews(route.views, layout);
-    }
-
-    return getLayout(route, layout);
-  });
+const getRouteViews = (routes: IRoute[], layout: LayoutType, userRole: Role) => {
+  return routes.map(route => getLayout(route, layout, userRole));
 };
 
-const getRouteViews = (routes: IRoute[], layout: LayoutType) => {
-  return routes.map(route => getLayout(route, layout));
+export const getRoutes = (routes: IRoute[], layout: LayoutType, userRole: Role) => {
+  return routes.map(route => {
+    if (
+      route.collapse &&
+      route.views &&
+      route.views.length > 0 &&
+      route.allowedRoles.includes(userRole)
+    ) {
+      return getRouteViews(route.views, layout, userRole);
+    }
+    return getLayout(route, layout, userRole);
+  });
 };
