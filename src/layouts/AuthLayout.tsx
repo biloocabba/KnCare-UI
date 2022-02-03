@@ -27,7 +27,7 @@ import { routes } from "routes";
 
 // import { getuseScrollToTopRoutes } from "./hooks";
 import { useScrollToTop } from "./hooks";
-import { getRoutes } from "./hooks/useGetRoutes";
+import { getRoutes } from "./utils";
 
 export const AuthLayout = () => {
   const mainContentRef = useRef(document.createElement("div"));

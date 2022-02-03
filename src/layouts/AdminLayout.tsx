@@ -42,7 +42,7 @@ import {
 } from "redux/features";
 
 import { useScrollToTop } from "./hooks";
-import { getRoutes } from "./hooks/useGetRoutes";
+import { getRoutes } from "./utils";
 
 export const AdminLayout = () => {
   const dispatch = useAppDispatch();
@@ -134,7 +134,7 @@ export const AdminLayout = () => {
       <div className="main-content" ref={mainContentRef}>
         <AdminNavbar theme={getNavbarTheme()} />
         <Switch>
-          {useGetRoutes(routes, "/admin")}
+          {getRoutes(routes, "/admin")}
           <Redirect from="*" to="/admin/home" />
         </Switch>
         <AdminFooter />
