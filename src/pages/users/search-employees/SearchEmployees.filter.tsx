@@ -100,7 +100,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
             />
           </Col>
           <WithAuthorization
-            requires={Permission.Email_country_all}
+            requires={Permission.Employee_country_all}
             onUnauthorized={renderDateFilter()}
           >
             <Col md="2">

@@ -11,7 +11,8 @@ const testPrincipal: Principal = {
   email: "stefano.fiorenza@kuehne-nagel.com",
   jwtToken: "abracadabra",
   countryCode3: "ITA",
-  authRole: Role.Advocate,
+  authRole: Role.RegionalManager,
+  role: "RegionalTransformationManager",
 };
 
 const initialState: StateType<Principal> = {

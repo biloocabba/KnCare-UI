@@ -1,10 +1,10 @@
 export enum Role {
-  RegionalManager,
-  CountryManager,
-  Advocate,
-  Trainer,
-  Sponsor,
-  Anonymous,
+  RegionalManager = 6,
+  CountryManager = 5,
+  Advocate = 4,
+  Trainer = 3,
+  Sponsor = 2,
+  Anonymous = 1,
 }
 
 export enum Permission {

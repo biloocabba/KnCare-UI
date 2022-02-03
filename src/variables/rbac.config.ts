@@ -4,6 +4,7 @@ import { Permission, PolicyMap, Role } from "types/security";
 export const AnonymousPermissions: Permission[] = [];
 
 export const SponsorPermissions: Permission[] = [
+  ...AnonymousPermissions,
   Permission.Employee_read,
   Permission.CareMember_read,
   Permission.BestPractice_read,
