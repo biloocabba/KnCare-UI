@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import {
   Button,
@@ -15,7 +15,6 @@ import {
   Row,
 } from "reactstrap";
 
-import { createRole, retrieveRoles } from "actions/roles";
 import AsyncSelect2 from "react-select2-wrapper";
 
 import { BoxHeader } from "components/headers";
@@ -34,9 +33,7 @@ var CreateRolePage = () => {
 
   const roles = useSelector(state => state.roles);
   const [role, setRole] = useState(initialState);
-  const [submitted, setSubmitted] = useState(false);
-
-  const dispatch = useDispatch();
+  const [submitted] = useState(false);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -44,7 +41,7 @@ var CreateRolePage = () => {
   };
 
   useEffect(() => {
-    dispatch(retrieveRoles());
+    // dispatch(retrieveRoles());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -75,23 +72,23 @@ var CreateRolePage = () => {
         }
       }
       role.rank = Math.ceil(num / 2);
-      dispatch(createRole(role))
-        .then(data => {
-          setRole({
-            id: null,
-            name: data.name,
-            rankedBefore: data.rankedBefore,
-            rankedAfter: data.rankedAfter,
-            active: data.active,
-            createdAt: data.createdAt,
-            updatedAt: data.updatedAt,
-            rank: data.rank,
-          });
-          setSubmitted(true);
-        })
-        .catch(e => {
-          console.log(e);
-        });
+      // dispatch(createRole(role))
+      //   .then(data => {
+      //     setRole({
+      //       id: null,
+      //       name: data.name,
+      //       rankedBefore: data.rankedBefore,
+      //       rankedAfter: data.rankedAfter,
+      //       active: data.active,
+      //       createdAt: data.createdAt,
+      //       updatedAt: data.updatedAt,
+      //       rank: data.rank,
+      //     });
+      //     setSubmitted(true);
+      //   })
+      //   .catch(e => {
+      //     console.log(e);
+      //   });
     }
   };
 
