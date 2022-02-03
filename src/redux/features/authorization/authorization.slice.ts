@@ -3,13 +3,15 @@ import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Principal, LoginBody } from "types";
 
 import { StateType } from "..";
-import { loggedInUsers } from "../utils/in-memory-api-mock/api-mock-data/authorization";
+// import { loggedInUsers } from "../utils/in-memory-api-mock/api-mock-data/authorization";
 
 import { authorizationService } from "./authorization.service";
 
 const initialState: StateType<Principal> = {
   entities: [],
-  entity: loggedInUsers.sponsorUser,
+  // entity: loggedInUsers.sponsorUser, // can't access dashboards
+  // entity: loggedInUsers.regionalManagerUser, // has all roles
+  entity: null, // no user at start
   isLoading: false,
   isSuccess: false,
   error: {},
@@ -17,11 +19,14 @@ const initialState: StateType<Principal> = {
 
 export const login = createAsyncThunk("authorization/login", async (body: LoginBody) => {
   const { data } = await authorizationService.login(body);
+
   return data;
 });
 
 export const logout = createAsyncThunk("authorization/logout", async () => {
   const { data } = await authorizationService.logout();
+  console.log("logout", data);
+
   return data;
 });
 
@@ -47,8 +52,8 @@ export const authorizationSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = true;
     });
-    builder.addCase(logout.fulfilled, (state, action) => {
-      state.entity = action.payload;
+    builder.addCase(logout.fulfilled, state => {
+      state.entity = null;
       state.isLoading = false;
       state.isSuccess = true;
     });

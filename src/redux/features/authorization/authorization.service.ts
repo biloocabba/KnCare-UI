@@ -1,11 +1,11 @@
 import { LoginBody } from "types";
-import { toFormData } from "types/utils";
 
 import { httpCommon, HttpResponseType } from "../utils";
 
 const login = (body: LoginBody): HttpResponseType => {
-  const bodyAsFormData = toFormData(body);
-  return httpCommon.post(`/login`, bodyAsFormData);
+  console.log("body", body);
+
+  return httpCommon.post(`/login`, body);
 };
 
 const logout = (): HttpResponseType => {

@@ -32,12 +32,16 @@ import classnames from "classnames";
 import stefanoImg from "assets/img/care/stefano-fiorenza.jpg";
 import { Theme } from "types";
 
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { logout, selectLoggedUser } from "redux/features";
+
 interface Props {
   theme: Theme;
 }
 
 export const AdminNavbar = ({ theme }: Props) => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectLoggedUser);
 
   // // function that on mobile devices makes the search open
   // const openSearch = () => {
@@ -67,7 +71,7 @@ export const AdminNavbar = ({ theme }: Props) => {
   // };
 
   const logOut = () => {
-    // dispatch(logout());
+    dispatch(logout());
   };
 
   return (
@@ -398,7 +402,7 @@ export const AdminNavbar = ({ theme }: Props) => {
                       <img alt="..." src={stefanoImg} />
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
-                      <span className="mb-0 text-sm font-weight-bold">Stefano Fiorenza</span>
+                      <span className="mb-0 text-sm font-weight-bold">{user?.fullName}</span>
                     </Media>
                   </Media>
                 </DropdownToggle>

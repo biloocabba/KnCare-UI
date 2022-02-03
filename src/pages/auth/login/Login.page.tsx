@@ -1,6 +1,8 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 // nodejs library that concatenates classes
+import { useHistory } from "react-router";
+
 import {
   Button,
   Card,
@@ -26,9 +28,33 @@ import { AuthHeader } from "components/headers";
 import githubIcon from "assets/img/icons/common/github.svg";
 import googleIcon from "assets/img/icons/common/google.svg";
 
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { login, selectPrincipalState } from "redux/features";
+
 export const LoginPage = () => {
-  const [focusedEmail, setfocusedEmail] = React.useState(false);
-  const [focusedPassword, setfocusedPassword] = React.useState(false);
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+
+  const [focusedEmail, setfocusedEmail] = useState(false);
+  const [focusedPassword, setfocusedPassword] = useState(false);
+
+  const [email, setEmail] = useState("jozef.peterson@kuehne-nagel.com");
+  const [password, setPassword] = useState("test1234");
+
+  const user = useAppSelector(selectPrincipalState);
+
+  const handleSignIn = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    dispatch(login({ email, password }));
+  };
+
+  useEffect(() => {
+    if (user.entity !== null) {
+      history.push("/admin/home");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user.entity]);
+
   return (
     <>
       <AuthHeader
@@ -87,6 +113,8 @@ export const LoginPage = () => {
                       <Input
                         placeholder="Email"
                         type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                         onFocus={() => setfocusedEmail(true)}
                         onBlur={() => setfocusedEmail(true)}
                       />
@@ -106,6 +134,8 @@ export const LoginPage = () => {
                       <Input
                         placeholder="Password"
                         type="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                         onFocus={() => setfocusedPassword(true)}
                         onBlur={() => setfocusedPassword(true)}
                       />
@@ -122,7 +152,12 @@ export const LoginPage = () => {
                     </label>
                   </div>
                   <div className="text-center">
-                    <Button className="my-4" color="info" type="button">
+                    <Button
+                      className="my-4"
+                      color="info"
+                      type="button"
+                      onClick={e => handleSignIn(e)}
+                    >
                       Sign in
                     </Button>
                   </div>
