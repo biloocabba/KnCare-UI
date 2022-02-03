@@ -60,6 +60,9 @@ export async function post(url: string, body: any): Promise<AxiosResponse> {
   if (url.includes("/care-member")) {
     return saveCareMember(url, body);
   }
+  if (url.includes("/login")) {
+    return saveCareMember(url, body);
+  }
   if (url.includes(BEST_PRACTICE_ROUTE)) {
     return saveBestPractice(body);
   }
