@@ -118,7 +118,7 @@ export const AdminLayout = () => {
             <AdminNavbar theme={getNavbarTheme()} />
             <Switch>
               {getRoutes(routes, "/admin", userRole)}
-              <Redirect from="*" to="/admin/home" />
+              <Redirect from="*" to="/auth/login" />
             </Switch>
             <AdminFooter />
           </div>
