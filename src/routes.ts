@@ -386,8 +386,10 @@ import { IRoute } from "types";
 
 import { authMenu } from "./pages/auth";
 import { bestPracticesMenu } from "./pages/best-practices";
+import { homeMenu } from "./pages/home";
 
 export const routes: IRoute[] = [
+  ...homeMenu,
   ...userMenu,
   ...groupMenu,
   ...dashboardMenu,
