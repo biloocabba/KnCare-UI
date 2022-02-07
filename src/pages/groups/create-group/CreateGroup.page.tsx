@@ -22,7 +22,7 @@ export const CreateGroupPage = () => {
   const dispatch = useAppDispatch();
   const groupsState = useAppSelector(state => state.group);
 
-  const { alert, setSaveSent } = useAlerts(groupsState);
+  const { alert, setSaveSent } = useAlerts(groupsState, "Group Created");
 
   const [group, setGroup] = useState(initialState);
   const [addMembersCollapse, setAddMembersCollapse] = useState(false);
