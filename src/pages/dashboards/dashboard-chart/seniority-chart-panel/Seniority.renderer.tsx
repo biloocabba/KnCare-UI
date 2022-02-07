@@ -2,7 +2,7 @@ import { Pie } from "react-chartjs-2";
 
 import { ApiResponse, IPieChart, Chart, ThemeColors } from "types";
 
-import { pieDataTemplate, pieOptionsTemplate } from "../templates";
+import { pieDataTemplate, pieOptionsTemplate } from "..";
 
 const toPieChartUI = (apiResponse: Chart[]): IPieChart => {
   const template = pieDataTemplate({
