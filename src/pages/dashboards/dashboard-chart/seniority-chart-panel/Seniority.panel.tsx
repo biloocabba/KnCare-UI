@@ -1,7 +1,7 @@
 import { dashboardService } from "redux/features/dashboards";
 
 import { ChartPanel } from "../chart-panels";
-import { useChart } from "../useChart";
+import { useChart } from "../hooks";
 
 import { renderChart } from "./Seniority.renderer";
 
