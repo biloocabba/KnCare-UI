@@ -1,6 +1,6 @@
 import { defaults } from "react-chartjs-2";
 
-import { colors, fonts, mode } from "./theme";
+import { ThemeColors, fonts, mode } from "types";
 
 defaults.maintainAspectRatio = false;
 
@@ -11,7 +11,7 @@ defaults.plugins.legend.labels.padding = 16;
 defaults.plugins.legend.labels.usePointStyle = true;
 
 // change text color
-defaults.color = mode === "dark" ? colors.gray[700] : colors.gray[600];
+defaults.color = mode === "dark" ? ThemeColors.gray[700] : ThemeColors.gray[600];
 
 // change font
 defaults.font = {
@@ -23,26 +23,26 @@ defaults.font = {
 defaults.layout.padding = 0;
 
 // change grid colors to following
-defaults.scale.grid.color = colors.gray[200];
+defaults.scale.grid.color = ThemeColors.gray[200];
 
 // point
 defaults.elements.point.radius = 0;
-defaults.elements.point.backgroundColor = colors.theme["primary"];
+defaults.elements.point.backgroundColor = ThemeColors.theme["primary"];
 
 // line
 defaults.elements.line.tension = 0.4;
 defaults.elements.line.borderWidth = 4;
-defaults.elements.line.borderColor = colors.theme["primary"];
-defaults.elements.line.backgroundColor = colors.transparent;
+defaults.elements.line.borderColor = ThemeColors.theme["primary"];
+defaults.elements.line.backgroundColor = ThemeColors.transparent;
 defaults.elements.line.borderCapStyle = "round";
 
 // bar (v2. rectangle)
-defaults.elements.bar.backgroundColor = colors.theme["warning"];
+defaults.elements.bar.backgroundColor = ThemeColors.theme["warning"];
 defaults.elements.bar.borderRadius = 10;
 
 // arc (pie and doughnut)
-defaults.elements.arc.backgroundColor = colors.theme["primary"];
-defaults.elements.arc.borderColor = mode === "dark" ? colors.gray[800] : colors.white;
+defaults.elements.arc.backgroundColor = ThemeColors.theme["primary"];
+defaults.elements.arc.borderColor = mode === "dark" ? ThemeColors.gray[800] : ThemeColors.white;
 // defaults.elements.arc.borderWidth = 4;
 defaults.elements.arc.hoverOffset = 6;
 
