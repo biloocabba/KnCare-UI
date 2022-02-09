@@ -8,6 +8,7 @@ const regionalManagerUser: Principal = {
   countryCode3: "BRA",
   authRole: Role.RegionalManager,
   role: "RegionalTransformationManager",
+  imageUrl: "https://i.pravatar.cc/300",
 };
 
 const countryManagerUser: Principal = {
@@ -18,6 +19,7 @@ const countryManagerUser: Principal = {
   countryCode3: "EST",
   authRole: Role.CountryManager,
   role: "CountryTransformationManager",
+  imageUrl: "https://i.pravatar.cc/300",
 };
 
 const advocateUser: Principal = {
@@ -28,6 +30,7 @@ const advocateUser: Principal = {
   countryCode3: "EST",
   authRole: Role.Advocate,
   role: "Advocate",
+  imageUrl: "https://i.pravatar.cc/300",
 };
 
 const trainerUser: Principal = {
@@ -38,6 +41,7 @@ const trainerUser: Principal = {
   countryCode3: "EST",
   authRole: Role.Trainer,
   role: "Trainer",
+  imageUrl: "https://i.pravatar.cc/300",
 };
 
 const sponsorUser: Principal = {
@@ -48,6 +52,7 @@ const sponsorUser: Principal = {
   countryCode3: "EST",
   authRole: Role.Sponsor,
   role: "Sponsor",
+  imageUrl: "https://i.pravatar.cc/300",
 };
 
 const anonymousUser: Principal = {
