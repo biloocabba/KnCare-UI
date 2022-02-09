@@ -82,7 +82,7 @@ export interface Principal extends Domain {
   fullName: string;
   username: string;
   email: string;
-  jwtToken: string;
+  access_token: string;
   countryCode3: string;
   authRole: Role;
   role?: string;
