@@ -1,51 +1,51 @@
 import { Principal, Role } from "types";
 
 const regionalManagerUser: Principal = {
-  fullName: "Stefano Fiorenza",
-  username: "stefanofiorenza",
-  email: "stefano.fiorenza@kuehne-nagel.com",
-  jwtToken: "abracadabra",
-  countryCode3: "ITA",
+  fullName: "Gabriela Rios",
+  username: "gabriela.rios",
+  email: "gabriela.rios@Kuehne-Nagel.com",
+  jwtToken: "asdlasdloldfiadjadsfhueiy2839r7489fsdhfaiuehf328",
+  countryCode3: "BRA",
   authRole: Role.RegionalManager,
   role: "RegionalTransformationManager",
 };
 
 const countryManagerUser: Principal = {
-  fullName: "Piero Bortolotti",
-  username: "pierobortolotti",
-  email: "piero.bortolotti@kuehne-nagel.com",
-  jwtToken: "abracadabra",
-  countryCode3: "ITA",
+  fullName: "Kristin Allik",
+  username: "kristin.allik",
+  email: "kristin.allik@kuehne-nagel.com",
+  jwtToken: "rfwpio425ipogfskpflk3p32q09orpfafdefkaöldfkaodffe",
+  countryCode3: "EST",
   authRole: Role.CountryManager,
   role: "CountryTransformationManager",
 };
 
 const advocateUser: Principal = {
-  fullName: "Federico Fusco",
-  username: "federicofusco",
-  email: "federico.fusco@kuehne-nagel.com",
-  jwtToken: "abracadabra",
-  countryCode3: "ITA",
+  fullName: "Laura Haavik",
+  username: "laura.haavik",
+  email: "laura.haavik@kuehne-nagel.com",
+  jwtToken: "45jo54juo3iurfeoiru2o3u42o3ijdklmnlkjr2o3irujoi23u4o2ij42oi",
+  countryCode3: "EST",
   authRole: Role.Advocate,
   role: "Advocate",
 };
 
 const trainerUser: Principal = {
-  fullName: "Tim Kirkpatrick",
-  username: "timkirkpatrick",
-  email: "tim.kirkpatrick@kuehne-nagel.com",
-  jwtToken: "abracadabra",
-  countryCode3: "FRA",
+  fullName: "Stefano Fiorenza",
+  username: "stefano.fiorenza",
+  email: "stefano.fiorenza@kuehne-nagel.com",
+  jwtToken: "dasdasdtyaudtyquwghjasfy3242t3jgr4vr23vtv32yt32v2gsya65s6",
+  countryCode3: "EST",
   authRole: Role.Trainer,
   role: "Trainer",
 };
 
 const sponsorUser: Principal = {
-  fullName: "Jozef Peterson",
-  username: "jozefpeterson",
-  email: "jozef.peterson@kuehne-nagel.com",
-  jwtToken: "abracadabra",
-  countryCode3: "USA",
+  fullName: "Tomi Markus Alber",
+  username: "tomimarkus.alber",
+  email: "tomimarkus.alber@kuehne-nagel.com",
+  jwtToken: "sgdaugu32yg2gy3jrgt3fcht43hv4hgvyghgafuadsrtf675r76afs6a78",
+  countryCode3: "EST",
   authRole: Role.Sponsor,
   role: "Sponsor",
 };
