@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { ApiResponse } from "types";
 
-import { renderAlert } from "./Chart.renderers";
+import { renderAlert } from "../Chart.renderers";
 
 interface ApiCallFunction<T> {
   (): Promise<ApiResponse<T>>;

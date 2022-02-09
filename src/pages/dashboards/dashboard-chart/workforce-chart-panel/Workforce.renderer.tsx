@@ -2,17 +2,19 @@ import { Line } from "react-chartjs-2";
 
 import { ApiResponse, Chart, ILineChart } from "types";
 
-import { workforceTemplate } from "./Workforce.template";
+import { lineDataTemplate, lineOptionsTemplate } from "..";
 
 const toWorkforceLineChartUI = (apiResponse: Chart[]): ILineChart => {
+  const template = lineDataTemplate({ label: "Members" });
   apiResponse.forEach(workforceRecord => {
-    workforceTemplate.data.labels = workforceTemplate.data.labels
-      ? workforceTemplate.data.labels
-      : [];
-    workforceTemplate.data.labels.push(workforceRecord.label);
-    workforceTemplate.data.datasets[0].data.push(workforceRecord.value);
+    template.labels = template.labels ? template.labels : [];
+    template.labels.push(workforceRecord.label);
+    template.datasets[0].data.push(workforceRecord.value);
   });
-  return workforceTemplate;
+  return {
+    data: template,
+    options: lineOptionsTemplate,
+  };
 };
 
 export const renderChart = (response: ApiResponse<Chart[]>): JSX.Element => {

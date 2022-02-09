@@ -3,7 +3,7 @@ import { TurnoverChart } from "types";
 import { dashboardService } from "redux/features/dashboards";
 
 import { ChartPanel } from "../chart-panels";
-import { useChart } from "../useChart";
+import { useChart } from "../hooks";
 
 import { renderChart } from "./Turnover.renderer";
 

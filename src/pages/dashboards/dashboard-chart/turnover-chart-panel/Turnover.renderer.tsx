@@ -1,22 +1,26 @@
 import { Bar } from "react-chartjs-2";
 
-import { ApiResponse, IBarChart, TurnoverChart } from "types";
+import { ApiResponse, IBarChart, TurnoverChart, ThemeColors } from "types";
 
-import { optionsTemplate, templateTurnoverBarChart } from "./Turnover.template";
+import { barDataTemplate, barOptionsTemplate } from "..";
 
 export const toTurnoverBarChartUI = (apiResponse: TurnoverChart[]): IBarChart => {
+  const template = barDataTemplate({
+    bars: [
+      { label: "Onboarded", backgroundColor: ThemeColors.theme["success"] },
+      { label: "Offboarded", backgroundColor: ThemeColors.theme["danger"] },
+    ],
+  });
   apiResponse.forEach(turnOverRecord => {
-    templateTurnoverBarChart.labels = templateTurnoverBarChart.labels
-      ? templateTurnoverBarChart.labels
-      : [];
-    templateTurnoverBarChart.labels.push(turnOverRecord.month);
-    templateTurnoverBarChart.datasets[0].data.push(turnOverRecord.onboarded);
-    templateTurnoverBarChart.datasets[1].data.push(turnOverRecord.offboarded);
+    template.labels = template.labels ? template.labels : [];
+    template.labels.push(turnOverRecord.month);
+    template.datasets[0].data.push(turnOverRecord.onboarded);
+    template.datasets[1].data.push(turnOverRecord.offboarded);
   });
 
   return {
-    data: templateTurnoverBarChart,
-    options: optionsTemplate,
+    data: template,
+    options: barOptionsTemplate,
   };
 };
 
