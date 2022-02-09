@@ -25,7 +25,6 @@ export const login = createAsyncThunk("authorization/login", async (body: LoginB
 
 export const logout = createAsyncThunk("authorization/logout", async () => {
   const { data } = await authorizationService.logout();
-  console.log("logout", data);
 
   return data;
 });
