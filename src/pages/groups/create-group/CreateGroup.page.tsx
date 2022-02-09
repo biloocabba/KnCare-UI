@@ -4,6 +4,7 @@ import { Container } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 
+import { useAlerts } from "hooks";
 import { Group } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
 
@@ -23,14 +24,17 @@ export const CreateGroupPage = () => {
   const dispatch = useAppDispatch();
   const groupsState = useAppSelector(state => state.group);
 
+  const { alert, setSaveSent } = useAlerts(groupsState, "Group Created");
+
   const [group, setGroup] = useState(initialState);
 
   const onCreate = () => {
     dispatch(createGroup(group));
+    setSaveSent(true);
   };
-
   return (
     <>
+      {alert}
       <BoxHeader />
 
       <Container className="mt--6" fluid>
