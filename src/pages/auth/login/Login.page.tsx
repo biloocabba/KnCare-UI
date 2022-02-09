@@ -21,12 +21,9 @@ import {
 
 import classnames from "classnames";
 
-// reactstrap components
-// core components
 import { AuthHeader } from "components/headers";
 
-import githubIcon from "assets/img/icons/common/github.svg";
-import googleIcon from "assets/img/icons/common/google.svg";
+import { Role } from "types/security";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { login, selectPrincipalState } from "redux/features";
@@ -49,7 +46,7 @@ export const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (user.entity !== null) {
+    if (user.entity !== null && user.entity.authRole !== Role.Anonymous) {
       history.push("/admin/home");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,40 +54,20 @@ export const LoginPage = () => {
 
   return (
     <>
-      <AuthHeader
-        title="Welcome!"
-        lead="Use these awesome forms to login or create new account in your project for free."
-      />
+      <AuthHeader title="Welcome to Kn Care" lead="Please login" />
       <Container className="mt--8 pb-5">
         <Row className="justify-content-center">
           <Col lg="5" md="7">
             <Card className="bg-secondary border-0 mb-0">
               <CardHeader className="bg-transparent pb-5">
-                <div className="text-muted text-center mt-2 mb-3">
-                  <small>Sign in with</small>
-                </div>
                 <div className="btn-wrapper text-center">
                   <Button
                     className="btn-neutral btn-icon"
-                    color="default"
+                    color="primary"
                     href="#pablo"
                     onClick={e => e.preventDefault()}
                   >
-                    <span className="btn-inner--icon mr-1">
-                      <img alt="..." src={githubIcon} />
-                    </span>
-                    <span className="btn-inner--text">Github</span>
-                  </Button>
-                  <Button
-                    className="btn-neutral btn-icon"
-                    color="default"
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    <span className="btn-inner--icon mr-1">
-                      <img alt="..." src={googleIcon} />
-                    </span>
-                    <span className="btn-inner--text">Google</span>
+                    Sign in with SSO
                   </Button>
                 </div>
               </CardHeader>
@@ -168,11 +145,6 @@ export const LoginPage = () => {
               <Col xs="6">
                 <a className="text-light" href="#pablo" onClick={e => e.preventDefault()}>
                   <small>Forgot password?</small>
-                </a>
-              </Col>
-              <Col className="text-right" xs="6">
-                <a className="text-light" href="#pablo" onClick={e => e.preventDefault()}>
-                  <small>Create new account</small>
                 </a>
               </Col>
             </Row>

@@ -21,7 +21,6 @@ import { Switch, Redirect } from "react-router-dom";
 
 // core components
 import { AuthFooter } from "components/footers";
-import { AuthNavbar } from "components/navbars";
 
 import { routes } from "routes";
 
@@ -49,7 +48,6 @@ export const AuthLayout = () => {
   return (
     <>
       <div className="main-content" ref={mainContentRef}>
-        <AuthNavbar />
         <Switch>
           {getRoutes(routes, "/auth", userRole)}
           <Redirect from="*" to="/auth/login" />

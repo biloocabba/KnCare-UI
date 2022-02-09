@@ -12,7 +12,7 @@ export const login = async (url: string, body: LoginBody): Promise<AxiosResponse
 
   let loginResponse = user as Principal;
   if (user === undefined) {
-    loginResponse = loggedInUsers.sponsorUser;
+    loginResponse = loggedInUsers.anonymousUser;
   }
 
   const response = wrapIntoResponse(loginResponse);

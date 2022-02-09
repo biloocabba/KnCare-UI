@@ -50,9 +50,14 @@ const sponsorUser: Principal = {
   role: "Sponsor",
 };
 
-const anonymousUser: Partial<Principal> = {
+const anonymousUser: Principal = {
   authRole: Role.Anonymous,
   role: "Anonymous",
+  fullName: "Anonymous",
+  username: "Anonymous",
+  email: "Anonymous",
+  jwtToken: "Anonymous",
+  countryCode3: "",
 };
 
 export const loggedInUsers = {
