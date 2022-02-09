@@ -19,6 +19,7 @@ import {
 import { BoxHeader } from "components/headers";
 import { InputField, ReactTable } from "components/widgets";
 
+import { useAlerts } from "hooks";
 import { employeesTableColumns } from "pages/users";
 import { Group } from "types";
 
@@ -29,6 +30,7 @@ import {
   partialUpdateGroup,
   selectEmployeesState,
   selectGroupById,
+  selectGroupState,
   updateGroup,
 } from "redux/features";
 
@@ -44,14 +46,17 @@ export const GroupDetailsPage = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
 
-  const groupsState = useAppSelector(selectGroupById(groupId));
+  const groupState = useAppSelector(selectGroupById(groupId));
+  const groupsState = useAppSelector(selectGroupState);
   const employeesState = useAppSelector(selectEmployeesState);
 
-  const [group, setGroup] = useState(groupsState as Group);
+  const [group, setGroup] = useState(groupState as Group);
 
   const [selectedEmployees, setSelectedEmployees] = useState([]);
   const [currentMembersCollapse, setCurrentMembersCollapse] = useState(false);
   const [addMemberCollapse, setAddMemberCollapse] = useState(false);
+
+  const { alert, setSaveSent } = useAlerts(groupsState, "Group Updated");
 
   useEffect(() => {
     dispatch(findGroupById(groupId));
@@ -61,14 +66,8 @@ export const GroupDetailsPage = () => {
   const onSave = () => {
     if (group) {
       dispatch(updateGroup({ id: groupId, body: group }));
+      setSaveSent(true);
     }
-    // if (groupsState.isSuccess) {
-    //   setAlert(
-    //     <SweetAlert success title="Success" onConfirm={() => setAlert(false)}>
-    //       Group Updated
-    //     </SweetAlert>
-    //   );
-    // }
   };
 
   const toggleCurrentMembers = () => {
@@ -99,12 +98,10 @@ export const GroupDetailsPage = () => {
 
   return (
     <>
-      <BoxHeader />
       {alert}
+      <BoxHeader />
+
       <Container className="mt--6" fluid>
-        {/* {groupsState.isLoading ? (
-          <Spinner />
-        ) : ( */}
         <>
           {group && (
             <Row>
@@ -247,7 +244,6 @@ export const GroupDetailsPage = () => {
             </Row>
           )}
         </>
-        {/* )} */}
       </Container>
     </>
   );
