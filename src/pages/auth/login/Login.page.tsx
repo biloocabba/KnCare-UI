@@ -17,6 +17,7 @@ import {
   Container,
   Row,
   Col,
+  Alert,
 } from "reactstrap";
 
 import classnames from "classnames";
@@ -35,8 +36,8 @@ export const LoginPage = () => {
   const [focusedEmail, setfocusedEmail] = useState(false);
   const [focusedPassword, setfocusedPassword] = useState(false);
 
-  const [email, setEmail] = useState("jozef.peterson@kuehne-nagel.com");
-  const [password, setPassword] = useState("test1234");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const user = useAppSelector(selectPrincipalState);
 
@@ -55,7 +56,11 @@ export const LoginPage = () => {
   return (
     <>
       <AuthHeader title="Welcome to Kn Care" lead="Please login" />
+
       <Container className="mt--8 pb-5">
+        {user.entity !== null && user.entity.authRole === Role.Anonymous && (
+          <Alert color="warning">Login Failed! Email or Password was wrong.</Alert>
+        )}
         <Row className="justify-content-center">
           <Col lg="5" md="7">
             <Card className="bg-secondary border-0 mb-0">
