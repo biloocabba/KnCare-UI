@@ -1,5 +1,7 @@
 import { IRoute } from "types";
 
+import { allAuthRoles, fromAdvocateRole } from "../utils";
+
 import {
   BestPracticeDetailPage,
   BEST_PRACTICE_DETAILS,
@@ -17,6 +19,7 @@ export const bestPracticesMenu: IRoute[] = [
     state: "bestPracticesCollapse",
     key: "BestPracticesMenu",
     path: "BestPracticesMenu",
+    allowedRoles: [...allAuthRoles],
     views: [
       {
         path: NEW_BEST_PRACTICE,
@@ -25,6 +28,7 @@ export const bestPracticesMenu: IRoute[] = [
         component: CreateBestPracticePage,
         layout: "/admin",
         key: "Best Practice/Create New",
+        allowedRoles: [...fromAdvocateRole],
       },
       {
         path: SEARCH_BEST_PRACTICE,
@@ -33,6 +37,7 @@ export const bestPracticesMenu: IRoute[] = [
         component: SearchBestPracticesPage,
         layout: "/admin",
         key: "Best Practice/Search",
+        allowedRoles: [...allAuthRoles],
       },
     ],
   },
@@ -43,5 +48,6 @@ export const bestPracticesMenu: IRoute[] = [
     component: BestPracticeDetailPage,
     layout: "/admin",
     key: `Best Practice/${BEST_PRACTICE_DETAILS}/:id`,
+    allowedRoles: [...allAuthRoles],
   },
 ];

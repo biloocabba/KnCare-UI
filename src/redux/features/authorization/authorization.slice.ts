@@ -1,35 +1,60 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { Principal } from "types";
-import { Role } from "types/security";
+import { Principal, LoginBody } from "types";
 
 import { StateType } from "..";
+// import { loggedInUsers } from "../utils/in-memory-api-mock/api-mock-data/authorization";
 
-const testPrincipal: Principal = {
-  fullName: "Stefano Fiorenza",
-  username: "stefanofiorenza",
-  email: "stefano.fiorenza@kuehne-nagel.com",
-  jwtToken: "abracadabra",
-  countryCode3: "ITA",
-  authRole: Role.RegionalManager,
-  role: "RegionalTransformationManager",
-};
+import { authorizationService } from "./authorization.service";
 
 const initialState: StateType<Principal> = {
   entities: [],
-  entity: testPrincipal,
+  // entity: loggedInUsers.sponsorUser, // can't access dashboards
+  // entity: loggedInUsers.regionalManagerUser, // has all roles
+  entity: null, // no user at start
   isLoading: false,
   isSuccess: false,
   error: {},
 };
 
-//@todo:
-//thunks and actions to manage:
-//1) login
-//2) logout
+export const login = createAsyncThunk("authorization/login", async (body: LoginBody) => {
+  const { data } = await authorizationService.login(body);
+
+  return data;
+});
+
+export const logout = createAsyncThunk("authorization/logout", async () => {
+  const { data } = await authorizationService.logout();
+
+  return data;
+});
 
 export const authorizationSlice = createSlice({
   name: "authorization",
-  initialState: initialState,
+  initialState,
   reducers: {},
+  extraReducers: builder => {
+    // https://stackoverflow.com/questions/68184008/how-to-refactor-duplicate-code-in-redux-toolkit-createasyncthunk-and-extrareduc
+    [login, logout].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
+      builder.addCase(thunk.pending, state => {
+        state.isLoading = true;
+        state.isSuccess = false;
+      });
+      builder.addCase(thunk.rejected, (state, action) => {
+        state.error = action.error;
+        state.isLoading = false;
+        state.isSuccess = false;
+      });
+    });
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.entity = action.payload;
+      state.isLoading = false;
+      state.isSuccess = true;
+    });
+    builder.addCase(logout.fulfilled, state => {
+      state.entity = null;
+      state.isLoading = false;
+      state.isSuccess = true;
+    });
+  },
 });

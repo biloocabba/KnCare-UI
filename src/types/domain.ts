@@ -86,6 +86,7 @@ export interface Principal extends Domain {
   countryCode3: string;
   authRole: Role;
   role?: string;
+  imageUrl?: string;
 }
 export interface WorldOverviewCachedReports extends Domain {
   reportName: string;

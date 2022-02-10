@@ -2,7 +2,7 @@ import { Card, CardBody, CardHeader, Container, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 
-const HomePage = () => {
+export const HomePage = () => {
   return (
     <>
       <BoxHeader />
@@ -21,4 +21,3 @@ const HomePage = () => {
     </>
   );
 };
-export default HomePage;

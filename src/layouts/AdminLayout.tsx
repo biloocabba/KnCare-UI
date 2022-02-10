@@ -39,10 +39,11 @@ import {
   fetchCountries,
   selectAllBusinessUnitData,
   selectAllCountryData,
+  selectLoggedUserRole,
 } from "redux/features";
 
 import { useScrollToTop } from "./hooks";
-import { getRoutes } from "./hooks/useGetRoutes";
+import { getRoutes } from "./utils";
 
 export const AdminLayout = () => {
   const dispatch = useAppDispatch();
@@ -56,6 +57,7 @@ export const AdminLayout = () => {
   const [isBusinessUnitsDataLoaded, setIsBusinessUnitsDataLoaded] = useState(false);
   const countries = useAppSelector(selectAllCountryData);
   const businessUnits = useAppSelector(selectAllBusinessUnitData);
+  const userRole = useAppSelector(selectLoggedUserRole);
   useScrollToTop(mainContentRef);
 
   useEffect(() => {
@@ -115,40 +117,13 @@ export const AdminLayout = () => {
           <div className="main-content" ref={mainContentRef}>
             <AdminNavbar theme={getNavbarTheme()} />
             <Switch>
-              {getRoutes(routes, "/admin")}
-              <Redirect from="*" to="/admin/home" />
+              {getRoutes(routes, "/admin", userRole)}
+              <Redirect from="*" to="/auth/login" />
             </Switch>
             <AdminFooter />
           </div>
         </>
       )}
-      {/* <Sidebar
-        routes={routes}
-        logo={{
-          innerLink: "/",
-          imgSrc: careLogo,
-          imgAlt: "...",
-        }}
-        rtlActive={false}
-      />
-      <div className="main-content" ref={mainContentRef}>
-        <AdminNavbar theme={getNavbarTheme()} />
-        <Switch>
-          {useGetRoutes(routes, "/admin")}
-          <Redirect from="*" to="/admin/home" />
-        </Switch>
-        <AdminFooter />
-      </div> */}
-      {/* {isSidenavOpen ? (
-        <div
-          className="backdrop d-xl-none"
-          role="button"
-          tabIndex={0}
-          // @docs https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/click-events-have-key-events.md
-          onKeyDown={() => dispatch(toggleSidenav())}
-          onClick={() => dispatch(toggleSidenav())}
-        />
-      ) : null} */}
     </>
   );
 };

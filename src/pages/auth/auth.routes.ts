@@ -1,5 +1,7 @@
 import { IRoute } from "types";
 
+import { allAuthRoles } from "../utils";
+
 import { LOGIN, LoginPage } from ".";
 
 export const authMenu: IRoute[] = [
@@ -10,5 +12,6 @@ export const authMenu: IRoute[] = [
     component: LoginPage,
     layout: "/auth",
     key: "Auth/Login",
+    allowedRoles: [...allAuthRoles, 1],
   },
 ];

@@ -17,6 +17,7 @@ import {
   searchEmployees,
   wrapIntoResponse,
   reportService,
+  login,
 } from "./api-mock-service";
 import { saveBestPractice } from "./api-mock-service/mock-best-practice-api";
 
@@ -59,6 +60,9 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
 export async function post(url: string, body: any): Promise<AxiosResponse> {
   if (url.includes("/care-member")) {
     return saveCareMember(url, body);
+  }
+  if (url.includes("/login")) {
+    return login(url, body);
   }
   if (url.includes(BEST_PRACTICE_ROUTE)) {
     return saveBestPractice(body);
