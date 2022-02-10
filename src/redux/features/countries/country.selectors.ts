@@ -18,9 +18,7 @@ export const selectAllCountryDataAsSelectOptions = (countryCode3: string, role: 
   createSelector([selectAllCountryData], (countries): SelectOption[] => {
     let countriesOptions: SelectOption[] = [];
     if (role === "RegionalTransformationManager") {
-      countriesOptions = [
-        ...countries.map(country => ({ value: country.code3, label: country.name })),
-      ];
+      countriesOptions = countries.map(country => ({ value: country.code3, label: country.name }));
     } else {
       const userCountries = countries.filter(country => country.code3 === countryCode3);
       countriesOptions = userCountries.map(country => {
