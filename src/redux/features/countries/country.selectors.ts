@@ -14,15 +14,22 @@ export const selectAllCountryData = createSelector([selectCountryState], country
   return countryState.entities;
 });
 
-export const selectAllCountryDataAsSelectOptions = createSelector(
-  [selectAllCountryData],
-  (countries): SelectOption[] => {
-    const countriesOptions: SelectOption[] = countries.map(country => {
-      return { value: country.code, label: country.name };
-    });
+export const selectAllCountryDataAsSelectOptions = (countryCode3: string, role: string) =>
+  createSelector([selectAllCountryData], (countries): SelectOption[] => {
+    let countriesOptions: SelectOption[] = [];
+    if (role === "RegionalTransformationManager") {
+      countriesOptions = [
+        ...countries.map(country => ({ value: country.code3, label: country.name })),
+      ];
+    } else {
+      const userCountries = countries.filter(country => country.code3 === countryCode3);
+      countriesOptions = userCountries.map(country => {
+        return { value: country.code, label: country.name };
+      });
+    }
+
     return [ALL, ...countriesOptions];
-  }
-);
+  });
 
 export const selectCountryByIsoCode3 = (code3: string) =>
   createSelector([selectAllCountryData], countries =>

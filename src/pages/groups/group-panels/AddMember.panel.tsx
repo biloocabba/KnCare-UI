@@ -1,13 +1,10 @@
 import { Button, FormGroup } from "reactstrap";
 
+import { useSelectCountries } from "hooks";
 import { Employee, EmployeeQueryFilters, Group, SelectOption } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
-import {
-  searchEmployees,
-  selectAllBusinessUnitsDataAsSelectOptions,
-  selectAllCountryDataAsSelectOptions,
-} from "redux/features";
+import { searchEmployees, selectAllBusinessUnitsDataAsSelectOptions } from "redux/features";
 
 import { SearchEmployeesFilterPanel } from "../../users";
 
@@ -28,7 +25,8 @@ export const AddMemberPanel = ({
 }: Props) => {
   const dispatch = useAppDispatch();
 
-  const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
+  // const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
+  const { countries } = useSelectCountries();
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
 
   const jobTitles: SelectOption[] = [

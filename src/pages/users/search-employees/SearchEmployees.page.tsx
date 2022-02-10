@@ -7,20 +7,19 @@ import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
+import { useSelectCountries } from "hooks";
 import { EMPLOYEE_DETAILS } from "pages/users";
 import { EmployeeQueryFilters, SelectOption } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
-  selectAllCountryDataAsSelectOptions,
   selectEmployeesState,
   searchEmployees,
   selectAllBusinessUnitsDataAsSelectOptions,
   deleteEmployee,
 } from "redux/features";
 
-import { SearchEmployeesFilterPanel } from "./SearchEmployees.filter";
-import { employeesTableColumns } from "./SearchEmployees.table";
+import { employeesTableColumns, SearchEmployeesFilterPanel } from ".";
 
 export const SearchEmployeesPage = () => {
   const history = useHistory();
@@ -28,7 +27,8 @@ export const SearchEmployeesPage = () => {
 
   const employeeState = useAppSelector(selectEmployeesState);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
-  const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
+
+  const { countries } = useSelectCountries();
 
   // @todo find a bettter place for this
   const jobTitles: SelectOption[] = [
