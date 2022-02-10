@@ -1,6 +1,6 @@
 import { IRoute } from "types";
 
-import { allAuthRoles } from "../utils";
+import { allAuthRoles, fromAdvocateRole } from "../utils";
 
 import {
   CreateGroupPage,
@@ -28,7 +28,7 @@ export const groupMenu: IRoute[] = [
         component: CreateGroupPage,
         layout: "/admin",
         key: "Groups/Create Group",
-        allowedRoles: [...allAuthRoles],
+        allowedRoles: [...fromAdvocateRole],
       },
       {
         path: GROUP_SEARCH,

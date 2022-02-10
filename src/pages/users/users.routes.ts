@@ -1,6 +1,6 @@
 import { IRoute } from "types";
 
-import { allAuthRoles } from "../utils";
+import { allAuthRoles, fromCountryManagerRole } from "../utils";
 
 import {
   CreateCareMemberPage,
@@ -73,6 +73,6 @@ export const userMenu: IRoute[] = [
     layout: "/admin",
     name: `${CARE_MEMBER_CREATE}/:id`,
     key: `Users/${CARE_MEMBER_CREATE}/:id`,
-    allowedRoles: [...allAuthRoles],
+    allowedRoles: [...fromCountryManagerRole],
   },
 ];

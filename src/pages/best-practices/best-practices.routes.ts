@@ -1,6 +1,6 @@
 import { IRoute } from "types";
 
-import { allAuthRoles } from "../utils";
+import { allAuthRoles, fromAdvocateRole } from "../utils";
 
 import {
   BestPracticeDetailPage,
@@ -28,7 +28,7 @@ export const bestPracticesMenu: IRoute[] = [
         component: CreateBestPracticePage,
         layout: "/admin",
         key: "Best Practice/Create New",
-        allowedRoles: [...allAuthRoles],
+        allowedRoles: [...fromAdvocateRole],
       },
       {
         path: SEARCH_BEST_PRACTICE,

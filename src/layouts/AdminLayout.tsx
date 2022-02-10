@@ -124,33 +124,6 @@ export const AdminLayout = () => {
           </div>
         </>
       )}
-      {/* <Sidebar
-        routes={routes}
-        logo={{
-          innerLink: "/",
-          imgSrc: careLogo,
-          imgAlt: "...",
-        }}
-        rtlActive={false}
-      />
-      <div className="main-content" ref={mainContentRef}>
-        <AdminNavbar theme={getNavbarTheme()} />
-        <Switch>
-          {getRoutes(routes, "/admin")}
-          <Redirect from="*" to="/admin/home" />
-        </Switch>
-        <AdminFooter />
-      </div> */}
-      {/* {isSidenavOpen ? (
-        <div
-          className="backdrop d-xl-none"
-          role="button"
-          tabIndex={0}
-          // @docs https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/click-events-have-key-events.md
-          onKeyDown={() => dispatch(toggleSidenav())}
-          onClick={() => dispatch(toggleSidenav())}
-        />
-      ) : null} */}
     </>
   );
 };
