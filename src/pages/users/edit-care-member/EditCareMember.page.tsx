@@ -73,6 +73,7 @@ export const EditCareMemberPage = () => {
                   groupOptions={groups}
                   roleOptions={roles}
                   onSave={saveCareMember}
+                  buttonName={`Update Care Member`}
                 />
               </CardBody>
             </Card>

@@ -18,6 +18,7 @@ interface CareMemberPanelProps {
   groupOptions: SelectOption[];
   roleOptions: SelectOption[];
   onSave: onSaveFunction;
+  buttonName: string;
 }
 
 export const CareMemberPanel = (props: CareMemberPanelProps) => {
@@ -255,7 +256,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
         </Row>
         <Row>
           <Button color="primary" type="button" onClick={onSaveCareMember}>
-            Save
+            {props.buttonName}
           </Button>
         </Row>
       </div>
