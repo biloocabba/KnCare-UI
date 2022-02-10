@@ -3,15 +3,15 @@ import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Principal, LoginBody } from "types";
 
 import { StateType } from "..";
-import { loggedInUsers } from "../utils/in-memory-api-mock/api-mock-data/authorization";
+// import { loggedInUsers } from "../utils/in-memory-api-mock/api-mock-data/authorization";
 
-import { authorizationService } from "./authorization.service";
+import { authorizationService } from ".";
 
 const initialState: StateType<Principal> = {
   entities: [],
   // entity: loggedInUsers.sponsorUser, // can't access dashboards
-  entity: loggedInUsers.regionalManagerUser, // has all roles
-  // entity: null, // no user at start
+  // entity: loggedInUsers.regionalManagerUser, // has all roles
+  entity: null, // no user at start
   isLoading: false,
   isSuccess: false,
   error: {},

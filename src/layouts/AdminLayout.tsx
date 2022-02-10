@@ -19,10 +19,6 @@ import { useEffect, useRef, useState } from "react";
 // react library for routing
 import { useLocation, Switch, Redirect } from "react-router-dom";
 
-// core components
-// import { Spinner } from "reactstrap";
-// import { Col, Row } from "reactstrap";
-
 import { Audio } from "react-loader-spinner";
 
 import { AdminFooter } from "components/footers";
@@ -42,14 +38,12 @@ import {
   selectLoggedUserRole,
 } from "redux/features";
 
-import { useScrollToTop } from "./hooks";
-import { getRoutes } from "./utils";
+import { useScrollToTop, getRoutes } from ".";
 
 export const AdminLayout = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
 
-  // const { isSidenavOpen } = useAppSelector(state => state.sidenav);
   const mainContentRef = useRef(document.createElement("div"));
   const [isDataLoadingCompleted, setIsDataLoadingCompleted] = useState(false);
 
@@ -81,7 +75,6 @@ export const AdminLayout = () => {
   }, [businessUnits, isBusinessUnitsDataLoaded, isCountryDataLoaded]);
 
   useEffect(() => {
-    console.log("Current state: ", isCountryDataLoaded, isBusinessUnitsDataLoaded);
     if (isCountryDataLoaded && isBusinessUnitsDataLoaded) {
       setIsDataLoadingCompleted(true);
     }
