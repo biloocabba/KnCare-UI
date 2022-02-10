@@ -7,12 +7,12 @@ import { Card, CardHeader, Container, Row } from "reactstrap";
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets/react-table";
 
-import { useSelectCountries } from "hooks";
 import { CARE_MEMBER_EDIT } from "pages/users";
 import { CareMemberQueryFilters, SelectOption } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
+  selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
   selectAllRoleDataAsSelectOptions,
 } from "redux/features";
@@ -27,8 +27,8 @@ export const SearchCareMembersPage = () => {
 
   const careMemberState = useAppSelector(selectCareMemberState);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
-  // const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
-  const { countries } = useSelectCountries();
+
+  const countries: SelectOption[] = useAppSelector(selectAllCountriesDataAsSelectOptions);
   const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
   const currentRole = "admin";

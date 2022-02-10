@@ -59,7 +59,8 @@ export const matchBusinessUnit = (queryParams: URLSearchParams, entity: Employee
 export const matchCountryId = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
   if (queryParams && queryParams.get("countryId")) {
     const countryCode = queryParams.get("countryId");
-    const countryObj = countriesMockResponse.data.find(country => country.code === countryCode);
+
+    const countryObj = countriesMockResponse.data.find(country => country.code3 === countryCode);
     if (countryObj && entity.country !== countryObj.name) {
       return false;
     }

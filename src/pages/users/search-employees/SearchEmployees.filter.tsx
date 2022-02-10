@@ -9,8 +9,8 @@ import { DateField } from "components/widgets/date-field";
 import { InputField } from "components/widgets/input-field";
 import { SelectField } from "components/widgets/select-field";
 
-import { EmployeeQueryFilters, SelectOption } from "types";
-import { Permission } from "types/security";
+import { useCountryCode3State } from "hooks";
+import { EmployeeQueryFilters, SelectOption, Permission } from "types";
 
 interface onSearchEmployeesFunction {
   (employeeSearchRequest: EmployeeQueryFilters): void;
@@ -26,7 +26,7 @@ interface SearchEmployeesFilterPanelProps {
 export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProps) => {
   const [searchLastName, setSearchLastName] = useState("");
   const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
-  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>();
+  const { searchCountryIsoCode3, setSearchCountryIsoCode3 } = useCountryCode3State();
   const [searchHiringDate, setSearchHiringDate] = useState<string>();
   const [searchJobTitle, setSearchJobTitle] = useState<string>();
 
@@ -46,18 +46,6 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
     props.onSearchEmployees(filters);
   };
 
-  const renderDateFilter = () => {
-    return (
-      <Col md="2">
-        <DateField
-          id="date-hire-from"
-          label="Hire Date From"
-          onChange={(dateAsMoment: Moment) => setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"))}
-          timeFormat={false}
-        />
-      </Col>
-    );
-  };
   return (
     <Card>
       <CardHeader>
@@ -99,10 +87,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
               }}
             />
           </Col>
-          <WithAuthorization
-            requires={Permission.Employee_country_all}
-            onUnauthorized={renderDateFilter()}
-          >
+          <WithAuthorization requires={Permission.Employee_country_all}>
             <Col md="2">
               <SelectField
                 id="select-country"
@@ -113,8 +98,17 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
                 }}
               />
             </Col>
-            {renderDateFilter()} {/* reused in WithAuthorization */}
           </WithAuthorization>
+          <Col md="2">
+            <DateField
+              id="date-hire-from"
+              label="Hire Date From"
+              onChange={(dateAsMoment: Moment) =>
+                setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"))
+              }
+              timeFormat={false}
+            />
+          </Col>
           <Col md="2">
             <FormGroup>
               <Button

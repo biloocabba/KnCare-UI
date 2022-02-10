@@ -49,7 +49,7 @@ const sponsorUser: Principal = {
   username: "tomimarkus.alber",
   email: "tomimarkus.alber@kuehne-nagel.com",
   jwtToken: "sgdaugu32yg2gy3jrgt3fcht43hv4hgvyghgafuadsrtf675r76afs6a78",
-  countryCode3: "EST",
+  countryCode3: "BRA",
   authRole: Role.Sponsor,
   role: "Sponsor",
   imageUrl: "https://i.pravatar.cc/300",
