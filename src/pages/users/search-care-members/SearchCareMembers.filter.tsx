@@ -9,8 +9,10 @@ import { DateField } from "components/widgets/date-field";
 import { InputField } from "components/widgets/input-field";
 import { SelectField } from "components/widgets/select-field";
 
-import { useCountryCode3State } from "hooks";
 import { CareMemberQueryFilters, Permission, SelectOption } from "types";
+
+import { useAppSelector } from "redux/app";
+import { selectLoggedUserDefaultCountry } from "redux/features";
 
 interface onSearchCareMembersFunction {
   (filters: CareMemberQueryFilters): void;
@@ -33,7 +35,9 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
   const [searchOnBoardDateTo, setSearchOnBoardDateTo] = useState<string>("");
   const [searchOffboardingDateFrom, setSearchOffboardingDateFrom] = useState<string>("");
   const [searchOffboardingDateTo, setSearchOffboardingDateTo] = useState<string>("");
-  const { searchCountryIsoCode3, setSearchCountryIsoCode3 } = useCountryCode3State();
+  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
+    useAppSelector(selectLoggedUserDefaultCountry)
+  );
 
   const findByAllParameters = () => {
     const filters: CareMemberQueryFilters = {

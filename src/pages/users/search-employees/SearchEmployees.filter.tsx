@@ -9,8 +9,10 @@ import { DateField } from "components/widgets/date-field";
 import { InputField } from "components/widgets/input-field";
 import { SelectField } from "components/widgets/select-field";
 
-import { useCountryCode3State } from "hooks";
 import { EmployeeQueryFilters, SelectOption, Permission } from "types";
+
+import { useAppSelector } from "redux/app";
+import { selectLoggedUserDefaultCountry } from "redux/features";
 
 interface onSearchEmployeesFunction {
   (employeeSearchRequest: EmployeeQueryFilters): void;
@@ -26,7 +28,9 @@ interface SearchEmployeesFilterPanelProps {
 export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProps) => {
   const [searchLastName, setSearchLastName] = useState("");
   const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
-  const { searchCountryIsoCode3, setSearchCountryIsoCode3 } = useCountryCode3State();
+  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
+    useAppSelector(selectLoggedUserDefaultCountry)
+  );
   const [searchHiringDate, setSearchHiringDate] = useState<string>();
   const [searchJobTitle, setSearchJobTitle] = useState<string>();
 
