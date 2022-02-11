@@ -1,7 +1,8 @@
 import { SelectRowProps } from "react-bootstrap-table-next";
 
-// @todo change this type to generic type
-export const selectRow = (setSelectedRows: React.Dispatch<React.SetStateAction<any[]>>) => {
+export const selectRow = <T extends { id: string }>(
+  setSelectedRows: React.Dispatch<React.SetStateAction<T[]>>
+) => {
   return {
     mode: "checkbox",
     onSelect: (row, isSelect) => {

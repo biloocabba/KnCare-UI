@@ -6,27 +6,26 @@ import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 import { pagination, selectRow } from ".";
+import { careMemberTableColumns, employeesTableColumns } from "../../../pages/users";
+import { groupsTableColumns } from "../../../pages/groups";
 
 const { SearchBar } = Search;
 
-interface Props {
-  // @todo change data any type to generic type
-  data: any[];
-  // @todo change columns any type to generic type
-  columns: any;
+interface Props<T> {
+  data: T[];
+  columns: typeof employeesTableColumns | typeof groupsTableColumns | typeof careMemberTableColumns;
   keyField: string;
   onViewDetailsClick: (e: MouseEvent<HTMLButtonElement>) => void;
   onDeleteItemClick: (e: MouseEvent<HTMLButtonElement>) => void;
   // @todo change columns any type to generic type
   // this can be Employees or Groups, etc...
-  selectedRows: any;
-  setSelectedRows: any;
-  // setSelectedRows: React.Dispatch<React.SetStateAction<any[]>>;
+  selectedRows: T[];
+  setSelectedRows: React.Dispatch<React.SetStateAction<T[]>>;
   searchBarPlaceholder?: string;
   selectButtonText?: string;
 }
 
-export const ReactTable = ({
+export const ReactTable = <T,>({
   columns,
   keyField,
   data,
@@ -36,9 +35,11 @@ export const ReactTable = ({
   setSelectedRows,
   searchBarPlaceholder,
   selectButtonText,
-}: Props) => {
+}: Props<T>) => {
+  const [formatterFunction, setFormatterFunction] = useState(false);
+
   // @todo change row type to generic type
-  const formatActionButtonCell = (_: any, row: any) => {
+  const formatActionButtonCell = (_: any, row: T) => {
     return (
       <>
         <Button
@@ -66,8 +67,6 @@ export const ReactTable = ({
       </>
     );
   };
-
-  const [formatterFunction, setFormatterFunction] = useState(false);
 
   if (!formatterFunction) {
     columns[columns.length - 1].formatter = formatActionButtonCell; //we can/should force formatter always to be on last column
@@ -104,7 +103,6 @@ export const ReactTable = ({
             bootstrap4
             pagination={pagination}
             bordered={false}
-            // deleteRow // does not exist
             selectRow={selectRow(setSelectedRows)}
           />
         </div>
@@ -112,13 +110,3 @@ export const ReactTable = ({
     </ToolkitProvider>
   );
 };
-
-// ReactTable.propTypes = {
-//   columns: PropTypes.array.isRequired,
-//   keyField: PropTypes.string.isRequired,
-//   data: PropTypes.array.isRequired,
-//   selectedRows: PropTypes.array.isRequired,
-//   setSelectedRows: PropTypes.func.isRequired,
-//   searchBarPlaceholder: PropTypes.string,
-//   selectButtonText: PropTypes.string,
-// };
