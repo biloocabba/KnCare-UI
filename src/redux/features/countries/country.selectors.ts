@@ -14,12 +14,14 @@ export const selectAllCountryData = createSelector([selectCountryState], country
   return countryState.entities;
 });
 
-export const selectAllCountryDataAsSelectOptions = createSelector(
+export const selectAllCountriesDataAsSelectOptions = createSelector(
   [selectAllCountryData],
   (countries): SelectOption[] => {
-    const countriesOptions: SelectOption[] = countries.map(country => {
-      return { value: country.code, label: country.name };
-    });
+    const countriesOptions = countries.map(country => ({
+      value: country.code3,
+      label: country.name,
+    }));
+
     return [ALL, ...countriesOptions];
   }
 );

@@ -85,7 +85,7 @@ export interface Principal extends Domain {
   jwtToken: string;
   countryCode3: string;
   authRole: Role;
-  role?: string;
+  role: string;
   imageUrl?: string;
 }
 export interface WorldOverviewCachedReports extends Domain {

@@ -5,7 +5,7 @@ import { Principal, LoginBody } from "types";
 import { StateType } from "..";
 // import { loggedInUsers } from "../utils/in-memory-api-mock/api-mock-data/authorization";
 
-import { authorizationService } from "./authorization.service";
+import { authorizationService } from ".";
 
 const initialState: StateType<Principal> = {
   entities: [],

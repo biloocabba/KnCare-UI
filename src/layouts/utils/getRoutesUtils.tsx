@@ -12,7 +12,6 @@ const getLayout = (route: IRoute, layout: LayoutType, userRole: Role) => {
       />
     );
   } else {
-    console.log("This route will be not rendered: ", route);
     return null;
   }
 };

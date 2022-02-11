@@ -12,15 +12,14 @@ import { EmployeeQueryFilters, SelectOption } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
-  selectAllCountryDataAsSelectOptions,
   selectEmployeesState,
   searchEmployees,
   selectAllBusinessUnitsDataAsSelectOptions,
   deleteEmployee,
+  selectAllCountriesDataAsSelectOptions,
 } from "redux/features";
 
-import { SearchEmployeesFilterPanel } from "./SearchEmployees.filter";
-import { employeesTableColumns } from "./SearchEmployees.table";
+import { employeesTableColumns, SearchEmployeesFilterPanel } from ".";
 
 export const SearchEmployeesPage = () => {
   const history = useHistory();
@@ -28,9 +27,9 @@ export const SearchEmployeesPage = () => {
 
   const employeeState = useAppSelector(selectEmployeesState);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
-  const countries = useAppSelector(selectAllCountryDataAsSelectOptions);
+  const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
 
-  // @todo find a bettter place for this
+  // @todo find a better place for this
   const jobTitles: SelectOption[] = [
     { value: "1", label: "product manager" },
     { value: "2", label: "qa engineer" },
