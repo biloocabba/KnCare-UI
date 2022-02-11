@@ -88,6 +88,7 @@ export const CreateCareMemberPage = () => {
                   groupOptions={groups}
                   roleOptions={roles}
                   onSave={saveCareMember}
+                  buttonName={`Invite ${employee.firstName} ${employee.lastName}`}
                 />
               </CardBody>
             </Card>
