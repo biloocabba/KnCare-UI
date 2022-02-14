@@ -2,10 +2,7 @@ import { useState } from "react";
 
 import { Button, ButtonGroup, Col, Row } from "reactstrap";
 
-import { Group } from "types";
-
-import { useAppSelector } from "redux/app";
-import { selectEmployeesState } from "redux/features";
+import { Employee, Group } from "types";
 
 import { AddMemberPanel, CurrentMemberPanel } from ".";
 
@@ -15,10 +12,10 @@ interface Props {
 }
 
 export const MembersPanel = ({ group, setGroup }: Props) => {
-  const employeesState = useAppSelector(selectEmployeesState);
-
   const [currentMembersCollapse, setCurrentMembersCollapse] = useState(false);
   const [addMemberCollapse, setAddMemberCollapse] = useState(false);
+
+  const [currentGroupMembers, setCurrentGroupMembers] = useState<Employee[]>([]);
 
   const toggleCurrentMembers = () => {
     setCurrentMembersCollapse(!currentMembersCollapse);
@@ -48,7 +45,7 @@ export const MembersPanel = ({ group, setGroup }: Props) => {
             group={group}
             setGroup={setGroup}
             addMemberCollapse={addMemberCollapse}
-            employeesState={employeesState}
+            setCurrentGroupMembers={setCurrentGroupMembers}
           />
         </Col>
       </Row>
@@ -57,8 +54,9 @@ export const MembersPanel = ({ group, setGroup }: Props) => {
         <Col lg="12">
           <CurrentMemberPanel
             group={group}
-            employeesState={employeesState}
             currentMembersCollapse={currentMembersCollapse}
+            currentGroupMembers={currentGroupMembers}
+            setCurrentGroupMembers={setCurrentGroupMembers}
           />
         </Col>
       </Row>

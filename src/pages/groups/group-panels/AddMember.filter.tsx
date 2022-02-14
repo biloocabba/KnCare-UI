@@ -3,9 +3,9 @@ import { Button, FormGroup } from "reactstrap";
 import { SearchEmployeesFilterPanel } from "pages/users";
 import { Employee, EmployeeQueryFilters, Group, SelectOption } from "types";
 
-import { useAppDispatch, useAppSelector } from "redux/app";
+import { useAppSelector } from "redux/app";
 import {
-  searchEmployees,
+  employeeService,
   selectAllBusinessUnitsDataAsSelectOptions,
   selectAllCountriesDataAsSelectOptions,
 } from "redux/features";
@@ -16,6 +16,8 @@ interface Props {
   selectedRows: Employee[];
   setSelectedRows: (selectedRows: Employee[]) => void;
   tableRef: React.MutableRefObject<undefined>;
+  setEmployeeResultSet: React.Dispatch<React.SetStateAction<Employee[]>>;
+  setCurrentGroupMembers: React.Dispatch<React.SetStateAction<Employee[]>>;
 }
 
 export const AddMemberFilterPanel = ({
@@ -24,9 +26,9 @@ export const AddMemberFilterPanel = ({
   selectedRows,
   setSelectedRows,
   tableRef,
+  setEmployeeResultSet,
+  setCurrentGroupMembers,
 }: Props) => {
-  const dispatch = useAppDispatch();
-
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
 
@@ -42,13 +44,18 @@ export const AddMemberFilterPanel = ({
   const onEmployeeAdd = (selectedEmployees: Employee[]) => {
     const employeeIds = selectedEmployees.map(employee => employee.id);
     setGroup({ ...group, members: [...group.members, ...employeeIds] });
+    setCurrentGroupMembers(oldEmployees => [...oldEmployees, ...selectedEmployees]);
     setSelectedRows([]);
     // @ts-ignore
     tableRef.current.selectionContext.selected = [];
   };
 
-  const onClickSearchEmployees = (filters: EmployeeQueryFilters): void => {
-    dispatch(searchEmployees(filters));
+  const onClickSearchEmployees = async (filters: EmployeeQueryFilters) => {
+    // @todo find correct type for filters
+    const queryParams = new URLSearchParams(filters as any);
+    const { data } = await employeeService.searchEmployees(queryParams);
+
+    setEmployeeResultSet(data);
   };
 
   return (

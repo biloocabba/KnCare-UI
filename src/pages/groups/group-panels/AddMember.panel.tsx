@@ -6,8 +6,6 @@ import { ReactTable } from "components/widgets";
 
 import { Employee, Group } from "types";
 
-import { StateType } from "redux/features";
-
 import { employeesTableColumns } from "../../users";
 
 import { AddMemberFilterPanel } from ".";
@@ -16,12 +14,20 @@ interface Props {
   group: Group;
   setGroup: (group: Group) => void;
   addMemberCollapse: boolean;
-  employeesState: StateType<Employee>;
+  setCurrentGroupMembers: React.Dispatch<React.SetStateAction<Employee[]>>;
 }
 
-export const AddMemberPanel = ({ group, setGroup, addMemberCollapse, employeesState }: Props) => {
-  const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
+export const AddMemberPanel = ({
+  group,
+  setGroup,
+  addMemberCollapse,
+  setCurrentGroupMembers,
+}: Props) => {
   const tableRef = useRef();
+
+  const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
+  const [employeeResultSet, setEmployeeResultSet] = useState<Employee[]>([]);
+
   return (
     <Collapse isOpen={addMemberCollapse}>
       <AddMemberFilterPanel
@@ -30,14 +36,17 @@ export const AddMemberPanel = ({ group, setGroup, addMemberCollapse, employeesSt
         selectedRows={selectedEmployees}
         setSelectedRows={setSelectedEmployees}
         tableRef={tableRef}
+        setEmployeeResultSet={setEmployeeResultSet}
+        setCurrentGroupMembers={setCurrentGroupMembers}
       />
-      {employeesState.isLoading ? (
+      {/* @todo add loading here */}
+      {!employeeResultSet ? (
         <div className="text-center">
           <Spinner />
         </div>
       ) : (
         <ReactTable
-          data={employeesState.entities}
+          data={employeeResultSet}
           keyField="id"
           columns={employeesTableColumns}
           selectedRows={selectedEmployees}

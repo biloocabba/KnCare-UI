@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useHistory } from "react-router";
 
@@ -8,22 +8,38 @@ import { ReactTable } from "components/widgets";
 
 import { Employee, Group } from "types";
 
-import { useAppSelector } from "redux/app";
-import { selectEmployeesByIds, StateType } from "redux/features";
+import { employeeService } from "redux/features";
 
 import { employeesTableColumns } from "../../users";
 
 interface Props {
   group: Group;
   currentMembersCollapse: boolean;
-  employeesState: StateType<Employee>;
+  currentGroupMembers: Employee[];
+  setCurrentGroupMembers: React.Dispatch<React.SetStateAction<Employee[]>>;
 }
 
-export const CurrentMemberPanel = ({ group, employeesState, currentMembersCollapse }: Props) => {
+export const CurrentMemberPanel = ({
+  group,
+  currentMembersCollapse,
+  currentGroupMembers,
+  setCurrentGroupMembers,
+}: Props) => {
   const history = useHistory();
 
   const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
-  const groupMembers = useAppSelector(selectEmployeesByIds(group.members)) as unknown as Employee[];
+
+  useEffect(() => {
+    const fetchGroupMembers = async (members: number[]) => {
+      if (members.length > 0) {
+        const groupMembers = await employeeService.findByIds(members);
+        setCurrentGroupMembers(groupMembers.data as Employee[]);
+      }
+    };
+
+    fetchGroupMembers(group.members);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const memberDetails = (e: any) => {
     const { id } = e.target;
@@ -39,8 +55,8 @@ export const CurrentMemberPanel = ({ group, employeesState, currentMembersCollap
           <h3 className="mb-0">Group members</h3>
           <p className="text-sm mb-0">Care Members</p>
         </CardHeader>
-
-        {employeesState.isLoading && !groupMembers ? (
+        {/* @todo add loading here */}
+        {!currentGroupMembers ? (
           <div
             style={{
               textAlign: "center",
@@ -50,7 +66,7 @@ export const CurrentMemberPanel = ({ group, employeesState, currentMembersCollap
           </div>
         ) : (
           <ReactTable
-            data={groupMembers}
+            data={currentGroupMembers}
             keyField="id"
             columns={employeesTableColumns}
             onViewDetailsClick={memberDetails}
