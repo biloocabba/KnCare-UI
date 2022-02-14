@@ -1,8 +1,8 @@
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { Group } from "types/domain";
+import { Group } from "types";
 
-import { StateType, IUpdated, IPartiallyUpdated } from "redux/features/common";
+import { StateType, IUpdated, IPartiallyUpdated } from "redux/features";
 
 import { groupService } from ".";
 
