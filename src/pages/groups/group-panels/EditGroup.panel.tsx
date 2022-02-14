@@ -11,7 +11,7 @@ import {
   Spinner,
 } from "reactstrap";
 
-import { InputField } from "components/widgets/input-field";
+import { InputField } from "components/widgets";
 
 import { Group } from "types/domain";
 

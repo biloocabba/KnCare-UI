@@ -6,8 +6,6 @@ type Props = InputProps & {
 };
 
 export const InputField = ({ id, label, ...props }: Props) => {
-  console.log("InputField propssss123: ", props);
-
   return (
     <FormGroup>
       <label className="form-control-label" htmlFor={id}>
