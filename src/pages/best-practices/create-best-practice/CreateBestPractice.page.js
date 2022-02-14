@@ -14,10 +14,8 @@ import {
   FormGroup,
   Input,
   Row,
-  Tooltip,
 } from "reactstrap";
 
-import Files from "react-files";
 import CreatableSelect from "react-select/creatable";
 // reactstrap components
 import SimpleReactValidator from "simple-react-validator";
@@ -44,12 +42,12 @@ export const CreateBestPracticePage = () => {
 
   const [formData] = useState(new FormData());
   const [, forceUpdate] = useState();
-  const [errorAlert, setErrorAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("Something went wrong");
+  const [errorAlert] = useState(false);
+  const [errorMessage] = useState("Something went wrong");
 
-  const [tooltipOpen, setTooltipOpen] = useState(false);
+  // const [tooltipOpen, setTooltipOpen] = useState(false);
 
-  const toggle = () => setTooltipOpen(!tooltipOpen);
+  // const toggle = () => setTooltipOpen(!tooltipOpen);
 
   const [content] = useState(initialState);
 
@@ -59,18 +57,18 @@ export const CreateBestPracticePage = () => {
   //   simpleValidator.current.showMessageFor(name);
   // };
 
-  const onFilesError = error => {
-    setErrorMessage(error.message);
-    setErrorAlert(true);
-  };
+  // const onFilesError = error => {
+  //   setErrorMessage(error.message);
+  //   setErrorAlert(true);
+  // };
 
-  const fileUpload = files => {
-    toggle();
-    formData.delete("file");
-    formData.append("file", files[0]);
-    setErrorAlert(false);
-    forceUpdate(formData.get("file").name);
-  };
+  // const fileUpload = files => {
+  //   toggle();
+  //   formData.delete("file");
+  //   formData.append("file", files[0]);
+  //   setErrorAlert(false);
+  //   forceUpdate(formData.get("file").name);
+  // };
 
   const removeFile = () => {
     formData.delete("file");
@@ -214,7 +212,7 @@ export const CreateBestPracticePage = () => {
           <Col>
             <FormGroup>
               <div className="files">
-                <Files
+                {/* <Files
                   className="files-dropzone"
                   onChange={fileUpload}
                   onError={onFilesError}
@@ -243,7 +241,7 @@ export const CreateBestPracticePage = () => {
                   >
                     <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z" />
                   </svg>
-                </Files>
+                </Files> */}
                 {/* <div className="file-name d-flex" hidden={formData.entries("file").next().done}> */}
                 {/* <p className="mt-2">{formData.entries("file").next().done ? "" : formData.get("file").name}</p> */}
               </div>
