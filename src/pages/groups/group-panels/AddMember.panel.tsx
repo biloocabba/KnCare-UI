@@ -1,69 +1,50 @@
-import { Button, FormGroup } from "reactstrap";
+import { useRef, useState } from "react";
 
-import { SearchEmployeesFilterPanel } from "pages/users";
-import { Employee, EmployeeQueryFilters, Group, SelectOption } from "types";
+import { Collapse, Spinner } from "reactstrap";
 
-import { useAppDispatch, useAppSelector } from "redux/app";
-import {
-  searchEmployees,
-  selectAllBusinessUnitsDataAsSelectOptions,
-  selectAllCountriesDataAsSelectOptions,
-} from "redux/features";
+import { ReactTable } from "components/widgets";
+
+import { Employee, Group } from "types";
+
+import { StateType } from "redux/features";
+
+import { employeesTableColumns } from "../../users";
+
+import { AddMemberFilterPanel } from ".";
 
 interface Props {
   group: Group;
   setGroup: (group: Group) => void;
-  selectedRows: Employee[];
-  setSelectedRows: (selectedRows: Employee[]) => void;
-  tableRef: React.MutableRefObject<undefined>;
+  addMemberCollapse: boolean;
+  employeesState: StateType<Employee>;
 }
 
-export const AddMemberPanel = ({
-  group,
-  setGroup,
-  selectedRows,
-  setSelectedRows,
-  tableRef,
-}: Props) => {
-  const dispatch = useAppDispatch();
-
-  const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
-  const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
-
-  const jobTitles: SelectOption[] = [
-    { value: "1", label: "product manager" },
-    { value: "2", label: "qa engineer" },
-    { value: "3", label: "hr consultant" },
-    { value: "4", label: "office manager" },
-    { value: "5", label: "sales representative" },
-    { value: "6", label: "logistics consultant" },
-  ];
-
-  const onEmployeeAdd = (selectedEmployees: Employee[]) => {
-    const employeeIds = selectedEmployees.map(employee => employee.id);
-    setGroup({ ...group, members: [...group.members, ...employeeIds] });
-    setSelectedRows([]);
-    // @ts-ignore
-    tableRef.current.selectionContext.selected = [];
-  };
-
-  const onClickSearchEmployees = (filters: EmployeeQueryFilters): void => {
-    dispatch(searchEmployees(filters));
-  };
-
+export const AddMemberPanel = ({ group, setGroup, addMemberCollapse, employeesState }: Props) => {
+  const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
+  const tableRef = useRef();
   return (
-    <>
-      <SearchEmployeesFilterPanel
-        onSearchEmployees={onClickSearchEmployees}
-        jobTitle={jobTitles}
-        countries={countries}
-        businessUnits={businessUnits}
+    <Collapse isOpen={addMemberCollapse}>
+      <AddMemberFilterPanel
+        group={group}
+        setGroup={setGroup}
+        selectedRows={selectedEmployees}
+        setSelectedRows={setSelectedEmployees}
+        tableRef={tableRef}
       />
-      <FormGroup>
-        <Button color="success" onClick={() => onEmployeeAdd(selectedRows)}>
-          Add Member To Group
-        </Button>
-      </FormGroup>
-    </>
+      {employeesState.isLoading ? (
+        <div className="text-center">
+          <Spinner />
+        </div>
+      ) : (
+        <ReactTable
+          data={employeesState.entities}
+          keyField="id"
+          columns={employeesTableColumns}
+          selectedRows={selectedEmployees}
+          setSelectedRows={setSelectedEmployees}
+          tableRef={tableRef}
+        />
+      )}
+    </Collapse>
   );
 };
