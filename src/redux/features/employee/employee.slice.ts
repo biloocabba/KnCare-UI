@@ -32,15 +32,6 @@ export const searchEmployees = createAsyncThunk(
   }
 );
 
-export const searchEmployeesByIds = createAsyncThunk(
-  "employee/searchByIds",
-  async (employeeIds: number[]): Promise<Employee[]> => {
-    const { data } = await employeeService.searchEmployeesByIds(employeeIds);
-
-    return data;
-  }
-);
-
 export const createEmployee = createAsyncThunk(
   "employee/create",
   async (body: Employee): Promise<Employee> => {
@@ -80,7 +71,6 @@ export const employeeSlice = createSlice({
     [
       findEmployeeById,
       searchEmployees,
-      searchEmployeesByIds,
       createEmployee,
       updateEmployee,
       partialUpdateEmployee,
@@ -103,11 +93,6 @@ export const employeeSlice = createSlice({
       state.isSuccess = true;
     });
     builder.addCase(searchEmployees.fulfilled, (state, action) => {
-      state.entities = action.payload;
-      state.isLoading = false;
-      state.isSuccess = true;
-    });
-    builder.addCase(searchEmployeesByIds.fulfilled, (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;
       state.isSuccess = true;

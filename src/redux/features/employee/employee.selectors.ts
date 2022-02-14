@@ -21,17 +21,6 @@ export const selectEmployeeById = (id: number) =>
     employees.find(employee => employee.id === id)
   );
 
-export const selectEmployeesByIds = (ids: number[]) => {
-  return createSelector([selectAllEmployeesData], employees => {
-    const groupMembers: Employee[] = [];
-    console.log("employees", employees);
-
-    // @ts-ignore
-    ids.forEach(id => groupMembers.push(employees.find(employee => employee.id === id)));
-    return groupMembers;
-  });
-};
-
 export const selectAllEmployeeDataAsSelectOptions = createSelector(
   [selectAllEmployeesData],
   (employees): SelectOption[] => {

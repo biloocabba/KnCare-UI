@@ -58,13 +58,6 @@ export const GroupDetailsPage = () => {
       };
       dispatch(updateGroup(httpUpdateRequest));
     }
-    // if (groupsState.isSuccess) {
-    //   setAlert(
-    //     <SweetAlert success title="Success" onConfirm={() => setAlert(false)}>
-    //       Group Updated
-    //     </SweetAlert>
-    //   );
-    // }
   };
 
   const onToggleGroupActive = () => {
@@ -78,8 +71,9 @@ export const GroupDetailsPage = () => {
 
   return (
     <>
+      {/* {alert} */}
       <BoxHeader />
-      {alert}
+
       <Container className="mt--6" fluid>
         {group && (
           <Row>

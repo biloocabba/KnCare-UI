@@ -31,6 +31,7 @@ const deleteItem = (id: number) => {
 export const groupService = {
   findAll,
   findById,
+
   create,
   update,
   partialUpdate,
