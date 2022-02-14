@@ -16,7 +16,6 @@ const initialState: StateType<Group> = {
 
 export const findGroupById = createAsyncThunk("group/findById", async (id: number) => {
   const { data } = await groupService.findById(id);
-  console.log("data", data);
 
   return data;
 });

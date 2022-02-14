@@ -8,7 +8,7 @@ import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets/react-table";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
-import { deleteGroup, searchGroups, selectGroupState } from "redux/features";
+import { deleteGroup, searchEmployees, searchGroups, selectGroupState } from "redux/features";
 
 import { groupsTableColumns } from ".";
 
@@ -19,18 +19,21 @@ export const SearchGroupsPage = () => {
 
   const [selectedGroups, setSelectedGroups] = useState([]);
 
-  const goToGroupDetails = (e: any) => {
-    const { id } = e.target;
+  const goToGroupDetails = (e: React.MouseEvent<HTMLInputElement>) => {
+    const { id } = e.target as HTMLElement;
     history.push(`/admin/groups/group-details/${id}`);
   };
 
-  const removeGroup = (e: any) => {
-    const { id } = e.target;
-    dispatch(deleteGroup(id));
+  const removeGroup = (e: React.MouseEvent<HTMLInputElement>) => {
+    const { id } = e.target as HTMLElement;
+    dispatch(deleteGroup(parseInt(id)));
   };
 
   const findByAllParameters = () => {
     dispatch(searchGroups());
+    // @todo find a fix to get rid of this
+    // this gets all the employees so group members would'nt be empty
+    dispatch(searchEmployees({}));
   };
 
   return (

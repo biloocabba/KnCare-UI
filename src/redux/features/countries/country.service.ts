@@ -1,7 +1,7 @@
 import { httpCommon } from "..";
 
 const listCountries = () => {
-  return httpCommon.get(`/countries`);
+  return httpCommon.get(`/country`);
 };
 
 export const countryService = {

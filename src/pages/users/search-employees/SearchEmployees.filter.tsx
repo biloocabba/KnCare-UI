@@ -4,11 +4,15 @@ import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactst
 
 import { Moment } from "moment";
 
+import { WithAuthorization } from "components/authorization/WithAuthorization";
 import { DateField } from "components/widgets/date-field";
 import { InputField } from "components/widgets/input-field";
 import { SelectField } from "components/widgets/select-field";
 
-import { EmployeeQueryFilters, SelectOption } from "types";
+import { EmployeeQueryFilters, SelectOption, Permission } from "types";
+
+import { useAppSelector } from "redux/app";
+import { selectLoggedUserDefaultCountry } from "redux/features";
 
 interface onSearchEmployeesFunction {
   (employeeSearchRequest: EmployeeQueryFilters): void;
@@ -17,14 +21,18 @@ interface onSearchEmployeesFunction {
 interface SearchEmployeesFilterPanelProps {
   countries: SelectOption[];
   businessUnits: SelectOption[];
+  jobTitle: SelectOption[];
   onSearchEmployees: onSearchEmployeesFunction;
 }
 
 export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProps) => {
   const [searchLastName, setSearchLastName] = useState("");
   const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
-  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>();
+  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
+    useAppSelector(selectLoggedUserDefaultCountry)
+  );
   const [searchHiringDate, setSearchHiringDate] = useState<string>();
+  const [searchJobTitle, setSearchJobTitle] = useState<string>();
 
   const onChangeSearchLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchLastName = e.target.value;
@@ -35,8 +43,9 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
     const filters: EmployeeQueryFilters = {
       lastName: searchLastName,
       businessUnitId: searchBusinessUnitId,
-      countryIsoCode3: searchCountryIsoCode3,
+      countryId: searchCountryIsoCode3,
       hiringDate: searchHiringDate,
+      jobTitle: searchJobTitle,
     };
     props.onSearchEmployees(filters);
   };
@@ -66,22 +75,34 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
               id="select-businessUnits"
               label="Business Unit"
               options={props.businessUnits}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                const id: number = parseInt(item.target.value);
+              onChange={(item: SelectOption) => {
+                const id: number = parseInt(item.value);
                 setSearchBusinessUnitId(id);
               }}
             />
           </Col>
-          <Col md="2">
+          <Col md="3">
             <SelectField
-              id="select-country"
-              label="Country"
-              options={props.countries}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                setSearchCountryIsoCode3(item.target.value);
+              id="select-jobTitle"
+              label="Job Title"
+              options={props.jobTitle}
+              onChange={(item: SelectOption) => {
+                setSearchJobTitle(item.value);
               }}
             />
           </Col>
+          <WithAuthorization requires={Permission.Employee_country_all}>
+            <Col md="2">
+              <SelectField
+                id="select-country"
+                label="Country"
+                options={props.countries}
+                onChange={(item: SelectOption) => {
+                  setSearchCountryIsoCode3(item.value);
+                }}
+              />
+            </Col>
+          </WithAuthorization>
           <Col md="2">
             <DateField
               id="date-hire-from"

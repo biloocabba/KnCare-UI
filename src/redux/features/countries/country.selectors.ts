@@ -10,17 +10,18 @@ const ALL: SelectOption = { value: "", label: "ALL" };
 
 export const selectCountryState = (rootState: RootState): StateType<Country> => rootState.country;
 
-export const selectAllCountryData = createSelector(
-  [selectCountryState],
-  countryState => countryState.entities
-);
+export const selectAllCountryData = createSelector([selectCountryState], countryState => {
+  return countryState.entities;
+});
 
-export const selectAllCountryDataAsSelectOptions = createSelector(
+export const selectAllCountriesDataAsSelectOptions = createSelector(
   [selectAllCountryData],
   (countries): SelectOption[] => {
-    const countriesOptions: SelectOption[] = countries.map(country => {
-      return { value: country.code, label: country.name };
-    });
+    const countriesOptions = countries.map(country => ({
+      value: country.code3,
+      label: country.name,
+    }));
+
     return [ALL, ...countriesOptions];
   }
 );

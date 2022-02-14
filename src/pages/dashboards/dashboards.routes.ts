@@ -1,5 +1,7 @@
 import { IRoute } from "types";
 
+import { fromCountryManagerRole } from "../utils";
+
 import { ChartsPage, WorldOverviewPage } from ".";
 
 export const dashboardMenu: IRoute[] = [
@@ -8,6 +10,9 @@ export const dashboardMenu: IRoute[] = [
     name: "Dashboard",
     icon: "ni ni-chart-pie-35 text-info",
     state: "dashboardCollapse",
+    key: "DashboardMenu",
+    path: "DashboardMenu",
+    allowedRoles: [...fromCountryManagerRole],
     views: [
       {
         path: "/statistics",
@@ -15,6 +20,8 @@ export const dashboardMenu: IRoute[] = [
         miniName: "C",
         component: ChartsPage,
         layout: "/admin",
+        key: "Dashboard/Charts",
+        allowedRoles: [...fromCountryManagerRole],
       },
       {
         path: "/world-map",
@@ -22,6 +29,8 @@ export const dashboardMenu: IRoute[] = [
         miniName: "WM",
         component: WorldOverviewPage,
         layout: "/admin",
+        key: "Dashboard/World Map",
+        allowedRoles: [...fromCountryManagerRole],
       },
     ],
   },

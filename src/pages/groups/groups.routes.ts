@@ -1,10 +1,12 @@
 import { IRoute } from "types";
 
+import { allAuthRoles, fromAdvocateRole } from "../utils";
+
 import {
   CreateGroupPage,
-  GroupDetailsPage,
+  // GroupDetailsPage,
   GROUP_CREATE,
-  GROUP_DETAILS,
+  // GROUP_DETAILS,
   GROUP_SEARCH,
   SearchGroupsPage,
 } from ".";
@@ -15,6 +17,9 @@ export const groupMenu: IRoute[] = [
     name: "Groups",
     icon: "ni ni-circle-08 text-info",
     state: "groupCollapse",
+    path: "GroupsMenu",
+    key: "GroupsMenu",
+    allowedRoles: [...allAuthRoles],
     views: [
       {
         path: GROUP_CREATE,
@@ -22,6 +27,8 @@ export const groupMenu: IRoute[] = [
         miniName: "CG",
         component: CreateGroupPage,
         layout: "/admin",
+        key: "Groups/Create Group",
+        allowedRoles: [...fromAdvocateRole],
       },
       {
         path: GROUP_SEARCH,
@@ -29,14 +36,19 @@ export const groupMenu: IRoute[] = [
         miniName: "SG",
         component: SearchGroupsPage,
         layout: "/admin",
+        key: "Groups/Search Group",
+        allowedRoles: [...allAuthRoles],
       },
     ],
   },
-  {
-    collapse: false,
-    global: true,
-    path: `${GROUP_DETAILS}/:id`,
-    component: GroupDetailsPage,
-    layout: "/admin",
-  },
+  // {
+  //   collapse: false,
+  //   global: true,
+  //   path: `${GROUP_DETAILS}/:id`,
+  //   component: GroupDetailsPage,
+  //   layout: "/admin",
+  //   name: `${GROUP_DETAILS}/:id`,
+  //   key: `Groups/${GROUP_DETAILS}/:id`,
+  //   allowedRoles: [...allAuthRoles],
+  // },
 ];

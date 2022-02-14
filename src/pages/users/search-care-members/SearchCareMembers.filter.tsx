@@ -4,11 +4,15 @@ import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactst
 
 import { Moment } from "moment";
 
+import { WithAuthorization } from "components/authorization";
 import { DateField } from "components/widgets/date-field";
 import { InputField } from "components/widgets/input-field";
 import { SelectField } from "components/widgets/select-field";
 
-import { CareMemberQueryFilters, SelectOption } from "types";
+import { CareMemberQueryFilters, Permission, SelectOption } from "types";
+
+import { useAppSelector } from "redux/app";
+import { selectLoggedUserDefaultCountry } from "redux/features";
 
 interface onSearchCareMembersFunction {
   (filters: CareMemberQueryFilters): void;
@@ -25,18 +29,20 @@ interface SearchCareMemberFilterPanelProps {
 export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelProps) => {
   const [searchRoleId, setSearchRoleId] = useState<number>();
   const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
-  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>();
   const [searchGroupId, setSearchGroupId] = useState<number>();
   const [searchLastName, setSearchLastName] = useState("");
   const [searchOnBoardDateFrom, setSearchOnBoardDateFrom] = useState<string>("");
   const [searchOnBoardDateTo, setSearchOnBoardDateTo] = useState<string>("");
   const [searchOffboardingDateFrom, setSearchOffboardingDateFrom] = useState<string>("");
   const [searchOffboardingDateTo, setSearchOffboardingDateTo] = useState<string>("");
+  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
+    useAppSelector(selectLoggedUserDefaultCountry)
+  );
 
   const findByAllParameters = () => {
     const filters: CareMemberQueryFilters = {
       businessUnitId: searchBusinessUnitId,
-      countryIsoCode3: searchCountryIsoCode3,
+      countryId: searchCountryIsoCode3,
       roleId: searchRoleId,
       groupId: searchGroupId,
       lastName: searchLastName,
@@ -62,47 +68,46 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               label="Role"
               options={props.roles}
               value={searchRoleId}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                const id: number = parseInt(item.target.value);
+              onChange={(item: SelectOption) => {
+                const id: number = parseInt(item.value);
                 setSearchRoleId(id);
               }}
             />
           </Col>
-          <Col md="3">
+          <Col md="2">
             <SelectField
               id="select-businessUnits"
               label="Business Unit"
               options={props.businessUnits}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                const id: number = parseInt(item.target.value);
+              onChange={(item: SelectOption) => {
+                const id: number = parseInt(item.value);
                 setSearchBusinessUnitId(id);
               }}
             />
           </Col>
-          <Col md="3">
-            <SelectField
-              id="select-country"
-              label="Country"
-              options={props.countries}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                setSearchCountryIsoCode3(item.target.value);
-              }}
-            />
-          </Col>
+          <WithAuthorization requires={Permission.Employee_country_all}>
+            <Col md="3">
+              <SelectField
+                id="select-country"
+                label="Country"
+                options={props.countries}
+                onChange={(item: SelectOption) => {
+                  setSearchCountryIsoCode3(item.value);
+                }}
+              />
+            </Col>
+          </WithAuthorization>
           <Col md="3">
             <SelectField
               id="select-group"
               label="Group"
               options={props.groups}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                const id: number = parseInt(item.target.value);
+              onChange={(item: SelectOption) => {
+                const id: number = parseInt(item.value);
                 setSearchGroupId(id);
               }}
             />
           </Col>
-        </Row>
-
-        <Row>
           <Col md="3">
             <InputField
               id="input-last-name"

@@ -1,9 +1,6 @@
 import React, { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
-// // react component used to create sweet alerts
-// import ReactBSAlert from "react-bootstrap-sweetalert";
-
-type AlertType = null | React.ReactNode;
+import { AlertType } from "types";
 
 type InitialContextType = {
   alert: AlertType;

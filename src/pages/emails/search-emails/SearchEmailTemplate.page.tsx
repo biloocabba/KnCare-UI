@@ -15,36 +15,19 @@
 
 */
 
-import { useRef } from "react";
+// import { useRef } from "react";
 
-import {
-  ButtonGroup,
-  Card,
-  CardHeader,
-  Col,
-  Container,
-  Row,
-  UncontrolledTooltip,
-} from "reactstrap";
+import { Card, CardHeader, Container, Row } from "reactstrap";
 
-import BootstrapTable from "react-bootstrap-table-next";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+// import { dataTable } from "variables/general";
 
 import { BoxHeader } from "components/headers";
-import { pagination } from "components/widgets";
 
 import { useAlert } from "context";
-import { dataTable } from "variables/general";
-
-import { CopyButton, PrintButton } from "../components";
-
-import { emailsTableColumns } from "./SearchEmails.table";
-
-const { SearchBar } = Search;
 
 export const SearchEmailTemplatePage = () => {
   const { alert } = useAlert();
-  const componentRef = useRef(null);
+  // const componentRef = useRef(null);
 
   return (
     <>
@@ -61,7 +44,7 @@ export const SearchEmailTemplatePage = () => {
                   plugin. This is a minimal setup in order to get started fast.
                 </p>
               </CardHeader>
-              <ToolkitProvider data={dataTable} keyField="name" columns={emailsTableColumns} search>
+              {/* <ToolkitProvider data={dataTable} keyField="name" columns={emailsTableColumns} search>
                 {props => (
                   <div className="py-4 table-responsive">
                     <div id="datatable-basic_filter" className="dataTables_filter px-4 pb-1">
@@ -80,7 +63,7 @@ export const SearchEmailTemplatePage = () => {
                     />
                   </div>
                 )}
-              </ToolkitProvider>
+              </ToolkitProvider> */}
             </Card>
             <Card>
               <CardHeader>
@@ -90,7 +73,7 @@ export const SearchEmailTemplatePage = () => {
                   plugin. This is a minimal setup in order to get started fast.
                 </p>
               </CardHeader>
-              <ToolkitProvider
+              {/* <ToolkitProvider
                 data={dataTable}
                 keyField="name"
                 columns={[
@@ -168,7 +151,7 @@ export const SearchEmailTemplatePage = () => {
                     />
                   </div>
                 )}
-              </ToolkitProvider>
+              </ToolkitProvider> */}
             </Card>
           </div>
         </Row>

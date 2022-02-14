@@ -29,7 +29,7 @@ import { AdminLayout, AuthLayout } from "layouts";
 
 import { store } from "redux/app";
 
-import "variables/charts/chartDefaults";
+import "variables/chartDefaults";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fullcalendar/common/main.min.css";
@@ -41,6 +41,7 @@ import "font-awesome/css/font-awesome.min.css";
 import "./assets/scss/argon-dashboard-pro-react.scss?v1.2.0";
 import "./assets/css/site.css";
 import "./assets/vendor/nucleo/css/nucleo.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 ReactDOM.render(
   <Provider store={store}>

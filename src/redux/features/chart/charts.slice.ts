@@ -1,6 +1,6 @@
 import { AsyncThunk, createAsyncThunk, createSlice, SerializedError } from "@reduxjs/toolkit";
 
-import { Chart } from "types/domain";
+import { Chart } from "types";
 
 import { chartService } from ".";
 

@@ -1,4 +1,3 @@
-export * from "./best-practice";
 export * from "./best-practice-details";
 export * from "./create-best-practice";
 export * from "./search-best-practices";

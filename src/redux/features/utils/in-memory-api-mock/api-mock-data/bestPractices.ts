@@ -12,7 +12,8 @@ export const bestPractices: BestPractice[] = [
     publishDate: new Date("2019-01-01"),
     rating: 4,
     tags: ["typescript", "javascript", "react"],
-    pdf: "https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-types",
+    contentUrl:
+      "https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-types",
   },
   {
     id: 2,
@@ -22,6 +23,17 @@ export const bestPractices: BestPractice[] = [
     publishDate: new Date("2019-01-01"),
     rating: 4,
     tags: ["typescript", "javascript", "react"],
-    pdf: sampleBase64pdf,
+    contentUrl: sampleBase64pdf,
+  },
+  {
+    id: 3,
+    title: "Be consistent with your naming conventions",
+    description: "This is a good practice to avoid errors in your code.",
+    author: "John Doe",
+    publishDate: new Date("2019-01-01"),
+    rating: 4,
+    tags: ["typescript", "javascript", "react"],
+    contentUrl:
+      "https://github.com/KNITS-OS/SkillQuest/raw/master/Resources/corporatebrochurekuehnenagel2021en.pdf",
   },
 ];

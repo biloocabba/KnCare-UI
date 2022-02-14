@@ -1,20 +1,25 @@
 import { AxiosResponse } from "axios";
 
-import { PRACTICES } from "redux/features/common";
+import { BEST_PRACTICE_ROUTE } from "redux/features";
 
 import {
+  bestPracticeMockResponse,
   businessUnitsMockResponse,
   careRolesMockResponse,
   countriesMockResponse,
   deleteMockResponse,
   groupMockResponse,
-} from "./mock-data";
+  // worldOverviewMockResponse,
+} from "./api-mock-data/mock-data";
 import {
   saveCareMember,
   searchCareMembers,
   searchEmployees,
   wrapIntoResponse,
-} from "./mock-data-api";
+  reportService,
+  login,
+} from "./api-mock-service";
+import { saveBestPractice } from "./api-mock-service/mock-best-practice-api";
 
 export async function get(url: string): Promise<AxiosResponse<any>> {
   if (url.includes("/employee")) {
@@ -25,8 +30,12 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
     return Promise.resolve(searchCareMembers(url));
   }
 
-  if (url.includes(PRACTICES)) {
-    return Promise.resolve(groupMockResponse);
+  if (url.includes(BEST_PRACTICE_ROUTE)) {
+    return Promise.resolve(bestPracticeMockResponse);
+  }
+
+  if (url.includes("/report/")) {
+    return Promise.resolve(reportService.get(url));
   }
 
   if (url.includes("/group")) {
@@ -36,6 +45,7 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
   if (url.includes("/care-role")) {
     return Promise.resolve(careRolesMockResponse);
   }
+
   if (url.includes("/business-unit")) {
     return Promise.resolve(businessUnitsMockResponse);
   }
@@ -43,12 +53,19 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
   if (url.includes("/country")) {
     return Promise.resolve(countriesMockResponse);
   }
+
   return Promise.reject();
 }
 
 export async function post(url: string, body: any): Promise<AxiosResponse> {
   if (url.includes("/care-member")) {
     return saveCareMember(url, body);
+  }
+  if (url.includes("/login")) {
+    return login(url, body);
+  }
+  if (url.includes(BEST_PRACTICE_ROUTE)) {
+    return saveBestPractice(body);
   }
   return Promise.resolve(wrapIntoResponse(body));
 }

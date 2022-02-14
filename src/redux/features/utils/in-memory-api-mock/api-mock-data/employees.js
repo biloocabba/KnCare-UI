@@ -1,5 +1,3 @@
-// @todo add type
-// error: Expression produces a union type that is too complex to represent.ts(2590)
 export const employeesData = [
   {
     id: 1,
@@ -25,8 +23,6 @@ export const employeesData = [
     officeAddressCountry: null,
     officeAddressCity: "Calaya",
     officeAddressStreet: "1 Bultman Trail",
-    onboardingDate: "5/25/2019",
-    offboardingDate: "3/19/2019",
   },
   {
     id: 2,
@@ -52,8 +48,6 @@ export const employeesData = [
     officeAddressCountry: null,
     officeAddressCity: "Rychnov nad Kněžnou",
     officeAddressStreet: "65 Cascade Road",
-    onboardingDate: "11/29/2020",
-    offboardingDate: "10/12/2020",
   },
   {
     id: 3,

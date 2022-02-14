@@ -1,5 +1,7 @@
 import { IRoute } from "types";
 
+import { allAuthRoles, fromCountryManagerRole } from "../utils";
+
 import {
   CreateCareMemberPage,
   EditCareMemberPage,
@@ -19,6 +21,9 @@ export const userMenu: IRoute[] = [
     name: "Users",
     icon: "ni ni-single-02 text-primary",
     state: "usersCollapse",
+    path: "UsersMenu",
+    key: "UsersMenu",
+    allowedRoles: [...allAuthRoles],
     views: [
       {
         path: EMPLOYEE_SEARCH,
@@ -26,6 +31,8 @@ export const userMenu: IRoute[] = [
         miniName: "E",
         component: SearchEmployeesPage,
         layout: "/admin",
+        key: "Users/Employees",
+        allowedRoles: [...allAuthRoles],
       },
       {
         path: CARE_MEMBER_SEARCH,
@@ -33,6 +40,8 @@ export const userMenu: IRoute[] = [
         miniName: "CM",
         component: SearchCareMembersPage,
         layout: "/admin",
+        key: "Users/Care Members",
+        allowedRoles: [...allAuthRoles],
       },
     ],
   },
@@ -42,6 +51,9 @@ export const userMenu: IRoute[] = [
     path: `${EMPLOYEE_DETAILS}/:id`,
     component: EmployeeDetailsPage,
     layout: "/admin",
+    name: `${EMPLOYEE_DETAILS}/:id`,
+    key: `Users/${EMPLOYEE_DETAILS}/:id`,
+    allowedRoles: [...allAuthRoles],
   },
   {
     collapse: false,
@@ -49,6 +61,9 @@ export const userMenu: IRoute[] = [
     path: `${CARE_MEMBER_EDIT}/:id`,
     component: EditCareMemberPage,
     layout: "/admin",
+    name: `${CARE_MEMBER_EDIT}/:id`,
+    key: `Users/${CARE_MEMBER_EDIT}/:id`,
+    allowedRoles: [...allAuthRoles],
   },
   {
     collapse: false,
@@ -56,5 +71,8 @@ export const userMenu: IRoute[] = [
     path: `${CARE_MEMBER_CREATE}/:id`,
     component: CreateCareMemberPage,
     layout: "/admin",
+    name: `${CARE_MEMBER_CREATE}/:id`,
+    key: `Users/${CARE_MEMBER_CREATE}/:id`,
+    allowedRoles: [...fromCountryManagerRole],
   },
 ];
