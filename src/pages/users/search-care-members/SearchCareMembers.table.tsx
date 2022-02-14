@@ -1,4 +1,6 @@
-export const careMemberTableColumns = [
+import { ColumnDescription } from "react-bootstrap-table-next";
+
+export const careMemberTableColumns: ColumnDescription<any, any>[] = [
   {
     dataField: "id",
     text: "id",
@@ -54,6 +56,8 @@ export const careMemberTableColumns = [
   {
     dataField: "action",
     text: "",
-    formatter: () => {},
+    formatter: () => {
+      return <div></div>;
+    },
   },
 ];

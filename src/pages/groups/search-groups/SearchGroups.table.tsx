@@ -1,4 +1,6 @@
-export const groupsTableColumns = [
+import { ColumnDescription } from "react-bootstrap-table-next";
+
+export const groupsTableColumns: ColumnDescription<any, any>[] = [
   {
     dataField: "id",
     text: "id",
@@ -22,6 +24,8 @@ export const groupsTableColumns = [
   {
     dataField: "action",
     text: "",
-    formatter: () => {},
+    formatter: () => {
+      return <div></div>;
+    },
   },
 ];
