@@ -57,7 +57,7 @@ export const careMemberTableColumns: ColumnDescription<any, any>[] = [
     dataField: "action",
     text: "",
     formatter: () => {
-      return <div></div>;
+      return <></>;
     },
   },
 ];

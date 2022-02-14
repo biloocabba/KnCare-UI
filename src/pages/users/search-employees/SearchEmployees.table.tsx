@@ -51,7 +51,7 @@ export const employeesTableColumns: ColumnDescription<any, any>[] = [
     dataField: "action",
     text: "",
     formatter: () => {
-      return <div></div>;
+      return <></>;
     },
   },
 ];
