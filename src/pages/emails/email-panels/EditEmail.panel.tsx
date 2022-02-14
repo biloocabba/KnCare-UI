@@ -15,10 +15,6 @@
 
 */
 
-import { useState } from "react";
-
-import { useHistory } from "react-router-dom";
-
 import {
   Button,
   ButtonGroup,
@@ -36,18 +32,23 @@ import makeAnimated from "react-select/animated";
 import { BoxHeader } from "components/headers";
 import { SelectField, InputField } from "components/widgets";
 
-import { EMAIL_SEARCH_ROUTE } from "../emails.routes.const";
+import { Email, EmailSaveRequest } from "types";
 
 // import "react-quill/dist/quill.snow.css";
 
+interface onSaveFunction {
+  (emailRequest: EmailSaveRequest): void;
+}
 interface Props {
-  initialEmailState: any;
+  email: Email;
+  setEmail: (email: Email) => void;
+  onSave: onSaveFunction;
 }
 
-export const EditEmail = ({ initialEmailState }: Props) => {
-  const history = useHistory();
-  const [emailState, setEmailState] = useState(initialEmailState);
+export const EditEmail = ({ email, setEmail, onSave }: Props) => {
+  // const history = useHistory();
 
+  //@todo load those from redux
   const careRoles: any = [];
   const groups: any = [];
   const careMembers: any = [];
@@ -58,12 +59,18 @@ export const EditEmail = ({ initialEmailState }: Props) => {
   };
 
   const handleSaveAsDraft = () => {
+    const emailSaveRequest: EmailSaveRequest = {
+      content: "",
+      recipientIds: [],
+      subject: "",
+    };
+    onSave(emailSaveRequest);
     // emailService.saveAsDraft(emailState);
     // history.push("/admin/search-email");
   };
 
   const handleDiscard = () => {
-    history.push(`/admin${EMAIL_SEARCH_ROUTE}`);
+    // history.push(`/admin${EMAIL_SEARCH_ROUTE}`);
   };
 
   return (
@@ -107,8 +114,8 @@ export const EditEmail = ({ initialEmailState }: Props) => {
                           onChange={(e: any) => {
                             const recipientsArray: any = [];
                             e.forEach((element: any) => recipientsArray.push(element.value));
-                            setEmailState({
-                              ...emailState,
+                            setEmail({
+                              ...email,
                               recipients: recipientsArray,
                             });
                           }}
@@ -126,9 +133,9 @@ export const EditEmail = ({ initialEmailState }: Props) => {
                           onChange={(e: any) => {
                             const recipientGroupsArray: any = [];
                             e.forEach((element: any) => recipientGroupsArray.push(element.value));
-                            setEmailState({
-                              ...emailState,
-                              recipientGroups: recipientGroupsArray,
+                            setEmail({
+                              ...email,
+                              groups: recipientGroupsArray,
                             });
                           }}
                         />
@@ -145,9 +152,9 @@ export const EditEmail = ({ initialEmailState }: Props) => {
                           onChange={(e: any) => {
                             const recipientRoleArray: any = [];
                             e.forEach((element: any) => recipientRoleArray.push(element.value));
-                            setEmailState({
-                              ...emailState,
-                              recipientRoles: recipientRoleArray,
+                            setEmail({
+                              ...email,
+                              roles: recipientRoleArray,
                             });
                           }}
                         />
@@ -160,10 +167,10 @@ export const EditEmail = ({ initialEmailState }: Props) => {
                       id="email-subject"
                       type="text"
                       label="Subject"
-                      value={emailState.subject}
+                      value={email.subject}
                       onChange={(e: any) =>
-                        setEmailState({
-                          ...emailState,
+                        setEmail({
+                          ...email,
                           subject: e.target.value,
                         })
                       }

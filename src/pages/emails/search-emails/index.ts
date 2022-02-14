@@ -1,3 +1,3 @@
-export * from "./SearchEmail.page";
-export * from "./SearchEmailDraft.page";
-export * from "./SearchEmailTemplate.page";
+export * from "./SearchEmails.page";
+export * from "./Emails.table";
+export * from "./SearchEmails.filter";

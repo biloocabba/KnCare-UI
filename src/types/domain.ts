@@ -71,6 +71,15 @@ export interface Group extends Domain {
   description: string;
 }
 
+export interface Email extends Domain {
+  subject: string;
+  content: string;
+  groups?: string[];
+  businessUnits?: string[];
+  roles?: string[];
+  countries?: string[];
+  recipients: string[];
+}
 export interface Country extends Domain {
   code: string;
   code3: string;

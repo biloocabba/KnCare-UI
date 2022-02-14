@@ -1,15 +1,27 @@
+import { useState } from "react";
+
+import { Email, EmailSaveRequest } from "types";
+import { CREATE_ENTITY_ID } from "variables/app.consts";
+
 import { EditEmail } from "../email-panels";
 
 export const CreateEmailPage = () => {
-  const initialEmailState = {
-    id: "",
+  const newEmail = {
+    id: CREATE_ENTITY_ID,
     subject: "",
     content: "",
-    attachments: null,
-    createdBy: 1,
     recipients: [],
-    recipientGroups: [],
+    groups: [],
+    businessUnits: [],
+    roles: [],
+    countries: [],
   };
 
-  return <EditEmail initialEmailState={initialEmailState} />;
+  const [email, setEmail] = useState<Email>(newEmail);
+
+  const onEmailSave = (emailRequest: EmailSaveRequest) => {
+    console.log(emailRequest);
+  };
+
+  return <EditEmail email={email} setEmail={setEmail} onSave={onEmailSave} />;
 };

@@ -15,6 +15,16 @@ export interface GroupSaveRequest {
   description: string;
 }
 
+export interface EmailSaveRequest {
+  subject: string;
+  content: string;
+  businessUnitIds?: number[];
+  countryIso3?: string[];
+  groupIds?: number[];
+  recipientIds: number[];
+  roleIds?: number[];
+}
+
 export interface EmployeeQueryFilters {
   lastName?: string;
   businessUnitId?: number;
@@ -22,7 +32,14 @@ export interface EmployeeQueryFilters {
   jobTitle?: string;
   hiringDate?: string;
 }
-
+export interface EmailQueryFilters {
+  lastName?: string;
+  businessUnitId?: number;
+  countryIso3?: string;
+  groupId?: number;
+  sendingDateFrom?: string;
+  sendingDateTo?: string;
+}
 export interface BestPracticesQueryFilters {
   searchTime?: string;
   searchAuthor?: string;
