@@ -2,18 +2,9 @@ import { FormGroup } from "reactstrap";
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import { StateManagerProps } from "react-select/dist/declarations/src/useStateManager";
 
-// import StateManagedSelect from "react-select/dist/declarations/src/stateManager";
-
-// type Props = StateManagedSelect &
-//   SingleValueProps &
-//   InputProps & {
-//     id: string;
-//     label: string;
-//   };
-
-// @todo find types
-type Props = any & {
+type Props = StateManagerProps & {
   id: string;
   label: string;
 };

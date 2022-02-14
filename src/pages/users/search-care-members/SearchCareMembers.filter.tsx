@@ -58,8 +58,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               label="Role"
               options={props.roles}
               value={searchRoleId}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                const id: number = parseInt(item.target.value);
+              onChange={item => {
+                const id: number = parseInt(item as SelectOption["value"]);
                 setSearchRoleId(id);
               }}
             />
@@ -69,8 +69,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               id="select-businessUnits"
               label="Business Unit"
               options={props.businessUnits}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                const id: number = parseInt(item.target.value);
+              onChange={item => {
+                const id: number = parseInt(item as SelectOption["value"]);
                 setSearchBusinessUnitId(id);
               }}
             />
@@ -80,8 +80,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               id="select-country"
               label="Country"
               options={props.countries}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                setSearchCountryIsoCode3(item.target.value);
+              onChange={item => {
+                setSearchCountryIsoCode3(item as SelectOption["value"]);
               }}
             />
           </Col>
@@ -90,8 +90,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               id="select-group"
               label="Group"
               options={props.groups}
-              onChange={(item: React.ChangeEvent<HTMLSelectElement>) => {
-                const id: number = parseInt(item.target.value);
+              onChange={item => {
+                const id: number = parseInt(item as SelectOption["value"]);
                 setSearchGroupId(id);
               }}
             />

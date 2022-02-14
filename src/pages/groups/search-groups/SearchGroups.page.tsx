@@ -5,7 +5,9 @@ import { useHistory } from "react-router";
 import { Card, CardBody, CardHeader, Col, Container, FormGroup, Row, Spinner } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
-import { ReactTable } from "components/widgets/react-table";
+import { ReactTable } from "components/widgets";
+
+import { Group } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { deleteGroup, searchGroups, selectGroupState } from "redux/features";
@@ -17,7 +19,7 @@ export const SearchGroupsPage = () => {
   const dispatch = useAppDispatch();
   const groups = useAppSelector(selectGroupState);
 
-  const [selectedGroups, setSelectedGroups] = useState([]);
+  const [selectedGroups, setSelectedGroups] = useState<Group[]>([]);
 
   const goToGroupDetails = (e: any) => {
     const { id } = e.target;

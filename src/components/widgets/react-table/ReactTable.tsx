@@ -2,30 +2,26 @@ import { MouseEvent, useState } from "react";
 
 import { Button } from "reactstrap";
 
-import BootstrapTable from "react-bootstrap-table-next";
+import BootstrapTable, { ColumnDescription } from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 import { pagination, selectRow } from ".";
-import { careMemberTableColumns, employeesTableColumns } from "../../../pages/users";
-import { groupsTableColumns } from "../../../pages/groups";
 
 const { SearchBar } = Search;
 
 interface Props<T> {
   data: T[];
-  columns: typeof employeesTableColumns | typeof groupsTableColumns | typeof careMemberTableColumns;
+  columns: ColumnDescription<any, T>[];
   keyField: string;
   onViewDetailsClick: (e: MouseEvent<HTMLButtonElement>) => void;
   onDeleteItemClick: (e: MouseEvent<HTMLButtonElement>) => void;
-  // @todo change columns any type to generic type
-  // this can be Employees or Groups, etc...
   selectedRows: T[];
   setSelectedRows: React.Dispatch<React.SetStateAction<T[]>>;
   searchBarPlaceholder?: string;
   selectButtonText?: string;
 }
 
-export const ReactTable = <T,>({
+export const ReactTable = <T extends { id: number }>({
   columns,
   keyField,
   data,
@@ -38,30 +34,30 @@ export const ReactTable = <T,>({
 }: Props<T>) => {
   const [formatterFunction, setFormatterFunction] = useState(false);
 
-  // @todo change row type to generic type
   const formatActionButtonCell = (_: any, row: T) => {
+    const rowId = row.id.toString();
     return (
       <>
         <Button
-          id={row.id}
+          id={rowId}
           className="btn-icon btn-2"
           type="button"
           color="info"
           onClick={onViewDetailsClick}
         >
-          <span id={row.id} className="btn-inner--icon">
-            <i id={row.id} className="ni ni-badge" />
+          <span id={rowId} className="btn-inner--icon">
+            <i id={rowId} className="ni ni-badge" />
           </span>
         </Button>
         <Button
-          id={row.id}
+          id={rowId}
           className="btn-icon btn-2"
           color="danger"
           type="button"
           onClick={onDeleteItemClick}
         >
-          <span id={row.id} className="btn-inner--icon">
-            <i id={row.id} className="ni ni-fat-remove" />
+          <span id={rowId} className="btn-inner--icon">
+            <i id={rowId} className="ni ni-fat-remove" />
           </span>
         </Button>
       </>

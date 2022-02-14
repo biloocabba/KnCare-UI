@@ -1,6 +1,6 @@
 import { SelectRowProps } from "react-bootstrap-table-next";
 
-export const selectRow = <T extends { id: string }>(
+export const selectRow = <T extends { id: number }>(
   setSelectedRows: React.Dispatch<React.SetStateAction<T[]>>
 ) => {
   return {

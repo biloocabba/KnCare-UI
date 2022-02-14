@@ -20,6 +20,7 @@ import { BoxHeader } from "components/headers";
 import { ReactTable, InputField } from "components/widgets";
 
 import { employeesTableColumns } from "pages/users";
+import { Employee } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
@@ -48,7 +49,7 @@ export const GroupDetailsPage = () => {
 
   const [group, setGroup] = useState(groupsState);
 
-  const [selectedEmployees, setSelectedEmployees] = useState([]);
+  const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
   const [currentMembersCollapse, setCurrentMembersCollapse] = useState(false);
   const [addMemberCollapse, setAddMemberCollapse] = useState(false);
 
