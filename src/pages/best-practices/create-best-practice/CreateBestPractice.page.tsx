@@ -7,18 +7,22 @@ import CreatableSelect from "react-select/creatable";
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
+import { useAlerts } from "hooks";
 import { BestPractice } from "types";
 import { toFileArray } from "types/utils";
 import { defaultBestPracticesTags } from "variables/app.consts";
 
-import { useAppDispatch } from "redux/app";
-import { createBestPractice } from "redux/features";
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { createBestPractice, selectBestPracticeState } from "redux/features";
 
 import { bestPracticeDefaultState } from "..";
 
 export const CreateBestPracticePage = () => {
   const dispatch = useAppDispatch();
   const [bestPractice, setBestPractice] = useState<BestPractice>(bestPracticeDefaultState);
+  const bestPracticeState = useAppSelector(selectBestPracticeState);
+
+  const { alert, setSaveSent } = useAlerts(bestPracticeState, "Best Practice Created");
 
   const changeFileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files) {
@@ -31,6 +35,7 @@ export const CreateBestPracticePage = () => {
 
   const saveBestPractice = () => {
     dispatch(createBestPractice(bestPractice));
+    setSaveSent(true);
   };
 
   const handleChange = (newValue: any) => {
@@ -40,7 +45,9 @@ export const CreateBestPracticePage = () => {
 
   return (
     <>
+      {alert}
       <BoxHeader />
+
       <Container className="mt--6" fluid>
         <Row>
           <Col className="order-xl-1">
