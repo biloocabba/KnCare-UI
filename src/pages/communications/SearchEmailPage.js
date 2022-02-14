@@ -17,8 +17,6 @@ import ReactBSAlert from "react-bootstrap-sweetalert";
 // react component for creating dynamic tables
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-// react plugin that prints a given react component
-import ReactToPrint from "react-to-print";
 
 import { BoxHeader } from "components/headers";
 import { pagination } from "components/widgets";
@@ -148,7 +146,7 @@ var ReactBSTables = props => {
                             >
                               <span>Copy</span>
                             </Button>
-                            <ReactToPrint
+                            {/* <ReactToPrint
                               trigger={() => (
                                 <Button
                                   color="default"
@@ -160,7 +158,7 @@ var ReactBSTables = props => {
                                 </Button>
                               )}
                               content={() => componentRef.current}
-                            />
+                            /> */}
                           </ButtonGroup>
                           <UncontrolledTooltip placement="top" target="print-tooltip">
                             This will open a print page with the visible rows of the table.

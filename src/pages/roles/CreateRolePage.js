@@ -15,8 +15,6 @@ import {
   Row,
 } from "reactstrap";
 
-import AsyncSelect2 from "react-select2-wrapper";
-
 import { BoxHeader } from "components/headers";
 
 var CreateRolePage = () => {
@@ -147,18 +145,6 @@ var CreateRolePage = () => {
                             <label className="form-control-label" htmlFor="input-ranked-before">
                               Ranked Before
                             </label>
-                            <AsyncSelect2
-                              className="form-control"
-                              name="rankedBefore"
-                              id="rankedBefore"
-                              value={role.rankedBefore}
-                              required
-                              onChange={handleInputChange}
-                              options={{
-                                placeholder: "Select Role",
-                              }}
-                              data={getRoles()}
-                            />
                           </FormGroup>
                         </Col>
                       </Row>
@@ -168,17 +154,6 @@ var CreateRolePage = () => {
                             <label className="form-control-label" htmlFor="input-ranked-after">
                               Ranked After
                             </label>
-                            <AsyncSelect2
-                              className="form-control"
-                              name="rankedAfter"
-                              id="rankedAfter"
-                              value={role.rankedAfter}
-                              options={{
-                                placeholder: "Select Role",
-                              }}
-                              onChange={handleInputChange}
-                              data={getRoles()}
-                            />
                           </FormGroup>
                         </Col>
                       </Row>
