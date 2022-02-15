@@ -2,25 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import { useHistory, useParams } from "react-router";
 
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Collapse,
-  Container,
-  Form,
-  Row,
-  Spinner,
-} from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Container, Form, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
-import { InputField, ReactTable } from "components/widgets";
+import { InputField } from "components/widgets";
 
 import { useAlerts } from "hooks";
-import { employeesTableColumns } from "pages/users";
 import { Group } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
@@ -28,13 +15,12 @@ import {
   deleteGroup,
   findGroupById,
   partialUpdateGroup,
-  selectEmployeesState,
   selectGroupById,
   selectGroupState,
   updateGroup,
 } from "redux/features";
 
-import { AddMemberPanel } from "..";
+import { MembersPanel } from "..";
 
 interface RouteParams {
   id: string;
@@ -48,13 +34,8 @@ export const GroupDetailsPage = () => {
 
   const groupState = useAppSelector(selectGroupById(groupId));
   const groupsState = useAppSelector(selectGroupState);
-  const employeesState = useAppSelector(selectEmployeesState);
 
   const [group, setGroup] = useState(groupState as Group);
-
-  const [selectedEmployees, setSelectedEmployees] = useState([]);
-  const [currentMembersCollapse, setCurrentMembersCollapse] = useState(false);
-  const [addMemberCollapse, setAddMemberCollapse] = useState(false);
 
   const { alert, setSaveSent } = useAlerts(groupsState, "Group Updated");
 
@@ -69,23 +50,6 @@ export const GroupDetailsPage = () => {
       setSaveSent(true);
     }
   };
-
-  const toggleCurrentMembers = () => {
-    setCurrentMembersCollapse(!currentMembersCollapse);
-    setAddMemberCollapse(false);
-  };
-
-  const toggleAddMember = () => {
-    setAddMemberCollapse(!addMemberCollapse);
-    setCurrentMembersCollapse(false);
-  };
-
-  const memberDetails = (e: any) => {
-    const { id } = e.target;
-    history.push(`/admin/users/employee-details/${id}`);
-  };
-
-  const memberRemove = () => {};
 
   const onToggleGroupActive = () => {
     if (group) {
@@ -168,62 +132,9 @@ export const GroupDetailsPage = () => {
                             />
                           </Col>
                         </Row>
-
-                        <Row>
-                          <Col lg="12">
-                            <Collapse isOpen={addMemberCollapse}>
-                              <AddMemberPanel group={group} setGroup={setGroup} />
-                            </Collapse>
-                          </Col>
-                        </Row>
                       </div>
 
-                      <ButtonGroup className="d-flex">
-                        <Button onClick={toggleAddMember} color="success">
-                          Add new Member
-                        </Button>
-                        <Button
-                          onClick={toggleCurrentMembers}
-                          disabled={group.members.length === 0}
-                          color="info"
-                        >
-                          {currentMembersCollapse ? "Hide members" : "Show members"} (
-                          {group.members.length} members)
-                        </Button>
-                      </ButtonGroup>
-
-                      <Row>
-                        <Col lg="12">
-                          <Collapse isOpen={currentMembersCollapse}>
-                            <Card>
-                              <CardHeader>
-                                <h3 className="mb-0">Group members</h3>
-                                <p className="text-sm mb-0">Care Members</p>
-                              </CardHeader>
-
-                              {employeesState.isLoading ? (
-                                <div
-                                  style={{
-                                    textAlign: "center",
-                                  }}
-                                >
-                                  <Spinner />
-                                </div>
-                              ) : (
-                                <ReactTable
-                                  data={employeesState.entities}
-                                  keyField="id"
-                                  columns={employeesTableColumns}
-                                  onViewDetailsClick={memberDetails}
-                                  onDeleteItemClick={memberRemove}
-                                  selectedRows={selectedEmployees}
-                                  setSelectedRows={setSelectedEmployees}
-                                />
-                              )}
-                            </Card>
-                          </Collapse>
-                        </Col>
-                      </Row>
+                      <MembersPanel group={group} setGroup={setGroup} />
 
                       <hr className="my-4" />
 

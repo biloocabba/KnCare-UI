@@ -1,6 +1,6 @@
 import { Col, Form, Row } from "reactstrap";
 
-import { InputField } from "components/widgets/input-field";
+import { InputField } from "components/widgets";
 
 import { Employee } from "types";
 

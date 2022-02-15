@@ -2,10 +2,14 @@ import { FormGroup } from "reactstrap";
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import { StateManagerProps } from "react-select/dist/declarations/src/useStateManager";
 
-export const SelectField = props => {
-  let { id, label } = props;
+type Props = StateManagerProps & {
+  id: string;
+  label: string;
+};
 
+export const SelectField = ({ id, label, ...props }: Props) => {
   return (
     <FormGroup>
       <label className="form-control-label" htmlFor={id}>

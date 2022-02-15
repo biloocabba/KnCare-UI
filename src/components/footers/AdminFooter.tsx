@@ -17,7 +17,6 @@
 import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
 
 import knitsLogo from "assets/img/brand/KNITS.png";
-// reactstrap components
 
 export const AdminFooter = () => {
   return (
@@ -50,13 +49,7 @@ export const AdminFooter = () => {
                       KNITS@MyKn {"   "}
                     </NavLink>
                   </NavItem>
-                  {/* <span className="h3" style={{marginTop:'6px'}}>
-                      {" "} KNITS {"   "}
-                      <small className="text-muted">
-                        Kuehne+Nagel Information Technology School
-                      {"   "} - {"   "}Tallinn It Centre {"   "} - {"   "}
-                      </small>
-                  </span>                 */}
+
                   <NavItem>
                     <NavLink href="mailto:kn.it.school@kuehne-nagel.com" target="_blank">
                       {"   "} Contact Us
@@ -65,21 +58,6 @@ export const AdminFooter = () => {
                 </Nav>
               </div>
             </Col>
-            {/* <Col lg="2">            
-              <small className="text-muted">{"   "} Tallinn It Centre</small>
-            </Col>           
-            <Col lg="6">            
-              <Nav className="nav-footer justify-content-center justify-content-lg-end">                
-                <NavItem>
-                  <NavLink
-                    href="mailto:kn.it.school@kuehne-nagel.com"
-                    target="_blank"
-                  >
-                    Contact Us
-                  </NavLink>
-                </NavItem>             
-              </Nav>
-            </Col> */}
           </Row>
         </footer>
       </Container>

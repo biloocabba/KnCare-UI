@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 import { Button } from "reactstrap";
 
-import PropTypes from "prop-types";
-import BootstrapTable from "react-bootstrap-table-next";
+import BootstrapTable, { ColumnDescription } from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 import { pagination, selectRow } from ".";
 
 const { SearchBar } = Search;
 
-export const ReactTable = ({
+interface Props<T> {
+  data: T[];
+  columns: ColumnDescription<any, T>[];
+  keyField: string;
+  onViewDetailsClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  onDeleteItemClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  selectedRows: T[];
+  setSelectedRows: React.Dispatch<React.SetStateAction<T[]>>;
+  searchBarPlaceholder?: string;
+  selectButtonText?: string;
+  tableRef?: React.MutableRefObject<any>;
+}
+
+export const ReactTable = <T extends { id: number }>({
   columns,
   keyField,
   data,
@@ -21,37 +33,38 @@ export const ReactTable = ({
   searchBarPlaceholder,
   selectButtonText,
   tableRef,
-}) => {
-  const formatActionButtonCell = (cell, row) => {
+}: Props<T>) => {
+  const [formatterFunction, setFormatterFunction] = useState(false);
+
+  const formatActionButtonCell = (_: any, row: T) => {
+    const rowId = row.id.toString();
     return (
       <>
         <Button
-          id={row.id}
+          id={rowId}
           className="btn-icon btn-2"
           type="button"
           color="info"
           onClick={onViewDetailsClick}
         >
-          <span id={row.id} className="btn-inner--icon">
-            <i id={row.id} className="ni ni-badge" />
+          <span id={rowId} className="btn-inner--icon">
+            <i id={rowId} className="ni ni-badge" />
           </span>
         </Button>
         <Button
-          id={row.id}
+          id={rowId}
           className="btn-icon btn-2"
           color="danger"
           type="button"
           onClick={onDeleteItemClick}
         >
-          <span id={row.id} className="btn-inner--icon">
-            <i id={row.id} className="ni ni-fat-remove" />
+          <span id={rowId} className="btn-inner--icon">
+            <i id={rowId} className="ni ni-fat-remove" />
           </span>
         </Button>
       </>
     );
   };
-
-  const [formatterFunction, setFormatterFunction] = useState(false);
 
   if (!formatterFunction) {
     columns[columns.length - 1].formatter = formatActionButtonCell; //we can/should force formatter always to be on last column
@@ -89,24 +102,10 @@ export const ReactTable = ({
             bootstrap4
             pagination={pagination}
             bordered={false}
-            deleteRow
             selectRow={selectRow(setSelectedRows)}
           />
         </div>
       )}
     </ToolkitProvider>
   );
-};
-
-ReactTable.propTypes = {
-  columns: PropTypes.array.isRequired,
-  keyField: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
-  onViewDetailsClick: PropTypes.func,
-  onDeleteItemClick: PropTypes.func,
-  selectedRows: PropTypes.array.isRequired,
-  setSelectedRows: PropTypes.func.isRequired,
-  tableRef: PropTypes.object,
-  searchBarPlaceholder: PropTypes.string,
-  selectButtonText: PropTypes.string,
 };

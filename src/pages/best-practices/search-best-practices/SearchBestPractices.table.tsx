@@ -1,4 +1,6 @@
-export const bestPracticesTableColumns = [
+import { ColumnDescription } from "react-bootstrap-table-next";
+
+export const bestPracticesTableColumns: ColumnDescription<any, any>[] = [
   {
     dataField: "id",
     text: "id",
@@ -42,6 +44,8 @@ export const bestPracticesTableColumns = [
   {
     dataField: "action",
     text: "",
-    formatter: () => {},
+    formatter: () => {
+      return <></>;
+    },
   },
 ];

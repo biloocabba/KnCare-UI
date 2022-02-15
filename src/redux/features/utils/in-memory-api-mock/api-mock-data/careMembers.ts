@@ -23,7 +23,7 @@ export const careMembersData: CareMember[] = [
     endDate: null,
     dateOfLeave: null,
     nationality: null,
-    officeAddressCountry: null,
+    officeAddressCountry: "",
     officeAddressCity: "Turija",
     officeAddressStreet: "67736 Glacier Hill Drive",
     officeAddressPostalCode: "67736",

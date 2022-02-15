@@ -1,4 +1,6 @@
-export const careMemberTableColumns = [
+import { ColumnDescription } from "react-bootstrap-table-next";
+
+export const employeesTableColumns: ColumnDescription<any, any>[] = [
   {
     dataField: "id",
     text: "id",
@@ -10,16 +12,16 @@ export const careMemberTableColumns = [
   },
   {
     dataField: "lastName",
-    text: "lastName",
+    text: "Last Name",
   },
   {
     dataField: "internationalName",
-    text: "int Name",
+    text: "Int Name",
     sort: true,
   },
   {
     dataField: "title",
-    text: "title",
+    text: "Title",
     sort: true,
     style: { width: "50px" },
   },
@@ -30,21 +32,10 @@ export const careMemberTableColumns = [
     style: { width: "50px" },
   },
   {
-    dataField: "managementGroup",
-    text: "Man Group",
-    sort: true,
-    style: { width: "50px" },
-  },
-  {
     dataField: "companyCode",
     text: "companyCode",
     sort: true,
     style: { width: "50px" },
-  },
-  {
-    dataField: "costCenter",
-    text: "costCenter",
-    sort: true,
   },
   {
     dataField: "country",
@@ -52,8 +43,15 @@ export const careMemberTableColumns = [
     sort: true,
   },
   {
+    dataField: "hiringDate",
+    text: "hiringDate",
+    sort: true,
+  },
+  {
     dataField: "action",
     text: "",
-    formatter: () => {},
+    formatter: () => {
+      return <></>;
+    },
   },
 ];
