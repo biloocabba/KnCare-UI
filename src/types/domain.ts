@@ -72,6 +72,7 @@ export interface Group extends Domain {
 }
 
 export interface Email extends Domain {
+  id: number;
   subject: string;
   content: string;
   groups?: string[];

@@ -5,7 +5,7 @@ import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
-import { EmailQueryFilters } from "types";
+import { Email, EmailQueryFilters } from "types";
 
 import { useAppSelector } from "redux/app";
 import {
@@ -21,7 +21,7 @@ import { SearchEmailsFilterPanel } from "./SearchEmails.filter";
 export const SearchEmailPage = () => {
   //   const history = useHistory();
   //   const dispatch = useAppDispatch();
-  const [selectedEmails, setSelectedEmails] = useState([]);
+  const [selectedEmails, setSelectedEmails] = useState<Email[]>([]);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
   const groups = useAppSelector(selectAllGroupsDataAsSelectOptions);

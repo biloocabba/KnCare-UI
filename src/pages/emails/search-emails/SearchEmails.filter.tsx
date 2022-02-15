@@ -2,8 +2,6 @@ import { useState } from "react";
 
 import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactstrap";
 
-import { Moment } from "moment";
-
 import { WithAuthorization } from "components/authorization";
 import { DateField, InputField, SelectField } from "components/widgets";
 
@@ -62,8 +60,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
               id="select-businessUnits"
               label="Business Unit"
               options={props.businessUnits}
-              onChange={(item: SelectOption) => {
-                const id: number = parseInt(item.value);
+              onChange={item => {
+                const id: number = parseInt(item as SelectOption["value"]);
                 setSearchBusinessUnitId(id);
               }}
             />
@@ -73,8 +71,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
               id="select-groups"
               label="Groups"
               options={props.groups}
-              onChange={(item: SelectOption) => {
-                const id: number = parseInt(item.value);
+              onChange={item => {
+                const id: number = parseInt(item as SelectOption["value"]);
                 setSearchGroupId(id);
               }}
             />
@@ -83,8 +81,12 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
             <DateField
               id="date-sent-from"
               label="Sending Date From"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchSendingDateFrom(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchSendingDateFrom(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -93,8 +95,12 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
             <DateField
               id="date-sent-to"
               label="Sending Date To"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchSendingDateTo(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchSendingDateTo(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -107,8 +113,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
                 id="select-country"
                 label="Country"
                 options={props.countries}
-                onChange={(item: SelectOption) => {
-                  setSearchCountryIsoCode3(item.value);
+                onChange={item => {
+                  setSearchCountryIsoCode3(item as SelectOption["value"]);
                 }}
               />
             </Col>

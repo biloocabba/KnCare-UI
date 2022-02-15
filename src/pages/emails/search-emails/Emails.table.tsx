@@ -1,4 +1,6 @@
-export const emailsTableColumns = [
+import { ColumnDescription } from "react-bootstrap-table-next";
+
+export const emailsTableColumns: ColumnDescription<any, any>[] = [
   {
     dataField: "sendDate",
     text: "Date",
@@ -12,6 +14,8 @@ export const emailsTableColumns = [
   {
     dataField: "actions",
     text: "",
-    formatter: () => {},
+    formatter: () => {
+      return <></>;
+    },
   },
 ];
