@@ -15,6 +15,10 @@
 
 */
 
+import { useState } from "react";
+
+import { useHistory } from "react-router";
+
 import {
   Button,
   ButtonGroup,
@@ -27,14 +31,24 @@ import {
   Row,
 } from "reactstrap";
 
+import { AnyObject, Plate, TNode } from "@udecode/plate";
 import makeAnimated from "react-select/animated";
 
 import { BoxHeader } from "components/headers";
 import { SelectField, InputField } from "components/widgets";
 
-import { Email, EmailSaveRequest } from "types";
+import { Email, EmailSaveRequest, SelectOption } from "types";
 
-// import "react-quill/dist/quill.snow.css";
+import { useAppSelector } from "redux/app";
+import {
+  emailService,
+  selectAllCareMembersData,
+  selectAllCountriesDataAsSelectOptions,
+  selectAllGroupsDataAsSelectOptions,
+  selectAllRolesData,
+} from "redux/features";
+
+import { EMAIL_SEARCH_ROUTE } from "../emails.routes.const";
 
 interface onSaveFunction {
   (emailRequest: EmailSaveRequest): void;
@@ -46,31 +60,53 @@ interface Props {
 }
 
 export const EditEmail = ({ email, setEmail, onSave }: Props) => {
-  // const history = useHistory();
+  const history = useHistory();
+  const currentRole = "admin";
 
-  //@todo load those from redux
-  const careRoles: any = [];
-  const groups: any = [];
-  const careMembers: any = [];
+  const careMembers = useAppSelector(selectAllCareMembersData);
+  const groups = useAppSelector(selectAllGroupsDataAsSelectOptions);
+  const careRoles = useAppSelector(selectAllRolesData);
+  const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
+
+  const [emailContent, setEmailContent] = useState<TNode<AnyObject>[]>([]);
+
+  const editableProps = {
+    placeholder: "Type…",
+    style: {
+      padding: "15px",
+      border: "1px solid #e4e7ea",
+    },
+  };
+
+  const initialValue = [
+    {
+      children: [
+        {
+          text: "This is editable plain text with react and history plugins, just like a <textarea>!",
+        },
+      ],
+    },
+  ];
 
   const handleSend = () => {
-    // emailService.sendMail(emailState);
-    // history.push("/admin/search-email");
+    emailService.send(email);
+    history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
   };
 
   const handleSaveAsDraft = () => {
     const emailSaveRequest: EmailSaveRequest = {
-      content: "",
+      content: emailContent.toString(),
       recipientIds: [],
       subject: "",
     };
+    // @todo why two times?
     onSave(emailSaveRequest);
-    // emailService.saveAsDraft(emailState);
-    // history.push("/admin/search-email");
+    emailService.saveAsDraft(emailSaveRequest);
+    history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
   };
 
   const handleDiscard = () => {
-    // history.push(`/admin${EMAIL_SEARCH_ROUTE}`);
+    history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
   };
 
   return (
@@ -111,9 +147,10 @@ export const EditEmail = ({ email, setEmail, onSave }: Props) => {
                           isMulti
                           label="Recipients"
                           options={careMembers}
-                          onChange={(e: any) => {
-                            const recipientsArray: any = [];
-                            e.forEach((element: any) => recipientsArray.push(element.value));
+                          onChange={item => {
+                            const selections = item as SelectOption[];
+                            const recipientsArray = selections.map(item => item.value);
+
                             setEmail({
                               ...email,
                               recipients: recipientsArray,
@@ -130,9 +167,9 @@ export const EditEmail = ({ email, setEmail, onSave }: Props) => {
                           label="Recipient Group"
                           isMulti
                           options={groups}
-                          onChange={(e: any) => {
-                            const recipientGroupsArray: any = [];
-                            e.forEach((element: any) => recipientGroupsArray.push(element.value));
+                          onChange={item => {
+                            const selections = item as SelectOption[];
+                            const recipientGroupsArray = selections.map(item => item.value);
                             setEmail({
                               ...email,
                               groups: recipientGroupsArray,
@@ -145,16 +182,37 @@ export const EditEmail = ({ email, setEmail, onSave }: Props) => {
                       <Col>
                         <SelectField
                           id="input-recipient-group"
-                          label="To Roles"
+                          label="Roles"
                           components={makeAnimated()}
                           isMulti
                           options={careRoles}
-                          onChange={(e: any) => {
-                            const recipientRoleArray: any = [];
-                            e.forEach((element: any) => recipientRoleArray.push(element.value));
+                          onChange={item => {
+                            const selections = item as SelectOption[];
+                            const recipientRoleArray = selections.map(item => item.value);
+
                             setEmail({
                               ...email,
                               roles: recipientRoleArray,
+                            });
+                          }}
+                        />
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <SelectField
+                          id="input-recipient-country"
+                          label="Countries"
+                          components={makeAnimated()}
+                          isMulti
+                          options={countries}
+                          onChange={item => {
+                            const selections = item as SelectOption[];
+                            const recipientCountriesArray = selections.map(item => item.value);
+
+                            setEmail({
+                              ...email,
+                              roles: recipientCountriesArray,
                             });
                           }}
                         />
@@ -168,7 +226,7 @@ export const EditEmail = ({ email, setEmail, onSave }: Props) => {
                       type="text"
                       label="Subject"
                       value={email.subject}
-                      onChange={(e: any) =>
+                      onChange={e =>
                         setEmail({
                           ...email,
                           subject: e.target.value,
@@ -176,10 +234,14 @@ export const EditEmail = ({ email, setEmail, onSave }: Props) => {
                       }
                     />
 
-                    {/* <ReactQuill
-                      value={emailState.content}
-                      onChange={e => setEmailState({ ...emailState, content: e })}
-                    /> */}
+                    <Plate
+                      id="1"
+                      editableProps={editableProps}
+                      initialValue={initialValue}
+                      onChange={newValue => {
+                        setEmailContent(newValue);
+                      }}
+                    />
                   </div>
                 </Form>
               </CardBody>

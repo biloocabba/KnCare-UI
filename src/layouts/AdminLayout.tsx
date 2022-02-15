@@ -16,11 +16,11 @@
 */
 import { useEffect, useRef, useState } from "react";
 
-// react library for routing
-import { useLocation, Switch, Redirect } from "react-router-dom";
+import { Redirect, Switch, useLocation } from "react-router-dom";
 
 import { Audio } from "react-loader-spinner";
 
+// react library for routing
 import { AdminFooter } from "components/footers";
 import { AdminNavbar } from "components/navbars";
 import { Sidebar } from "components/sidebar";
@@ -38,7 +38,7 @@ import {
   selectLoggedUserRole,
 } from "redux/features";
 
-import { useScrollToTop, getRoutes } from ".";
+import { getRoutes, useScrollToTop } from ".";
 
 export const AdminLayout = () => {
   const dispatch = useAppDispatch();

@@ -18,6 +18,7 @@ interface SearchEmailsFilterPanelProps {
   countries: SelectOption[];
   businessUnits: SelectOption[];
   groups: SelectOption[];
+  roles: SelectOption[];
   onSearchEmails: onSearchEmailsFunction;
 }
 
@@ -26,6 +27,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
   const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
     useAppSelector(selectLoggedUserDefaultCountry)
   );
+
+  const [searchRole, setSearchRole] = useState<string>();
   const [searchGroupId, setSearchGroupId] = useState<number>();
   const [searchSendingDateFrom, setSearchSendingDateFrom] = useState<string>();
   const [searchSendingDateTo, setSearchSendingDateTo] = useState<string>();
@@ -34,7 +37,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
   const findByAllParameters = () => {
     const filters: EmailQueryFilters = {
       businessUnitId: searchBusinessUnitId,
-      countryIso3: searchCountryIsoCode3,
+      countryId: searchCountryIsoCode3,
+      roleId: searchRole,
       groupId: searchGroupId,
       sendingDateFrom: searchSendingDateFrom,
       sendingDateTo: searchSendingDateTo,
@@ -61,7 +65,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
               label="Business Unit"
               options={props.businessUnits}
               onChange={item => {
-                const id: number = parseInt(item as SelectOption["value"]);
+                const { value } = item as SelectOption;
+                const id: number = parseInt(value);
                 setSearchBusinessUnitId(id);
               }}
             />
@@ -72,12 +77,13 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
               label="Groups"
               options={props.groups}
               onChange={item => {
-                const id: number = parseInt(item as SelectOption["value"]);
+                const { value } = item as SelectOption;
+                const id: number = parseInt(value);
                 setSearchGroupId(id);
               }}
             />
           </Col>
-          <Col md="3">
+          <Col md="2">
             <DateField
               id="date-sent-from"
               label="Sending Date From"
@@ -91,7 +97,7 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
               timeFormat={false}
             />
           </Col>
-          <Col md="3">
+          <Col md="2">
             <DateField
               id="date-sent-to"
               label="Sending Date To"
@@ -105,20 +111,31 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
               timeFormat={false}
             />
           </Col>
-        </Row>
-        <Row>
+
           <WithAuthorization requires={Permission.Email_country_all}>
-            <Col md="4">
+            <Col md="2">
               <SelectField
                 id="select-country"
                 label="Country"
                 options={props.countries}
                 onChange={item => {
-                  setSearchCountryIsoCode3(item as SelectOption["value"]);
+                  const { value } = item as SelectOption;
+                  setSearchCountryIsoCode3(value);
                 }}
               />
             </Col>
           </WithAuthorization>
+          <Col md="2">
+            <SelectField
+              id="select-role"
+              label="Role"
+              options={props.roles}
+              onChange={item => {
+                const { value } = item as SelectOption;
+                setSearchRole(value);
+              }}
+            />
+          </Col>
           <Col md="4">
             <InputField
               id="input-subject"

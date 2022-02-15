@@ -81,7 +81,10 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="select-role"
               label="Role"
               options={roleOptions}
-              onChange={item => setRoleId(parseInt(item as SelectOption["value"]))}
+              onChange={item => {
+                const { value } = item as SelectOption;
+                setRoleId(parseInt(value));
+              }}
             />
           </Col>
           <Col lg="6">

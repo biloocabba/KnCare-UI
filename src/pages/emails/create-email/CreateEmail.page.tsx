@@ -3,9 +3,13 @@ import { useState } from "react";
 import { Email, EmailSaveRequest } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
 
+import { useAppDispatch } from "redux/app";
+import { createEmail } from "redux/features";
+
 import { EditEmail } from "..";
 
 export const CreateEmailPage = () => {
+  const dispatch = useAppDispatch();
   const newEmail = {
     id: CREATE_ENTITY_ID,
     subject: "",
@@ -20,7 +24,7 @@ export const CreateEmailPage = () => {
   const [email, setEmail] = useState<Email>(newEmail);
 
   const onEmailSave = (emailRequest: EmailSaveRequest) => {
-    console.log(emailRequest);
+    dispatch(createEmail(emailRequest));
   };
 
   return <EditEmail email={email} setEmail={setEmail} onSave={onEmailSave} />;

@@ -33,9 +33,9 @@ export interface EmployeeQueryFilters {
   hiringDate?: string;
 }
 export interface EmailQueryFilters {
-  lastName?: string;
   businessUnitId?: number;
-  countryIso3?: string;
+  countryId?: string;
+  roleId?: string;
   groupId?: number;
   sendingDateFrom?: string;
   sendingDateTo?: string;

@@ -1,54 +1,64 @@
 import { MouseEvent, useState } from "react";
 
-import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
+import { useHistory } from "react-router";
+
+import { Card, CardHeader, Col, Container, Row, Spinner } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
 import { Email, EmailQueryFilters } from "types";
 
-import { useAppSelector } from "redux/app";
+import { useAppDispatch, useAppSelector } from "redux/app";
 import {
+  deleteEmail,
+  searchEmails,
   selectAllBusinessUnitsDataAsSelectOptions,
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
+  selectAllRoleDataAsSelectOptions,
   selectEmailState,
 } from "redux/features";
+
+import { EMAIL_DETAILS_ROUTE } from "..";
 
 import { emailsTableColumns, SearchEmailsFilterPanel } from ".";
 
 export const SearchEmailPage = () => {
-  //   const history = useHistory();
-  //   const dispatch = useAppDispatch();
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+
   const [selectedEmails, setSelectedEmails] = useState<Email[]>([]);
+
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
   const groups = useAppSelector(selectAllGroupsDataAsSelectOptions);
-
+  const roles = useAppSelector(selectAllRoleDataAsSelectOptions);
   const emailsState = useAppSelector(selectEmailState);
 
+  const currentRole = "admin";
+
   const onClickSearchEmails = (filters: EmailQueryFilters): void => {
-    console.log(filters);
-    //dispatch(searchEmails(filters));
+    dispatch(searchEmails(filters));
   };
 
   const onGoToEmailDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    console.log(id);
-    // history.push(`/${currentRole}${EMPLOYEE_DETAILS}/${id}`);
+    history.push(`/${currentRole}${EMAIL_DETAILS_ROUTE}/${id}`);
   };
 
   const onRemoveEmail = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
     console.log(id);
-    // dispatch(deleteEmployee(parseInt(id)));
+    dispatch(deleteEmail(parseInt(id)));
   };
 
   return (
     <>
       <BoxHeader />
+
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
@@ -56,13 +66,14 @@ export const SearchEmailPage = () => {
               countries={countries}
               businessUnits={businessUnits}
               groups={groups}
+              roles={roles}
               onSearchEmails={onClickSearchEmails}
             />
           </div>
         </Row>
 
         <Row>
-          <div className="col">
+          <Col>
             <Card>
               <CardHeader>
                 <h3 className="mb-0">Emails</h3>
@@ -89,7 +100,7 @@ export const SearchEmailPage = () => {
                 />
               )}
             </Card>
-          </div>
+          </Col>
         </Row>
       </Container>
     </>
