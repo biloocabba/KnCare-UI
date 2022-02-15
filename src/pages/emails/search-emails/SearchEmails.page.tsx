@@ -51,7 +51,6 @@ export const SearchEmailPage = () => {
   const onRemoveEmail = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    console.log(id);
     dispatch(deleteEmail(parseInt(id)));
   };
 

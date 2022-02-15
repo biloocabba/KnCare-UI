@@ -1,31 +1,29 @@
 import { useState } from "react";
 
+import { useAlerts } from "hooks";
 import { Email, EmailSaveRequest } from "types";
-import { CREATE_ENTITY_ID } from "variables/app.consts";
 
-import { useAppDispatch } from "redux/app";
-import { createEmail } from "redux/features";
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { createEmail, selectEmailState } from "redux/features";
 
-import { EditEmail } from "..";
+import { EditEmail, emailDefaultState } from "..";
 
 export const CreateEmailPage = () => {
   const dispatch = useAppDispatch();
-  const newEmail = {
-    id: CREATE_ENTITY_ID,
-    subject: "",
-    content: "",
-    recipients: [],
-    groups: [],
-    businessUnits: [],
-    roles: [],
-    countries: [],
-  };
+  const emailState = useAppSelector(selectEmailState);
 
-  const [email, setEmail] = useState<Email>(newEmail);
+  const [email, setEmail] = useState<Email>(emailDefaultState);
+  const { alert, setSaveSent } = useAlerts(emailState, "Email Saved");
 
   const onEmailSave = (emailRequest: EmailSaveRequest) => {
     dispatch(createEmail(emailRequest));
+    setSaveSent(true);
   };
 
-  return <EditEmail email={email} setEmail={setEmail} onSave={onEmailSave} />;
+  return (
+    <>
+      {alert}
+      <EditEmail email={email} setEmail={setEmail} onSave={onEmailSave} />
+    </>
+  );
 };
