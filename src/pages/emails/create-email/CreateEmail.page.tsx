@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Email, EmailSaveRequest } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
 
-import { EditEmail } from "../email-panels";
+import { EditEmail } from "..";
 
 export const CreateEmailPage = () => {
   const newEmail = {

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Email, EmailSaveRequest, RouteParams } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
 
-import { EditEmail } from "../email-panels";
+import { EditEmail } from "..";
 
 export const EmailDetailsPage = () => {
   const { id } = useParams<RouteParams>();

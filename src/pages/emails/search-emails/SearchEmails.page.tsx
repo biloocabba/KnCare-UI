@@ -12,11 +12,10 @@ import {
   selectAllBusinessUnitsDataAsSelectOptions,
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
+  selectEmailState,
 } from "redux/features";
-import { selectEmailState } from "redux/features/email/email.selectors";
 
-import { emailsTableColumns } from "./Emails.table";
-import { SearchEmailsFilterPanel } from "./SearchEmails.filter";
+import { emailsTableColumns, SearchEmailsFilterPanel } from ".";
 
 export const SearchEmailPage = () => {
   //   const history = useHistory();

@@ -1,6 +1,6 @@
 import { Button } from "reactstrap";
 
-import { useCopy } from "../hooks";
+import { useCopy } from "..";
 
 interface Props {
   elementId: string;
