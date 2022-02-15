@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 import { useHistory } from "react-router";
 
 import { Card, CardBody, CardHeader, Col, Container, FormGroup, Row, Spinner } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
-import { ReactTable } from "components/widgets/react-table";
+import { ReactTable } from "components/widgets";
+
+import { Group } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { deleteGroup, searchEmployees, searchGroups, selectGroupState } from "redux/features";
@@ -17,14 +19,14 @@ export const SearchGroupsPage = () => {
   const dispatch = useAppDispatch();
   const groups = useAppSelector(selectGroupState);
 
-  const [selectedGroups, setSelectedGroups] = useState([]);
+  const [selectedGroups, setSelectedGroups] = useState<Group[]>([]);
 
-  const goToGroupDetails = (e: React.MouseEvent<HTMLInputElement>) => {
+  const goToGroupDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.target as HTMLElement;
     history.push(`/admin/groups/group-details/${id}`);
   };
 
-  const removeGroup = (e: React.MouseEvent<HTMLInputElement>) => {
+  const removeGroup = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.target as HTMLElement;
     dispatch(deleteGroup(parseInt(id)));
   };

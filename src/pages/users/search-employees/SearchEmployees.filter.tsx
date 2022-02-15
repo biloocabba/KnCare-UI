@@ -2,12 +2,8 @@ import { useState } from "react";
 
 import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactstrap";
 
-import { Moment } from "moment";
-
-import { WithAuthorization } from "components/authorization/WithAuthorization";
-import { DateField } from "components/widgets/date-field";
-import { InputField } from "components/widgets/input-field";
-import { SelectField } from "components/widgets/select-field";
+import { WithAuthorization } from "components/authorization";
+import { DateField, InputField, SelectField } from "components/widgets";
 
 import { EmployeeQueryFilters, SelectOption, Permission } from "types";
 
@@ -75,8 +71,8 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
               id="select-businessUnits"
               label="Business Unit"
               options={props.businessUnits}
-              onChange={(item: SelectOption) => {
-                const id: number = parseInt(item.value);
+              onChange={item => {
+                const id: number = parseInt(item as SelectOption["value"]);
                 setSearchBusinessUnitId(id);
               }}
             />
@@ -86,8 +82,8 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
               id="select-jobTitle"
               label="Job Title"
               options={props.jobTitle}
-              onChange={(item: SelectOption) => {
-                setSearchJobTitle(item.value);
+              onChange={item => {
+                setSearchJobTitle(item as SelectOption["value"]);
               }}
             />
           </Col>
@@ -97,8 +93,8 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
                 id="select-country"
                 label="Country"
                 options={props.countries}
-                onChange={(item: SelectOption) => {
-                  setSearchCountryIsoCode3(item.value);
+                onChange={item => {
+                  setSearchCountryIsoCode3(item as SelectOption["value"]);
                 }}
               />
             </Col>
@@ -107,8 +103,12 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
             <DateField
               id="date-hire-from"
               label="Hire Date From"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchHiringDate(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchHiringDate(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />

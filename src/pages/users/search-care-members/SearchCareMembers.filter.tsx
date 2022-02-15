@@ -2,12 +2,8 @@ import React, { useState } from "react";
 
 import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactstrap";
 
-import { Moment } from "moment";
-
 import { WithAuthorization } from "components/authorization";
-import { DateField } from "components/widgets/date-field";
-import { InputField } from "components/widgets/input-field";
-import { SelectField } from "components/widgets/select-field";
+import { DateField, InputField, SelectField } from "components/widgets";
 
 import { CareMemberQueryFilters, Permission, SelectOption } from "types";
 
@@ -68,8 +64,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               label="Role"
               options={props.roles}
               value={searchRoleId}
-              onChange={(item: SelectOption) => {
-                const id: number = parseInt(item.value);
+              onChange={item => {
+                const id: number = parseInt(item as SelectOption["value"]);
                 setSearchRoleId(id);
               }}
             />
@@ -79,8 +75,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               id="select-businessUnits"
               label="Business Unit"
               options={props.businessUnits}
-              onChange={(item: SelectOption) => {
-                const id: number = parseInt(item.value);
+              onChange={item => {
+                const id: number = parseInt(item as SelectOption["value"]);
                 setSearchBusinessUnitId(id);
               }}
             />
@@ -91,19 +87,20 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
                 id="select-country"
                 label="Country"
                 options={props.countries}
-                onChange={(item: SelectOption) => {
-                  setSearchCountryIsoCode3(item.value);
+                onChange={item => {
+                  setSearchCountryIsoCode3(item as SelectOption["value"]);
                 }}
               />
             </Col>
           </WithAuthorization>
+
           <Col md="3">
             <SelectField
               id="select-group"
               label="Group"
               options={props.groups}
-              onChange={(item: SelectOption) => {
-                const id: number = parseInt(item.value);
+              onChange={item => {
+                const id: number = parseInt(item as SelectOption["value"]);
                 setSearchGroupId(id);
               }}
             />
@@ -129,8 +126,12 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
                 placeholder: "From",
               }}
               label="Onbording from"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchOnBoardDateFrom(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchOnBoardDateFrom(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -142,8 +143,12 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
                 placeholder: "To",
               }}
               label="Onbording to"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchOnBoardDateTo(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchOnBoardDateTo(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -155,8 +160,12 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
                 placeholder: "from",
               }}
               label="Offboarded From"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchOffboardingDateFrom(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchOffboardingDateFrom(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -168,8 +177,12 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
                 placeholder: "to",
               }}
               label="Offboarded To"
-              onChange={(dateAsMoment: Moment) =>
-                setSearchOffboardingDateTo(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setSearchOffboardingDateTo(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />

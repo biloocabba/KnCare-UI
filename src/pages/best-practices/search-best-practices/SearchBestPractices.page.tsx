@@ -23,7 +23,7 @@ import { Card, CardHeader, Col, Container, Row, Spinner } from "reactstrap";
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
-import { BestPracticesQueryFilters } from "types";
+import { BestPractice, BestPracticesQueryFilters } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { deleteBestPractice, selectBestPracticeState, searchBestPractices } from "redux/features";
@@ -37,7 +37,7 @@ export const SearchBestPracticesPage = () => {
   const history = useHistory();
 
   const [alert] = useState(null);
-  const [selectedRows, setSelectedRows] = useState([]);
+  const [selectedRows, setSelectedRows] = useState<BestPractice[]>([]);
 
   const dispatch = useAppDispatch();
 

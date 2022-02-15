@@ -124,6 +124,7 @@ export const CreateBestPracticePage = () => {
                     <Row>
                       <InputField
                         id="file-content-upload"
+                        label="Content Files"
                         type="file"
                         name="file"
                         onChange={changeFileHandler}

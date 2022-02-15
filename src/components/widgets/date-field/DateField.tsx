@@ -2,9 +2,12 @@ import { FormGroup } from "reactstrap";
 
 import ReactDatetime from "react-datetime";
 
-export const DateField = props => {
-  let { id, label } = props;
+type Props = ReactDatetime.DatetimepickerProps & {
+  id: string;
+  label: string;
+};
 
+export const DateField = ({ id, label, ...props }: Props) => {
   return (
     <FormGroup>
       <label className="form-control-label" htmlFor={id}>

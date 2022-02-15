@@ -5,10 +5,10 @@ import { useHistory } from "react-router-dom";
 import { Card, CardHeader, Container, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
-import { ReactTable } from "components/widgets/react-table";
+import { ReactTable } from "components/widgets";
 
 import { CARE_MEMBER_EDIT } from "pages/users";
-import { CareMemberQueryFilters, SelectOption } from "types";
+import { CareMember, CareMemberQueryFilters, SelectOption } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
@@ -33,7 +33,7 @@ export const SearchCareMembersPage = () => {
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
   const currentRole = "admin";
 
-  const [selectedCareMembers, setSelectedCareMembers] = useState([]);
+  const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
 
   const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
