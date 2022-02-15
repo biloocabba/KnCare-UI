@@ -45,7 +45,7 @@ import {
   selectAllCareMembersData,
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
-  selectAllRolesData,
+  selectAllRolesDataAsSelectOptions,
 } from "redux/features";
 
 import { EMAIL_SEARCH_ROUTE } from "../emails.routes.const";
@@ -65,7 +65,7 @@ export const EditEmail = ({ email, setEmail, onSave }: Props) => {
 
   const careMembers = useAppSelector(selectAllCareMembersData);
   const groups = useAppSelector(selectAllGroupsDataAsSelectOptions);
-  const careRoles = useAppSelector(selectAllRolesData);
+  const careRoles = useAppSelector(selectAllRolesDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
 
   const [emailContent, setEmailContent] = useState<TNode<AnyObject>[]>([]);
@@ -88,8 +88,7 @@ export const EditEmail = ({ email, setEmail, onSave }: Props) => {
     },
   ];
 
-  const handleSend = () => {
-    emailService.send(email);
+  const handleDiscard = () => {
     history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
   };
 
@@ -102,11 +101,12 @@ export const EditEmail = ({ email, setEmail, onSave }: Props) => {
     // @todo why two times?
     onSave(emailSaveRequest);
     emailService.saveAsDraft(emailSaveRequest);
-    history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
+    // history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
   };
 
-  const handleDiscard = () => {
-    history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
+  const handleSend = () => {
+    emailService.send(email);
+    history.push(`/${currentRole}${EMAIL_SEARCH_ROUTE}`);
   };
 
   return (
@@ -212,7 +212,7 @@ export const EditEmail = ({ email, setEmail, onSave }: Props) => {
 
                             setEmail({
                               ...email,
-                              roles: recipientCountriesArray,
+                              countries: recipientCountriesArray,
                             });
                           }}
                         />

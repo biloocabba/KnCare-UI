@@ -54,7 +54,7 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
   return (
     <Card>
       <CardHeader>
-        <h3 className="mb-0">Search Employees</h3>
+        <h3 className="mb-0">Search Emails</h3>
         <p className="text-sm mb-0">Filters</p>
       </CardHeader>
       <CardBody>

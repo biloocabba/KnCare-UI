@@ -22,8 +22,8 @@ const initialState: StateType<BusinessUnit> = {
   error: {},
 };
 
-export const fetchBusinessUnits = createAsyncThunk("businessUnit/fetchBusinessUnits", async () => {
-  const { data } = await businessUnitService.listBusinessUnits();
+export const findAllBusinessUnits = createAsyncThunk("businessUnit/findAll", async () => {
+  const { data } = await businessUnitService.findAll();
 
   return data;
 });
@@ -33,7 +33,7 @@ export const businessUnitSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    [fetchBusinessUnits].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
+    [findAllBusinessUnits].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
       builder.addCase(thunk.pending, state => {
         state.isLoading = true;
         state.isSuccess = false;
@@ -44,7 +44,7 @@ export const businessUnitSlice = createSlice({
         state.isSuccess = false;
       });
     });
-    builder.addCase(fetchBusinessUnits.fulfilled, (state, action) => {
+    builder.addCase(findAllBusinessUnits.fulfilled, (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;
       state.isSuccess = true;

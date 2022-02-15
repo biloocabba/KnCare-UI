@@ -18,7 +18,7 @@ export const selectRoleById = (id: number) =>
     roles => roles.find(role => role.id === id) //arg
   );
 
-export const selectAllRoleDataAsSelectOptions = createSelector([selectAllRolesData], roles => {
+export const selectAllRolesDataAsSelectOptions = createSelector([selectAllRolesData], roles => {
   const rolesOptions: SelectOption[] = roles.map(role => {
     return { value: `${role.id}`, label: role.name };
   });

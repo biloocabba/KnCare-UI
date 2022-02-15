@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from "redux/app";
 import {
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
-  selectAllRoleDataAsSelectOptions,
+  selectAllRolesDataAsSelectOptions,
 } from "redux/features";
 import { selectAllBusinessUnitsDataAsSelectOptions } from "redux/features/business-unit/business-unit.selectors";
 import { searchCareMembers, selectCareMemberState } from "redux/features/care-member";
@@ -29,7 +29,7 @@ export const SearchCareMembersPage = () => {
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
 
   const countries: SelectOption[] = useAppSelector(selectAllCountriesDataAsSelectOptions);
-  const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
+  const roles: SelectOption[] = useAppSelector(selectAllRolesDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
   const currentRole = "admin";
 

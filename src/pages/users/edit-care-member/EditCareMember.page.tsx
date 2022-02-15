@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "redux/app";
 import {
   IUpdated,
   selectAllGroupsDataAsSelectOptions,
-  selectAllRoleDataAsSelectOptions,
+  selectAllRolesDataAsSelectOptions,
   selectCareMemberById,
   selectCareMemberState,
   updateCareMember,
@@ -25,7 +25,7 @@ export const EditCareMemberPage = () => {
 
   const currentRole = "admin";
   const careMember = useAppSelector(selectCareMemberById(parseInt(id))) as CareMember;
-  const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
+  const roles: SelectOption[] = useAppSelector(selectAllRolesDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
   const careMemberState = useAppSelector(selectCareMemberState);

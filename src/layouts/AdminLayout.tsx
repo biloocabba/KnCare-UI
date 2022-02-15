@@ -31,10 +31,14 @@ import { ThemeColors } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
-  fetchBusinessUnits,
-  fetchCountries,
+  findAllBusinessUnits,
+  findAllCountries,
+  findAllGroups,
+  findAllRoles,
   selectAllBusinessUnitData,
   selectAllCountryData,
+  selectAllGroupsData,
+  selectAllRolesData,
   selectLoggedUserRole,
 } from "redux/features";
 
@@ -49,14 +53,20 @@ export const AdminLayout = () => {
 
   const [isCountryDataLoaded, setIsCountryDataLoaded] = useState(false);
   const [isBusinessUnitsDataLoaded, setIsBusinessUnitsDataLoaded] = useState(false);
+  const [isRolesDataLoaded, setIsRolesDataLoaded] = useState(false);
+  const [isGroupsDataLoaded, setIsGroupsDataLoaded] = useState(false);
+
   const countries = useAppSelector(selectAllCountryData);
   const businessUnits = useAppSelector(selectAllBusinessUnitData);
+  const roles = useAppSelector(selectAllRolesData);
+  const groups = useAppSelector(selectAllGroupsData);
+
   const userRole = useAppSelector(selectLoggedUserRole);
   useScrollToTop(mainContentRef);
 
   useEffect(() => {
     if (!countries || countries.length == 0) {
-      dispatch(fetchCountries());
+      dispatch(findAllCountries());
     } else {
       setIsCountryDataLoaded(true);
     }
@@ -64,22 +74,49 @@ export const AdminLayout = () => {
   }, [countries, isCountryDataLoaded]);
 
   useEffect(() => {
-    if (isCountryDataLoaded) {
-      if (!businessUnits || businessUnits.length == 0) {
-        dispatch(fetchBusinessUnits());
-      } else {
-        setIsBusinessUnitsDataLoaded(true);
-      }
+    if (!businessUnits || businessUnits.length == 0) {
+      dispatch(findAllBusinessUnits());
+    } else {
+      setIsBusinessUnitsDataLoaded(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [businessUnits, isBusinessUnitsDataLoaded, isCountryDataLoaded]);
+  }, [businessUnits, isBusinessUnitsDataLoaded]);
 
   useEffect(() => {
-    if (isCountryDataLoaded && isBusinessUnitsDataLoaded) {
+    if (!roles || roles.length == 0) {
+      dispatch(findAllRoles());
+    } else {
+      setIsRolesDataLoaded(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roles, isRolesDataLoaded]);
+
+  useEffect(() => {
+    if (!groups || groups.length == 0) {
+      dispatch(findAllGroups());
+    } else {
+      setIsGroupsDataLoaded(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [groups, isGroupsDataLoaded]);
+
+  useEffect(() => {
+    if (
+      isCountryDataLoaded &&
+      isBusinessUnitsDataLoaded &&
+      isRolesDataLoaded &&
+      isGroupsDataLoaded
+    ) {
       setIsDataLoadingCompleted(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isCountryDataLoaded, isBusinessUnitsDataLoaded, isDataLoadingCompleted]);
+  }, [
+    isCountryDataLoaded,
+    isBusinessUnitsDataLoaded,
+    isGroupsDataLoaded,
+    isRolesDataLoaded,
+    isDataLoadingCompleted,
+  ]);
 
   const getNavbarTheme = () => {
     return location.pathname.indexOf("admin/alternative-dashboard") === -1 ? "dark" : "light";

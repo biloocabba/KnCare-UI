@@ -16,7 +16,7 @@ import {
   selectAllBusinessUnitsDataAsSelectOptions,
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
-  selectAllRoleDataAsSelectOptions,
+  selectAllRolesDataAsSelectOptions,
   selectEmailState,
 } from "redux/features";
 
@@ -33,7 +33,7 @@ export const SearchEmailPage = () => {
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
   const groups = useAppSelector(selectAllGroupsDataAsSelectOptions);
-  const roles = useAppSelector(selectAllRoleDataAsSelectOptions);
+  const roles = useAppSelector(selectAllRolesDataAsSelectOptions);
   const emailsState = useAppSelector(selectEmailState);
 
   const currentRole = "admin";

@@ -14,8 +14,8 @@ const initialState: StateType<Country> = {
   error: {},
 };
 
-export const fetchCountries = createAsyncThunk("country/fetchCountries", async () => {
-  const { data } = await countryService.listCountries();
+export const findAllCountries = createAsyncThunk("country/findAll", async () => {
+  const { data } = await countryService.findAll();
 
   return data;
 });
@@ -25,7 +25,7 @@ export const countrySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    [fetchCountries].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
+    [findAllCountries].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
       builder.addCase(thunk.pending, state => {
         state.isLoading = true;
         state.isSuccess = false;
@@ -36,7 +36,7 @@ export const countrySlice = createSlice({
         state.isSuccess = false;
       });
     });
-    builder.addCase(fetchCountries.fulfilled, (state, action) => {
+    builder.addCase(findAllCountries.fulfilled, (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;
       state.isSuccess = true;
