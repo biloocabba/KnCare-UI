@@ -41,10 +41,9 @@ export const CreateCareMemberPage = () => {
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
   const careMemberState = useAppSelector(selectCareMemberState);
-  const { alert, setSaveSent } = useAlerts(careMemberState, "Care Member Created");
+  const { alert, setSaveSent, setSuccessMessage } = useAlerts(careMemberState);
 
   const createDefaultCareMember = (): CareMember => {
-    console.log("createDefaultCareMember Called");
     const nowAsDate: Date = new Date();
     const oneYearFromNowAsDate: Date = addDays(nowAsDate, 365);
 
@@ -62,6 +61,7 @@ export const CreateCareMemberPage = () => {
 
   const saveCareMember = (careMemberSaveRequest: CareMemberSaveRequest): void => {
     dispatch(createCareMember(careMemberSaveRequest));
+    setSuccessMessage("Care Member Created");
     setSaveSent(true);
   };
 

@@ -11,22 +11,17 @@ const findById = (id: number): HttpResponseType => {
   return httpCommon.get(`${EMAIL_ROUTE}/${id}`);
 };
 
-const saveAsDraft = (email: EmailSaveRequest): HttpResponseType => {
+const save = (email: EmailSaveRequest): HttpResponseType => {
   const bodyAsFormData = toFormData(email);
   return httpCommon.post(`${EMAIL_ROUTE}`, bodyAsFormData);
-};
-
-const create = (email: EmailSaveRequest): HttpResponseType => {
-  const bodyAsFormData = toFormData(email);
-  return httpCommon.post(`${EMAIL_ROUTE}`, bodyAsFormData);
-};
-
-const search = (queryParams: URLSearchParams): HttpResponseType => {
-  return httpCommon.get(`${EMAIL_ROUTE}?${queryParams}`);
 };
 
 const send = (body: Email): HttpResponseType => {
   return httpCommon.post(`${EMAIL_ROUTE}/send`, body);
+};
+
+const search = (queryParams: URLSearchParams): HttpResponseType => {
+  return httpCommon.get(`${EMAIL_ROUTE}?${queryParams}`);
 };
 
 const update = (updatedEmail: IUpdated<EmailSaveRequest>): HttpResponseType => {
@@ -41,8 +36,7 @@ const remove = (id: number) => {
 export const emailService = {
   findAll,
   findById,
-  create,
-  saveAsDraft,
+  save,
   search,
   send,
   update,

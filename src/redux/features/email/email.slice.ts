@@ -35,8 +35,13 @@ export const searchEmails = createAsyncThunk(
   }
 );
 
-export const createEmail = createAsyncThunk("email/create", async (body: EmailSaveRequest) => {
-  const { data } = await emailService.create(body);
+export const saveEmail = createAsyncThunk("email/save", async (body: EmailSaveRequest) => {
+  const { data } = await emailService.save(body);
+  return data;
+});
+
+export const sendEmail = createAsyncThunk("email/send", async (body: Email) => {
+  const { data } = await emailService.send(body);
   return data;
 });
 
@@ -60,19 +65,25 @@ export const emailSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     // https://stackoverflow.com/questions/68184008/how-to-refactor-duplicate-code-in-redux-toolkit-createasyncthunk-and-extrareduc
-    [findEmailById, findAllEmails, createEmail, searchEmails, updateEmail, deleteEmail].forEach(
-      (thunk: AsyncThunk<any, any, Record<string, never>>) => {
-        builder.addCase(thunk.pending, state => {
-          state.isLoading = true;
-          state.isSuccess = false;
-        });
-        builder.addCase(thunk.rejected, (state, action) => {
-          state.error = action.error;
-          state.isLoading = false;
-          state.isSuccess = false;
-        });
-      }
-    );
+    [
+      findEmailById,
+      findAllEmails,
+      saveEmail,
+      sendEmail,
+      searchEmails,
+      updateEmail,
+      deleteEmail,
+    ].forEach((thunk: AsyncThunk<any, any, Record<string, never>>) => {
+      builder.addCase(thunk.pending, state => {
+        state.isLoading = true;
+        state.isSuccess = false;
+      });
+      builder.addCase(thunk.rejected, (state, action) => {
+        state.error = action.error;
+        state.isLoading = false;
+        state.isSuccess = false;
+      });
+    });
 
     builder.addCase(findEmailById.fulfilled, (state, action) => {
       state.entity = action.payload;
@@ -90,7 +101,14 @@ export const emailSlice = createSlice({
       state.isSuccess = true;
     });
 
-    builder.addCase(createEmail.fulfilled, (state, action) => {
+    builder.addCase(saveEmail.fulfilled, (state, action) => {
+      state.entity = action.payload;
+      state.entities = [...state.entities, action.payload];
+      state.isLoading = false;
+      state.isSuccess = true;
+    });
+
+    builder.addCase(sendEmail.fulfilled, (state, action) => {
       state.entity = action.payload;
       state.entities = [...state.entities, action.payload];
       state.isLoading = false;

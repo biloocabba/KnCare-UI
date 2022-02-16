@@ -41,7 +41,6 @@ import { Email, EmailSaveRequest, SelectOption } from "types";
 
 import { useAppSelector } from "redux/app";
 import {
-  emailService,
   selectAllCareMembersData,
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
@@ -53,13 +52,18 @@ import { EMAIL_SEARCH_ROUTE } from "../emails.routes.const";
 interface onSaveFunction {
   (emailRequest: EmailSaveRequest): void;
 }
+
+interface onSendFunction {
+  (emailRequest: Email): void;
+}
 interface Props {
   email: Email;
   setEmail: (email: Email) => void;
   onSave: onSaveFunction;
+  onSend: onSendFunction;
 }
 
-export const EditEmail = ({ email, setEmail, onSave }: Props) => {
+export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
   const history = useHistory();
   const currentRole = "admin";
 
@@ -98,15 +102,11 @@ export const EditEmail = ({ email, setEmail, onSave }: Props) => {
       recipientIds: [],
       subject: "",
     };
-    // @todo why two times?
     onSave(emailSaveRequest);
-    emailService.saveAsDraft(emailSaveRequest);
-    // history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
   };
 
   const handleSend = () => {
-    emailService.send(email);
-    history.push(`/${currentRole}${EMAIL_SEARCH_ROUTE}`);
+    onSend(email);
   };
 
   return (

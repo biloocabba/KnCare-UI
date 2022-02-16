@@ -12,3 +12,9 @@ export const selectAllEmailsData = createSelector(
   [selectEmailState],
   emailState => emailState.entities
 );
+
+export const selectEmailById = (id: number) =>
+  createSelector(
+    [selectAllEmailsData], //array of input selectors
+    emails => emails.find(email => email.id === id) //arg
+  );

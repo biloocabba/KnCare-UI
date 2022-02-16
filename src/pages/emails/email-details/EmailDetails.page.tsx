@@ -2,38 +2,40 @@ import { useState } from "react";
 
 import { useParams } from "react-router-dom";
 
+import { useAlerts } from "hooks";
 import { Email, EmailSaveRequest, RouteParams } from "types";
-import { CREATE_ENTITY_ID } from "variables/app.consts";
+
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { saveEmail, selectEmailById, selectEmailState, sendEmail } from "redux/features";
 
 import { EditEmail } from "..";
 
 export const EmailDetailsPage = () => {
   const { id } = useParams<RouteParams>();
 
-  console.log(id);
-  //@todo
-  /*
-  1) load email from redux store
-  2) provide onSaveFunction to save it in api/redux using thunk actions
-  */
+  const dispatch = useAppDispatch();
+  const emailState = useAppSelector(selectEmailById(parseInt(id))) as Email;
+  const emailsState = useAppSelector(selectEmailState);
 
-  const emailFromStore = {
-    id: CREATE_ENTITY_ID,
-    subject: "a mock subject",
-    content: "a mock content",
-    recipients: [],
-    //  groups?: string[];
-    // businessUnits?: string[];
-    // roles?: string[];
-    // countries?: string[];
-    // recipients: string[];
-  };
-
-  const [email, setEmail] = useState<Email>(emailFromStore);
+  const [email, setEmail] = useState<Email>(emailState);
+  const { alert, setSaveSent, setSuccessMessage } = useAlerts(emailsState);
 
   const onEmailSave = (emailRequest: EmailSaveRequest) => {
-    console.log(emailRequest);
+    dispatch(saveEmail(emailRequest));
+    setSuccessMessage("Email Saved");
+    setSaveSent(true);
   };
 
-  return <EditEmail email={email} setEmail={setEmail} onSave={onEmailSave} />;
+  const onEmailSend = (email: Email) => {
+    setSuccessMessage("Email Sent");
+    dispatch(sendEmail(email));
+    setSaveSent(true);
+  };
+
+  return (
+    <>
+      {alert}
+      <EditEmail email={email} setEmail={setEmail} onSave={onEmailSave} onSend={onEmailSend} />
+    </>
+  );
 };
