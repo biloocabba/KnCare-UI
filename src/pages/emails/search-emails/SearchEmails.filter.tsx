@@ -58,111 +58,104 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
         <p className="text-sm mb-0">Filters</p>
       </CardHeader>
       <CardBody>
-        <Row>
-          <Col md="3">
-            <SelectField
-              id="select-businessUnits"
-              label="Business Unit"
-              options={props.businessUnits}
-              onChange={item => {
-                const { value } = item as SelectOption;
-                const id: number = parseInt(value);
-                setSearchBusinessUnitId(id);
-              }}
-            />
-          </Col>
-          <Col md="3">
-            <SelectField
-              id="select-groups"
-              label="Groups"
-              options={props.groups}
-              onChange={item => {
-                const { value } = item as SelectOption;
-                const id: number = parseInt(value);
-                setSearchGroupId(id);
-              }}
-            />
-          </Col>
-          <Col md="2">
-            <DateField
-              id="date-sent-from"
-              label="Sending Date From"
-              onChange={dateAsMoment =>
-                setSearchSendingDateFrom(
-                  typeof dateAsMoment === "string"
-                    ? dateAsMoment
-                    : dateAsMoment.format("YYYY-MM-DD")
-                )
-              }
-              timeFormat={false}
-            />
-          </Col>
-          <Col md="2">
-            <DateField
-              id="date-sent-to"
-              label="Sending Date To"
-              onChange={dateAsMoment =>
-                setSearchSendingDateTo(
-                  typeof dateAsMoment === "string"
-                    ? dateAsMoment
-                    : dateAsMoment.format("YYYY-MM-DD")
-                )
-              }
-              timeFormat={false}
-            />
-          </Col>
+        <Row style={{ paddingLeft: "3rem", paddingRight: "3rem" }}>
+          <Col>
+            <Row style={{ display: "flex", justifyContent: "center" }}>
+              <Col md="3">
+                <SelectField
+                  id="select-businessUnits"
+                  label="Business Unit"
+                  options={props.businessUnits}
+                  onChange={item => {
+                    const { value } = item as SelectOption;
+                    const id: number = parseInt(value);
+                    setSearchBusinessUnitId(id);
+                  }}
+                />
+              </Col>
+              <Col md="3">
+                <SelectField
+                  id="select-groups"
+                  label="Groups"
+                  options={props.groups}
+                  onChange={item => {
+                    const { value } = item as SelectOption;
+                    const id: number = parseInt(value);
+                    setSearchGroupId(id);
+                  }}
+                />
+              </Col>
+              <Col md="2">
+                <DateField
+                  id="date-sent-from"
+                  label="Sending Date From"
+                  onChange={dateAsMoment =>
+                    setSearchSendingDateFrom(
+                      typeof dateAsMoment === "string"
+                        ? dateAsMoment
+                        : dateAsMoment.format("YYYY-MM-DD")
+                    )
+                  }
+                  timeFormat={false}
+                />
+              </Col>
+              <Col md="2">
+                <DateField
+                  id="date-sent-to"
+                  label="Sending Date To"
+                  onChange={dateAsMoment =>
+                    setSearchSendingDateTo(
+                      typeof dateAsMoment === "string"
+                        ? dateAsMoment
+                        : dateAsMoment.format("YYYY-MM-DD")
+                    )
+                  }
+                  timeFormat={false}
+                />
+              </Col>
 
-          <WithAuthorization requires={Permission.Email_country_all}>
-            <Col md="2">
-              <SelectField
-                id="select-country"
-                label="Country"
-                options={props.countries}
-                onChange={item => {
-                  const { value } = item as SelectOption;
-                  setSearchCountryIsoCode3(value);
-                }}
-              />
-            </Col>
-          </WithAuthorization>
-          <Col md="2">
-            <SelectField
-              id="select-role"
-              label="Role"
-              options={props.roles}
-              onChange={item => {
-                const { value } = item as SelectOption;
-                setSearchRole(value);
-              }}
-            />
-          </Col>
-          <Col md="4">
-            <InputField
-              id="input-subject"
-              label="Subject"
-              style={{ height: "36px" }}
-              className="form-control"
-              value={searchSubject}
-              placeholder="Subject"
-              type="text"
-              onChange={onChangeSearchSubject}
-            />
-          </Col>
-        </Row>
+              <WithAuthorization requires={Permission.Email_country_all}>
+                <Col md="3">
+                  <SelectField
+                    id="select-country"
+                    label="Country"
+                    options={props.countries}
+                    onChange={item => {
+                      const { value } = item as SelectOption;
+                      setSearchCountryIsoCode3(value);
+                    }}
+                  />
+                </Col>
+              </WithAuthorization>
 
-        <Row>
-          <Col md="2">
-            <FormGroup>
-              <Button
-                style={{
-                  marginTop: "32px",
-                  marginLeft: "32px",
-                  height: "40px",
-                }}
-                className="btn btn-primary"
-                color="primary"
-                onClick={findByAllParameters}
-              >
+              <Col md="3">
+                <SelectField
+                  id="select-role"
+                  label="Role"
+                  options={props.roles}
+                  onChange={item => {
+                    const { value } = item as SelectOption;
+                    setSearchRole(value);
+                  }}
+                />
+              </Col>
+              <Col md="4">
+                <InputField
+                  id="input-subject"
+                  label="Subject"
+                  style={{ height: "36px" }}
+                  className="form-control"
+                  value={searchSubject}
+                  placeholder="Subject"
+                  type="text"
+                  onChange={onChangeSearchSubject}
+                />
+              </Col>
+            </Row>
+          </Col>
+          <Col md="1" style={{ display: "flex", alignItems: "center" }}>
+            <FormGroup style={{ margin: 0, padding: 0 }}>
+              <Button className="btn btn-primary" color="primary" onClick={findByAllParameters}>
                 Search
               </Button>
             </FormGroup>
