@@ -1,12 +1,11 @@
-import {
-  AnyObject,
-  HeadingToolbar,
-  ImageToolbarButton,
-  LinkToolbarButton,
-  Plate,
-  TNode,
-} from "@udecode/plate";
-import { MdImage, MdLink } from "react-icons/md";
+import { useState } from "react";
+
+import { HeadingToolbar, ImageToolbarButton, LinkToolbarButton, Plate } from "@udecode/plate";
+import { MdAttachFile, MdImage, MdLink } from "react-icons/md";
+
+import { toFileArray } from "types";
+
+import { EmailContent } from "..";
 
 import {
   AlignToolbarButtons,
@@ -21,10 +20,19 @@ import {
 } from ".";
 
 interface Props {
-  setEmailContent: React.Dispatch<React.SetStateAction<TNode<AnyObject>[]>>;
+  setEmailContent: React.Dispatch<React.SetStateAction<EmailContent>>;
 }
 
 export const Editor = ({ setEmailContent }: Props) => {
+  const [files, setFiles] = useState<File[]>([]);
+  const changeFileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFiles(toFileArray(event.currentTarget.files));
+    setEmailContent(oldEmailContent => ({
+      ...oldEmailContent,
+      contentFiles: toFileArray(event.currentTarget.files),
+    }));
+  };
+
   return (
     <>
       <HeadingToolbar>
@@ -34,20 +42,40 @@ export const Editor = ({ setEmailContent }: Props) => {
         <IndentToolbarButtons />
         <ListToolbarButtons />
         <AlignToolbarButtons />
-        {/* <LineHeightToolbarDropdown icon={<MdLineWeight />} /> */}
         <LinkToolbarButton icon={<MdLink />} />
         <ImageToolbarButton icon={<MdImage />} />
+        <label
+          style={{ cursor: "pointer", marginBottom: "0.2rem" }}
+          htmlFor="file-content-upload"
+          id="fileUpload"
+        >
+          <MdAttachFile size={17} />
+        </label>
+        <input
+          id="file-content-upload"
+          style={{
+            visibility: "hidden",
+            position: "absolute",
+            width: "0px",
+          }}
+          type="file"
+          onChange={changeFileHandler}
+          multiple
+        />
       </HeadingToolbar>
       <Plate
         id="1"
         editableProps={CONFIG.editableProps}
         plugins={plugins}
         onChange={newValue => {
-          setEmailContent(newValue);
+          setEmailContent(oldEmailContent => ({ ...oldEmailContent, text: newValue }));
         }}
       >
         <MarkBallonToolbar />
       </Plate>
+      <div className="mt-3">
+        {files.length > 0 && `Files: ${files.map(file => file.name).join(", ")}`}
+      </div>
     </>
   );
 };

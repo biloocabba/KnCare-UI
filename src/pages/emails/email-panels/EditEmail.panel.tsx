@@ -47,8 +47,7 @@ import {
   selectAllRolesDataAsSelectOptions,
 } from "redux/features";
 
-import { Editor } from "../components";
-import { EMAIL_SEARCH_ROUTE } from "../emails.routes.const";
+import { Editor, EMAIL_SEARCH_ROUTE } from "..";
 
 interface onSaveFunction {
   (emailRequest: EmailSaveRequest): void;
@@ -64,6 +63,11 @@ interface Props {
   onSend: onSendFunction;
 }
 
+export interface EmailContent {
+  text: TNode<AnyObject>[];
+  contentFiles: File[];
+}
+
 export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
   const history = useHistory();
   const currentRole = "admin";
@@ -73,7 +77,7 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
   const careRoles = useAppSelector(selectAllRolesDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
 
-  const [emailContent, setEmailContent] = useState<TNode<AnyObject>[]>([]);
+  const [emailContent, setEmailContent] = useState<EmailContent>({ text: [], contentFiles: [] });
 
   const handleDiscard = () => {
     history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
@@ -81,6 +85,7 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
 
   const handleSaveAsDraft = () => {
     const emailSaveRequest: EmailSaveRequest = {
+      // @todo add email content
       content: emailContent.toString(),
       recipientIds: [],
       subject: "",
@@ -200,7 +205,7 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
                     </Row>
                   </div>
                   <hr className="my-4" />
-                  <div>
+                  <div className="pl-lg-4 pr-lg-4">
                     <InputField
                       id="email-subject"
                       type="text"

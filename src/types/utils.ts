@@ -12,7 +12,7 @@ export const addDays = (date: Date, days: number): Date => {
   return moment(date).add(days, "days").toDate();
 };
 
-export const toFileArray = (filelist: FileList): File[] => {
+export const toFileArray = (filelist: FileList | null): File[] => {
   if (!filelist || filelist.length === 0) {
     return [];
   }
