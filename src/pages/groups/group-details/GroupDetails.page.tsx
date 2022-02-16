@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { useHistory, useParams } from "react-router";
 
@@ -12,7 +12,6 @@ import { Group, GroupSaveRequest } from "types";
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
   deleteGroup,
-  findGroupById,
   IUpdated,
   partialUpdateGroup,
   selectGroupById,
@@ -34,11 +33,6 @@ export const GroupDetailsPage = () => {
   const groupState = useAppSelector(selectGroupById(groupId));
 
   const [group, setGroup] = useState(groupState as Group);
-
-  useEffect(() => {
-    dispatch(findGroupById(groupId));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const onSave = (groupRequest: GroupSaveRequest) => {
     const { name, active, members, description } = groupRequest;

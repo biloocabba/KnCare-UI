@@ -51,8 +51,8 @@ export const AddMemberFilterPanel = ({
   };
 
   const onClickSearchEmployees = async (filters: EmployeeQueryFilters) => {
-    // @todo find correct type for filters
-    const queryParams = new URLSearchParams(filters as any);
+    console.log(JSON.stringify(filters));
+    const queryParams = new URLSearchParams(JSON.stringify(filters));
     const { data } = await employeeService.searchEmployees(queryParams);
 
     setEmployeeResultSet(data);
