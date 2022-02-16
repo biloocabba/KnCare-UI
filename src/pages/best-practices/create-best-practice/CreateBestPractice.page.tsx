@@ -130,6 +130,7 @@ export const CreateBestPracticePage = () => {
                         name="file"
                         onChange={changeFileHandler}
                         className="form-control"
+                        multiple
                       />
                     </Row>
                   </CardBody>
