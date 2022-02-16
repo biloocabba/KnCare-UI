@@ -35,13 +35,13 @@ import { AnyObject, TNode } from "@udecode/plate";
 import makeAnimated from "react-select/animated";
 
 import { BoxHeader } from "components/headers";
-import { SelectField, InputField } from "components/widgets";
+import { InputField, SelectField } from "components/widgets";
 
 import { Email, EmailSaveRequest, SelectOption } from "types";
 
 import { useAppSelector } from "redux/app";
 import {
-  selectAllCareMembersData,
+  selectAllCareMembersDataAsSelectOptions,
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
   selectAllRolesDataAsSelectOptions,
@@ -72,7 +72,7 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
   const history = useHistory();
   const currentRole = "admin";
 
-  const careMembers = useAppSelector(selectAllCareMembersData);
+  const careMembersState = useAppSelector(selectAllCareMembersDataAsSelectOptions);
   const groups = useAppSelector(selectAllGroupsDataAsSelectOptions);
   const careRoles = useAppSelector(selectAllRolesDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
@@ -190,7 +190,7 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
                           components={makeAnimated()}
                           isMulti
                           label="Recipients"
-                          options={careMembers}
+                          options={careMembersState}
                           onChange={item => {
                             const selections = item as SelectOption[];
                             const recipientsArray = selections.map(item => item.value);

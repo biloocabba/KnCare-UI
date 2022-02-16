@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { CareMember } from "types/domain";
+import { SelectOption, CareMember } from "types";
 
 import { RootState } from "redux/app";
-import { StateType } from "redux/features/common";
+import { ALL, StateType } from "redux/features";
 
 export const selectCareMemberState = (rootState: RootState): StateType<CareMember> =>
   rootState.careMember;
@@ -17,3 +17,13 @@ export const selectCareMemberById = (id: number) =>
   createSelector([selectAllCareMembersData], careMember =>
     careMember.find(careMember => careMember.id === id)
   );
+
+export const selectAllCareMembersDataAsSelectOptions = createSelector(
+  [selectAllCareMembersData],
+  careMembers => {
+    const careMemberOptions: SelectOption[] = careMembers.map(careMember => {
+      return { value: `${careMember.id}`, label: careMember.internationalName };
+    });
+    return [ALL, ...careMemberOptions];
+  }
+);
