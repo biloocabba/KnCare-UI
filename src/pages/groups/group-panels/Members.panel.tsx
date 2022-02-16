@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button, ButtonGroup, Col, Row } from "reactstrap";
 
-import { Employee, Group } from "types";
+import { CareMember, Group } from "types";
 
 import { AddMemberPanel, CurrentMemberPanel } from ".";
 
@@ -15,7 +15,7 @@ export const MembersPanel = ({ group, setGroup }: Props) => {
   const [currentMembersCollapse, setCurrentMembersCollapse] = useState(false);
   const [addMemberCollapse, setAddMemberCollapse] = useState(false);
 
-  const [currentGroupMembers, setCurrentGroupMembers] = useState<Employee[]>([]);
+  const [currentGroupMembers, setCurrentGroupMembers] = useState<CareMember[]>([]);
 
   const toggleCurrentMembers = () => {
     setCurrentMembersCollapse(!currentMembersCollapse);

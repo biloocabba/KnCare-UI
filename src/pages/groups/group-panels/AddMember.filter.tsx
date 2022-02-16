@@ -1,23 +1,25 @@
 import { Button, FormGroup } from "reactstrap";
 
-import { SearchEmployeesFilterPanel } from "pages/users";
-import { Employee, EmployeeQueryFilters, Group, SelectOption } from "types";
+import { SearchCareMemberFilterPanel } from "pages/users";
+import { CareMember, CareMemberQueryFilters, Group } from "types";
 
 import { useAppSelector } from "redux/app";
 import {
-  employeeService,
+  careMemberService,
   selectAllBusinessUnitsDataAsSelectOptions,
   selectAllCountriesDataAsSelectOptions,
+  selectAllGroupsDataAsSelectOptions,
+  selectAllRoleDataAsSelectOptions,
 } from "redux/features";
 
 interface Props {
   group: Group;
   setGroup: (group: Group) => void;
-  selectedRows: Employee[];
-  setSelectedRows: (selectedRows: Employee[]) => void;
+  selectedRows: CareMember[];
+  setSelectedRows: (selectedRows: CareMember[]) => void;
   tableRef: React.MutableRefObject<undefined>;
-  setEmployeeResultSet: React.Dispatch<React.SetStateAction<Employee[]>>;
-  setCurrentGroupMembers: React.Dispatch<React.SetStateAction<Employee[]>>;
+  setCareMemberResultSet: React.Dispatch<React.SetStateAction<CareMember[]>>;
+  setCurrentGroupMembers: React.Dispatch<React.SetStateAction<CareMember[]>>;
 }
 
 export const AddMemberFilterPanel = ({
@@ -26,48 +28,41 @@ export const AddMemberFilterPanel = ({
   selectedRows,
   setSelectedRows,
   tableRef,
-  setEmployeeResultSet,
+  setCareMemberResultSet,
   setCurrentGroupMembers,
 }: Props) => {
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
+  const roles = useAppSelector(selectAllRoleDataAsSelectOptions);
+  const groups = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
-  const jobTitles: SelectOption[] = [
-    { value: "1", label: "product manager" },
-    { value: "2", label: "qa engineer" },
-    { value: "3", label: "hr consultant" },
-    { value: "4", label: "office manager" },
-    { value: "5", label: "sales representative" },
-    { value: "6", label: "logistics consultant" },
-  ];
-
-  const onEmployeeAdd = (selectedEmployees: Employee[]) => {
-    const employeeIds = selectedEmployees.map(employee => employee.id);
-    setGroup({ ...group, members: [...group.members, ...employeeIds] });
-    setCurrentGroupMembers(oldEmployees => [...oldEmployees, ...selectedEmployees]);
+  const onCareMemberAdd = (selectedCareMembers: CareMember[]) => {
+    const careMemberIds = selectedCareMembers.map(careMember => careMember.id);
+    setGroup({ ...group, members: [...group.members, ...careMemberIds] });
+    setCurrentGroupMembers(previousCareMembers => [...previousCareMembers, ...selectedCareMembers]);
     setSelectedRows([]);
     // @ts-ignore
     tableRef.current.selectionContext.selected = [];
   };
 
-  const onClickSearchEmployees = async (filters: EmployeeQueryFilters) => {
+  const onClickSearchCareMember = async (filters: CareMemberQueryFilters) => {
     console.log(JSON.stringify(filters));
     const queryParams = new URLSearchParams(JSON.stringify(filters));
-    const { data } = await employeeService.searchEmployees(queryParams);
-
-    setEmployeeResultSet(data);
+    const { data } = await careMemberService.searchCareMembers(queryParams);
+    setCareMemberResultSet(data);
   };
 
   return (
     <>
-      <SearchEmployeesFilterPanel
-        onSearchEmployees={onClickSearchEmployees}
-        jobTitle={jobTitles}
+      <SearchCareMemberFilterPanel
+        onSearchCareMembers={onClickSearchCareMember}
+        roles={roles}
+        groups={groups}
         countries={countries}
         businessUnits={businessUnits}
       />
       <FormGroup>
-        <Button color="success" onClick={() => onEmployeeAdd(selectedRows)}>
+        <Button color="success" onClick={() => onCareMemberAdd(selectedRows)}>
           Add Member To Group
         </Button>
       </FormGroup>

@@ -30,9 +30,9 @@ export const GroupDetailsPage = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
 
-  const groupState = useAppSelector(selectGroupById(groupId));
+  const groupFromStore = useAppSelector(selectGroupById(groupId));
 
-  const [group, setGroup] = useState(groupState as Group);
+  const [group, setGroup] = useState(groupFromStore as Group);
 
   const onSave = (groupRequest: GroupSaveRequest) => {
     const { name, active, members, description } = groupRequest;

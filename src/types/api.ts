@@ -33,7 +33,7 @@ export interface BestPracticesQueryFilters {
 
 export interface CareMemberQueryFilters {
   businessUnitId?: number;
-  countryId?: string;
+  countryIso3?: string;
   roleId?: number;
   groupId?: number;
   lastName?: string;

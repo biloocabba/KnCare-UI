@@ -4,7 +4,7 @@ import { Employee } from "types";
 
 import { employeeMockResponse, mockAxiosReponse } from "../api-mock-data/mock-data";
 
-import { entitySearch, matchBusinessUnit, matchCountryId, matchFirstName } from ".";
+import { entitySearch, matchBusinessUnit, matchCountryIso3, matchFirstName } from ".";
 
 export const searchEmployees = (url: string): AxiosResponse<Employee[]> => {
   return entitySearch<Employee>(url, employeeMockResponse, filterEmployees);
@@ -15,7 +15,7 @@ const filterEmployees = (queryParams: URLSearchParams, employeesData: Employee[]
     return (
       matchFirstName(queryParams, employee) &&
       matchBusinessUnit(queryParams, employee) &&
-      matchCountryId(queryParams, employee)
+      matchCountryIso3(queryParams, employee)
     );
   });
 

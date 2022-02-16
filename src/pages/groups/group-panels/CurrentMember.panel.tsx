@@ -6,9 +6,9 @@ import { Collapse, Card, CardHeader, Spinner } from "reactstrap";
 
 import { ReactTable } from "components/widgets";
 
-import { Employee, Group } from "types";
+import { CareMember, Employee, Group } from "types";
 
-import { employeeService } from "redux/features";
+import { careMemberService } from "redux/features";
 
 import { employeesTableColumns } from "../../users";
 
@@ -16,7 +16,7 @@ interface Props {
   group: Group;
   currentMembersCollapse: boolean;
   currentGroupMembers: Employee[];
-  setCurrentGroupMembers: React.Dispatch<React.SetStateAction<Employee[]>>;
+  setCurrentGroupMembers: React.Dispatch<React.SetStateAction<CareMember[]>>;
 }
 
 export const CurrentMemberPanel = ({
@@ -27,13 +27,13 @@ export const CurrentMemberPanel = ({
 }: Props) => {
   const history = useHistory();
 
-  const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
+  const [selectedEmployees, setSelectedEmployees] = useState<CareMember[]>([]);
 
   useEffect(() => {
     const fetchGroupMembers = async (members: number[]) => {
       if (members.length > 0) {
-        const groupMembers = await employeeService.findByIds(members);
-        setCurrentGroupMembers(groupMembers.data as Employee[]);
+        const groupMembers = await careMemberService.searchCareMembersByIds(members);
+        setCurrentGroupMembers(groupMembers.data as CareMember[]);
       }
     };
 

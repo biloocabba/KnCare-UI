@@ -56,7 +56,7 @@ export const matchBusinessUnit = (queryParams: URLSearchParams, entity: Employee
   return true;
 };
 
-export const matchCountryId = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
+export const matchCountryIso3 = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
   if (queryParams && queryParams.get("countryId")) {
     const countryCode = queryParams.get("countryId");
 
