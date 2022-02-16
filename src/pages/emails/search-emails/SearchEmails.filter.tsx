@@ -153,8 +153,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
               </Col>
             </Row>
           </Col>
-          <Col md="1" style={{ display: "flex", alignItems: "center" }}>
-            <FormGroup style={{ margin: 0, padding: 0 }}>
+          <Col md="1" style={{ display: "flex", alignItems: "flex-end" }}>
+            <FormGroup>
               <Button className="btn btn-primary" color="primary" onClick={findByAllParameters}>
                 Search
               </Button>

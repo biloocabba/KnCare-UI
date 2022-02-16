@@ -31,7 +31,7 @@ import {
   Row,
 } from "reactstrap";
 
-import { AnyObject, Plate, TNode } from "@udecode/plate";
+import { AnyObject, TNode } from "@udecode/plate";
 import makeAnimated from "react-select/animated";
 
 import { BoxHeader } from "components/headers";
@@ -47,6 +47,7 @@ import {
   selectAllRolesDataAsSelectOptions,
 } from "redux/features";
 
+import { Editor } from "../components";
 import { EMAIL_SEARCH_ROUTE } from "../emails.routes.const";
 
 interface onSaveFunction {
@@ -73,24 +74,6 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
 
   const [emailContent, setEmailContent] = useState<TNode<AnyObject>[]>([]);
-
-  const editableProps = {
-    placeholder: "Type…",
-    style: {
-      padding: "15px",
-      border: "1px solid #e4e7ea",
-    },
-  };
-
-  const initialValue = [
-    {
-      children: [
-        {
-          text: "This is editable plain text with react and history plugins, just like a <textarea>!",
-        },
-      ],
-    },
-  ];
 
   const handleDiscard = () => {
     history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
@@ -138,7 +121,63 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
               </CardHeader>
               <CardBody>
                 <Form>
-                  <div className="pl-lg-4">
+                  <div className="pl-lg-4 pr-lg-4">
+                    <Row>
+                      <Col>
+                        <SelectField
+                          id="input-recipient-group"
+                          components={makeAnimated()}
+                          label="Recipient Group"
+                          isMulti
+                          options={groups}
+                          onChange={item => {
+                            const selections = item as SelectOption[];
+                            const recipientGroupsArray = selections.map(item => item.value);
+                            setEmail({
+                              ...email,
+                              groups: recipientGroupsArray,
+                            });
+                          }}
+                        />
+                      </Col>
+                      <Col>
+                        <SelectField
+                          id="input-recipient-group"
+                          label="Roles"
+                          components={makeAnimated()}
+                          isMulti
+                          options={careRoles}
+                          onChange={item => {
+                            const selections = item as SelectOption[];
+                            const recipientRoleArray = selections.map(item => item.value);
+
+                            setEmail({
+                              ...email,
+                              roles: recipientRoleArray,
+                            });
+                          }}
+                        />
+                      </Col>
+                      <Col>
+                        <SelectField
+                          id="input-recipient-country"
+                          label="Countries"
+                          components={makeAnimated()}
+                          isMulti
+                          options={countries}
+                          onChange={item => {
+                            const selections = item as SelectOption[];
+                            const recipientCountriesArray = selections.map(item => item.value);
+
+                            setEmail({
+                              ...email,
+                              countries: recipientCountriesArray,
+                            });
+                          }}
+                        />
+                      </Col>
+                    </Row>
+
                     <Row>
                       <Col>
                         <SelectField
@@ -159,68 +198,9 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
                         />
                       </Col>
                     </Row>
-                    <Row>
-                      <Col>
-                        <SelectField
-                          id="input-recipient-group"
-                          components={makeAnimated()}
-                          label="Recipient Group"
-                          isMulti
-                          options={groups}
-                          onChange={item => {
-                            const selections = item as SelectOption[];
-                            const recipientGroupsArray = selections.map(item => item.value);
-                            setEmail({
-                              ...email,
-                              groups: recipientGroupsArray,
-                            });
-                          }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <SelectField
-                          id="input-recipient-group"
-                          label="Roles"
-                          components={makeAnimated()}
-                          isMulti
-                          options={careRoles}
-                          onChange={item => {
-                            const selections = item as SelectOption[];
-                            const recipientRoleArray = selections.map(item => item.value);
-
-                            setEmail({
-                              ...email,
-                              roles: recipientRoleArray,
-                            });
-                          }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <SelectField
-                          id="input-recipient-country"
-                          label="Countries"
-                          components={makeAnimated()}
-                          isMulti
-                          options={countries}
-                          onChange={item => {
-                            const selections = item as SelectOption[];
-                            const recipientCountriesArray = selections.map(item => item.value);
-
-                            setEmail({
-                              ...email,
-                              countries: recipientCountriesArray,
-                            });
-                          }}
-                        />
-                      </Col>
-                    </Row>
                   </div>
                   <hr className="my-4" />
-                  <div className="pl-lg-4">
+                  <div>
                     <InputField
                       id="email-subject"
                       type="text"
@@ -234,14 +214,7 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
                       }
                     />
 
-                    <Plate
-                      id="1"
-                      editableProps={editableProps}
-                      initialValue={initialValue}
-                      onChange={newValue => {
-                        setEmailContent(newValue);
-                      }}
-                    />
+                    <Editor setEmailContent={setEmailContent} />
                   </div>
                 </Form>
               </CardBody>
