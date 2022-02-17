@@ -34,6 +34,7 @@ import {
 import { AnyObject, TNode } from "@udecode/plate";
 import makeAnimated from "react-select/animated";
 
+import { Editor } from "components/editor";
 import { BoxHeader } from "components/headers";
 import { InputField, SelectField } from "components/widgets";
 
@@ -47,7 +48,7 @@ import {
   selectAllRolesDataAsSelectOptions,
 } from "redux/features";
 
-import { Editor, EMAIL_SEARCH_ROUTE } from "..";
+import { EMAIL_SEARCH_ROUTE } from "..";
 
 interface onSaveFunction {
   (emailRequest: EmailSaveRequest): void;
