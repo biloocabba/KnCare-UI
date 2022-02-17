@@ -9,7 +9,7 @@ import { Group } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
-import { createGroup } from "redux/features";
+import { createGroup, selectGroupState } from "redux/features";
 
 import { EditGroupPanel } from "..";
 
@@ -22,7 +22,7 @@ export const CreateGroupPage = () => {
     active: true,
   };
   const dispatch = useAppDispatch();
-  const groupsState = useAppSelector(state => state.group);
+  const groupsState = useAppSelector(selectGroupState);
 
   const { alert, setSaveSent } = useAlerts(groupsState, "Group Created");
 

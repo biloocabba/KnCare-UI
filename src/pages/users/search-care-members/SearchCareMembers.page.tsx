@@ -5,33 +5,43 @@ import { useHistory } from "react-router-dom";
 import { Card, CardHeader, Container, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
-import { ReactTable } from "components/widgets/react-table";
+import { ReactTable } from "components/widgets";
 
 import { CARE_MEMBER_EDIT } from "pages/users";
-import { CareMemberQueryFilters, SelectOption } from "types";
+import { CareMember, CareMemberQueryFilters, SelectOption } from "types";
 
-import { useAppDispatch, useAppSelector } from "redux/app";
+import { useAppSelector } from "redux/app";
 import {
+  selectAllBusinessUnitsDataAsSelectOptions,
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
   selectAllRoleDataAsSelectOptions,
+  selectCareMembersByFilters,
+  selectLoggedUserDefaultCountry,
 } from "redux/features";
-import { selectAllBusinessUnitsDataAsSelectOptions } from "redux/features/business-unit/business-unit.selectors";
-import { searchCareMembers, selectCareMemberState } from "redux/features/care-member";
 
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from ".";
 
 export const SearchCareMembersPage = () => {
   const history = useHistory();
-  const dispatch = useAppDispatch();
 
-  const careMemberState = useAppSelector(selectCareMemberState);
-  const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
+  const businessUnitsAsSelectOptions: SelectOption[] = useAppSelector(
+    selectAllBusinessUnitsDataAsSelectOptions
+  );
+  const countriesAsSelectOptions: SelectOption[] = useAppSelector(
+    selectAllCountriesDataAsSelectOptions
+  );
+  const rolesAsSelectOptions: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
+  const groupsAsSelectOptions: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
-  const countries: SelectOption[] = useAppSelector(selectAllCountriesDataAsSelectOptions);
-  const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
-  const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
-  const [selectedCareMembers, setSelectedCareMembers] = useState([]);
+  const userCountry = useAppSelector(selectLoggedUserDefaultCountry);
+
+  const [filters, setFilters] = useState<CareMemberQueryFilters>({
+    countryIso3: userCountry,
+  });
+
+  const careMembers = useAppSelector(selectCareMembersByFilters(filters));
+  const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
 
   const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -44,7 +54,7 @@ export const SearchCareMembersPage = () => {
   };
 
   const onClickSearchCareMembers = (filters: CareMemberQueryFilters): void => {
-    dispatch(searchCareMembers(filters));
+    setFilters(filters);
   };
 
   return (
@@ -55,10 +65,10 @@ export const SearchCareMembersPage = () => {
         <Row>
           <div className="col">
             <SearchCareMemberFilterPanel
-              businessUnits={businessUnits}
-              countries={countries}
-              groups={groups}
-              roles={roles}
+              businessUnits={businessUnitsAsSelectOptions}
+              countries={countriesAsSelectOptions}
+              groups={groupsAsSelectOptions}
+              roles={rolesAsSelectOptions}
               onSearchCareMembers={onClickSearchCareMembers}
             />
           </div>
@@ -75,7 +85,7 @@ export const SearchCareMembersPage = () => {
               </CardHeader>
 
               <ReactTable
-                data={careMemberState.entities}
+                data={careMembers}
                 keyField="id"
                 columns={careMemberTableColumns}
                 onViewDetailsClick={onGoToCareMemberDetailsPage}

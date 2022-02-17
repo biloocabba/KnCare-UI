@@ -1,24 +1,22 @@
-/* eslint-disable */
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 
-import { CARE_MEMBER_SEARCH } from "pages/users";
+import { useAlerts } from "hooks";
+import { CARE_MEMBER_SEARCH, CareMemberPanel } from "pages/users";
 import { CareMember, CareMemberSaveRequest, RouteParams, SelectOption } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
+  IUpdated,
   selectAllGroupsDataAsSelectOptions,
   selectAllRoleDataAsSelectOptions,
   selectCareMemberById,
+  selectCareMemberState,
   updateCareMember,
 } from "redux/features";
-
-import { IUpdated } from "redux/features/common";
-
-import { CareMemberPanel } from "../panels";
 
 export const EditCareMemberPage = () => {
   const { id } = useParams<RouteParams>();
@@ -29,17 +27,23 @@ export const EditCareMemberPage = () => {
   const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
+  const careMemberState = useAppSelector(selectCareMemberState);
+  const { alert, setSaveSent } = useAlerts(careMemberState, "Care Member Updated");
+
   const saveCareMember = (careMemberRequest: CareMemberSaveRequest) => {
     const httpUpdateRequest: IUpdated<CareMemberSaveRequest> = {
       id: careMemberRequest.id,
       body: careMemberRequest,
     };
     dispatch(updateCareMember(httpUpdateRequest));
+    setSaveSent(true);
   };
 
   return (
     <>
+      {alert}
       <BoxHeader />
+
       <Container className="mt--6" fluid>
         <Row>
           <Col className="order-xl-1" xl="12">

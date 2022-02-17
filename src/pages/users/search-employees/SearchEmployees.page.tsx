@@ -8,7 +8,7 @@ import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
 import { EMPLOYEE_DETAILS } from "pages/users";
-import { EmployeeQueryFilters, SelectOption } from "types";
+import { EmployeeQueryFilters, SelectOption, Employee } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
@@ -39,7 +39,7 @@ export const SearchEmployeesPage = () => {
     { value: "6", label: "logistics consultant" },
   ];
 
-  const [selectedEmployees, setSelectedEmployees] = useState([]);
+  const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
 
   const onClickSearchEmployees = (filters: EmployeeQueryFilters): void => {
     dispatch(searchEmployees(filters));

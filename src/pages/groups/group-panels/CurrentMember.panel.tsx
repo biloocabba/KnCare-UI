@@ -6,16 +6,16 @@ import { Collapse, Card, CardHeader, Spinner } from "reactstrap";
 
 import { ReactTable } from "components/widgets";
 
-import { CareMember, Employee, Group } from "types";
+import { CareMember, Group } from "types";
 
 import { careMemberService } from "redux/features";
 
-import { CARE_MEMBER_EDIT, employeesTableColumns } from "../../users";
+import { CARE_MEMBER_EDIT, careMemberTableColumns } from "../../users";
 
 interface Props {
   group: Group;
   currentMembersCollapse: boolean;
-  currentGroupMembers: Employee[];
+  currentGroupMembers: CareMember[];
   setCurrentGroupMembers: React.Dispatch<React.SetStateAction<CareMember[]>>;
 }
 
@@ -69,7 +69,7 @@ export const CurrentMemberPanel = ({
           <ReactTable
             data={currentGroupMembers}
             keyField="id"
-            columns={employeesTableColumns}
+            columns={careMemberTableColumns}
             onViewDetailsClick={memberDetails}
             onDeleteItemClick={memberRemove}
             selectedRows={selectedCareMembers}

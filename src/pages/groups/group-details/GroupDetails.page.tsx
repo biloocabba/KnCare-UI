@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useHistory, useParams } from "react-router";
 
@@ -7,14 +7,16 @@ import { Button, Card, CardBody, CardHeader, Col, Container, Form, Row } from "r
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
-import { Group, GroupSaveRequest } from "types";
+import { useAlerts } from "hooks";
+import { Group } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
   deleteGroup,
-  IUpdated,
+  findGroupById,
   partialUpdateGroup,
   selectGroupById,
+  selectGroupState,
   updateGroup,
 } from "redux/features";
 
@@ -30,27 +32,22 @@ export const GroupDetailsPage = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
 
-  const groupFromStore = useAppSelector(selectGroupById(groupId));
+  const groupState = useAppSelector(selectGroupById(groupId));
+  const groupsState = useAppSelector(selectGroupState);
 
-  const [group, setGroup] = useState(groupFromStore as Group);
+  const [group, setGroup] = useState(groupState as Group);
 
-  const onSave = (groupRequest: GroupSaveRequest) => {
-    const { name, active, members, description } = groupRequest;
+  const { alert, setSaveSent } = useAlerts(groupsState, "Group Updated");
 
-    const groupSaveRequest: GroupSaveRequest = {
-      id: groupId,
-      name,
-      active,
-      members,
-      description,
-    };
+  useEffect(() => {
+    dispatch(findGroupById(groupId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  const onSave = () => {
     if (group) {
-      const httpUpdateRequest: IUpdated<GroupSaveRequest> = {
-        id: groupId,
-        body: groupSaveRequest,
-      };
-      dispatch(updateGroup(httpUpdateRequest));
+      dispatch(updateGroup({ id: groupId, body: group }));
+      setSaveSent(true);
     }
   };
 
@@ -65,97 +62,99 @@ export const GroupDetailsPage = () => {
 
   return (
     <>
-      {/* {alert} */}
+      {alert}
       <BoxHeader />
 
       <Container className="mt--6" fluid>
-        {group && (
-          <Row>
-            <Col className="order-xl-1" xl="12">
-              <Card>
-                <CardHeader>
-                  <Row className="align-items-center">
-                    <Col xs="8">
-                      <h3 className="mb-0">Group Details</h3>
-                    </Col>
-                  </Row>
-                  <Row className="align-items-center py-4">
-                    <Col lg="12" xs="7" className="text-right">
-                      {group && group.active ? (
-                        <Button type="button" color="danger" onClick={onToggleGroupActive}>
-                          Deactivate Group
+        <>
+          {group && (
+            <Row>
+              <Col className="order-xl-1" xl="12">
+                <Card>
+                  <CardHeader>
+                    <Row className="align-items-center">
+                      <Col xs="8">
+                        <h3 className="mb-0">Group Details</h3>
+                      </Col>
+                    </Row>
+                    <Row className="align-items-center py-4">
+                      <Col lg="12" xs="7" className="text-right">
+                        {group && group.active ? (
+                          <Button type="button" color="danger" onClick={onToggleGroupActive}>
+                            Deactivate Group
+                          </Button>
+                        ) : (
+                          <Button type="button" color="success" onClick={onToggleGroupActive}>
+                            Activate Group
+                          </Button>
+                        )}
+                        <Button type="button" color="info" onClick={() => history.goBack()}>
+                          Back to Search
                         </Button>
-                      ) : (
-                        <Button type="button" color="success" onClick={onToggleGroupActive}>
-                          Activate Group
-                        </Button>
-                      )}
-                      <Button type="button" color="info" onClick={() => history.goBack()}>
-                        Back to Search
-                      </Button>
-                    </Col>
-                  </Row>
-                </CardHeader>
+                      </Col>
+                    </Row>
+                  </CardHeader>
 
-                <CardBody>
-                  <Form>
-                    <h6 className="heading-small text-muted mb-4">Group Details</h6>
-                    <div className="pl-lg-4">
-                      <Row>
-                        <Col lg="10">
-                          <InputField
-                            id="input-group-name"
-                            label="Group Name"
-                            value={group.name}
-                            type="text"
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                              setGroup({
-                                ...group,
-                                name: e.target.value,
-                              })
-                            }
-                          />
-                        </Col>
-                      </Row>
+                  <CardBody>
+                    <Form>
+                      <h6 className="heading-small text-muted mb-4">Group Details</h6>
+                      <div className="pl-lg-4">
+                        <Row>
+                          <Col lg="10">
+                            <InputField
+                              id="input-group-name"
+                              label="Group Name"
+                              value={group.name}
+                              type="text"
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                setGroup({
+                                  ...group,
+                                  name: e.target.value,
+                                })
+                              }
+                            />
+                          </Col>
+                        </Row>
 
-                      <Row>
-                        <Col lg="10">
-                          <InputField
-                            id="input-group-description"
-                            label="Group Description"
-                            value={group.description}
-                            type="text"
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                              setGroup({
-                                ...group,
-                                description: e.target.value,
-                              })
-                            }
-                          />
-                        </Col>
-                      </Row>
-                    </div>
+                        <Row>
+                          <Col lg="10">
+                            <InputField
+                              id="input-group-description"
+                              label="Group Description"
+                              value={group.description}
+                              type="text"
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                setGroup({
+                                  ...group,
+                                  description: e.target.value,
+                                })
+                              }
+                            />
+                          </Col>
+                        </Row>
+                      </div>
 
-                    <MembersPanel group={group} setGroup={setGroup} />
+                      <MembersPanel group={group} setGroup={setGroup} />
 
-                    <hr className="my-4" />
+                      <hr className="my-4" />
 
-                    <div className="pl-lg-4">
-                      <Row>
-                        <Button color="primary" onClick={() => onSave(group)}>
-                          Save
-                        </Button>
-                        <Button color="danger" onClick={onDelete}>
-                          Delete group
-                        </Button>
-                      </Row>
-                    </div>
-                  </Form>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        )}
+                      <div className="pl-lg-4">
+                        <Row>
+                          <Button color="primary" onClick={onSave}>
+                            Save
+                          </Button>
+                          <Button color="danger" onClick={onDelete}>
+                            Delete group
+                          </Button>
+                        </Row>
+                      </div>
+                    </Form>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+          )}
+        </>
       </Container>
     </>
   );

@@ -23,8 +23,8 @@ export interface Employee extends Domain {
   endDate?: string | null;
   dateOfLeave: string | null;
   nationality: string | null;
-  officeAddressCity: string | null;
-  officeAddressStreet: string | null;
+  officeAddressCity: string;
+  officeAddressStreet: string;
   officeAddressCountry: string | null;
   officeAddressPostalCode: string | null;
 }

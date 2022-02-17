@@ -1,6 +1,6 @@
 import { Col, Form, Row } from "reactstrap";
 
-import { InputField } from "components/widgets/input-field";
+import { InputField } from "components/widgets";
 
 import { Employee } from "types";
 
@@ -86,7 +86,7 @@ export const EmployeePanel = (props: EmployeePanelProps) => {
             <InputField
               id="input-office-address-country"
               label="Country"
-              value={employee.officeAddressCountry}
+              value={employee.officeAddressCountry || ""}
               type="text"
               disabled={true}
             />
@@ -95,7 +95,7 @@ export const EmployeePanel = (props: EmployeePanelProps) => {
             <InputField
               id="input-office-address-postal-code"
               label="Postal Code"
-              value={employee.officeAddressPostalCode}
+              value={employee.officeAddressPostalCode || ""}
               type="text"
               disabled={true}
             />

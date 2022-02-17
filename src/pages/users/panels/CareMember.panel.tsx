@@ -2,11 +2,7 @@ import { useState } from "react";
 
 import { Button, Col, Form, Row } from "reactstrap";
 
-import { Moment } from "moment";
-
-import { DateField } from "components/widgets/date-field";
-import { InputField } from "components/widgets/input-field";
-import { SelectField } from "components/widgets/select-field";
+import { DateField, InputField, SelectField } from "components/widgets";
 
 import { CareMember, SelectOption, CareMemberSaveRequest } from "types";
 
@@ -52,8 +48,12 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-onboarding-date"
               label="Onboard date"
               value={onboardingDate}
-              onChange={(dateAsMoment: Moment) =>
-                setOnboardingDate(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setOnboardingDate(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -63,8 +63,12 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-offboarding-date"
               label="Auto Offboard Date"
               value={offboardingDate}
-              onChange={(dateAsMoment: Moment) =>
-                setOffboardingDate(dateAsMoment.format("D-MM-YYYY"))
+              onChange={dateAsMoment =>
+                setOffboardingDate(
+                  typeof dateAsMoment === "string"
+                    ? dateAsMoment
+                    : dateAsMoment.format("YYYY-MM-DD")
+                )
               }
               timeFormat={false}
             />
@@ -77,7 +81,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="select-role"
               label="Role"
               options={roleOptions}
-              onChange={(item: SelectOption) => setRoleId(parseInt(item.value))}
+              onChange={item => setRoleId(parseInt(item as SelectOption["value"]))}
             />
           </Col>
           <Col lg="6">
@@ -86,12 +90,10 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               label="Group"
               options={groupOptions}
               isMulti={true}
-              onChange={(selectionEvent: any) => {
-                console.log(selectionEvent);
-                const selections = selectionEvent.target.options as HTMLOptionsCollection;
-                const groupIdSelected = Array.from(selections)
-                  .filter(option => option.selected)
-                  .map(item => parseInt(item.value));
+              onChange={item => {
+                const selections = item as SelectOption[];
+                const groupIdSelected = selections.map(item => parseInt(item.value));
+
                 setGroupIds(groupIdSelected);
               }}
             />
@@ -173,7 +175,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
             <InputField
               id="input-country"
               label="Country"
-              value={careMember.officeAddressCountry}
+              value={careMember.officeAddressCountry || ""}
               type="text"
               disabled={true}
             />
@@ -182,7 +184,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
             <InputField
               id="input-postal-code"
               label="Postal code"
-              value={careMember.officeAddressPostalCode}
+              value={careMember.officeAddressPostalCode || ""}
               type="text"
               disabled={true}
             />

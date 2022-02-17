@@ -33,7 +33,9 @@ import { useAppDispatch, useAppSelector } from "redux/app";
 import {
   fetchBusinessUnits,
   fetchCountries,
+  searchCareMembers,
   selectAllBusinessUnitData,
+  selectAllCareMembersData,
   selectAllCountryData,
   selectLoggedUserRole,
 } from "redux/features";
@@ -49,9 +51,13 @@ export const AdminLayout = () => {
 
   const [isCountryDataLoaded, setIsCountryDataLoaded] = useState(false);
   const [isBusinessUnitsDataLoaded, setIsBusinessUnitsDataLoaded] = useState(false);
+  const [isCareMembersDataLoaded, setIsCareMembersDataLoaded] = useState(false);
   const countries = useAppSelector(selectAllCountryData);
   const businessUnits = useAppSelector(selectAllBusinessUnitData);
+  const careMembers = useAppSelector(selectAllCareMembersData);
+
   const userRole = useAppSelector(selectLoggedUserRole);
+
   useScrollToTop(mainContentRef);
 
   useEffect(() => {
@@ -64,15 +70,24 @@ export const AdminLayout = () => {
   }, [countries, isCountryDataLoaded]);
 
   useEffect(() => {
-    if (isCountryDataLoaded) {
-      if (!businessUnits || businessUnits.length == 0) {
-        dispatch(fetchBusinessUnits());
-      } else {
-        setIsBusinessUnitsDataLoaded(true);
-      }
+    if (!businessUnits || businessUnits.length == 0) {
+      dispatch(fetchBusinessUnits());
+    } else {
+      setIsBusinessUnitsDataLoaded(true);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [businessUnits, isBusinessUnitsDataLoaded, isCountryDataLoaded]);
+  }, [businessUnits, isBusinessUnitsDataLoaded]);
+
+  useEffect(() => {
+    if (!careMembers || careMembers.length == 0) {
+      dispatch(searchCareMembers({}));
+    } else {
+      setIsCareMembersDataLoaded(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [careMembers, isCareMembersDataLoaded]);
 
   useEffect(() => {
     if (isCountryDataLoaded && isBusinessUnitsDataLoaded) {
