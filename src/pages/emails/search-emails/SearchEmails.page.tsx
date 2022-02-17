@@ -36,8 +36,6 @@ export const SearchEmailPage = () => {
   const roles = useAppSelector(selectAllRolesDataAsSelectOptions);
   const emailsState = useAppSelector(selectEmailState);
 
-  const currentRole = "admin";
-
   const onClickSearchEmails = (filters: EmailQueryFilters): void => {
     dispatch(searchEmails(filters));
   };
@@ -45,7 +43,7 @@ export const SearchEmailPage = () => {
   const onGoToEmailDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    history.push(`/${currentRole}${EMAIL_DETAILS_ROUTE}/${id}`);
+    history.push(`/admin${EMAIL_DETAILS_ROUTE}/${id}`);
   };
 
   const onRemoveEmail = (e: MouseEvent<HTMLButtonElement>) => {
