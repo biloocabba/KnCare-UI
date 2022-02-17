@@ -72,7 +72,8 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
               label="Business Unit"
               options={props.businessUnits}
               onChange={item => {
-                const id: number = parseInt(item as SelectOption["value"]);
+                const { value } = item as SelectOption;
+                const id: number = parseInt(value);
                 setSearchBusinessUnitId(id);
               }}
             />
@@ -83,7 +84,8 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
               label="Job Title"
               options={props.jobTitle}
               onChange={item => {
-                setSearchJobTitle(item as SelectOption["value"]);
+                const { value } = item as SelectOption;
+                setSearchJobTitle(value);
               }}
             />
           </Col>
@@ -94,7 +96,8 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
                 label="Country"
                 options={props.countries}
                 onChange={item => {
-                  setSearchCountryIsoCode3(item as SelectOption["value"]);
+                  const { value } = item as SelectOption;
+                  setSearchCountryIsoCode3(value);
                 }}
               />
             </Col>
