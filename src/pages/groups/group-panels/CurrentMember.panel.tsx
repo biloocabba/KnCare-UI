@@ -10,7 +10,7 @@ import { CareMember, Employee, Group } from "types";
 
 import { careMemberService } from "redux/features";
 
-import { employeesTableColumns } from "../../users";
+import { CARE_MEMBER_EDIT, employeesTableColumns } from "../../users";
 
 interface Props {
   group: Group;
@@ -27,7 +27,7 @@ export const CurrentMemberPanel = ({
 }: Props) => {
   const history = useHistory();
 
-  const [selectedEmployees, setSelectedEmployees] = useState<CareMember[]>([]);
+  const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
 
   useEffect(() => {
     const fetchGroupMembers = async (members: number[]) => {
@@ -43,7 +43,8 @@ export const CurrentMemberPanel = ({
 
   const memberDetails = (e: any) => {
     const { id } = e.target;
-    history.push(`/admin/users/employee-details/${id}`);
+    //console.log(`${CARE_MEMBER_EDIT}/${id}`);
+    history.push(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const memberRemove = () => {};
@@ -71,8 +72,8 @@ export const CurrentMemberPanel = ({
             columns={employeesTableColumns}
             onViewDetailsClick={memberDetails}
             onDeleteItemClick={memberRemove}
-            selectedRows={selectedEmployees}
-            setSelectedRows={setSelectedEmployees}
+            selectedRows={selectedCareMembers}
+            setSelectedRows={setSelectedCareMembers}
           />
         )}
       </Card>

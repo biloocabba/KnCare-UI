@@ -31,15 +31,12 @@ export const SearchCareMembersPage = () => {
   const countries: SelectOption[] = useAppSelector(selectAllCountriesDataAsSelectOptions);
   const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
-  const currentRole = "admin";
-
   const [selectedCareMembers, setSelectedCareMembers] = useState([]);
 
   const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    console.log(id, `/${currentRole}${CARE_MEMBER_EDIT}/${id}`);
-    history.push(`/${currentRole}${CARE_MEMBER_EDIT}/${id}`);
+    history.push(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const onRemoveCareMember = (e: MouseEvent<HTMLButtonElement>) => {
