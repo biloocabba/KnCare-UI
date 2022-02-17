@@ -175,7 +175,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
             <InputField
               id="input-country"
               label="Country"
-              value={careMember.officeAddressCountry}
+              value={careMember.officeAddressCountry || ""}
               type="text"
               disabled={true}
             />
@@ -184,7 +184,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
             <InputField
               id="input-postal-code"
               label="Postal code"
-              value={careMember.officeAddressPostalCode}
+              value={careMember.officeAddressPostalCode || ""}
               type="text"
               disabled={true}
             />
