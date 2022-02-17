@@ -6,6 +6,8 @@ import { CareMember, Group } from "types";
 
 import { AddMemberPanel, CurrentMemberPanel } from ".";
 
+// import { AddMemberPanel, CurrentMemberPanel } from ".";
+
 interface Props {
   group: Group;
   setGroup: (group: Group) => void;
@@ -42,9 +44,9 @@ export const MembersPanel = ({ group, setGroup }: Props) => {
       <Row>
         <Col lg="12">
           <AddMemberPanel
+            addMemberCollapse={addMemberCollapse}
             group={group}
             setGroup={setGroup}
-            addMemberCollapse={addMemberCollapse}
             setCurrentGroupMembers={setCurrentGroupMembers}
           />
         </Col>
@@ -53,8 +55,8 @@ export const MembersPanel = ({ group, setGroup }: Props) => {
       <Row>
         <Col lg="12">
           <CurrentMemberPanel
-            group={group}
             currentMembersCollapse={currentMembersCollapse}
+            group={group}
             currentGroupMembers={currentGroupMembers}
             setCurrentGroupMembers={setCurrentGroupMembers}
           />

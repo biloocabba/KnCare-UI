@@ -6,11 +6,10 @@ import { Collapse, Card, CardHeader, Spinner } from "reactstrap";
 
 import { ReactTable } from "components/widgets";
 
+import { CARE_MEMBER_EDIT, careMemberTableColumns } from "pages/users";
 import { CareMember, Group } from "types";
 
 import { careMemberService } from "redux/features";
-
-import { CARE_MEMBER_EDIT, careMemberTableColumns } from "../../users";
 
 interface Props {
   group: Group;
@@ -31,13 +30,13 @@ export const CurrentMemberPanel = ({
 
   useEffect(() => {
     const fetchGroupMembers = async (members: number[]) => {
-      if (members.length > 0) {
-        const groupMembers = await careMemberService.searchCareMembersByIds(members);
-        setCurrentGroupMembers(groupMembers.data as CareMember[]);
-      }
+      const groupMembers = await careMemberService.searchCareMembersByIds(members);
+      setCurrentGroupMembers(groupMembers.data as CareMember[]);
     };
 
-    fetchGroupMembers(group.members);
+    if (group.members.length > 0) {
+      fetchGroupMembers(group.members);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

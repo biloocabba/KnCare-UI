@@ -5,7 +5,7 @@ import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactst
 import { BoxHeader } from "components/headers";
 
 import { useAlerts } from "hooks";
-import { CARE_MEMBER_SEARCH, CareMemberPanel } from "pages/users";
+import { CareMemberPanel } from "pages/users";
 import { CareMember, CareMemberSaveRequest, RouteParams, SelectOption } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
@@ -62,7 +62,8 @@ export const EditCareMemberPage = () => {
                       href="#dsfkjlsi39ds9d97876s7d"
                       onClick={e => {
                         e.preventDefault();
-                        history.push(`/admin${CARE_MEMBER_SEARCH}`);
+                        history.goBack();
+                        //history.push(`/admin${CARE_MEMBER_SEARCH}`);
                       }}
                     >
                       Back to Care Members

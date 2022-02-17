@@ -2,7 +2,7 @@ import { MouseEvent, useState } from "react";
 
 import { Button } from "reactstrap";
 
-import BootstrapTable, { ColumnDescription } from "react-bootstrap-table-next";
+import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 import { pagination, selectRow } from ".";
@@ -11,7 +11,7 @@ const { SearchBar } = Search;
 
 interface Props<T> {
   data: T[];
-  columns: ColumnDescription<any, T>[];
+  columns: any; //@todo find a better type for columns
   keyField: string;
   onViewDetailsClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   onDeleteItemClick?: (e: MouseEvent<HTMLButtonElement>) => void;
