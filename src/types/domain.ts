@@ -75,11 +75,11 @@ export interface Email extends Domain {
   id: number;
   subject: string;
   content: string;
-  groups?: string[];
-  businessUnits?: string[];
-  roles?: string[];
+  groups?: number[];
+  businessUnits?: number[];
+  roles?: number[];
   countries?: string[];
-  recipients: string[];
+  recipients: number[];
 }
 export interface Country extends Domain {
   code: string;

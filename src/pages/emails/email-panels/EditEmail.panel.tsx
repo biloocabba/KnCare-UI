@@ -91,7 +91,11 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
       // @todo add email content
       subject: email.subject,
       content: emailContent.toString(),
-      recipientIds: [],
+      recipientIds: email.recipients,
+      groupIds: email.groups,
+      roleIds: email.roles,
+      businessUnitIds: email.businessUnits,
+      countryIso3: email.countries,
     };
 
     onSave(emailSaveRequest);
@@ -141,7 +145,9 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
                           options={groups}
                           onChange={item => {
                             const selections = item as SelectOption[];
-                            const recipientGroupsArray = selections.map(item => item.value);
+                            const recipientGroupsArray = selections.map(item =>
+                              parseInt(item.value)
+                            );
                             setEmail({
                               ...email,
                               groups: recipientGroupsArray,
@@ -158,7 +164,9 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
                           options={businessUnits}
                           onChange={item => {
                             const selections = item as SelectOption[];
-                            const recipientBusinessUnitsArray = selections.map(item => item.value);
+                            const recipientBusinessUnitsArray = selections.map(item =>
+                              parseInt(item.value)
+                            );
                             setEmail({
                               ...email,
                               businessUnits: recipientBusinessUnitsArray,
@@ -175,7 +183,7 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
                           options={careRoles}
                           onChange={item => {
                             const selections = item as SelectOption[];
-                            const recipientRoleArray = selections.map(item => item.value);
+                            const recipientRoleArray = selections.map(item => parseInt(item.value));
 
                             setEmail({
                               ...email,
@@ -214,7 +222,7 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
                           options={careMembersState}
                           onChange={item => {
                             const selections = item as SelectOption[];
-                            const recipientsArray = selections.map(item => item.value);
+                            const recipientsArray = selections.map(item => parseInt(item.value));
 
                             setEmail({
                               ...email,

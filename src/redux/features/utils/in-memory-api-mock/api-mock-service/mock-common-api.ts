@@ -8,6 +8,7 @@ import {
   businessUnitsMockResponse,
   countriesMockResponse,
   careRolesMockResponse,
+  groupMockResponse,
 } from "../api-mock-data/mock-data";
 
 export const wrapIntoResponse = <T>(body: T): AxiosResponse<T> => {
@@ -63,7 +64,18 @@ export const matchBusinessUnits = (queryParams: URLSearchParams, entity: Email) 
     const bunitId: number = bunitIdAsString ? parseInt(bunitIdAsString) : CREATE_ENTITY_ID;
     const businessUnitObj = businessUnitsMockResponse.data.find(bunit => bunit.id === bunitId);
 
-    if (businessUnitObj && !entity.businessUnits?.includes(businessUnitObj.name)) {
+    if (businessUnitObj && !entity.businessUnits?.includes(businessUnitObj.id)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const matchGroups = (queryParams: URLSearchParams, entity: Email) => {
+  const groupId = queryParams.get("groupId");
+  if (queryParams && groupId) {
+    const groupObj = groupMockResponse.data.find(group => group.id === parseInt(groupId));
+    if (groupObj && !entity.groups?.includes(groupObj.id)) {
       return false;
     }
   }
@@ -96,7 +108,7 @@ export const matchRoles = (queryParams: URLSearchParams, entity: Email) => {
   const roleId = queryParams.get("roleId");
   if (queryParams && roleId) {
     const roleObj = careRolesMockResponse.data.find(careRole => careRole.id === parseInt(roleId));
-    if (roleObj && !entity.roles?.includes(roleObj.name)) {
+    if (roleObj && !entity.roles?.includes(roleObj.id)) {
       return false;
     }
   }
