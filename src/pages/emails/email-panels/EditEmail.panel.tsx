@@ -42,6 +42,7 @@ import { Email, EmailSaveRequest, SelectOption } from "types";
 
 import { useAppSelector } from "redux/app";
 import {
+  selectAllBusinessUnitsDataAsSelectOptions,
   selectAllCareMembersDataAsSelectOptions,
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
@@ -75,6 +76,7 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
 
   const careMembersState = useAppSelector(selectAllCareMembersDataAsSelectOptions);
   const groups = useAppSelector(selectAllGroupsDataAsSelectOptions);
+  const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const careRoles = useAppSelector(selectAllRolesDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
 
@@ -87,10 +89,11 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
   const handleSaveAsDraft = () => {
     const emailSaveRequest: EmailSaveRequest = {
       // @todo add email content
+      subject: email.subject,
       content: emailContent.toString(),
       recipientIds: [],
-      subject: "",
     };
+
     onSave(emailSaveRequest);
   };
 
@@ -142,6 +145,23 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
                             setEmail({
                               ...email,
                               groups: recipientGroupsArray,
+                            });
+                          }}
+                        />
+                      </Col>
+                      <Col>
+                        <SelectField
+                          id="input-recipient-business-unit"
+                          components={makeAnimated()}
+                          label="Recipient Business Unit"
+                          isMulti
+                          options={businessUnits}
+                          onChange={item => {
+                            const selections = item as SelectOption[];
+                            const recipientBusinessUnitsArray = selections.map(item => item.value);
+                            setEmail({
+                              ...email,
+                              businessUnits: recipientBusinessUnitsArray,
                             });
                           }}
                         />
