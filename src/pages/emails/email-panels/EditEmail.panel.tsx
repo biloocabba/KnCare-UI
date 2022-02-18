@@ -174,6 +174,8 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
                           }}
                         />
                       </Col>
+                    </Row>
+                    <Row>
                       <Col>
                         <SelectField
                           id="input-recipient-group"
