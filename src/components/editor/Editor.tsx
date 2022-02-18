@@ -1,10 +1,12 @@
 import { useState } from "react";
 
 import { HeadingToolbar, ImageToolbarButton, LinkToolbarButton, Plate } from "@udecode/plate";
-import { MdAttachFile, MdImage, MdLink } from "react-icons/md";
+import { MdImage, MdLink } from "react-icons/md";
 
 import { EmailContent } from "pages/emails";
 import { toFileArray } from "types";
+
+import { FileInput } from "../widgets";
 
 import {
   AlignToolbarButtons,
@@ -24,6 +26,7 @@ interface Props {
 
 export const Editor = ({ setEmailContent }: Props) => {
   const [files, setFiles] = useState<File[]>([]);
+
   const changeFileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFiles(toFileArray(event.currentTarget.files));
     setEmailContent(oldEmailContent => ({
@@ -43,24 +46,7 @@ export const Editor = ({ setEmailContent }: Props) => {
         <AlignToolbarButtons />
         <LinkToolbarButton icon={<MdLink />} />
         <ImageToolbarButton icon={<MdImage />} />
-        <label
-          style={{ cursor: "pointer", marginBottom: "0.2rem" }}
-          htmlFor="file-content-upload"
-          id="fileUpload"
-        >
-          <MdAttachFile size={17} />
-        </label>
-        <input
-          id="file-content-upload"
-          style={{
-            visibility: "hidden",
-            position: "absolute",
-            width: "0px",
-          }}
-          type="file"
-          onChange={changeFileHandler}
-          multiple
-        />
+        <FileInput id="file-content-upload" onChange={changeFileHandler} />
       </HeadingToolbar>
       <Plate
         id="1"
