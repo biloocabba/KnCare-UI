@@ -4,7 +4,14 @@ import { Email } from "types";
 
 import { emailMockResponse } from "../api-mock-data/mock-data";
 
-import { entitySearch, matchBusinessUnits, matchCountriesIds, matchGroups, matchRoles } from ".";
+import {
+  entitySearch,
+  matchBusinessUnits,
+  matchCountriesIds,
+  matchGroups,
+  matchRoles,
+  matchSubject,
+} from ".";
 
 export const searchEmails = (url: string): AxiosResponse<Email[]> => {
   return entitySearch<Email>(url, emailMockResponse, filterEmails);
@@ -16,7 +23,8 @@ const filterEmails = (queryParams: URLSearchParams, emailsData: Email[]): Email[
       matchBusinessUnits(queryParams, email) &&
       matchCountriesIds(queryParams, email) &&
       matchRoles(queryParams, email) &&
-      matchGroups(queryParams, email)
+      matchGroups(queryParams, email) &&
+      matchSubject(queryParams, email)
     );
   });
 

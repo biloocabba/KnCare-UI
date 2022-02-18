@@ -39,6 +39,7 @@ export interface EmailQueryFilters {
   groupId?: number;
   sendingDateFrom?: string;
   sendingDateTo?: string;
+  searchSubject?: string;
 }
 export interface GroupQueryFilters {
   active?: boolean;

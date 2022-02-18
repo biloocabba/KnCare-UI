@@ -43,13 +43,9 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
       groupId: searchGroupId,
       sendingDateFrom: searchSendingDateFrom,
       sendingDateTo: searchSendingDateTo,
+      searchSubject,
     };
     props.onSearchEmails(filters);
-  };
-
-  const onChangeSearchSubject = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const subject = e.target.value;
-    setSearchSubject(subject);
   };
 
   return (
@@ -137,7 +133,9 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
           value={searchSubject}
           placeholder="Subject"
           type="text"
-          onChange={onChangeSearchSubject}
+          onChange={({ target }) => {
+            setSearchSubject(target.value);
+          }}
         />
       </Col>
     </FilterPanel>

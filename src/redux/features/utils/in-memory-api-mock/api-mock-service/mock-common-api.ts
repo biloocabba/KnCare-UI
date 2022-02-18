@@ -58,69 +58,12 @@ export const matchBusinessUnit = (queryParams: URLSearchParams, entity: Employee
   return true;
 };
 
-export const matchBusinessUnits = (queryParams: URLSearchParams, entity: Email) => {
-  const bunitIdAsString = queryParams.get("businessUnitId");
-  if (queryParams && bunitIdAsString) {
-    const bunitId: number = bunitIdAsString ? parseInt(bunitIdAsString) : CREATE_ENTITY_ID;
-    const businessUnitObj = businessUnitsMockResponse.data.find(bunit => bunit.id === bunitId);
-
-    if (businessUnitObj && !entity.businessUnits?.includes(businessUnitObj.id)) {
-      return false;
-    }
-  }
-  return true;
-};
-
 export const matchCountryIso3 = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
   if (queryParams && queryParams.get("countryId")) {
     const countryCode = queryParams.get("countryId");
 
     const countryObj = countriesMockResponse.data.find(country => country.code3 === countryCode);
     if (countryObj && entity.country !== countryObj.name) {
-      return false;
-    }
-  }
-  return true;
-};
-
-export const matchGroups = (queryParams: URLSearchParams, entity: Email) => {
-  const groupId = queryParams.get("groupId");
-  if (queryParams && groupId) {
-    const groupObj = groupMockResponse.data.find(group => group.id === parseInt(groupId));
-    if (groupObj && !entity.groups?.includes(groupObj.id)) {
-      return false;
-    }
-  }
-  return true;
-};
-
-export const matchCountryId = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
-  const countryCode = queryParams.get("countryId");
-  if (queryParams && countryCode) {
-    const countryObj = countriesMockResponse.data.find(country => country.code3 === countryCode);
-    if (countryObj && entity.country !== countryObj.name) {
-      return false;
-    }
-  }
-  return true;
-};
-
-export const matchCountriesIds = (queryParams: URLSearchParams, entity: Email) => {
-  const countryCode = queryParams.get("countryId");
-  if (queryParams && countryCode) {
-    const countryObj = countriesMockResponse.data.find(country => country.code3 === countryCode);
-    if (countryObj && !entity.countries?.includes(countryObj.name)) {
-      return false;
-    }
-  }
-  return true;
-};
-
-export const matchRoles = (queryParams: URLSearchParams, entity: Email) => {
-  const roleId = queryParams.get("roleId");
-  if (queryParams && roleId) {
-    const roleObj = careRolesMockResponse.data.find(careRole => careRole.id === parseInt(roleId));
-    if (roleObj && !entity.roles?.includes(roleObj.id)) {
       return false;
     }
   }
@@ -160,6 +103,18 @@ export const matchTitle = (queryParams: URLSearchParams, entity: BestPractice) =
   return true;
 };
 
+export const matchSubject = (queryParams: URLSearchParams, entity: Email) => {
+  if (queryParams && queryParams.get("searchSubject")) {
+    const searchSubject = queryParams.get("searchSubject");
+
+    if (searchSubject && entity.subject.includes(searchSubject)) {
+      return true;
+    }
+    return false;
+  }
+  return true;
+};
+
 export const matchTag = (queryParams: URLSearchParams, entity: BestPractice) => {
   if (queryParams && queryParams.get("searchTag")) {
     const searchTag = queryParams.get("searchTag");
@@ -178,6 +133,54 @@ export const matchRating = (queryParams: URLSearchParams, entity: BestPractice) 
       return true;
     }
     return false;
+  }
+  return true;
+};
+
+export const matchBusinessUnits = (queryParams: URLSearchParams, entity: Email) => {
+  if (queryParams && queryParams.get("businessUnitId")) {
+    const bunitIdAsString = queryParams.get("businessUnitId");
+    const bunitId: number = bunitIdAsString ? parseInt(bunitIdAsString) : CREATE_ENTITY_ID;
+    const businessUnitObj = businessUnitsMockResponse.data.find(bunit => bunit.id === bunitId);
+
+    if (businessUnitObj && !entity.businessUnits?.includes(businessUnitObj.id)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const matchGroups = (queryParams: URLSearchParams, entity: Email) => {
+  const groupId = queryParams.get("groupId");
+  if (queryParams && groupId) {
+    const groupObj = groupMockResponse.data.find(group => group.id === parseInt(groupId));
+    if (groupObj && !entity.groups?.includes(groupObj.id)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const matchCountriesIds = (queryParams: URLSearchParams, entity: Email) => {
+  if (queryParams && queryParams.get("countryId")) {
+    const countryCode = queryParams.get("countryId");
+
+    const countryObj = countriesMockResponse.data.find(country => country.code3 === countryCode);
+
+    if (countryObj && !entity.countries?.includes(countryObj.code3)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const matchRoles = (queryParams: URLSearchParams, entity: Email) => {
+  const roleId = queryParams.get("roleId");
+  if (queryParams && roleId) {
+    const roleObj = careRolesMockResponse.data.find(careRole => careRole.id === parseInt(roleId));
+    if (roleObj && !entity.roles?.includes(roleObj.id)) {
+      return false;
+    }
   }
   return true;
 };
