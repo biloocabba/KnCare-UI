@@ -2,17 +2,17 @@ import { MouseEvent, useState } from "react";
 
 import { useHistory } from "react-router";
 
-import { Card, CardBody, CardHeader, Col, Container, FormGroup, Row, Spinner } from "reactstrap";
+import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
 
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
-import { Group } from "types";
+import { Group, GroupQueryFilters } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { deleteGroup, searchEmployees, searchGroups, selectGroupState } from "redux/features";
 
-import { groupsTableColumns } from ".";
+import { groupsTableColumns, SearchGroupsFilter } from ".";
 
 export const SearchGroupsPage = () => {
   const history = useHistory();
@@ -31,8 +31,8 @@ export const SearchGroupsPage = () => {
     dispatch(deleteGroup(parseInt(id)));
   };
 
-  const findByAllParameters = () => {
-    dispatch(searchGroups());
+  const findByAllParameters = (filters: GroupQueryFilters): void => {
+    dispatch(searchGroups(filters));
     // @todo find a fix to get rid of this
     // this gets all the employees so group members would'nt be empty
     dispatch(searchEmployees({}));
@@ -44,32 +44,7 @@ export const SearchGroupsPage = () => {
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
-            <Card>
-              <CardHeader>
-                <h3 className="mb-0">Search Groups</h3>
-                <p className="text-sm mb-0">Search</p>
-              </CardHeader>
-              <CardBody>
-                <Row>
-                  <Col md="2">
-                    <FormGroup>
-                      <button
-                        style={{
-                          marginTop: "32px",
-                          marginLeft: "32px",
-                          height: "40px",
-                        }}
-                        className="btn btn-info"
-                        type="button"
-                        onClick={findByAllParameters}
-                      >
-                        Search
-                      </button>
-                    </FormGroup>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
+            <SearchGroupsFilter onSearch={findByAllParameters} />
           </div>
         </Row>
 
