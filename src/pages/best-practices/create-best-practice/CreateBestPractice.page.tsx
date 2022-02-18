@@ -22,7 +22,7 @@ export const CreateBestPracticePage = () => {
   const [bestPractice, setBestPractice] = useState<BestPractice>(bestPracticeDefaultState);
   const bestPracticeState = useAppSelector(selectBestPracticeState);
 
-  const { alert, setSaveSent } = useAlerts(bestPracticeState, "Best Practice Created");
+  const { alert, setSaveSent, setSuccessMessage } = useAlerts(bestPracticeState);
 
   const changeFileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files) {
@@ -35,6 +35,7 @@ export const CreateBestPracticePage = () => {
 
   const saveBestPractice = () => {
     dispatch(createBestPractice(bestPractice));
+    setSuccessMessage("Best Practice Created");
     setSaveSent(true);
   };
 
@@ -129,6 +130,7 @@ export const CreateBestPracticePage = () => {
                         name="file"
                         onChange={changeFileHandler}
                         className="form-control"
+                        multiple
                       />
                     </Row>
                   </CardBody>

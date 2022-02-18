@@ -65,7 +65,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               options={props.roles}
               value={searchRoleId}
               onChange={item => {
-                const id: number = parseInt(item as SelectOption["value"]);
+                const { value } = item as SelectOption;
+                const id: number = parseInt(value);
                 setSearchRoleId(id);
               }}
             />
@@ -76,7 +77,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               label="Business Unit"
               options={props.businessUnits}
               onChange={item => {
-                const id: number = parseInt(item as SelectOption["value"]);
+                const { value } = item as SelectOption;
+                const id: number = parseInt(value);
                 setSearchBusinessUnitId(id);
               }}
             />
@@ -88,7 +90,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
                 label="Country"
                 options={props.countries}
                 onChange={item => {
-                  setSearchCountryIsoCode3(item as SelectOption["value"]);
+                  const { value } = item as SelectOption;
+                  setSearchCountryIsoCode3(value);
                 }}
               />
             </Col>
@@ -100,7 +103,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               label="Group"
               options={props.groups}
               onChange={item => {
-                const id: number = parseInt(item as SelectOption["value"]);
+                const { value } = item as SelectOption;
+                const id: number = parseInt(value);
                 setSearchGroupId(id);
               }}
             />

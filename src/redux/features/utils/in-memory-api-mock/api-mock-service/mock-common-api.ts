@@ -1,12 +1,14 @@
 import { AxiosResponse } from "axios";
 
-import { CareMember, Employee } from "types";
+import { CareMember, Email, Employee } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
 
 import {
   mockAxiosReponse,
   businessUnitsMockResponse,
   countriesMockResponse,
+  careRolesMockResponse,
+  groupMockResponse,
 } from "../api-mock-data/mock-data";
 
 export const wrapIntoResponse = <T>(body: T): AxiosResponse<T> => {
@@ -44,8 +46,8 @@ export const entitySearch = <T>(
 };
 
 export const matchBusinessUnit = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
-  if (queryParams && queryParams.get("businessUnitId")) {
-    const bunitIdAsString = queryParams.get("businessUnitId");
+  const bunitIdAsString = queryParams.get("businessUnitId");
+  if (queryParams && bunitIdAsString) {
     const bunitId: number = bunitIdAsString ? parseInt(bunitIdAsString) : CREATE_ENTITY_ID;
     const businessUnitObj = businessUnitsMockResponse.data.find(bunit => bunit.id === bunitId);
 
@@ -56,12 +58,57 @@ export const matchBusinessUnit = (queryParams: URLSearchParams, entity: Employee
   return true;
 };
 
-export const matchCountryId = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
-  if (queryParams && queryParams.get("countryId")) {
-    const countryCode = queryParams.get("countryId");
+export const matchBusinessUnits = (queryParams: URLSearchParams, entity: Email) => {
+  const bunitIdAsString = queryParams.get("businessUnitId");
+  if (queryParams && bunitIdAsString) {
+    const bunitId: number = bunitIdAsString ? parseInt(bunitIdAsString) : CREATE_ENTITY_ID;
+    const businessUnitObj = businessUnitsMockResponse.data.find(bunit => bunit.id === bunitId);
 
+    if (businessUnitObj && !entity.businessUnits?.includes(businessUnitObj.id)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const matchGroups = (queryParams: URLSearchParams, entity: Email) => {
+  const groupId = queryParams.get("groupId");
+  if (queryParams && groupId) {
+    const groupObj = groupMockResponse.data.find(group => group.id === parseInt(groupId));
+    if (groupObj && !entity.groups?.includes(groupObj.id)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const matchCountryId = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
+  const countryCode = queryParams.get("countryId");
+  if (queryParams && countryCode) {
     const countryObj = countriesMockResponse.data.find(country => country.code3 === countryCode);
     if (countryObj && entity.country !== countryObj.name) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const matchCountriesIds = (queryParams: URLSearchParams, entity: Email) => {
+  const countryCode = queryParams.get("countryId");
+  if (queryParams && countryCode) {
+    const countryObj = countriesMockResponse.data.find(country => country.code3 === countryCode);
+    if (countryObj && !entity.countries?.includes(countryObj.name)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const matchRoles = (queryParams: URLSearchParams, entity: Email) => {
+  const roleId = queryParams.get("roleId");
+  if (queryParams && roleId) {
+    const roleObj = careRolesMockResponse.data.find(careRole => careRole.id === parseInt(roleId));
+    if (roleObj && !entity.roles?.includes(roleObj.id)) {
       return false;
     }
   }

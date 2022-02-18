@@ -22,7 +22,7 @@ import { CREATE_ENTITY_ID } from "variables/app.consts";
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
   selectAllGroupsDataAsSelectOptions,
-  selectAllRoleDataAsSelectOptions,
+  selectAllRolesDataAsSelectOptions,
   selectEmployeeById,
   createCareMember,
   selectCareMemberState,
@@ -37,14 +37,13 @@ export const CreateCareMemberPage = () => {
 
   const currentRole = "admin";
   const employee: Employee = useAppSelector(selectEmployeeById(employeeIdAsInt)) as Employee;
-  const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
+  const roles: SelectOption[] = useAppSelector(selectAllRolesDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
   const careMemberState = useAppSelector(selectCareMemberState);
-  const { alert, setSaveSent } = useAlerts(careMemberState, "Care Member Created");
+  const { alert, setSaveSent, setSuccessMessage } = useAlerts(careMemberState);
 
   const createDefaultCareMember = (): CareMember => {
-    console.log("createDefaultCareMember Called");
     const nowAsDate: Date = new Date();
     const oneYearFromNowAsDate: Date = addDays(nowAsDate, 365);
 
@@ -62,6 +61,7 @@ export const CreateCareMemberPage = () => {
 
   const saveCareMember = (careMemberSaveRequest: CareMemberSaveRequest): void => {
     dispatch(createCareMember(careMemberSaveRequest));
+    setSuccessMessage("Care Member Created");
     setSaveSent(true);
   };
 

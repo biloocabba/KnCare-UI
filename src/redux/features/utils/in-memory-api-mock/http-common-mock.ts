@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-import { BEST_PRACTICE_ROUTE } from "redux/features";
+import { BEST_PRACTICE_ROUTE, EMAIL_ROUTE } from "redux/features";
 
 import {
   bestPracticeMockResponse,
@@ -18,6 +18,7 @@ import {
   wrapIntoResponse,
   reportService,
   login,
+  searchEmails,
 } from "./api-mock-service";
 import { saveBestPractice } from "./api-mock-service/mock-best-practice-api";
 
@@ -34,6 +35,10 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
     return Promise.resolve(bestPracticeMockResponse);
   }
 
+  if (url.includes(EMAIL_ROUTE)) {
+    return Promise.resolve(searchEmails(url));
+  }
+
   if (url.includes("/report/")) {
     return Promise.resolve(reportService.get(url));
   }
@@ -42,7 +47,7 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
     return Promise.resolve(groupMockResponse);
   }
 
-  if (url.includes("/care-role")) {
+  if (url.includes("/role")) {
     return Promise.resolve(careRolesMockResponse);
   }
 

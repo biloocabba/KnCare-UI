@@ -9,6 +9,7 @@ import {
   BusinessUnit,
   BestPractice,
   TurnoverChart,
+  Email,
 } from "types";
 
 import {
@@ -20,6 +21,7 @@ import {
   businessUnits,
   careRoles,
   memberTurnoverReport,
+  emails,
 } from ".";
 
 export const mockAxiosReponse = {
@@ -46,6 +48,11 @@ export const groupMockResponse: AxiosResponse<Group[]> = {
 
 export const bestPracticeMockResponse: AxiosResponse<BestPractice[]> = {
   data: bestPractices,
+  ...mockAxiosReponse,
+};
+
+export const emailMockResponse: AxiosResponse<Email[]> = {
+  data: emails,
   ...mockAxiosReponse,
 };
 

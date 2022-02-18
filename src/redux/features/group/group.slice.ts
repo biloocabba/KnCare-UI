@@ -14,6 +14,12 @@ const initialState: StateType<Group> = {
   error: {},
 };
 
+export const findAllGroups = createAsyncThunk("group/findAll", async () => {
+  const { data } = await groupService.findAll();
+
+  return data;
+});
+
 export const findGroupById = createAsyncThunk("group/findById", async (id: number) => {
   const { data } = await groupService.findById(id);
 
@@ -62,6 +68,7 @@ export const groupSlice = createSlice({
   extraReducers: builder => {
     // https://stackoverflow.com/questions/68184008/how-to-refactor-duplicate-code-in-redux-toolkit-createasyncthunk-and-extrareduc
     [
+      findAllGroups,
       findGroupById,
       searchGroups,
       createGroup,
@@ -80,11 +87,18 @@ export const groupSlice = createSlice({
       });
     });
 
+    builder.addCase(findAllGroups.fulfilled, (state, action) => {
+      state.entities = action.payload;
+      state.isLoading = false;
+      state.isSuccess = true;
+    });
+
     builder.addCase(findGroupById.fulfilled, (state, action) => {
       state.entity = action.payload;
       state.isLoading = false;
       state.isSuccess = true;
     });
+
     builder.addCase(searchGroups.fulfilled, (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;

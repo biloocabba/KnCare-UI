@@ -12,6 +12,12 @@ const initialState: StateType<CareRole> = {
   error: {},
 };
 
+export const findAllRoles = createAsyncThunk("role/findAll", async () => {
+  const { data } = await roleService.findAll();
+
+  return data;
+});
+
 export const findRoleById = createAsyncThunk("role/findById", async (id: number) => {
   const { data } = await roleService.findById(id);
   return data;
@@ -49,7 +55,7 @@ export const roleSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     // https://stackoverflow.com/questions/68184008/how-to-refactor-duplicate-code-in-redux-toolkit-createasyncthunk-and-extrareduc
-    [findRoleById, searchRoles, createRole, updateRole, deleteRole].forEach(
+    [findAllRoles, findRoleById, searchRoles, createRole, updateRole, deleteRole].forEach(
       (thunk: AsyncThunk<any, any, Record<string, never>>) => {
         builder.addCase(thunk.pending, state => {
           state.isLoading = true;
@@ -63,11 +69,18 @@ export const roleSlice = createSlice({
       }
     );
 
+    builder.addCase(findAllRoles.fulfilled, (state, action) => {
+      state.entities = action.payload;
+      state.isLoading = false;
+      state.isSuccess = true;
+    });
+
     builder.addCase(findRoleById.fulfilled, (state, action) => {
       state.entity = action.payload;
       state.isLoading = false;
       state.isSuccess = true;
     });
+
     builder.addCase(searchRoles.fulfilled, (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;

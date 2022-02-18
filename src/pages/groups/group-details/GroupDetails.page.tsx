@@ -37,7 +37,7 @@ export const GroupDetailsPage = () => {
 
   const [group, setGroup] = useState(groupState as Group);
 
-  const { alert, setSaveSent } = useAlerts(groupsState, "Group Updated");
+  const { alert, setSaveSent, setSuccessMessage } = useAlerts(groupsState);
 
   useEffect(() => {
     dispatch(findGroupById(groupId));
@@ -47,6 +47,7 @@ export const GroupDetailsPage = () => {
   const onSave = () => {
     if (group) {
       dispatch(updateGroup({ id: groupId, body: group }));
+      setSuccessMessage("Group Updated");
       setSaveSent(true);
     }
   };

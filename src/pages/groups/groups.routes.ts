@@ -4,9 +4,9 @@ import { allAuthRoles, fromAdvocateRole } from "../utils";
 
 import {
   CreateGroupPage,
-  GroupDetailsPage,
+  // GroupDetailsPage,
   GROUP_CREATE,
-  GROUP_DETAILS,
+  // GROUP_DETAILS,
   GROUP_SEARCH,
   SearchGroupsPage,
 } from ".";
@@ -41,14 +41,14 @@ export const groupMenu: IRoute[] = [
       },
     ],
   },
-  {
-    collapse: false,
-    global: true,
-    path: `${GROUP_DETAILS}/:id`,
-    component: GroupDetailsPage,
-    layout: "/admin",
-    name: `${GROUP_DETAILS}/:id`,
-    key: `Groups/${GROUP_DETAILS}/:id`,
-    allowedRoles: [...allAuthRoles],
-  },
+  // {
+  //   collapse: false,
+  //   global: true,
+  //   path: `${GROUP_DETAILS}/:id`,
+  //   component: GroupDetailsPage,
+  //   layout: "/admin",
+  //   name: `${GROUP_DETAILS}/:id`,
+  //   key: `Groups/${GROUP_DETAILS}/:id`,
+  //   allowedRoles: [...allAuthRoles],
+  // },
 ];

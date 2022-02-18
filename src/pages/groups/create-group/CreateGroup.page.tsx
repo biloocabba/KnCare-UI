@@ -24,12 +24,13 @@ export const CreateGroupPage = () => {
   const dispatch = useAppDispatch();
   const groupsState = useAppSelector(selectGroupState);
 
-  const { alert, setSaveSent } = useAlerts(groupsState, "Group Created");
+  const { alert, setSaveSent, setSuccessMessage } = useAlerts(groupsState);
 
   const [group, setGroup] = useState(initialState);
 
   const onCreate = () => {
     dispatch(createGroup(group));
+    setSuccessMessage("Group Created");
     setSaveSent(true);
   };
   return (
