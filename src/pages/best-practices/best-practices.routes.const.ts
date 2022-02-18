@@ -15,4 +15,5 @@ export const bestPracticeDefaultState: BestPractice = {
   tags: [],
   imageUrl: "",
   contentUrl: "",
+  contentFiles: [],
 };
