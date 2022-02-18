@@ -8,21 +8,35 @@ import { DateField, InputField, SelectField } from "components/widgets";
 import { CareMemberQueryFilters, Permission, SelectOption } from "types";
 
 import { useAppSelector } from "redux/app";
-import { selectLoggedUserDefaultCountry } from "redux/features";
+import {
+  selectAllBusinessUnitsDataAsSelectOptions,
+  selectAllCountriesDataAsSelectOptions,
+  selectAllGroupsDataAsSelectOptions,
+  selectAllRoleDataAsSelectOptions,
+  // selectCareMembersByFilters,
+  selectLoggedUserDefaultCountry,
+} from "redux/features";
 
-interface onSearchCareMembersFunction {
-  (filters: CareMemberQueryFilters): void;
-}
+// interface onSearchCareMembersFunction {
+//   (filters: CareMemberQueryFilters): void;
+// }
 
 interface SearchCareMemberFilterPanelProps {
-  roles: SelectOption[];
-  groups: SelectOption[];
-  countries: SelectOption[];
-  businessUnits: SelectOption[];
-  onSearchCareMembers: onSearchCareMembersFunction;
+  // roles: SelectOption[];
+  // groups: SelectOption[];
+  // countries: SelectOption[];
+  // businessUnits: SelectOption[];
+  filters: CareMemberQueryFilters;
+  setFilters: (filters: CareMemberQueryFilters) => void;
+  // onSearchCareMembers: onSearchCareMembersFunction;
 }
 
 export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelProps) => {
+  const businessUnits: SelectOption[] = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
+  const countries: SelectOption[] = useAppSelector(selectAllCountriesDataAsSelectOptions);
+  const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
+  const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
+
   const [searchRoleId, setSearchRoleId] = useState<number>();
   const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
   const [searchGroupId, setSearchGroupId] = useState<number>();
@@ -38,7 +52,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
   const findByAllParameters = () => {
     const filters: CareMemberQueryFilters = {
       businessUnitId: searchBusinessUnitId,
-      countryId: searchCountryIsoCode3,
+      countryIso3: searchCountryIsoCode3,
       roleId: searchRoleId,
       groupId: searchGroupId,
       lastName: searchLastName,
@@ -47,7 +61,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
       offboardingDateFrom: searchOffboardingDateFrom,
       offboardingDateTo: searchOffboardingDateTo,
     };
-    props.onSearchCareMembers(filters);
+    props.setFilters(filters);
   };
 
   return (
@@ -62,7 +76,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             <SelectField
               id="select-role"
               label="Role"
-              options={props.roles}
+              options={roles}
               value={searchRoleId}
               onChange={item => {
                 const { value } = item as SelectOption;
@@ -75,7 +89,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             <SelectField
               id="select-businessUnits"
               label="Business Unit"
-              options={props.businessUnits}
+              options={businessUnits}
               onChange={item => {
                 const { value } = item as SelectOption;
                 const id: number = parseInt(value);
@@ -88,7 +102,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
               <SelectField
                 id="select-country"
                 label="Country"
-                options={props.countries}
+                options={countries}
                 onChange={item => {
                   const { value } = item as SelectOption;
                   setSearchCountryIsoCode3(value);
@@ -101,7 +115,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             <SelectField
               id="select-group"
               label="Group"
-              options={props.groups}
+              options={groups}
               onChange={item => {
                 const { value } = item as SelectOption;
                 const id: number = parseInt(value);

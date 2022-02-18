@@ -1,18 +1,12 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
-import { useHistory } from "react-router";
+import { Button, ButtonGroup, Col, Row } from "reactstrap";
 
-import { Row, Col, Collapse, Spinner, Card, CardHeader, ButtonGroup, Button } from "reactstrap";
+import { CareMember, Group } from "types";
 
-import { ReactTable } from "components/widgets";
+import { AddMemberPanel, CurrentMemberPanel } from ".";
 
-import { employeesTableColumns } from "pages/users";
-import { Employee, Group } from "types";
-
-import { useAppSelector } from "redux/app";
-import { selectEmployeesByIds, selectEmployeesState } from "redux/features";
-
-import { AddMemberPanel } from ".";
+// import { AddMemberPanel, CurrentMemberPanel } from ".";
 
 interface Props {
   group: Group;
@@ -20,17 +14,10 @@ interface Props {
 }
 
 export const MembersPanel = ({ group, setGroup }: Props) => {
-  const history = useHistory();
-
-  const groupsState = useAppSelector(state => state.group);
-  const employeesState = useAppSelector(selectEmployeesState);
-  const groupMembers = useAppSelector(selectEmployeesByIds(group.members)) as unknown as Employee[];
-
-  const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
   const [currentMembersCollapse, setCurrentMembersCollapse] = useState(false);
   const [addMemberCollapse, setAddMemberCollapse] = useState(false);
 
-  const tableRef = useRef();
+  const [currentGroupMembers, setCurrentGroupMembers] = useState<CareMember[]>([]);
 
   const toggleCurrentMembers = () => {
     setCurrentMembersCollapse(!currentMembersCollapse);
@@ -41,13 +28,6 @@ export const MembersPanel = ({ group, setGroup }: Props) => {
     setAddMemberCollapse(!addMemberCollapse);
     setCurrentMembersCollapse(false);
   };
-
-  const memberDetails = (e: any) => {
-    const { id } = e.target;
-    history.push(`/admin/users/employee-details/${id}`);
-  };
-
-  const memberRemove = () => {};
 
   return (
     <>
@@ -63,62 +43,23 @@ export const MembersPanel = ({ group, setGroup }: Props) => {
 
       <Row>
         <Col lg="12">
-          <Collapse isOpen={addMemberCollapse}>
-            <AddMemberPanel
-              group={group}
-              setGroup={setGroup}
-              selectedRows={selectedEmployees}
-              setSelectedRows={setSelectedEmployees}
-              tableRef={tableRef}
-            />
-            {groupsState.isLoading ? (
-              <div className="text-center">
-                <Spinner />
-              </div>
-            ) : (
-              <ReactTable
-                data={employeesState.entities}
-                keyField="id"
-                columns={employeesTableColumns}
-                selectedRows={selectedEmployees}
-                setSelectedRows={setSelectedEmployees}
-                tableRef={tableRef}
-              />
-            )}
-          </Collapse>
+          <AddMemberPanel
+            addMemberCollapse={addMemberCollapse}
+            group={group}
+            setGroup={setGroup}
+            setCurrentGroupMembers={setCurrentGroupMembers}
+          />
         </Col>
       </Row>
 
       <Row>
         <Col lg="12">
-          <Collapse isOpen={currentMembersCollapse}>
-            <Card>
-              <CardHeader>
-                <h3 className="mb-0">Group members</h3>
-                <p className="text-sm mb-0">Care Members</p>
-              </CardHeader>
-
-              {employeesState.isLoading && !groupMembers ? (
-                <div
-                  style={{
-                    textAlign: "center",
-                  }}
-                >
-                  <Spinner />
-                </div>
-              ) : (
-                <ReactTable
-                  data={groupMembers}
-                  keyField="id"
-                  columns={employeesTableColumns}
-                  onViewDetailsClick={memberDetails}
-                  onDeleteItemClick={memberRemove}
-                  selectedRows={selectedEmployees}
-                  setSelectedRows={setSelectedEmployees}
-                />
-              )}
-            </Card>
-          </Collapse>
+          <CurrentMemberPanel
+            currentMembersCollapse={currentMembersCollapse}
+            group={group}
+            currentGroupMembers={currentGroupMembers}
+            setCurrentGroupMembers={setCurrentGroupMembers}
+          />
         </Col>
       </Row>
     </>

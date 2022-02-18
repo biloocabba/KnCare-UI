@@ -8,46 +8,33 @@ import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
 import { CARE_MEMBER_EDIT } from "pages/users";
-import { CareMember, CareMemberQueryFilters, SelectOption } from "types";
+import { CareMember, CareMemberQueryFilters } from "types";
 
-import { useAppDispatch, useAppSelector } from "redux/app";
-import {
-  selectAllCountriesDataAsSelectOptions,
-  selectAllGroupsDataAsSelectOptions,
-  selectAllRolesDataAsSelectOptions,
-} from "redux/features";
-import { selectAllBusinessUnitsDataAsSelectOptions } from "redux/features/business-unit/business-unit.selectors";
-import { searchCareMembers, selectCareMemberState } from "redux/features/care-member";
+import { useAppSelector } from "redux/app";
+import { selectCareMembersByFilters, selectLoggedUserDefaultCountry } from "redux/features";
 
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from ".";
 
 export const SearchCareMembersPage = () => {
   const history = useHistory();
-  const dispatch = useAppDispatch();
 
-  const careMemberState = useAppSelector(selectCareMemberState);
-  const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
+  const userCountry = useAppSelector(selectLoggedUserDefaultCountry);
+  const [filters, setFilters] = useState<CareMemberQueryFilters>({
+    countryIso3: userCountry,
+  });
 
-  const countries: SelectOption[] = useAppSelector(selectAllCountriesDataAsSelectOptions);
-  const roles: SelectOption[] = useAppSelector(selectAllRolesDataAsSelectOptions);
-  const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
-  const currentRole = "admin";
+  const careMemberResultSet: CareMember[] = useAppSelector(selectCareMembersByFilters(filters));
 
   const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
 
   const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    console.log(id, `/${currentRole}${CARE_MEMBER_EDIT}/${id}`);
-    history.push(`/${currentRole}${CARE_MEMBER_EDIT}/${id}`);
+    history.push(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const onRemoveCareMember = (e: MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget);
-  };
-
-  const onClickSearchCareMembers = (filters: CareMemberQueryFilters): void => {
-    dispatch(searchCareMembers(filters));
   };
 
   return (
@@ -57,13 +44,7 @@ export const SearchCareMembersPage = () => {
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
-            <SearchCareMemberFilterPanel
-              businessUnits={businessUnits}
-              countries={countries}
-              groups={groups}
-              roles={roles}
-              onSearchCareMembers={onClickSearchCareMembers}
-            />
+            <SearchCareMemberFilterPanel filters={filters} setFilters={setFilters} />
           </div>
         </Row>
 
@@ -78,7 +59,7 @@ export const SearchCareMembersPage = () => {
               </CardHeader>
 
               <ReactTable
-                data={careMemberState.entities}
+                data={careMemberResultSet}
                 keyField="id"
                 columns={careMemberTableColumns}
                 onViewDetailsClick={onGoToCareMemberDetailsPage}

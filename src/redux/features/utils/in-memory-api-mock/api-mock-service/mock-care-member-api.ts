@@ -8,7 +8,7 @@ import {
   entitySearch,
   findEmployeeById,
   matchBusinessUnit,
-  matchCountryId,
+  matchCountryIso3,
   matchFirstName,
   wrapIntoResponse,
 } from ".";
@@ -46,7 +46,7 @@ export const filterCareMembers = (
     return (
       matchFirstName(queryParams, careMember) &&
       matchBusinessUnit(queryParams, careMember) &&
-      matchCountryId(queryParams, careMember)
+      matchCountryIso3(queryParams, careMember)
     );
   });
 

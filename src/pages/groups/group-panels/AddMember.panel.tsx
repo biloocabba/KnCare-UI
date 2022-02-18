@@ -1,69 +1,72 @@
-import { Button, FormGroup } from "reactstrap";
+import { useRef, useState } from "react";
 
-import { SearchEmployeesFilterPanel } from "pages/users";
-import { Employee, EmployeeQueryFilters, Group, SelectOption } from "types";
+import { Button, Collapse, FormGroup, Spinner } from "reactstrap";
 
-import { useAppDispatch, useAppSelector } from "redux/app";
-import {
-  searchEmployees,
-  selectAllBusinessUnitsDataAsSelectOptions,
-  selectAllCountriesDataAsSelectOptions,
-} from "redux/features";
+import { ReactTable } from "components/widgets";
+
+import { careMemberTableColumns, SearchCareMemberFilterPanel } from "pages/users";
+import { CareMember, CareMemberQueryFilters, Group } from "types";
+
+import { useAppSelector } from "redux/app";
+import { selectCareMembersByFilters, selectLoggedUserDefaultCountry } from "redux/features";
+
+// import { AddMemberFilterPanel } from ".";
 
 interface Props {
   group: Group;
   setGroup: (group: Group) => void;
-  selectedRows: Employee[];
-  setSelectedRows: (selectedRows: Employee[]) => void;
-  tableRef: React.MutableRefObject<undefined>;
+  addMemberCollapse: boolean;
+  setCurrentGroupMembers: React.Dispatch<React.SetStateAction<CareMember[]>>;
 }
 
 export const AddMemberPanel = ({
   group,
   setGroup,
-  selectedRows,
-  setSelectedRows,
-  tableRef,
+  addMemberCollapse,
+  setCurrentGroupMembers,
 }: Props) => {
-  const dispatch = useAppDispatch();
+  const tableRef = useRef();
 
-  const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
-  const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
+  const userCountry = useAppSelector(selectLoggedUserDefaultCountry);
+  const [filters, setFilters] = useState<CareMemberQueryFilters>({
+    countryIso3: userCountry,
+  });
 
-  const jobTitles: SelectOption[] = [
-    { value: "1", label: "product manager" },
-    { value: "2", label: "qa engineer" },
-    { value: "3", label: "hr consultant" },
-    { value: "4", label: "office manager" },
-    { value: "5", label: "sales representative" },
-    { value: "6", label: "logistics consultant" },
-  ];
+  const careMemberResultSet: CareMember[] = useAppSelector(selectCareMembersByFilters(filters));
+  const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
 
-  const onEmployeeAdd = (selectedEmployees: Employee[]) => {
-    const employeeIds = selectedEmployees.map(employee => employee.id);
-    setGroup({ ...group, members: [...group.members, ...employeeIds] });
-    setSelectedRows([]);
+  const onCareMemberAdd = () => {
+    const careMemberIds = selectedCareMembers.map(careMember => careMember.id);
+    setGroup({ ...group, members: [...group.members, ...careMemberIds] });
+    setCurrentGroupMembers(previousCareMembers => [...previousCareMembers, ...selectedCareMembers]);
+    setSelectedCareMembers([]);
     // @ts-ignore
     tableRef.current.selectionContext.selected = [];
   };
 
-  const onClickSearchEmployees = (filters: EmployeeQueryFilters): void => {
-    dispatch(searchEmployees(filters));
-  };
-
   return (
-    <>
-      <SearchEmployeesFilterPanel
-        onSearchEmployees={onClickSearchEmployees}
-        jobTitle={jobTitles}
-        countries={countries}
-        businessUnits={businessUnits}
-      />
+    <Collapse isOpen={addMemberCollapse}>
+      <SearchCareMemberFilterPanel filters={filters} setFilters={setFilters} />
       <FormGroup>
-        <Button color="success" onClick={() => onEmployeeAdd(selectedRows)}>
+        <Button color="success" onClick={onCareMemberAdd}>
           Add Member To Group
         </Button>
       </FormGroup>
-    </>
+      {/* @todo add loading here */}
+      {!careMemberResultSet ? (
+        <div className="text-center">
+          <Spinner />
+        </div>
+      ) : (
+        <ReactTable
+          data={careMemberResultSet}
+          keyField="id"
+          columns={careMemberTableColumns}
+          selectedRows={selectedCareMembers}
+          setSelectedRows={setSelectedCareMembers}
+          tableRef={tableRef}
+        />
+      )}
+    </Collapse>
   );
 };

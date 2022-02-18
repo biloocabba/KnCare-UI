@@ -38,7 +38,6 @@ export const SearchEmployeesPage = () => {
     { value: "5", label: "sales representative" },
     { value: "6", label: "logistics consultant" },
   ];
-  const currentRole = "admin"; //TO GET FROM SELECTORS
 
   const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
 
@@ -49,7 +48,7 @@ export const SearchEmployeesPage = () => {
   const onGoToEmployeeDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    history.push(`/${currentRole}${EMPLOYEE_DETAILS}/${id}`);
+    history.push(`/admin${EMPLOYEE_DETAILS}/${id}`);
   };
 
   const onRemoveEmployee = (e: MouseEvent<HTMLButtonElement>) => {

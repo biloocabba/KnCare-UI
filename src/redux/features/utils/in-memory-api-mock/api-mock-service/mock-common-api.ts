@@ -71,6 +71,18 @@ export const matchBusinessUnits = (queryParams: URLSearchParams, entity: Email) 
   return true;
 };
 
+export const matchCountryIso3 = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
+  if (queryParams && queryParams.get("countryId")) {
+    const countryCode = queryParams.get("countryId");
+
+    const countryObj = countriesMockResponse.data.find(country => country.code3 === countryCode);
+    if (countryObj && entity.country !== countryObj.name) {
+      return false;
+    }
+  }
+  return true;
+};
+
 export const matchGroups = (queryParams: URLSearchParams, entity: Email) => {
   const groupId = queryParams.get("groupId");
   if (queryParams && groupId) {

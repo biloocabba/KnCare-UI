@@ -19,6 +19,9 @@ export const selectLoggedUserRole = createSelector([selectLoggedUser], principal
 );
 
 export const selectLoggedUserDefaultCountry = createSelector([selectLoggedUser], principal => {
+  if (!principal) {
+    return "NO COUNTRY";
+  }
   const { authRole, countryCode3 } = principal as Principal;
   return authRole !== Role.RegionalManager ? countryCode3 : "";
 });

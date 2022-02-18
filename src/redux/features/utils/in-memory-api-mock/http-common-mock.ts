@@ -19,10 +19,25 @@ import {
   reportService,
   login,
   searchEmails,
+  findEmployeesByIds,
 } from "./api-mock-service";
 import { saveBestPractice } from "./api-mock-service/mock-best-practice-api";
 
 export async function get(url: string): Promise<AxiosResponse<any>> {
+  if (url.includes("/employee/group/members")) {
+    // pop out the ids of members
+    const ids = url.split("/employee/group/members/").pop();
+
+    // if there are any ids
+    if (ids) {
+      // get the number array of them
+      const idsArray: number[] = ids.split(",").map(id => parseInt(id));
+
+      // return the Employees
+      return Promise.resolve(findEmployeesByIds(idsArray));
+    }
+  }
+
   if (url.includes("/employee")) {
     return Promise.resolve(searchEmployees(url));
   }

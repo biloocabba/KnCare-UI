@@ -31,15 +31,17 @@ import { ThemeColors } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
-  findAllBusinessUnits,
   findAllCountries,
   findAllGroups,
   findAllRoles,
+  searchCareMembers,
   selectAllBusinessUnitData,
+  selectAllCareMembersData,
   selectAllCountryData,
   selectAllGroupsData,
   selectAllRolesData,
   selectLoggedUserRole,
+  findAllBusinessUnits,
 } from "redux/features";
 
 import { getRoutes, useScrollToTop } from ".";
@@ -55,13 +57,16 @@ export const AdminLayout = () => {
   const [isBusinessUnitsDataLoaded, setIsBusinessUnitsDataLoaded] = useState(false);
   const [isRolesDataLoaded, setIsRolesDataLoaded] = useState(false);
   const [isGroupsDataLoaded, setIsGroupsDataLoaded] = useState(false);
+  const [isCareMembersDataLoaded, setIsCareMembersDataLoaded] = useState(false);
 
   const countries = useAppSelector(selectAllCountryData);
   const businessUnits = useAppSelector(selectAllBusinessUnitData);
   const roles = useAppSelector(selectAllRolesData);
   const groups = useAppSelector(selectAllGroupsData);
+  const careMembers = useAppSelector(selectAllCareMembersData);
 
   const userRole = useAppSelector(selectLoggedUserRole);
+
   useScrollToTop(mainContentRef);
 
   useEffect(() => {
@@ -79,8 +84,19 @@ export const AdminLayout = () => {
     } else {
       setIsBusinessUnitsDataLoaded(true);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [businessUnits, isBusinessUnitsDataLoaded]);
+
+  useEffect(() => {
+    if (!careMembers || careMembers.length == 0) {
+      dispatch(searchCareMembers({}));
+    } else {
+      setIsCareMembersDataLoaded(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [careMembers, isCareMembersDataLoaded]);
 
   useEffect(() => {
     if (!roles || roles.length == 0) {

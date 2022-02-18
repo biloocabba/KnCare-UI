@@ -1,9 +1,15 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { SelectOption, CareMember } from "types";
+import { CareMember, CareMemberQueryFilters, SelectOption } from "types";
 
 import { RootState } from "redux/app";
-import { ALL, StateType } from "redux/features";
+import {
+  ALL,
+  entitySearch,
+  selectAllBusinessUnitData,
+  selectAllCountryData,
+  StateType,
+} from "redux/features";
 
 export const selectCareMemberState = (rootState: RootState): StateType<CareMember> =>
   rootState.careMember;
@@ -14,8 +20,16 @@ export const selectAllCareMembersData = createSelector(
 );
 
 export const selectCareMemberById = (id: number) =>
-  createSelector([selectAllCareMembersData], careMember =>
-    careMember.find(careMember => careMember.id === id)
+  createSelector([selectAllCareMembersData], careMembers =>
+    careMembers.find(careMember => careMember.id === id)
+  );
+
+export const selectCareMembersByFilters = (filters: CareMemberQueryFilters) =>
+  createSelector(
+    [selectAllCareMembersData, selectAllCountryData, selectAllBusinessUnitData],
+    (careMembers, countries, businessUnits) => {
+      return entitySearch(filters, careMembers, businessUnits, countries);
+    }
   );
 
 export const selectAllCareMembersDataAsSelectOptions = createSelector(
