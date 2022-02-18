@@ -45,11 +45,11 @@ export interface GroupQueryFilters {
   active?: boolean;
 }
 export interface BestPracticesQueryFilters {
-  searchTime?: string;
   searchAuthor?: string;
   searchTag?: string;
   searchRating?: string;
   searchTitle?: string;
+  searchPublishDate?: string;
 }
 
 export interface CareMemberQueryFilters {

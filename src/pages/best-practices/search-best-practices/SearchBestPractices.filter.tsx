@@ -22,16 +22,16 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
   const [searchAuthor, setSearchAuthor] = useState("");
   const [searchTag, setSearchTag] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
-  const [searchTime, setSearchTime] = useState("");
   const [searchRating, setSearchRating] = useState("");
+  const [searchPublishDate, setSearchPublishDate] = useState("");
 
   const findByAllParameters = () => {
     const searchFilters: BestPracticesQueryFilters = {
       searchAuthor,
       searchTag,
       searchTitle,
-      searchTime,
       searchRating,
+      searchPublishDate,
     };
 
     onSearch(searchFilters);
@@ -77,7 +77,7 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
             inputProps={{
               placeholder: "Creation Date",
             }}
-            onChange={e => setSearchTime(e.toLocaleString())}
+            onChange={e => setSearchPublishDate(e.toLocaleString())}
             timeFormat={false}
           />
         </FormGroup>

@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import moment from "moment";
 
 import { BestPractice, CareMember, Email, Employee } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
@@ -131,6 +132,21 @@ export const matchRating = (queryParams: URLSearchParams, entity: BestPractice) 
   if (queryParams && queryParams.get("searchRating")) {
     const searchRating = queryParams.get("searchRating");
     if (searchRating && entity.rating === parseInt(searchRating)) {
+      return true;
+    }
+    return false;
+  }
+  return true;
+};
+
+export const matchPublishDate = (queryParams: URLSearchParams, entity: BestPractice) => {
+  if (queryParams && queryParams.get("searchPublishDate")) {
+    const searchPublishDate = moment(queryParams.get("searchPublishDate")).format("YYYY-MM-DD");
+
+    if (
+      searchPublishDate &&
+      moment(entity.publishDate).format("YYYY-MM-DD") === searchPublishDate
+    ) {
       return true;
     }
     return false;

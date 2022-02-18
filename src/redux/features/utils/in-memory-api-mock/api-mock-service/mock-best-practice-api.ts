@@ -5,7 +5,15 @@ import { BestPractice } from "types";
 import { bestPractices } from "../api-mock-data";
 import { bestPracticeMockResponse } from "../api-mock-data/mock-data";
 
-import { wrapIntoResponse, entitySearch, matchAuthor, matchRating, matchTag, matchTitle } from ".";
+import {
+  wrapIntoResponse,
+  entitySearch,
+  matchAuthor,
+  matchRating,
+  matchTag,
+  matchTitle,
+  matchPublishDate,
+} from ".";
 
 export const saveBestPractice = async (body: FormData): Promise<AxiosResponse<FormData>> => {
   return wrapIntoResponse(toObject(body));
@@ -37,7 +45,8 @@ const filter = (
       matchAuthor(queryParams, bestPractice) &&
       matchTitle(queryParams, bestPractice) &&
       matchTag(queryParams, bestPractice) &&
-      matchRating(queryParams, bestPractice)
+      matchRating(queryParams, bestPractice) &&
+      matchPublishDate(queryParams, bestPractice)
     );
   });
 
