@@ -27,6 +27,7 @@ export interface Employee extends Domain {
   officeAddressStreet: string;
   officeAddressCountry: string | null;
   officeAddressPostalCode: string | null;
+  careMember: boolean;
 }
 
 export interface CareMember extends Employee {
