@@ -12,29 +12,19 @@ import {
   selectAllBusinessUnitsDataAsSelectOptions,
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
-  selectAllRoleDataAsSelectOptions,
-  // selectCareMembersByFilters,
+  selectAllRolesDataAsSelectOptions,
   selectLoggedUserDefaultCountry,
 } from "redux/features";
 
-// interface onSearchCareMembersFunction {
-//   (filters: CareMemberQueryFilters): void;
-// }
-
 interface SearchCareMemberFilterPanelProps {
-  // roles: SelectOption[];
-  // groups: SelectOption[];
-  // countries: SelectOption[];
-  // businessUnits: SelectOption[];
   filters: CareMemberQueryFilters;
   setFilters: (filters: CareMemberQueryFilters) => void;
-  // onSearchCareMembers: onSearchCareMembersFunction;
 }
 
 export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelProps) => {
   const businessUnits: SelectOption[] = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const countries: SelectOption[] = useAppSelector(selectAllCountriesDataAsSelectOptions);
-  const roles: SelectOption[] = useAppSelector(selectAllRoleDataAsSelectOptions);
+  const roles: SelectOption[] = useAppSelector(selectAllRolesDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
   const [searchRoleId, setSearchRoleId] = useState<number>();
