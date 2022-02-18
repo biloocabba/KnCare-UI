@@ -29,11 +29,11 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
     useAppSelector(selectLoggedUserDefaultCountry)
   );
 
-  const [searchRole, setSearchRole] = useState<string>();
+  const [searchRole, setSearchRole] = useState<string>("");
   const [searchGroupId, setSearchGroupId] = useState<number>();
-  const [searchSendingDateFrom, setSearchSendingDateFrom] = useState<string>();
-  const [searchSendingDateTo, setSearchSendingDateTo] = useState<string>();
-  const [searchSubject, setSearchSubject] = useState<string>();
+  const [searchSendingDateFrom, setSearchSendingDateFrom] = useState<string>("");
+  const [searchSendingDateTo, setSearchSendingDateTo] = useState<string>("");
+  const [searchSubject, setSearchSubject] = useState<string>("");
 
   const findByAllParameters = () => {
     const filters: EmailQueryFilters = {

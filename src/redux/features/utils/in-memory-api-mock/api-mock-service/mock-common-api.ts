@@ -95,6 +95,7 @@ export const matchAuthor = (queryParams: URLSearchParams, entity: BestPractice) 
 export const matchTitle = (queryParams: URLSearchParams, entity: BestPractice) => {
   if (queryParams && queryParams.get("searchTitle")) {
     const searchTitle = queryParams.get("searchTitle");
+
     if (searchTitle && entity.title.includes(searchTitle)) {
       return true;
     }
