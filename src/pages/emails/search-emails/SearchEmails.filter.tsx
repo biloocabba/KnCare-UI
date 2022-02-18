@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactstrap";
+import { Col } from "reactstrap";
 
 import { WithAuthorization } from "components/authorization";
+import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
 import { EmailQueryFilters, Permission, SelectOption } from "types";
@@ -52,116 +53,93 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <h3 className="mb-0">Search Emails</h3>
-        <p className="text-sm mb-0">Filters</p>
-      </CardHeader>
-      <CardBody>
-        <Row style={{ paddingLeft: "3rem", paddingRight: "3rem" }}>
-          <Col>
-            <Row style={{ display: "flex", justifyContent: "center" }}>
-              <Col md="3">
-                <SelectField
-                  id="select-businessUnits"
-                  label="Business Unit"
-                  options={props.businessUnits}
-                  onChange={item => {
-                    const { value } = item as SelectOption;
-                    const id: number = parseInt(value);
-                    setSearchBusinessUnitId(id);
-                  }}
-                />
-              </Col>
-              <Col md="3">
-                <SelectField
-                  id="select-groups"
-                  label="Groups"
-                  options={props.groups}
-                  onChange={item => {
-                    const { value } = item as SelectOption;
-                    const id: number = parseInt(value);
-                    setSearchGroupId(id);
-                  }}
-                />
-              </Col>
-              <Col md="2">
-                <DateField
-                  id="date-sent-from"
-                  label="Sending Date From"
-                  onChange={dateAsMoment =>
-                    setSearchSendingDateFrom(
-                      typeof dateAsMoment === "string"
-                        ? dateAsMoment
-                        : dateAsMoment.format("YYYY-MM-DD")
-                    )
-                  }
-                  timeFormat={false}
-                />
-              </Col>
-              <Col md="2">
-                <DateField
-                  id="date-sent-to"
-                  label="Sending Date To"
-                  onChange={dateAsMoment =>
-                    setSearchSendingDateTo(
-                      typeof dateAsMoment === "string"
-                        ? dateAsMoment
-                        : dateAsMoment.format("YYYY-MM-DD")
-                    )
-                  }
-                  timeFormat={false}
-                />
-              </Col>
+    <FilterPanel title="Search Emails" findByAllParameters={findByAllParameters}>
+      <Col md="3">
+        <SelectField
+          id="select-businessUnits"
+          label="Business Unit"
+          options={props.businessUnits}
+          onChange={item => {
+            const { value } = item as SelectOption;
+            const id: number = parseInt(value);
+            setSearchBusinessUnitId(id);
+          }}
+        />
+      </Col>
+      <Col md="3">
+        <SelectField
+          id="select-groups"
+          label="Groups"
+          options={props.groups}
+          onChange={item => {
+            const { value } = item as SelectOption;
+            const id: number = parseInt(value);
+            setSearchGroupId(id);
+          }}
+        />
+      </Col>
+      <Col md="2">
+        <DateField
+          id="date-sent-from"
+          label="Sending Date From"
+          onChange={dateAsMoment =>
+            setSearchSendingDateFrom(
+              typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
+            )
+          }
+          timeFormat={false}
+        />
+      </Col>
+      <Col md="2">
+        <DateField
+          id="date-sent-to"
+          label="Sending Date To"
+          onChange={dateAsMoment =>
+            setSearchSendingDateTo(
+              typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
+            )
+          }
+          timeFormat={false}
+        />
+      </Col>
 
-              <WithAuthorization requires={Permission.Email_country_all}>
-                <Col md="3">
-                  <SelectField
-                    id="select-country"
-                    label="Country"
-                    options={props.countries}
-                    onChange={item => {
-                      const { value } = item as SelectOption;
-                      setSearchCountryIsoCode3(value);
-                    }}
-                  />
-                </Col>
-              </WithAuthorization>
+      <WithAuthorization requires={Permission.Email_country_all}>
+        <Col md="3">
+          <SelectField
+            id="select-country"
+            label="Country"
+            options={props.countries}
+            onChange={item => {
+              const { value } = item as SelectOption;
+              setSearchCountryIsoCode3(value);
+            }}
+          />
+        </Col>
+      </WithAuthorization>
 
-              <Col md="3">
-                <SelectField
-                  id="select-role"
-                  label="Role"
-                  options={props.roles}
-                  onChange={item => {
-                    const { value } = item as SelectOption;
-                    setSearchRole(value);
-                  }}
-                />
-              </Col>
-              <Col md="4">
-                <InputField
-                  id="input-subject"
-                  label="Subject"
-                  style={{ height: "36px" }}
-                  className="form-control"
-                  value={searchSubject}
-                  placeholder="Subject"
-                  type="text"
-                  onChange={onChangeSearchSubject}
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col md="1" style={{ display: "flex", alignItems: "flex-end" }}>
-            <FormGroup>
-              <Button className="btn btn-primary" color="primary" onClick={findByAllParameters}>
-                Search
-              </Button>
-            </FormGroup>
-          </Col>
-        </Row>
-      </CardBody>
-    </Card>
+      <Col md="3">
+        <SelectField
+          id="select-role"
+          label="Role"
+          options={props.roles}
+          onChange={item => {
+            const { value } = item as SelectOption;
+            setSearchRole(value);
+          }}
+        />
+      </Col>
+      <Col md="4">
+        <InputField
+          id="input-subject"
+          label="Subject"
+          style={{ height: "36px" }}
+          className="form-control"
+          value={searchSubject}
+          placeholder="Subject"
+          type="text"
+          onChange={onChangeSearchSubject}
+        />
+      </Col>
+    </FilterPanel>
   );
 };
