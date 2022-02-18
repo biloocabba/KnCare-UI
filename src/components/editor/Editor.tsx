@@ -6,7 +6,7 @@ import { MdImage, MdLink } from "react-icons/md";
 import { EmailContent } from "pages/emails";
 import { toFileArray } from "types";
 
-import { FileInput } from "../widgets";
+import { DisplayFiles, FileInput } from "../widgets";
 
 import {
   AlignToolbarButtons,
@@ -59,7 +59,7 @@ export const Editor = ({ setEmailContent }: Props) => {
         <MarkBallonToolbar />
       </Plate>
       <div className="mt-3">
-        {files.length > 0 && `Files: ${files.map(file => file.name).join(", ")}`}
+        <DisplayFiles files={files} />
       </div>
     </>
   );
