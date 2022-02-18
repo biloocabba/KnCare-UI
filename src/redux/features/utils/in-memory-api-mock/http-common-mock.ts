@@ -20,8 +20,9 @@ import {
   login,
   searchEmails,
   findEmployeesByIds,
+  searchBestPractices,
+  saveBestPractice,
 } from "./api-mock-service";
-import { saveBestPractice } from "./api-mock-service/mock-best-practice-api";
 
 export async function get(url: string): Promise<AxiosResponse<any>> {
   if (url.includes("/employee/group/members")) {
@@ -44,6 +45,10 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
 
   if (url.includes("/care-member")) {
     return Promise.resolve(searchCareMembers(url));
+  }
+
+  if (url.includes(`${BEST_PRACTICE_ROUTE}?`)) {
+    return Promise.resolve(searchBestPractices(url));
   }
 
   if (url.includes(BEST_PRACTICE_ROUTE)) {

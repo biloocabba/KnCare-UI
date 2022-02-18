@@ -32,6 +32,7 @@ export const searchBestPractices = createAsyncThunk(
   "bestPractice/search",
   async (filters: any): Promise<BestPractice[]> => {
     const queryParams = new URLSearchParams(filters);
+
     const { data } = await bestPracticeService.search(queryParams);
     return data;
   }

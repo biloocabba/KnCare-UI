@@ -1,6 +1,10 @@
+import moment from "moment";
 import { ColumnDescription } from "react-bootstrap-table-next";
+import Rating from "react-rating";
 
-export const bestPracticesTableColumns: ColumnDescription<any, any>[] = [
+import { BestPractice } from "types";
+
+export const bestPracticesTableColumns: ColumnDescription<any, BestPractice>[] = [
   {
     dataField: "id",
     text: "id",
@@ -9,11 +13,6 @@ export const bestPracticesTableColumns: ColumnDescription<any, any>[] = [
   {
     dataField: "title",
     text: "Title",
-    sort: true,
-  },
-  {
-    dataField: "content",
-    text: "Content",
     sort: true,
   },
   {
@@ -27,19 +26,41 @@ export const bestPracticesTableColumns: ColumnDescription<any, any>[] = [
     sort: true,
   },
   {
-    dataField: "tag",
-    text: "Tag",
+    dataField: "tags",
+    text: "Tags",
     sort: true,
+    formatter: (cell: BestPractice["tags"]) => {
+      return (
+        <>
+          {cell.map((tag, i) => (
+            <div key={i}>{tag} </div>
+          ))}
+        </>
+      );
+    },
   },
   {
-    dataField: "rate",
-    text: "Rate",
+    dataField: "rating",
+    text: "Rating",
     sort: true,
+    formatter: (cell: BestPractice["rating"]) => {
+      return (
+        <Rating
+          initialRating={cell}
+          emptySymbol="fa fa-star-o fa-2x"
+          fullSymbol="fa fa-star fa-2x"
+          readonly
+        />
+      );
+    },
   },
   {
-    dataField: "time",
-    text: "Time",
+    dataField: "publishDate",
+    text: "Publish Date",
     sort: true,
+    formatter: (cell: BestPractice["publishDate"]) => {
+      return <>{moment(cell).format("YYYY-MM-DD")}</>;
+    },
   },
   {
     dataField: "action",

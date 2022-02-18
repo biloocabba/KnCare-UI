@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-import { CareMember, Email, Employee } from "types";
+import { BestPractice, CareMember, Email, Employee } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
 
 import {
@@ -133,6 +133,50 @@ export const matchFirstName = (queryParams: URLSearchParams, entity: Employee | 
     queryParams.get("lastName") &&
     entity.lastName !== queryParams.get("lastName")
   ) {
+    return false;
+  }
+  return true;
+};
+
+export const matchAuthor = (queryParams: URLSearchParams, entity: BestPractice) => {
+  if (
+    queryParams &&
+    queryParams.get("searchAuthor") &&
+    entity.author !== queryParams.get("searchAuthor")
+  ) {
+    return false;
+  }
+  return true;
+};
+
+export const matchTitle = (queryParams: URLSearchParams, entity: BestPractice) => {
+  if (queryParams && queryParams.get("searchTitle")) {
+    const searchTitle = queryParams.get("searchTitle");
+    if (searchTitle && entity.title.includes(searchTitle)) {
+      return true;
+    }
+    return false;
+  }
+  return true;
+};
+
+export const matchTag = (queryParams: URLSearchParams, entity: BestPractice) => {
+  if (queryParams && queryParams.get("searchTag")) {
+    const searchTag = queryParams.get("searchTag");
+    if (searchTag && entity.tags.includes(searchTag)) {
+      return true;
+    }
+    return false;
+  }
+  return true;
+};
+
+export const matchRating = (queryParams: URLSearchParams, entity: BestPractice) => {
+  if (queryParams && queryParams.get("searchRating")) {
+    const searchRating = queryParams.get("searchRating");
+    if (searchRating && entity.rating === parseInt(searchRating)) {
+      return true;
+    }
     return false;
   }
   return true;

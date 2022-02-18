@@ -47,7 +47,7 @@ export interface BestPracticesQueryFilters {
   searchTime?: string;
   searchAuthor?: string;
   searchTag?: string;
-  searchRate?: number;
+  searchRating?: string;
   searchTitle?: string;
 }
 
