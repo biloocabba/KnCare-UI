@@ -40,6 +40,9 @@ export interface EmailQueryFilters {
   sendingDateFrom?: string;
   sendingDateTo?: string;
 }
+export interface GroupQueryFilters {
+  active?: boolean;
+}
 export interface BestPracticesQueryFilters {
   searchTime?: string;
   searchAuthor?: string;

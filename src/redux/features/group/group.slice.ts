@@ -26,8 +26,9 @@ export const findGroupById = createAsyncThunk("group/findById", async (id: numbe
   return data;
 });
 
-export const searchGroups = createAsyncThunk("group/search", async () => {
-  const { data } = await groupService.findAll();
+export const searchGroups = createAsyncThunk("group/search", async (filters: any) => {
+  const queryParams = new URLSearchParams(filters);
+  const { data } = await groupService.search(queryParams);
 
   return data;
 });

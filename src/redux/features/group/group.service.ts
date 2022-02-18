@@ -2,6 +2,10 @@ import { Group } from "types";
 
 import { GROUP_ROUTE, httpCommon, HttpResponseType, IPartiallyUpdated, IUpdated } from "..";
 
+const search = (queryParams: URLSearchParams): HttpResponseType => {
+  return httpCommon.get(`${GROUP_ROUTE}?${queryParams}`);
+};
+
 const findAll = (): HttpResponseType => {
   return httpCommon.get(`${GROUP_ROUTE}`);
 };
@@ -31,7 +35,7 @@ const deleteItem = (id: number) => {
 export const groupService = {
   findAll,
   findById,
-
+  search,
   create,
   update,
   partialUpdate,
