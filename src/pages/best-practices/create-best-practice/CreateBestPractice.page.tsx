@@ -5,7 +5,7 @@ import { Button, Card, CardBody, CardHeader, Col, Container, FormGroup, Row } fr
 import CreatableSelect from "react-select/creatable";
 
 import { BoxHeader } from "components/headers";
-import { InputField } from "components/widgets";
+import { InputField, FileInput, DisplayFiles } from "components/widgets";
 
 import { useAlerts } from "hooks";
 import { BestPractice } from "types";
@@ -53,14 +53,14 @@ export const CreateBestPracticePage = () => {
         <Row>
           <Col className="order-xl-1">
             <Row>
-              <div className="col">
+              <Col>
                 <Card>
                   <CardHeader>
                     <h3 className="mb-0">Best Practices</h3>
                     <p className="text-sm mb-0">Create new</p>
                   </CardHeader>
                   <CardBody>
-                    <Row>
+                    <Row className="justify-content-center">
                       <Col md="10">
                         <InputField
                           id="input-title"
@@ -75,7 +75,7 @@ export const CreateBestPracticePage = () => {
                         />
                       </Col>
                     </Row>
-                    <Row>
+                    <Row className="justify-content-center">
                       <Col md="10">
                         <InputField
                           id="input-description"
@@ -92,7 +92,7 @@ export const CreateBestPracticePage = () => {
                         />
                       </Col>
                     </Row>
-                    <Row>
+                    <Row className="justify-content-center">
                       <Col md="10">
                         <FormGroup>
                           <label htmlFor="select-tags" className="form-control-label">
@@ -107,7 +107,7 @@ export const CreateBestPracticePage = () => {
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Row>
+                    <Row className="justify-content-center">
                       <Col md="10">
                         <InputField
                           id="input-image-url"
@@ -122,28 +122,28 @@ export const CreateBestPracticePage = () => {
                         />
                       </Col>
                     </Row>
-                    <Row>
-                      <InputField
-                        id="file-content-upload"
-                        label="Content Files"
-                        type="file"
-                        name="file"
-                        onChange={changeFileHandler}
-                        className="form-control"
-                        multiple
-                      />
+                    <Row className="justify-content-center">
+                      <Col md="10">
+                        <FileInput id="file-content-upload" onChange={changeFileHandler} />
+                      </Col>
+                    </Row>
+                    <Row className="justify-content-center">
+                      <Col md="10">
+                        <DisplayFiles files={bestPractice.contentFiles || []} />
+                      </Col>
+                    </Row>
+                    <Row className="mt-3 justify-content-center">
+                      <Col md="10" className="d-flex" style={{ justifyContent: "right" }}>
+                        <Button color="primary" type="submit" onClick={saveBestPractice}>
+                          Create
+                        </Button>
+                      </Col>
                     </Row>
                   </CardBody>
                 </Card>
-              </div>
+              </Col>
             </Row>
           </Col>
-        </Row>
-
-        <Row>
-          <Button color="primary" type="submit" onClick={saveBestPractice}>
-            Create
-          </Button>
         </Row>
       </Container>
     </>
