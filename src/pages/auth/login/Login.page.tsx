@@ -36,7 +36,7 @@ export const LoginPage = () => {
   const [focusedEmail, setfocusedEmail] = useState(false);
   const [focusedPassword, setfocusedPassword] = useState(false);
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("gabriela.rios@kuehne-nagel.com");
   const [password, setPassword] = useState("");
 
   const user = useAppSelector(selectPrincipalState);
