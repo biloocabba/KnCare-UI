@@ -11,6 +11,7 @@ import {
   matchGroups,
   matchSubject,
   matchRoles,
+  matchSendingDateBetween,
 } from ".";
 
 export const searchEmails = (url: string): AxiosResponse<Email[]> => {
@@ -24,7 +25,8 @@ const filterEmails = (queryParams: URLSearchParams, emailsData: Email[]): Email[
       matchCountriesIds(queryParams, email) &&
       matchRoles(queryParams, email) &&
       matchGroups(queryParams, email) &&
-      matchSubject(queryParams, email)
+      matchSubject(queryParams, email) &&
+      matchSendingDateBetween(queryParams, email)
     );
   });
 

@@ -20,4 +20,5 @@ export const emailDefaultState: Email = {
   businessUnits: [],
   roles: [],
   countries: [],
+  sendingDate: new Date().toUTCString(),
 };

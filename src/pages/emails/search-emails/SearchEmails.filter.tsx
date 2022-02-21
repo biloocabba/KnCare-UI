@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { Col } from "reactstrap";
 
+import moment from "moment";
+
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
@@ -31,8 +33,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
 
   const [searchRole, setSearchRole] = useState<string>("");
   const [searchGroupId, setSearchGroupId] = useState<number>();
-  const [searchSendingDateFrom, setSearchSendingDateFrom] = useState<string>("");
-  const [searchSendingDateTo, setSearchSendingDateTo] = useState<string>("");
+  const [searchSendingDateFrom, setSearchSendingDateFrom] = useState<moment.Moment>();
+  const [searchSendingDateTo, setSearchSendingDateTo] = useState<moment.Moment>();
   const [searchSubject, setSearchSubject] = useState<string>("");
 
   const findByAllParameters = () => {
@@ -78,11 +80,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
         <DateField
           id="date-sent-from"
           label="Sending Date From"
-          onChange={dateAsMoment =>
-            setSearchSendingDateFrom(
-              typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
-            )
-          }
+          onChange={dateAsMoment => setSearchSendingDateFrom(moment(dateAsMoment).utc())}
+          closeOnSelect
           timeFormat={false}
         />
       </Col>
@@ -90,11 +89,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
         <DateField
           id="date-sent-to"
           label="Sending Date To"
-          onChange={dateAsMoment =>
-            setSearchSendingDateTo(
-              typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
-            )
-          }
+          onChange={dateAsMoment => setSearchSendingDateTo(moment(dateAsMoment).utc())}
+          closeOnSelect
           timeFormat={false}
         />
       </Col>
