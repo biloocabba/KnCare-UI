@@ -23,8 +23,8 @@ export const groupMenu: IRoute[] = [
     views: [
       {
         path: GROUP_CREATE,
-        name: "Create Group",
-        miniName: "CG",
+        name: "Create New",
+        miniName: "CN",
         component: CreateGroupPage,
         layout: "/admin",
         key: "Groups/Create Group",
@@ -32,8 +32,8 @@ export const groupMenu: IRoute[] = [
       },
       {
         path: GROUP_SEARCH,
-        name: "Search Group",
-        miniName: "SG",
+        name: "Search",
+        miniName: "S",
         component: SearchGroupsPage,
         layout: "/admin",
         key: "Groups/Search Group",
