@@ -47,6 +47,7 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
       sendingDateTo: searchSendingDateTo,
       searchSubject,
     };
+
     props.onSearchEmails(filters);
   };
 
