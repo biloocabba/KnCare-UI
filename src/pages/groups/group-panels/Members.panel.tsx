@@ -47,6 +47,7 @@ export const MembersPanel = ({ group, setGroup }: Props) => {
             addMemberCollapse={addMemberCollapse}
             group={group}
             setGroup={setGroup}
+            currentGroupMembers={currentGroupMembers}
             setCurrentGroupMembers={setCurrentGroupMembers}
           />
         </Col>

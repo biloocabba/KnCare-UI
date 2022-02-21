@@ -24,7 +24,7 @@ export const bestPracticesMenu: IRoute[] = [
       {
         path: NEW_BEST_PRACTICE,
         name: "Create New",
-        miniName: "NB",
+        miniName: "CN",
         component: CreateBestPracticePage,
         layout: "/admin",
         key: "Best Practice/Create New",
@@ -33,7 +33,7 @@ export const bestPracticesMenu: IRoute[] = [
       {
         path: SEARCH_BEST_PRACTICE,
         name: "Search",
-        miniName: "SB",
+        miniName: "S",
         component: SearchBestPracticesPage,
         layout: "/admin",
         key: "Best Practice/Search",

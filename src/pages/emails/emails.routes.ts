@@ -22,8 +22,8 @@ export const emailMenu: IRoute[] = [
     views: [
       {
         path: CREATE_EMAIL_ROUTE,
-        name: "Create Email",
-        miniName: "CE",
+        name: "Create New",
+        miniName: "CN",
         component: CreateEmailPage,
         layout: "/admin",
         key: "Emails/CreateEmailPage",
@@ -31,8 +31,8 @@ export const emailMenu: IRoute[] = [
       },
       {
         path: EMAIL_SEARCH_ROUTE,
-        name: "Search Email",
-        miniName: "SE",
+        name: "Search",
+        miniName: "S",
         component: SearchEmailPage,
         layout: "/admin",
         key: "Emails/SearchEmailPage",
