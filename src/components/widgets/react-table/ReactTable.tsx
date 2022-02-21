@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent } from "react";
 
 import { Button } from "reactstrap";
 
@@ -20,6 +20,7 @@ interface Props<T> {
   searchBarPlaceholder?: string;
   selectButtonText?: string;
   tableRef?: React.MutableRefObject<any>;
+  formatterFn?: (_: any, row: T) => React.ReactNode;
 }
 
 export const ReactTable = <T extends { id: number }>({
@@ -33,10 +34,9 @@ export const ReactTable = <T extends { id: number }>({
   searchBarPlaceholder,
   selectButtonText,
   tableRef,
+  formatterFn,
 }: Props<T>) => {
-  const [formatterFunction, setFormatterFunction] = useState(false);
-
-  const formatActionButtonCell = (_: any, row: T) => {
+  const formatActionButtonCell = (_: any, row: T): React.ReactNode => {
     const rowId = row.id.toString();
     return (
       <>
@@ -66,10 +66,12 @@ export const ReactTable = <T extends { id: number }>({
     );
   };
 
-  if (!formatterFunction) {
-    columns[columns.length - 1].formatter = formatActionButtonCell; //we can/should force formatter always to be on last column
-    setFormatterFunction(true);
-  }
+  // const [formatterFunction, setFormatterFunction] = useState(formatterFnc);
+
+  // if (!formatterFunction) {
+  columns[columns.length - 1].formatter = formatterFn ? formatterFn : formatActionButtonCell; //we can/should force formatter always to be on last column
+  //   setFormatterFunction(true);
+  // }
 
   return (
     <ToolkitProvider data={data} keyField={keyField} columns={columns} bootstrap4 search>

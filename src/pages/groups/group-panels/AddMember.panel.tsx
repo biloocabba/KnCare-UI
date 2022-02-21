@@ -65,6 +65,7 @@ export const AddMemberPanel = ({
           selectedRows={selectedCareMembers}
           setSelectedRows={setSelectedCareMembers}
           tableRef={tableRef}
+          formatterFn={() => <></>}
         />
       )}
     </Collapse>
