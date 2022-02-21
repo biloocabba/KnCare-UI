@@ -19,6 +19,20 @@ export const selectGroupById = (id: number) =>
     groups => groups.find(group => group.id === id) //arg
   );
 
+export const selectGroupsByIds = (ids: number[]) =>
+  createSelector(
+    [selectAllGroupsData], //array of input selectors
+    groups => groups.filter(group => ids.includes(group.id))
+  );
+
+export const selectGroupsByIdsAsSelectValues = (ids: number[]) =>
+  createSelector([selectGroupsByIds(ids)], (groupsByIds): SelectOption[] => {
+    const groupOptions: SelectOption[] = groupsByIds.map(group => {
+      return { value: `${group.id}`, label: group.name };
+    });
+    return [...groupOptions];
+  });
+
 export const selectAllGroupsDataAsSelectOptions = createSelector(
   [selectAllGroupsData],
   (groups): SelectOption[] => {
