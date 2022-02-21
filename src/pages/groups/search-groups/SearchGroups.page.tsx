@@ -12,6 +12,8 @@ import { Group, GroupQueryFilters } from "types";
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { deleteGroup, searchEmployees, searchGroups, selectGroupState } from "redux/features";
 
+import { GROUP_DETAILS } from "..";
+
 import { groupsTableColumns, SearchGroupsFilter } from ".";
 
 export const SearchGroupsPage = () => {
@@ -23,7 +25,7 @@ export const SearchGroupsPage = () => {
 
   const goToGroupDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.target as HTMLElement;
-    history.push(`/admin/groups/group-details/${id}`);
+    history.push(`/admin${GROUP_DETAILS}/${id}`);
   };
 
   const removeGroup = (e: MouseEvent<HTMLButtonElement>) => {
