@@ -2,11 +2,11 @@ import { useState } from "react";
 
 import { Col, FormGroup } from "reactstrap";
 
-import ReactDatetimeClass from "react-datetime";
+import moment from "moment";
 import Rating from "react-rating";
 
 import { FilterPanel } from "components/panels";
-import { InputField } from "components/widgets";
+import { InputField, DateField } from "components/widgets";
 
 import { BestPracticesQueryFilters } from "types";
 
@@ -23,7 +23,7 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
   const [searchTag, setSearchTag] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
   const [searchRating, setSearchRating] = useState("");
-  const [searchPublishDate, setSearchPublishDate] = useState("");
+  const [searchPublishDate, setSearchPublishDate] = useState<moment.Moment>();
 
   const findByAllParameters = () => {
     const searchFilters: BestPracticesQueryFilters = {
@@ -69,18 +69,16 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
         />
       </Col>
       <Col md="3">
-        <FormGroup>
-          <label className="form-control-label" htmlFor="example3cols2Input">
-            Creation Date
-          </label>
-          <ReactDatetimeClass
-            inputProps={{
-              placeholder: "Creation Date",
-            }}
-            onChange={e => setSearchPublishDate(e.toLocaleString())}
-            timeFormat={false}
-          />
-        </FormGroup>
+        <DateField
+          id="creation-date"
+          inputProps={{
+            placeholder: "Creation Date",
+          }}
+          label="Creation Date"
+          onChange={dateAsMoment => setSearchPublishDate(moment(dateAsMoment).utc())}
+          closeOnSelect
+          timeFormat={false}
+        />
       </Col>
       <Col md="3">
         <FormGroup>
