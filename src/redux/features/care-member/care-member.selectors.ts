@@ -8,6 +8,8 @@ import {
   entitySearch,
   selectAllBusinessUnitData,
   selectAllCountryData,
+  selectAllGroupsData,
+  selectAllRolesData,
   StateType,
 } from "redux/features";
 
@@ -26,9 +28,15 @@ export const selectCareMemberById = (id: number) =>
 
 export const selectCareMembersByFilters = (filters: CareMemberQueryFilters) =>
   createSelector(
-    [selectAllCareMembersData, selectAllCountryData, selectAllBusinessUnitData],
-    (careMembers, countries, businessUnits) => {
-      return entitySearch(filters, careMembers, businessUnits, countries);
+    [
+      selectAllCareMembersData,
+      selectAllCountryData,
+      selectAllBusinessUnitData,
+      selectAllGroupsData,
+      selectAllRolesData,
+    ],
+    (careMembers, countries, businessUnits, groups, roles) => {
+      return entitySearch(filters, careMembers, businessUnits, countries, groups, roles);
     }
   );
 
