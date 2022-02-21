@@ -58,10 +58,10 @@ export interface CareMemberQueryFilters {
   roleId?: number;
   groupId?: number;
   lastName?: string;
-  onboardDateFrom?: moment.Moment;
-  onboardDateTo?: moment.Moment;
-  offboardingDateFrom?: moment.Moment;
-  offboardingDateTo?: moment.Moment;
+  onboardDateFrom?: string;
+  onboardDateTo?: string;
+  offboardingDateFrom?: string;
+  offboardingDateTo?: string;
 }
 
 export interface Chart {
