@@ -8,7 +8,6 @@ import { IUpdated, StateType } from "../common";
 import { careMemberService } from ".";
 
 export const searchCareMembers = createAsyncThunk("care-member/search", async (filters: any) => {
-  console.log(filters);
   const queryParams = new URLSearchParams(filters);
   const { data } = await careMemberService.searchCareMembers(queryParams);
   return data;
