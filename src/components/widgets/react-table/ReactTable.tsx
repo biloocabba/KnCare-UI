@@ -111,3 +111,7 @@ export const ReactTable = <T extends { id: number }>({
     </ToolkitProvider>
   );
 };
+
+export const emptyFormatter = (): React.ReactNode => {
+  return <></>;
+};

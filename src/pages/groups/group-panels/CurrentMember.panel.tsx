@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 
 import { Collapse, Card, CardHeader, Spinner } from "reactstrap";
 
-import { ReactTable } from "components/widgets";
+import { emptyFormatter, ReactTable } from "components/widgets";
 
 import { CARE_MEMBER_EDIT, careMemberTableColumns } from "pages/users";
 import { CareMember, Group } from "types";
@@ -73,6 +73,7 @@ export const CurrentMemberPanel = ({
             onDeleteItemClick={memberRemove}
             selectedRows={selectedCareMembers}
             setSelectedRows={setSelectedCareMembers}
+            formatterFn={emptyFormatter}
           />
         )}
       </Card>

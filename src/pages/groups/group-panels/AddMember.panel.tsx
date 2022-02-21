@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 import { Button, Collapse, FormGroup, Spinner } from "reactstrap";
 
-import { ReactTable } from "components/widgets";
+import { emptyFormatter, ReactTable } from "components/widgets";
 
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from "pages/users";
 import { CareMember, CareMemberQueryFilters, Group } from "types";
@@ -65,7 +65,7 @@ export const AddMemberPanel = ({
           selectedRows={selectedCareMembers}
           setSelectedRows={setSelectedCareMembers}
           tableRef={tableRef}
-          formatterFn={() => <></>}
+          formatterFn={emptyFormatter}
         />
       )}
     </Collapse>
