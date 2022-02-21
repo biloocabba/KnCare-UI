@@ -64,8 +64,6 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               label="Onboard date"
               value={onboardingDate}
               onChange={dateAsMoment => setOnboardingDate(moment(dateAsMoment).toLocaleString())}
-              closeOnSelect
-              timeFormat={false}
             />
           </Col>
           <Col lg="6">
@@ -74,8 +72,6 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               label="Auto Offboard Date"
               value={offboardingDate}
               onChange={dateAsMoment => setOffboardingDate(moment(dateAsMoment).toLocaleString())}
-              closeOnSelect
-              timeFormat={false}
             />
           </Col>
         </Row>

@@ -131,8 +131,6 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           }}
           label="Onboarding from"
           onChange={dateAsMoment => setSearchOnBoardDateFrom(moment(dateAsMoment).toLocaleString())}
-          closeOnSelect
-          timeFormat={false}
         />
       </Col>
       <Col md="2">
@@ -143,8 +141,6 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           }}
           label="Onboarding to"
           onChange={dateAsMoment => setSearchOnBoardDateTo(moment(dateAsMoment).toLocaleString())}
-          closeOnSelect
-          timeFormat={false}
         />
       </Col>
       <Col md="2">
@@ -157,8 +153,6 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           onChange={dateAsMoment =>
             setSearchOffboardingDateFrom(moment(dateAsMoment).toLocaleString())
           }
-          closeOnSelect
-          timeFormat={false}
         />
       </Col>
       <Col md="2">
@@ -171,8 +165,6 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           onChange={dateAsMoment =>
             setSearchOffboardingDateTo(moment(dateAsMoment).toLocaleString())
           }
-          closeOnSelect
-          timeFormat={false}
         />
       </Col>
     </FilterPanel>

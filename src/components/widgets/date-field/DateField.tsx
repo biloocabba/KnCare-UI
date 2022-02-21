@@ -13,7 +13,7 @@ export const DateField = ({ id, label, ...props }: Props) => {
       <label className="form-control-label" htmlFor={id}>
         {label}
       </label>
-      <ReactDatetime {...props} />
+      <ReactDatetime {...props} timeFormat={false} closeOnSelect />
     </FormGroup>
   );
 };

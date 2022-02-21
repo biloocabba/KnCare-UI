@@ -82,8 +82,6 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
           id="date-sent-from"
           label="Sending Date From"
           onChange={dateAsMoment => setSearchSendingDateFrom(moment(dateAsMoment).toLocaleString())}
-          closeOnSelect
-          timeFormat={false}
         />
       </Col>
       <Col md="2">
@@ -91,8 +89,6 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
           id="date-sent-to"
           label="Sending Date To"
           onChange={dateAsMoment => setSearchSendingDateTo(moment(dateAsMoment).toLocaleString())}
-          closeOnSelect
-          timeFormat={false}
         />
       </Col>
 

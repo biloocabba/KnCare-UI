@@ -3,10 +3,11 @@ import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactst
 interface Props {
   title: string;
   findByAllParameters: () => void;
+  resetFilters?: () => void;
   children?: React.ReactNode;
 }
 
-export const FilterPanel = ({ title, children, findByAllParameters }: Props) => {
+export const FilterPanel = ({ title, children, findByAllParameters, resetFilters }: Props) => {
   return (
     <Card>
       <CardHeader>
@@ -18,7 +19,12 @@ export const FilterPanel = ({ title, children, findByAllParameters }: Props) => 
           <Col>
             <Row className="d-flex justify-content-center">{children}</Row>
           </Col>
-          <Col md="1.1" className="d-flex align-items-end">
+          <Col md="1.1" className="d-flex flex-column justify-content-end">
+            <FormGroup>
+              <Button className="btn btn-secondary" color="secondary" onClick={resetFilters}>
+                Reset
+              </Button>
+            </FormGroup>
             <FormGroup>
               <Button className="btn btn-primary" color="primary" onClick={findByAllParameters}>
                 Search
