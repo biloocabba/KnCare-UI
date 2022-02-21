@@ -202,7 +202,7 @@ export const matchRoles = (queryParams: URLSearchParams, entity: Email) => {
   return true;
 };
 
-export const matchDateBetween = (queryParams: URLSearchParams, entity: Email) => {
+export const matchSendingDateBetween = (queryParams: URLSearchParams, entity: Email) => {
   const sendingDateFromAsString = queryParams.get("sendingDateFrom");
   const sendingDateToAsString = queryParams.get("sendingDateTo");
 
