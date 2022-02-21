@@ -81,7 +81,7 @@ export interface Email extends Domain {
   roles?: number[];
   countries?: string[];
   recipients: number[];
-  sendingDate: Date;
+  sendingDate: string;
 }
 export interface Country extends Domain {
   code: string;
