@@ -60,10 +60,10 @@ export interface CareMemberQueryFilters {
   roleId?: number;
   groupId?: number;
   lastName?: string;
-  onboardDateFrom?: string;
-  onboardDateTo?: string;
-  offboardingDateFrom?: string;
-  offboardingDateTo?: string;
+  onboardDateFrom?: moment.Moment;
+  onboardDateTo?: moment.Moment;
+  offboardingDateFrom?: moment.Moment;
+  offboardingDateTo?: moment.Moment;
 }
 
 export interface Chart {

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Col } from "reactstrap";
+
+import moment from "moment";
 
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
@@ -32,10 +34,10 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
   const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
   const [searchGroupId, setSearchGroupId] = useState<number>();
   const [searchLastName, setSearchLastName] = useState("");
-  const [searchOnBoardDateFrom, setSearchOnBoardDateFrom] = useState<string>("");
-  const [searchOnBoardDateTo, setSearchOnBoardDateTo] = useState<string>("");
-  const [searchOffboardingDateFrom, setSearchOffboardingDateFrom] = useState<string>("");
-  const [searchOffboardingDateTo, setSearchOffboardingDateTo] = useState<string>("");
+  const [searchOnBoardDateFrom, setSearchOnBoardDateFrom] = useState<moment.Moment>();
+  const [searchOnBoardDateTo, setSearchOnBoardDateTo] = useState<moment.Moment>();
+  const [searchOffboardingDateFrom, setSearchOffboardingDateFrom] = useState<moment.Moment>();
+  const [searchOffboardingDateTo, setSearchOffboardingDateTo] = useState<moment.Moment>();
   const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
     useAppSelector(selectLoggedUserDefaultCountry)
   );
@@ -62,7 +64,6 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           id="select-role"
           label="Role"
           options={roles}
-          value={searchRoleId}
           onChange={item => {
             const { value } = item as SelectOption;
             const id: number = parseInt(value);
@@ -117,7 +118,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           value={searchLastName}
           placeholder="Last Name"
           type="text"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onChange={e => {
             setSearchLastName(e.currentTarget.value);
           }}
         />
@@ -128,12 +129,9 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           inputProps={{
             placeholder: "From",
           }}
-          label="Onbording from"
-          onChange={dateAsMoment =>
-            setSearchOnBoardDateFrom(
-              typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
-            )
-          }
+          label="Onboarding from"
+          onChange={dateAsMoment => setSearchOnBoardDateFrom(moment(dateAsMoment).utc())}
+          closeOnSelect
           timeFormat={false}
         />
       </Col>
@@ -143,12 +141,9 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           inputProps={{
             placeholder: "To",
           }}
-          label="Onbording to"
-          onChange={dateAsMoment =>
-            setSearchOnBoardDateTo(
-              typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
-            )
-          }
+          label="Onboarding to"
+          onChange={dateAsMoment => setSearchOnBoardDateTo(moment(dateAsMoment).utc())}
+          closeOnSelect
           timeFormat={false}
         />
       </Col>
@@ -156,14 +151,11 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
         <DateField
           id="date-offboarded-from"
           inputProps={{
-            placeholder: "from",
+            placeholder: "From",
           }}
           label="Offboarded From"
-          onChange={dateAsMoment =>
-            setSearchOffboardingDateFrom(
-              typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
-            )
-          }
+          onChange={dateAsMoment => setSearchOffboardingDateFrom(moment(dateAsMoment).utc())}
+          closeOnSelect
           timeFormat={false}
         />
       </Col>
@@ -171,14 +163,11 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
         <DateField
           id="date-offboarded-to"
           inputProps={{
-            placeholder: "to",
+            placeholder: "To",
           }}
           label="Offboarded To"
-          onChange={dateAsMoment =>
-            setSearchOffboardingDateTo(
-              typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
-            )
-          }
+          onChange={dateAsMoment => setSearchOffboardingDateTo(moment(dateAsMoment).utc())}
+          closeOnSelect
           timeFormat={false}
         />
       </Col>
