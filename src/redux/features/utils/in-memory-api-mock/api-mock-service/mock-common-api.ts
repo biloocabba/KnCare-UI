@@ -201,3 +201,20 @@ export const matchRoles = (queryParams: URLSearchParams, entity: Email) => {
   }
   return true;
 };
+
+export const matchDateBetween = (queryParams: URLSearchParams, entity: Email) => {
+  const sendingDateFromAsString = queryParams.get("sendingDateFrom");
+  const sendingDateToAsString = queryParams.get("sendingDateTo");
+
+  if (queryParams && sendingDateFromAsString && sendingDateToAsString) {
+    const sendingDate = moment(entity.sendingDate).utc();
+    const sendingDateFrom = moment(sendingDateFromAsString).utc();
+    const sendingDateTo = moment(sendingDateToAsString).utc();
+
+    if (sendingDate.isBetween(sendingDateFrom, sendingDateTo)) {
+      return true;
+    }
+    return false;
+  }
+  return true;
+};
