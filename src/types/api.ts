@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export interface CareMemberSaveRequest {
   id: number;
   onboardingDate: string;
@@ -40,8 +38,8 @@ export interface EmailQueryFilters {
   countryId?: string;
   roleId?: string;
   groupId?: number;
-  sendingDateFrom?: moment.Moment;
-  sendingDateTo?: moment.Moment;
+  sendingDateFrom?: string;
+  sendingDateTo?: string;
   searchSubject?: string;
 }
 export interface GroupQueryFilters {
@@ -52,7 +50,7 @@ export interface BestPracticesQueryFilters {
   searchTag?: string;
   searchRating?: string;
   searchTitle?: string;
-  searchPublishDate?: moment.Moment;
+  searchPublishDate?: string;
 }
 
 export interface CareMemberQueryFilters {
@@ -61,10 +59,10 @@ export interface CareMemberQueryFilters {
   roleId?: number;
   groupId?: number;
   lastName?: string;
-  onboardDateFrom?: moment.Moment;
-  onboardDateTo?: moment.Moment;
-  offboardingDateFrom?: moment.Moment;
-  offboardingDateTo?: moment.Moment;
+  onboardDateFrom?: string;
+  onboardDateTo?: string;
+  offboardingDateFrom?: string;
+  offboardingDateTo?: string;
 }
 
 export interface Chart {

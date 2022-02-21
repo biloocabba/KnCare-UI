@@ -25,11 +25,11 @@ interface CareMemberPanelProps {
 export const CareMemberPanel = (props: CareMemberPanelProps) => {
   const { careMember, groupOptions, roleOptions, onSave } = props;
 
-  const [onboardingDate, setOnboardingDate] = useState<moment.Moment>(
-    moment(careMember.onboardingDate).utc()
+  const [onboardingDate, setOnboardingDate] = useState<string>(
+    moment(moment(careMember.onboardingDate).toLocaleString()).format("MM/DD/YYYY")
   );
-  const [offboardingDate, setOffboardingDate] = useState<moment.Moment>(
-    moment(careMember.offboardingDate).utc()
+  const [offboardingDate, setOffboardingDate] = useState<string>(
+    moment(moment(careMember.offboardingDate).toLocaleString()).format("MM/DD/YYYY")
   );
 
   const careMemberRole = useAppSelector(selectRoleByIdAsSelectValue(careMember.roleId));
@@ -43,8 +43,8 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
   const onSaveCareMember = () => {
     const careMemberSaveRequest: CareMemberSaveRequest = {
       id: careMember.id,
-      onboardingDate: onboardingDate.utc().toLocaleString(),
-      offboardingDate: offboardingDate.utc().toLocaleString(),
+      onboardingDate: onboardingDate.toLocaleString(),
+      offboardingDate: offboardingDate.toLocaleString(),
       roleId: roleId,
       employeeId: careMember.employeeId,
       groupIds: groupIds,
@@ -63,9 +63,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-onboarding-date"
               label="Onboard date"
               value={onboardingDate}
-              onChange={dateAsMoment => setOnboardingDate(moment(dateAsMoment).utc())}
-              closeOnSelect
-              timeFormat={false}
+              onChange={dateAsMoment => setOnboardingDate(moment(dateAsMoment).toLocaleString())}
             />
           </Col>
           <Col lg="6">
@@ -73,9 +71,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-offboarding-date"
               label="Auto Offboard Date"
               value={offboardingDate}
-              onChange={dateAsMoment => setOffboardingDate(moment(dateAsMoment).utc())}
-              closeOnSelect
-              timeFormat={false}
+              onChange={dateAsMoment => setOffboardingDate(moment(dateAsMoment).toLocaleString())}
             />
           </Col>
         </Row>

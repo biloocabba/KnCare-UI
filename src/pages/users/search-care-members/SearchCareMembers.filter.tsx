@@ -34,10 +34,10 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
   const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
   const [searchGroupId, setSearchGroupId] = useState<number>();
   const [searchLastName, setSearchLastName] = useState("");
-  const [searchOnBoardDateFrom, setSearchOnBoardDateFrom] = useState<moment.Moment>();
-  const [searchOnBoardDateTo, setSearchOnBoardDateTo] = useState<moment.Moment>();
-  const [searchOffboardingDateFrom, setSearchOffboardingDateFrom] = useState<moment.Moment>();
-  const [searchOffboardingDateTo, setSearchOffboardingDateTo] = useState<moment.Moment>();
+  const [searchOnBoardDateFrom, setSearchOnBoardDateFrom] = useState<string>("");
+  const [searchOnBoardDateTo, setSearchOnBoardDateTo] = useState<string>("");
+  const [searchOffboardingDateFrom, setSearchOffboardingDateFrom] = useState<string>("");
+  const [searchOffboardingDateTo, setSearchOffboardingDateTo] = useState<string>("");
   const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
     useAppSelector(selectLoggedUserDefaultCountry)
   );
@@ -130,9 +130,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             placeholder: "From",
           }}
           label="Onboarding from"
-          onChange={dateAsMoment => setSearchOnBoardDateFrom(moment(dateAsMoment).utc())}
-          closeOnSelect
-          timeFormat={false}
+          onChange={dateAsMoment => setSearchOnBoardDateFrom(moment(dateAsMoment).toLocaleString())}
         />
       </Col>
       <Col md="2">
@@ -142,9 +140,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             placeholder: "To",
           }}
           label="Onboarding to"
-          onChange={dateAsMoment => setSearchOnBoardDateTo(moment(dateAsMoment).utc())}
-          closeOnSelect
-          timeFormat={false}
+          onChange={dateAsMoment => setSearchOnBoardDateTo(moment(dateAsMoment).toLocaleString())}
         />
       </Col>
       <Col md="2">
@@ -154,9 +150,9 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             placeholder: "From",
           }}
           label="Offboarded From"
-          onChange={dateAsMoment => setSearchOffboardingDateFrom(moment(dateAsMoment).utc())}
-          closeOnSelect
-          timeFormat={false}
+          onChange={dateAsMoment =>
+            setSearchOffboardingDateFrom(moment(dateAsMoment).toLocaleString())
+          }
         />
       </Col>
       <Col md="2">
@@ -166,9 +162,9 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             placeholder: "To",
           }}
           label="Offboarded To"
-          onChange={dateAsMoment => setSearchOffboardingDateTo(moment(dateAsMoment).utc())}
-          closeOnSelect
-          timeFormat={false}
+          onChange={dateAsMoment =>
+            setSearchOffboardingDateTo(moment(dateAsMoment).toLocaleString())
+          }
         />
       </Col>
     </FilterPanel>

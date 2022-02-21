@@ -151,15 +151,16 @@ export const matchRating = (queryParams: URLSearchParams, entity: BestPractice) 
 
 export const matchPublishDate = (queryParams: URLSearchParams, entity: BestPractice) => {
   if (queryParams && queryParams.get("searchPublishDate")) {
-    const searchPublishDate = moment(queryParams.get("searchPublishDate")).format("YYYY-MM-DD");
+    const searchPublishDate = moment(queryParams.get("searchPublishDate")).toDate();
+    const bestPracticePublishDate = moment(entity.publishDate).toDate();
 
     if (
-      searchPublishDate &&
-      moment(entity.publishDate).format("YYYY-MM-DD") === searchPublishDate
+      moment(searchPublishDate).isValid() &&
+      moment(bestPracticePublishDate).format("YYYY-MM-DD") !==
+        moment(searchPublishDate).format("YYYY-MM-DD")
     ) {
-      return true;
+      return false;
     }
-    return false;
   }
   return true;
 };
@@ -167,6 +168,7 @@ export const matchPublishDate = (queryParams: URLSearchParams, entity: BestPract
 export const matchBusinessUnits = (queryParams: URLSearchParams, entity: Email) => {
   if (queryParams && queryParams.get("businessUnitId")) {
     const bunitIdAsString = queryParams.get("businessUnitId");
+
     const bunitId: number = bunitIdAsString ? parseInt(bunitIdAsString) : CREATE_ENTITY_ID;
     const businessUnitObj = businessUnitsMockResponse.data.find(bunit => bunit.id === bunitId);
 
@@ -213,18 +215,21 @@ export const matchRoles = (queryParams: URLSearchParams, entity: Email) => {
 };
 
 export const matchSendingDateBetween = (queryParams: URLSearchParams, entity: Email) => {
-  const sendingDateFromAsString = queryParams.get("sendingDateFrom");
-  const sendingDateToAsString = queryParams.get("sendingDateTo");
+  if (queryParams && queryParams.get("sendingDateFrom") && queryParams.get("sendingDateTo")) {
+    const sendingDateFromAsString = queryParams.get("sendingDateFrom");
+    const sendingDateToAsString = queryParams.get("sendingDateTo");
 
-  if (queryParams && sendingDateFromAsString && sendingDateToAsString) {
     const sendingDate = moment(entity.sendingDate).utc();
     const sendingDateFrom = moment(sendingDateFromAsString).utc();
     const sendingDateTo = moment(sendingDateToAsString).utc();
 
-    if (sendingDate.isBetween(sendingDateFrom, sendingDateTo)) {
-      return true;
+    if (
+      sendingDateFrom.isValid() &&
+      sendingDateTo.isValid() &&
+      !sendingDate.isBetween(sendingDateFrom, sendingDateTo)
+    ) {
+      return false;
     }
-    return false;
   }
   return true;
 };

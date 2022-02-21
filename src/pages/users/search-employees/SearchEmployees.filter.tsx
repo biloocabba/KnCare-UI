@@ -109,7 +109,6 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
               typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
             )
           }
-          timeFormat={false}
         />
       </Col>
       <Col md="3">
