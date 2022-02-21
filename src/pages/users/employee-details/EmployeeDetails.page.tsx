@@ -35,6 +35,7 @@ export const EmployeeDetailsPage = () => {
 
   const employee: Employee = useSelector(selectEmployeeById(parseInt(id))) as Employee;
   const currentRole = "admin";
+  const buttonColor = employee.careMember ? "secondary" : "success";
 
   return (
     <>
@@ -52,9 +53,9 @@ export const EmployeeDetailsPage = () => {
                 <Row className="align-items-center py-4">
                   <Col lg="12" xs="7" className="text-right">
                     <Button
-                      // color={buttonColor}
+                      color={buttonColor}
                       onClick={() => history.push(`/${currentRole}${CARE_MEMBER_CREATE}/${id}`)}
-                      // disabled={employee.careMember}
+                      disabled={employee.careMember}
                     >
                       Invite to Care
                     </Button>
