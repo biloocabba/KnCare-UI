@@ -8,7 +8,7 @@ import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
 import { EMPLOYEE_DETAILS } from "pages/users";
-import { EmployeeQueryFilters, SelectOption, Employee } from "types";
+import { EmployeeQueryFilters, Employee } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
@@ -30,14 +30,14 @@ export const SearchEmployeesPage = () => {
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
 
   // @todo find a better place for this
-  const jobTitles: SelectOption[] = [
-    { value: "1", label: "product manager" },
-    { value: "2", label: "qa engineer" },
-    { value: "3", label: "hr consultant" },
-    { value: "4", label: "office manager" },
-    { value: "5", label: "sales representative" },
-    { value: "6", label: "logistics consultant" },
-  ];
+  // const jobTitles: SelectOption[] = [
+  //   { value: "1", label: "product manager" },
+  //   { value: "2", label: "qa engineer" },
+  //   { value: "3", label: "hr consultant" },
+  //   { value: "4", label: "office manager" },
+  //   { value: "5", label: "sales representative" },
+  //   { value: "6", label: "logistics consultant" },
+  // ];
 
   const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
 
@@ -65,7 +65,7 @@ export const SearchEmployeesPage = () => {
           <div className="col">
             <SearchEmployeesFilterPanel
               onSearchEmployees={onClickSearchEmployees}
-              jobTitle={jobTitles}
+              // jobTitle={jobTitles}
               countries={countries}
               businessUnits={businessUnits}
             />

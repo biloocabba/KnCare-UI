@@ -18,7 +18,7 @@ interface onSearchEmployeesFunction {
 interface SearchEmployeesFilterPanelProps {
   countries: SelectOption[];
   businessUnits: SelectOption[];
-  jobTitle: SelectOption[];
+  // jobTitle: SelectOption[];
   onSearchEmployees: onSearchEmployeesFunction;
 }
 
@@ -29,7 +29,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
     useAppSelector(selectLoggedUserDefaultCountry)
   );
   const [searchHiringDate, setSearchHiringDate] = useState<string>();
-  const [searchJobTitle, setSearchJobTitle] = useState<string>();
+  // const [searchJobTitle, setSearchJobTitle] = useState<string>();
 
   const onChangeSearchLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchLastName = e.target.value;
@@ -42,7 +42,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
       businessUnitId: searchBusinessUnitId,
       countryId: searchCountryIsoCode3,
       hiringDate: searchHiringDate,
-      jobTitle: searchJobTitle,
+      // jobTitle: searchJobTitle,
     };
     props.onSearchEmployees(filters);
   };
@@ -73,7 +73,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
           }}
         />
       </Col>
-      <Col md="3">
+      {/* <Col md="3">
         <SelectField
           id="select-jobTitle"
           label="Job Title"
@@ -83,7 +83,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
             setSearchJobTitle(value);
           }}
         />
-      </Col>
+      </Col> */}
       <WithAuthorization requires={Permission.Employee_country_all}>
         <Col md="3">
           <SelectField
