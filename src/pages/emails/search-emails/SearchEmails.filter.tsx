@@ -33,8 +33,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
 
   const [searchRole, setSearchRole] = useState<string>("");
   const [searchGroupId, setSearchGroupId] = useState<number>();
-  const [searchSendingDateFrom, setSearchSendingDateFrom] = useState<moment.Moment>();
-  const [searchSendingDateTo, setSearchSendingDateTo] = useState<moment.Moment>();
+  const [searchSendingDateFrom, setSearchSendingDateFrom] = useState<string>("");
+  const [searchSendingDateTo, setSearchSendingDateTo] = useState<string>("");
   const [searchSubject, setSearchSubject] = useState<string>("");
 
   const findByAllParameters = () => {
@@ -81,7 +81,7 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
         <DateField
           id="date-sent-from"
           label="Sending Date From"
-          onChange={dateAsMoment => setSearchSendingDateFrom(moment(dateAsMoment).utc())}
+          onChange={dateAsMoment => setSearchSendingDateFrom(moment(dateAsMoment).toLocaleString())}
           closeOnSelect
           timeFormat={false}
         />
@@ -90,7 +90,7 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
         <DateField
           id="date-sent-to"
           label="Sending Date To"
-          onChange={dateAsMoment => setSearchSendingDateTo(moment(dateAsMoment).utc())}
+          onChange={dateAsMoment => setSearchSendingDateTo(moment(dateAsMoment).toLocaleString())}
           closeOnSelect
           timeFormat={false}
         />

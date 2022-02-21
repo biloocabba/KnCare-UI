@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export interface CareMemberSaveRequest {
   id: number;
   onboardingDate: string;
@@ -39,8 +37,8 @@ export interface EmailQueryFilters {
   countryId?: string;
   roleId?: string;
   groupId?: number;
-  sendingDateFrom?: moment.Moment;
-  sendingDateTo?: moment.Moment;
+  sendingDateFrom?: string;
+  sendingDateTo?: string;
   searchSubject?: string;
 }
 export interface GroupQueryFilters {
