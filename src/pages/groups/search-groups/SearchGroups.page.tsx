@@ -7,12 +7,12 @@ import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
-import { Group, GroupQueryFilters } from "types";
+import { Group } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
-import { deleteGroup, searchEmployees, searchGroups, selectGroupState } from "redux/features";
+import { deleteGroup, selectGroupState } from "redux/features";
 
-import { groupsTableColumns, SearchGroupsFilter } from ".";
+import { groupsTableColumns } from ".";
 
 export const SearchGroupsPage = () => {
   const history = useHistory();
@@ -31,23 +31,10 @@ export const SearchGroupsPage = () => {
     dispatch(deleteGroup(parseInt(id)));
   };
 
-  const findByAllParameters = (filters: GroupQueryFilters): void => {
-    dispatch(searchGroups(filters));
-    // @todo find a fix to get rid of this
-    // this gets all the employees so group members would'nt be empty
-    dispatch(searchEmployees({}));
-  };
-
   return (
     <>
       <BoxHeader />
       <Container className="mt--6" fluid>
-        <Row>
-          <div className="col">
-            <SearchGroupsFilter onSearch={findByAllParameters} />
-          </div>
-        </Row>
-
         <Row>
           <div className="col">
             <Card>
