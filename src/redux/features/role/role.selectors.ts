@@ -12,10 +12,21 @@ export const selectAllRolesData = createSelector(
   roleState => roleState.entities
 );
 
-export const selectRoleById = (id: number) =>
+export const selectRoleById = (id: number | undefined) =>
   createSelector(
     [selectAllRolesData], //array of input selectors
     roles => roles.find(role => role.id === id) //arg
+  );
+
+export const selectRoleByIdAsSelectValue = (id: number | undefined) =>
+  createSelector(
+    [selectRoleById(id)], //array of input selectors
+    (role): SelectOption[] => {
+      if (role) {
+        return [{ value: `${role.id}`, label: role.name }];
+      }
+      return [];
+    }
   );
 
 export const selectAllRolesDataAsSelectOptions = createSelector([selectAllRolesData], roles => {
