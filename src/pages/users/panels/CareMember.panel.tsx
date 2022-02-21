@@ -2,9 +2,14 @@ import { useState } from "react";
 
 import { Button, Col, Form, Row } from "reactstrap";
 
+import moment from "moment";
+
 import { DateField, InputField, SelectField } from "components/widgets";
 
 import { CareMember, SelectOption, CareMemberSaveRequest } from "types";
+
+import { useAppSelector } from "redux/app";
+import { selectGroupsByIdsAsSelectValues, selectRoleByIdAsSelectValue } from "redux/features";
 
 interface onSaveFunction {
   (careMemberRequest: CareMemberSaveRequest): void;
@@ -20,8 +25,17 @@ interface CareMemberPanelProps {
 export const CareMemberPanel = (props: CareMemberPanelProps) => {
   const { careMember, groupOptions, roleOptions, onSave } = props;
 
-  const [onboardingDate, setOnboardingDate] = useState(careMember.onboardingDate);
-  const [offboardingDate, setOffboardingDate] = useState(careMember.offboardingDate);
+  const [onboardingDate, setOnboardingDate] = useState<moment.Moment>(
+    moment(careMember.onboardingDate).utc()
+  );
+  const [offboardingDate, setOffboardingDate] = useState<moment.Moment>(
+    moment(careMember.offboardingDate).utc()
+  );
+
+  const careMemberRole = useAppSelector(selectRoleByIdAsSelectValue(careMember.roleId));
+  const careMemberGroups = useAppSelector(
+    selectGroupsByIdsAsSelectValues(careMember.groupIds || [])
+  );
 
   const [roleId, setRoleId] = useState<number | undefined>();
   const [groupIds, setGroupIds] = useState<number[]>([]);
@@ -29,12 +43,13 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
   const onSaveCareMember = () => {
     const careMemberSaveRequest: CareMemberSaveRequest = {
       id: careMember.id,
-      onboardingDate: onboardingDate,
-      offboardingDate: offboardingDate,
+      onboardingDate: onboardingDate.utc().toLocaleString(),
+      offboardingDate: offboardingDate.utc().toLocaleString(),
       roleId: roleId,
       employeeId: careMember.employeeId,
       groupIds: groupIds,
     };
+
     onSave(careMemberSaveRequest);
   };
 
@@ -48,13 +63,8 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-onboarding-date"
               label="Onboard date"
               value={onboardingDate}
-              onChange={dateAsMoment =>
-                setOnboardingDate(
-                  typeof dateAsMoment === "string"
-                    ? dateAsMoment
-                    : dateAsMoment.format("YYYY-MM-DD")
-                )
-              }
+              onChange={dateAsMoment => setOnboardingDate(moment(dateAsMoment).utc())}
+              closeOnSelect
               timeFormat={false}
             />
           </Col>
@@ -63,13 +73,8 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-offboarding-date"
               label="Auto Offboard Date"
               value={offboardingDate}
-              onChange={dateAsMoment =>
-                setOffboardingDate(
-                  typeof dateAsMoment === "string"
-                    ? dateAsMoment
-                    : dateAsMoment.format("YYYY-MM-DD")
-                )
-              }
+              onChange={dateAsMoment => setOffboardingDate(moment(dateAsMoment).utc())}
+              closeOnSelect
               timeFormat={false}
             />
           </Col>
@@ -81,6 +86,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="select-role"
               label="Role"
               options={roleOptions}
+              defaultValue={careMemberRole}
               onChange={item => {
                 const { value } = item as SelectOption;
                 setRoleId(parseInt(value));
@@ -92,6 +98,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="select-group"
               label="Group"
               options={groupOptions}
+              defaultValue={careMemberGroups}
               isMulti={true}
               onChange={item => {
                 const selections = item as SelectOption[];
