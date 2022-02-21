@@ -83,6 +83,7 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
               typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
             )
           }
+          closeOnSelect
           timeFormat={false}
         />
       </Col>
@@ -95,6 +96,7 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
               typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
             )
           }
+          closeOnSelect
           timeFormat={false}
         />
       </Col>
