@@ -25,7 +25,6 @@ export const findEmployeeById = createAsyncThunk(
 export const searchEmployees = createAsyncThunk(
   "employee/search",
   async (filters: any): Promise<Employee[]> => {
-    console.log(filters);
     const queryParams = new URLSearchParams(filters);
     const { data } = await employeeService.searchEmployees(queryParams);
     return data;

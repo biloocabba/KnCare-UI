@@ -4,7 +4,13 @@ import { Employee } from "types";
 
 import { employeeMockResponse, mockAxiosReponse } from "../api-mock-data/mock-data";
 
-import { entitySearch, matchBusinessUnit, matchCountryIso3, matchFirstName } from ".";
+import {
+  entitySearch,
+  matchBusinessUnit,
+  matchCountryIso3,
+  matchFirstName,
+  matchNewMembersOnly,
+} from ".";
 
 export const searchEmployees = (url: string): AxiosResponse<Employee[]> => {
   return entitySearch<Employee>(url, employeeMockResponse, filterEmployees);
@@ -12,10 +18,12 @@ export const searchEmployees = (url: string): AxiosResponse<Employee[]> => {
 
 const filterEmployees = (queryParams: URLSearchParams, employeesData: Employee[]): Employee[] => {
   const result: Employee[] = employeesData.filter(employee => {
+    console.log(employee, matchNewMembersOnly(queryParams, employee));
     return (
       matchFirstName(queryParams, employee) &&
       matchBusinessUnit(queryParams, employee) &&
-      matchCountryIso3(queryParams, employee)
+      matchCountryIso3(queryParams, employee) &&
+      matchNewMembersOnly(queryParams, employee)
     );
   });
 

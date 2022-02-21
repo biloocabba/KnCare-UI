@@ -23,6 +23,7 @@ interface SearchEmployeesFilterPanelProps {
 }
 
 export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProps) => {
+  const [searchNewMembersOnly, setSearchNewMembersOnly] = useState<boolean>(false);
   const [searchLastName, setSearchLastName] = useState("");
   const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
   const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
@@ -42,6 +43,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
       businessUnitId: searchBusinessUnitId,
       countryId: searchCountryIsoCode3,
       hiringDate: searchHiringDate,
+      newMembersOnly: searchNewMembersOnly,
       // jobTitle: searchJobTitle,
     };
     props.onSearchEmployees(filters);
@@ -73,6 +75,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
           }}
         />
       </Col>
+
       {/* <Col md="3">
         <SelectField
           id="select-jobTitle"
@@ -108,6 +111,20 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
           }
           timeFormat={false}
         />
+      </Col>
+      <Col md="3">
+        <div className="custom-control custom-control-alternative custom-checkbox">
+          <input
+            className="custom-control-input"
+            id="onlyNewMembers"
+            type="checkbox"
+            value={searchNewMembersOnly.toString()}
+            onClick={() => setSearchNewMembersOnly(!searchNewMembersOnly)}
+          />
+          <label className="custom-control-label" htmlFor="onlyNewMembers">
+            <span className="text-muted">Only Employees NOT in Care</span>
+          </label>
+        </div>
       </Col>
     </FilterPanel>
   );

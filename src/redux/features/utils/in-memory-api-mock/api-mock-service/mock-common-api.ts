@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import moment from "moment";
 
-import { BestPractice, CareMember, Email, Employee } from "types";
+import { BestPractice, CareMember, Email, Employee, toBoolean } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
 
 import {
@@ -69,6 +69,16 @@ export const matchCountryIso3 = (queryParams: URLSearchParams, entity: Employee 
     }
   }
   return true;
+};
+
+export const matchNewMembersOnly = (
+  queryParams: URLSearchParams,
+  entity: Employee | CareMember
+) => {
+  if (!queryParams || !queryParams.get("newMembersOnly")) {
+    return true;
+  }
+  return entity.careMember !== toBoolean(queryParams.get("newMembersOnly"));
 };
 
 export const matchFirstName = (queryParams: URLSearchParams, entity: Employee | CareMember) => {

@@ -33,6 +33,7 @@ export interface EmployeeQueryFilters {
   countryId?: string;
   jobTitle?: string;
   hiringDate?: string;
+  newMembersOnly?: boolean;
 }
 export interface EmailQueryFilters {
   businessUnitId?: number;

@@ -64,3 +64,10 @@ export const checkAuthorized = (role: Role, required: Permission): boolean => {
   const foundPermission = permissions.find(permission => permission === required);
   return foundPermission ? true : false;
 };
+
+export const toBoolean = (value: string | number | boolean | null | undefined): boolean => {
+  if (value == null || value == undefined) {
+    return false;
+  }
+  return [true, "true", "True", "TRUE", "1", 1].includes(value);
+};
