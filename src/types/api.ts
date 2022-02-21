@@ -51,7 +51,7 @@ export interface BestPracticesQueryFilters {
   searchTag?: string;
   searchRating?: string;
   searchTitle?: string;
-  searchPublishDate?: moment.Moment;
+  searchPublishDate?: string;
 }
 
 export interface CareMemberQueryFilters {

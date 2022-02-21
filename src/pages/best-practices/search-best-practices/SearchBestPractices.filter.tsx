@@ -23,9 +23,11 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
   const [searchTag, setSearchTag] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
   const [searchRating, setSearchRating] = useState("");
-  const [searchPublishDate, setSearchPublishDate] = useState<moment.Moment>();
+  const [searchPublishDate, setSearchPublishDate] = useState("");
 
   const findByAllParameters = () => {
+    // console.log("timezone1234", Intl.DateTimeFormat().resolvedOptions().timeZone);
+
     const searchFilters: BestPracticesQueryFilters = {
       searchAuthor,
       searchTag,
@@ -75,7 +77,7 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
             placeholder: "Creation Date",
           }}
           label="Creation Date"
-          onChange={dateAsMoment => setSearchPublishDate(moment(dateAsMoment).utc())}
+          onChange={dateAsMoment => setSearchPublishDate(moment(dateAsMoment).toLocaleString())}
           closeOnSelect
           timeFormat={false}
         />

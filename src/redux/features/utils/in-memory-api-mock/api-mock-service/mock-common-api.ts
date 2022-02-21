@@ -141,15 +141,16 @@ export const matchRating = (queryParams: URLSearchParams, entity: BestPractice) 
 
 export const matchPublishDate = (queryParams: URLSearchParams, entity: BestPractice) => {
   if (queryParams && queryParams.get("searchPublishDate")) {
-    const searchPublishDate = moment(queryParams.get("searchPublishDate")).format("YYYY-MM-DD");
+    const searchPublishDate = moment(queryParams.get("searchPublishDate")).toDate();
+    const bestPracticePublishDate = moment(entity.publishDate).toDate();
 
     if (
-      searchPublishDate &&
-      moment(entity.publishDate).format("YYYY-MM-DD") === searchPublishDate
+      moment(searchPublishDate).isValid() &&
+      moment(bestPracticePublishDate).format("YYYY-MM-DD") !==
+        moment(searchPublishDate).format("YYYY-MM-DD")
     ) {
-      return true;
+      return false;
     }
-    return false;
   }
   return true;
 };
