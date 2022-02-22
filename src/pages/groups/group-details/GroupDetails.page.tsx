@@ -16,7 +16,7 @@ import {
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
-import { useAlerts } from "hooks";
+import { useAlerts, useFireAlert } from "hooks";
 import { Group } from "types";
 
 import { MembersPanel } from "..";
@@ -38,6 +38,8 @@ export const GroupDetailsPage = () => {
 
   const { alert, setSaveSent, setSuccessMessage } = useAlerts(groupsState);
 
+  const { fireAlert } = useFireAlert();
+
   useEffect(() => {
     dispatch(findGroupById(groupId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,11 +54,13 @@ export const GroupDetailsPage = () => {
   };
 
   const onToggleGroupActive = () => {
+    fireAlert();
     if (group) {
       dispatch(partialUpdateGroup({ id: groupId, body: { active: !group.active } }));
     }
   };
   const onDelete = () => {
+    fireAlert();
     dispatch(deleteGroup(groupId));
   };
 
