@@ -32,11 +32,15 @@ export const AddMemberPanel = ({
     useLocalStateAlerts(currentGroupMembers);
 
   const userCountry = useAppSelector(selectLoggedUserDefaultCountry);
+
   const [filters, setFilters] = useState<CareMemberQueryFilters>({
     countryIso3: userCountry,
   });
 
   const careMemberResultSet: CareMember[] = useAppSelector(selectCareMembersByFilters(filters));
+
+  console.log("currentGroupMembers 1234", currentGroupMembers);
+
   const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
 
   const onCareMemberAdd = () => {

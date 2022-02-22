@@ -12,9 +12,8 @@ const getCareMemberById = (id: number): HttpResponseType => {
   return httpCommon.get(`/care-member/${id}`);
 };
 
-const searchCareMembersByIds = (careMembersIds: number[]): HttpResponseType => {
-  const searchString = careMembersIds.map(id => `id=${id}`).join("&");
-  return httpCommon.get(`/care-member?${searchString}`);
+const searchCareMembersByIds = (ids: number[]): HttpResponseType => {
+  return httpCommon.get(`/care-member/group/members/${ids}`);
 };
 
 const createCareMember = (body: CareMemberSaveRequest): HttpResponseType => {

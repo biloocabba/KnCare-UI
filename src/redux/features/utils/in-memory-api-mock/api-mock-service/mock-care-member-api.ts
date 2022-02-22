@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 
 import { CareMember, CareMemberSaveRequest, Employee } from "types";
 
-import { careMembersMockResponse } from "../api-mock-data/mock-data";
+import { careMembersMockResponse, mockAxiosReponse } from "../api-mock-data/mock-data";
 
 import {
   entitySearch,
@@ -33,6 +33,18 @@ export const saveCareMember = async (
 
 export const findCareMemberById = (id: number): CareMember => {
   return careMembersMockResponse.data.find(careMember => careMember.id === id) as CareMember;
+};
+
+export const findCareMembersByIds = (ids: number[]): AxiosResponse<CareMember[]> => {
+  const groupMembers: CareMember[] = [];
+
+  ids.forEach(id =>
+    // for each id, find the careMember in the mock data and push it to the groupMembers array
+    groupMembers.push(
+      careMembersMockResponse.data.find(careMember => careMember.id === id) as CareMember
+    )
+  );
+  return { data: groupMembers, ...mockAxiosReponse };
 };
 
 export const filterCareMembers = (

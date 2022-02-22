@@ -25,9 +25,9 @@ import {
 } from "./api-mock-service";
 
 export async function get(url: string): Promise<AxiosResponse<any>> {
-  if (url.includes("/employee/group/members")) {
+  if (url.includes("/care-member/group/members")) {
     // pop out the ids of members
-    const ids = url.split("/employee/group/members/").pop();
+    const ids = url.split("/care-member/group/members/").pop();
 
     // if there are any ids
     if (ids) {

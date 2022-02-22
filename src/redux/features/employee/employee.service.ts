@@ -11,10 +11,6 @@ const getEmployeeById = (id: number): HttpResponseType => {
   return httpCommon.get(`/employee/${id}`);
 };
 
-const findByIds = (ids: number[]) => {
-  return httpCommon.get(`/employee/group/members/${ids}`);
-};
-
 const createEmployee = (body: Employee): HttpResponseType => {
   return httpCommon.post(`/employee`, body);
 };
@@ -38,7 +34,6 @@ const deleteEmployee = (id: number): HttpResponseType => {
 export const employeeService = {
   searchEmployees,
   getEmployeeById,
-  findByIds,
   createEmployee,
   updateEmployee,
   partialUpdateEmployee,
