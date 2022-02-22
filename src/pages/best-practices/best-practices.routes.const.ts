@@ -10,7 +10,7 @@ export const bestPracticeDefaultState: BestPractice = {
   title: "",
   description: "",
   author: "",
-  publishDate: new Date(),
+  publishDate: new Date().toLocaleString(),
   rating: 0,
   tags: [],
   imageUrl: "",

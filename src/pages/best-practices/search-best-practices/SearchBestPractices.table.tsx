@@ -29,10 +29,17 @@ export const bestPracticesTableColumns: ColumnDescription<any, BestPractice>[] =
     dataField: "tags",
     text: "Tags",
     sort: true,
-    formatter: (cell: BestPractice["tags"]) => {
+    // BestPractice["tags"]
+    formatter: (cell: any) => {
+      // cell should return array of strings or [] array when there are no tags
+      // but it returns empty string
+      // this is a temporary fix
+      if (cell === "") {
+        cell = [];
+      }
       return (
         <>
-          {cell.map((tag, i) => (
+          {cell.map((tag: string, i: number) => (
             <div key={i}>{tag} </div>
           ))}
         </>

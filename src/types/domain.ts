@@ -56,7 +56,7 @@ export interface BestPractice extends Domain {
   title: string;
   description: string;
   author: string;
-  publishDate: Date;
+  publishDate: string;
   rating: number;
   tags: string[];
   imageUrl?: string;
