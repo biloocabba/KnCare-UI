@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useState } from "react";
 
 import { Col } from "reactstrap";
@@ -29,7 +30,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
   const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
     useAppSelector(selectLoggedUserDefaultCountry)
   );
-  const [searchHiringDate, setSearchHiringDate] = useState<string>();
+  const [searchHiringDate, setSearchHiringDate] = useState<string>("");
   // const [searchJobTitle, setSearchJobTitle] = useState<string>();
 
   const onChangeSearchLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +43,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
       lastName: searchLastName,
       businessUnitId: searchBusinessUnitId,
       countryId: searchCountryIsoCode3,
-      hiringDate: searchHiringDate,
+      hiringDateFrom: searchHiringDate,
       newMembersOnly: searchNewMembersOnly,
       // jobTitle: searchJobTitle,
     };
@@ -104,11 +105,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
         <DateField
           id="date-hire-from"
           label="Hire Date From"
-          onChange={dateAsMoment =>
-            setSearchHiringDate(
-              typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
-            )
-          }
+          onChange={dateAsMoment => setSearchHiringDate(moment(dateAsMoment).toLocaleString())}
         />
       </Col>
       <Col md="3">

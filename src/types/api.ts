@@ -30,7 +30,7 @@ export interface EmployeeQueryFilters {
   businessUnitId?: number;
   countryId?: string;
   jobTitle?: string;
-  hiringDate?: string;
+  hiringDateFrom?: string;
   newMembersOnly?: boolean;
 }
 export interface EmailQueryFilters {
