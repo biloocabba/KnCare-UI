@@ -30,6 +30,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
   const roles: SelectOption[] = useAppSelector(selectAllRolesDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
+  // const [userCountry] = useState(useAppSelector(selectLoggedUserDefaultCountry));
+
   const [searchRoleId, setSearchRoleId] = useState<number>();
   const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
   const [searchGroupId, setSearchGroupId] = useState<number>();
@@ -41,6 +43,30 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
   const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
     useAppSelector(selectLoggedUserDefaultCountry)
   );
+
+  const [groupValue, setGroupValue] = useState<SelectOption | null>();
+  const [onBoardDateFrom, setOnBoardDateFromValue] = useState<any>();
+  const [onBoardDateTo, setOnBoardDateToValue] = useState<any>();
+
+  console.log("groupId1234", searchGroupId);
+
+  const resetFilters = () => {
+    setSearchRoleId(undefined);
+    setSearchBusinessUnitId(undefined);
+    setSearchGroupId(undefined);
+    setSearchLastName("");
+    setSearchOnBoardDateFrom("");
+    setSearchOnBoardDateTo("");
+    // setSearchOffboardingDateFrom(moment(new Date(0)).toLocaleString());
+    // setSearchOffboardingDateTo(moment(new Date(0)).toLocaleString());
+
+    // setSearchCountryIsoCode3(userCountry);
+
+    // filters
+    setGroupValue(null);
+    setOnBoardDateFromValue(null);
+    setOnBoardDateToValue(null);
+  };
 
   const findByAllParameters = () => {
     const filters: CareMemberQueryFilters = {
@@ -58,7 +84,11 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
   };
 
   return (
-    <FilterPanel title="Search Care Members" findByAllParameters={findByAllParameters}>
+    <FilterPanel
+      title="Search Care Members"
+      findByAllParameters={findByAllParameters}
+      resetFilters={resetFilters}
+    >
       <Col md="3">
         <SelectField
           id="select-role"
@@ -101,11 +131,13 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
         <SelectField
           id="select-group"
           label="Group"
+          value={groupValue}
           options={groups}
           onChange={item => {
-            const { value } = item as SelectOption;
+            const { value, label } = item as SelectOption;
             const id: number = parseInt(value);
             setSearchGroupId(id);
+            setGroupValue({ label, value });
           }}
         />
       </Col>
@@ -129,6 +161,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           inputProps={{
             placeholder: "From",
           }}
+          value={onBoardDateFrom}
           label="Onboarding from"
           onChange={dateAsMoment => setSearchOnBoardDateFrom(moment(dateAsMoment).toLocaleString())}
         />
@@ -139,6 +172,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           inputProps={{
             placeholder: "To",
           }}
+          value={onBoardDateTo}
           label="Onboarding to"
           onChange={dateAsMoment => setSearchOnBoardDateTo(moment(dateAsMoment).toLocaleString())}
         />

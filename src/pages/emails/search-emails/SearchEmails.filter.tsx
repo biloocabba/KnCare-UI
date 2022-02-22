@@ -37,6 +37,16 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
   const [searchSendingDateTo, setSearchSendingDateTo] = useState<string>("");
   const [searchSubject, setSearchSubject] = useState<string>("");
 
+  const resetFilters = () => {
+    setSearchRole("");
+    setSearchSubject("");
+    setSearchGroupId(undefined);
+    setSearchBusinessUnitId(undefined);
+    // setSearchCountryIsoCode3("");
+    setSearchSendingDateFrom(moment(new Date(0)).toLocaleString());
+    setSearchSendingDateTo(moment(new Date(0)).toLocaleString());
+  };
+
   const findByAllParameters = () => {
     const filters: EmailQueryFilters = {
       businessUnitId: searchBusinessUnitId,
@@ -52,7 +62,11 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
   };
 
   return (
-    <FilterPanel title="Search Emails" findByAllParameters={findByAllParameters}>
+    <FilterPanel
+      title="Search Emails"
+      findByAllParameters={findByAllParameters}
+      resetFilters={resetFilters}
+    >
       <Col md="3">
         <SelectField
           id="select-businessUnits"

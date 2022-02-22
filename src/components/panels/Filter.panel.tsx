@@ -3,7 +3,7 @@ import { Button, Card, CardBody, CardHeader, Col, FormGroup, Row } from "reactst
 interface Props {
   title: string;
   findByAllParameters: () => void;
-  resetFilters?: () => void;
+  resetFilters: () => void;
   children?: React.ReactNode;
 }
 

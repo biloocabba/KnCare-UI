@@ -27,11 +27,14 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
 
   const resetFilters = () => {
     setSearchAuthor("");
+    // setSearchPublishDate(moment(new Date(0)).toLocaleString());
+    setSearchPublishDate("");
     setSearchTag("");
     setSearchTitle("");
     setSearchRating("");
-    setSearchPublishDate("");
   };
+
+  console.log("searchPublishDate", searchPublishDate);
 
   const findByAllParameters = () => {
     const searchFilters: BestPracticesQueryFilters = {
@@ -86,6 +89,7 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
           inputProps={{
             placeholder: "Creation Date",
           }}
+          value={searchPublishDate}
           label="Creation Date"
           onChange={dateAsMoment => setSearchPublishDate(moment(dateAsMoment).toLocaleString())}
         />

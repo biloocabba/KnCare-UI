@@ -37,6 +37,15 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
     setSearchLastName(searchLastName);
   };
 
+  const resetFilters = () => {
+    setSearchNewMembersOnly(false);
+    setSearchLastName("");
+    setSearchBusinessUnitId(undefined);
+    // setSearchCountryIsoCode3("");
+    setSearchHiringDate("");
+    // setSearchHiringDate(moment(new Date(0)).toLocaleString());
+  };
+
   const findByAllParameters = () => {
     const filters: EmployeeQueryFilters = {
       lastName: searchLastName,
@@ -50,7 +59,11 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
   };
 
   return (
-    <FilterPanel title="Search Employees" findByAllParameters={findByAllParameters}>
+    <FilterPanel
+      title="Search Employees"
+      findByAllParameters={findByAllParameters}
+      resetFilters={resetFilters}
+    >
       <Col md="3">
         <InputField
           id="input-last-name"
