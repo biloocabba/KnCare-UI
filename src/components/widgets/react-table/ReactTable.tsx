@@ -1,9 +1,8 @@
 import { MouseEvent } from "react";
-
-import { Button } from "reactstrap";
-
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+
+import { Button } from "reactstrap";
 
 import { useFireAlert } from "hooks";
 

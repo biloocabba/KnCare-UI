@@ -1,6 +1,6 @@
-import { TurnoverChart } from "types";
-
 import { dashboardService } from "redux/features/dashboards";
+
+import { TurnoverChart } from "types";
 
 import { ChartPanel } from "../chart-panels";
 import { useChart } from "../hooks";

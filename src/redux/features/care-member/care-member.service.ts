@@ -1,6 +1,6 @@
-import { CareMemberSaveRequest } from "types";
-
 import { IUpdated } from "redux/features/common";
+
+import { CareMemberSaveRequest } from "types";
 
 import { httpCommon, HttpResponseType } from "../utils/http-common";
 

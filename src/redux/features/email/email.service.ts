@@ -1,7 +1,8 @@
-import { Email, EmailSaveRequest } from "types";
 import { toFormData } from "types/utils";
 
 import { httpCommon, IUpdated, EMAIL_ROUTE, HttpResponseType } from "redux/features";
+
+import { Email, EmailSaveRequest } from "types";
 
 const findAll = (): HttpResponseType => {
   return httpCommon.get(`${EMAIL_ROUTE}`);

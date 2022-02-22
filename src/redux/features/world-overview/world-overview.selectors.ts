@@ -1,5 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 
+import { RootState } from "redux/app";
+
 import { WorldOverviewCachedReports, WorldDataReport } from "types";
 import {
   REPORT_KEY_ACTIVE_MEMBERS,
@@ -9,8 +11,6 @@ import {
   REPORT_KEY_CURRENT_MAP,
   NO_REPORT_CACHED,
 } from "variables/app.consts";
-
-import { RootState } from "redux/app";
 
 import { StateType } from "..";
 

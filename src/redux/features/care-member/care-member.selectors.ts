@@ -1,7 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { CareMember, CareMemberQueryFilters, SelectOption } from "types";
-
 import { RootState } from "redux/app";
 import {
   ALL,
@@ -12,6 +10,8 @@ import {
   selectAllRolesData,
   StateType,
 } from "redux/features";
+
+import { CareMember, CareMemberQueryFilters, SelectOption } from "types";
 
 export const selectCareMemberState = (rootState: RootState): StateType<CareMember> =>
   rootState.careMember;

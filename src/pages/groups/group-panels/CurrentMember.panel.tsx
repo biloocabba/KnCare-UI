@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-
 import { useHistory } from "react-router";
 
 import { Collapse, Card, CardHeader, Spinner } from "reactstrap";
 
+import { careMemberService } from "redux/features";
+
 import { emptyFormatter, ReactTable } from "components/widgets";
 
 import { CARE_MEMBER_EDIT, careMemberTableColumns } from "pages/users";
-import { CareMember, Group } from "types";
 
-import { careMemberService } from "redux/features";
+import { CareMember, Group } from "types";
 
 interface Props {
   group: Group;

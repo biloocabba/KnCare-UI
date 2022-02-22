@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { SelectOption, CareRole } from "types";
-
 import { RootState } from "redux/app";
 import { StateType, ALL } from "redux/features";
+
+import { SelectOption, CareRole } from "types";
 
 export const selectRoleState = (rootState: RootState): StateType<CareRole> => rootState.role;
 

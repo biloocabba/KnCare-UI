@@ -1,10 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { SelectOption } from "types";
 import { Group } from "types/domain";
 
 import { RootState } from "redux/app";
 import { StateType, ALL } from "redux/features/common";
+
+import { SelectOption } from "types";
 
 export const selectGroupState = (rootState: RootState): StateType<Group> => rootState.group;
 

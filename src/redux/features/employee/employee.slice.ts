@@ -1,8 +1,8 @@
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { Employee } from "types";
-
 import { StateType, IPartiallyUpdated, IUpdated } from "redux/features/common";
+
+import { Employee } from "types";
 
 import { employeeService } from ".";
 

@@ -15,9 +15,10 @@
 
 */
 
+import { AnyObject, TNode } from "@udecode/plate";
 import { useState } from "react";
-
 import { useHistory } from "react-router";
+import makeAnimated from "react-select/animated";
 
 import {
   Button,
@@ -31,15 +32,6 @@ import {
   Row,
 } from "reactstrap";
 
-import { AnyObject, TNode } from "@udecode/plate";
-import makeAnimated from "react-select/animated";
-
-import { Editor } from "components/editor";
-import { BoxHeader } from "components/headers";
-import { InputField, SelectField } from "components/widgets";
-
-import { Email, EmailSaveRequest, SelectOption } from "types";
-
 import { useAppSelector } from "redux/app";
 import {
   selectAllBusinessUnitsDataAsSelectOptions,
@@ -48,6 +40,12 @@ import {
   selectAllGroupsDataAsSelectOptions,
   selectAllRolesDataAsSelectOptions,
 } from "redux/features";
+
+import { Editor } from "components/editor";
+import { BoxHeader } from "components/headers";
+import { InputField, SelectField } from "components/widgets";
+
+import { Email, EmailSaveRequest, SelectOption } from "types";
 
 import { EMAIL_SEARCH_ROUTE } from "..";
 

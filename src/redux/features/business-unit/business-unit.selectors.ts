@@ -1,10 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { SelectOption } from "types";
 import { BusinessUnit } from "types/domain";
 
 import { RootState } from "redux/app";
 import { StateType } from "redux/features/common";
+
+import { SelectOption } from "types";
 
 const ALL: SelectOption = { value: "", label: "ALL" };
 

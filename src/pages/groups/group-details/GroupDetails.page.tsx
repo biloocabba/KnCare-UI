@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
-
 import { useHistory, useParams } from "react-router";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Form, Row } from "reactstrap";
-
-import { BoxHeader } from "components/headers";
-import { InputField } from "components/widgets";
-
-import { useAlerts } from "hooks";
-import { Group } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
@@ -19,6 +12,12 @@ import {
   selectGroupState,
   updateGroup,
 } from "redux/features";
+
+import { BoxHeader } from "components/headers";
+import { InputField } from "components/widgets";
+
+import { useAlerts } from "hooks";
+import { Group } from "types";
 
 import { MembersPanel } from "..";
 

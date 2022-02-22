@@ -1,13 +1,7 @@
 import { MouseEvent, useState } from "react";
-
 import { useHistory } from "react-router";
 
 import { Card, CardHeader, Col, Container, Row, Spinner } from "reactstrap";
-
-import { BoxHeader } from "components/headers";
-import { ReactTable } from "components/widgets";
-
-import { Email, EmailQueryFilters } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
@@ -19,6 +13,11 @@ import {
   selectAllRolesDataAsSelectOptions,
   selectEmailState,
 } from "redux/features";
+
+import { BoxHeader } from "components/headers";
+import { ReactTable } from "components/widgets";
+
+import { Email, EmailQueryFilters } from "types";
 
 import { EMAIL_DETAILS_ROUTE } from "..";
 

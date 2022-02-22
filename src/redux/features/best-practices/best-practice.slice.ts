@@ -1,8 +1,8 @@
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { BestPractice } from "types";
-
 import { IUpdated, StateType } from "redux/features/common";
+
+import { BestPractice } from "types";
 
 import { bestPracticeService } from "./best-practice.service";
 

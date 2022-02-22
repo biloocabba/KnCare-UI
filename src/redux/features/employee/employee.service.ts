@@ -1,6 +1,6 @@
-import { Employee } from "types";
-
 import { IPartiallyUpdated, IUpdated, httpCommon, HttpResponseType } from "redux/features";
+
+import { Employee } from "types";
 
 const searchEmployees = (queryParams: URLSearchParams): HttpResponseType => {
   console.log(queryParams);

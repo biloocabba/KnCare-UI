@@ -1,6 +1,5 @@
-import { ReactNode } from "react";
-
 import { ChartData, ChartOptions } from "chart.js";
+import { ReactNode } from "react";
 
 import { Role } from "./security";
 export type LayoutType = "/admin" | "/auth" | "/rtl";

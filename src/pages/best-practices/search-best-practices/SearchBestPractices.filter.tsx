@@ -1,9 +1,8 @@
+import moment from "moment";
 import { useState } from "react";
+import Rating from "react-rating";
 
 import { Col, FormGroup } from "reactstrap";
-
-import moment from "moment";
-import Rating from "react-rating";
 
 import { FilterPanel } from "components/panels";
 import { InputField, DateField } from "components/widgets";

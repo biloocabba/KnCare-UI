@@ -1,6 +1,6 @@
-import { Button } from "reactstrap";
-
 import ReactToPrint from "react-to-print";
+
+import { Button } from "reactstrap";
 
 interface Props {
   ref: React.MutableRefObject<null>;

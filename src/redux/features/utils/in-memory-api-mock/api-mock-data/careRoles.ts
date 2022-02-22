@@ -1,5 +1,6 @@
-import { CareRole } from "types";
 import { Role } from "types/security";
+
+import { CareRole } from "types";
 
 export const careRoles: CareRole[] = [
   { id: 1, name: "Regional Transformation Manager", role: Role.RegionalManager },

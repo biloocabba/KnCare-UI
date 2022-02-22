@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { BestPractice } from "types";
-
 import { RootState } from "redux/app";
 import { StateType } from "redux/features";
+
+import { BestPractice } from "types";
 
 const ALL = { value: "", label: "ALL" };
 

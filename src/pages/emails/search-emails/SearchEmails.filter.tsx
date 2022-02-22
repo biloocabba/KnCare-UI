@@ -1,17 +1,16 @@
+import moment from "moment";
 import { useState } from "react";
 
 import { Col } from "reactstrap";
 
-import moment from "moment";
+import { useAppSelector } from "redux/app";
+import { selectLoggedUserDefaultCountry } from "redux/features";
 
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
 import { EmailQueryFilters, Permission, SelectOption } from "types";
-
-import { useAppSelector } from "redux/app";
-import { selectLoggedUserDefaultCountry } from "redux/features";
 
 interface onSearchEmailsFunction {
   (employeeSearchRequest: EmailQueryFilters): void;

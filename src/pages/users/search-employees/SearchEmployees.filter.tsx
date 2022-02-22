@@ -2,14 +2,14 @@ import { useState } from "react";
 
 import { Col } from "reactstrap";
 
+import { useAppSelector } from "redux/app";
+import { selectLoggedUserDefaultCountry } from "redux/features";
+
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
 import { EmployeeQueryFilters, Permission, SelectOption } from "types";
-
-import { useAppSelector } from "redux/app";
-import { selectLoggedUserDefaultCountry } from "redux/features";
 
 interface onSearchEmployeesFunction {
   (employeeSearchRequest: EmployeeQueryFilters): void;

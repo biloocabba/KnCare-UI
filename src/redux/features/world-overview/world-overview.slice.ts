@@ -1,5 +1,13 @@
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+import {
+  StateType,
+  REPORT_ACTIVE_MEMBERS_ROUTE,
+  REPORT_NEW_MEMBERS_ROUTE,
+  REPORT_AUTO_OFFBOARDED_MEMBERS_ROUTE,
+  REPORT_SELF_RESIGNED_MEMBERS_ROUTE,
+} from "redux/features/common";
+
 import { WorldOverviewCachedReports, WorldDataReport } from "types";
 import {
   REPORT_KEY_ACTIVE_MEMBERS,
@@ -9,14 +17,6 @@ import {
   REPORT_KEY_CURRENT_MAP,
   NO_REPORT_CACHED,
 } from "variables/app.consts";
-
-import {
-  StateType,
-  REPORT_ACTIVE_MEMBERS_ROUTE,
-  REPORT_NEW_MEMBERS_ROUTE,
-  REPORT_AUTO_OFFBOARDED_MEMBERS_ROUTE,
-  REPORT_SELF_RESIGNED_MEMBERS_ROUTE,
-} from "redux/features/common";
 
 import { worldOverviewService } from ".";
 

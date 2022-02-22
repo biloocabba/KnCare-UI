@@ -15,7 +15,8 @@
 
 */
 import { useState } from "react";
-
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
+import Rating from "react-rating";
 import { useHistory, useParams } from "react-router";
 
 import {
@@ -32,17 +33,14 @@ import {
   Row,
 } from "reactstrap";
 
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
-import Rating from "react-rating";
+import { useAppSelector } from "redux/app";
+import { selectBestPracticeById } from "redux/features";
+import { huddle64pdf } from "redux/features/utils/in-memory-api-mock";
 
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
 import { RouteParams } from "types";
-
-import { useAppSelector } from "redux/app";
-import { selectBestPracticeById } from "redux/features";
-import { huddle64pdf } from "redux/features/utils/in-memory-api-mock";
 
 import { SEARCH_BEST_PRACTICE } from "../best-practices.routes.const";
 
