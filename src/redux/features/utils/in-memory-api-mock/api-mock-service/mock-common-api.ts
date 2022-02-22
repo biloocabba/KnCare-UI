@@ -243,7 +243,7 @@ export const matchSendingDateBetween = (queryParams: URLSearchParams, entity: Em
     if (
       sendingDateFrom.isValid() &&
       sendingDateTo.isValid() &&
-      !sendingDate.isBetween(sendingDateFrom, sendingDateTo)
+      !sendingDate.isBetween(sendingDateFrom, sendingDateTo, undefined, "[]")
     ) {
       return false;
     }
