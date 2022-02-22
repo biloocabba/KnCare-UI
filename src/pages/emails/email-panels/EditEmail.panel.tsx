@@ -17,7 +17,6 @@
 
 import { AnyObject, TNode } from "@udecode/plate";
 import { useState } from "react";
-import { useHistory } from "react-router";
 import makeAnimated from "react-select/animated";
 
 import {
@@ -45,9 +44,8 @@ import { Editor } from "components/editor";
 import { BoxHeader } from "components/headers";
 import { InputField, SelectField } from "components/widgets";
 
+import { useFireAlert } from "hooks";
 import { Email, EmailSaveRequest, SelectOption } from "types";
-
-import { EMAIL_SEARCH_ROUTE } from "..";
 
 interface onSaveFunction {
   (emailRequest: EmailSaveRequest): void;
@@ -69,9 +67,6 @@ export interface EmailContent {
 }
 
 export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
-  const history = useHistory();
-  const currentRole = "admin";
-
   const careMembersState = useAppSelector(selectAllCareMembersDataAsSelectOptions);
   const groups = useAppSelector(selectAllGroupsDataAsSelectOptions);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
@@ -80,8 +75,10 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
 
   const [emailContent, setEmailContent] = useState<EmailContent>({ text: [], contentFiles: [] });
 
+  const { alert, fireAlert } = useFireAlert();
+
   const handleDiscard = () => {
-    history.push(`/${currentRole}/${EMAIL_SEARCH_ROUTE}`);
+    fireAlert();
   };
 
   const handleSaveAsDraft = () => {
@@ -105,7 +102,9 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
 
   return (
     <>
+      {alert}
       <BoxHeader />
+
       <Container className="mt--6" fluid>
         <Row>
           <Col>
