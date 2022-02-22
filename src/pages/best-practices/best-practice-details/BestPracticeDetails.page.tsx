@@ -14,6 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import moment from "moment";
 import { useState } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
 import Rating from "react-rating";
@@ -138,7 +139,7 @@ export const BestPracticeDetailPage = () => {
                         <InputField
                           id="publishDate"
                           label="Published On"
-                          value={bestPractice?.publishDate.toString()}
+                          value={moment(bestPractice?.publishDate).format("MM/DD/YYYY")}
                           type="text"
                           disabled={true}
                         />
