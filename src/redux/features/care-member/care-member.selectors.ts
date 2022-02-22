@@ -1,10 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 
 import { CareMember, CareMemberQueryFilters, SelectOption } from "types";
+import { SELECT_ALL } from "variables/app.consts";
 
 import { RootState } from "redux/app";
 import {
-  ALL,
   entitySearch,
   selectAllBusinessUnitData,
   selectAllCountryData,
@@ -46,6 +46,6 @@ export const selectAllCareMembersDataAsSelectOptions = createSelector(
     const careMemberOptions: SelectOption[] = careMembers.map(careMember => {
       return { value: `${careMember.id}`, label: careMember.internationalName };
     });
-    return [ALL, ...careMemberOptions];
+    return [SELECT_ALL, ...careMemberOptions];
   }
 );

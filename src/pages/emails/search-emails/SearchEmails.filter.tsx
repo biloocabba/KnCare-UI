@@ -2,13 +2,13 @@ import { useState } from "react";
 
 import { Col } from "reactstrap";
 
-import moment from "moment";
+import { Moment } from "moment";
 
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
-import { EmailQueryFilters, Permission, SelectOption } from "types";
+import { EmailQueryFilters, formatMomentAsDD_MM_YYYY, Permission, SelectOption } from "types";
 
 import { useAppSelector } from "redux/app";
 import { selectLoggedUserDefaultCountry } from "redux/features";
@@ -33,8 +33,9 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
 
   const [searchRole, setSearchRole] = useState<string>("");
   const [searchGroupId, setSearchGroupId] = useState<number>();
-  const [searchSendingDateFrom, setSearchSendingDateFrom] = useState<string>("");
-  const [searchSendingDateTo, setSearchSendingDateTo] = useState<string>("");
+
+  const [searchSendingDateFrom, setSearchSendingDateFrom] = useState<Moment | undefined>(undefined);
+  const [searchSendingDateTo, setSearchSendingDateTo] = useState<Moment | undefined>(undefined);
   const [searchSubject, setSearchSubject] = useState<string>("");
 
   const resetFilters = () => {
@@ -42,9 +43,8 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
     setSearchSubject("");
     setSearchGroupId(undefined);
     setSearchBusinessUnitId(undefined);
-    // setSearchCountryIsoCode3("");
-    setSearchSendingDateFrom(moment(new Date(0)).toLocaleString());
-    setSearchSendingDateTo(moment(new Date(0)).toLocaleString());
+    setSearchSendingDateFrom(undefined);
+    setSearchSendingDateTo(undefined);
   };
 
   const findByAllParameters = () => {
@@ -53,11 +53,11 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
       countryId: searchCountryIsoCode3,
       roleId: searchRole,
       groupId: searchGroupId,
-      sendingDateFrom: searchSendingDateFrom,
-      sendingDateTo: searchSendingDateTo,
+      sendingDateFrom: formatMomentAsDD_MM_YYYY(searchSendingDateFrom),
+      sendingDateTo: formatMomentAsDD_MM_YYYY(searchSendingDateTo),
       searchSubject,
     };
-
+    console.log(filters);
     props.onSearchEmails(filters);
   };
 
@@ -95,14 +95,16 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
         <DateField
           id="date-sent-from"
           label="Sending Date From"
-          onChange={dateAsMoment => setSearchSendingDateFrom(moment(dateAsMoment).toLocaleString())}
+          value={searchSendingDateFrom}
+          setValue={setSearchSendingDateFrom}
         />
       </Col>
       <Col md="2">
         <DateField
           id="date-sent-to"
           label="Sending Date To"
-          onChange={dateAsMoment => setSearchSendingDateTo(moment(dateAsMoment).toLocaleString())}
+          value={searchSendingDateTo}
+          setValue={setSearchSendingDateTo}
         />
       </Col>
 

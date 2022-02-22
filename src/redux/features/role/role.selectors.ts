@@ -1,9 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 
 import { SelectOption, CareRole } from "types";
+import { SELECT_ALL } from "variables/app.consts";
 
 import { RootState } from "redux/app";
-import { StateType, ALL } from "redux/features";
+import { StateType } from "redux/features";
 
 export const selectRoleState = (rootState: RootState): StateType<CareRole> => rootState.role;
 
@@ -33,5 +34,5 @@ export const selectAllRolesDataAsSelectOptions = createSelector([selectAllRolesD
   const rolesOptions: SelectOption[] = roles.map(role => {
     return { value: `${role.id}`, label: role.name };
   });
-  return [ALL, ...rolesOptions];
+  return [SELECT_ALL, ...rolesOptions];
 });

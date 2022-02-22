@@ -2,11 +2,11 @@ import { useState } from "react";
 
 import { Button, Col, Form, Row } from "reactstrap";
 
-import moment from "moment";
+import moment, { Moment } from "moment";
 
 import { DateField, InputField, SelectField } from "components/widgets";
 
-import { CareMember, SelectOption, CareMemberSaveRequest } from "types";
+import { CareMember, SelectOption, CareMemberSaveRequest, formatMomentAsDD_MM_YYYY } from "types";
 
 import { useAppSelector } from "redux/app";
 import { selectGroupsByIdsAsSelectValues, selectRoleByIdAsSelectValue } from "redux/features";
@@ -25,12 +25,20 @@ interface CareMemberPanelProps {
 export const CareMemberPanel = (props: CareMemberPanelProps) => {
   const { careMember, groupOptions, roleOptions, onSave } = props;
 
-  const [onboardingDate, setOnboardingDate] = useState<string>(
-    moment(moment(careMember.onboardingDate).toLocaleString()).format("MM/DD/YYYY")
+  const [onboardingDate, setOnboardingDate] = useState<Moment | undefined>(
+    moment(careMember.onboardingDate)
   );
-  const [offboardingDate, setOffboardingDate] = useState<string>(
-    moment(moment(careMember.offboardingDate).toLocaleString()).format("MM/DD/YYYY")
+
+  const [offboardingDate, setOffboardingDate] = useState<Moment | undefined>(
+    moment(careMember.offboardingDate)
   );
+
+  // const [onboardingDate, setOnboardingDate] = useState<string>(
+  //   moment(moment(careMember.onboardingDate).toLocaleString()).format("MM/DD/YYYY")
+  // );
+  // const [offboardingDate, setOffboardingDate] = useState<string>(
+  //   moment(moment(careMember.offboardingDate).toLocaleString()).format("MM/DD/YYYY")
+  // );
 
   const careMemberRole = useAppSelector(selectRoleByIdAsSelectValue(careMember.roleId));
   const careMemberGroups = useAppSelector(
@@ -43,8 +51,8 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
   const onSaveCareMember = () => {
     const careMemberSaveRequest: CareMemberSaveRequest = {
       id: careMember.id,
-      onboardingDate: onboardingDate.toLocaleString(),
-      offboardingDate: offboardingDate.toLocaleString(),
+      onboardingDate: formatMomentAsDD_MM_YYYY(onboardingDate),
+      offboardingDate: formatMomentAsDD_MM_YYYY(offboardingDate),
       roleId: roleId,
       employeeId: careMember.employeeId,
       groupIds: groupIds,
@@ -63,7 +71,8 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-onboarding-date"
               label="Onboard date"
               value={onboardingDate}
-              onChange={dateAsMoment => setOnboardingDate(moment(dateAsMoment).toLocaleString())}
+              setValue={setOnboardingDate}
+              // onChange={dateAsMoment => setOnboardingDate(moment(dateAsMoment).toLocaleString())}
             />
           </Col>
           <Col lg="6">
@@ -71,7 +80,9 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               id="date-auto-offboarding-date"
               label="Auto Offboard Date"
               value={offboardingDate}
-              onChange={dateAsMoment => setOffboardingDate(moment(dateAsMoment).toLocaleString())}
+              setValue={setOffboardingDate}
+              // setValue={setOnboardingDate}
+              // onChange={dateAsMoment => setOffboardingDate(moment(dateAsMoment).toLocaleString())}
             />
           </Col>
         </Row>

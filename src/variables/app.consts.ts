@@ -2,6 +2,9 @@ import { WorldDataReport } from "types";
 
 export const CREATE_ENTITY_ID = -1; //on create entity id will be created on backend and therefore is missing here
 export const GENERIC_ERROR_CODE = -1024;
+export const NO_FILTER = -1024;
+
+export const SELECT_ALL = { value: `${NO_FILTER}`, label: "ALL" };
 
 export const defaultBestPracticesTags = [
   { value: "Collaboration", label: "Collaboration" },

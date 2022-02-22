@@ -2,11 +2,16 @@ import { useState } from "react";
 
 import { Col } from "reactstrap";
 
+// import moment, { Moment } from "moment";
+// import ReactDatetime from "react-datetime";
+
+import { Moment } from "moment";
+
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
-import { EmployeeQueryFilters, Permission, SelectOption } from "types";
+import { EmployeeQueryFilters, formatMomentAsDD_MM_YYYY, Permission, SelectOption } from "types";
 
 import { useAppSelector } from "redux/app";
 import { selectLoggedUserDefaultCountry } from "redux/features";
@@ -29,7 +34,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
   const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
     useAppSelector(selectLoggedUserDefaultCountry)
   );
-  const [searchHiringDate, setSearchHiringDate] = useState<string>();
+  const [searchHiringDate, setSearchHiringDate] = useState<Moment | undefined>();
   // const [searchJobTitle, setSearchJobTitle] = useState<string>();
 
   const onChangeSearchLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,12 +43,11 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
   };
 
   const resetFilters = () => {
+    console.log(searchHiringDate);
     setSearchNewMembersOnly(false);
     setSearchLastName("");
     setSearchBusinessUnitId(undefined);
-    // setSearchCountryIsoCode3("");
-    setSearchHiringDate("");
-    // setSearchHiringDate(moment(new Date(0)).toLocaleString());
+    setSearchHiringDate(undefined);
   };
 
   const findByAllParameters = () => {
@@ -51,10 +55,11 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
       lastName: searchLastName,
       businessUnitId: searchBusinessUnitId,
       countryId: searchCountryIsoCode3,
-      hiringDate: searchHiringDate,
+      hiringDate: formatMomentAsDD_MM_YYYY(searchHiringDate),
       newMembersOnly: searchNewMembersOnly,
       // jobTitle: searchJobTitle,
     };
+    console.log(filters);
     props.onSearchEmployees(filters);
   };
 
@@ -117,14 +122,11 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
         <DateField
           id="date-hire-from"
           label="Hire Date From"
-          onChange={dateAsMoment =>
-            setSearchHiringDate(
-              typeof dateAsMoment === "string" ? dateAsMoment : dateAsMoment.format("YYYY-MM-DD")
-            )
-          }
+          value={searchHiringDate}
+          setValue={setSearchHiringDate}
         />
       </Col>
-      <Col md="3">
+      <Col md="3" style={{ zIndex: 0 }} class="d-flex justify-content-center align-items-center">
         <div className="custom-control custom-control-alternative custom-checkbox">
           <input
             className="custom-control-input"

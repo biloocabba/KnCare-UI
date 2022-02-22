@@ -2,13 +2,13 @@ import { useState } from "react";
 
 import { Col, FormGroup } from "reactstrap";
 
-import moment from "moment";
+import { Moment } from "moment";
 import Rating from "react-rating";
 
 import { FilterPanel } from "components/panels";
 import { InputField, DateField } from "components/widgets";
 
-import { BestPracticesQueryFilters } from "types";
+import { BestPracticesQueryFilters, formatMomentAsDD_MM_YYYY } from "types";
 
 interface onSearchFunction {
   (searchRequest: BestPracticesQueryFilters): void;
@@ -23,18 +23,15 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
   const [searchTag, setSearchTag] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
   const [searchRating, setSearchRating] = useState("");
-  const [searchPublishDate, setSearchPublishDate] = useState("");
+  const [searchPublishDate, setSearchPublishDate] = useState<Moment | undefined>(undefined);
 
   const resetFilters = () => {
     setSearchAuthor("");
-    // setSearchPublishDate(moment(new Date(0)).toLocaleString());
-    setSearchPublishDate("");
+    setSearchPublishDate(undefined);
     setSearchTag("");
     setSearchTitle("");
     setSearchRating("");
   };
-
-  console.log("searchPublishDate", searchPublishDate);
 
   const findByAllParameters = () => {
     const searchFilters: BestPracticesQueryFilters = {
@@ -42,9 +39,9 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
       searchTag,
       searchTitle,
       searchRating,
-      searchPublishDate,
+      searchPublishDate: formatMomentAsDD_MM_YYYY(searchPublishDate),
     };
-
+    console.log(searchFilters);
     onSearch(searchFilters);
   };
   return (
@@ -86,12 +83,12 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
       <Col md="3">
         <DateField
           id="creation-date"
+          label="Creation Date"
           inputProps={{
             placeholder: "Creation Date",
           }}
           value={searchPublishDate}
-          label="Creation Date"
-          onChange={dateAsMoment => setSearchPublishDate(moment(dateAsMoment).toLocaleString())}
+          setValue={setSearchPublishDate}
         />
       </Col>
       <Col md="3">

@@ -18,7 +18,6 @@ export const searchEmployees = (url: string): AxiosResponse<Employee[]> => {
 
 const filterEmployees = (queryParams: URLSearchParams, employeesData: Employee[]): Employee[] => {
   const result: Employee[] = employeesData.filter(employee => {
-    console.log(employee, matchNewMembersOnly(queryParams, employee));
     return (
       matchFirstName(queryParams, employee) &&
       matchBusinessUnit(queryParams, employee) &&
