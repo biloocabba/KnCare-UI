@@ -63,6 +63,7 @@ export interface CareMemberQueryFilters {
   onboardDateTo?: string;
   offboardingDateFrom?: string;
   offboardingDateTo?: string;
+  members?: number[];
 }
 
 export interface Chart {

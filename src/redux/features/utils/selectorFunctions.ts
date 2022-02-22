@@ -18,7 +18,8 @@ export const filterCareMembers = (
       matchOnboardingBetween(filters, careMember) &&
       matchOffboardingBetween(filters, careMember) &&
       matchGroupId(filters, careMember, groups) &&
-      matchCareRoleId(filters, careMember, roles)
+      matchCareRoleId(filters, careMember, roles) &&
+      doNotMatchMembers(filters, careMember)
     );
   });
 
@@ -145,6 +146,15 @@ const matchOffboardingBetween = (filters: CareMemberQueryFilters, entity: CareMe
       return true;
     }
     return false;
+  }
+  return true;
+};
+
+const doNotMatchMembers = (filters: CareMemberQueryFilters, entity: CareMember) => {
+  if (filters && filters.members) {
+    if (filters.members.includes(entity.id)) {
+      return false;
+    }
   }
   return true;
 };

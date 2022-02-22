@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Button, Collapse, FormGroup, Spinner } from "reactstrap";
 
@@ -35,13 +35,18 @@ export const AddMemberPanel = ({
 
   const [filters, setFilters] = useState<CareMemberQueryFilters>({
     countryIso3: userCountry,
+    members: group.members || [],
   });
-
   const careMemberResultSet: CareMember[] = useAppSelector(selectCareMembersByFilters(filters));
 
-  console.log("currentGroupMembers 1234", currentGroupMembers);
-
   const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
+
+  useEffect(() => {
+    setFilters(prevState => ({
+      ...prevState,
+      members: currentGroupMembers.map(careMember => careMember.id),
+    }));
+  }, [currentGroupMembers]);
 
   const onCareMemberAdd = () => {
     const careMemberIds = selectedCareMembers.map(careMember => careMember.id);
