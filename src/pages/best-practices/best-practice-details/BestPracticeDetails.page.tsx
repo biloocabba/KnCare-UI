@@ -79,18 +79,6 @@ export const BestPracticeDetailPage = () => {
     <>
       <BoxHeader />
       <Container className="mt--6" fluid>
-        <Row className="align-items-center py-4">
-          <Col lg="12" xs="7" className="text-right">
-            <Button
-              className="btn btn-primary"
-              color="primary"
-              href="#pablo"
-              onClick={() => history.push(`/admin${SEARCH_BEST_PRACTICE}`)}
-            >
-              Back to Search
-            </Button>
-          </Col>
-        </Row>
         <Row>
           <Col className="order-xl-1" xl="12">
             <Card>
@@ -98,6 +86,18 @@ export const BestPracticeDetailPage = () => {
                 <Row className="align-items-center">
                   <Col xs="8">
                     <h3 className="mb-0">Best Practice Details</h3>
+                  </Col>
+                </Row>
+                <Row className="align-items-center py-4">
+                  <Col lg="12" xs="7" className="text-right">
+                    <Button
+                      className="btn btn-primary"
+                      color="primary"
+                      href="#pablo"
+                      onClick={() => history.push(`/admin${SEARCH_BEST_PRACTICE}`)}
+                    >
+                      Back to Search
+                    </Button>
                   </Col>
                 </Row>
               </CardHeader>
