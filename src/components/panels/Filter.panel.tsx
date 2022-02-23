@@ -17,7 +17,8 @@ export const FilterPanel = ({ title, children, findByAllParameters, resetFilters
       <CardBody className="pl-6 pr-6">
         <Row>
           <Col>
-            <Row className="d-flex justify-content-center">{children}</Row>
+            {/* <Row className="d-flex justify-content-center">{children}</Row> */}
+            {children}
           </Col>
           <Col md="1.1" className="d-flex flex-column justify-content-end">
             <FormGroup>

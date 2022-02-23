@@ -48,7 +48,7 @@ export interface GroupQueryFilters {
 export interface BestPracticesQueryFilters {
   searchAuthor?: string;
   searchTag?: string;
-  searchRating?: string;
+  searchRating?: number;
   searchTitle?: string;
   searchPublishDate?: string;
 }

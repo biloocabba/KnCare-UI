@@ -15,6 +15,14 @@ export const defaultBestPracticesTags = [
   { value: "Huddle", label: "Huddle" },
 ];
 
+export const bestPracticeRatings = [
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "4", label: "4" },
+  { value: "5", label: "5" },
+];
+
 export const NO_REPORT_CACHED: WorldDataReport = { NONE: 0 };
 export const REPORT_KEY_ACTIVE_MEMBERS = "ActiveMembers";
 export const REPORT_KEY_NEW_MEMBERS = "NewMembers";

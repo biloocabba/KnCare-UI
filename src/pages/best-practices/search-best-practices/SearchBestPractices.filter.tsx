@@ -1,13 +1,13 @@
 import { Moment } from "moment";
 import { useState } from "react";
-import Rating from "react-rating";
 
-import { Col, FormGroup } from "reactstrap";
+import { Col, Row } from "reactstrap";
 
 import { FilterPanel } from "components/panels";
-import { InputField, DateField } from "components/widgets";
+import { InputField, DateField, SelectField } from "components/widgets";
 
-import { BestPracticesQueryFilters, formatMomentAsDD_MM_YYYY } from "types";
+import { BestPracticesQueryFilters, formatMomentAsDD_MM_YYYY, SelectOption } from "types";
+import { bestPracticeRatings } from "variables/app.consts";
 
 interface onSearchFunction {
   (searchRequest: BestPracticesQueryFilters): void;
@@ -21,15 +21,18 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
   const [searchAuthor, setSearchAuthor] = useState("");
   const [searchTag, setSearchTag] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
-  const [searchRating, setSearchRating] = useState("");
+
   const [searchPublishDate, setSearchPublishDate] = useState<Moment | undefined>(undefined);
+
+  const ratings: SelectOption[] = bestPracticeRatings;
+  const [ratingSelected, setRatingSelected] = useState<SelectOption | null>();
 
   const resetFilters = () => {
     setSearchAuthor("");
     setSearchPublishDate(undefined);
     setSearchTag("");
     setSearchTitle("");
-    setSearchRating("");
+    setRatingSelected(null);
   };
 
   const findByAllParameters = () => {
@@ -37,9 +40,14 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
       searchAuthor,
       searchTag,
       searchTitle,
-      searchRating,
+      // searchRating,
       searchPublishDate: formatMomentAsDD_MM_YYYY(searchPublishDate),
     };
+
+    if (ratingSelected) {
+      searchFilters.searchRating = parseInt(ratingSelected.value);
+    }
+
     console.log(searchFilters);
     onSearch(searchFilters);
   };
@@ -49,49 +57,66 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
       findByAllParameters={findByAllParameters}
       resetFilters={resetFilters}
     >
-      <Col md="4">
-        <InputField
-          placeholder="Title"
-          label="Title"
-          onChange={e => setSearchTitle(e.target.value)}
-          value={searchTitle}
-          id="title"
-          type="text"
-        />
-      </Col>
-      <Col md="3">
-        <InputField
-          placeholder="Author"
-          label="Author"
-          onChange={e => setSearchAuthor(e.target.value)}
-          value={searchAuthor}
-          id="author"
-          type="text"
-        />
-      </Col>
-      <Col md="3">
-        <InputField
-          placeholder="Tag"
-          label="Tag"
-          onChange={e => setSearchTag(e.target.value)}
-          value={searchTag}
-          id="search-Tag"
-          type="text"
-        />
-      </Col>
-      <Col md="3">
-        <DateField
-          id="creation-date"
-          label="Creation Date"
-          inputProps={{
-            placeholder: "Creation Date",
-          }}
-          value={searchPublishDate}
-          setValue={setSearchPublishDate}
-        />
-      </Col>
-      <Col md="3">
-        <FormGroup>
+      <Row>
+        <Col md="5">
+          <InputField
+            placeholder="Title"
+            label="Title"
+            onChange={e => setSearchTitle(e.target.value)}
+            value={searchTitle}
+            id="title"
+            type="text"
+          />
+        </Col>
+        <Col md="6">
+          <InputField
+            placeholder="Author"
+            label="Author"
+            onChange={e => setSearchAuthor(e.target.value)}
+            value={searchAuthor}
+            id="author"
+            type="text"
+          />
+        </Col>
+        <Col md="1">&nbsp;</Col>
+      </Row>
+      <Row>
+        <Col md="3">
+          <DateField
+            id="creation-date"
+            label="Creation Date"
+            inputProps={{
+              placeholder: "Creation Date",
+            }}
+            value={searchPublishDate}
+            setValue={setSearchPublishDate}
+          />
+        </Col>
+        <Col md="2">
+          <SelectField
+            id="select-rating"
+            label="Rating"
+            value={ratingSelected}
+            options={ratings}
+            onChange={item => {
+              setRatingSelected(item as SelectOption);
+            }}
+          />
+        </Col>
+        <Col md="6">
+          <InputField
+            placeholder="Tag"
+            label="Tag"
+            onChange={e => setSearchTag(e.target.value)}
+            value={searchTag}
+            id="search-Tag"
+            type="text"
+          />
+        </Col>
+        <Col md="1">&nbsp;</Col>
+      </Row>
+
+      {/* <FormGroup>
           <label className="form-control-label" htmlFor="rating">
             Rating
           </label>
@@ -104,8 +129,7 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
               className="mt-2"
             />
           </div>
-        </FormGroup>
-      </Col>
+        </FormGroup> */}
     </FilterPanel>
   );
 };
