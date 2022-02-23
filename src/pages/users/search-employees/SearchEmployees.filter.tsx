@@ -1,7 +1,7 @@
 import { Moment } from "moment";
 import { useState } from "react";
 
-import { Col } from "reactstrap";
+import { Col, Row } from "reactstrap";
 
 import { useAppSelector } from "redux/app";
 import { selectLoggedUserDefaultCountry } from "redux/features";
@@ -65,31 +65,71 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
       findByAllParameters={findByAllParameters}
       resetFilters={resetFilters}
     >
-      <Col md="3">
-        <InputField
-          id="input-last-name"
-          label="Last name"
-          style={{ height: "36px" }}
-          className="form-control"
-          value={searchLastName}
-          placeholder="Last Name"
-          type="text"
-          onChange={onChangeSearchLastName}
-        />
-      </Col>
-      <Col md="4">
-        <SelectField
-          id="select-businessUnits"
-          label="Business Unit"
-          options={props.businessUnits}
-          onChange={item => {
-            const { value } = item as SelectOption;
-            const id: number = parseInt(value);
-            setSearchBusinessUnitId(id);
-          }}
-        />
-      </Col>
-
+      <Row>
+        <Col md="3">
+          <InputField
+            id="input-last-name"
+            label="Last name"
+            style={{ height: "36px" }}
+            className="form-control"
+            value={searchLastName}
+            placeholder="Last Name"
+            type="text"
+            onChange={onChangeSearchLastName}
+          />
+        </Col>
+        <Col md="3">
+          <SelectField
+            id="select-businessUnits"
+            label="Business Unit"
+            options={props.businessUnits}
+            onChange={item => {
+              const { value } = item as SelectOption;
+              const id: number = parseInt(value);
+              setSearchBusinessUnitId(id);
+            }}
+          />
+        </Col>
+        <WithAuthorization requires={Permission.Employee_country_all}>
+          <Col md="3">
+            <SelectField
+              id="select-country"
+              label="Country"
+              options={props.countries}
+              onChange={item => {
+                const { value } = item as SelectOption;
+                setSearchCountryIsoCode3(value);
+              }}
+            />
+          </Col>
+        </WithAuthorization>
+        <Col md="2">
+          <DateField
+            id="date-hire-from"
+            label="Hire Date From"
+            value={searchHiringDate}
+            setValue={setSearchHiringDate}
+          />
+        </Col>
+        <Col md="1">&nbsp;</Col>
+      </Row>
+      <Row>
+        <Col md="9">&nbsp;</Col>
+        <Col md="3" style={{ zIndex: 0 }} class="d-flex justify-content-center align-items-center">
+          <div className="custom-control custom-control-alternative custom-checkbox">
+            <input
+              className="custom-control-input"
+              id="onlyNewMembers"
+              type="checkbox"
+              value={searchNewMembersOnly.toString()}
+              onClick={() => setSearchNewMembersOnly(!searchNewMembersOnly)}
+            />
+            <label className="custom-control-label" htmlFor="onlyNewMembers">
+              <span className="text-muted">Only Employees NOT in Care</span>
+            </label>
+          </div>
+        </Col>
+      </Row>
       {/* <Col md="3">
         <SelectField
           id="select-jobTitle"
@@ -101,41 +141,6 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
           }}
         />
       </Col> */}
-      <WithAuthorization requires={Permission.Employee_country_all}>
-        <Col md="3">
-          <SelectField
-            id="select-country"
-            label="Country"
-            options={props.countries}
-            onChange={item => {
-              const { value } = item as SelectOption;
-              setSearchCountryIsoCode3(value);
-            }}
-          />
-        </Col>
-      </WithAuthorization>
-      <Col md="3">
-        <DateField
-          id="date-hire-from"
-          label="Hire Date From"
-          value={searchHiringDate}
-          setValue={setSearchHiringDate}
-        />
-      </Col>
-      <Col md="3" style={{ zIndex: 0 }} class="d-flex justify-content-center align-items-center">
-        <div className="custom-control custom-control-alternative custom-checkbox">
-          <input
-            className="custom-control-input"
-            id="onlyNewMembers"
-            type="checkbox"
-            value={searchNewMembersOnly.toString()}
-            onClick={() => setSearchNewMembersOnly(!searchNewMembersOnly)}
-          />
-          <label className="custom-control-label" htmlFor="onlyNewMembers">
-            <span className="text-muted">Only Employees NOT in Care</span>
-          </label>
-        </div>
-      </Col>
     </FilterPanel>
   );
 };

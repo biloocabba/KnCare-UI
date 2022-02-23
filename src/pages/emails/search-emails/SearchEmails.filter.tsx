@@ -1,7 +1,7 @@
 import { Moment } from "moment";
 import { useState } from "react";
 
-import { Col } from "reactstrap";
+import { Col, Row } from "reactstrap";
 
 import { useAppSelector } from "redux/app";
 import { selectLoggedUserDefaultCountry } from "redux/features";
@@ -66,86 +66,91 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
       findByAllParameters={findByAllParameters}
       resetFilters={resetFilters}
     >
-      <Col md="3">
-        <SelectField
-          id="select-businessUnits"
-          label="Business Unit"
-          options={props.businessUnits}
-          onChange={item => {
-            const { value } = item as SelectOption;
-            const id: number = parseInt(value);
-            setSearchBusinessUnitId(id);
-          }}
-        />
-      </Col>
-      <Col md="3">
-        <SelectField
-          id="select-groups"
-          label="Groups"
-          options={props.groups}
-          onChange={item => {
-            const { value } = item as SelectOption;
-            const id: number = parseInt(value);
-            setSearchGroupId(id);
-          }}
-        />
-      </Col>
-      <Col md="2">
-        <DateField
-          id="date-sent-from"
-          label="Sending Date From"
-          value={searchSendingDateFrom}
-          setValue={setSearchSendingDateFrom}
-        />
-      </Col>
-      <Col md="2">
-        <DateField
-          id="date-sent-to"
-          label="Sending Date To"
-          value={searchSendingDateTo}
-          setValue={setSearchSendingDateTo}
-        />
-      </Col>
-
-      <WithAuthorization requires={Permission.Email_country_all}>
-        <Col md="3">
-          <SelectField
-            id="select-country"
-            label="Country"
-            options={props.countries}
-            onChange={item => {
-              const { value } = item as SelectOption;
-              setSearchCountryIsoCode3(value);
+      <Row>
+        <Col md="6">
+          <InputField
+            id="input-subject"
+            label="Subject"
+            style={{ height: "36px" }}
+            className="form-control"
+            value={searchSubject}
+            placeholder="Subject"
+            type="text"
+            onChange={({ target }) => {
+              setSearchSubject(target.value);
             }}
           />
         </Col>
-      </WithAuthorization>
+        <Col md="3">
+          <DateField
+            id="date-sent-from"
+            label="Sending Date From"
+            value={searchSendingDateFrom}
+            setValue={setSearchSendingDateFrom}
+          />
+        </Col>
+        <Col md="2">
+          <DateField
+            id="date-sent-to"
+            label="Sending Date To"
+            value={searchSendingDateTo}
+            setValue={setSearchSendingDateTo}
+          />
+        </Col>
+        <Col md="1">&nbsp;</Col>
+      </Row>
+      <Row>
+        <Col md="3">
+          <SelectField
+            id="select-groups"
+            label="Groups"
+            options={props.groups}
+            onChange={item => {
+              const { value } = item as SelectOption;
+              const id: number = parseInt(value);
+              setSearchGroupId(id);
+            }}
+          />
+        </Col>
+        <Col md="3">
+          <SelectField
+            id="select-role"
+            label="Role"
+            options={props.roles}
+            onChange={item => {
+              const { value } = item as SelectOption;
+              setSearchRole(value);
+            }}
+          />
+        </Col>
+        <WithAuthorization requires={Permission.Email_country_all}>
+          <Col md="3">
+            <SelectField
+              id="select-country"
+              label="Country"
+              options={props.countries}
+              onChange={item => {
+                const { value } = item as SelectOption;
+                setSearchCountryIsoCode3(value);
+              }}
+            />
+          </Col>
+        </WithAuthorization>
+        <Col md="2">
+          <SelectField
+            id="select-businessUnits"
+            label="Business Unit"
+            options={props.businessUnits}
+            onChange={item => {
+              const { value } = item as SelectOption;
+              const id: number = parseInt(value);
+              setSearchBusinessUnitId(id);
+            }}
+          />
+        </Col>
 
-      <Col md="3">
-        <SelectField
-          id="select-role"
-          label="Role"
-          options={props.roles}
-          onChange={item => {
-            const { value } = item as SelectOption;
-            setSearchRole(value);
-          }}
-        />
-      </Col>
-      <Col md="4">
-        <InputField
-          id="input-subject"
-          label="Subject"
-          style={{ height: "36px" }}
-          className="form-control"
-          value={searchSubject}
-          placeholder="Subject"
-          type="text"
-          onChange={({ target }) => {
-            setSearchSubject(target.value);
-          }}
-        />
-      </Col>
+        <Col md="1">&nbsp;</Col>
+      </Row>
     </FilterPanel>
   );
 };

@@ -1,7 +1,7 @@
 import { Moment } from "moment";
 import { useState } from "react";
 
-import { Col } from "reactstrap";
+import { Col, Row } from "reactstrap";
 
 import { useAppSelector } from "redux/app";
 import {
@@ -87,126 +87,128 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
       findByAllParameters={findByAllParameters}
       resetFilters={resetFilters}
     >
-      <Col md="3">
-        <SelectField
-          id="select-role"
-          label="Role"
-          options={roles}
-          onChange={item => {
-            const { value } = item as SelectOption;
-            const id: number = parseInt(value);
-            setSearchRoleId(id);
-          }}
-        />
-      </Col>
-      <Col md="2">
-        <SelectField
-          id="select-businessUnits"
-          label="Business Unit"
-          options={businessUnits}
-          onChange={item => {
-            const { value } = item as SelectOption;
-            const id: number = parseInt(value);
-            setSearchBusinessUnitId(id);
-          }}
-        />
-      </Col>
-      <WithAuthorization requires={Permission.Employee_country_all}>
+      <Row>
         <Col md="3">
           <SelectField
-            id="select-country"
-            label="Country"
-            options={countries}
+            id="select-role"
+            label="Role"
+            options={roles}
             onChange={item => {
               const { value } = item as SelectOption;
-              setSearchCountryIsoCode3(value);
+              const id: number = parseInt(value);
+              setSearchRoleId(id);
             }}
           />
         </Col>
-      </WithAuthorization>
+        <Col md="2">
+          <SelectField
+            id="select-businessUnits"
+            label="Business Unit"
+            options={businessUnits}
+            onChange={item => {
+              const { value } = item as SelectOption;
+              const id: number = parseInt(value);
+              setSearchBusinessUnitId(id);
+            }}
+          />
+        </Col>
+        <WithAuthorization requires={Permission.Employee_country_all}>
+          <Col md="3">
+            <SelectField
+              id="select-country"
+              label="Country"
+              options={countries}
+              onChange={item => {
+                const { value } = item as SelectOption;
+                setSearchCountryIsoCode3(value);
+              }}
+            />
+          </Col>
+        </WithAuthorization>
 
-      <Col md="3">
-        <SelectField
-          id="select-group"
-          label="Group"
-          value={groupSelected}
-          options={groups}
-          onChange={item => {
-            const { value, label } = item as SelectOption;
-            // const id: number = parseInt(value);
-            // setSearchGroupId(id);
-            // setGroupValue({ label, value });
-            setGroupSelected({ label, value });
-          }}
-        />
-      </Col>
-      <Col md="3">
-        <InputField
-          id="input-last-name"
-          label="Last name"
-          style={{ height: "36px" }}
-          className="form-control"
-          value={searchLastName}
-          placeholder="Last Name"
-          type="text"
-          onChange={e => {
-            setSearchLastName(e.currentTarget.value);
-          }}
-        />
-      </Col>
-      <Col md="2">
-        <DateField
-          id="date-onboarding-from"
-          inputProps={{
-            placeholder: "From",
-          }}
-          value={searchOnBoardDateFrom}
-          setValue={setSearchOnBoardDateFrom}
-          label="Onboarding from"
-          // onChange={dateAsMoment => setSearchOnBoardDateFrom(moment(dateAsMoment).toLocaleString())}
-        />
-      </Col>
-      <Col md="2">
-        <DateField
-          id="date-onboarding-to"
-          inputProps={{
-            placeholder: "To",
-          }}
-          value={searchOnBoardDateTo}
-          setValue={setSearchOnBoardDateTo}
-          label="Onboarding to"
-          // onChange={dateAsMoment => setSearchOnBoardDateTo(moment(dateAsMoment).toLocaleString())}
-        />
-      </Col>
-      <Col md="2">
-        <DateField
-          id="date-offboarded-from"
-          inputProps={{
-            placeholder: "From",
-          }}
-          label="Offboarded From"
-          value={searchOffboardingDateFrom}
-          setValue={setSearchOffboardingDateFrom}
+        <Col md="3">
+          <SelectField
+            id="select-group"
+            label="Group"
+            value={groupSelected}
+            options={groups}
+            onChange={item => {
+              const { value, label } = item as SelectOption;
+              // const id: number = parseInt(value);
+              // setSearchGroupId(id);
+              // setGroupValue({ label, value });
+              setGroupSelected({ label, value });
+            }}
+          />
+        </Col>
+        <Col md="3">
+          <InputField
+            id="input-last-name"
+            label="Last name"
+            style={{ height: "36px" }}
+            className="form-control"
+            value={searchLastName}
+            placeholder="Last Name"
+            type="text"
+            onChange={e => {
+              setSearchLastName(e.currentTarget.value);
+            }}
+          />
+        </Col>
+        <Col md="2">
+          <DateField
+            id="date-onboarding-from"
+            inputProps={{
+              placeholder: "From",
+            }}
+            value={searchOnBoardDateFrom}
+            setValue={setSearchOnBoardDateFrom}
+            label="Onboarding from"
+            // onChange={dateAsMoment => setSearchOnBoardDateFrom(moment(dateAsMoment).toLocaleString())}
+          />
+        </Col>
+        <Col md="2">
+          <DateField
+            id="date-onboarding-to"
+            inputProps={{
+              placeholder: "To",
+            }}
+            value={searchOnBoardDateTo}
+            setValue={setSearchOnBoardDateTo}
+            label="Onboarding to"
+            // onChange={dateAsMoment => setSearchOnBoardDateTo(moment(dateAsMoment).toLocaleString())}
+          />
+        </Col>
+        <Col md="2">
+          <DateField
+            id="date-offboarded-from"
+            inputProps={{
+              placeholder: "From",
+            }}
+            label="Offboarded From"
+            value={searchOffboardingDateFrom}
+            setValue={setSearchOffboardingDateFrom}
 
-          // onChange={dateAsMoment =>
-          //   setSearchOffboardingDateFrom(moment(dateAsMoment).toLocaleString())
-          // }
-        />
-      </Col>
-      <Col md="2">
-        <DateField
-          id="date-offboarded-to"
-          inputProps={{
-            placeholder: "To",
-          }}
-          label="Offboarded To"
-          value={searchOffboardingDateTo}
-          setValue={setSearchOffboardingDateTo}
-          // onChange={dateAsMoment =>
-          //   setSearchOffboardingDateTo(moment(dateAsMoment).toLocaleString())
-          // }
-        />
-      </Col>
+            // onChange={dateAsMoment =>
+            //   setSearchOffboardingDateFrom(moment(dateAsMoment).toLocaleString())
+            // }
+          />
+        </Col>
+        <Col md="2">
+          <DateField
+            id="date-offboarded-to"
+            inputProps={{
+              placeholder: "To",
+            }}
+            label="Offboarded To"
+            value={searchOffboardingDateTo}
+            setValue={setSearchOffboardingDateTo}
+            // onChange={dateAsMoment =>
+            //   setSearchOffboardingDateTo(moment(dateAsMoment).toLocaleString())
+            // }
+          />
+        </Col>
+      </Row>
     </FilterPanel>
   );
 };

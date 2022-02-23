@@ -43,8 +43,8 @@ export const employeesTableColumns: ColumnDescription<any, any>[] = [
     sort: true,
   },
   {
-    dataField: "hiringDate",
-    text: "hiringDate",
+    dataField: "startDate",
+    text: "startDate",
     sort: true,
   },
   {
