@@ -44,7 +44,7 @@ import { Editor } from "components/editor";
 import { BoxHeader } from "components/headers";
 import { InputField, SelectField } from "components/widgets";
 
-import { useFireAlert } from "hooks";
+import { useFeatureDisabledWarning } from "hooks";
 import { Email, EmailSaveRequest, SelectOption } from "types";
 
 interface onSaveFunction {
@@ -75,7 +75,7 @@ export const EditEmail = ({ email, setEmail, onSave, onSend }: Props) => {
 
   const [emailContent, setEmailContent] = useState<EmailContent>({ text: [], contentFiles: [] });
 
-  const { alert, fireAlert } = useFireAlert();
+  const { alert, fireAlert } = useFeatureDisabledWarning();
 
   const handleDiscard = () => {
     fireAlert();

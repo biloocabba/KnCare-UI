@@ -1,12 +1,12 @@
-import { ErrorAlert } from "components/alerts";
+import { WarningAlert } from "components/alerts/WarningAlert";
 
 import { useAlert } from "context";
 
-export const useFireAlert = () => {
+export const useFeatureDisabledWarning = () => {
   const { alert, setAlert } = useAlert();
 
   const fireAlert = (message = "Feature under development") => {
-    setAlert(() => <ErrorAlert>{message}</ErrorAlert>);
+    setAlert(() => <WarningAlert>{message}</WarningAlert>);
   };
 
   return { alert, fireAlert };

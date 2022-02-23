@@ -16,7 +16,7 @@ import {
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
-import { useAlerts, useFireAlert } from "hooks";
+import { useAlerts, useFeatureDisabledWarning } from "hooks";
 import { Group } from "types";
 
 import { MembersPanel } from "..";
@@ -38,7 +38,7 @@ export const GroupDetailsPage = () => {
 
   const { alert, setSaveSent, setSuccessMessage } = useAlerts(groupsState);
 
-  const { fireAlert } = useFireAlert();
+  const { fireAlert } = useFeatureDisabledWarning();
 
   useEffect(() => {
     dispatch(findGroupById(groupId));

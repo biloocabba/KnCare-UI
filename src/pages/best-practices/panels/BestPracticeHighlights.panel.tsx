@@ -16,11 +16,14 @@ import careCreditCardsImg from "assets/img/care/care-credit-cards.png";
 import huddleImg from "assets/img/care/huddle.png";
 import remoteWorkImg from "assets/img/care/remote-work.png";
 
+import { useFeatureDisabledWarning } from "hooks";
+
 interface Props {
   onViewDetailsClick: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const BestPracticeHighlightsPanel = ({ onViewDetailsClick }: Props) => {
+  const { fireAlert } = useFeatureDisabledWarning();
   return (
     <Card>
       <CardHeader>
@@ -41,7 +44,7 @@ export const BestPracticeHighlightsPanel = ({ onViewDetailsClick }: Props) => {
                     <Col lg="12">Recognize a colleague from everywhere in the world</Col>
                   </Row>
                 </CardText>
-                <Button id="1" color="primary" onClick={e => onViewDetailsClick(e)}>
+                <Button id="1" color="primary" onClick={() => fireAlert()}>
                   Read More
                 </Button>
               </CardBody>
@@ -79,7 +82,7 @@ export const BestPracticeHighlightsPanel = ({ onViewDetailsClick }: Props) => {
                     <Col lg="12">Playbook for remote work</Col>
                   </Row>
                 </CardText>
-                <Button id="3" color="primary" onClick={e => onViewDetailsClick(e)}>
+                <Button id="3" color="primary" onClick={() => fireAlert()}>
                   Read More
                 </Button>
               </CardBody>

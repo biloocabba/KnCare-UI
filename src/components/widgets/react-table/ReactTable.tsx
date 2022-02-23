@@ -4,7 +4,7 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 import { Button } from "reactstrap";
 
-import { useFireAlert } from "hooks";
+import { useFeatureDisabledWarning } from "hooks";
 
 import { pagination, selectRow } from ".";
 
@@ -36,7 +36,7 @@ export const ReactTable = <T extends { id: number }>({
   tableRef,
   formatterFn,
 }: Props<T>) => {
-  const { alert, fireAlert } = useFireAlert();
+  const { alert, fireAlert } = useFeatureDisabledWarning();
 
   const formatActionButtonCell = (_: any, row: T): React.ReactNode => {
     const rowId = row.id.toString();
