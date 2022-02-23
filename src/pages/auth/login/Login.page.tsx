@@ -1,6 +1,5 @@
+import classnames from "classnames";
 import { useEffect, useState } from "react";
-
-// nodejs library that concatenates classes
 import { useHistory } from "react-router";
 
 import {
@@ -20,14 +19,12 @@ import {
   Alert,
 } from "reactstrap";
 
-import classnames from "classnames";
-
-import { AuthHeader } from "components/headers";
-
 import { Role } from "types/security";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { login, selectPrincipalState } from "redux/features";
+
+import { AuthHeader } from "components/headers";
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();

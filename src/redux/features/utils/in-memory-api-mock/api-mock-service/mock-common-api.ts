@@ -164,6 +164,23 @@ export const matchPublishDate = (queryParams: URLSearchParams, entity: BestPract
   }
   return true;
 };
+export const hiringDateBetweenToday = (queryParams: URLSearchParams, entity: Employee) => {
+  if (queryParams && queryParams.get("hiringDateFrom")) {
+    const searchHiringDateFromAsString = queryParams.get("hiringDateFrom");
+
+    const entityHiringDate = moment(entity.startDate).local();
+    const hiringDateFrom = moment(searchHiringDateFromAsString).local();
+    const todaysDate = moment.utc();
+
+    if (
+      hiringDateFrom.isValid() &&
+      !entityHiringDate.isBetween(hiringDateFrom, todaysDate, undefined, "[]")
+    ) {
+      return false;
+    }
+  }
+  return true;
+};
 
 export const matchBusinessUnits = (queryParams: URLSearchParams, entity: Email) => {
   if (queryParams && queryParams.get("businessUnitId")) {
@@ -226,7 +243,7 @@ export const matchSendingDateBetween = (queryParams: URLSearchParams, entity: Em
     if (
       sendingDateFrom.isValid() &&
       sendingDateTo.isValid() &&
-      !sendingDate.isBetween(sendingDateFrom, sendingDateTo)
+      !sendingDate.isBetween(sendingDateFrom, sendingDateTo, undefined, "[]")
     ) {
       return false;
     }

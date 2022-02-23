@@ -1,8 +1,8 @@
-import { FormGroup } from "reactstrap";
-
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { StateManagerProps } from "react-select/dist/declarations/src/useStateManager";
+
+import { FormGroup } from "reactstrap";
 
 type Props = StateManagerProps & {
   id: string;

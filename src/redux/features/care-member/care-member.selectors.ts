@@ -1,8 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { CareMember, CareMemberQueryFilters, SelectOption } from "types";
-import { SELECT_ALL } from "variables/app.consts";
-
 import { RootState } from "redux/app";
 import {
   entitySearch,
@@ -12,6 +9,9 @@ import {
   selectAllRolesData,
   StateType,
 } from "redux/features";
+
+import { CareMember, CareMemberQueryFilters, SelectOption } from "types";
+import { SELECT_ALL } from "variables/app.consts";
 
 export const selectCareMemberState = (rootState: RootState): StateType<CareMember> =>
   rootState.careMember;

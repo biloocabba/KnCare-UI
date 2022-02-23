@@ -15,18 +15,17 @@
 
 */
 import { MouseEvent, useState } from "react";
-
 import { useHistory } from "react-router";
 
 import { Card, CardHeader, Col, Container, Row, Spinner } from "reactstrap";
+
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { deleteBestPractice, selectBestPracticeState, searchBestPractices } from "redux/features";
 
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
 import { BestPractice, BestPracticesQueryFilters } from "types";
-
-import { useAppDispatch, useAppSelector } from "redux/app";
-import { deleteBestPractice, selectBestPracticeState, searchBestPractices } from "redux/features";
 
 import { BEST_PRACTICE_DETAILS } from "../best-practices.routes.const";
 import { BestPracticeHighlightsPanel } from "../panels";

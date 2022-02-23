@@ -1,17 +1,17 @@
 import { MouseEvent, useState } from "react";
-
 import { useHistory } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row } from "reactstrap";
+
+import { useAppSelector } from "redux/app";
+import { selectCareMembersByFilters, selectLoggedUserDefaultCountry } from "redux/features";
 
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
 import { CARE_MEMBER_EDIT } from "pages/users";
-import { CareMember, CareMemberQueryFilters } from "types";
 
-import { useAppSelector } from "redux/app";
-import { selectCareMembersByFilters, selectLoggedUserDefaultCountry } from "redux/features";
+import { CareMember, CareMemberQueryFilters } from "types";
 
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from ".";
 

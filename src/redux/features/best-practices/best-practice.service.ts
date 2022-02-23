@@ -1,7 +1,8 @@
-import { BestPractice } from "types";
 import { toFormData } from "types/utils";
 
 import { httpCommon, IUpdated, BEST_PRACTICE_ROUTE, HttpResponseType } from "redux/features";
+
+import { BestPractice } from "types";
 
 const findAll = (): HttpResponseType => {
   return httpCommon.get(`${BEST_PRACTICE_ROUTE}`);

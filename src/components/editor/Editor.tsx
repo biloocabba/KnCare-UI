@@ -1,9 +1,9 @@
-import { useState } from "react";
-
 import { HeadingToolbar, ImageToolbarButton, LinkToolbarButton, Plate } from "@udecode/plate";
+import { useState } from "react";
 import { MdImage, MdLink } from "react-icons/md";
 
 import { EmailContent } from "pages/emails";
+
 import { toFileArray } from "types";
 
 import { DisplayFiles, FileInput } from "../widgets";

@@ -18,7 +18,7 @@ export const employeesData: Employee[] = [
     companyPhone: "896-608-1900",
     companyMobilePhone: "234-752-6297",
     gender: "Female",
-    startDate: "2/14/2004",
+    startDate: "2/14/2022",
     endDate: null,
     dateOfLeave: null,
     nationality: "China",

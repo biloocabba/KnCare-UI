@@ -2,14 +2,14 @@ import { useState } from "react";
 
 import { Container } from "reactstrap";
 
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { createGroup, selectGroupState } from "redux/features";
+
 import { BoxHeader } from "components/headers";
 
 import { useAlerts } from "hooks";
 import { Group } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
-
-import { useAppDispatch, useAppSelector } from "redux/app";
-import { createGroup, selectGroupState } from "redux/features";
 
 import { EditGroupPanel } from "..";
 

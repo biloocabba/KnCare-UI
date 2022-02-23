@@ -10,6 +10,7 @@ import {
   matchCountryIso3,
   matchFirstName,
   matchNewMembersOnly,
+  hiringDateBetweenToday,
 } from ".";
 
 export const searchEmployees = (url: string): AxiosResponse<Employee[]> => {
@@ -22,7 +23,8 @@ const filterEmployees = (queryParams: URLSearchParams, employeesData: Employee[]
       matchFirstName(queryParams, employee) &&
       matchBusinessUnit(queryParams, employee) &&
       matchCountryIso3(queryParams, employee) &&
-      matchNewMembersOnly(queryParams, employee)
+      matchNewMembersOnly(queryParams, employee) &&
+      hiringDateBetweenToday(queryParams, employee)
     );
   });
 

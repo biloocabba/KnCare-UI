@@ -1,16 +1,15 @@
 import { MouseEvent, useState } from "react";
-
 import { useHistory } from "react-router";
 
 import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
+
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { deleteGroup, selectGroupState } from "redux/features";
 
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
 import { Group } from "types";
-
-import { useAppDispatch, useAppSelector } from "redux/app";
-import { deleteGroup, selectGroupState } from "redux/features";
 
 import { GROUP_DETAILS } from "..";
 

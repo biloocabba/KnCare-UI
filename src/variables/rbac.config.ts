@@ -1,5 +1,6 @@
-import { CareRole } from "types";
 import { Permission, PolicyMap, Role } from "types/security";
+
+import { CareRole } from "types";
 
 export const AnonymousPermissions: Permission[] = [];
 

@@ -14,19 +14,17 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import classnames from "classnames";
 import { ReactNode, useEffect, useState } from "react";
-
+import PerfectScrollbar from "react-perfect-scrollbar";
 import { useLocation, NavLink as NavLinkRRD, Link } from "react-router-dom";
 
 import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav } from "reactstrap";
 
-import classnames from "classnames";
-import PerfectScrollbar from "react-perfect-scrollbar";
-
-import { IRoute, Role } from "types";
-
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { selectLoggedUserRole, toggleSidenav } from "redux/features";
+
+import { IRoute, Role } from "types";
 
 interface Props {
   /**

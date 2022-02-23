@@ -15,19 +15,13 @@
 
 */
 import { useEffect, useRef, useState } from "react";
-
+import { Audio } from "react-loader-spinner";
 import { Redirect, Switch, useLocation } from "react-router-dom";
 
-import { Audio } from "react-loader-spinner";
-
 // react library for routing
-import { AdminFooter } from "components/footers";
-import { AdminNavbar } from "components/navbars";
-import { Sidebar } from "components/sidebar";
-
 import careLogo from "assets/img/brand/CareLogoMin.png";
+
 import { routes } from "routes";
-import { ThemeColors } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
@@ -43,6 +37,12 @@ import {
   selectLoggedUserRole,
   findAllBusinessUnits,
 } from "redux/features";
+
+import { AdminFooter } from "components/footers";
+import { AdminNavbar } from "components/navbars";
+import { Sidebar } from "components/sidebar";
+
+import { ThemeColors } from "types";
 
 import { getRoutes, useScrollToTop } from ".";
 

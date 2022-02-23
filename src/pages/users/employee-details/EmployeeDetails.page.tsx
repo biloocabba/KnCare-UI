@@ -16,18 +16,18 @@
 */
 
 import { useSelector } from "react-redux";
-
 import { useParams, useHistory } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
+
+import { selectEmployeeById } from "redux/features/employee";
 
 import { BoxHeader } from "components/headers";
 
 import { EMPLOYEE_SEARCH, CARE_MEMBER_CREATE } from "pages/users";
 import { EmployeePanel } from "pages/users/panels";
-import { Employee, RouteParams } from "types";
 
-import { selectEmployeeById } from "redux/features/employee";
+import { Employee, RouteParams } from "types";
 
 export const EmployeeDetailsPage = () => {
   const { id } = useParams<RouteParams>();

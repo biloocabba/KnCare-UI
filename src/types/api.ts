@@ -30,7 +30,7 @@ export interface EmployeeQueryFilters {
   businessUnitId?: number;
   countryId?: string;
   jobTitle?: string;
-  hiringDate?: string;
+  hiringDateFrom?: string;
   newMembersOnly?: boolean;
 }
 export interface EmailQueryFilters {
@@ -63,6 +63,7 @@ export interface CareMemberQueryFilters {
   onboardDateTo?: string;
   offboardingDateFrom?: string;
   offboardingDateTo?: string;
+  members?: number[];
 }
 
 export interface Chart {

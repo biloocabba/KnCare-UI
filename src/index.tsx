@@ -16,18 +16,15 @@
 */
 
 import { StrictMode } from "react";
-
-import { Provider } from "react-redux";
-
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 // import { ToastContainer } from "react-toastify";
+
+import { store } from "redux/app";
 
 import { AlertProvider } from "context";
 import { AdminLayout, AuthLayout } from "layouts";
-
-import { store } from "redux/app";
 
 import "variables/chartDefaults";
 

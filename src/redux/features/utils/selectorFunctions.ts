@@ -18,7 +18,8 @@ export const filterCareMembers = (
       matchOnboardingBetween(filters, careMember) &&
       matchOffboardingBetween(filters, careMember) &&
       matchGroupId(filters, careMember, groups) &&
-      matchCareRoleId(filters, careMember, roles)
+      matchCareRoleId(filters, careMember, roles) &&
+      doNotMatchMembers(filters, careMember)
     );
   });
 
@@ -126,7 +127,7 @@ const matchOnboardingBetween = (filters: CareMemberQueryFilters, entity: CareMem
   if (filters && onBoardingDateFrom && onBoardingDateTo) {
     const onBoardingDate = moment(entity.onboardingDate).utc();
 
-    if (onBoardingDate.isBetween(onBoardingDateFrom, onBoardingDateTo)) {
+    if (onBoardingDate.isBetween(onBoardingDateFrom, onBoardingDateTo, undefined, "[]")) {
       return true;
     }
     return false;
@@ -141,10 +142,19 @@ const matchOffboardingBetween = (filters: CareMemberQueryFilters, entity: CareMe
   if (filters && offBoardingDateFrom && offBoardingDateTo) {
     const offBoardingDate = moment(entity.offboardingDate).utc();
 
-    if (offBoardingDate.isBetween(offBoardingDateFrom, offBoardingDateTo)) {
+    if (offBoardingDate.isBetween(offBoardingDateFrom, offBoardingDateTo, undefined, "[]")) {
       return true;
     }
     return false;
+  }
+  return true;
+};
+
+const doNotMatchMembers = (filters: CareMemberQueryFilters, entity: CareMember) => {
+  if (filters && filters.members) {
+    if (filters.members.includes(entity.id)) {
+      return false;
+    }
   }
   return true;
 };

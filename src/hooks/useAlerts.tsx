@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
+import { StateType } from "redux/features";
+
 import { ErrorAlert, SuccessAlert } from "components/alerts";
 
 import { useAlert } from "context";
 import { Domain } from "types";
-
-import { StateType } from "redux/features";
 
 export const useAlerts = (state: StateType<Domain>) => {
   const { alert, setAlert } = useAlert();

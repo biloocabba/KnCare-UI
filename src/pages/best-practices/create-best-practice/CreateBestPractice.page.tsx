@@ -1,19 +1,19 @@
 import { useState } from "react";
+import CreatableSelect from "react-select/creatable";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, FormGroup, Row } from "reactstrap";
 
-import CreatableSelect from "react-select/creatable";
+import { toFileArray } from "types/utils";
+
+import { useAppDispatch, useAppSelector } from "redux/app";
+import { createBestPractice, selectBestPracticeState } from "redux/features";
 
 import { BoxHeader } from "components/headers";
 import { InputField, FileInput, DisplayFiles } from "components/widgets";
 
 import { useAlerts } from "hooks";
 import { BestPractice } from "types";
-import { toFileArray } from "types/utils";
 import { defaultBestPracticesTags } from "variables/app.consts";
-
-import { useAppDispatch, useAppSelector } from "redux/app";
-import { createBestPractice, selectBestPracticeState } from "redux/features";
 
 import { bestPracticeDefaultState } from "..";
 

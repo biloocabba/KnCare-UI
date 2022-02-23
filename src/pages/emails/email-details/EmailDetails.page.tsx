@@ -1,12 +1,11 @@
 import { useState } from "react";
-
 import { useParams } from "react-router-dom";
-
-import { useAlerts } from "hooks";
-import { Email, EmailSaveRequest, RouteParams } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { saveEmail, selectEmailById, selectEmailState, sendEmail } from "redux/features";
+
+import { useAlerts } from "hooks";
+import { Email, EmailSaveRequest, RouteParams } from "types";
 
 import { EditEmail } from "..";
 

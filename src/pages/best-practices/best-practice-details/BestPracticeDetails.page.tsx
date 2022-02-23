@@ -14,8 +14,10 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import moment from "moment";
 import { useState } from "react";
-
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
+import Rating from "react-rating";
 import { useHistory, useParams } from "react-router";
 
 import {
@@ -32,17 +34,14 @@ import {
   Row,
 } from "reactstrap";
 
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
-import Rating from "react-rating";
+import { useAppSelector } from "redux/app";
+import { selectBestPracticeById } from "redux/features";
+import { huddle64pdf } from "redux/features/utils/in-memory-api-mock";
 
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
 import { RouteParams } from "types";
-
-import { useAppSelector } from "redux/app";
-import { selectBestPracticeById } from "redux/features";
-import { huddle64pdf } from "redux/features/utils/in-memory-api-mock";
 
 import { SEARCH_BEST_PRACTICE } from "../best-practices.routes.const";
 
@@ -81,18 +80,6 @@ export const BestPracticeDetailPage = () => {
     <>
       <BoxHeader />
       <Container className="mt--6" fluid>
-        <Row className="align-items-center py-4">
-          <Col lg="12" xs="7" className="text-right">
-            <Button
-              className="btn btn-primary"
-              color="primary"
-              href="#pablo"
-              onClick={() => history.push(`/admin${SEARCH_BEST_PRACTICE}`)}
-            >
-              Back to Search
-            </Button>
-          </Col>
-        </Row>
         <Row>
           <Col className="order-xl-1" xl="12">
             <Card>
@@ -100,6 +87,18 @@ export const BestPracticeDetailPage = () => {
                 <Row className="align-items-center">
                   <Col xs="8">
                     <h3 className="mb-0">Best Practice Details</h3>
+                  </Col>
+                </Row>
+                <Row className="align-items-center py-4">
+                  <Col lg="12" xs="7" className="text-right">
+                    <Button
+                      className="btn btn-primary"
+                      color="primary"
+                      href="#pablo"
+                      onClick={() => history.push(`/admin${SEARCH_BEST_PRACTICE}`)}
+                    >
+                      Back to Search
+                    </Button>
                   </Col>
                 </Row>
               </CardHeader>
@@ -140,7 +139,7 @@ export const BestPracticeDetailPage = () => {
                         <InputField
                           id="publishDate"
                           label="Published On"
-                          value={bestPractice?.publishDate.toString()}
+                          value={moment(bestPractice?.publishDate).format("MM/DD/YYYY")}
                           type="text"
                           disabled={true}
                         />

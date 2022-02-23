@@ -1,7 +1,5 @@
 import { AxiosResponse } from "axios";
 
-import { Country } from "types";
-
 import {
   REPORT_ACTIVE_MEMBERS_ROUTE,
   REPORT_AUTO_OFFBOARDED_MEMBERS_ROUTE,
@@ -15,6 +13,8 @@ import {
   REPORT_NEW_MEMBERS_ROUTE,
   REPORT_SELF_RESIGNED_MEMBERS_ROUTE,
 } from "redux/features";
+
+import { Country } from "types";
 
 import {
   memberTurnoverReport,

@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import { useAlerts } from "hooks";
-import { Email, EmailSaveRequest } from "types";
-
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { saveEmail, selectEmailState, sendEmail } from "redux/features";
+
+import { useAlerts } from "hooks";
+import { Email, EmailSaveRequest } from "types";
 
 import { EditEmail, emailDefaultState } from "..";
 

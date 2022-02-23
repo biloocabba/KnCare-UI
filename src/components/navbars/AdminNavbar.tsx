@@ -14,6 +14,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
+import classnames from "classnames";
+
 import {
   Collapse,
   Container,
@@ -26,13 +29,12 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 
-import classnames from "classnames";
-
 import placeholderPortrait from "assets/img/icons/common/Portrait_Placeholder.png";
-import { Theme } from "types";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import { logout, selectLoggedUser } from "redux/features";
+
+import { Theme } from "types";
 
 interface Props {
   theme: Theme;

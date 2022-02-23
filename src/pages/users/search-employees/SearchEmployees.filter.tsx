@@ -1,20 +1,16 @@
+import { Moment } from "moment";
 import { useState } from "react";
 
 import { Col } from "reactstrap";
 
-// import moment, { Moment } from "moment";
-// import ReactDatetime from "react-datetime";
-
-import { Moment } from "moment";
+import { useAppSelector } from "redux/app";
+import { selectLoggedUserDefaultCountry } from "redux/features";
 
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
 import { EmployeeQueryFilters, formatMomentAsDD_MM_YYYY, Permission, SelectOption } from "types";
-
-import { useAppSelector } from "redux/app";
-import { selectLoggedUserDefaultCountry } from "redux/features";
 
 interface onSearchEmployeesFunction {
   (employeeSearchRequest: EmployeeQueryFilters): void;
@@ -55,7 +51,7 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
       lastName: searchLastName,
       businessUnitId: searchBusinessUnitId,
       countryId: searchCountryIsoCode3,
-      hiringDate: formatMomentAsDD_MM_YYYY(searchHiringDate),
+      hiringDateFrom: formatMomentAsDD_MM_YYYY(searchHiringDate),
       newMembersOnly: searchNewMembersOnly,
       // jobTitle: searchJobTitle,
     };

@@ -1,8 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { Email } from "types";
-
 import { RootState } from "redux/app";
+
+import { Email } from "types";
 
 import { StateType } from "..";
 

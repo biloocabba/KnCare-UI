@@ -1,15 +1,16 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Button, Collapse, FormGroup, Spinner } from "reactstrap";
 
-import { emptyFormatter, ReactTable } from "components/widgets";
-
-import { useLocalStateAlerts } from "hooks";
-import { careMemberTableColumns, SearchCareMemberFilterPanel } from "pages/users";
-import { CareMember, CareMemberQueryFilters, Group } from "types";
-
 import { useAppSelector } from "redux/app";
 import { selectCareMembersByFilters, selectLoggedUserDefaultCountry } from "redux/features";
+
+import { emptyFormatter, ReactTable } from "components/widgets";
+
+import { careMemberTableColumns, SearchCareMemberFilterPanel } from "pages/users";
+
+import { useLocalStateAlerts } from "hooks";
+import { CareMember, CareMemberQueryFilters, Group } from "types";
 
 interface Props {
   group: Group;
@@ -31,12 +32,21 @@ export const AddMemberPanel = ({
     useLocalStateAlerts(currentGroupMembers);
 
   const userCountry = useAppSelector(selectLoggedUserDefaultCountry);
+
   const [filters, setFilters] = useState<CareMemberQueryFilters>({
     countryIso3: userCountry,
+    members: group.members || [],
   });
-
   const careMemberResultSet: CareMember[] = useAppSelector(selectCareMembersByFilters(filters));
+
   const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
+
+  useEffect(() => {
+    setFilters(prevState => ({
+      ...prevState,
+      members: currentGroupMembers.map(careMember => careMember.id),
+    }));
+  }, [currentGroupMembers]);
 
   const onCareMemberAdd = () => {
     const careMemberIds = selectedCareMembers.map(careMember => careMember.id);

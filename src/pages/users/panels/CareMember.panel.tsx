@@ -1,15 +1,14 @@
+import moment, { Moment } from "moment";
 import { useState } from "react";
 
 import { Button, Col, Form, Row } from "reactstrap";
 
-import moment, { Moment } from "moment";
+import { useAppSelector } from "redux/app";
+import { selectGroupsByIdsAsSelectValues, selectRoleByIdAsSelectValue } from "redux/features";
 
 import { DateField, InputField, SelectField } from "components/widgets";
 
 import { CareMember, SelectOption, CareMemberSaveRequest, formatMomentAsDD_MM_YYYY } from "types";
-
-import { useAppSelector } from "redux/app";
-import { selectGroupsByIdsAsSelectValues, selectRoleByIdAsSelectValue } from "redux/features";
 
 interface onSaveFunction {
   (careMemberRequest: CareMemberSaveRequest): void;
@@ -72,7 +71,6 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               label="Onboard date"
               value={onboardingDate}
               setValue={setOnboardingDate}
-              // onChange={dateAsMoment => setOnboardingDate(moment(dateAsMoment).toLocaleString())}
             />
           </Col>
           <Col lg="6">
@@ -81,8 +79,6 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               label="Auto Offboard Date"
               value={offboardingDate}
               setValue={setOffboardingDate}
-              // setValue={setOnboardingDate}
-              // onChange={dateAsMoment => setOffboardingDate(moment(dateAsMoment).toLocaleString())}
             />
           </Col>
         </Row>

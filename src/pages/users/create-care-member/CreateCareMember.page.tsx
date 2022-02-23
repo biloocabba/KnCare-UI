@@ -1,13 +1,22 @@
 import { useHistory } from "react-router";
-
 import { useParams } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
+import { useAppDispatch, useAppSelector } from "redux/app";
+import {
+  selectAllGroupsDataAsSelectOptions,
+  selectAllRolesDataAsSelectOptions,
+  selectEmployeeById,
+  createCareMember,
+  selectCareMemberState,
+} from "redux/features";
+
 import { BoxHeader } from "components/headers";
 
-import { useAlerts } from "hooks";
 import { EMPLOYEE_SEARCH, CareMemberPanel } from "pages/users";
+
+import { useAlerts } from "hooks";
 import {
   RouteParams,
   SelectOption,
@@ -18,15 +27,6 @@ import {
   addDays,
 } from "types";
 import { CREATE_ENTITY_ID } from "variables/app.consts";
-
-import { useAppDispatch, useAppSelector } from "redux/app";
-import {
-  selectAllGroupsDataAsSelectOptions,
-  selectAllRolesDataAsSelectOptions,
-  selectEmployeeById,
-  createCareMember,
-  selectCareMemberState,
-} from "redux/features";
 
 export const CreateCareMemberPage = () => {
   const { id } = useParams<RouteParams>();

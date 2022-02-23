@@ -2,12 +2,6 @@ import { useHistory, useParams } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
-import { BoxHeader } from "components/headers";
-
-import { useAlerts } from "hooks";
-import { CareMemberPanel } from "pages/users";
-import { CareMember, CareMemberSaveRequest, RouteParams, SelectOption } from "types";
-
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
   IUpdated,
@@ -17,6 +11,13 @@ import {
   selectCareMemberState,
   updateCareMember,
 } from "redux/features";
+
+import { BoxHeader } from "components/headers";
+
+import { CareMemberPanel } from "pages/users";
+
+import { useAlerts } from "hooks";
+import { CareMember, CareMemberSaveRequest, RouteParams, SelectOption } from "types";
 
 export const EditCareMemberPage = () => {
   const { id } = useParams<RouteParams>();

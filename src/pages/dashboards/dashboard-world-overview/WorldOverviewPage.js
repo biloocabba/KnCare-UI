@@ -15,12 +15,9 @@
 
 */
 import { useState } from "react";
-
-import { Card, CardBody, Container, Row, Col, CardTitle } from "reactstrap";
-
 import { VectorMap } from "react-jvectormap";
 
-import { MapsHeader } from "components/headers";
+import { Card, CardBody, Container, Row, Col, CardTitle } from "reactstrap";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
@@ -34,6 +31,8 @@ import {
   selectNewMembersReportsData,
   selectSelfResignedMembersReportsData,
 } from "redux/features";
+
+import { MapsHeader } from "components/headers";
 
 export const WorldOverviewPage = () => {
   const dispatch = useAppDispatch();

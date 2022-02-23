@@ -1,7 +1,8 @@
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { CareMemberSaveRequest } from "types";
 import { CareMember } from "types/domain";
+
+import { CareMemberSaveRequest } from "types";
 
 import { IUpdated, StateType } from "../common";
 

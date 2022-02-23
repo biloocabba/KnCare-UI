@@ -15,18 +15,14 @@
 
 */
 import { useEffect, useRef } from "react";
-
-// react library for routing
 import { Switch, Redirect } from "react-router-dom";
-
-// core components
-import { AuthFooter } from "components/footers";
 
 import { routes } from "routes";
 
-// import { getuseScrollToTopRoutes } from "./hooks";
 import { useAppSelector } from "redux/app";
 import { selectLoggedUserRole } from "redux/features";
+
+import { AuthFooter } from "components/footers";
 
 import { useScrollToTop } from "./hooks";
 import { getRoutes } from "./utils";
