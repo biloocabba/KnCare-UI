@@ -9,14 +9,15 @@ import {
   selectAllCountriesDataAsSelectOptions,
   selectAllGroupsDataAsSelectOptions,
   selectAllRolesDataAsSelectOptions,
-  selectLoggedUserDefaultCountry,
+  selectLoggedUserDefaultCountryAsSelection,
 } from "redux/features";
 
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
-import { CareMemberQueryFilters, formatMomentAsDD_MM_YYYY, Permission, SelectOption } from "types";
+import { CareMemberQueryFilters, Permission, SelectOption } from "types";
+import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 interface SearchCareMemberFilterPanelProps {
   filters: CareMemberQueryFilters;
@@ -29,10 +30,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
   const roles: SelectOption[] = useAppSelector(selectAllRolesDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
 
-  const [searchRoleId, setSearchRoleId] = useState<number>();
-  const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
   const [searchLastName, setSearchLastName] = useState("");
-
   const [searchOnBoardDateFrom, setSearchOnBoardDateFrom] = useState<Moment | undefined>(undefined);
   const [searchOnBoardDateTo, setSearchOnBoardDateTo] = useState<Moment | undefined>(undefined);
   const [searchOffboardingDateFrom, setSearchOffboardingDateFrom] = useState<Moment | undefined>(
@@ -42,43 +40,54 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
     undefined
   );
 
-  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
-    useAppSelector(selectLoggedUserDefaultCountry)
+  const [businessUnitSelected, setBusinessUnitSelected] = useState<SelectOption | null>();
+  const [groupSelected, setGroupSelected] = useState<SelectOption | null>();
+  const [roleSelected, setRoleSelected] = useState<SelectOption | null>();
+  const [countrySelected, setCountrySelected] = useState<SelectOption | null>(
+    useAppSelector(selectLoggedUserDefaultCountryAsSelection)
   );
 
-  const [groupSelected, setGroupSelected] = useState<SelectOption | null>();
-
   const resetFilters = () => {
-    setSearchRoleId(undefined);
-    setSearchBusinessUnitId(undefined);
     setSearchLastName("");
     setSearchOnBoardDateFrom(undefined);
     setSearchOnBoardDateTo(undefined);
     setSearchOffboardingDateFrom(undefined);
     setSearchOffboardingDateTo(undefined);
+    setCountrySelected(null);
+    setBusinessUnitSelected(null);
     setGroupSelected(null);
+    setRoleSelected(null);
   };
 
   const findByAllParameters = () => {
-    const filters: CareMemberQueryFilters = {
-      businessUnitId: searchBusinessUnitId,
-      countryIso3: searchCountryIsoCode3,
-      roleId: searchRoleId,
-      // groupId: groupSelected ?parseInt(groupSelected.value)  : NO_FILTER,
-      lastName: searchLastName,
-      onboardDateFrom: formatMomentAsDD_MM_YYYY(searchOnBoardDateFrom),
-      onboardDateTo: formatMomentAsDD_MM_YYYY(searchOnBoardDateTo),
-      offboardingDateFrom: formatMomentAsDD_MM_YYYY(searchOffboardingDateFrom),
-      offboardingDateTo: formatMomentAsDD_MM_YYYY(searchOffboardingDateTo),
-    };
-
-    //@todo include in object only filters!= blank or undefined
-    if (groupSelected) {
-      filters.groupId = parseInt(groupSelected.value);
-    }
-
+    const filters = parametersToFilter();
     console.log(filters);
     props.setFilters(filters);
+  };
+
+  const parametersToFilter = (): CareMemberQueryFilters => {
+    return Object.assign(
+      {},
+      searchLastName && searchLastName !== "" ? { lastName: searchLastName } : null,
+      groupSelected ? { groupId: parseInt(groupSelected.value) } : null,
+      roleSelected ? { roleId: parseInt(roleSelected.value) } : null,
+      businessUnitSelected ? { businessUnitId: parseInt(businessUnitSelected.value) } : null,
+      countrySelected && countrySelected.value !== ""
+        ? { countryIso3: countrySelected.value }
+        : null,
+      searchOnBoardDateFrom
+        ? { onboardDateFrom: searchOnBoardDateFrom.format(DATE_FILTER_FORMAT) }
+        : null,
+      searchOnBoardDateTo
+        ? { onboardDateTo: searchOnBoardDateTo.format(DATE_FILTER_FORMAT) }
+        : null,
+      searchOffboardingDateFrom
+        ? { offboardingDateFrom: searchOffboardingDateFrom.format(DATE_FILTER_FORMAT) }
+        : null,
+      searchOffboardingDateTo
+        ? { offboardingDateTo: searchOffboardingDateTo.format(DATE_FILTER_FORMAT) }
+        : null
+    );
   };
 
   return (
@@ -93,10 +102,9 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             id="select-role"
             label="Role"
             options={roles}
+            value={roleSelected}
             onChange={item => {
-              const { value } = item as SelectOption;
-              const id: number = parseInt(value);
-              setSearchRoleId(id);
+              setRoleSelected(item as SelectOption);
             }}
           />
         </Col>
@@ -104,11 +112,10 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
           <SelectField
             id="select-businessUnits"
             label="Business Unit"
+            value={businessUnitSelected}
             options={businessUnits}
             onChange={item => {
-              const { value } = item as SelectOption;
-              const id: number = parseInt(value);
-              setSearchBusinessUnitId(id);
+              setBusinessUnitSelected(item as SelectOption);
             }}
           />
         </Col>
@@ -117,10 +124,10 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             <SelectField
               id="select-country"
               label="Country"
+              value={countrySelected}
               options={countries}
               onChange={item => {
-                const { value } = item as SelectOption;
-                setSearchCountryIsoCode3(value);
+                setCountrySelected(item as SelectOption);
               }}
             />
           </Col>
@@ -133,11 +140,7 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             value={groupSelected}
             options={groups}
             onChange={item => {
-              const { value, label } = item as SelectOption;
-              // const id: number = parseInt(value);
-              // setSearchGroupId(id);
-              // setGroupValue({ label, value });
-              setGroupSelected({ label, value });
+              setGroupSelected(item as SelectOption);
             }}
           />
         </Col>
@@ -164,7 +167,6 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             value={searchOnBoardDateFrom}
             setValue={setSearchOnBoardDateFrom}
             label="Onboarding from"
-            // onChange={dateAsMoment => setSearchOnBoardDateFrom(moment(dateAsMoment).toLocaleString())}
           />
         </Col>
         <Col md="2">
@@ -176,7 +178,6 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             value={searchOnBoardDateTo}
             setValue={setSearchOnBoardDateTo}
             label="Onboarding to"
-            // onChange={dateAsMoment => setSearchOnBoardDateTo(moment(dateAsMoment).toLocaleString())}
           />
         </Col>
         <Col md="2">
@@ -188,10 +189,6 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             label="Offboarded From"
             value={searchOffboardingDateFrom}
             setValue={setSearchOffboardingDateFrom}
-
-            // onChange={dateAsMoment =>
-            //   setSearchOffboardingDateFrom(moment(dateAsMoment).toLocaleString())
-            // }
           />
         </Col>
         <Col md="2">
@@ -203,9 +200,6 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
             label="Offboarded To"
             value={searchOffboardingDateTo}
             setValue={setSearchOffboardingDateTo}
-            // onChange={dateAsMoment =>
-            //   setSearchOffboardingDateTo(moment(dateAsMoment).toLocaleString())
-            // }
           />
         </Col>
       </Row>

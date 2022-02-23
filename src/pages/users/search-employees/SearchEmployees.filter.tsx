@@ -4,13 +4,14 @@ import { useState } from "react";
 import { Col, Row } from "reactstrap";
 
 import { useAppSelector } from "redux/app";
-import { selectLoggedUserDefaultCountry } from "redux/features";
+import { selectLoggedUserDefaultCountryAsSelection } from "redux/features";
 
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
-import { EmployeeQueryFilters, formatMomentAsDD_MM_YYYY, Permission, SelectOption } from "types";
+import { EmployeeQueryFilters, Permission, SelectOption } from "types";
+import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 interface onSearchEmployeesFunction {
   (employeeSearchRequest: EmployeeQueryFilters): void;
@@ -26,10 +27,17 @@ interface SearchEmployeesFilterPanelProps {
 export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProps) => {
   const [searchNewMembersOnly, setSearchNewMembersOnly] = useState<boolean>(false);
   const [searchLastName, setSearchLastName] = useState("");
-  const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
-  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
-    useAppSelector(selectLoggedUserDefaultCountry)
+
+  // const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
+  // const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
+  //   useAppSelector(selectLoggedUserDefaultCountry)
+  // );
+
+  const [businessUnitSelected, setBusinessUnitSelected] = useState<SelectOption | null>();
+  const [countrySelected, setCountrySelected] = useState<SelectOption | null>(
+    useAppSelector(selectLoggedUserDefaultCountryAsSelection)
   );
+
   const [searchHiringDate, setSearchHiringDate] = useState<Moment | undefined>();
   // const [searchJobTitle, setSearchJobTitle] = useState<string>();
 
@@ -39,24 +47,30 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
   };
 
   const resetFilters = () => {
-    console.log(searchHiringDate);
-    setSearchNewMembersOnly(false);
     setSearchLastName("");
-    setSearchBusinessUnitId(undefined);
+    setSearchNewMembersOnly(false);
+    setBusinessUnitSelected(null);
+    setCountrySelected(null);
     setSearchHiringDate(undefined);
   };
 
   const findByAllParameters = () => {
-    const filters: EmployeeQueryFilters = {
-      lastName: searchLastName,
-      businessUnitId: searchBusinessUnitId,
-      countryId: searchCountryIsoCode3,
-      hiringDateFrom: formatMomentAsDD_MM_YYYY(searchHiringDate),
-      newMembersOnly: searchNewMembersOnly,
-      // jobTitle: searchJobTitle,
-    };
+    const filters = parametersToFilter();
     console.log(filters);
     props.onSearchEmployees(filters);
+  };
+
+  const parametersToFilter = (): EmployeeQueryFilters => {
+    return Object.assign(
+      {},
+      searchLastName && searchLastName !== "" ? { lastName: searchLastName } : null,
+      businessUnitSelected ? { businessUnitId: parseInt(businessUnitSelected.value) } : null,
+      countrySelected && countrySelected.value !== ""
+        ? { countryIso3: countrySelected.value }
+        : null,
+      searchHiringDate ? { hiringDateFrom: searchHiringDate.format(DATE_FILTER_FORMAT) } : null,
+      searchNewMembersOnly ? { newMembersOnly: searchNewMembersOnly } : null
+    );
   };
 
   return (
@@ -82,11 +96,10 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
           <SelectField
             id="select-businessUnits"
             label="Business Unit"
+            value={businessUnitSelected}
             options={props.businessUnits}
             onChange={item => {
-              const { value } = item as SelectOption;
-              const id: number = parseInt(value);
-              setSearchBusinessUnitId(id);
+              setBusinessUnitSelected(item as SelectOption);
             }}
           />
         </Col>
@@ -95,10 +108,10 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
             <SelectField
               id="select-country"
               label="Country"
+              value={countrySelected}
               options={props.countries}
               onChange={item => {
-                const { value } = item as SelectOption;
-                setSearchCountryIsoCode3(value);
+                setCountrySelected(item as SelectOption);
               }}
             />
           </Col>

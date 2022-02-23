@@ -28,14 +28,14 @@ export interface EmailSaveRequest {
 export interface EmployeeQueryFilters {
   lastName?: string;
   businessUnitId?: number;
-  countryId?: string;
+  countryIso3?: string;
   jobTitle?: string;
   hiringDateFrom?: string;
   newMembersOnly?: boolean;
 }
 export interface EmailQueryFilters {
   businessUnitId?: number;
-  countryId?: string;
+  countryIso3?: string;
   roleId?: string;
   groupId?: number;
   sendingDateFrom?: string;
@@ -46,11 +46,11 @@ export interface GroupQueryFilters {
   active?: boolean;
 }
 export interface BestPracticesQueryFilters {
-  searchAuthor?: string;
-  searchTag?: string;
-  searchRating?: number;
-  searchTitle?: string;
-  searchPublishDate?: string;
+  author?: string;
+  tag?: string;
+  rating?: number;
+  title?: string;
+  publishDate?: string;
 }
 
 export interface CareMemberQueryFilters {

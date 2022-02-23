@@ -60,8 +60,8 @@ export const matchBusinessUnit = (queryParams: URLSearchParams, entity: Employee
 };
 
 export const matchCountryIso3 = (queryParams: URLSearchParams, entity: Employee | CareMember) => {
-  if (queryParams && queryParams.get("countryId")) {
-    const countryCode = queryParams.get("countryId");
+  if (queryParams && queryParams.get("countryIso3")) {
+    const countryCode = queryParams.get("countryIso3");
 
     const countryObj = countriesMockResponse.data.find(country => country.code3 === countryCode);
     if (countryObj && entity.country !== countryObj.name) {
@@ -70,6 +70,14 @@ export const matchCountryIso3 = (queryParams: URLSearchParams, entity: Employee 
   }
   return true;
 };
+
+// export const matchHireDate = (queryParams: URLSearchParams, entity: Employee) => {
+//   if (queryParams && queryParams.get("hiringDateFrom")) {
+//     const hireDateAsMoment = moment(queryParams.get("hiringDateFrom"));
+//     return hireDateAsMoment.isAfter(moment(entity.startDate));
+//   }
+//   return true;
+// };
 
 export const matchNewMembersOnly = (
   queryParams: URLSearchParams,

@@ -6,8 +6,8 @@ import { Col, Row } from "reactstrap";
 import { FilterPanel } from "components/panels";
 import { InputField, DateField, SelectField } from "components/widgets";
 
-import { BestPracticesQueryFilters, formatMomentAsDD_MM_YYYY, SelectOption } from "types";
-import { bestPracticeRatings } from "variables/app.consts";
+import { BestPracticesQueryFilters, SelectOption } from "types";
+import { bestPracticeRatings, DATE_FILTER_FORMAT } from "variables/app.consts";
 
 interface onSearchFunction {
   (searchRequest: BestPracticesQueryFilters): void;
@@ -36,21 +36,22 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
   };
 
   const findByAllParameters = () => {
-    const searchFilters: BestPracticesQueryFilters = {
-      searchAuthor,
-      searchTag,
-      searchTitle,
-      // searchRating,
-      searchPublishDate: formatMomentAsDD_MM_YYYY(searchPublishDate),
-    };
-
-    if (ratingSelected) {
-      searchFilters.searchRating = parseInt(ratingSelected.value);
-    }
-
+    const searchFilters = parametersToFilter();
     console.log(searchFilters);
     onSearch(searchFilters);
   };
+
+  const parametersToFilter = (): BestPracticesQueryFilters => {
+    return Object.assign(
+      {},
+      searchAuthor && searchAuthor !== "" ? { author: searchAuthor } : null,
+      searchTag && searchTag !== "" ? { tag: searchTag } : null,
+      searchTitle && searchTitle !== "" ? { title: searchTitle } : null,
+      searchPublishDate ? { publishDate: searchPublishDate.format(DATE_FILTER_FORMAT) } : null,
+      ratingSelected ? { rating: parseInt(ratingSelected.value) } : null
+    );
+  };
+
   return (
     <FilterPanel
       title="Search Best Practices"

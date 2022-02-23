@@ -36,3 +36,13 @@ export const selectCountryByIsoCode = (code: string) =>
   createSelector([selectAllCountryData], countries =>
     countries.find(country => country.code === code)
   );
+
+export const selectCountryByIsoCodeAsSelectOption = (code: string) =>
+  // : SelectorType<SelectOption | undefined> =>
+  createSelector([selectAllCountryData], countries => {
+    const countryFound = countries.find(country => country.code3 === code) as Country;
+    return {
+      value: countryFound.code3,
+      label: countryFound.name,
+    };
+  });

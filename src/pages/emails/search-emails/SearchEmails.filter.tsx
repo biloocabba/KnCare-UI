@@ -4,13 +4,14 @@ import { useState } from "react";
 import { Col, Row } from "reactstrap";
 
 import { useAppSelector } from "redux/app";
-import { selectLoggedUserDefaultCountry } from "redux/features";
+import { selectLoggedUserDefaultCountryAsSelection } from "redux/features";
 
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
-import { EmailQueryFilters, formatMomentAsDD_MM_YYYY, Permission, SelectOption } from "types";
+import { EmailQueryFilters, Permission, SelectOption } from "types";
+import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 interface onSearchEmailsFunction {
   (employeeSearchRequest: EmailQueryFilters): void;
@@ -25,39 +26,57 @@ interface SearchEmailsFilterPanelProps {
 }
 
 export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => {
-  const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
-  const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
-    useAppSelector(selectLoggedUserDefaultCountry)
-  );
+  // const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
+  // const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
+  //   useAppSelector(selectLoggedUserDefaultCountry)
+  // );
+  // const [searchRole, setSearchRole] = useState<string>("");
+  // const [searchGroupId, setSearchGroupId] = useState<number>();
 
-  const [searchRole, setSearchRole] = useState<string>("");
-  const [searchGroupId, setSearchGroupId] = useState<number>();
+  const [businessUnitSelected, setBusinessUnitSelected] = useState<SelectOption | null>();
+  const [groupSelected, setGroupSelected] = useState<SelectOption | null>();
+  const [roleSelected, setRoleSelected] = useState<SelectOption | null>();
+  const [countrySelected, setCountrySelected] = useState<SelectOption | null>(
+    useAppSelector(selectLoggedUserDefaultCountryAsSelection)
+  );
 
   const [searchSendingDateFrom, setSearchSendingDateFrom] = useState<Moment | undefined>(undefined);
   const [searchSendingDateTo, setSearchSendingDateTo] = useState<Moment | undefined>(undefined);
   const [searchSubject, setSearchSubject] = useState<string>("");
 
   const resetFilters = () => {
-    setSearchRole("");
+    setRoleSelected(null);
+    setGroupSelected(null);
+    setBusinessUnitSelected(null);
+    setCountrySelected(null);
     setSearchSubject("");
-    setSearchGroupId(undefined);
-    setSearchBusinessUnitId(undefined);
     setSearchSendingDateFrom(undefined);
     setSearchSendingDateTo(undefined);
   };
 
   const findByAllParameters = () => {
-    const filters: EmailQueryFilters = {
-      businessUnitId: searchBusinessUnitId,
-      countryId: searchCountryIsoCode3,
-      roleId: searchRole,
-      groupId: searchGroupId,
-      sendingDateFrom: formatMomentAsDD_MM_YYYY(searchSendingDateFrom),
-      sendingDateTo: formatMomentAsDD_MM_YYYY(searchSendingDateTo),
-      searchSubject,
-    };
+    const filters = parametersToFilter();
     console.log(filters);
     props.onSearchEmails(filters);
+  };
+
+  const parametersToFilter = (): EmailQueryFilters => {
+    return Object.assign(
+      {},
+      groupSelected ? { groupId: parseInt(groupSelected.value) } : null,
+      roleSelected ? { roleId: parseInt(roleSelected.value) } : null,
+      businessUnitSelected ? { businessUnitId: parseInt(businessUnitSelected.value) } : null,
+      countrySelected && countrySelected.value !== ""
+        ? { countryIso3: countrySelected.value }
+        : null,
+      searchSendingDateFrom
+        ? { sendingDateFrom: searchSendingDateFrom.format(DATE_FILTER_FORMAT) }
+        : null,
+      searchSendingDateTo
+        ? { sendingDateTo: searchSendingDateTo.format(DATE_FILTER_FORMAT) }
+        : null,
+      searchSubject && searchSubject !== "" ? { searchSubject: searchSubject } : null
+    );
   };
 
   return (
@@ -105,10 +124,9 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
             id="select-groups"
             label="Groups"
             options={props.groups}
+            value={groupSelected}
             onChange={item => {
-              const { value } = item as SelectOption;
-              const id: number = parseInt(value);
-              setSearchGroupId(id);
+              setGroupSelected(item as SelectOption);
             }}
           />
         </Col>
@@ -117,9 +135,9 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
             id="select-role"
             label="Role"
             options={props.roles}
+            value={roleSelected}
             onChange={item => {
-              const { value } = item as SelectOption;
-              setSearchRole(value);
+              setRoleSelected(item as SelectOption);
             }}
           />
         </Col>
@@ -129,9 +147,9 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
               id="select-country"
               label="Country"
               options={props.countries}
+              value={countrySelected}
               onChange={item => {
-                const { value } = item as SelectOption;
-                setSearchCountryIsoCode3(value);
+                setCountrySelected(item as SelectOption);
               }}
             />
           </Col>
@@ -141,10 +159,9 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
             id="select-businessUnits"
             label="Business Unit"
             options={props.businessUnits}
+            value={businessUnitSelected}
             onChange={item => {
-              const { value } = item as SelectOption;
-              const id: number = parseInt(value);
-              setSearchBusinessUnitId(id);
+              setBusinessUnitSelected(item as SelectOption);
             }}
           />
         </Col>

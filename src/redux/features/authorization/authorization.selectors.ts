@@ -5,7 +5,9 @@ import { Role } from "types/security";
 import { RootState } from "redux/app";
 import { StateType } from "redux/features";
 
-import { Principal } from "types";
+import { Principal, SelectOption } from "types";
+
+import { selectAllCountriesDataAsSelectOptions } from "../countries";
 
 export const selectPrincipalState = (rootState: RootState): StateType<Principal> =>
   rootState.authorization;
@@ -20,9 +22,16 @@ export const selectLoggedUserRole = createSelector([selectLoggedUser], principal
 );
 
 export const selectLoggedUserDefaultCountry = createSelector([selectLoggedUser], principal => {
-  if (!principal) {
-    return "NO COUNTRY";
-  }
   const { authRole, countryCode3 } = principal as Principal;
   return authRole !== Role.RegionalManager ? countryCode3 : "";
 });
+
+export const selectLoggedUserDefaultCountryAsSelection = createSelector(
+  [selectLoggedUserDefaultCountry, selectAllCountriesDataAsSelectOptions],
+  (isoCode3, countriesAsSelections: SelectOption[]) => {
+    const countrySelectOption = countriesAsSelections.find(
+      countryOption => countryOption.value === isoCode3
+    );
+    return countrySelectOption as SelectOption;
+  }
+);

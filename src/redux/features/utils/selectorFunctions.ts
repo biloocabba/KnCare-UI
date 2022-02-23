@@ -14,7 +14,7 @@ export const filterCareMembers = (
     return (
       matchLastName(filters, careMember) &&
       matchBusinessUnit(filters, careMember, businessUnits) &&
-      matchCountryId(filters, careMember, countries) &&
+      matchCountryIso3(filters, careMember, countries) &&
       matchOnboardingBetween(filters, careMember) &&
       matchOffboardingBetween(filters, careMember) &&
       matchGroupId(filters, careMember, groups) &&
@@ -23,6 +23,7 @@ export const filterCareMembers = (
     );
   });
 
+  console.log(result);
   return result;
 };
 
@@ -63,7 +64,7 @@ export const matchBusinessUnit = (
   return true;
 };
 
-export const matchCountryId = (
+export const matchCountryIso3 = (
   filters: CareMemberQueryFilters,
   entity: CareMember,
   countries: Country[]
@@ -85,6 +86,8 @@ export const matchGroupId = (
   groups: Group[]
 ) => {
   if (filters && filters.groupId) {
+    console.log(filters, entity, entity.groupIds?.includes(filters.groupId));
+
     // find obj from db based on filter
     const groupObj = groups.find(group => group.id === filters.groupId);
 
