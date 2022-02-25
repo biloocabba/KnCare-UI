@@ -49,7 +49,7 @@ export const careMemberTableColumns: ColumnDescription<any, any>[] = [
     sort: true,
   },
   {
-    dataField: "country",
+    dataField: "office.country",
     text: "country",
     sort: true,
   },

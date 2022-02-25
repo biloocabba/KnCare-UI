@@ -1,6 +1,7 @@
 import moment from "moment";
 
 import { CareMemberQueryFilters, CareMember, BusinessUnit, Country, Group, CareRole } from "types";
+import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 export const filterCareMembers = (
   filters: CareMemberQueryFilters,
@@ -73,7 +74,7 @@ export const matchCountryIso3 = (
     const countryCode3 = filters.countryIso3;
 
     const countryObj = countries.find(country => country.code3 === countryCode3);
-    if (countryObj && entity.country !== countryObj.name) {
+    if (countryObj && entity.office.countryiso3 !== countryObj.code3) {
       return false;
     }
   }
@@ -86,13 +87,13 @@ export const matchGroupId = (
   groups: Group[]
 ) => {
   if (filters && filters.groupId) {
-    console.log(filters, entity, entity.groupIds?.includes(filters.groupId));
+    console.log(filters, entity, entity.groups?.includes(filters.groupId));
 
     // find obj from db based on filter
     const groupObj = groups.find(group => group.id === filters.groupId);
 
     // check if groupIds on careMember doesn't include the groupId if group is found
-    if (groupObj && !entity.groupIds?.includes(groupObj.id)) {
+    if (groupObj && !entity.groups?.includes(groupObj.id)) {
       return false;
     }
   }
@@ -124,31 +125,37 @@ export const matchLastName = (filters: CareMemberQueryFilters, entity: CareMembe
 };
 
 const matchOnboardingBetween = (filters: CareMemberQueryFilters, entity: CareMember) => {
-  const onBoardingDateFrom = filters.onboardDateFrom;
-  const onBoardingDateTo = filters.onboardDateTo;
+  if (filters && filters.onboardDateFrom && filters.onboardDateTo) {
+    const onBoardingDateFrom = moment(filters.onboardDateFrom, DATE_FILTER_FORMAT).utc();
+    const onBoardingDateTo = moment(filters.onboardDateTo, DATE_FILTER_FORMAT).utc();
 
-  if (filters && onBoardingDateFrom && onBoardingDateTo) {
-    const onBoardingDate = moment(entity.onboardingDate).utc();
+    if (filters && onBoardingDateFrom && onBoardingDateTo) {
+      const onBoardingDate = moment(entity.onboardingDate, DATE_FILTER_FORMAT).utc();
 
-    if (onBoardingDate.isBetween(onBoardingDateFrom, onBoardingDateTo, undefined, "[]")) {
-      return true;
+      if (onBoardingDate.isBetween(onBoardingDateFrom, onBoardingDateTo, undefined, "[]")) {
+        return true;
+      }
+      return false;
     }
-    return false;
+    return true;
   }
   return true;
 };
 
 const matchOffboardingBetween = (filters: CareMemberQueryFilters, entity: CareMember) => {
-  const offBoardingDateFrom = filters.offboardingDateFrom;
-  const offBoardingDateTo = filters.offboardingDateTo;
+  if (filters && filters.offboardingDateFrom && filters.offboardingDateTo) {
+    const offBoardingDateFrom = moment(filters.offboardingDateFrom, DATE_FILTER_FORMAT).utc();
+    const offBoardingDateTo = moment(filters.offboardingDateTo, DATE_FILTER_FORMAT).utc();
 
-  if (filters && offBoardingDateFrom && offBoardingDateTo) {
-    const offBoardingDate = moment(entity.offboardingDate).utc();
+    if (filters && offBoardingDateFrom && offBoardingDateTo) {
+      const offBoardingDate = moment(entity.offboardingDate, DATE_FILTER_FORMAT).utc();
 
-    if (offBoardingDate.isBetween(offBoardingDateFrom, offBoardingDateTo, undefined, "[]")) {
-      return true;
+      if (offBoardingDate.isBetween(offBoardingDateFrom, offBoardingDateTo, undefined, "[]")) {
+        return true;
+      }
+      return false;
     }
-    return false;
+    return true;
   }
   return true;
 };

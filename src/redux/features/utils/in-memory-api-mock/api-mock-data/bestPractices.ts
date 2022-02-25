@@ -9,7 +9,7 @@ export const bestPractices: BestPractice[] = [
     description:
       "Use the right type for your variables. This is a good practice to avoid errors in your code.",
     author: "John Doe",
-    publishDate: "3/13/2022",
+    publishDate: "13/03/2022",
     rating: 2,
     tags: ["typescript", "javascript", "react"],
     contentUrl:
@@ -20,7 +20,7 @@ export const bestPractices: BestPractice[] = [
     title: "Be consistent with your naming conventions",
     description: "This is a good practice to avoid errors in your code.",
     author: "Peter Parker",
-    publishDate: "2/13/2022",
+    publishDate: "13/02/2022",
     rating: 1,
     tags: ["typescript", "react", "go"],
     contentUrl: sampleBase64pdf,
@@ -30,7 +30,7 @@ export const bestPractices: BestPractice[] = [
     title: "Be consistent with your naming conventions",
     description: "This is a good practice to avoid errors in your code.",
     author: "Mary Jane",
-    publishDate: "1/13/2022",
+    publishDate: "13/01/2022",
     rating: 5,
     tags: ["javascript", "react", "html"],
     contentUrl:

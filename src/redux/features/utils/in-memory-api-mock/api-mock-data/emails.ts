@@ -10,7 +10,7 @@ export const emails: Email[] = [
     roles: [2, 3],
     countries: ["AFG", "BRA"],
     recipients: [10, 12],
-    sendingDate: "2/13/2022",
+    sendingDate: "13/02/2022",
   },
   {
     id: 2,
@@ -21,6 +21,6 @@ export const emails: Email[] = [
     roles: [1, 3],
     countries: ["AFG", "BRA"],
     recipients: [4, 5, 6, 7, 8, 9],
-    sendingDate: "3/13/2022",
+    sendingDate: "13/03/2022",
   },
 ];

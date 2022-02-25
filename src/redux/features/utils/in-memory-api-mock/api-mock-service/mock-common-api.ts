@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import moment from "moment";
 
 import { BestPractice, CareMember, Email, Employee, toBoolean } from "types";
-import { CREATE_ENTITY_ID } from "variables/app.consts";
+import { CREATE_ENTITY_ID, DATE_FILTER_FORMAT } from "variables/app.consts";
 
 import {
   mockAxiosReponse,
@@ -64,7 +64,7 @@ export const matchCountryIso3 = (queryParams: URLSearchParams, entity: Employee 
     const countryCode = queryParams.get("countryIso3");
 
     const countryObj = countriesMockResponse.data.find(country => country.code3 === countryCode);
-    if (countryObj && entity.country !== countryObj.name) {
+    if (countryObj && entity.office.countryiso3 !== countryObj.code3) {
       return false;
     }
   }
@@ -155,13 +155,13 @@ export const matchRating = (queryParams: URLSearchParams, entity: BestPractice) 
 
 export const matchPublishDate = (queryParams: URLSearchParams, entity: BestPractice) => {
   if (queryParams && queryParams.get("publishDate")) {
-    const publishDate = moment(queryParams.get("publishDate")).toDate();
-    const bestPracticePublishDate = moment(entity.publishDate).toDate();
+    const publishDate = moment(queryParams.get("publishDate"), DATE_FILTER_FORMAT).toDate();
+    const bestPracticePublishDate = moment(entity.publishDate, DATE_FILTER_FORMAT).toDate();
 
     if (
       moment(publishDate).isValid() &&
-      moment(bestPracticePublishDate).format("YYYY-MM-DD") !==
-        moment(publishDate).format("YYYY-MM-DD")
+      moment(bestPracticePublishDate).format(DATE_FILTER_FORMAT) !==
+        moment(publishDate).format(DATE_FILTER_FORMAT)
     ) {
       return false;
     }
@@ -172,8 +172,8 @@ export const hiringDateBetweenToday = (queryParams: URLSearchParams, entity: Emp
   if (queryParams && queryParams.get("hiringDateFrom")) {
     const searchHiringDateFromAsString = queryParams.get("hiringDateFrom");
 
-    const entityHiringDate = moment(entity.startDate).local();
-    const hiringDateFrom = moment(searchHiringDateFromAsString).local();
+    const entityHiringDate = moment(entity.startDate, DATE_FILTER_FORMAT).local();
+    const hiringDateFrom = moment(searchHiringDateFromAsString, DATE_FILTER_FORMAT).local();
     const todaysDate = moment.utc();
 
     if (
@@ -240,9 +240,9 @@ export const matchSendingDateBetween = (queryParams: URLSearchParams, entity: Em
     const sendingDateFromAsString = queryParams.get("sendingDateFrom");
     const sendingDateToAsString = queryParams.get("sendingDateTo");
 
-    const sendingDate = moment(entity.sendingDate).utc();
-    const sendingDateFrom = moment(sendingDateFromAsString).utc();
-    const sendingDateTo = moment(sendingDateToAsString).utc();
+    const sendingDate = moment(entity.sendingDate, DATE_FILTER_FORMAT).utc();
+    const sendingDateFrom = moment(sendingDateFromAsString, DATE_FILTER_FORMAT).utc();
+    const sendingDateTo = moment(sendingDateToAsString, DATE_FILTER_FORMAT).utc();
 
     if (
       sendingDateFrom.isValid() &&

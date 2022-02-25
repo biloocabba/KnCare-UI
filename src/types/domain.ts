@@ -14,7 +14,6 @@ export interface Employee extends Domain {
   managementGroup: string;
   companyCode: string;
   costCenter: string;
-  country: string;
   birthDate: string;
   companyPhone: string;
   companyMobilePhone: string;
@@ -23,21 +22,22 @@ export interface Employee extends Domain {
   endDate?: string | null;
   dateOfLeave: string | null;
   nationality: string | null;
-  officeAddressCity: string;
-  officeAddressStreet: string;
-  officeAddressCountry: string | null;
-  officeAddressPostalCode: string | null;
+  office: {
+    countryiso3: string;
+    city: string;
+    street: string;
+    country: string;
+    postalCode: string;
+  };
   careMember: boolean;
 }
 
 export interface CareMember extends Employee {
   employeeId: number;
-  onboardingDate: string;
-  offboardingDate: string;
-  groups?: Group[];
-  groupIds?: number[];
+  onboardingDate: string | null;
+  offboardingDate: string | null;
+  groups?: number[];
   roleId?: number;
-  role?: CareRole;
 }
 
 export interface CareRole extends Domain {

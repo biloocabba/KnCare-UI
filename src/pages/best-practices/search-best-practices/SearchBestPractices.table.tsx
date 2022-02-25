@@ -3,6 +3,7 @@ import { ColumnDescription } from "react-bootstrap-table-next";
 import Rating from "react-rating";
 
 import { BestPractice } from "types";
+import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 export const bestPracticesTableColumns: ColumnDescription<any, BestPractice>[] = [
   {
@@ -66,7 +67,7 @@ export const bestPracticesTableColumns: ColumnDescription<any, BestPractice>[] =
     text: "Publish Date",
     sort: true,
     formatter: (cell: BestPractice["publishDate"]) => {
-      return <>{moment(cell).format("YYYY-MM-DD")}</>;
+      return <>{moment(cell).format(DATE_FILTER_FORMAT)}</>;
     },
   },
   {

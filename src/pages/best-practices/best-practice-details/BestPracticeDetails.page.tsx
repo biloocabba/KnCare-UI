@@ -42,6 +42,7 @@ import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
 import { RouteParams } from "types";
+import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 import { SEARCH_BEST_PRACTICE } from "../best-practices.routes.const";
 
@@ -139,7 +140,7 @@ export const BestPracticeDetailPage = () => {
                         <InputField
                           id="publishDate"
                           label="Published On"
-                          value={moment(bestPractice?.publishDate).format("MM/DD/YYYY")}
+                          value={moment(bestPractice?.publishDate).format(DATE_FILTER_FORMAT)}
                           type="text"
                           disabled={true}
                         />

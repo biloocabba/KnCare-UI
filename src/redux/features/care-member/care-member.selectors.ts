@@ -36,7 +36,6 @@ export const selectCareMembersByFilters = (filters: CareMemberQueryFilters) =>
       selectAllRolesData,
     ],
     (careMembers, countries, businessUnits, groups, roles) => {
-      console.log("selectCareMembersByFilters", filters);
       return entitySearch(filters, careMembers, businessUnits, countries, groups, roles);
     }
   );

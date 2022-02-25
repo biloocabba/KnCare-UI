@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 
@@ -17,16 +18,8 @@ import { BoxHeader } from "components/headers";
 import { EMPLOYEE_SEARCH, CareMemberPanel } from "pages/users";
 
 import { useAlerts } from "hooks";
-import {
-  RouteParams,
-  SelectOption,
-  CareMember,
-  Employee,
-  CareMemberSaveRequest,
-  formatDateAsDD_MM_YYYY,
-  addDays,
-} from "types";
-import { CREATE_ENTITY_ID } from "variables/app.consts";
+import { RouteParams, SelectOption, CareMember, Employee, CareMemberSaveRequest } from "types";
+import { CREATE_ENTITY_ID, DATE_FILTER_FORMAT } from "variables/app.consts";
 
 export const CreateCareMemberPage = () => {
   const { id } = useParams<RouteParams>();
@@ -44,11 +37,11 @@ export const CreateCareMemberPage = () => {
   const { alert, setSaveSent, setSuccessMessage } = useAlerts(careMemberState);
 
   const createDefaultCareMember = (): CareMember => {
-    const nowAsDate: Date = new Date();
-    const oneYearFromNowAsDate: Date = addDays(nowAsDate, 365);
+    const nowAsDate = moment.now();
+    const oneYearFromNowAsDate = moment().add(365, "days");
 
-    const onboardingDate: string = formatDateAsDD_MM_YYYY(nowAsDate);
-    const defaultOffBoarding: string = formatDateAsDD_MM_YYYY(oneYearFromNowAsDate);
+    const onboardingDate: string = moment(nowAsDate).format(DATE_FILTER_FORMAT);
+    const defaultOffBoarding: string = moment(oneYearFromNowAsDate).format(DATE_FILTER_FORMAT);
 
     return {
       ...employee,
@@ -87,7 +80,6 @@ export const CreateCareMemberPage = () => {
                     <Button
                       type="button"
                       color="info"
-                      href="#dsfkjlsi39ds9d97876s7d"
                       onClick={() => history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Employees

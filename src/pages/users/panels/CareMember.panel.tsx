@@ -8,7 +8,8 @@ import { selectGroupsByIdsAsSelectValues, selectRoleByIdAsSelectValue } from "re
 
 import { DateField, InputField, SelectField } from "components/widgets";
 
-import { CareMember, SelectOption, CareMemberSaveRequest, formatMomentAsDD_MM_YYYY } from "types";
+import { CareMember, CareMemberSaveRequest, SelectOption } from "types";
+import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 interface onSaveFunction {
   (careMemberRequest: CareMemberSaveRequest): void;
@@ -25,24 +26,15 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
   const { careMember, groupOptions, roleOptions, onSave } = props;
 
   const [onboardingDate, setOnboardingDate] = useState<Moment | undefined>(
-    moment(careMember.onboardingDate)
+    moment(careMember?.onboardingDate, DATE_FILTER_FORMAT)
   );
 
   const [offboardingDate, setOffboardingDate] = useState<Moment | undefined>(
-    moment(careMember.offboardingDate)
+    moment(careMember?.offboardingDate, DATE_FILTER_FORMAT)
   );
-
-  // const [onboardingDate, setOnboardingDate] = useState<string>(
-  //   moment(moment(careMember.onboardingDate).toLocaleString()).format("MM/DD/YYYY")
-  // );
-  // const [offboardingDate, setOffboardingDate] = useState<string>(
-  //   moment(moment(careMember.offboardingDate).toLocaleString()).format("MM/DD/YYYY")
-  // );
 
   const careMemberRole = useAppSelector(selectRoleByIdAsSelectValue(careMember.roleId));
-  const careMemberGroups = useAppSelector(
-    selectGroupsByIdsAsSelectValues(careMember.groupIds || [])
-  );
+  const careMemberGroups = useAppSelector(selectGroupsByIdsAsSelectValues(careMember.groups || []));
 
   const [roleId, setRoleId] = useState<number | undefined>();
   const [groupIds, setGroupIds] = useState<number[]>([]);
@@ -50,8 +42,8 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
   const onSaveCareMember = () => {
     const careMemberSaveRequest: CareMemberSaveRequest = {
       id: careMember.id,
-      onboardingDate: formatMomentAsDD_MM_YYYY(onboardingDate),
-      offboardingDate: formatMomentAsDD_MM_YYYY(offboardingDate),
+      onboardingDate: moment(onboardingDate).format(DATE_FILTER_FORMAT),
+      offboardingDate: moment(offboardingDate).format(DATE_FILTER_FORMAT),
       roleId: roleId,
       employeeId: careMember.employeeId,
       groupIds: groupIds,
@@ -168,7 +160,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
             <InputField
               id="input-address"
               label="Address"
-              value={careMember.officeAddressStreet}
+              value={careMember.office.street}
               type="text"
               disabled={true}
             />
@@ -179,7 +171,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
             <InputField
               id="input-city"
               label="City"
-              value={careMember.officeAddressCity}
+              value={careMember.office.city}
               type="text"
               disabled={true}
             />
@@ -188,7 +180,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
             <InputField
               id="input-country"
               label="Country"
-              value={careMember.officeAddressCountry || ""}
+              value={careMember.office.country || ""}
               type="text"
               disabled={true}
             />
@@ -197,7 +189,7 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
             <InputField
               id="input-postal-code"
               label="Postal code"
-              value={careMember.officeAddressPostalCode || ""}
+              value={careMember.office.postalCode || ""}
               type="text"
               disabled={true}
             />
