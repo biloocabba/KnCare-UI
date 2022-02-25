@@ -21,7 +21,7 @@ export const saveCareMember = async (
   url: string,
   body: CareMemberSaveRequest
 ): Promise<AxiosResponse<CareMember>> => {
-  const employeeData: Employee = findEmployeeById(body.id);
+  const employeeData: Employee = findEmployeeById(body.employeeId);
   const careMemberResponse = {
     ...employeeData,
     ...body,

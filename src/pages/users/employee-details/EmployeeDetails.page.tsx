@@ -22,19 +22,19 @@ import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactst
 
 import { selectEmployeeById } from "redux/features/employee";
 
+import { WithAuthorization } from "components/authorization";
 import { BoxHeader } from "components/headers";
 
 import { EMPLOYEE_SEARCH, CARE_MEMBER_CREATE } from "pages/users";
 import { EmployeePanel } from "pages/users/panels";
 
-import { Employee, RouteParams } from "types";
+import { Employee, Permission, RouteParams } from "types";
 
 export const EmployeeDetailsPage = () => {
   const { id } = useParams<RouteParams>();
   const history = useHistory();
 
   const employee: Employee = useSelector(selectEmployeeById(parseInt(id))) as Employee;
-  const currentRole = "admin";
   const buttonColor = employee.careMember ? "secondary" : "success";
 
   return (
@@ -52,17 +52,19 @@ export const EmployeeDetailsPage = () => {
                 </Row>
                 <Row className="align-items-center py-4">
                   <Col lg="12" xs="7" className="text-right">
-                    <Button
-                      color={buttonColor}
-                      onClick={() => history.push(`/${currentRole}${CARE_MEMBER_CREATE}/${id}`)}
-                      disabled={employee.careMember}
-                    >
-                      Invite to Care
-                    </Button>
+                    <WithAuthorization requires={Permission.CareMember_write}>
+                      <Button
+                        color={buttonColor}
+                        onClick={() => history.push(`/admin${CARE_MEMBER_CREATE}/${id}`)}
+                        disabled={employee.careMember}
+                      >
+                        Invite to Care
+                      </Button>
+                    </WithAuthorization>
                     <Button
                       className="btn btn-primary"
                       color="primary"
-                      onClick={() => history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)}
+                      onClick={() => history.push(`/admin${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Search
                     </Button>
