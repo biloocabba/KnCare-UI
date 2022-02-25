@@ -5,7 +5,7 @@ export const GENERIC_ERROR_CODE = -1024;
 export const NO_FILTER = -1024;
 
 export const SELECT_ALL = { value: `${NO_FILTER}`, label: "ALL" };
-export const DATE_FILTER_FORMAT = "D-M-YYYY";
+export const DATE_FILTER_FORMAT = "DD/MM/YYYY";
 
 export const defaultBestPracticesTags = [
   { value: "Collaboration", label: "Collaboration" },

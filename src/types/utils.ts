@@ -1,23 +1,6 @@
-import moment, { Moment } from "moment";
-
 import { AuthorizationPolicies } from "variables/rbac.config";
 
 import { Permission, Role } from "./security";
-
-export const formatDateAsDD_MM_YYYY = (date: Date): string => {
-  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear() - 1}`;
-};
-
-export const formatMomentAsDD_MM_YYYY = (moment: Moment | undefined): string => {
-  if (!moment) {
-    return "";
-  }
-  return `${moment.date()}/${moment.month() + 1}/${moment.year()}`;
-};
-
-export const addDays = (date: Date, days: number): Date => {
-  return moment(date).add(days, "days").toDate();
-};
 
 export const toFileArray = (filelist: FileList | null): File[] => {
   if (!filelist || filelist.length === 0) {

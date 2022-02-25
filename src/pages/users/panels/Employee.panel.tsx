@@ -66,7 +66,7 @@ export const EmployeePanel = (props: EmployeePanelProps) => {
             <InputField
               id="input-office-address-street"
               label="Street"
-              value={employee.officeAddressStreet}
+              value={employee.office.street}
               type="text"
               disabled={true}
             />
@@ -77,7 +77,7 @@ export const EmployeePanel = (props: EmployeePanelProps) => {
             <InputField
               id="input-office-address-city"
               label="City"
-              value={employee.officeAddressCity}
+              value={employee.office.city}
               type="text"
               disabled={true}
             />
@@ -86,7 +86,7 @@ export const EmployeePanel = (props: EmployeePanelProps) => {
             <InputField
               id="input-office-address-country"
               label="Country"
-              value={employee.officeAddressCountry || ""}
+              value={employee.office.country || ""}
               type="text"
               disabled={true}
             />
@@ -95,7 +95,7 @@ export const EmployeePanel = (props: EmployeePanelProps) => {
             <InputField
               id="input-office-address-postal-code"
               label="Postal Code"
-              value={employee.officeAddressPostalCode || ""}
+              value={employee.office.postalCode || ""}
               type="text"
               disabled={true}
             />

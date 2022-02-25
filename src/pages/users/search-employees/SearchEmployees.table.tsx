@@ -38,7 +38,7 @@ export const employeesTableColumns: ColumnDescription<any, any>[] = [
     style: { width: "50px" },
   },
   {
-    dataField: "country",
+    dataField: "office.country",
     text: "country",
     sort: true,
   },

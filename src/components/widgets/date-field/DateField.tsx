@@ -4,7 +4,7 @@ import ReactDatetime from "react-datetime";
 
 import { FormGroup } from "reactstrap";
 
-import { formatMomentAsDD_MM_YYYY } from "types";
+import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 type Props = ReactDatetime.DatetimepickerProps & {
   id: string;
@@ -23,14 +23,12 @@ export const DateField = ({ id, label, value, setValue, ...props }: Props) => {
         {...props}
         timeFormat={false}
         closeOnSelect
-        value={value ? formatMomentAsDD_MM_YYYY(value) : ""}
+        value={value ? moment(value).format(DATE_FILTER_FORMAT) : ""}
         renderInput={props => {
-          return <input {...props} value={value ? formatMomentAsDD_MM_YYYY(value) : ""} />;
+          return <input {...props} value={value ? moment(value).format(DATE_FILTER_FORMAT) : ""} />;
         }}
         onChange={dateAsMoment => {
-          const selectedDate =
-            typeof dateAsMoment === "string" ? moment(dateAsMoment) : dateAsMoment;
-          setValue(selectedDate);
+          setValue(moment(dateAsMoment));
         }}
       />
     </FormGroup>
