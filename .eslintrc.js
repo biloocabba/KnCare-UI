@@ -58,6 +58,7 @@ module.exports = {
     ],
 
     "react/prop-types": "off",
+    "react/jsx-key": "off",
 
     "linebreak-style": ["error", process.platform === "win32" ? "windows" : "unix"],
 
@@ -171,6 +172,7 @@ module.exports = {
         "@typescript-eslint/ban-ts-comment": "off",
         "linebreak-style": ["error", process.platform === "win32" ? "windows" : "unix"],
         "react/prop-types": "off",
+        "react/jsx-key": "off",
         "import/order": [
           "error",
           {
