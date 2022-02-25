@@ -34,7 +34,7 @@ export const BestPracticeHighlightsPanel = ({ onViewDetailsClick }: Props) => {
         <Row className="card-wrapper">
           <Col lg="4">
             <Card>
-              <CardImg alt="..." src={careCreditCardsImg} top style={{ height: "12em" }} />
+              <CardImg alt="..." src={careCreditCardsImg} top />
               <CardBody style={{ height: "13em" }}>
                 <CardTitle className="mb-3 text-center" tag="h3">
                   Care Credit Cards
@@ -52,7 +52,7 @@ export const BestPracticeHighlightsPanel = ({ onViewDetailsClick }: Props) => {
           </Col>
           <Col lg="4">
             <Card>
-              <CardImg alt="..." src={huddleImg} top style={{ height: "12em" }} />
+              <CardImg alt="..." src={huddleImg} top />
               <CardBody style={{ height: "13em" }}>
                 <CardTitle className="mb-3 text-center" tag="h3">
                   Huddles
@@ -72,7 +72,7 @@ export const BestPracticeHighlightsPanel = ({ onViewDetailsClick }: Props) => {
           </Col>
           <Col lg="4">
             <Card>
-              <CardImg alt="..." src={remoteWorkImg} top style={{ height: "12em" }} />
+              <CardImg alt="..." src={remoteWorkImg} top />
               <CardBody style={{ height: "13em" }}>
                 <CardTitle className="mb-3 text-center" tag="h3">
                   Care & Remote Work

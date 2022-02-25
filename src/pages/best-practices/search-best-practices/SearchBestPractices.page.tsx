@@ -39,8 +39,6 @@ export const SearchBestPracticesPage = () => {
   const [selectedRows, setSelectedRows] = useState<BestPractice[]>([]);
 
   const dispatch = useAppDispatch();
-
-  console.log("Best practice");
   const bestPractices = useAppSelector(selectBestPracticeState);
 
   const onClickSearchBestPractices = (filters: BestPracticesQueryFilters): void => {
