@@ -10,13 +10,14 @@ import {
   selectAllGroupsDataAsSelectOptions,
   selectAllRolesDataAsSelectOptions,
   selectLoggedUserDefaultCountryAsSelection,
+  selectLoggedUserRole,
 } from "redux/features";
 
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
-import { CareMemberQueryFilters, Permission, SelectOption } from "types";
+import { CareMemberQueryFilters, Permission, Role, SelectOption } from "types";
 import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 interface SearchCareMemberFilterPanelProps {
@@ -25,6 +26,8 @@ interface SearchCareMemberFilterPanelProps {
 }
 
 export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelProps) => {
+  const userRole = useAppSelector(selectLoggedUserRole);
+
   const businessUnits: SelectOption[] = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const countries: SelectOption[] = useAppSelector(selectAllCountriesDataAsSelectOptions);
   const roles: SelectOption[] = useAppSelector(selectAllRolesDataAsSelectOptions);
@@ -53,10 +56,12 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
     setSearchOnBoardDateTo(undefined);
     setSearchOffboardingDateFrom(undefined);
     setSearchOffboardingDateTo(undefined);
-    setCountrySelected(null);
     setBusinessUnitSelected(null);
     setGroupSelected(null);
     setRoleSelected(null);
+    if (userRole === Role.RegionalManager) {
+      setCountrySelected(null);
+    }
   };
 
   const findByAllParameters = () => {

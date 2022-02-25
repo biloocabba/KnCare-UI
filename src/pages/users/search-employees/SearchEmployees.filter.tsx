@@ -4,13 +4,13 @@ import { useState } from "react";
 import { Col, Row } from "reactstrap";
 
 import { useAppSelector } from "redux/app";
-import { selectLoggedUserDefaultCountryAsSelection } from "redux/features";
+import { selectLoggedUserDefaultCountryAsSelection, selectLoggedUserRole } from "redux/features";
 
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
-import { EmployeeQueryFilters, Permission, SelectOption } from "types";
+import { EmployeeQueryFilters, Permission, Role, SelectOption } from "types";
 import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 interface onSearchEmployeesFunction {
@@ -25,6 +25,7 @@ interface SearchEmployeesFilterPanelProps {
 }
 
 export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProps) => {
+  const userRole = useAppSelector(selectLoggedUserRole);
   const [searchNewMembersOnly, setSearchNewMembersOnly] = useState<boolean>(false);
   const [searchLastName, setSearchLastName] = useState("");
 
@@ -50,8 +51,10 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
     setSearchLastName("");
     setSearchNewMembersOnly(false);
     setBusinessUnitSelected(null);
-    setCountrySelected(null);
     setSearchHiringDate(undefined);
+    if (userRole === Role.RegionalManager) {
+      setCountrySelected(null);
+    }
   };
 
   const findByAllParameters = () => {

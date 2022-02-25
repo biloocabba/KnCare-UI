@@ -4,13 +4,13 @@ import { useState } from "react";
 import { Col, Row } from "reactstrap";
 
 import { useAppSelector } from "redux/app";
-import { selectLoggedUserDefaultCountryAsSelection } from "redux/features";
+import { selectLoggedUserDefaultCountryAsSelection, selectLoggedUserRole } from "redux/features";
 
 import { WithAuthorization } from "components/authorization";
 import { FilterPanel } from "components/panels";
 import { DateField, InputField, SelectField } from "components/widgets";
 
-import { EmailQueryFilters, Permission, SelectOption } from "types";
+import { EmailQueryFilters, Permission, Role, SelectOption } from "types";
 import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 interface onSearchEmailsFunction {
@@ -26,13 +26,7 @@ interface SearchEmailsFilterPanelProps {
 }
 
 export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => {
-  // const [searchBusinessUnitId, setSearchBusinessUnitId] = useState<number>();
-  // const [searchCountryIsoCode3, setSearchCountryIsoCode3] = useState<string>(
-  //   useAppSelector(selectLoggedUserDefaultCountry)
-  // );
-  // const [searchRole, setSearchRole] = useState<string>("");
-  // const [searchGroupId, setSearchGroupId] = useState<number>();
-
+  const userRole = useAppSelector(selectLoggedUserRole);
   const [businessUnitSelected, setBusinessUnitSelected] = useState<SelectOption | null>();
   const [groupSelected, setGroupSelected] = useState<SelectOption | null>();
   const [roleSelected, setRoleSelected] = useState<SelectOption | null>();
@@ -48,10 +42,12 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
     setRoleSelected(null);
     setGroupSelected(null);
     setBusinessUnitSelected(null);
-    setCountrySelected(null);
     setSearchSubject("");
     setSearchSendingDateFrom(undefined);
     setSearchSendingDateTo(undefined);
+    if (userRole === Role.RegionalManager) {
+      setCountrySelected(null);
+    }
   };
 
   const findByAllParameters = () => {

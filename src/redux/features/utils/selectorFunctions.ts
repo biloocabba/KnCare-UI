@@ -23,7 +23,7 @@ export const filterCareMembers = (
     );
   });
 
-  console.log(result);
+  // console.log(result);
   return result;
 };
 
@@ -86,7 +86,7 @@ export const matchGroupId = (
   groups: Group[]
 ) => {
   if (filters && filters.groupId) {
-    console.log(filters, entity, entity.groupIds?.includes(filters.groupId));
+    // console.log(filters, entity, entity.groupIds?.includes(filters.groupId));
 
     // find obj from db based on filter
     const groupObj = groups.find(group => group.id === filters.groupId);
