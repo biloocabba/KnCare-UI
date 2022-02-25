@@ -17,6 +17,7 @@ import {
 
 export const saveBestPractice = async (body: FormData): Promise<AxiosResponse<BestPractice>> => {
   const bestPractice = toBestPractice(body) as BestPractice;
+  bestPracticeMockResponse.data.push(bestPractice);
   return wrapIntoResponse(bestPractice);
 };
 
