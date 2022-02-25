@@ -101,21 +101,17 @@ export const matchFirstName = (queryParams: URLSearchParams, entity: Employee | 
 };
 
 export const matchAuthor = (queryParams: URLSearchParams, entity: BestPractice) => {
-  if (
-    queryParams &&
-    queryParams.get("searchAuthor") &&
-    entity.author !== queryParams.get("searchAuthor")
-  ) {
+  if (queryParams && queryParams.get("author") && entity.author !== queryParams.get("author")) {
     return false;
   }
   return true;
 };
 
 export const matchTitle = (queryParams: URLSearchParams, entity: BestPractice) => {
-  if (queryParams && queryParams.get("searchTitle")) {
-    const searchTitle = queryParams.get("searchTitle");
+  if (queryParams && queryParams.get("title")) {
+    const title = queryParams.get("title");
 
-    if (searchTitle && entity.title.includes(searchTitle)) {
+    if (title && entity.title.includes(title)) {
       return true;
     }
     return false;
@@ -136,9 +132,9 @@ export const matchSubject = (queryParams: URLSearchParams, entity: Email) => {
 };
 
 export const matchTag = (queryParams: URLSearchParams, entity: BestPractice) => {
-  if (queryParams && queryParams.get("searchTag")) {
-    const searchTag = queryParams.get("searchTag");
-    if (searchTag && entity.tags.includes(searchTag)) {
+  if (queryParams && queryParams.get("tag")) {
+    const tag = queryParams.get("tag");
+    if (tag && entity.tags.includes(tag)) {
       return true;
     }
     return false;
@@ -147,9 +143,9 @@ export const matchTag = (queryParams: URLSearchParams, entity: BestPractice) => 
 };
 
 export const matchRating = (queryParams: URLSearchParams, entity: BestPractice) => {
-  if (queryParams && queryParams.get("searchRating")) {
-    const searchRating = queryParams.get("searchRating");
-    if (searchRating && entity.rating === parseInt(searchRating)) {
+  if (queryParams && queryParams.get("rating")) {
+    const rating = queryParams.get("rating");
+    if (rating && entity.rating === parseInt(rating)) {
       return true;
     }
     return false;
@@ -158,14 +154,14 @@ export const matchRating = (queryParams: URLSearchParams, entity: BestPractice) 
 };
 
 export const matchPublishDate = (queryParams: URLSearchParams, entity: BestPractice) => {
-  if (queryParams && queryParams.get("searchPublishDate")) {
-    const searchPublishDate = moment(queryParams.get("searchPublishDate")).toDate();
+  if (queryParams && queryParams.get("publishDate")) {
+    const publishDate = moment(queryParams.get("publishDate")).toDate();
     const bestPracticePublishDate = moment(entity.publishDate).toDate();
 
     if (
-      moment(searchPublishDate).isValid() &&
+      moment(publishDate).isValid() &&
       moment(bestPracticePublishDate).format("YYYY-MM-DD") !==
-        moment(searchPublishDate).format("YYYY-MM-DD")
+        moment(publishDate).format("YYYY-MM-DD")
     ) {
       return false;
     }
