@@ -34,7 +34,6 @@ export const handleGetApiRequestInternal = async <T>(url: string): Promise<ApiRe
       isError: false,
     };
 
-    console.log(responseOk);
     return responseOk;
   } catch (err: any) {
     return {

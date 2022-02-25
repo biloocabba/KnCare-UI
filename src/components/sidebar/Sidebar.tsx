@@ -133,7 +133,6 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
           const st: any = {};
           st[route["state"]] = !state[route.state];
 
-          // console.log("Route for Collapsed: ", route, "key: ", route.key);
           return (
             <NavItem key={route.key}>
               <NavLink

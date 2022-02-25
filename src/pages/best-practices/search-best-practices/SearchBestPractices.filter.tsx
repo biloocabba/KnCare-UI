@@ -37,7 +37,6 @@ export const SearchBestPracticesFilterPanel = ({ onSearch }: Props) => {
 
   const findByAllParameters = () => {
     const searchFilters = parametersToFilter();
-    console.log(searchFilters);
     onSearch(searchFilters);
   };
 

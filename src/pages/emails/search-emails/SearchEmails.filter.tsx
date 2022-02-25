@@ -52,7 +52,6 @@ export const SearchEmailsFilterPanel = (props: SearchEmailsFilterPanelProps) => 
 
   const findByAllParameters = () => {
     const filters = parametersToFilter();
-    console.log(filters);
     props.onSearchEmails(filters);
   };
 

@@ -22,7 +22,6 @@ const createCareMember = (body: CareMemberSaveRequest): HttpResponseType => {
 
 const updateCareMember = (updatedCareMember: IUpdated<CareMemberSaveRequest>): HttpResponseType => {
   const { id, body } = updatedCareMember;
-  console.log(body);
   return httpCommon.put(`/care-member/${id}`, body);
 };
 

@@ -28,7 +28,6 @@ const findReportInCache = (
   cacheKey: string
 ): WorldDataReport => {
   const reportsData = allReports.find(report => report.reportName === cacheKey);
-  console.log(reportsData);
   return reportsData ? reportsData.data : NO_REPORT_CACHED;
 };
 
@@ -57,11 +56,3 @@ export const selectAutoOffboardedMembersReportsData = createSelector(
 export const selectCurrentMapData = createSelector([selectAllReportsData], allReports => {
   return findReportInCache(allReports, REPORT_KEY_CURRENT_MAP);
 });
-//  getActiveMembersMapData,
-//   getNewMembersMapData,
-//   getSelfResignedMembersMapData,
-//   getAutoOffboardedMembersMapData,
-
-// export const selectWorldOverviewState = createSelector(
-//   rootState: RootState
-// ): StateType<WorldOverviewCachedReports> => rootState.worldOverview;

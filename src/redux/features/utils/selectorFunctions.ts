@@ -71,7 +71,6 @@ export const matchCountryIso3 = (
 ) => {
   if (filters && filters.countryIso3) {
     const countryCode3 = filters.countryIso3;
-
     const countryObj = countries.find(country => country.code3 === countryCode3);
     if (countryObj && entity.country !== countryObj.name) {
       return false;

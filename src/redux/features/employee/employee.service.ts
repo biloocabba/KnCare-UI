@@ -3,7 +3,6 @@ import { IPartiallyUpdated, IUpdated, httpCommon, HttpResponseType } from "redux
 import { Employee } from "types";
 
 const searchEmployees = (queryParams: URLSearchParams): HttpResponseType => {
-  console.log(queryParams);
   return httpCommon.get(`/employee?${queryParams}`);
 };
 

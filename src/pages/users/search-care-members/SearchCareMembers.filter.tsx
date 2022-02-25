@@ -64,9 +64,8 @@ export const SearchCareMemberFilterPanel = (props: SearchCareMemberFilterPanelPr
     }
   };
 
-  const findByAllParameters = () => {
+  const findByAllParameters = (): void => {
     const filters = parametersToFilter();
-    console.log(filters);
     props.setFilters(filters);
   };
 

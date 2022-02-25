@@ -19,7 +19,6 @@ export const searchEmployees = (url: string): AxiosResponse<Employee[]> => {
 
 const filterEmployees = (queryParams: URLSearchParams, employeesData: Employee[]): Employee[] => {
   const result: Employee[] = employeesData.filter(employee => {
-    console.log("Debug from here:", queryParams);
     return (
       matchFirstName(queryParams, employee) &&
       matchBusinessUnit(queryParams, employee) &&
@@ -45,43 +44,3 @@ export const findEmployeesByIds = (ids: number[]): AxiosResponse<Employee[]> => 
   );
   return { data: groupMembers, ...mockAxiosReponse };
 };
-
-// export const searchCareMembers = (url: string): AxiosResponse<CareMember[]> => {
-//   return entitySearch<CareMember>(url, careMembersMockResponse, filterCareMembers);
-// };
-
-// export const saveCareMember = async (
-//   url: string,
-//   body: CareMemberSaveRequest
-// ): Promise<AxiosResponse<CareMember>> => {
-//   console.log(body);
-
-//   const employeeData: Employee = findEmployeeById(body.id);
-//   const careMemberResponse = {
-//     ...employeeData,
-//     ...body,
-//   };
-
-//   const response = wrapIntoResponse(careMemberResponse);
-//   console.log(response);
-//   return Promise.resolve(response);
-// };
-
-// export const findCareMemberById = (id: number): CareMember => {
-//   return careMembersMockResponse.data.find(careMember => careMember.id === id) as CareMember;
-// };
-
-// export const filterCareMembers = (
-//   queryParams: URLSearchParams,
-//   careMembersData: CareMember[]
-// ): CareMember[] => {
-//   const result: CareMember[] = careMembersData.filter(careMember => {
-//     return (
-//       matchFirstName(queryParams, careMember) &&
-//       matchBusinessUnit(queryParams, careMember) &&
-//       matchCountryId(queryParams, careMember)
-//     );
-//   });
-
-//   return result;
-// };

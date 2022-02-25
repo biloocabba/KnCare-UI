@@ -16,7 +16,7 @@ const countryManagerUser: Principal = {
   username: "kristin.allik",
   email: "kristin.allik@kuehne-nagel.com",
   jwtToken: "rfwpio425ipogfskpflk3p32q09orpfafdefkaöldfkaodffe",
-  countryCode3: "GER",
+  countryCode3: "CHN",
   authRole: Role.CountryManager,
   role: "CountryTransformationManager",
   imageUrl: "https://i.pravatar.cc/300",

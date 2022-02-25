@@ -42,7 +42,6 @@ export const CurrentMemberPanel = ({
 
   const memberDetails = (e: any) => {
     const { id } = e.target;
-    //console.log(`${CARE_MEMBER_EDIT}/${id}`);
     history.push(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 

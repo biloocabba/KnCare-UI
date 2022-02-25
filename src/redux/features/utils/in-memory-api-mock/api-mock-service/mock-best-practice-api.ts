@@ -23,7 +23,6 @@ export const toObject = (formData: FormData): any => {
   const object: any = {};
 
   for (const [key, value] of formData.entries()) {
-    // console.log(key, ":", value);
     object[key] = value;
   }
   object["contentUrl"] =

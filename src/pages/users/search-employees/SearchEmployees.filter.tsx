@@ -59,7 +59,6 @@ export const SearchEmployeesFilterPanel = (props: SearchEmployeesFilterPanelProp
 
   const findByAllParameters = () => {
     const filters = parametersToFilter();
-    console.log(filters);
     props.onSearchEmployees(filters);
   };
 
