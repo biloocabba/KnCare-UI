@@ -15,19 +15,23 @@ import {
   matchPublishDate,
 } from ".";
 
-export const saveBestPractice = async (body: FormData): Promise<AxiosResponse<FormData>> => {
-  return wrapIntoResponse(toObject(body));
+export const saveBestPractice = async (body: FormData): Promise<AxiosResponse<BestPractice>> => {
+  const bestPractice = toBestPractice(body) as BestPractice;
+  return wrapIntoResponse(bestPractice);
 };
 
-export const toObject = (formData: FormData): any => {
+export const toBestPractice = (formData: FormData): any => {
   const object: any = {};
-
   for (const [key, value] of formData.entries()) {
     object[key] = value;
+    if (key === "tags") {
+      (object[key] = (value as string).split(",")), [];
+    }
   }
   object["contentUrl"] =
     "https://cors-anywhere.herokuapp.com/https://github.com/KNITS-OS/SkillQuest/raw/master/Resources/corporatebrochurekuehnenagel2021en.pdf";
   object["id"] = bestPractices[bestPractices.length - 1].id + 1;
+
   return object;
 };
 

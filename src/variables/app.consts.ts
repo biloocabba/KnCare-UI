@@ -10,7 +10,7 @@ export const DATE_FILTER_FORMAT = "DD/MM/YYYY";
 export const defaultBestPracticesTags = [
   { value: "Collaboration", label: "Collaboration" },
   { value: "Reflection", label: "Reflection" },
-  { value: "Learning +", label: "Learning" },
+  { value: "Learning", label: "Learning" },
   { value: "ServiceActions", label: "Service Actions" },
   { value: "SocialConnectedness", label: "Social Connectedness" },
   { value: "Huddle", label: "Huddle" },

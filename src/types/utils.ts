@@ -16,6 +16,13 @@ export const toFileArray = (filelist: FileList | null): File[] => {
   return files;
 };
 
+export const formDataCsvToArray = (commaSeparatedValues: string): string[] => {
+  if (!commaSeparatedValues) {
+    return [];
+  }
+  return commaSeparatedValues.split(",");
+};
+
 export const toFormData = (object: any): FormData => {
   const formData = new FormData();
 

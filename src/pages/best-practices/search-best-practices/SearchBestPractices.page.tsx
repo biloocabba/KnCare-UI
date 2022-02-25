@@ -40,6 +40,7 @@ export const SearchBestPracticesPage = () => {
 
   const dispatch = useAppDispatch();
 
+  console.log("Best practice");
   const bestPractices = useAppSelector(selectBestPracticeState);
 
   const onClickSearchBestPractices = (filters: BestPracticesQueryFilters): void => {

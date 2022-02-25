@@ -12,7 +12,7 @@ import { BoxHeader } from "components/headers";
 import { InputField, FileInput, DisplayFiles } from "components/widgets";
 
 import { useAlerts } from "hooks";
-import { BestPractice } from "types";
+import { BestPractice, SelectOption } from "types";
 import { defaultBestPracticesTags } from "variables/app.consts";
 
 import { bestPracticeDefaultState } from "..";
@@ -40,8 +40,16 @@ export const CreateBestPracticePage = () => {
   };
 
   const handleChange = (newValue: any) => {
-    const currentTags = [...bestPractice.tags, newValue];
-    setBestPractice({ ...bestPractice, tags: currentTags });
+    const arrayOfOptions = newValue ? (newValue as SelectOption[]) : [];
+    const newTags = arrayOfOptions.map(option => option.value);
+    const updatedTags = bestPractice.tags ? bestPractice.tags : [];
+
+    newTags.forEach(newTag => {
+      if (!updatedTags.includes(newTag)) {
+        updatedTags.push(newTag);
+      }
+    });
+    setBestPractice({ ...bestPractice, tags: updatedTags });
   };
 
   return (

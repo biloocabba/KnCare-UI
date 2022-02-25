@@ -131,7 +131,7 @@ export const worldOverviewSlice = createSlice({
           ) {
             report.data = action.payload;
           }
-          console.log(report);
+          // console.log(report);
           return report;
         });
         state.entities = updatedReports;

@@ -134,7 +134,7 @@ export const matchSubject = (queryParams: URLSearchParams, entity: Email) => {
 export const matchTag = (queryParams: URLSearchParams, entity: BestPractice) => {
   if (queryParams && queryParams.get("tag")) {
     const tag = queryParams.get("tag");
-    if (tag && entity.tags.includes(tag)) {
+    if (tag && entity && entity.tags && entity.tags.includes(tag)) {
       return true;
     }
     return false;
