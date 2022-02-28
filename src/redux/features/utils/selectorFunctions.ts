@@ -125,11 +125,11 @@ export const matchLastName = (filters: CareMemberQueryFilters, entity: CareMembe
 
 const matchOnboardingBetween = (filters: CareMemberQueryFilters, entity: CareMember) => {
   if (filters && filters.onboardDateFrom && filters.onboardDateTo) {
-    const onBoardingDateFrom = moment(filters.onboardDateFrom, DATE_FILTER_FORMAT).utc();
-    const onBoardingDateTo = moment(filters.onboardDateTo, DATE_FILTER_FORMAT).utc();
+    const onBoardingDateFrom = moment(filters.onboardDateFrom, DATE_FILTER_FORMAT).local();
+    const onBoardingDateTo = moment(filters.onboardDateTo, DATE_FILTER_FORMAT).local();
 
     if (filters && onBoardingDateFrom && onBoardingDateTo) {
-      const onBoardingDate = moment(entity.onboardingDate, DATE_FILTER_FORMAT).utc();
+      const onBoardingDate = moment(entity.onboardingDate, DATE_FILTER_FORMAT).local();
 
       if (onBoardingDate.isBetween(onBoardingDateFrom, onBoardingDateTo, undefined, "[]")) {
         return true;
@@ -143,11 +143,11 @@ const matchOnboardingBetween = (filters: CareMemberQueryFilters, entity: CareMem
 
 const matchOffboardingBetween = (filters: CareMemberQueryFilters, entity: CareMember) => {
   if (filters && filters.offboardingDateFrom && filters.offboardingDateTo) {
-    const offBoardingDateFrom = moment(filters.offboardingDateFrom, DATE_FILTER_FORMAT).utc();
-    const offBoardingDateTo = moment(filters.offboardingDateTo, DATE_FILTER_FORMAT).utc();
+    const offBoardingDateFrom = moment(filters.offboardingDateFrom, DATE_FILTER_FORMAT).local();
+    const offBoardingDateTo = moment(filters.offboardingDateTo, DATE_FILTER_FORMAT).local();
 
     if (filters && offBoardingDateFrom && offBoardingDateTo) {
-      const offBoardingDate = moment(entity.offboardingDate, DATE_FILTER_FORMAT).utc();
+      const offBoardingDate = moment(entity.offboardingDate, DATE_FILTER_FORMAT).local();
 
       if (offBoardingDate.isBetween(offBoardingDateFrom, offBoardingDateTo, undefined, "[]")) {
         return true;

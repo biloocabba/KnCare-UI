@@ -174,7 +174,7 @@ export const hiringDateBetweenToday = (queryParams: URLSearchParams, entity: Emp
 
     const entityHiringDate = moment(entity.startDate, DATE_FILTER_FORMAT).local();
     const hiringDateFrom = moment(searchHiringDateFromAsString, DATE_FILTER_FORMAT).local();
-    const todaysDate = moment.utc();
+    const todaysDate = moment.utc().local();
 
     if (
       hiringDateFrom.isValid() &&
