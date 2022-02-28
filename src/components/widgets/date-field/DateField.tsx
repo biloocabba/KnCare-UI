@@ -22,6 +22,7 @@ export const DateField = ({ id, label, value, setValue, ...props }: Props) => {
       <ReactDatetime
         {...props}
         timeFormat={false}
+        dateFormat={DATE_FILTER_FORMAT}
         closeOnSelect
         value={value ? moment(value).format(DATE_FILTER_FORMAT) : ""}
         renderInput={props => {
