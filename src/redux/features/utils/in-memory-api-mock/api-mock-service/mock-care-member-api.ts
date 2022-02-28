@@ -23,12 +23,13 @@ export const saveCareMember = async (
 ): Promise<AxiosResponse<CareMember>> => {
   const employeeData: Employee = findEmployeeById(body.employeeId);
 
-  const careMemberResponse = {
+  const careMemberData = {
     ...employeeData,
     ...body,
   };
-  careMembersMockResponse.data.push(careMemberResponse);
-  const response = wrapIntoResponse(careMemberResponse);
+  careMemberData.careMember = true;
+  careMembersMockResponse.data.push(careMemberData);
+  const response = wrapIntoResponse(careMemberData);
   return Promise.resolve(response);
 };
 
