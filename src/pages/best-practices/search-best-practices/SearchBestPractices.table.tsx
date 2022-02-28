@@ -67,7 +67,7 @@ export const bestPracticesTableColumns: ColumnDescription<any, BestPractice>[] =
     text: "Publish Date",
     sort: true,
     formatter: (cell: BestPractice["publishDate"]) => {
-      return <>{moment(cell).format(DATE_FILTER_FORMAT)}</>;
+      return <>{moment(cell, DATE_FILTER_FORMAT).format(DATE_FILTER_FORMAT)}</>;
     },
   },
   {

@@ -42,8 +42,8 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
   const onSaveCareMember = () => {
     const careMemberSaveRequest: CareMemberSaveRequest = {
       id: careMember.id,
-      onboardingDate: moment(onboardingDate).format(DATE_FILTER_FORMAT),
-      offboardingDate: moment(offboardingDate).format(DATE_FILTER_FORMAT),
+      onboardingDate: moment(onboardingDate, DATE_FILTER_FORMAT).format(DATE_FILTER_FORMAT),
+      offboardingDate: moment(offboardingDate, DATE_FILTER_FORMAT).format(DATE_FILTER_FORMAT),
       roleId: roleId,
       employeeId: careMember.employeeId,
       groupIds: groupIds,
