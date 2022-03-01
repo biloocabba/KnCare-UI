@@ -39,14 +39,17 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
   const [roleId, setRoleId] = useState<number | undefined>();
   const [groupIds, setGroupIds] = useState<number[]>([]);
 
+  // state to know which fields has the user selected
+  const [currentSelections, setCurrentSelections] = useState<SelectOption[]>([]);
+
   const onSaveCareMember = () => {
     const careMemberSaveRequest: CareMemberSaveRequest = {
       id: careMember.id,
       onboardingDate: moment(onboardingDate, DATE_FILTER_FORMAT).format(DATE_FILTER_FORMAT),
       offboardingDate: moment(offboardingDate, DATE_FILTER_FORMAT).format(DATE_FILTER_FORMAT),
-      roleId: roleId,
+      roleId,
       employeeId: careMember.employeeId,
-      groupIds: groupIds,
+      groupIds,
     };
 
     onSave(careMemberSaveRequest);
@@ -95,11 +98,33 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
               options={groupOptions}
               defaultValue={careMemberGroups}
               isMulti={true}
-              onChange={item => {
-                const selections = item as SelectOption[];
-                const groupIdSelected = selections.map(item => parseInt(item.value));
-
-                setGroupIds(groupIdSelected);
+              isOptionDisabled={option => {
+                const { label } = option as SelectOption;
+                // if user has selected ALL field then other fields will be disabled
+                if (currentSelections.some(selection => selection.label === "ALL")) {
+                  return true;
+                  // if user has selected other field then ALL field will be disabled
+                } else if (currentSelections.length > 0 && label === "ALL") {
+                  return true;
+                  // default allow all fields to be selected
+                } else {
+                  return false;
+                }
+                // return true to disable field
+              }}
+              onChange={items => {
+                const selections = items as SelectOption[];
+                setCurrentSelections(selections);
+                // if there is an "ALL" selection in the list (data will be 1,2,3,12,etc)
+                // split and return an array of numbers
+                if (selections.some(item => item.label === "ALL")) {
+                  const values = selections[0].value.split(",").map(Number);
+                  setGroupIds(values);
+                } else {
+                  // if user selected groups manually, return an array of the group ids
+                  const groupIdSelected = selections.map(item => parseInt(item.value));
+                  setGroupIds(groupIdSelected);
+                }
               }}
             />
           </Col>
