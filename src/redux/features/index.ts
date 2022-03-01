@@ -8,6 +8,7 @@ export * from "./countries";
 export * from "./common";
 export * from "./email";
 export * from "./group";
+export * from "./job-title";
 export * from "./role";
 export * from "./sidenav";
 export * from "./utils";

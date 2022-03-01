@@ -9,7 +9,7 @@ import {
   countriesMockResponse,
   deleteMockResponse,
   groupMockResponse,
-  // worldOverviewMockResponse,
+  jobTitlesMockResponse,
 } from "./api-mock-data/mock-data";
 import {
   saveCareMember,
@@ -73,6 +73,9 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
 
   if (url.includes("/business-unit")) {
     return Promise.resolve(businessUnitsMockResponse);
+  }
+  if (url.includes("/job-title")) {
+    return Promise.resolve(jobTitlesMockResponse);
   }
 
   if (url.includes("/country")) {

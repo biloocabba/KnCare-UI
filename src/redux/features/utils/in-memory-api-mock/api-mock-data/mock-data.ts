@@ -7,6 +7,7 @@ import {
   CareMember,
   Country,
   BusinessUnit,
+  JobTitle,
   BestPractice,
   TurnoverChart,
   Email,
@@ -19,6 +20,7 @@ import {
   careMembersData,
   countryListAllIsoData,
   businessUnits,
+  jobTitles,
   careRoles,
   memberTurnoverReport,
   emails,
@@ -73,6 +75,10 @@ export const countriesMockResponse: AxiosResponse<Country[]> = {
 
 export const businessUnitsMockResponse: AxiosResponse<BusinessUnit[]> = {
   data: businessUnits,
+  ...mockAxiosReponse,
+};
+export const jobTitlesMockResponse: AxiosResponse<JobTitle[]> = {
+  data: jobTitles,
   ...mockAxiosReponse,
 };
 
