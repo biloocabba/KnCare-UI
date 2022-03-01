@@ -28,14 +28,16 @@ import {
   findAllCountries,
   findAllGroups,
   findAllRoles,
+  findAllBusinessUnits,
+  findAllJobTitles,
   searchCareMembers,
   selectAllBusinessUnitData,
   selectAllCareMembersData,
   selectAllCountryData,
   selectAllGroupsData,
   selectAllRolesData,
+  selectAllJobTitleData,
   selectLoggedUserRole,
-  findAllBusinessUnits,
 } from "redux/features";
 
 import { AdminFooter } from "components/footers";
@@ -58,12 +60,14 @@ export const AdminLayout = () => {
   const [isRolesDataLoaded, setIsRolesDataLoaded] = useState(false);
   const [isGroupsDataLoaded, setIsGroupsDataLoaded] = useState(false);
   const [isCareMembersDataLoaded, setIsCareMembersDataLoaded] = useState(false);
+  const [isJobTitlesDataLoaded, setIsJobTitlesDataLoaded] = useState(false);
 
   const countries = useAppSelector(selectAllCountryData);
   const businessUnits = useAppSelector(selectAllBusinessUnitData);
   const roles = useAppSelector(selectAllRolesData);
   const groups = useAppSelector(selectAllGroupsData);
   const careMembers = useAppSelector(selectAllCareMembersData);
+  const jobTitles = useAppSelector(selectAllJobTitleData);
 
   const userRole = useAppSelector(selectLoggedUserRole);
 
@@ -87,6 +91,16 @@ export const AdminLayout = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [businessUnits, isBusinessUnitsDataLoaded]);
+
+  useEffect(() => {
+    if (!jobTitles || jobTitles.length == 0) {
+      dispatch(findAllJobTitles());
+    } else {
+      setIsJobTitlesDataLoaded(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [jobTitles, isJobTitlesDataLoaded]);
 
   useEffect(() => {
     if (!careMembers || careMembers.length == 0) {
@@ -121,7 +135,9 @@ export const AdminLayout = () => {
       isCountryDataLoaded &&
       isBusinessUnitsDataLoaded &&
       isRolesDataLoaded &&
-      isGroupsDataLoaded
+      isGroupsDataLoaded &&
+      isCareMembersDataLoaded &&
+      isJobTitlesDataLoaded
     ) {
       setIsDataLoadingCompleted(true);
     }
@@ -131,6 +147,8 @@ export const AdminLayout = () => {
     isBusinessUnitsDataLoaded,
     isGroupsDataLoaded,
     isRolesDataLoaded,
+    isCareMembersDataLoaded,
+    isJobTitlesDataLoaded,
     isDataLoadingCompleted,
   ]);
 
