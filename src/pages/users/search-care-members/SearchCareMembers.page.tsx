@@ -25,8 +25,6 @@ export const SearchCareMembersPage = () => {
 
   const careMemberResultSet: CareMember[] = useAppSelector(selectCareMembersByFilters(filters));
 
-  const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
-
   const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
@@ -60,13 +58,10 @@ export const SearchCareMembersPage = () => {
 
               <ReactTable
                 data={careMemberResultSet}
-                keyField="id"
-                columns={careMemberTableColumns}
-                onViewDetailsClick={onGoToCareMemberDetailsPage}
-                onDeleteItemClick={onRemoveCareMember}
-                selectedRows={selectedCareMembers}
-                setSelectedRows={setSelectedCareMembers}
-                searchBarPlaceholder="Filter results"
+                columns={careMemberTableColumns({
+                  onDetailsButtonClick: onGoToCareMemberDetailsPage,
+                  onRemoveButtonClick: onRemoveCareMember,
+                })}
               />
             </Card>
           </div>

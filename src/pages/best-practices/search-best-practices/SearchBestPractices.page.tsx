@@ -25,7 +25,7 @@ import { deleteBestPractice, selectBestPracticeState, searchBestPractices } from
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
-import { BestPractice, BestPracticesQueryFilters } from "types";
+import { BestPracticesQueryFilters } from "types";
 
 import { BEST_PRACTICE_DETAILS } from "../best-practices.routes.const";
 import { BestPracticeHighlightsPanel } from "../panels";
@@ -36,7 +36,6 @@ export const SearchBestPracticesPage = () => {
   const history = useHistory();
 
   const [alert] = useState(null);
-  const [selectedRows, setSelectedRows] = useState<BestPractice[]>([]);
 
   const dispatch = useAppDispatch();
   const bestPractices = useAppSelector(selectBestPracticeState);
@@ -90,13 +89,10 @@ export const SearchBestPracticesPage = () => {
               ) : (
                 <ReactTable
                   data={bestPractices.entities}
-                  keyField="id"
-                  columns={bestPracticesTableColumns}
-                  onViewDetailsClick={onGoToBestPracticeDetails}
-                  onDeleteItemClick={onRemoveBestPractice}
-                  selectedRows={selectedRows}
-                  setSelectedRows={setSelectedRows}
-                  searchBarPlaceholder="Filter results"
+                  columns={bestPracticesTableColumns({
+                    onDetailsButtonClick: onGoToBestPracticeDetails,
+                    onRemoveButtonClick: onRemoveBestPractice,
+                  })}
                 />
               )}
             </Card>
