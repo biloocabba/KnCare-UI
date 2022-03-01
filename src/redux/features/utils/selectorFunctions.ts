@@ -92,7 +92,7 @@ export const matchGroupId = (
     const groupObj = groups.find(group => group.id === filters.groupId);
 
     // check if groupIds on careMember doesn't include the groupId if group is found
-    if (groupObj && !entity.groups?.includes(groupObj.id)) {
+    if (groupObj && !entity.groupIds?.includes(groupObj.id)) {
       return false;
     }
   }

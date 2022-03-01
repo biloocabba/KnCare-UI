@@ -36,7 +36,7 @@ export interface CareMember extends Employee {
   employeeId: number;
   onboardingDate: string | null;
   offboardingDate: string | null;
-  groups?: number[];
+  groupIds?: number[];
   roleId?: number;
 }
 

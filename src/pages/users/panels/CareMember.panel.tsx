@@ -34,7 +34,9 @@ export const CareMemberPanel = (props: CareMemberPanelProps) => {
   );
 
   const careMemberRole = useAppSelector(selectRoleByIdAsSelectValue(careMember.roleId));
-  const careMemberGroups = useAppSelector(selectGroupsByIdsAsSelectValues(careMember.groups || []));
+  const careMemberGroups = useAppSelector(
+    selectGroupsByIdsAsSelectValues(careMember.groupIds || [])
+  );
 
   const [roleId, setRoleId] = useState<number | undefined>();
   const [groupIds, setGroupIds] = useState<number[]>([]);
