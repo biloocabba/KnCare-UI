@@ -1,3 +1,2 @@
 export * from "./ReactTable";
-export * from "./selectRow";
-export * from "./pagination";
+export * from "./components";

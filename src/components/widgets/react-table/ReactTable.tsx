@@ -1,123 +1,169 @@
-import { MouseEvent } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import { useMemo } from "react";
+import {
+  Column,
+  useGlobalFilter,
+  usePagination,
+  useRowSelect,
+  useSortBy,
+  useTable,
+} from "react-table";
 
-import { Button } from "reactstrap";
+import {
+  IndeterminateCheckbox,
+  PaginationReactTable,
+  Sorter,
+  GlobalFilter,
+  SelectionButton,
+} from ".";
 
-import { useFeatureDisabledWarning } from "hooks";
-
-import { pagination, selectRow } from ".";
-
-const { SearchBar } = Search;
+import "./styles/reactTable.css";
 
 interface Props<T> {
   data: T[];
-  columns: any; //@todo find a better type for columns
-  keyField: string;
-  onViewDetailsClick?: (e: MouseEvent<HTMLButtonElement>) => void;
-  onDeleteItemClick?: (e: MouseEvent<HTMLButtonElement>) => void;
-  selectedRows: T[];
-  setSelectedRows: React.Dispatch<React.SetStateAction<T[]>>;
-  searchBarPlaceholder?: string;
+  columns: Column[];
   selectButtonText?: string;
-  tableRef?: React.MutableRefObject<any>;
-  formatterFn?: (_: any, row: T) => React.ReactNode;
 }
 
-export const ReactTable = <T extends { id: number }>({
-  columns,
-  keyField,
-  data,
-  onViewDetailsClick,
-  selectedRows,
-  setSelectedRows,
-  searchBarPlaceholder,
-  selectButtonText,
-  tableRef,
-  formatterFn,
-}: Props<T>) => {
-  const { alert, fireAlert } = useFeatureDisabledWarning();
+export const ReactTable = <T,>({ data, columns, selectButtonText }: Props<T>) => {
+  const memoizedData: Array<T> = useMemo(() => data, [data]);
+  const memoizedColumns: Array<Column> = useMemo(() => columns, [columns]);
 
-  const formatActionButtonCell = (_: any, row: T): React.ReactNode => {
-    const rowId = row.id.toString();
-    return (
-      <>
-        <Button
-          id={rowId}
-          className="btn-icon btn-2"
-          type="button"
-          color="info"
-          onClick={onViewDetailsClick}
-        >
-          <span id={rowId} className="btn-inner--icon">
-            <i id={rowId} className="ni ni-badge" />
-          </span>
-        </Button>
-
-        <Button
-          id={rowId}
-          className="btn-icon btn-2"
-          color="danger"
-          type="button"
-          onClick={() => fireAlert()}
-        >
-          <span id={rowId} className="btn-inner--icon">
-            <i id={rowId} className="ni ni-fat-remove" />
-          </span>
-        </Button>
-      </>
-    );
-  };
-
-  // const [formatterFunction, setFormatterFunction] = useState(formatterFnc);
-
-  // if (!formatterFunction) {
-  columns[columns.length - 1].formatter = formatterFn ? formatterFn : formatActionButtonCell; //we can/should force formatter always to be on last column
-  //   setFormatterFunction(true);
-  // }
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    page,
+    rows,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    nextPage,
+    previousPage,
+    setPageSize,
+    gotoPage,
+    setGlobalFilter,
+    selectedFlatRows,
+    state: { pageIndex, pageSize, globalFilter },
+  } = useTable(
+    {
+      columns: memoizedColumns,
+      data: memoizedData,
+      initialState: {
+        hiddenColumns: ["id"],
+      },
+    },
+    useGlobalFilter,
+    useSortBy,
+    usePagination,
+    useRowSelect,
+    hooks => {
+      hooks.visibleColumns.push(columns => [
+        // Let's make a column for selection
+        {
+          id: "selection",
+          // The header can use the table's getToggleAllRowsSelectedProps method
+          // to render a checkbox
+          Header: ({ getToggleAllPageRowsSelectedProps }) => {
+            return (
+              <div>
+                <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
+              </div>
+            );
+          },
+          // The cell can use the individual row's getToggleRowSelectedProps method
+          // to the render a checkbox
+          Cell: ({ row }) => {
+            return (
+              <div>
+                <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+              </div>
+            );
+          },
+        },
+        ...columns,
+      ]);
+    }
+  );
 
   return (
     <>
-      {alert}
-      <ToolkitProvider data={data} keyField={keyField} columns={columns} bootstrap4 search>
-        {props => (
-          <div className="py-4 table-responsive">
-            <div
-              id="datatable-basic_filter"
-              className="dataTables_filter px-4 pb-1"
-              style={{ display: "flex" }}
-            >
-              <label>
-                {searchBarPlaceholder}
-                <SearchBar className="form-control-sm mr-3" placeholder="" {...props.searchProps} />
-              </label>
-
-              {selectButtonText && (
-                <>
-                  <Button
-                    className="btn btn-success"
-                    onClick={() => console.log("selectedRows", selectedRows)}
-                  >
-                    {selectButtonText}
-                  </Button>
-                </>
-              )}
-            </div>
-            <BootstrapTable
-              {...props.baseProps}
-              ref={tableRef}
-              bootstrap4
-              pagination={pagination}
-              bordered={false}
-              selectRow={selectRow(setSelectedRows)}
-            />
-          </div>
-        )}
-      </ToolkitProvider>
+      <div className="react-table-filter d-flex justify-content-between align-items-center">
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+        <SelectionButton selectButtonText={selectButtonText} selectedFlatRows={selectedFlatRows} />
+      </div>
+      <table {...getTableProps()} className="react-table">
+        <thead className="react-table-thead">
+          {
+            // Loop over the header rows
+            headerGroups.map((headerGroup, i) => (
+              // Apply the header row props
+              <tr {...headerGroup.getHeaderGroupProps()} key={i} className="react-table-tr">
+                {
+                  // Loop over the headers in each row
+                  headerGroup.headers.map((column, i) => {
+                    return (
+                      // Apply the header cell props
+                      <th
+                        {...column.getHeaderProps(column.getSortByToggleProps())}
+                        key={i}
+                        className="react-table-th"
+                      >
+                        {
+                          // Render the header
+                          column.render("Header")
+                        }
+                        <Sorter column={column} />
+                      </th>
+                    );
+                  })
+                }
+              </tr>
+            ))
+          }
+        </thead>
+        {/* Apply the table body props */}
+        <tbody {...getTableBodyProps()} className="react-table-tbody">
+          {
+            // Loop over the table rows
+            page.map(row => {
+              // Prepare the row for display
+              prepareRow(row);
+              return (
+                // Apply the row props
+                <tr {...row.getRowProps()} className="react-table-tr">
+                  {
+                    // Loop over the rows cells
+                    row.cells.map(cell => {
+                      // Apply the cell props
+                      return (
+                        <td {...cell.getCellProps()} className="react-table-td">
+                          {
+                            // Render the cell contents
+                            cell.render("Cell")
+                          }
+                        </td>
+                      );
+                    })
+                  }
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+      <PaginationReactTable
+        canPreviousPage={canPreviousPage}
+        canNextPage={canNextPage}
+        pageOptions={pageOptions}
+        nextPage={nextPage}
+        previousPage={previousPage}
+        setPageSize={setPageSize}
+        pageIndex={pageIndex}
+        pageSize={pageSize}
+        gotoPage={gotoPage}
+        rows={rows}
+      />
     </>
   );
-};
-
-export const emptyFormatter = (): React.ReactNode => {
-  return <></>;
 };
