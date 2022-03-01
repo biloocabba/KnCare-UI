@@ -1,31 +1,28 @@
-import { ColumnDescription } from "react-bootstrap-table-next";
+import { Column } from "react-table";
 
-export const groupsTableColumns: ColumnDescription<any, any>[] = [
-  {
-    dataField: "id",
-    text: "id",
-    hidden: true,
-  },
-  {
-    dataField: "name",
-    text: "Name",
-    sort: true,
-  },
-  {
-    dataField: "description",
-    text: "description",
-    sort: true,
-  },
-  {
-    dataField: "active",
-    text: "active",
-    sort: true,
-  },
-  {
-    dataField: "action",
-    text: "",
-    formatter: () => {
-      return <></>;
+import { TwoMouseEventActionButtons, IDefaultActionButtons } from "components/widgets";
+
+export const groupsTableColumns = ({
+  onDetailsButtonClick,
+  onRemoveButtonClick,
+}: IDefaultActionButtons) => {
+  return [
+    {
+      accessor: "id",
+      Header: "id",
     },
-  },
-];
+    {
+      accessor: "name",
+      Header: "Name",
+    },
+    {
+      accessor: "description",
+      Header: "description",
+    },
+    {
+      accessor: "active",
+      Header: "active",
+    },
+    TwoMouseEventActionButtons({ onDetailsButtonClick, onRemoveButtonClick }),
+  ] as Array<Column>;
+};

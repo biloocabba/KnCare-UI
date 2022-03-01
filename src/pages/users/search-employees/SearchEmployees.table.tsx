@@ -1,57 +1,48 @@
-import { ColumnDescription } from "react-bootstrap-table-next";
+import { Column } from "react-table";
 
-export const employeesTableColumns: ColumnDescription<any, any>[] = [
-  {
-    dataField: "id",
-    text: "id",
-    hidden: true,
-  },
-  {
-    dataField: "firstName",
-    text: "First Name",
-  },
-  {
-    dataField: "lastName",
-    text: "Last Name",
-  },
-  {
-    dataField: "internationalName",
-    text: "Int Name",
-    sort: true,
-  },
-  {
-    dataField: "title",
-    text: "Title",
-    sort: true,
-    style: { width: "50px" },
-  },
-  {
-    dataField: "businessUnit",
-    text: "bUnit",
-    sort: true,
-    style: { width: "50px" },
-  },
-  {
-    dataField: "companyCode",
-    text: "companyCode",
-    sort: true,
-    style: { width: "50px" },
-  },
-  {
-    dataField: "office.country",
-    text: "country",
-    sort: true,
-  },
-  {
-    dataField: "startDate",
-    text: "Hire Date",
-    sort: true,
-  },
-  {
-    dataField: "action",
-    text: "",
-    formatter: () => {
-      return <></>;
+import { IDefaultActionButtons, TwoMouseEventActionButtons } from "components/widgets";
+
+export const employeesTableColumns = ({
+  onDetailsButtonClick,
+  onRemoveButtonClick,
+}: IDefaultActionButtons) => {
+  return [
+    {
+      accessor: "id",
+      Header: "id",
     },
-  },
-];
+    {
+      accessor: "firstName",
+      Header: "First Name",
+    },
+    {
+      accessor: "lastName",
+      Header: "Last Name",
+    },
+    {
+      accessor: "internationalName",
+      Header: "Int Name",
+    },
+    {
+      accessor: "title",
+      Header: "Title",
+    },
+    {
+      accessor: "businessUnit",
+      Header: "bUnit",
+    },
+    {
+      accessor: "companyCode",
+      Header: "companyCode",
+    },
+    {
+      accessor: "office.country",
+      Header: "country",
+    },
+    {
+      accessor: "startDate",
+      Header: "Hire Date",
+    },
+    TwoMouseEventActionButtons({ onDetailsButtonClick, onRemoveButtonClick }),
+  ] as Array<Column>;
+};
