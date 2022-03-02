@@ -42,7 +42,7 @@ export const SearchEmailPage = () => {
   const onGoToEmailDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    navigate(`/admin${EMAIL_DETAILS_ROUTE}/${id}`);
+    navigate(`${EMAIL_DETAILS_ROUTE}/${id}`);
   };
 
   const onRemoveEmail = (e: MouseEvent<HTMLButtonElement>) => {

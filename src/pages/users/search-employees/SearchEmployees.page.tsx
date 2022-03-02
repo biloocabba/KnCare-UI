@@ -48,7 +48,7 @@ export const SearchEmployeesPage = () => {
   const onGoToEmployeeDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    navigate(`/admin${EMPLOYEE_DETAILS}/${id}`);
+    navigate(`${EMPLOYEE_DETAILS}/${id}`);
   };
 
   const onRemoveEmployee = (e: MouseEvent<HTMLButtonElement>) => {

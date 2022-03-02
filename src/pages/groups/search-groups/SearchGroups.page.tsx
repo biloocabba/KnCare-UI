@@ -24,7 +24,7 @@ export const SearchGroupsPage = () => {
 
   const goToGroupDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.target as HTMLElement;
-    navigate(`/admin${GROUP_DETAILS}/${id}`);
+    navigate(`${GROUP_DETAILS}/${id}`);
   };
 
   const removeGroup = (e: MouseEvent<HTMLButtonElement>) => {

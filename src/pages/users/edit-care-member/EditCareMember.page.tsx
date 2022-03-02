@@ -65,7 +65,6 @@ export const EditCareMemberPage = () => {
                       onClick={e => {
                         e.preventDefault();
                         navigate(-1);
-                        //navigate(`/admin${CARE_MEMBER_SEARCH}`);
                       }}
                     >
                       Back to Care Members

@@ -27,7 +27,6 @@ export const CreateCareMemberPage = () => {
 
   const employeeIdAsInt: number = parseInt(id);
 
-  const currentRole = "admin";
   const employee: Employee = useAppSelector(selectEmployeeById(employeeIdAsInt)) as Employee;
   const roles: SelectOption[] = useAppSelector(selectAllRolesDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
@@ -79,7 +78,7 @@ export const CreateCareMemberPage = () => {
                     <Button
                       type="button"
                       color="info"
-                      onClick={() => navigate(`/${currentRole}${EMPLOYEE_SEARCH}`)}
+                      onClick={() => navigate(`${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Employees
                     </Button>

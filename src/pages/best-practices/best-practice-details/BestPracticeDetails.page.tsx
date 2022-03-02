@@ -95,7 +95,7 @@ export const BestPracticeDetailPage = () => {
                       className="btn btn-primary"
                       color="primary"
                       href="#pablo"
-                      onClick={() => navigate(`/admin${SEARCH_BEST_PRACTICE}`)}
+                      onClick={() => navigate(`${SEARCH_BEST_PRACTICE}`)}
                     >
                       Back to Search
                     </Button>

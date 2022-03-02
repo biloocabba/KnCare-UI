@@ -25,6 +25,8 @@ import { login, selectPrincipalState } from "redux/features";
 
 import { AuthHeader } from "components/headers";
 
+import { HOME } from "pages/home";
+
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (user.entity !== null && user.entity.authRole !== Role.Anonymous) {
-      navigate("/admin/home");
+      navigate(HOME);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.entity]);

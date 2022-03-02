@@ -53,7 +53,7 @@ export const SearchBestPracticesPage = () => {
 
   const onGoToBestPracticeDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.currentTarget as HTMLButtonElement;
-    navigate(`/admin${BEST_PRACTICE_DETAILS}/${id}`);
+    navigate(`${BEST_PRACTICE_DETAILS}/${id}`);
   };
 
   return (
