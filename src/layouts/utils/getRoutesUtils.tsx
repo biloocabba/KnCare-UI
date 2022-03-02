@@ -11,7 +11,7 @@ const getLayout = (route: IRoute, layout: LayoutType, userRole: Role) => {
     return null;
   }
 };
-// JSX.Element;
+
 const getRouteViews = (routes: IRoute[], layout: LayoutType, userRole: Role) => {
   return routes.map(route => getLayout(route, layout, userRole));
 };
