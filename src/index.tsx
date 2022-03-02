@@ -35,7 +35,7 @@ import "react-notification-alert/dist/animate.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "font-awesome/css/font-awesome.min.css";
-import "./assets/scss/argon-dashboard-pro-react.scss?v1.2.0";
+import "./assets/css/argon-dashboard-pro-react.css";
 import "./assets/css/site.css";
 import "./assets/vendor/nucleo/css/nucleo.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";

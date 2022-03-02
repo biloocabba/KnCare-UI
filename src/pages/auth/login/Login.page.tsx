@@ -10,7 +10,6 @@ import {
   FormGroup,
   Form,
   Input,
-  InputGroupAddon,
   InputGroupText,
   InputGroup,
   Container,
@@ -84,11 +83,10 @@ export const LoginPage = () => {
                     })}
                   >
                     <InputGroup className="input-group-merge input-group-alternative">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="ni ni-email-83" />
-                        </InputGroupText>
-                      </InputGroupAddon>
+                      <InputGroupText>
+                        <i className="ni ni-email-83" />
+                      </InputGroupText>
+
                       <Input
                         placeholder="Email"
                         type="email"
@@ -105,11 +103,10 @@ export const LoginPage = () => {
                     })}
                   >
                     <InputGroup className="input-group-merge input-group-alternative">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="ni ni-lock-circle-open" />
-                        </InputGroupText>
-                      </InputGroupAddon>
+                      <InputGroupText>
+                        <i className="ni ni-lock-circle-open" />
+                      </InputGroupText>
+
                       <Input
                         placeholder="Password"
                         type="password"
