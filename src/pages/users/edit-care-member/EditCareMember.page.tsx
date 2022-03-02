@@ -1,4 +1,4 @@
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
@@ -17,11 +17,11 @@ import { BoxHeader } from "components/headers";
 import { CareMemberPanel } from "pages/users";
 
 import { useAlerts } from "hooks";
-import { CareMember, CareMemberSaveRequest, RouteParams, SelectOption } from "types";
+import { CareMember, CareMemberSaveRequest, SelectOption } from "types";
 
 export const EditCareMemberPage = () => {
-  const { id } = useParams<RouteParams>();
-  const history = useHistory();
+  const { id } = useParams() as { id: string };
+  const navigation = useNavigate();
   const dispatch = useAppDispatch();
 
   const careMember = useAppSelector(selectCareMemberById(parseInt(id))) as CareMember;
@@ -64,8 +64,8 @@ export const EditCareMemberPage = () => {
                       href="#dsfkjlsi39ds9d97876s7d"
                       onClick={e => {
                         e.preventDefault();
-                        history.goBack();
-                        //history.push(`/admin${CARE_MEMBER_SEARCH}`);
+                        navigation(-1);
+                        //navigation(`/admin${CARE_MEMBER_SEARCH}`);
                       }}
                     >
                       Back to Care Members

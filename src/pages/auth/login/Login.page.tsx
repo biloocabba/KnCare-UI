@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   Button,
@@ -27,7 +27,7 @@ import { AuthHeader } from "components/headers";
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const history = useHistory();
+  const navigation = useNavigate();
 
   const [focusedEmail, setfocusedEmail] = useState(false);
   const [focusedPassword, setfocusedPassword] = useState(false);
@@ -44,7 +44,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (user.entity !== null && user.entity.authRole !== Role.Anonymous) {
-      history.push("/admin/home");
+      navigation("/admin/home");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.entity]);

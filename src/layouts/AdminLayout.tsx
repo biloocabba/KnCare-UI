@@ -16,7 +16,7 @@
 */
 import { useEffect, useRef, useState } from "react";
 import { Audio } from "react-loader-spinner";
-import { Redirect, Switch, useLocation } from "react-router-dom";
+import { Routes, useLocation } from "react-router-dom";
 
 // react library for routing
 import careLogo from "assets/img/brand/CareLogoMin.png";
@@ -138,6 +138,8 @@ export const AdminLayout = () => {
     return location.pathname.indexOf("admin/alternative-dashboard") === -1 ? "dark" : "light";
   };
 
+  console.log("hmm2");
+
   return (
     <>
       {!isDataLoadingCompleted ? (
@@ -162,10 +164,10 @@ export const AdminLayout = () => {
           />
           <div className="main-content" ref={mainContentRef}>
             <AdminNavbar theme={getNavbarTheme()} />
-            <Switch>
+            <Routes>
               {getRoutes(routes, "/admin", userRole)}
-              <Redirect from="*" to="/auth/login" />
-            </Switch>
+              {/* <Route path="*" element={<Navigate replace to="/auth/login" />} /> */}
+            </Routes>
             <AdminFooter />
           </div>
         </>

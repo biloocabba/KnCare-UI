@@ -15,7 +15,6 @@
 
 */
 import { useEffect, useRef } from "react";
-import { Switch, Redirect } from "react-router-dom";
 
 import { routes } from "routes";
 
@@ -41,13 +40,13 @@ export const AuthLayout = () => {
 
   useScrollToTop(mainContentRef);
 
+  console.log("hmm");
+
   return (
     <>
       <div className="main-content" ref={mainContentRef}>
-        <Switch>
-          {getRoutes(routes, "/auth", userRole)}
-          <Redirect from="*" to="/auth/login" />
-        </Switch>
+        {getRoutes(routes, "/auth", userRole)}
+        {/* <Route path="*" element={<Navigate replace to="/auth/login" />} /> */}
       </div>
       <AuthFooter />
     </>

@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row } from "reactstrap";
 
@@ -16,7 +16,7 @@ import { CareMember, CareMemberQueryFilters } from "types";
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from ".";
 
 export const SearchCareMembersPage = () => {
-  const history = useHistory();
+  const navigation = useNavigate();
 
   const userCountry = useAppSelector(selectLoggedUserDefaultCountry);
   const [filters, setFilters] = useState<CareMemberQueryFilters>({
@@ -30,7 +30,7 @@ export const SearchCareMembersPage = () => {
   const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    history.push(`/admin${CARE_MEMBER_EDIT}/${id}`);
+    navigation(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const onRemoveCareMember = (e: MouseEvent<HTMLButtonElement>) => {

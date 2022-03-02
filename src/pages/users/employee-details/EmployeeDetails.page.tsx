@@ -16,7 +16,7 @@
 */
 
 import { useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
@@ -28,11 +28,11 @@ import { BoxHeader } from "components/headers";
 import { EMPLOYEE_SEARCH, CARE_MEMBER_CREATE } from "pages/users";
 import { EmployeePanel } from "pages/users/panels";
 
-import { Employee, Permission, RouteParams } from "types";
+import { Employee, Permission } from "types";
 
 export const EmployeeDetailsPage = () => {
-  const { id } = useParams<RouteParams>();
-  const history = useHistory();
+  const { id } = useParams() as { id: string };
+  const navigation = useNavigate();
 
   const employee: Employee = useSelector(selectEmployeeById(parseInt(id))) as Employee;
   const buttonColor = employee.careMember ? "secondary" : "success";
@@ -55,7 +55,7 @@ export const EmployeeDetailsPage = () => {
                     <WithAuthorization requires={Permission.CareMember_write}>
                       <Button
                         color={buttonColor}
-                        onClick={() => history.push(`/admin${CARE_MEMBER_CREATE}/${id}`)}
+                        onClick={() => navigation(`/admin${CARE_MEMBER_CREATE}/${id}`)}
                         disabled={employee.careMember}
                       >
                         Invite to Care
@@ -64,7 +64,7 @@ export const EmployeeDetailsPage = () => {
                     <Button
                       className="btn btn-primary"
                       color="primary"
-                      onClick={() => history.push(`/admin${EMPLOYEE_SEARCH}`)}
+                      onClick={() => navigation(`/admin${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Search
                     </Button>

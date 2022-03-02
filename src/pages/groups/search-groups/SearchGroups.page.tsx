@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
 
@@ -16,7 +16,7 @@ import { GROUP_DETAILS } from "..";
 import { groupsTableColumns } from ".";
 
 export const SearchGroupsPage = () => {
-  const history = useHistory();
+  const navigation = useNavigate();
   const dispatch = useAppDispatch();
   const groups = useAppSelector(selectGroupState);
 
@@ -24,7 +24,7 @@ export const SearchGroupsPage = () => {
 
   const goToGroupDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.target as HTMLElement;
-    history.push(`/admin${GROUP_DETAILS}/${id}`);
+    navigation(`/admin${GROUP_DETAILS}/${id}`);
   };
 
   const removeGroup = (e: MouseEvent<HTMLButtonElement>) => {

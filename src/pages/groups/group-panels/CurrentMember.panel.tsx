@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Collapse, Card, CardHeader, Spinner } from "reactstrap";
 
@@ -24,7 +24,7 @@ export const CurrentMemberPanel = ({
   currentGroupMembers,
   setCurrentGroupMembers,
 }: Props) => {
-  const history = useHistory();
+  const navigation = useNavigate();
 
   const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
 
@@ -42,7 +42,7 @@ export const CurrentMemberPanel = ({
 
   const memberDetails = (e: any) => {
     const { id } = e.target;
-    history.push(`/admin${CARE_MEMBER_EDIT}/${id}`);
+    navigation(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const memberRemove = () => {};

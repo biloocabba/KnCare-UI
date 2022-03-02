@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
 
@@ -22,7 +22,7 @@ import { EmployeeQueryFilters, Employee } from "types";
 import { employeesTableColumns, SearchEmployeesFilterPanel } from ".";
 
 export const SearchEmployeesPage = () => {
-  const history = useHistory();
+  const navigation = useNavigate();
   const dispatch = useAppDispatch();
 
   const employeeState = useAppSelector(selectEmployeesState);
@@ -48,7 +48,7 @@ export const SearchEmployeesPage = () => {
   const onGoToEmployeeDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    history.push(`/admin${EMPLOYEE_DETAILS}/${id}`);
+    navigation(`/admin${EMPLOYEE_DETAILS}/${id}`);
   };
 
   const onRemoveEmployee = (e: MouseEvent<HTMLButtonElement>) => {

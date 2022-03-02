@@ -1,9 +1,7 @@
-// @todo remove this line after migrating to react router v6
-/* eslint-disable react/no-children-prop */
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 import { store } from "redux/app";
 
@@ -29,12 +27,12 @@ ReactDOM.render(
     <BrowserRouter>
       <StrictMode>
         <AlertProvider>
-          <Switch>
-            <Route path="/admin" children={<AdminLayout />} />
-            <Route path="/auth" children={<AuthLayout />} />
-            <Route path="/" children={<AdminLayout />} />
-            <Redirect from="*" to="/" />
-          </Switch>
+          <Routes>
+            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/" element={<AdminLayout />} />
+            <Route path="/admin" element={<AdminLayout />} />
+            <Route path="/auth" element={<AuthLayout />} />
+          </Routes>
         </AlertProvider>
       </StrictMode>
     </BrowserRouter>

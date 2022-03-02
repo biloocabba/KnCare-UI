@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Card, CardHeader, Col, Container, Row, Spinner } from "reactstrap";
 
@@ -24,7 +24,7 @@ import { EMAIL_DETAILS_ROUTE } from "..";
 import { emailsTableColumns, SearchEmailsFilterPanel } from ".";
 
 export const SearchEmailPage = () => {
-  const history = useHistory();
+  const navigation = useNavigate();
   const dispatch = useAppDispatch();
 
   const [selectedEmails, setSelectedEmails] = useState<Email[]>([]);
@@ -42,7 +42,7 @@ export const SearchEmailPage = () => {
   const onGoToEmailDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    history.push(`/admin${EMAIL_DETAILS_ROUTE}/${id}`);
+    navigation(`/admin${EMAIL_DETAILS_ROUTE}/${id}`);
   };
 
   const onRemoveEmail = (e: MouseEvent<HTMLButtonElement>) => {
