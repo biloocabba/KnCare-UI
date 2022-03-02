@@ -22,7 +22,7 @@ import { CREATE_ENTITY_ID, DATE_FILTER_FORMAT } from "variables/app.consts";
 
 export const CreateCareMemberPage = () => {
   const { id } = useParams() as { id: string };
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const employeeIdAsInt: number = parseInt(id);
@@ -79,7 +79,7 @@ export const CreateCareMemberPage = () => {
                     <Button
                       type="button"
                       color="info"
-                      onClick={() => navigation(`/${currentRole}${EMPLOYEE_SEARCH}`)}
+                      onClick={() => navigate(`/${currentRole}${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Employees
                     </Button>

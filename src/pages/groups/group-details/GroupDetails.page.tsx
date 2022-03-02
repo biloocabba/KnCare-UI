@@ -24,7 +24,7 @@ import { MembersPanel } from "..";
 export const GroupDetailsPage = () => {
   const { id } = useParams() as { id: string };
   const groupId = parseInt(id);
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const groupState = useAppSelector(selectGroupById(groupId));
@@ -88,7 +88,7 @@ export const GroupDetailsPage = () => {
                             Activate Group
                           </Button>
                         )}
-                        <Button type="button" color="info" onClick={() => navigation(-1)}>
+                        <Button type="button" color="info" onClick={() => navigate(-1)}>
                           Back to Search
                         </Button>
                       </Col>

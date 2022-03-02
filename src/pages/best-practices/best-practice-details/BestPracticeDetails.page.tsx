@@ -46,7 +46,7 @@ import { DATE_FILTER_FORMAT } from "variables/app.consts";
 import { SEARCH_BEST_PRACTICE } from "../best-practices.routes.const";
 
 export const BestPracticeDetailPage = () => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams() as { id: string };
 
   const bestPractice = useAppSelector(selectBestPracticeById(parseInt(id)));
@@ -95,7 +95,7 @@ export const BestPracticeDetailPage = () => {
                       className="btn btn-primary"
                       color="primary"
                       href="#pablo"
-                      onClick={() => navigation(`/admin${SEARCH_BEST_PRACTICE}`)}
+                      onClick={() => navigate(`/admin${SEARCH_BEST_PRACTICE}`)}
                     >
                       Back to Search
                     </Button>

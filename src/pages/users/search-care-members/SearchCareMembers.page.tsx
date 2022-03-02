@@ -16,7 +16,7 @@ import { CareMember, CareMemberQueryFilters } from "types";
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from ".";
 
 export const SearchCareMembersPage = () => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const userCountry = useAppSelector(selectLoggedUserDefaultCountry);
   const [filters, setFilters] = useState<CareMemberQueryFilters>({
@@ -30,7 +30,7 @@ export const SearchCareMembersPage = () => {
   const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    navigation(`/admin${CARE_MEMBER_EDIT}/${id}`);
+    navigate(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const onRemoveCareMember = (e: MouseEvent<HTMLButtonElement>) => {

@@ -24,7 +24,7 @@ import { EMAIL_DETAILS_ROUTE } from "..";
 import { emailsTableColumns, SearchEmailsFilterPanel } from ".";
 
 export const SearchEmailPage = () => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [selectedEmails, setSelectedEmails] = useState<Email[]>([]);
@@ -42,7 +42,7 @@ export const SearchEmailPage = () => {
   const onGoToEmailDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    navigation(`/admin${EMAIL_DETAILS_ROUTE}/${id}`);
+    navigate(`/admin${EMAIL_DETAILS_ROUTE}/${id}`);
   };
 
   const onRemoveEmail = (e: MouseEvent<HTMLButtonElement>) => {

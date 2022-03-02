@@ -21,7 +21,7 @@ import { CareMember, CareMemberSaveRequest, SelectOption } from "types";
 
 export const EditCareMemberPage = () => {
   const { id } = useParams() as { id: string };
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const careMember = useAppSelector(selectCareMemberById(parseInt(id))) as CareMember;
@@ -64,8 +64,8 @@ export const EditCareMemberPage = () => {
                       href="#dsfkjlsi39ds9d97876s7d"
                       onClick={e => {
                         e.preventDefault();
-                        navigation(-1);
-                        //navigation(`/admin${CARE_MEMBER_SEARCH}`);
+                        navigate(-1);
+                        //navigate(`/admin${CARE_MEMBER_SEARCH}`);
                       }}
                     >
                       Back to Care Members

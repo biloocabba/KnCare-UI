@@ -16,7 +16,7 @@ import { GROUP_DETAILS } from "..";
 import { groupsTableColumns } from ".";
 
 export const SearchGroupsPage = () => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const groups = useAppSelector(selectGroupState);
 
@@ -24,7 +24,7 @@ export const SearchGroupsPage = () => {
 
   const goToGroupDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.target as HTMLElement;
-    navigation(`/admin${GROUP_DETAILS}/${id}`);
+    navigate(`/admin${GROUP_DETAILS}/${id}`);
   };
 
   const removeGroup = (e: MouseEvent<HTMLButtonElement>) => {

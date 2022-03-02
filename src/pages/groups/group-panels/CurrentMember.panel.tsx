@@ -24,7 +24,7 @@ export const CurrentMemberPanel = ({
   currentGroupMembers,
   setCurrentGroupMembers,
 }: Props) => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
 
@@ -42,7 +42,7 @@ export const CurrentMemberPanel = ({
 
   const memberDetails = (e: any) => {
     const { id } = e.target;
-    navigation(`/admin${CARE_MEMBER_EDIT}/${id}`);
+    navigate(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const memberRemove = () => {};

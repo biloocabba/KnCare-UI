@@ -32,7 +32,7 @@ import { Employee, Permission } from "types";
 
 export const EmployeeDetailsPage = () => {
   const { id } = useParams() as { id: string };
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const employee: Employee = useSelector(selectEmployeeById(parseInt(id))) as Employee;
   const buttonColor = employee.careMember ? "secondary" : "success";
@@ -55,7 +55,7 @@ export const EmployeeDetailsPage = () => {
                     <WithAuthorization requires={Permission.CareMember_write}>
                       <Button
                         color={buttonColor}
-                        onClick={() => navigation(`/admin${CARE_MEMBER_CREATE}/${id}`)}
+                        onClick={() => navigate(`/admin${CARE_MEMBER_CREATE}/${id}`)}
                         disabled={employee.careMember}
                       >
                         Invite to Care
@@ -64,7 +64,7 @@ export const EmployeeDetailsPage = () => {
                     <Button
                       className="btn btn-primary"
                       color="primary"
-                      onClick={() => navigation(`/admin${EMPLOYEE_SEARCH}`)}
+                      onClick={() => navigate(`/admin${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Search
                     </Button>

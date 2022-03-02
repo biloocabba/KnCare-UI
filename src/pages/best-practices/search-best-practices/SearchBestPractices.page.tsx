@@ -33,7 +33,7 @@ import { BestPracticeHighlightsPanel } from "../panels";
 import { SearchBestPracticesFilterPanel, bestPracticesTableColumns } from ".";
 
 export const SearchBestPracticesPage = () => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const [alert] = useState(null);
   const [selectedRows, setSelectedRows] = useState<BestPractice[]>([]);
@@ -53,7 +53,7 @@ export const SearchBestPracticesPage = () => {
 
   const onGoToBestPracticeDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.currentTarget as HTMLButtonElement;
-    navigation(`/admin${BEST_PRACTICE_DETAILS}/${id}`);
+    navigate(`/admin${BEST_PRACTICE_DETAILS}/${id}`);
   };
 
   return (

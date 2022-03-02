@@ -27,7 +27,7 @@ import { AuthHeader } from "components/headers";
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const [focusedEmail, setfocusedEmail] = useState(false);
   const [focusedPassword, setfocusedPassword] = useState(false);
@@ -44,7 +44,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (user.entity !== null && user.entity.authRole !== Role.Anonymous) {
-      navigation("/admin/home");
+      navigate("/admin/home");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.entity]);
