@@ -76,7 +76,7 @@ export const AdminNavbar = ({ theme }: Props) => {
                     </Media>
                   </Media>
                 </DropdownToggle>
-                <DropdownMenu right>
+                <DropdownMenu end>
                   <DropdownItem className="noti-title" header tag="div">
                     <h6 className="text-overflow m-0">Welcome!</h6>
                   </DropdownItem>
