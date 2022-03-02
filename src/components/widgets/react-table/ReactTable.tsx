@@ -1,6 +1,9 @@
 import { MouseEvent } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import ToolkitProvider, {
+  Search,
+  // @ts-ignore
+} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 
 import { Button } from "reactstrap";
 
@@ -80,7 +83,7 @@ export const ReactTable = <T extends { id: number }>({
     <>
       {alert}
       <ToolkitProvider data={data} keyField={keyField} columns={columns} bootstrap4 search>
-        {props => (
+        {(props: any) => (
           <div className="py-4 table-responsive">
             <div
               id="datatable-basic_filter"
