@@ -27,9 +27,12 @@ import {
 export const mockAxiosReponse = {
   status: 200,
   statusText: "",
-  headers: undefined,
+  headers: {},
   config: {},
 };
+
+// headers: AxiosResponseHeaders;
+// config: AxiosRequestConfig<D>;
 
 export const deleteMockResponse: AxiosResponse<any> = {
   data: "delete success",
