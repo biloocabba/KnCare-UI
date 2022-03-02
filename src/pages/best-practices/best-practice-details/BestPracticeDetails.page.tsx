@@ -18,7 +18,7 @@ import moment from "moment";
 import { useState } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
 import Rating from "react-rating";
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams } from "react-router-dom";
 
 import {
   Button,

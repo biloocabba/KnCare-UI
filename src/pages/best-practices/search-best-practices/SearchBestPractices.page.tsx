@@ -15,7 +15,7 @@
 
 */
 import { MouseEvent, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 import { Card, CardHeader, Col, Container, Row, Spinner } from "reactstrap";
 

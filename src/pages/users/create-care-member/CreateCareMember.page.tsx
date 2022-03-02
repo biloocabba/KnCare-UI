@@ -1,6 +1,5 @@
 import moment from "moment";
-import { useHistory } from "react-router";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 

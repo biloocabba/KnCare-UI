@@ -1,25 +1,9 @@
-/*!
-
-=========================================================
-* Argon Dashboard PRO React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
+// @todo remove this line after migrating to react router v6
+/* eslint-disable react/no-children-prop */
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-// import { ToastContainer } from "react-toastify";
 
 import { store } from "redux/app";
 
@@ -46,9 +30,9 @@ ReactDOM.render(
       <StrictMode>
         <AlertProvider>
           <Switch>
-            <Route path="/admin" render={() => <AdminLayout />} />
-            <Route path="/auth" render={() => <AuthLayout />} />
-            <Route path="/" render={() => <AdminLayout />} />
+            <Route path="/admin" children={<AdminLayout />} />
+            <Route path="/auth" children={<AuthLayout />} />
+            <Route path="/" children={<AdminLayout />} />
             <Redirect from="*" to="/" />
           </Switch>
         </AlertProvider>
