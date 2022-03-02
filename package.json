@@ -126,7 +126,6 @@
     "eslint-import-resolver-babel-plugin-root-import": "^1.1.1",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-css-import-order": "^1.1.0",
-    "eslint-plugin-flowtype": "5.10.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest-dom": "^4.0.1",
     "eslint-plugin-jsx-a11y": "^6.5.1",
