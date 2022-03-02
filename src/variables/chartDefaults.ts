@@ -1,6 +1,8 @@
-import { defaults } from "react-chartjs-2";
+import { defaults } from "chart.js";
 
 import { ThemeColors, fonts, mode } from "types";
+// https://react-chartjs-2.netlify.app/docs/migration-to-v4/#tree-shaking
+import "chart.js/auto";
 
 defaults.maintainAspectRatio = false;
 
