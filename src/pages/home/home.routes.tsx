@@ -10,7 +10,7 @@ export const homeMenu: IRoute[] = [
     collapse: false,
     global: true,
     path: `${HOME}`,
-    component: HomePage,
+    component: <HomePage />,
     layout: "/admin",
     name: `${HOME}`,
     key: `Home/${HOME}`,

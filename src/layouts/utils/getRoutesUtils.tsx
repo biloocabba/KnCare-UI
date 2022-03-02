@@ -1,21 +1,17 @@
+// @todo remove this line after migrating to react router v6
+/* eslint-disable react/no-children-prop */
 import { Route } from "react-router-dom";
 
 import { IRoute, LayoutType, Role } from "types";
 
 const getLayout = (route: IRoute, layout: LayoutType, userRole: Role) => {
   if (route.layout === layout && route.allowedRoles.includes(userRole)) {
-    return (
-      <Route
-        path={route.layout + route.path}
-        component={route.component as React.ComponentType}
-        key={route.key}
-      />
-    );
+    return <Route path={route.layout + route.path} children={route.component} key={route.key} />;
   } else {
     return null;
   }
 };
-
+// JSX.Element;
 const getRouteViews = (routes: IRoute[], layout: LayoutType, userRole: Role) => {
   return routes.map(route => getLayout(route, layout, userRole));
 };

@@ -9,7 +9,7 @@ export const authMenu: IRoute[] = [
     collapse: false,
     global: true,
     path: LOGIN,
-    component: LoginPage,
+    component: <LoginPage />,
     layout: "/auth",
     key: "Auth/Login",
     allowedRoles: [...allAuthRoles, 1],
