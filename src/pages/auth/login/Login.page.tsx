@@ -46,7 +46,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (user.entity !== null && user.entity.authRole !== Role.Anonymous) {
-      navigate(HOME);
+      navigate(`/admin${HOME}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.entity]);

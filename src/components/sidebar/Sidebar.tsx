@@ -126,8 +126,8 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
    * this function creates the links and collapses that appear in the sidebar (left menu)
    */
   const createLinks = (routes: IRoute[], userRole: Role): ReactNode => {
-    const navItems = routes
-      .filter(route => !route.global || !route.layout)
+    return routes
+      .filter(route => !route.global)
       .map(route => {
         if (route.collapse && route.state && route.views && route.allowedRoles.includes(userRole)) {
           const st: any = {};
@@ -163,41 +163,38 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
               </Collapse>
             </NavItem>
           );
-        } else {
+        } else if (route.allowedRoles.includes(userRole)) {
           return (
-            <>
-              {route.allowedRoles.includes(userRole) && (
-                <NavItem className={activeRoute(route.layout + route.path)} key={route.key}>
-                  <NavLink
-                    to={route.layout + route.path}
-                    activeClassName=""
-                    onClick={closeSidenav}
-                    tag={NavLinkRRD}
-                  >
-                    {route.icon !== undefined ? (
-                      <>
-                        <i className={route.icon} />
-                        <span className="nav-link-text">{route.name}</span>
-                      </>
-                    ) : route.miniName !== undefined ? (
-                      <>
-                        <span className="sidenav-mini-icon">{route.miniName}</span>
-                        <span className="sidenav-normal">{route.name}</span>
-                      </>
-                    ) : (
-                      route.name
-                    )}
-                  </NavLink>
-                </NavItem>
-              )}
-            </>
+            <NavItem className={activeRoute(route.layout + route.path)} key={route.key}>
+              <NavLink
+                to={route.layout + route.path}
+                activeClassName=""
+                onClick={closeSidenav}
+                tag={NavLinkRRD}
+              >
+                {route.icon ? (
+                  <>
+                    <i className={route.icon} />
+                    <span className="nav-link-text">{route.name}</span>
+                  </>
+                ) : route.miniName ? (
+                  <>
+                    <span className="sidenav-mini-icon">{route.miniName}</span>
+                    <span className="sidenav-normal">{route.name}</span>
+                  </>
+                ) : (
+                  route.name
+                )}
+              </NavLink>
+            </NavItem>
           );
+        } else {
+          return null;
         }
       });
-    return navItems;
   };
 
-  let navbarBrandProps;
+  let navbarBrandProps: any;
   if (logo && logo.innerLink) {
     navbarBrandProps = {
       to: logo.innerLink,
@@ -210,111 +207,113 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
     };
   }
 
-  const scrollBarInner = (
-    <div className="scrollbar-inner">
-      <div className="sidenav-header d-flex align-items-center">
-        {logo ? (
-          <NavbarBrand {...navbarBrandProps}>
-            <img alt={logo.imgAlt} className="navbar-brand-img" src={logo.imgSrc} />
-          </NavbarBrand>
-        ) : null}
-        <div className="ml-auto">
-          <div
-            className={classnames("sidenav-toggler d-none d-xl-block", {
-              active: isSidenavOpen,
-            })}
-            role="button"
-            tabIndex={0}
-            // @docs https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/click-events-have-key-events.md
-            onKeyDown={() => dispatch(toggleSidenav())}
-            onClick={() => dispatch(toggleSidenav())}
-          >
-            <div className="sidenav-toggler-inner">
-              <i className="sidenav-toggler-line" />
-              <i className="sidenav-toggler-line" />
-              <i className="sidenav-toggler-line" />
+  const ScrollBarInner = () => {
+    return (
+      <div className="scrollbar-inner">
+        <div className="sidenav-header d-flex align-items-center">
+          {logo ? (
+            <NavbarBrand {...navbarBrandProps}>
+              <img alt={logo.imgAlt} className="navbar-brand-img" src={logo.imgSrc} />
+            </NavbarBrand>
+          ) : null}
+          <div className="ml-auto">
+            <div
+              className={classnames("sidenav-toggler d-none d-xl-block", {
+                active: isSidenavOpen,
+              })}
+              role="button"
+              tabIndex={0}
+              // @docs https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/click-events-have-key-events.md
+              onKeyDown={() => dispatch(toggleSidenav())}
+              onClick={() => dispatch(toggleSidenav())}
+            >
+              <div className="sidenav-toggler-inner">
+                <i className="sidenav-toggler-line" />
+                <i className="sidenav-toggler-line" />
+                <i className="sidenav-toggler-line" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="navbar-inner">
-        <Collapse navbar isOpen={true}>
-          <Nav navbar>{createLinks(routes, userRole)}</Nav>
+        <div className="navbar-inner">
+          <Collapse navbar isOpen={true}>
+            <Nav navbar>{createLinks(routes, userRole)}</Nav>
 
-          <hr className="my-3" />
-          <h6 className="navbar-heading p-0 text-muted">
-            <span className="docs-normal">Care Tools</span>
-            <span className="docs-mini">CT</span>
-          </h6>
-          <Nav className="mb-md-3" navbar>
-            <NavItem>
-              <NavLink
-                href="http://carecards.us.int.kn/carecards/frmMenuMain?source=S"
-                target="_blank"
-              >
-                <i className="ni ni-palette" />
-                <span className="nav-link-text">Digital Credit Card</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                href="https://connections.mykn.community/communities/service/html/communitystart?communityUuid=ba7a3c5a-23dd-45ad-9527-b12bd39ea32a"
-                target="_blank"
-              >
-                <i className="ni ni-palette" />
-                <span className="nav-link-text">Care Global</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                href="https://connections.mykn.community/communities/service/html/communitystart?communityUuid=e6415180-c77b-4c50-baf6-f0346e49f86b"
-                target="_blank"
-              >
-                <i className="ni ni-palette" />
-                <span className="nav-link-text">Service Actions Trainings</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                href="https://connections.mykn.community/communities/service/html/communityoverview?communityUuid=65e6800f-a221-473c-92a9-ba3ab95fa099"
-                target="_blank"
-              >
-                <i className="ni ni-palette" />
-                <span className="nav-link-text">Balance+Belonging</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                href="https://connections.mykn.community/communities/service/html/communityoverview?communityUuid=7eda766f-0c33-4f62-8fdb-ecb53191ea79"
-                target="_blank"
-              >
-                <i className="ni ni-palette" />
-                <span className="nav-link-text">Blue for Green</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#under development" target="_blank">
-                <i className="ni ni-palette" />
-                <span className="nav-link-text">Customer Feedback Tool</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#to be confirmed" target="_blank">
-                <i className="ni ni-palette" />
-                <span className="nav-link-text">HR Dashboards integration</span>
-              </NavLink>
-            </NavItem>
-          </Nav>
+            <hr className="my-3" />
+            <h6 className="navbar-heading p-0 text-muted">
+              <span className="docs-normal">Care Tools</span>
+              <span className="docs-mini">CT</span>
+            </h6>
+            <Nav className="mb-md-3" navbar>
+              <NavItem>
+                <NavLink
+                  href="http://carecards.us.int.kn/carecards/frmMenuMain?source=S"
+                  target="_blank"
+                >
+                  <i className="ni ni-palette" />
+                  <span className="nav-link-text">Digital Credit Card</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  href="https://connections.mykn.community/communities/service/html/communitystart?communityUuid=ba7a3c5a-23dd-45ad-9527-b12bd39ea32a"
+                  target="_blank"
+                >
+                  <i className="ni ni-palette" />
+                  <span className="nav-link-text">Care Global</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  href="https://connections.mykn.community/communities/service/html/communitystart?communityUuid=e6415180-c77b-4c50-baf6-f0346e49f86b"
+                  target="_blank"
+                >
+                  <i className="ni ni-palette" />
+                  <span className="nav-link-text">Service Actions Trainings</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  href="https://connections.mykn.community/communities/service/html/communityoverview?communityUuid=65e6800f-a221-473c-92a9-ba3ab95fa099"
+                  target="_blank"
+                >
+                  <i className="ni ni-palette" />
+                  <span className="nav-link-text">Balance+Belonging</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  href="https://connections.mykn.community/communities/service/html/communityoverview?communityUuid=7eda766f-0c33-4f62-8fdb-ecb53191ea79"
+                  target="_blank"
+                >
+                  <i className="ni ni-palette" />
+                  <span className="nav-link-text">Blue for Green</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#under development" target="_blank">
+                  <i className="ni ni-palette" />
+                  <span className="nav-link-text">Customer Feedback Tool</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#to be confirmed" target="_blank">
+                  <i className="ni ni-palette" />
+                  <span className="nav-link-text">HR Dashboards integration</span>
+                </NavLink>
+              </NavItem>
+            </Nav>
 
-          <hr className="my-3" />
-          <h6 className="navbar-heading p-0 text-muted">
-            <span className="docs-normal">Support</span>
-            <span className="docs-mini">D</span>
-          </h6>
-        </Collapse>
+            <hr className="my-3" />
+            <h6 className="navbar-heading p-0 text-muted">
+              <span className="docs-normal">Support</span>
+              <span className="docs-mini">D</span>
+            </h6>
+          </Collapse>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
   return (
     <Navbar
       className={
@@ -325,9 +324,9 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
       onMouseLeave={onMouseLeaveSidenav}
     >
       {navigator.platform.indexOf("Win") > -1 ? (
-        <PerfectScrollbar>{scrollBarInner}</PerfectScrollbar>
+        <PerfectScrollbar>{<ScrollBarInner />}</PerfectScrollbar>
       ) : (
-        scrollBarInner
+        <ScrollBarInner />
       )}
     </Navbar>
   );

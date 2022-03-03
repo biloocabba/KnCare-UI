@@ -3,9 +3,10 @@ import { Route } from "react-router-dom";
 import { IRoute, LayoutType, Role } from "types";
 
 const getLayout = (route: IRoute, layout: LayoutType, userRole: Role) => {
-  console.log("route", route);
-
+  console.log("first route1234", route.layout + route.path);
   if (route.layout === layout && route.allowedRoles.includes(userRole)) {
+    console.log("route1234", route.layout + route.path);
+
     return <Route path={route.layout + route.path} element={route.component} key={route.key} />;
   } else {
     return null;
@@ -17,6 +18,8 @@ const getRouteViews = (routes: IRoute[], layout: LayoutType, userRole: Role) => 
 };
 
 export const getRoutes = (routes: IRoute[], layout: LayoutType, userRole: Role) => {
+  console.log("getRoutes12345", routes);
+
   return routes.map(route => {
     if (
       route.collapse &&
@@ -26,6 +29,7 @@ export const getRoutes = (routes: IRoute[], layout: LayoutType, userRole: Role) 
     ) {
       return getRouteViews(route.views, layout, userRole);
     }
+
     return getLayout(route, layout, userRole);
   });
 };

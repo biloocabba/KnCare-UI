@@ -15,6 +15,7 @@
 
 */
 import { useEffect, useRef } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import { routes } from "routes";
 
@@ -23,8 +24,7 @@ import { selectLoggedUserRole } from "redux/features";
 
 import { AuthFooter } from "components/footers";
 
-import { useScrollToTop } from "./hooks";
-import { getRoutes } from "./utils";
+import { getRoutes, useScrollToTop } from ".";
 
 export const AuthLayout = () => {
   const mainContentRef = useRef(document.createElement("div"));
@@ -40,13 +40,13 @@ export const AuthLayout = () => {
 
   useScrollToTop(mainContentRef);
 
-  console.log("hmm");
-
   return (
     <>
       <div className="main-content" ref={mainContentRef}>
-        {getRoutes(routes, "/auth", userRole)}
-        {/* <Route path="*" element={<Navigate replace to="/auth/login" />} /> */}
+        <Routes>
+          {getRoutes(routes, "/auth", userRole)}
+          <Route path="*" element={<Navigate to="/auth/login" replace />} />
+        </Routes>
       </div>
       <AuthFooter />
     </>
