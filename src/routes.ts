@@ -1,4 +1,4 @@
-// import { authMenu } from "pages/auth";
+import { authMenu } from "pages/auth";
 import { bestPracticesMenu } from "pages/best-practices";
 import { dashboardMenu } from "pages/dashboards";
 import { emailMenu } from "pages/emails";
@@ -14,6 +14,6 @@ export const routes: IRoute[] = [
   ...groupMenu,
   ...dashboardMenu,
   ...bestPracticesMenu,
-  // ...authMenu,
+  ...authMenu,
   ...emailMenu,
 ];

@@ -15,7 +15,7 @@
 
 */
 import { useEffect, useRef } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Routes, useNavigate } from "react-router-dom";
 
 import { routes } from "routes";
 
@@ -27,6 +27,8 @@ import { AuthFooter } from "components/footers";
 import { getRoutes, useScrollToTop } from ".";
 
 export const AuthLayout = () => {
+  const navigate = useNavigate();
+
   const mainContentRef = useRef(document.createElement("div"));
   const userRole = useAppSelector(selectLoggedUserRole);
 
@@ -38,15 +40,20 @@ export const AuthLayout = () => {
     };
   });
 
+  useEffect(() => {
+    if (userRole !== 1) {
+      navigate("/auth/login");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userRole]);
+
   useScrollToTop(mainContentRef);
 
   return (
     <>
       <div className="main-content" ref={mainContentRef}>
-        <Routes>
-          {getRoutes(routes, "/auth", userRole)}
-          <Route path="*" element={<Navigate to="/auth/login" replace />} />
-        </Routes>
+        <Routes>{getRoutes(routes, "/auth", userRole)}</Routes>
       </div>
       <AuthFooter />
     </>
