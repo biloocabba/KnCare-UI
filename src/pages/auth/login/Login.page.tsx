@@ -16,6 +16,7 @@ import {
   Row,
   Col,
   Alert,
+  InputGroupAddon,
 } from "reactstrap";
 
 import { Role } from "types/security";
@@ -85,10 +86,11 @@ export const LoginPage = () => {
                     })}
                   >
                     <InputGroup className="input-group-merge input-group-alternative">
-                      <InputGroupText>
-                        <i className="ni ni-email-83" />
-                      </InputGroupText>
-
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="ni ni-email-83" />
+                        </InputGroupText>
+                      </InputGroupAddon>
                       <Input
                         placeholder="Email"
                         type="email"
@@ -105,9 +107,11 @@ export const LoginPage = () => {
                     })}
                   >
                     <InputGroup className="input-group-merge input-group-alternative">
-                      <InputGroupText>
-                        <i className="ni ni-lock-circle-open" />
-                      </InputGroupText>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="ni ni-lock-circle-open" />
+                        </InputGroupText>
+                      </InputGroupAddon>
 
                       <Input
                         placeholder="Password"
