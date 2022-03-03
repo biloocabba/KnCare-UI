@@ -42,7 +42,7 @@ export const CurrentMemberPanel = ({
 
   const memberDetails = (e: any) => {
     const { id } = e.target;
-    navigate(`${CARE_MEMBER_EDIT}/${id}`);
+    navigate(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const memberRemove = () => {};

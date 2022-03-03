@@ -16,7 +16,7 @@
 */
 import { useEffect, useRef, useState } from "react";
 import { Audio } from "react-loader-spinner";
-import { Routes, useLocation, Route, Navigate } from "react-router-dom";
+import { Routes, useLocation } from "react-router-dom";
 
 import careLogo from "assets/img/brand/CareLogoMin.png";
 
@@ -163,7 +163,7 @@ export const AdminLayout = () => {
             <AdminNavbar theme={getNavbarTheme()} />
             <Routes>
               {getRoutes(routes, "/admin", userRole)}
-              <Route path="*" element={<Navigate to="/auth/login" replace />} />
+              {/* <Route path="*" element={<Navigate to="/auth/login" replace />} /> */}
             </Routes>
             <AdminFooter />
           </div>

@@ -5,10 +5,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { store } from "redux/app";
 
-import { LoginPage } from "pages/auth";
-
 import { AlertProvider } from "context";
-import { AdminLayout, AuthLayout } from "layouts";
+import { AdminLayout } from "layouts";
 
 import "variables/chartDefaults";
 
@@ -30,10 +28,10 @@ ReactDOM.render(
       <StrictMode>
         <AlertProvider>
           <Routes>
-            <Route path="/" element={<AdminLayout />} />
+            <Route path="*" element={<AdminLayout />} />
             <Route path="/admin" element={<AdminLayout />} />
-            <Route path="/auth" element={<AuthLayout />} />
-            <Route path="/auth/login" element={<LoginPage />} />
+            {/* <Route path="/auth" element={<AuthLayout />} /> */}
+            {/* <Route path="/auth/login" element={<LoginPage />} /> */}
             {/* <Route path="*" element={<Navigate to="/" />} /> */}
           </Routes>
         </AlertProvider>

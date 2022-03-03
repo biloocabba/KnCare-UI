@@ -30,7 +30,7 @@ export const SearchCareMembersPage = () => {
   const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    navigate(`${CARE_MEMBER_EDIT}/${id}`);
+    navigate(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const onRemoveCareMember = (e: MouseEvent<HTMLButtonElement>) => {

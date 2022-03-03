@@ -78,7 +78,7 @@ export const CreateCareMemberPage = () => {
                     <Button
                       type="button"
                       color="info"
-                      onClick={() => navigate(`${EMPLOYEE_SEARCH}`)}
+                      onClick={() => navigate(`/admin${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Employees
                     </Button>
