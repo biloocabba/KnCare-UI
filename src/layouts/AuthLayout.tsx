@@ -15,22 +15,14 @@
 
 */
 import { useEffect, useRef } from "react";
-import { Routes, useNavigate } from "react-router-dom";
-
-import { routes } from "routes";
-
-import { useAppSelector } from "redux/app";
-import { selectLoggedUserRole } from "redux/features";
+import { Outlet } from "react-router-dom";
 
 import { AuthFooter } from "components/footers";
 
-import { getRoutes, useScrollToTop } from ".";
+import { useScrollToTop } from ".";
 
 export const AuthLayout = () => {
-  const navigate = useNavigate();
-
   const mainContentRef = useRef(document.createElement("div"));
-  const userRole = useAppSelector(selectLoggedUserRole);
 
   useEffect(() => {
     document.body.classList.add("bg-default");
@@ -40,20 +32,12 @@ export const AuthLayout = () => {
     };
   });
 
-  useEffect(() => {
-    if (userRole !== 1) {
-      navigate("/auth/login");
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userRole]);
-
   useScrollToTop(mainContentRef);
 
   return (
     <>
       <div className="main-content" ref={mainContentRef}>
-        <Routes>{getRoutes(routes, "/auth", userRole)}</Routes>
+        <Outlet />
       </div>
       <AuthFooter />
     </>

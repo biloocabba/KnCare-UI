@@ -16,7 +16,7 @@
 */
 import { useEffect, useRef, useState } from "react";
 import { Audio } from "react-loader-spinner";
-import { Routes, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import careLogo from "assets/img/brand/CareLogoMin.png";
 
@@ -24,6 +24,7 @@ import { routes } from "routes";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
+  findAllBusinessUnits,
   findAllCountries,
   findAllGroups,
   findAllRoles,
@@ -33,8 +34,6 @@ import {
   selectAllCountryData,
   selectAllGroupsData,
   selectAllRolesData,
-  selectLoggedUserRole,
-  findAllBusinessUnits,
 } from "redux/features";
 
 import { AdminFooter } from "components/footers";
@@ -43,7 +42,7 @@ import { Sidebar } from "components/sidebar";
 
 import { ThemeColors } from "types";
 
-import { getRoutes, useScrollToTop } from ".";
+import { useScrollToTop } from ".";
 
 export const AdminLayout = () => {
   const dispatch = useAppDispatch();
@@ -63,8 +62,6 @@ export const AdminLayout = () => {
   const roles = useAppSelector(selectAllRolesData);
   const groups = useAppSelector(selectAllGroupsData);
   const careMembers = useAppSelector(selectAllCareMembersData);
-
-  const userRole = useAppSelector(selectLoggedUserRole);
 
   useScrollToTop(mainContentRef);
 
@@ -161,7 +158,7 @@ export const AdminLayout = () => {
           />
           <div className="main-content" ref={mainContentRef}>
             <AdminNavbar theme={getNavbarTheme()} />
-            <Routes>{getRoutes(routes, "/admin", userRole)}</Routes>
+            <Outlet />
             <AdminFooter />
           </div>
         </>
