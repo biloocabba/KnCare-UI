@@ -8,7 +8,7 @@ import { store } from "redux/app";
 import { AlertProvider } from "context";
 
 import "variables/chartDefaults";
-import { App } from "./App";
+import { Router } from "./Router";
 
 import "./assets/css/argon-dashboard-pro-react.css";
 import "./assets/css/site.css";
@@ -27,7 +27,7 @@ ReactDOM.render(
     <BrowserRouter>
       <StrictMode>
         <AlertProvider>
-          <App />
+          <Router />
         </AlertProvider>
       </StrictMode>
     </BrowserRouter>

@@ -10,7 +10,7 @@ import { HOME } from "pages/home";
 
 import { getRoutes, AdminLayout, AuthLayout } from "layouts";
 
-export const App = () => {
+export const Router = () => {
   const userRole = useAppSelector(selectLoggedUserRole);
 
   return (
