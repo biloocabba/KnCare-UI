@@ -16,7 +16,7 @@
 */
 import { useEffect, useRef, useState } from "react";
 import { Audio } from "react-loader-spinner";
-import { Routes, useLocation, useNavigate } from "react-router-dom";
+import { Routes, useLocation } from "react-router-dom";
 
 import careLogo from "assets/img/brand/CareLogoMin.png";
 
@@ -48,7 +48,6 @@ import { getRoutes, useScrollToTop } from ".";
 export const AdminLayout = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
 
   const mainContentRef = useRef(document.createElement("div"));
   const [isDataLoadingCompleted, setIsDataLoadingCompleted] = useState(false);
@@ -68,14 +67,6 @@ export const AdminLayout = () => {
   const userRole = useAppSelector(selectLoggedUserRole);
 
   useScrollToTop(mainContentRef);
-
-  useEffect(() => {
-    if (userRole === 1) {
-      navigate("/auth/login");
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userRole]);
 
   useEffect(() => {
     if (!countries || countries.length == 0) {
