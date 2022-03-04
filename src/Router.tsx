@@ -9,6 +9,7 @@ import { LOGIN } from "pages/auth";
 import { HOME } from "pages/home";
 
 import { getRoutes, AdminLayout, AuthLayout } from "layouts";
+
 import { Role } from "./types";
 
 export const Router = () => {
@@ -25,7 +26,9 @@ export const Router = () => {
 
       <Route
         path="*"
-        element={<Navigate to={userRole !== Role.Anonymous ? `admin${HOME}` : `auth${LOGIN}`} replace />}
+        element={
+          <Navigate to={userRole !== Role.Anonymous ? `admin${HOME}` : `auth${LOGIN}`} replace />
+        }
       />
     </Routes>
   );
