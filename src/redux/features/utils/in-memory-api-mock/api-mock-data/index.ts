@@ -10,3 +10,4 @@ export * from "./mock-data-pdf-base64";
 export * from "./mock-data-pdf-huddle-base64";
 export * from "./rolesInitialState";
 export * from "./emails";
+export * from "./jobTitles";

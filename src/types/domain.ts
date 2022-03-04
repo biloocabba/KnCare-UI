@@ -50,6 +50,10 @@ export interface BusinessUnit extends Domain {
   id: number;
   name: string;
 }
+export interface JobTitle extends Domain {
+  id: number;
+  name: string;
+}
 
 export interface BestPractice extends Domain {
   id: number;
