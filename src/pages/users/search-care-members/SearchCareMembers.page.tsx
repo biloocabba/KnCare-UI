@@ -27,13 +27,13 @@ export const SearchCareMembersPage = () => {
 
   const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
 
-  const onGoToCareMemberDetailsPage = (e: MouseEvent<HTMLButtonElement>) => {
+  const onViewCareMemberDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
     history.push(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
-  const onRemoveCareMember = (e: MouseEvent<HTMLButtonElement>) => {
+  const onDeleteCareMember = (e: MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget);
   };
 
@@ -62,8 +62,8 @@ export const SearchCareMembersPage = () => {
                 data={careMemberResultSet}
                 keyField="id"
                 columns={careMemberTableColumns}
-                onViewDetailsClick={onGoToCareMemberDetailsPage}
-                onDeleteItemClick={onRemoveCareMember}
+                onViewDetailsClick={onViewCareMemberDetails}
+                onDeleteItemClick={onDeleteCareMember}
                 selectedRows={selectedCareMembers}
                 setSelectedRows={setSelectedCareMembers}
                 searchBarPlaceholder="Filter results"

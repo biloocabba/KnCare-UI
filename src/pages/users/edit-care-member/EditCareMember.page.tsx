@@ -31,7 +31,7 @@ export const EditCareMemberPage = () => {
   const careMemberState = useAppSelector(selectCareMemberState);
   const { alert, setSaveSent, setSuccessMessage } = useAlerts(careMemberState);
 
-  const saveCareMember = (careMemberRequest: CareMemberSaveRequest) => {
+  const onSaveCareMember = (careMemberRequest: CareMemberSaveRequest) => {
     const httpUpdateRequest: IUpdated<CareMemberSaveRequest> = {
       id: careMemberRequest.id,
       body: careMemberRequest,
@@ -78,7 +78,7 @@ export const EditCareMemberPage = () => {
                   careMember={careMember}
                   groupOptions={groups}
                   roleOptions={roles}
-                  onSave={saveCareMember}
+                  onSave={onSaveCareMember}
                   buttonName={`Update Care Member`}
                 />
               </CardBody>

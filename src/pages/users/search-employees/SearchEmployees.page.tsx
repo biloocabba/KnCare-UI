@@ -41,17 +41,17 @@ export const SearchEmployeesPage = () => {
 
   const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
 
-  const onClickSearchEmployees = (filters: EmployeeQueryFilters): void => {
+  const onSearchEmployees = (filters: EmployeeQueryFilters): void => {
     dispatch(searchEmployees(filters));
   };
 
-  const onGoToEmployeeDetails = (e: MouseEvent<HTMLButtonElement>) => {
+  const onViewEmployeeDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
     history.push(`/admin${EMPLOYEE_DETAILS}/${id}`);
   };
 
-  const onRemoveEmployee = (e: MouseEvent<HTMLButtonElement>) => {
+  const onDeleteEmployee = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
     dispatch(deleteEmployee(parseInt(id)));
@@ -64,7 +64,7 @@ export const SearchEmployeesPage = () => {
         <Row>
           <div className="col">
             <SearchEmployeesFilterPanel
-              onSearchEmployees={onClickSearchEmployees}
+              onSearchEmployees={onSearchEmployees}
               // jobTitle={jobTitles}
               countries={countries}
               businessUnits={businessUnits}
@@ -92,8 +92,8 @@ export const SearchEmployeesPage = () => {
                   data={employeeState.entities}
                   keyField="id"
                   columns={employeesTableColumns}
-                  onViewDetailsClick={onGoToEmployeeDetails}
-                  onDeleteItemClick={onRemoveEmployee}
+                  onViewDetailsClick={onViewEmployeeDetails}
+                  onDeleteItemClick={onDeleteEmployee}
                   selectedRows={selectedEmployees}
                   setSelectedRows={setSelectedEmployees}
                   searchBarPlaceholder="Filter results"

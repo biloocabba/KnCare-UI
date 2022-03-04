@@ -51,7 +51,7 @@ export const CreateCareMemberPage = () => {
     };
   };
 
-  const saveCareMember = (careMemberSaveRequest: CareMemberSaveRequest): void => {
+  const onCreateCareMember = (careMemberSaveRequest: CareMemberSaveRequest): void => {
     dispatch(createCareMember(careMemberSaveRequest));
     setSuccessMessage("Care Member Created");
     setSaveSent(true);
@@ -91,7 +91,7 @@ export const CreateCareMemberPage = () => {
                   careMember={careMember}
                   groupOptions={groups}
                   roleOptions={roles}
-                  onSave={saveCareMember}
+                  onSave={onCreateCareMember}
                   buttonName={`Invite ${employee.firstName} ${employee.lastName}`}
                 />
               </CardBody>

@@ -33,13 +33,13 @@ export const CreateBestPracticePage = () => {
     }
   };
 
-  const saveBestPractice = () => {
+  const onCreateBestPractice = () => {
     dispatch(createBestPractice(bestPractice));
     setSuccessMessage("Best Practice Created");
     setSaveSent(true);
   };
 
-  const handleChange = (newValue: any) => {
+  const onChangeSelectedTag = (newValue: any) => {
     const arrayOfOptions = newValue ? (newValue as SelectOption[]) : [];
     const newTags = arrayOfOptions.map(option => option.value);
     const updatedTags = bestPractice.tags ? bestPractice.tags : [];
@@ -110,7 +110,7 @@ export const CreateBestPracticePage = () => {
                             id="select-tags"
                             isMulti
                             options={defaultBestPracticesTags}
-                            onChange={handleChange}
+                            onChange={onChangeSelectedTag}
                           />
                         </FormGroup>
                       </Col>
@@ -142,7 +142,7 @@ export const CreateBestPracticePage = () => {
                     </Row>
                     <Row className="mt-3 justify-content-center">
                       <Col md="10" className="d-flex" style={{ justifyContent: "right" }}>
-                        <Button color="primary" type="submit" onClick={saveBestPractice}>
+                        <Button color="primary" type="submit" onClick={onCreateBestPractice}>
                           Create
                         </Button>
                       </Col>

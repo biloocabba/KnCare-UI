@@ -28,7 +28,7 @@ export const CreateGroupPage = () => {
 
   const [group, setGroup] = useState(initialState);
 
-  const onCreate = () => {
+  const onCreateGroup = () => {
     dispatch(createGroup(group));
     setSuccessMessage("Group Created");
     setSaveSent(true);
@@ -42,7 +42,7 @@ export const CreateGroupPage = () => {
         <EditGroupPanel
           group={group as Group}
           setGroup={setGroup}
-          onSave={onCreate}
+          onSave={onCreateGroup}
           isLoading={groupsState.isLoading}
         />
       </Container>
