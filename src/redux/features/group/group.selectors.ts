@@ -3,10 +3,10 @@ import { createSelector } from "@reduxjs/toolkit";
 import { Group } from "types/domain";
 
 import { RootState } from "redux/app";
-import { StateType } from "redux/features/common";
+import { StateType } from "redux/features";
 
 import { SelectOption } from "types";
-import { SELECT_ALL } from "variables/app.consts";
+import { SELECT_ALL_IDS } from "variables/app.consts";
 
 export const selectGroupState = (rootState: RootState): StateType<Group> => rootState.group;
 
@@ -41,6 +41,6 @@ export const selectAllGroupsDataAsSelectOptions = createSelector(
     const groupOptions: SelectOption[] = groups.map(group => {
       return { value: `${group.id}`, label: group.name };
     });
-    return [SELECT_ALL, ...groupOptions];
+    return [SELECT_ALL_IDS(groups.map(group => group.id)), ...groupOptions];
   }
 );
