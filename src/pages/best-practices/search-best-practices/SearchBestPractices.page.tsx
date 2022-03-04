@@ -41,17 +41,17 @@ export const SearchBestPracticesPage = () => {
   const dispatch = useAppDispatch();
   const bestPractices = useAppSelector(selectBestPracticeState);
 
-  const onClickSearchBestPractices = (filters: BestPracticesQueryFilters): void => {
+  const onSearchBestPractices = (filters: BestPracticesQueryFilters): void => {
     dispatch(searchBestPractices(filters));
   };
 
-  const onRemoveBestPractice = (e: MouseEvent<HTMLButtonElement>) => {
+  const onDeleteBestPractice = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget as HTMLButtonElement;
     dispatch(deleteBestPractice(parseInt(id)));
   };
 
-  const onGoToBestPracticeDetails = (e: MouseEvent<HTMLButtonElement>) => {
+  const onViewBestPracticeDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.currentTarget as HTMLButtonElement;
     history.push(`/admin${BEST_PRACTICE_DETAILS}/${id}`);
   };
@@ -63,13 +63,13 @@ export const SearchBestPracticesPage = () => {
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="12">
-            <BestPracticeHighlightsPanel onViewDetailsClick={onGoToBestPracticeDetails} />
+            <BestPracticeHighlightsPanel onViewDetailsClick={onViewBestPracticeDetails} />
           </Col>
         </Row>
 
         <Row>
           <div className="col">
-            <SearchBestPracticesFilterPanel onSearch={onClickSearchBestPractices} />
+            <SearchBestPracticesFilterPanel onSearch={onSearchBestPractices} />
           </div>
         </Row>
 
@@ -92,8 +92,8 @@ export const SearchBestPracticesPage = () => {
                   data={bestPractices.entities}
                   keyField="id"
                   columns={bestPracticesTableColumns}
-                  onViewDetailsClick={onGoToBestPracticeDetails}
-                  onDeleteItemClick={onRemoveBestPractice}
+                  onViewDetailsClick={onViewBestPracticeDetails}
+                  onDeleteItemClick={onDeleteBestPractice}
                   selectedRows={selectedRows}
                   setSelectedRows={setSelectedRows}
                   searchBarPlaceholder="Filter results"

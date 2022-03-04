@@ -35,17 +35,17 @@ export const SearchEmailPage = () => {
   const roles = useAppSelector(selectAllRolesDataAsSelectOptions);
   const emailsState = useAppSelector(selectEmailState);
 
-  const onClickSearchEmails = (filters: EmailQueryFilters): void => {
+  const onSearchEmails = (filters: EmailQueryFilters): void => {
     dispatch(searchEmails(filters));
   };
 
-  const onGoToEmailDetails = (e: MouseEvent<HTMLButtonElement>) => {
+  const onViewEmailDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
     history.push(`/admin${EMAIL_DETAILS_ROUTE}/${id}`);
   };
 
-  const onRemoveEmail = (e: MouseEvent<HTMLButtonElement>) => {
+  const onDeleteEmail = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
     dispatch(deleteEmail(parseInt(id)));
@@ -63,7 +63,7 @@ export const SearchEmailPage = () => {
               businessUnits={businessUnits}
               groups={groups}
               roles={roles}
-              onSearchEmails={onClickSearchEmails}
+              onSearchEmails={onSearchEmails}
             />
           </div>
         </Row>
@@ -88,8 +88,8 @@ export const SearchEmailPage = () => {
                   data={emailsState.entities}
                   keyField="id"
                   columns={emailsTableColumns}
-                  onViewDetailsClick={onGoToEmailDetails}
-                  onDeleteItemClick={onRemoveEmail}
+                  onViewDetailsClick={onViewEmailDetails}
+                  onDeleteItemClick={onDeleteEmail}
                   selectedRows={selectedEmails}
                   setSelectedRows={setSelectedEmails}
                   searchBarPlaceholder="Filter results"

@@ -22,12 +22,12 @@ export const SearchGroupsPage = () => {
 
   const [selectedGroups, setSelectedGroups] = useState<Group[]>([]);
 
-  const goToGroupDetails = (e: MouseEvent<HTMLButtonElement>) => {
+  const onViewGroupDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.target as HTMLElement;
     history.push(`/admin${GROUP_DETAILS}/${id}`);
   };
 
-  const removeGroup = (e: MouseEvent<HTMLButtonElement>) => {
+  const onDeleteGroup = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.target as HTMLElement;
     dispatch(deleteGroup(parseInt(id)));
   };
@@ -56,8 +56,8 @@ export const SearchGroupsPage = () => {
                   data={groups.entities}
                   keyField="id"
                   columns={groupsTableColumns}
-                  onViewDetailsClick={goToGroupDetails}
-                  onDeleteItemClick={removeGroup}
+                  onViewDetailsClick={onViewGroupDetails}
+                  onDeleteItemClick={onDeleteGroup}
                   selectedRows={selectedGroups}
                   setSelectedRows={setSelectedGroups}
                 />

@@ -45,7 +45,7 @@ export const GroupDetailsPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSave = () => {
+  const onSaveGroup = () => {
     if (group) {
       dispatch(updateGroup({ id: groupId, body: group }));
       setSuccessMessage("Group Updated");
@@ -59,7 +59,7 @@ export const GroupDetailsPage = () => {
       dispatch(partialUpdateGroup({ id: groupId, body: { active: !group.active } }));
     }
   };
-  const onDelete = () => {
+  const onDeleteGroup = () => {
     fireAlert();
     dispatch(deleteGroup(groupId));
   };
@@ -144,10 +144,10 @@ export const GroupDetailsPage = () => {
 
                       <div className="pl-lg-4">
                         <Row>
-                          <Button color="primary" onClick={onSave}>
+                          <Button color="primary" onClick={onSaveGroup}>
                             Save
                           </Button>
-                          <Button color="danger" onClick={onDelete}>
+                          <Button color="danger" onClick={onDeleteGroup}>
                             Delete group
                           </Button>
                         </Row>
