@@ -37,17 +37,6 @@ export const Editor = ({ setEmailContent }: Props) => {
 
   return (
     <>
-      <HeadingToolbar>
-        <BasicElementToolbarButtons />
-        <BasicMarkToolbarButtons />
-        <ColorPickerToolbarButtons />
-        <IndentToolbarButtons />
-        <ListToolbarButtons />
-        <AlignToolbarButtons />
-        <LinkToolbarButton icon={<MdLink />} />
-        <ImageToolbarButton icon={<MdImage />} />
-        <FileInput id="file-content-upload" onChange={changeFileHandler} />
-      </HeadingToolbar>
       <Plate
         id="1"
         editableProps={CONFIG.editableProps}
@@ -56,6 +45,17 @@ export const Editor = ({ setEmailContent }: Props) => {
           setEmailContent(oldEmailContent => ({ ...oldEmailContent, text: newValue }));
         }}
       >
+        <HeadingToolbar>
+          <BasicElementToolbarButtons />
+          <BasicMarkToolbarButtons />
+          <ColorPickerToolbarButtons />
+          <IndentToolbarButtons />
+          <ListToolbarButtons />
+          <AlignToolbarButtons />
+          <LinkToolbarButton icon={<MdLink />} />
+          <ImageToolbarButton icon={<MdImage />} />
+          <FileInput id="file-content-upload" onChange={changeFileHandler} />
+        </HeadingToolbar>
         <MarkBallonToolbar />
       </Plate>
       <div className="mt-3">
