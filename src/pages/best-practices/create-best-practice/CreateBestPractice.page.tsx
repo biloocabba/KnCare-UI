@@ -39,7 +39,7 @@ export const CreateBestPracticePage = () => {
     setSaveSent(true);
   };
 
-  const handleTagChange = (newValue: any) => {
+  const onChangeSelectedTag = (newValue: any) => {
     const arrayOfOptions = newValue ? (newValue as SelectOption[]) : [];
     const newTags = arrayOfOptions.map(option => option.value);
     const updatedTags = bestPractice.tags ? bestPractice.tags : [];
@@ -110,7 +110,7 @@ export const CreateBestPracticePage = () => {
                             id="select-tags"
                             isMulti
                             options={defaultBestPracticesTags}
-                            onChange={handleTagChange}
+                            onChange={onChangeSelectedTag}
                           />
                         </FormGroup>
                       </Col>
