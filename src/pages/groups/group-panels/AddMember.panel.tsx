@@ -5,7 +5,7 @@ import { Button, Collapse, FormGroup, Spinner } from "reactstrap";
 import { useAppSelector } from "redux/app";
 import { selectCareMembersByFilters, selectLoggedUserDefaultCountry } from "redux/features";
 
-import { emptyFormatter, ReactTable } from "components/widgets";
+import { ReactTable } from "components/widgets";
 
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from "pages/users";
 
@@ -79,15 +79,7 @@ export const AddMemberPanel = ({
             <Spinner />
           </div>
         ) : (
-          <ReactTable
-            data={careMemberResultSet}
-            keyField="id"
-            columns={careMemberTableColumns}
-            selectedRows={selectedCareMembers}
-            setSelectedRows={setSelectedCareMembers}
-            tableRef={tableRef}
-            formatterFn={emptyFormatter}
-          />
+          <ReactTable data={careMemberResultSet} columns={careMemberTableColumns({})} />
         )}
       </Collapse>
     </>

@@ -1,63 +1,52 @@
-import { ColumnDescription } from "react-bootstrap-table-next";
+import { Column } from "react-table";
 
-export const careMemberTableColumns: ColumnDescription<any, any>[] = [
-  {
-    dataField: "id",
-    text: "id",
-    hidden: true,
-  },
-  {
-    dataField: "firstName",
-    text: "First Name",
-  },
-  {
-    dataField: "lastName",
-    text: "lastName",
-  },
-  {
-    dataField: "internationalName",
-    text: "int Name",
-    sort: true,
-  },
-  {
-    dataField: "title",
-    text: "title",
-    sort: true,
-    style: { width: "50px" },
-  },
-  {
-    dataField: "businessUnit",
-    text: "bUnit",
-    sort: true,
-    style: { width: "50px" },
-  },
-  {
-    dataField: "managementGroup",
-    text: "Man Group",
-    sort: true,
-    style: { width: "50px" },
-  },
-  {
-    dataField: "companyCode",
-    text: "companyCode",
-    sort: true,
-    style: { width: "50px" },
-  },
-  {
-    dataField: "costCenter",
-    text: "costCenter",
-    sort: true,
-  },
-  {
-    dataField: "office.country",
-    text: "country",
-    sort: true,
-  },
-  {
-    dataField: "action",
-    text: "",
-    formatter: (): React.ReactNode => {
-      return <></>;
+import { TwoMouseEventActionButtons, IDefaultActionButtons } from "components/widgets";
+
+export const careMemberTableColumns = ({
+  onDetailsButtonClick,
+  onRemoveButtonClick,
+}: IDefaultActionButtons) => {
+  return [
+    {
+      accessor: "id",
+      Header: "id",
     },
-  },
-];
+    {
+      accessor: "firstName",
+      Header: "First Name",
+    },
+    {
+      accessor: "lastName",
+      Header: "lastName",
+    },
+    {
+      accessor: "internationalName",
+      Header: "int Name",
+    },
+    {
+      accessor: "title",
+      Header: "title",
+    },
+    {
+      accessor: "businessUnit",
+      Header: "bUnit",
+    },
+    {
+      accessor: "managementGroup",
+      Header: "Man Group",
+    },
+    {
+      accessor: "companyCode",
+      Header: "companyCode",
+    },
+    {
+      accessor: "costCenter",
+      Header: "costCenter",
+    },
+    {
+      accessor: "office.country",
+      Header: "country",
+    },
+    TwoMouseEventActionButtons({ onDetailsButtonClick, onRemoveButtonClick }),
+  ] as Array<Column>;
+};

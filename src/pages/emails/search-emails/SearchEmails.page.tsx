@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Card, CardHeader, Col, Container, Row, Spinner } from "reactstrap";
@@ -17,7 +17,7 @@ import {
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
-import { Email, EmailQueryFilters } from "types";
+import { EmailQueryFilters } from "types";
 
 import { EMAIL_DETAILS_ROUTE } from "..";
 
@@ -26,8 +26,6 @@ import { emailsTableColumns, SearchEmailsFilterPanel } from ".";
 export const SearchEmailPage = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
-
-  const [selectedEmails, setSelectedEmails] = useState<Email[]>([]);
 
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
@@ -39,12 +37,18 @@ export const SearchEmailPage = () => {
     dispatch(searchEmails(filters));
   };
 
+  /**
+   *  @description - This function is used to go to emails details page
+   */
   const onViewEmailDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
     history.push(`/admin${EMAIL_DETAILS_ROUTE}/${id}`);
   };
 
+  /**
+   *  @description - This function is used to delete an email.
+   */
   const onDeleteEmail = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
@@ -86,13 +90,10 @@ export const SearchEmailPage = () => {
               ) : (
                 <ReactTable
                   data={emailsState.entities}
-                  keyField="id"
-                  columns={emailsTableColumns}
-                  onViewDetailsClick={onViewEmailDetails}
-                  onDeleteItemClick={onDeleteEmail}
-                  selectedRows={selectedEmails}
-                  setSelectedRows={setSelectedEmails}
-                  searchBarPlaceholder="Filter results"
+                  columns={emailsTableColumns({
+                    onDetailsButtonClick: onViewEmailDetails,
+                    onRemoveButtonClick: onDeleteEmail,
+                  })}
                 />
               )}
             </Card>

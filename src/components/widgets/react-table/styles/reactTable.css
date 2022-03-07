@@ -1,0 +1,59 @@
+.react-table {
+  border-collapse: collapse;
+  box-shadow: 0 5px 10px #e1e5ee;
+  background-color: white;
+  text-align: left;
+  overflow: hidden;
+  /* border-top: 1px solid #eaedf0; */
+  margin: 0.5rem 2rem 0 2rem;
+  border-radius: 0.2rem;
+}
+
+.react-table-thead {
+  box-shadow: 0 5px 10px #e1e5ee;
+  border-bottom: none;
+}
+.react-table-th::selection,
+.react-table-th::-moz-selection,
+.react-table-th::-webkit-selection,
+.react-table-sorting::selection,
+.react-table-sorting::-moz-selection,
+.react-table-sorting::-moz-selection {
+  background-color: transparent;
+}
+
+.react-table-th {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.react-table-td {
+  font-size: 0.9rem;
+  max-width: 5rem;
+}
+
+.react-table-th,
+.react-table-td {
+  padding: 1rem 0.5rem;
+  /* border-bottom: 1px solid #eaedf0; */
+}
+
+.react-table-tr:nth-child(even) {
+  background-color: #f6f9fc;
+}
+
+.react-table-td:first-child,
+.react-table-th:first-child {
+  padding-left: 1rem;
+}
+
+.globalFilter {
+  margin-left: 2rem;
+}
+
+.react-table-filter {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}

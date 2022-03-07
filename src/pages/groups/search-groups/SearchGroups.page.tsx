@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
@@ -9,8 +9,6 @@ import { deleteGroup, selectGroupState } from "redux/features";
 import { BoxHeader } from "components/headers";
 import { ReactTable } from "components/widgets";
 
-import { Group } from "types";
-
 import { GROUP_DETAILS } from "..";
 
 import { groupsTableColumns } from ".";
@@ -19,8 +17,6 @@ export const SearchGroupsPage = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const groups = useAppSelector(selectGroupState);
-
-  const [selectedGroups, setSelectedGroups] = useState<Group[]>([]);
 
   const onViewGroupDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.target as HTMLElement;
@@ -54,12 +50,10 @@ export const SearchGroupsPage = () => {
               ) : (
                 <ReactTable
                   data={groups.entities}
-                  keyField="id"
-                  columns={groupsTableColumns}
-                  onViewDetailsClick={onViewGroupDetails}
-                  onDeleteItemClick={onDeleteGroup}
-                  selectedRows={selectedGroups}
-                  setSelectedRows={setSelectedGroups}
+                  columns={groupsTableColumns({
+                    onDetailsButtonClick: onViewGroupDetails,
+                    onRemoveButtonClick: onDeleteGroup,
+                  })}
                 />
               )}
             </Card>

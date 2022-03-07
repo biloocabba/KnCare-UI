@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Collapse, Card, CardHeader, Spinner } from "reactstrap";
 
 import { careMemberService } from "redux/features";
 
-import { emptyFormatter, ReactTable } from "components/widgets";
+import { ReactTable } from "components/widgets";
 
 import { CARE_MEMBER_EDIT, careMemberTableColumns } from "pages/users";
 
@@ -25,8 +25,6 @@ export const CurrentMemberPanel = ({
   setCurrentGroupMembers,
 }: Props) => {
   const history = useHistory();
-
-  const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
 
   useEffect(() => {
     const fetchGroupMembers = async (members: number[]) => {
@@ -66,13 +64,10 @@ export const CurrentMemberPanel = ({
         ) : (
           <ReactTable
             data={currentGroupMembers}
-            keyField="id"
-            columns={careMemberTableColumns}
-            onViewDetailsClick={memberDetails}
-            onDeleteItemClick={memberRemove}
-            selectedRows={selectedCareMembers}
-            setSelectedRows={setSelectedCareMembers}
-            formatterFn={emptyFormatter}
+            columns={careMemberTableColumns({
+              onDetailsButtonClick: memberDetails,
+              onRemoveButtonClick: memberRemove,
+            })}
           />
         )}
       </Card>

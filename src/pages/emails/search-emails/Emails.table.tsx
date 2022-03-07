@@ -1,18 +1,20 @@
-import { ColumnDescription } from "react-bootstrap-table-next";
+import { Column } from "react-table";
 
-import { Email } from "types";
+import { TwoMouseEventActionButtons, IDefaultActionButtons } from "components/widgets";
 
-export const emailsTableColumns: ColumnDescription<any, Email>[] = [
-  {
-    dataField: "subject",
-    text: "subject",
-    sort: true,
-  },
-  {
-    dataField: "actions",
-    text: "",
-    formatter: () => {
-      return <></>;
+export const emailsTableColumns = ({
+  onDetailsButtonClick,
+  onRemoveButtonClick,
+}: IDefaultActionButtons) => {
+  return [
+    {
+      accessor: "id",
+      Header: "id",
     },
-  },
-];
+    {
+      accessor: "subject",
+      Header: "subject",
+    },
+    TwoMouseEventActionButtons({ onDetailsButtonClick, onRemoveButtonClick }),
+  ] as Array<Column>;
+};

@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
@@ -17,7 +17,7 @@ import { ReactTable } from "components/widgets";
 
 import { EMPLOYEE_DETAILS } from "pages/users";
 
-import { EmployeeQueryFilters, Employee } from "types";
+import { EmployeeQueryFilters } from "types";
 
 import { employeesTableColumns, SearchEmployeesFilterPanel } from ".";
 
@@ -28,18 +28,6 @@ export const SearchEmployeesPage = () => {
   const employeeState = useAppSelector(selectEmployeesState);
   const businessUnits = useAppSelector(selectAllBusinessUnitsDataAsSelectOptions);
   const countries = useAppSelector(selectAllCountriesDataAsSelectOptions);
-
-  // @todo find a better place for this
-  // const jobTitles: SelectOption[] = [
-  //   { value: "1", label: "product manager" },
-  //   { value: "2", label: "qa engineer" },
-  //   { value: "3", label: "hr consultant" },
-  //   { value: "4", label: "office manager" },
-  //   { value: "5", label: "sales representative" },
-  //   { value: "6", label: "logistics consultant" },
-  // ];
-
-  const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([]);
 
   const onSearchEmployees = (filters: EmployeeQueryFilters): void => {
     dispatch(searchEmployees(filters));
@@ -90,13 +78,10 @@ export const SearchEmployeesPage = () => {
               ) : (
                 <ReactTable
                   data={employeeState.entities}
-                  keyField="id"
-                  columns={employeesTableColumns}
-                  onViewDetailsClick={onViewEmployeeDetails}
-                  onDeleteItemClick={onDeleteEmployee}
-                  selectedRows={selectedEmployees}
-                  setSelectedRows={setSelectedEmployees}
-                  searchBarPlaceholder="Filter results"
+                  columns={employeesTableColumns({
+                    onDetailsButtonClick: onViewEmployeeDetails,
+                    onRemoveButtonClick: onDeleteEmployee,
+                  })}
                 />
               )}
             </Card>
