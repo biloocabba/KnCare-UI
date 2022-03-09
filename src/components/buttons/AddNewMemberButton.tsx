@@ -13,7 +13,7 @@ interface Props {
   group: Group;
 }
 
-export const AddNewGroupMemberButton = ({
+export const AddNewMemberButton = ({
   selectedFlatRows = [],
   toggleAllRowsSelected,
   setCurrentGroupMembers,

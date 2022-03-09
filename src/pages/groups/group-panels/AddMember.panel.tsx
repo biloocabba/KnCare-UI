@@ -5,7 +5,7 @@ import { Card, Collapse, Spinner } from "reactstrap";
 import { useAppSelector } from "redux/app";
 import { selectCareMembersByFilters, selectLoggedUserDefaultCountry } from "redux/features";
 
-import { AddNewGroupMemberButton } from "components/buttons";
+import { AddNewMemberButton } from "components/buttons";
 import { ReactTable } from "components/widgets";
 
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from "pages/users";
@@ -61,7 +61,7 @@ export const AddMemberPanel = ({
             <ReactTable
               data={careMemberResultSet}
               selectElement={
-                <AddNewGroupMemberButton
+                <AddNewMemberButton
                   setGroup={setGroup}
                   setCurrentGroupMembers={setCurrentGroupMembers}
                   setSaveSent={setSaveSent}
