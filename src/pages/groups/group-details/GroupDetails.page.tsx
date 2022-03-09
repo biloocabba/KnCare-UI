@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
-import { Button, Card, CardBody, CardHeader, Col, Container, Form, Row } from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
 import { useAppDispatch, useAppSelector } from "redux/app";
 import {
@@ -98,7 +98,7 @@ export const GroupDetailsPage = () => {
               </CardHeader>
 
               <CardBody>
-                <Form>
+                <>
                   <h6 className="heading-small text-muted mb-4">Group Details</h6>
                   <div className="pl-lg-4">
                     <Row>
@@ -150,7 +150,7 @@ export const GroupDetailsPage = () => {
                       </Button>
                     </Row>
                   </div>
-                </Form>
+                </>
               </CardBody>
             </Card>
           </Col>

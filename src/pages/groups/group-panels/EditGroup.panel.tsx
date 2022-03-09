@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardHeader, Col, Form, Row, Spinner } from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Row, Spinner } from "reactstrap";
 
 import { InputField } from "components/widgets";
 
@@ -35,7 +35,7 @@ export const EditGroupPanel = ({
             </Row>
           </CardHeader>
           <CardBody>
-            <Form>
+            <>
               <h6 className="heading-small text-muted mb-4">Group information</h6>
               <div className="pl-lg-4">
                 <Row>
@@ -90,7 +90,7 @@ export const EditGroupPanel = ({
                   )}
                 </Col>
               </Row>
-            </Form>
+            </>
           </CardBody>
         </Card>
       </Col>
