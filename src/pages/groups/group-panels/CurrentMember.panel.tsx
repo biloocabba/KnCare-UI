@@ -38,12 +38,12 @@ export const CurrentMemberPanel = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const memberDetails = (e: any) => {
+  const onViewEmailDetails = (e: any) => {
     const { id } = e.target;
     history.push(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
-  const memberRemove = () => {};
+  const onRemoveMember = () => {};
 
   return (
     <Collapse isOpen={currentMembersCollapse}>
@@ -65,8 +65,8 @@ export const CurrentMemberPanel = ({
           <ReactTable
             data={currentGroupMembers}
             columns={careMemberTableColumns({
-              onDetailsButtonClick: memberDetails,
-              onRemoveButtonClick: memberRemove,
+              onDetailsButtonClick: onViewEmailDetails,
+              onRemoveButtonClick: onRemoveMember,
             })}
           />
         )}

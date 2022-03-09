@@ -13,7 +13,7 @@ import {
   PaginationReactTable,
   Sorter,
   GlobalFilter,
-  SelectionButton,
+  TableUtilitiesWrapper,
 } from ".";
 
 import "./styles/reactTable.css";
@@ -21,10 +21,10 @@ import "./styles/reactTable.css";
 interface Props<T> {
   data: T[];
   columns: Column[];
-  selectButtonText?: string;
+  selectElement?: JSX.Element;
 }
 
-export const ReactTable = <T,>({ data, columns, selectButtonText }: Props<T>) => {
+export const ReactTable = <T,>({ data, columns, selectElement }: Props<T>) => {
   const memoizedData: Array<T> = useMemo(() => data, [data]);
   const memoizedColumns: Array<Column> = useMemo(() => columns, [columns]);
 
@@ -44,6 +44,7 @@ export const ReactTable = <T,>({ data, columns, selectButtonText }: Props<T>) =>
     gotoPage,
     setGlobalFilter,
     selectedFlatRows,
+    toggleAllRowsSelected,
     state: { pageIndex, pageSize, globalFilter },
   } = useTable(
     {
@@ -58,31 +59,33 @@ export const ReactTable = <T,>({ data, columns, selectButtonText }: Props<T>) =>
     usePagination,
     useRowSelect,
     hooks => {
-      hooks.visibleColumns.push(columns => [
-        // Let's make a column for selection
-        {
-          id: "selection",
-          // The header can use the table's getToggleAllRowsSelectedProps method
-          // to render a checkbox
-          Header: ({ getToggleAllPageRowsSelectedProps }) => {
-            return (
-              <div>
-                <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
-              </div>
-            );
+      if (selectElement) {
+        hooks.visibleColumns.push(columns => [
+          // Let's make a column for selection
+          {
+            id: "selection",
+            // The header can use the table's getToggleAllRowsSelectedProps method
+            // to render a checkbox
+            Header: ({ getToggleAllPageRowsSelectedProps }) => {
+              return (
+                <div>
+                  <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
+                </div>
+              );
+            },
+            // The cell can use the individual row's getToggleRowSelectedProps method
+            // to the render a checkbox
+            Cell: ({ row }) => {
+              return (
+                <div>
+                  <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+                </div>
+              );
+            },
           },
-          // The cell can use the individual row's getToggleRowSelectedProps method
-          // to the render a checkbox
-          Cell: ({ row }) => {
-            return (
-              <div>
-                <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-              </div>
-            );
-          },
-        },
-        ...columns,
-      ]);
+          ...columns,
+        ]);
+      }
     }
   );
 
@@ -90,7 +93,14 @@ export const ReactTable = <T,>({ data, columns, selectButtonText }: Props<T>) =>
     <>
       <div className="react-table-filter d-flex justify-content-between align-items-center">
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-        <SelectionButton selectButtonText={selectButtonText} selectedFlatRows={selectedFlatRows} />
+        {selectElement && (
+          <TableUtilitiesWrapper
+            selectedFlatRows={selectedFlatRows}
+            toggleAllRowsSelected={() => toggleAllRowsSelected(false)}
+          >
+            {selectElement}
+          </TableUtilitiesWrapper>
+        )}
       </div>
       <table {...getTableProps()} className="react-table">
         <thead className="react-table-thead">

@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Button, Collapse, FormGroup, Spinner } from "reactstrap";
+import { Card, Collapse, Spinner } from "reactstrap";
 
 import { useAppSelector } from "redux/app";
 import { selectCareMembersByFilters, selectLoggedUserDefaultCountry } from "redux/features";
 
+import { AddNewGroupMemberButton } from "components/buttons";
 import { ReactTable } from "components/widgets";
 
 import { careMemberTableColumns, SearchCareMemberFilterPanel } from "pages/users";
@@ -27,7 +28,6 @@ export const AddMemberPanel = ({
   currentGroupMembers,
   setCurrentGroupMembers,
 }: Props) => {
-  const tableRef = useRef();
   const { alert, setSaveSent, setSuccessMessage, setIsSuccess } =
     useLocalStateAlerts(currentGroupMembers);
 
@@ -39,8 +39,6 @@ export const AddMemberPanel = ({
   });
   const careMemberResultSet: CareMember[] = useAppSelector(selectCareMembersByFilters(filters));
 
-  const [selectedCareMembers, setSelectedCareMembers] = useState<CareMember[]>([]);
-
   useEffect(() => {
     setFilters(prevState => ({
       ...prevState,
@@ -48,39 +46,34 @@ export const AddMemberPanel = ({
     }));
   }, [currentGroupMembers]);
 
-  const onCareMemberAdd = () => {
-    const careMemberIds = selectedCareMembers.map(careMember => careMember.id);
-    setGroup({ ...group, members: [...group.members, ...careMemberIds] });
-    setCurrentGroupMembers(previousCareMembers => [...previousCareMembers, ...selectedCareMembers]);
-
-    setSuccessMessage("Member(s) added successfully");
-    setIsSuccess(true);
-    setSaveSent(true);
-
-    setSelectedCareMembers([]);
-
-    // @ts-ignore
-    tableRef.current.selectionContext.selected = [];
-  };
-
   return (
     <>
       {alert}
       <Collapse isOpen={addMemberCollapse}>
-        <SearchCareMemberFilterPanel filters={filters} setFilters={setFilters} />
-        <FormGroup>
-          <Button color="success" onClick={onCareMemberAdd}>
-            Add Member To Group
-          </Button>
-        </FormGroup>
-        {/* @todo add loading here */}
-        {!careMemberResultSet ? (
-          <div className="text-center">
-            <Spinner />
-          </div>
-        ) : (
-          <ReactTable data={careMemberResultSet} columns={careMemberTableColumns({})} />
-        )}
+        <Card>
+          <SearchCareMemberFilterPanel filters={filters} setFilters={setFilters} />
+          {/* @todo add loading here */}
+          {!careMemberResultSet ? (
+            <div className="text-center">
+              <Spinner />
+            </div>
+          ) : (
+            <ReactTable
+              data={careMemberResultSet}
+              selectElement={
+                <AddNewGroupMemberButton
+                  setGroup={setGroup}
+                  setCurrentGroupMembers={setCurrentGroupMembers}
+                  setSaveSent={setSaveSent}
+                  setSuccessMessage={setSuccessMessage}
+                  setIsSuccess={setIsSuccess}
+                  group={group}
+                />
+              }
+              columns={careMemberTableColumns({})}
+            />
+          )}
+        </Card>
       </Collapse>
     </>
   );
