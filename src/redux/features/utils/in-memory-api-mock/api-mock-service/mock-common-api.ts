@@ -26,7 +26,7 @@ export interface QueryFilterFunction<T> {
 export const entitySearch = <T>(
   url: string,
   mockResponse: AxiosResponse<T[]>,
-  filter: QueryFilterFunction<T>
+  filter?: QueryFilterFunction<T>
 ): AxiosResponse<any> => {
   let resultset = { ...mockResponse };
 
@@ -39,11 +39,16 @@ export const entitySearch = <T>(
     throw Error("Parameters " + pathAndqueryParams + " contain illegal querystring");
   }
   const searchParams = new URLSearchParams(pathAndqueryParams[1]);
-
-  const filteredEntities = filter(searchParams, mockResponse.data);
-  resultset = { ...mockResponse };
-  resultset.data = filteredEntities;
-  return resultset;
+  if (filter) {
+    const filteredEntities = filter(searchParams, mockResponse.data);
+    resultset = { ...mockResponse };
+    resultset.data = filteredEntities;
+    return resultset;
+  } else {
+    resultset = { ...mockResponse };
+    resultset.data = mockResponse.data;
+    return resultset;
+  }
 };
 
 export const matchBusinessUnit = (queryParams: URLSearchParams, entity: Employee | CareMember) => {

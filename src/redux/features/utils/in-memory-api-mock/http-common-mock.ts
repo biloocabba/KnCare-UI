@@ -19,9 +19,12 @@ import {
   reportService,
   login,
   searchEmails,
-  findEmployeesByIds,
+  findCareMembersByIds,
   searchBestPractices,
   saveBestPractice,
+  saveCareMembers,
+  findEmployeeById,
+  saveEmployees,
 } from "./api-mock-service";
 
 export async function get(url: string): Promise<AxiosResponse<any>> {
@@ -35,7 +38,19 @@ export async function get(url: string): Promise<AxiosResponse<any>> {
       const idsArray: number[] = ids.split(",").map(id => parseInt(id));
 
       // return the Employees
-      return Promise.resolve(findEmployeesByIds(idsArray));
+      return Promise.resolve(findCareMembersByIds(idsArray));
+    }
+  }
+
+  if (url.includes("/employee/")) {
+    const id = url.split("/employee/").pop();
+    // if there is an id
+    if (id) {
+      // get the number array of them
+      const idNumber: number = parseInt(id);
+
+      // return the Employee
+      return Promise.resolve(findEmployeeById(idNumber));
     }
   }
 
@@ -102,7 +117,13 @@ export async function put<T>(path: string, body: any): Promise<AxiosResponse<T>>
   return Promise.resolve(wrapIntoResponse(body));
 }
 
-export async function patch<T>(path: string, body: any): Promise<AxiosResponse<T>> {
+export async function patch(path: string, body: any): Promise<AxiosResponse<any>> {
+  if (path.includes("/employee")) {
+    return saveEmployees(path, body);
+  }
+  if (path.includes("/care-member")) {
+    return saveCareMembers(path, body);
+  }
   return Promise.resolve(wrapIntoResponse(body));
 }
 

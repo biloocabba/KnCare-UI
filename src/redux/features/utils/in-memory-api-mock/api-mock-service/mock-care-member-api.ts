@@ -1,43 +1,32 @@
 import { AxiosResponse } from "axios";
 
-import { CareMember, CareMemberSaveRequest, Employee } from "types";
+import { CareMember, CareMemberSaveRequest } from "types";
 
-import { careMembersMockResponse, mockAxiosReponse } from "../api-mock-data/mock-data";
+import { careMembersMockResponse } from "../api-mock-data/mock-data";
 
-import {
-  entitySearch,
-  findEmployeeById,
-  matchBusinessUnit,
-  matchCountryIso3,
-  matchFirstName,
-  wrapIntoResponse,
-} from ".";
+import { entitySearch, findEmployeeById, wrapIntoResponse } from ".";
 
 export const searchCareMembers = (url: string): AxiosResponse<CareMember[]> => {
-  return entitySearch<CareMember>(url, careMembersMockResponse, filterCareMembers);
+  return entitySearch<CareMember>(url, careMembersMockResponse);
 };
 
 export const saveCareMember = async (
   url: string,
   body: CareMemberSaveRequest
 ): Promise<AxiosResponse<CareMember>> => {
-  const employeeData: Employee = findEmployeeById(body.employeeId);
+  const { data } = findEmployeeById(body.employeeId);
 
   const careMemberData = {
-    ...employeeData,
+    ...data,
     ...body,
   };
-  careMemberData.careMember = true;
-  careMembersMockResponse.data.push(careMemberData);
+  careMemberData.id = Math.random();
+  // careMembersMockResponse.data.push(careMemberData);
   const response = wrapIntoResponse(careMemberData);
   return Promise.resolve(response);
 };
 
-export const findCareMemberById = (id: number): CareMember => {
-  return careMembersMockResponse.data.find(careMember => careMember.id === id) as CareMember;
-};
-
-export const findCareMembersByIds = (ids: number[]): AxiosResponse<CareMember[]> => {
+export const findCareMembersByIds = (ids: number[]): Promise<AxiosResponse<CareMember[]>> => {
   const groupMembers: CareMember[] = [];
 
   ids.forEach(id =>
@@ -46,20 +35,21 @@ export const findCareMembersByIds = (ids: number[]): AxiosResponse<CareMember[]>
       careMembersMockResponse.data.find(careMember => careMember.id === id) as CareMember
     )
   );
-  return { data: groupMembers, ...mockAxiosReponse };
+
+  const response = wrapIntoResponse(groupMembers);
+  return Promise.resolve(response);
 };
 
-export const filterCareMembers = (
-  queryParams: URLSearchParams,
-  careMembersData: CareMember[]
-): CareMember[] => {
-  const result: CareMember[] = careMembersData.filter(careMember => {
-    return (
-      matchFirstName(queryParams, careMember) &&
-      matchBusinessUnit(queryParams, careMember) &&
-      matchCountryIso3(queryParams, careMember)
-    );
+export const saveCareMembers = async (
+  path: string,
+  body: CareMember[]
+): Promise<AxiosResponse<CareMember[]>> => {
+  const careMembersData = body.map(careMember => {
+    careMembersMockResponse.data.push(careMember);
+    return careMember;
   });
 
-  return result;
+  const response = wrapIntoResponse(careMembersData);
+
+  return Promise.resolve(response);
 };
