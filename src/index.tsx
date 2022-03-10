@@ -24,6 +24,8 @@ import "./assets/css/site.css";
 import "./assets/vendor/nucleo/css/nucleo.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
+import "components/widgets/react-table/styles/reactTable.css";
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

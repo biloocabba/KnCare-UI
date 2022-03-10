@@ -16,8 +16,6 @@ import {
   TableUtilitiesWrapper,
 } from ".";
 
-import "./styles/reactTable.css";
-
 interface Props<T> {
   data: T[];
   columns: Column[];
@@ -147,7 +145,11 @@ export const ReactTable = <T,>({ data, columns, selectElement }: Props<T>) => {
                     row.cells.map(cell => {
                       // Apply the cell props
                       return (
-                        <td {...cell.getCellProps()} className="react-table-td">
+                        <td
+                          data-label={cell.column.Header}
+                          {...cell.getCellProps()}
+                          className="react-table-td"
+                        >
                           {
                             // Render the cell contents
                             cell.render("Cell")

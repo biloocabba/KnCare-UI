@@ -1,7 +1,7 @@
 import { MouseEvent } from "react";
 import { Column } from "react-table";
 
-import { Button, Row } from "reactstrap";
+import { Button } from "reactstrap";
 
 export interface IDefaultActionButtons {
   onDetailsButtonClick?: (e: MouseEvent<HTMLButtonElement>) => void;
@@ -21,10 +21,10 @@ export const TwoMouseEventActionButtons = <T extends { id: string }>({
       return (
         <>
           {onDetailsButtonClick && onRemoveButtonClick && (
-            <Row>
+            <div className="table-action-button-group">
               <Button
                 id={id}
-                className="btn-icon mr-1"
+                className="btn-icon m-1"
                 type="button"
                 color="info"
                 onClick={onDetailsButtonClick}
@@ -36,7 +36,7 @@ export const TwoMouseEventActionButtons = <T extends { id: string }>({
 
               <Button
                 id={id}
-                className="btn-icon m-0"
+                className="btn-icon m-1"
                 color="danger"
                 type="button"
                 onClick={onRemoveButtonClick}
@@ -45,7 +45,7 @@ export const TwoMouseEventActionButtons = <T extends { id: string }>({
                   <i id={id} className="ni ni-fat-remove" />
                 </span>
               </Button>
-            </Row>
+            </div>
           )}
         </>
       );
