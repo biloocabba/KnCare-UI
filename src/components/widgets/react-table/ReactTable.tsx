@@ -43,6 +43,7 @@ export const ReactTable = <T,>({ data, columns, selectElement }: Props<T>) => {
     setGlobalFilter,
     selectedFlatRows,
     toggleAllRowsSelected,
+    getToggleAllPageRowsSelectedProps,
     state: { pageIndex, pageSize, globalFilter },
   } = useTable(
     {
@@ -64,7 +65,7 @@ export const ReactTable = <T,>({ data, columns, selectElement }: Props<T>) => {
             id: "selection",
             // The header can use the table's getToggleAllRowsSelectedProps method
             // to render a checkbox
-            Header: ({ getToggleAllPageRowsSelectedProps }) => {
+            Header: () => {
               return (
                 <div>
                   <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
@@ -130,8 +131,14 @@ export const ReactTable = <T,>({ data, columns, selectElement }: Props<T>) => {
             ))
           }
         </thead>
+
         {/* Apply the table body props */}
         <tbody {...getTableBodyProps()} className="react-table-tbody">
+          {selectElement && (
+            <div className="react-table-all-checkbox">
+              <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
+            </div>
+          )}
           {
             // Loop over the table rows
             page.map(row => {

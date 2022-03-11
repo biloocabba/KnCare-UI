@@ -4,6 +4,11 @@
   border-radius: 0.5rem;
 }
 
+.react-table-all-checkbox {
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
 .react-table-th::selection,
 .react-table-th::-moz-selection,
 .react-table-th::-webkit-selection,
@@ -85,6 +90,9 @@
     text-align: left;
     overflow: hidden;
     display: table;
+  }
+  .react-table-all-checkbox {
+    display: none;
   }
   .react-table-search {
     width: 25% !important;
