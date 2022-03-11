@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   Button,
@@ -16,6 +16,7 @@ import {
   Row,
   Col,
   Alert,
+  InputGroupAddon,
 } from "reactstrap";
 
 import { Role } from "types/security";
@@ -25,9 +26,11 @@ import { login, selectPrincipalState } from "redux/features";
 
 import { AuthHeader } from "components/headers";
 
+import { HOME } from "pages/home";
+
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [focusedEmail, setfocusedEmail] = useState(false);
   const [focusedPassword, setfocusedPassword] = useState(false);
@@ -44,7 +47,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (user.entity !== null && user.entity.authRole !== Role.Anonymous) {
-      history.push("/admin/home");
+      navigate(`/admin${HOME}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.entity]);
@@ -83,10 +86,11 @@ export const LoginPage = () => {
                     })}
                   >
                     <InputGroup className="input-group-merge input-group-alternative">
-                      <InputGroupText>
-                        <i className="ni ni-email-83" />
-                      </InputGroupText>
-
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="ni ni-email-83" />
+                        </InputGroupText>
+                      </InputGroupAddon>
                       <Input
                         placeholder="Email"
                         type="email"
@@ -103,9 +107,11 @@ export const LoginPage = () => {
                     })}
                   >
                     <InputGroup className="input-group-merge input-group-alternative">
-                      <InputGroupText>
-                        <i className="ni ni-lock-circle-open" />
-                      </InputGroupText>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="ni ni-lock-circle-open" />
+                        </InputGroupText>
+                      </InputGroupAddon>
 
                       <Input
                         placeholder="Password"

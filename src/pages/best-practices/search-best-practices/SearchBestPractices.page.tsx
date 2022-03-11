@@ -15,7 +15,7 @@
 
 */
 import { MouseEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Card, CardHeader, Col, Container, Row, Spinner } from "reactstrap";
 
@@ -33,7 +33,7 @@ import { BestPracticeHighlightsPanel } from "../panels";
 import { SearchBestPracticesFilterPanel, bestPracticesTableColumns } from ".";
 
 export const SearchBestPracticesPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [alert] = useState(null);
 
@@ -52,7 +52,7 @@ export const SearchBestPracticesPage = () => {
 
   const onViewBestPracticeDetails = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.currentTarget as HTMLButtonElement;
-    history.push(`/admin${BEST_PRACTICE_DETAILS}/${id}`);
+    navigate(`/admin${BEST_PRACTICE_DETAILS}/${id}`);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Card, CardHeader, Container, Row, Spinner } from "reactstrap";
 
@@ -22,7 +22,7 @@ import { EmployeeQueryFilters } from "types";
 import { employeesTableColumns, SearchEmployeesFilterPanel } from ".";
 
 export const SearchEmployeesPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const employeeState = useAppSelector(selectEmployeesState);
@@ -36,7 +36,7 @@ export const SearchEmployeesPage = () => {
   const onViewEmployeeDetails = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { id } = e.currentTarget;
-    history.push(`/admin${EMPLOYEE_DETAILS}/${id}`);
+    navigate(`/admin${EMPLOYEE_DETAILS}/${id}`);
   };
 
   const onDeleteEmployee = (e: MouseEvent<HTMLButtonElement>) => {

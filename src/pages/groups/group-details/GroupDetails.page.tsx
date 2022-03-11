@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
@@ -21,14 +21,10 @@ import { Group } from "types";
 
 import { MembersPanel } from "..";
 
-interface RouteParams {
-  id: string;
-}
-
 export const GroupDetailsPage = () => {
-  const { id } = useParams<RouteParams>();
+  const { id } = useParams() as { id: string };
   const groupId = parseInt(id);
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const groupState = useAppSelector(selectGroupById(groupId));
@@ -90,7 +86,7 @@ export const GroupDetailsPage = () => {
                         Activate Group
                       </Button>
                     )}
-                    <Button type="button" color="info" onClick={() => history.goBack()}>
+                    <Button type="button" color="info" onClick={() => navigate(-1)}>
                       Back to Search
                     </Button>
                   </Col>
@@ -132,6 +128,22 @@ export const GroupDetailsPage = () => {
                             })
                           }
                         />
+                      </Col>
+                    </Row>
+                    <Row className="align-items-center py-4">
+                      <Col lg="12" xs="7" className="text-right">
+                        {group && group.active ? (
+                          <Button type="button" color="danger" onClick={onToggleGroupActive}>
+                            Deactivate Group
+                          </Button>
+                        ) : (
+                          <Button type="button" color="success" onClick={onToggleGroupActive}>
+                            Activate Group
+                          </Button>
+                        )}
+                        <Button type="button" color="info" onClick={() => navigate(-1)}>
+                          Back to Search
+                        </Button>
                       </Col>
                     </Row>
                   </div>

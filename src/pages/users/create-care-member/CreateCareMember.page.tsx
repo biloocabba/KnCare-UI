@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 
@@ -17,17 +17,16 @@ import { BoxHeader } from "components/headers";
 import { EMPLOYEE_SEARCH, CareMemberPanel } from "pages/users";
 
 import { useAlerts } from "hooks";
-import { RouteParams, SelectOption, CareMember, Employee, CareMemberSaveRequest } from "types";
+import { SelectOption, CareMember, Employee, CareMemberSaveRequest } from "types";
 import { CREATE_ENTITY_ID, DATE_FILTER_FORMAT } from "variables/app.consts";
 
 export const CreateCareMemberPage = () => {
-  const { id } = useParams<RouteParams>();
-  const history = useHistory();
+  const { id } = useParams() as { id: string };
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const employeeIdAsInt: number = parseInt(id);
 
-  const currentRole = "admin";
   const employee: Employee = useAppSelector(selectEmployeeById(employeeIdAsInt)) as Employee;
   const roles: SelectOption[] = useAppSelector(selectAllRolesDataAsSelectOptions);
   const groups: SelectOption[] = useAppSelector(selectAllGroupsDataAsSelectOptions);
@@ -79,7 +78,7 @@ export const CreateCareMemberPage = () => {
                     <Button
                       type="button"
                       color="info"
-                      onClick={() => history.push(`/${currentRole}${EMPLOYEE_SEARCH}`)}
+                      onClick={() => navigate(`/admin${EMPLOYEE_SEARCH}`)}
                     >
                       Back to Employees
                     </Button>

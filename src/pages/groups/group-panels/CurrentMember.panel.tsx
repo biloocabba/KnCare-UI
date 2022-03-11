@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Collapse, Card, CardHeader, Spinner } from "reactstrap";
 
@@ -24,7 +24,7 @@ export const CurrentMemberPanel = ({
   currentGroupMembers,
   setCurrentGroupMembers,
 }: Props) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGroupMembers = async (members: number[]) => {
@@ -40,7 +40,7 @@ export const CurrentMemberPanel = ({
 
   const onViewEmailDetails = (e: any) => {
     const { id } = e.target;
-    history.push(`/admin${CARE_MEMBER_EDIT}/${id}`);
+    navigate(`/admin${CARE_MEMBER_EDIT}/${id}`);
   };
 
   const onRemoveMember = () => {};

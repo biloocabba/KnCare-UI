@@ -18,7 +18,7 @@ import moment from "moment";
 import { useState } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack"; //this will optimize load with webworker
 import Rating from "react-rating";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   Button,
@@ -41,14 +41,13 @@ import { huddle64pdf } from "redux/features/utils/in-memory-api-mock";
 import { BoxHeader } from "components/headers";
 import { InputField } from "components/widgets";
 
-import { RouteParams } from "types";
 import { DATE_FILTER_FORMAT } from "variables/app.consts";
 
 import { SEARCH_BEST_PRACTICE } from "../best-practices.routes.const";
 
 export const BestPracticeDetailPage = () => {
-  const history = useHistory();
-  const { id } = useParams<RouteParams>();
+  const navigate = useNavigate();
+  const { id } = useParams() as { id: string };
 
   const bestPractice = useAppSelector(selectBestPracticeById(parseInt(id)));
 
@@ -96,7 +95,7 @@ export const BestPracticeDetailPage = () => {
                       className="btn btn-primary"
                       color="primary"
                       href="#pablo"
-                      onClick={() => history.push(`/admin${SEARCH_BEST_PRACTICE}`)}
+                      onClick={() => navigate(`/admin${SEARCH_BEST_PRACTICE}`)}
                     >
                       Back to Search
                     </Button>

@@ -126,8 +126,8 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
    * this function creates the links and collapses that appear in the sidebar (left menu)
    */
   const createLinks = (routes: IRoute[], userRole: Role): ReactNode => {
-    const navItems = routes
-      .filter(route => !route.global || !route.layout)
+    return routes
+      .filter(route => !route.global)
       .map(route => {
         if (route.collapse && route.state && route.views && route.allowedRoles.includes(userRole)) {
           const st: any = {};
@@ -163,41 +163,33 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
               </Collapse>
             </NavItem>
           );
-        } else {
+        } else if (route.allowedRoles.includes(userRole)) {
           return (
-            <>
-              {route.allowedRoles.includes(userRole) && (
-                <NavItem className={activeRoute(route.layout + route.path)} key={route.key}>
-                  <NavLink
-                    to={route.layout + route.path}
-                    activeClassName=""
-                    onClick={closeSidenav}
-                    tag={NavLinkRRD}
-                  >
-                    {route.icon !== undefined ? (
-                      <>
-                        <i className={route.icon} />
-                        <span className="nav-link-text">{route.name}</span>
-                      </>
-                    ) : route.miniName !== undefined ? (
-                      <>
-                        <span className="sidenav-mini-icon">{route.miniName}</span>
-                        <span className="sidenav-normal">{route.name}</span>
-                      </>
-                    ) : (
-                      route.name
-                    )}
-                  </NavLink>
-                </NavItem>
-              )}
-            </>
+            <NavItem className={activeRoute(route.layout + route.path)} key={route.key}>
+              <NavLink to={route.layout + route.path} onClick={closeSidenav} tag={NavLinkRRD}>
+                {route.icon ? (
+                  <>
+                    <i className={route.icon} />
+                    <span className="nav-link-text">{route.name}</span>
+                  </>
+                ) : route.miniName ? (
+                  <>
+                    <span className="sidenav-mini-icon">{route.miniName}</span>
+                    <span className="sidenav-normal">{route.name}</span>
+                  </>
+                ) : (
+                  route.name
+                )}
+              </NavLink>
+            </NavItem>
           );
+        } else {
+          return null;
         }
       });
-    return navItems;
   };
 
-  let navbarBrandProps;
+  let navbarBrandProps: any;
   if (logo && logo.innerLink) {
     navbarBrandProps = {
       to: logo.innerLink,
@@ -210,7 +202,7 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
     };
   }
 
-  const scrollBarInner = (
+  const ScrollBarInner = (
     <div className="scrollbar-inner">
       <div className="sidenav-header d-flex align-items-center">
         {logo ? (
@@ -325,9 +317,9 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
       onMouseLeave={onMouseLeaveSidenav}
     >
       {navigator.platform.indexOf("Win") > -1 ? (
-        <PerfectScrollbar>{scrollBarInner}</PerfectScrollbar>
+        <PerfectScrollbar>{ScrollBarInner}</PerfectScrollbar>
       ) : (
-        scrollBarInner
+        { ScrollBarInner }
       )}
     </Navbar>
   );

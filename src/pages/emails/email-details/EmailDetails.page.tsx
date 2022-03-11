@@ -5,12 +5,12 @@ import { useAppDispatch, useAppSelector } from "redux/app";
 import { saveEmail, selectEmailById, selectEmailState, sendEmail } from "redux/features";
 
 import { useAlerts } from "hooks";
-import { Email, EmailSaveRequest, RouteParams } from "types";
+import { Email, EmailSaveRequest } from "types";
 
 import { EditEmail } from "..";
 
 export const EmailDetailsPage = () => {
-  const { id } = useParams<RouteParams>();
+  const { id } = useParams() as { id: string };
 
   const dispatch = useAppDispatch();
   const emailState = useAppSelector(selectEmailById(parseInt(id))) as Email;

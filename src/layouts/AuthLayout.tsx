@@ -15,21 +15,14 @@
 
 */
 import { useEffect, useRef } from "react";
-import { Switch, Redirect } from "react-router-dom";
-
-import { routes } from "routes";
-
-import { useAppSelector } from "redux/app";
-import { selectLoggedUserRole } from "redux/features";
+import { Outlet } from "react-router-dom";
 
 import { AuthFooter } from "components/footers";
 
-import { useScrollToTop } from "./hooks";
-import { getRoutes } from "./utils";
+import { useScrollToTop } from ".";
 
 export const AuthLayout = () => {
   const mainContentRef = useRef(document.createElement("div"));
-  const userRole = useAppSelector(selectLoggedUserRole);
 
   useEffect(() => {
     document.body.classList.add("bg-default");
@@ -44,10 +37,7 @@ export const AuthLayout = () => {
   return (
     <>
       <div className="main-content" ref={mainContentRef}>
-        <Switch>
-          {getRoutes(routes, "/auth", userRole)}
-          <Redirect from="*" to="/auth/login" />
-        </Switch>
+        <Outlet />
       </div>
       <AuthFooter />
     </>
