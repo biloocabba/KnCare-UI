@@ -220,7 +220,7 @@ export const Sidebar = ({ routes, logo, rtlActive = false }: Props) => {
         ) : null}
         <div className="ml-auto">
           <div
-            className={classnames("sidenav-toggler d-none d-xl-block", {
+            className={classnames("sidenav-toggler", {
               active: isSidenavOpen,
             })}
             role="button"

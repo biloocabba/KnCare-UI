@@ -1,8 +1,7 @@
 .react-table {
-  box-shadow: 0 5px 10px #e1e5ee;
-  background-color: white;
+  background-color: #f7fafc;
   margin: 0.5rem 2rem 0 2rem;
-  border-radius: 0.2rem;
+  border-radius: 0.5rem;
 }
 
 .react-table-th::selection,
@@ -37,14 +36,15 @@
 .react-table-td {
   display: flex;
   justify-content: space-between;
-  font-size: 0.9rem;
+  font-size: 1rem;
   padding: 1rem 1rem;
   /* border-bottom: 1px solid #eaedf0; */
 }
 
 .react-table-td:before {
   content: attr(data-label);
-  font-size: 1rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
@@ -64,28 +64,33 @@
 .react-table-search {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  width: 100%;
+  width: 50%;
 }
 
 .react-table-tr {
-  box-shadow: 0px 10px 10px -5px #e1e5ee;
-  margin-top: 0.5rem;
+  border-bottom: white solid 1rem;
 }
 
 @media (min-width: 360px) {
 }
 @media (min-width: 640px) {
 }
-@media (min-width: 768px) {
+@media (min-width: 850px) {
 }
-@media (min-width: 1024px) {
-}
-@media (min-width: 1536px) {
+@media (min-width: 990px) {
   .react-table {
+    background-color: white;
+    box-shadow: 0 5px 10px #e1e5ee;
     border-collapse: collapse;
     text-align: left;
     overflow: hidden;
     display: table;
+  }
+  .react-table-search {
+    width: 25% !important;
+  }
+  .react-table-tr {
+    border-bottom: none;
   }
   .react-table-tbody {
     display: table-row-group;
@@ -96,6 +101,8 @@
   }
   .react-table-tr {
     display: table-row;
+    box-shadow: none;
+    margin-top: 0;
   }
 
   .react-table-th {
@@ -114,14 +121,11 @@
 
   .react-table-td:before {
     content: none;
+    text-transform: none;
   }
 
   .react-table-td:last-child {
     width: 15%;
-  }
-
-  .react-table-search {
-    width: 25% !important;
   }
 
   .react-table-th,
@@ -129,11 +133,9 @@
     padding: 1rem 0.5rem;
   }
 
-  .react-table-tr {
-    box-shadow: none;
-    margin-top: 0;
-  }
   .react-table-tr:nth-child(even) {
     background-color: #f6f9fc;
   }
+}
+@media (min-width: 1536px) {
 }
