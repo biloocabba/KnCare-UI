@@ -21,6 +21,8 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 import "react-notification-alert/dist/animate.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 
+import "components/widgets/react-table/styles/reactTable.css";
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

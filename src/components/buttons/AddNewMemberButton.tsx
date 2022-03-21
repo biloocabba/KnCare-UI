@@ -1,4 +1,4 @@
-import { Button, FormGroup } from "reactstrap";
+import { Button } from "reactstrap";
 
 import { CareMember, Group } from "types";
 
@@ -39,10 +39,8 @@ export const AddNewMemberButton = ({
   };
 
   return (
-    <FormGroup>
-      <Button color="success" onClick={onCareMemberAdd}>
-        Add Members To Group
-      </Button>
-    </FormGroup>
+    <Button color="success" onClick={onCareMemberAdd}>
+      Add Members To Group
+    </Button>
   );
 };

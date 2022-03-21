@@ -6,7 +6,7 @@ export const careMemberTableColumns = ({
   onDetailsButtonClick,
   onRemoveButtonClick,
 }: IDefaultActionButtons) => {
-  return [
+  const tableArray = [
     {
       accessor: "id",
       Header: "id",
@@ -47,6 +47,11 @@ export const careMemberTableColumns = ({
       accessor: "office.country",
       Header: "country",
     },
-    TwoMouseEventActionButtons({ onDetailsButtonClick, onRemoveButtonClick }),
   ] as Array<Column>;
+
+  if (onDetailsButtonClick && onRemoveButtonClick) {
+    tableArray.push(TwoMouseEventActionButtons({ onDetailsButtonClick, onRemoveButtonClick }));
+  }
+
+  return tableArray;
 };

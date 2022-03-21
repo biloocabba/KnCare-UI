@@ -27,24 +27,29 @@ export const PaginationReactTable = ({
 }: Props) => {
   return (
     <div className="d-flex justify-content-between ml-5 mr-5 mt-4 pb-4">
-      <div className="d-flex flex-row align-items-center">
-        <span className="mr-1">Show</span>
-        <div>
-          <select
-            className="form-control form-control-sm"
-            value={pageSize}
-            onChange={e => {
-              setPageSize(Number(e.target.value));
-            }}
-          >
-            {[10, 25, 50, 100].map(pageSize => (
-              <option key={pageSize} value={pageSize}>
-                {pageSize}
-              </option>
-            ))}
-          </select>
+      <div>
+        <div className="d-flex flex-row align-items-center">
+          <span className="mr-1">Show</span>
+          <div>
+            <select
+              className="form-control form-control-sm"
+              value={pageSize}
+              onChange={e => {
+                setPageSize(Number(e.target.value));
+              }}
+            >
+              {[10, 25, 50, 100].map(pageSize => (
+                <option key={pageSize} value={pageSize}>
+                  {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
+          <span className="ml-1">entries.</span>
         </div>
-        <span className="ml-1">entries. Out of {rows.length}</span>
+        <div className="d-flex align-items-center justify-content-center mt-1">
+          <span className="ml-1">Out of {rows.length}</span>
+        </div>
       </div>
 
       <div className="d-flex flex-column align-items-center">
