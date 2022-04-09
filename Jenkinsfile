@@ -8,12 +8,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout Source') {
-            steps {
-                git 'https://github.com/KNITS-OS/KnCare-UI.git'
-            }
-        }
-
         stage('Build image') {
             steps{
                 script {
