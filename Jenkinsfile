@@ -11,7 +11,7 @@ pipeline {
         stage('Build image') {
             steps{
                 script {
-                    dockerImage = docker.Build("dockerimagename")
+                    dockerImage =  docker.build "biloocabba/kncare:${env.BUILD_TAG}"
                 }
             }
         }
