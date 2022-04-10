@@ -1,6 +1,5 @@
 pipeline {
     environment {
-        dockerimagename = "biloocabba/kncare"
         dockerImage = ""
     }
 
