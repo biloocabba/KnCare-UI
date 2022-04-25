@@ -3,12 +3,6 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Test Image'){
-            
-            echo "Test Good"
-        }
-
         stage('Build image and push to Openshift registry') {
             steps{
                 script {
