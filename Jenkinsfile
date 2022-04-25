@@ -3,6 +3,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Build image and push to Openshift registry') {
             steps{
                 script {
@@ -16,7 +17,7 @@ pipeline {
 
             steps{
                 script {
-                    sh 'oc apply -n $openshift_project -f Deployment-kn-care-frontend-prod.yml'
+                    sh 'oc apply -n -f Deployment-kn-care-frontend-prod.yml'
                 }
             }
         }
