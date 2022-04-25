@@ -1,0 +1,47 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    build: kn-care-frontend-prod
+  name: kn-care-frontend-prod
+  namespace: cp-697974
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/KNITS-OS/KnCare-UI.git
+    sourceSecret: 
+      name: accessrepo
+    #contextDir: master
+    dockerfile: |
+      FROM node:16.14.2-alpine as build-stage
+      #WORKDIR /app
+      COPY package*.json ./
+      #RUN npm ci --force --legacy-peer-deps
+      RUN npm ci
+      COPY ./ ./
+      RUN npm run build
+
+      # Copy the build folde inside ngnix 
+      FROM nginx:alpine as prod
+      COPY --from=build-stage ./build/ /usr/share/nginx/html
+      #CMD ["nginx", "-g", "daemon off;"]
+      ENTRYPOINT ["nginx", "-g", "daemon off;"]
+    type: Dockerfile
+  strategy:
+    dockerstrategy: {}
+    type: Docker
+  output:
+    to:
+      kind: DockerImage
+      name: docker-registry.default.svc:5000/cp-697974/kn-care-frontend-prod
+  #successfulBuildsHistoryLimit: 4
+  #triggers:
+  #- type: ConfigChange
+  #- github:
+  #   secret:
+  # type: GitHub
+  #- generic:
+  #    secret:
+  #  type: Generic
+

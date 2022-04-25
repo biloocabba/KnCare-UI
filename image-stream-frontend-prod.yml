@@ -1,0 +1,12 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  generation: 1
+  name: kn-care-frontend-prod
+  namespace: cp-697974
+spec:
+  lokupPolicy:
+    local: false
+status:
+  dockerImageRepository: docker-registry.default.svc:5000/cp-697974/kn-care-frontend-prod
+  publicDockerImageRepository: docker-registry-default.apps.cluster1.emea.cp.int.kn/cp-697974/kn-care-frontend-prod

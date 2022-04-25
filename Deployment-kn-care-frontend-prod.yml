@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kncare
+      tier: frontend
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: kncare
+        tier: frontend
+        track: stable  
+    spec:
+      containers:
+      - name: kncare
+        image: docker-registry.default.svc:5000/cp-697974/kn-care-frontend-prod
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kncareapp
+spec:
+  selector:
+    app: kncare
+    tier: frontend
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  type: LoadBalancer
