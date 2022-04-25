@@ -16,7 +16,7 @@ pipeline {
 
             steps{
                 script {
-                    sh 'oc apply -n $openshift_project -f Docker/deployment.yml'
+                    sh 'oc apply -n $openshift_project -f Deployment-kn-care-frontend-prod.yml'
                 }
             }
         }
