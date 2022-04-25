@@ -17,7 +17,7 @@ pipeline {
 
             steps{
                 script {
-                    sh 'oc apply -n -f Deployment-kn-care-frontend-prod.yml'
+                    sh 'oc apply -f Deployment-kn-care-frontend-prod.yml'
                 }
             }
         }
