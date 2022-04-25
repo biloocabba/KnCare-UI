@@ -1,29 +1,28 @@
 pipeline {
-    environment {
-        dockerImage = ""
-    }
 
     agent any
 
     stages {
 
-        stage('Build image') {
+        stage('Test Image'){
+            
+            echo "Test Good"
+        }
+
+        stage('Build image and push to Openshift registry') {
             steps{
                 script {
-                    dockerImage =  docker.build "biloocabba/kncare:${env.BUILD_TAG}"
+                    sh 'oc apply -f kn-care-frontend-prod.yml'
+                    sh 'oc start-build kn-care-frontend-prod -n cp-697974'
                 }
             }
         }
 
-        stage('Pushing Image') {
-            environment {
-                registryCredential = 'docker-hub-repo'
-            }
+        stage('Deploy the Frontend to pod ') {
+
             steps{
                 script {
-                    docker.withRegistry( 'https://registry.hub.docker.com', registryCredential  ) {
-                        dockerImage.push("${env.BUILD_NUMBER}")
-                    }
+                    sh 'oc apply -n $openshift_project -f Docker/deployment.yml'
                 }
             }
         }
